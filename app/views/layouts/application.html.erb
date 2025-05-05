@@ -2,15 +2,21 @@
 <html>
   <head>
     <title>PortfolioEcfGame</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    
+    <!-- レスポンシブデザイン用、ページとデバイスの画面幅を合わせ、スケールを1に設定、ユーザーがズームインできなくする -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- WebpackerによるJavaScriptとCSSをバンドルして読み込む -->
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    <%= yield %>
+  <body class="d-flex flex-column vh-100">
+    <%= render 'layouts/header' %>
+    <main class="mb-auto">
+      <%= yield %>
+    </main>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

@@ -1,0 +1,73 @@
+<header class="container-fluid py-3" style="background-color: #f5deb3;">
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-3 d-flex justify-content-start">
+        #####<%#= link_to image_tag("logo.jpg", size: "100x75"), root_path #%>
+      </div>
+      <div class="col-3 d-flex justify-content-start">
+        <% if user_signed_in? %>
+          <div class="navbar-text mt-2">
+            <span style="color: #8b4513;">ようこそ、<%= current_customer.last_name %>さん！</span>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-6 p-0 d-flex flex-column align-items-center">
+        <div class="mb-2 ml-auto">
+          <ul class="nav">
+            <% if admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to '商品一覧', admin_items_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '会員一覧', admin_customers_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '注文履歴一覧', admin_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ジャンル一覧', admin_genres_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+            <% elsif user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to 'マイページ', customers_my_page_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to '商品一覧', items_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'カート', cart_items_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト', destroy_customer_session_path, method: :delete, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to 'About', about_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%#= link_to '商品一覧', items_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%#= link_to '新規登録', new_user_registration_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-secondary mx-1' %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <div class="ml-auto">
+          <form action="#" method="get" class="form-inline">
+            <input type="text" name="query" class="form-control mr-1" placeholder="Search">
+            <button type="submit" class="btn btn-outline-info">検索</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</header>
