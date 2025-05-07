@@ -1,0 +1,7 @@
+<%= form_with url: '#', method: :get, local: true, class: "form-inline" do %>
+  <%= text_field_tag :query, params[:query], 
+    class: "form-control mr-2", placeholder: "検索ワード" %>
+  <%= text_field_tag :exclude, params[:exclude], 
+    class: "form-control mr-2", placeholder: "含めたくないワード" %>
+  <%= submit_tag "検索", class: "btn btn-outline-info" %>
+<% end %>

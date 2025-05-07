@@ -60,3 +60,7 @@ gem 'devise'
 gem 'kaminari','~> 1.2.1'
 gem 'acts-as-taggable-on'
 gem 'ransack'
+group :development, :test do
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+end

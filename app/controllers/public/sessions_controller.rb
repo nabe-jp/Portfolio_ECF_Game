@@ -1,4 +1,4 @@
-class Public::SessionsController < ApplicationController
+class Public::SessionsController < Devise::SessionsController
   # Deviseの登録機能をオーバーライドしたいときに使用
 
   before_action :pre_login_active_check, only: [:create]

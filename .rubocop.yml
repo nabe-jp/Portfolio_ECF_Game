@@ -1,0 +1,27 @@
+# ファイルをインポートし設定を引き継ぐ、このファイルでルールの追加や変更を行う
+inherit_from: .rubocop_todo.yml
+
+# RuboCopの全体設定(全Copに影響する設定)をまとめるセクション
+AllCops:
+  TargetRubyVersion: 3.1            # Rubyのバージョンに合わせてください
+
+# 文字列リテラルのスタイルルール設定、可能な限りシングルクォート（'）で記載
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# rubocop-rails プラグインを読み込む設定
+plugins:
+  - rubocop-rails
+
+# ガード句の後に空行を挿入する、コードの可読性向上のため採用
+Layout/EmptyLineAfterGuardClause:
+  Enabled: true
+
+# インデント関連の設定
+# インデントが一貫しているかどうかをチェック
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+# インデント幅を指定
+Layout/IndentationWidth:
+  Width: 2                          # インデントの幅（スペース2つ分）

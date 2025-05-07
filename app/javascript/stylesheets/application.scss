@@ -1,2 +1,83 @@
 // カリキュラムより抜粋、Bootstrap用
 @use '~bootstrap/scss/bootstrap';
+
+// CSSの設定
+// ヘッダーの設定
+header {
+  background-color: #333333;
+}
+
+// フッターの設定
+footer {
+  background-color: #333333;
+}
+
+// ヘッダーのリンクボタンの設定
+.nav-item {
+  display: inline-block;        // 横並びにする 
+  margin-right: 10px;           // 右に10pxの余白を追加
+}
+
+.nav-item:last-child {
+  margin-right: 0;              // 最後のボタンの右余白をなくす
+}
+
+// ヘッダーのリンクボタンの色を変更
+// 通常時
+.nav-item .btn-outline-secondary {
+  color:#808080;
+  border-color: #808080;
+}
+
+//ホバー時
+.nav-item .btn-outline-secondary:hover {
+  color: black;
+  border-color: black;
+  background-color: white;
+}
+
+// クリック時の色
+.nav-item .btn-outline-secondary:active {
+  color: #FFFFFF;
+  border-color: #388E3C;
+  background-color: #388E3C;
+}
+
+// ヘッダーの検索ボタンの色を変更
+// 通常時
+form .btn-outline-info {
+  color:#808080;
+  border-color: #808080;
+}
+
+// ホバー時
+form .btn-outline-info:hover {
+  color: black;
+  border-color: black;
+  background-color: white;
+}
+
+// クリック時の色
+form .btn-outline-info:active {
+  color: #FFFFFF;
+  border-color: #388E3C;
+  background-color: #388E3C;
+}
+
+// ページのタイトルに使用
+// rowの中で使用する
+.page-title-col {
+  margin-top: 3rem;                 // my-5 相当
+  margin-bottom: 3rem;              // my-5 相当
+  margin-left: 1.5rem;              // ml-4 相当
+  background-color:#f8f9fa;       // 背景色
+}
+
+// <h4>の見出しタグに使用
+.page-title {
+  display: flex;
+  align-items: center;              // 垂直方向に中央揃え
+  justify-content: center;          // 水平方向に中央揃え
+  height: 100%;                     // 高さを指定して中央揃えができるようにする
+  font-size: 1.4rem;                // 文字サイズを調整(h4より少し小さめ)
+}

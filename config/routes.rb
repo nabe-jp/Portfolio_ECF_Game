@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  
+  # ネストが深くなると可読性、保守性が下がるので命名を短くしました
+  # その為、同じ名前が出てくるのでパスプレフィックス(/users, /groups)にてルートを分けています
+
   # 会員側
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",

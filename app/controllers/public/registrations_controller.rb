@@ -1,6 +1,5 @@
-class Public::RegistrationsController < ApplicationController
+class Public::RegistrationsController < Devise::RegistrationsController
   # Deviseの登録機能をオーバーライドしたいときに使用
-
   # ユーザーのサインアップ処理の前に特定のパラメータを許可する
   before_action :configure_sign_up_params, only: [:create]
   # ログインに必要なユーザー情報の更新に使用
