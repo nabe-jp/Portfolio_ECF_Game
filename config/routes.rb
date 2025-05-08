@@ -17,6 +17,15 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get 'about', to: 'homes#about'
+
+
+    # ユーザー関連のルーティング
+    resources :users, only: [:show, :edit, :update, :destroy] do
+      get 'mypage', to: 'users#mypage', as: 'mypage'
+      
+      # 投稿関連のネストされたルーティング
+      resources :posts, only: [:new, :index, :show, :create, :edit, :update, :destroy]
+    end
     # 他の会員用ルーティング
   end
 

@@ -1,78 +1,209 @@
 // カリキュラムより抜粋、Bootstrap用
 @use '~bootstrap/scss/bootstrap';
 
-// CSSの設定
-// ヘッダーの設定
+
+/*    初期化    */
+// container、row、colの初期化
+.container {
+  width: 100%;
+  max-width: none;                   // 幅の制限を設けない
+  margin: 0;
+  padding: 0;
+}
+.row {
+  margin: 0;
+  padding: 0;
+  display: flex;                     // Flexboxで並べる
+  flex-wrap: wrap;                   // 子要素が折り返すように
+}
+ .col {
+  margin: 0;
+  padding: 0;
+}
+// CSSの初期化(疑似要素も含む)
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+// 上の記載では初期化できなかったため初期化し、追加事項を記載
+label {
+  margin: 0 1rem 0 0;                // 入力欄との余白
+  padding: 0;
+  text-align: left;
+  white-space: nowrap;               // labelの中のテキスト自体を折り返さない
+}
+
+
+/*    ヘッダーの設定    */
+// ヘッダーの色
 header {
   background-color: #333333;
+  padding: 15px 0;                   // ヘッターの上下に余白を追加
+}
+// リンクボタンの設定
+.nav-item {
+  display: flex;                     // フレックスコンテナとして、子要素を柔軟に並べる
+  margin-right: 10px;                // 右に10pxの余白を追加
+}
+.nav-item:last-child {
+  margin-right: 0;                   // 最後のボタンの右余白をなくす
 }
 
-// フッターの設定
+
+/*    フッターの設定    */
+// フッターの色
 footer {
   background-color: #333333;
+  padding: 15px 0;                   // フッターの上下に余白を追加
+  text-align: center;                // フッター内のテキストを中央揃え
 }
 
+
+/*    フォームの設定    */
+// ラベルと入力欄の親要素に使用する
+.form-label-and-input {
+  display: flex;
+  flex-wrap: nowrap;                // inputとlabelを折り返さない
+  align-items: center;
+  margin-bottom: 1rem;
+}
+// ラベルに使用
+.form-label-and-input label {
+  width: 35%;
+}
+// 入力欄に使用
+.form-label-and-input input {
+  flex: 1;                          // ラベルの残りスペースを使用
+  max-width: 300px;                 // 入力欄を小さくする
+  padding: 0.5rem;
+  border: 1px solid #ccc;         // フォームの枠線を薄くし、入力時項目を選択していることがわかりやすくなる
+  border-radius: 4px;
+}
+// ボタンに使用する
+.form-submit {
+  text-align: center;  /* ボタンを中央揃え */
+  margin-top: 2rem;    /* ボタンに上の余白を追加 */
+}
+// 横並びの姓と名のフィールド
+.name-fields {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;   // 子要素を左右に分ける
+  flex: 1;                          // ラベルの残りスペースを使用
+}
+// 姓・名で使用する短い入力フォームのスタイル
+input.short-input {
+  max-width: 100px;
+  width: auto;
+}
+// 姓・名の上下中央寄せ
+.name-group {
+  display: flex;
+  align-items: center;
+}
+// 共通設定でlabelの右側にmarginを設けているので削除
+.sub-label {
+  margin-right: 0;
+}
+
+
+/*    ボタンの設定   */
 // ヘッダーのリンクボタンの設定
-.nav-item {
-  display: inline-block;        // 横並びにする 
-  margin-right: 10px;           // 右に10pxの余白を追加
-}
-
-.nav-item:last-child {
-  margin-right: 0;              // 最後のボタンの右余白をなくす
-}
-
-// ヘッダーのリンクボタンの色を変更
 // 通常時
 .nav-item .btn-outline-secondary {
   color:#808080;
   border-color: #808080;
 }
-
 //ホバー時
 .nav-item .btn-outline-secondary:hover {
   color: black;
   border-color: black;
   background-color: white;
 }
-
-// クリック時の色
+// クリック時
 .nav-item .btn-outline-secondary:active {
   color: #FFFFFF;
   border-color: #388E3C;
   background-color: #388E3C;
 }
-
-// ヘッダーの検索ボタンの色を変更
+// ヘッダーの検索ボタンの設定
 // 通常時
 form .btn-outline-info {
   color:#808080;
   border-color: #808080;
 }
-
 // ホバー時
 form .btn-outline-info:hover {
   color: black;
   border-color: black;
   background-color: white;
 }
-
-// クリック時の色
+// クリック時
 form .btn-outline-info:active {
   color: #FFFFFF;
   border-color: #388E3C;
   background-color: #388E3C;
 }
+// ヘッダー以外で使用するボタンの基本設定
+// 通常時
+.btn-base {
+  padding: 0.25rem 1.5rem;          // ボタンの大きさ
+  font-size: 1rem;                  // 文字サイズ
+  font-weight: bold;                // 文字を太く
+  border-radius: 0.25rem;           // 角を丸く
+}
+// ホバー時
+.btn-base:hover {
+  transform: scale(1.05);           // 少し大きく
+}
+// フォーカス時
+.btn-base:focus {
+  outline: none;                    // フォーカスのアウトラインを消す
+}
+// クリック時
+.btn-base:active {
+  transform: scale(0.95);           // 少し小さく
+}
+// フォームのログインボタンの設定
+// 通常時
+.login-btn {
+  background-color: #007bff;      // ボタン背景色
+  color: white;                   // 文字色
+}
+// ホバー時
+.login-btn:hover {
+  background-color: #0056b3;      // 背景色を変更
+}
+// フォーカス時
+.login-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); // 青色の影が少し広がる
+}
+// フォームの新規会員登録ボタンの設定
+// 通常時
+.new-user-btn {
+  background-color: #28a745;      // ボタン背景色
+  color: white;                   // 文字色
+}
+// ホバー時
+.new-user-btn:hover {
+  background-color: #218838;      // 背景色を濃い緑に変更
+}
+// フォーカス時
+.new-user-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); // 緑色の影が少し広がる
+}
 
-// ページのタイトルに使用
-// rowの中で使用する
+
+/*   ページのタイトルの設定   */
+// rowの中で使用
 .page-title-col {
   margin-top: 3rem;                 // my-5 相当
   margin-bottom: 3rem;              // my-5 相当
-  margin-left: 1.5rem;              // ml-4 相当
   background-color:#f8f9fa;       // 背景色
 }
-
 // <h4>の見出しタグに使用
 .page-title {
   display: flex;
@@ -80,4 +211,64 @@ form .btn-outline-info:active {
   justify-content: center;          // 水平方向に中央揃え
   height: 100%;                     // 高さを指定して中央揃えができるようにする
   font-size: 1.4rem;                // 文字サイズを調整(h4より少し小さめ)
+}
+
+
+/*    アバウトページの設定    */
+// アバウトページの余白の色
+body.homes.about {
+  background-color: #5ac2eb;
+}
+// すべてのセクションの共通設定
+body.homes.about section {
+  width: 80%;
+  margin: 0 auto 20px;              // 左右中央揃え、下側に余白
+  padding: 40px;
+  border-radius: 30px;              // 角に丸みを追加
+  text-align: left;                 // テキストを左揃え
+}
+// すべてのsection内のh、pタグの共通設定(hタグはh3を使用しているためh3を指定)
+body.homes.about section h3 {
+  margin-bottom: 20px;
+}
+body.homes.about section p {
+  padding-left: 10px;
+}
+// ヘッダー
+.about-page-header {
+  width: 90%;
+  margin: 20px auto;                // 左右中央揃え、上下側に余白
+  background-color: #6c63ff;
+  color: white;
+  text-align: center;
+}
+// サイトの目的
+.site-purpose {
+  background-color: #4caf50;
+  color: black;
+}
+// 運営者情報
+.about-creator {
+  background-color: #607d8b;
+  color: black;
+}
+// 取り扱っているコンテンツ
+.site-content {
+  background-color: #f44336;
+  color: black;
+}
+// ターゲット
+.target-audience {
+  background-color: #ffc107;
+  color: black;
+}
+// 今後の展望
+.future-goals {
+  background-color: #00bcd4;
+  color: black;
+}
+// お問い合わせ
+.contact-info {
+  background-color: #c22fdb;
+  color: black;
 }

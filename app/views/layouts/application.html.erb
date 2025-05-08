@@ -14,7 +14,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="d-flex flex-column vh-100">
+  <!-- bodyを動的にし、bodyの短くなり見栄えが悪くならないように高さを取る -->
+  <body class="d-flex flex-column <%= controller.controller_name %> <%= controller.action_name %> vh-100">
     <%= render 'shared/headers/header' %>
     <main class="mb-auto">
       <%= yield %>

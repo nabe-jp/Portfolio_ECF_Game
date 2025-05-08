@@ -17,7 +17,7 @@ class Public::SessionsController < Devise::SessionsController
 
   # ログイン前に退会済みか確認を行うためのメソッド
   def pre_login_active_check
-    user = Customer.find_by(email: params[:user][:email])   # find_byは見つからなくてもnilになるだけ
+    user = User.find_by(email: params[:user][:email])   # find_byは見つからなくてもnilになるだけ
   
     # ユーザーが存在し、パスワードがあっており、退会になっている場合、ログイン出来ないようにする
     if user && user.valid_password?(params[:user][:password]) && !user.is_active

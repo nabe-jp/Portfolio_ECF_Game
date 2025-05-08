@@ -1,0 +1,15 @@
+<%= form_with(model: @post, local: true) do |f| %>
+  <div class="form-group">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力してください" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body, "内容" %>
+    <%= f.text_area :body, class: "form-control", placeholder: "内容を入力してください" %>
+  </div>
+
+  <%= f.submit "投稿する", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to '戻る', user_posts_path(current_user), class: 'btn btn-secondary mt-3' %>

@@ -1,0 +1,31 @@
+<div>
+<% @recent_posts.each_with_index do |post, index| %>
+  <div class="post">
+    <h3><%= link_to post.title, post_path(post) %></h3>
+    <p><%= link_to image_tag("no_image.jpg", size: "100x100")</p>
+    <p><%= truncate(post.content, length: 100) %></p>
+    <p><%= post.created_at.strftime("%Y-%m-%d") %></p>
+  </div>
+  
+  <% if index == @recent_posts.length - 1 %>
+    <!-- 最後の投稿の右端に「全件確認」のリンク -->
+    <div class="view-all-link">
+      <%= link_to '全件確認', posts_path, class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>
+</div>
+
+
+
+
+
+<% items.each do |item| %>
+  <div class="mr-3">
+    <%= link_to item_path(item) do %>
+      <%= image_tag item.get_image(160,120), size: "160x120" %>
+      <p class="text-dark pt-3 font-weight-bold"><%= item.name %></p>
+      <p class="text-dark pt-1 font-weight-bold">￥<%= number_with_delimiter((item.price * 1.1).floor) %></p>
+    <% end %>
+  </div>
+<% end %>

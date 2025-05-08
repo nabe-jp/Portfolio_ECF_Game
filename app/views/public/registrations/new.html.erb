@@ -1,133 +1,22 @@
-<div class="container m-0">
-  <div class="row ml-5">
-    <div class="col-3 my-4 ml-5">
-    <h4 class="text-center bg-light">新規会員登録</h4>
+<div class="container">
+  <div class="row">
+    <div class="page-title-col col-auto offset-2">
+      <h4 class="page-title">新規会員登録</h4>
     </div>
   </div>
-</div>
-<div class="container ml-5">
-  <div class="row ml-1">
-    <div class="col">
-      <%= form_with scope: :customer, url: customer_registration_path do |f| %>
-        <%= render "public/shared/error_messages", resource: resource %>
-        <table class="table table-borderless" style="width: 80%">
-          <tbody>
-            <tr>
-              <td style="width: 26%">名前</td>
-              <div class="field">
-                <td class="pr-0" style="width: 7%"><%= f.label :last_name, "(姓)" %></td>
-                <td class="pl-0" style="width: 30%">
-                  <%= f.text_field :last_name, autofocus: true, placeholder: "令和" %>
-                </td>
-              </div>
-              <div class="field">
-                <td class="pr-0" style="width: 7%"><%= f.label :first_name, "(名)" %></td>
-                <td class="pl-0" style="width: 30%">
-                  <%= f.text_field :first_name, autofocus: true, placeholder: "道子" %>
-                </td>
-              </div>
-            </tr>
-            <tr>
-              <td>フリガナ</td>
-              <div class="field">
-                <td class="pr-0"><%= f.label :last_name_kana, "(セイ)" %></td>
-                <td class="pl-0">
-                  <%= f.text_field :last_name_kana, autofocus: true, placeholder: "令和" %>
-                </td>
-              </div>
-              <div class="field">
-                <td class="pr-0"><%= f.label :first_name_kana, "(メイ)" %></td>
-                <td class="pl-0">
-                  <%= f.text_field :first_name_kana, autofocus: true, placeholder: "ミチコ" %>
-                </td>
-              </div>
-            </tr>
-            <tr>
-              <div class="field">
-                <td><%= f.label :email, "メールアドレス" %></td>
-                <td></td>
-                <td class="pl-0">
-                  <%= f.email_field :email, autofocus: true, 
-                    class: "email", placeholder: "sample@exmple.com" %>
-                </td>
-              </div>
-            </tr>
-            <tr>
-              <div class="field">
-                <td><%= f.label :post_code, "郵便番号(ハイフンなし)" %></td>
-                <td></td>
-                <td class="pl-0">
-                  <%= f.text_field :post_code, autofocus: true, placeholder: "0000000" %>
-                </td>
-              </div>
-            </tr>
-            <tr>
-              <div class="field">
-                <td><%= f.label :address, "住所" %></td>
-                <td></td>
-                <td class="pl-0" colspan="3">
-                  <%= f.text_field :address, autofocus: true, 
-                    style:"width: 90%", placeholder: "東京都渋谷区代々木神園町0-0" %>
-                </td>
-              </div>
-            </tr>
-            <tr>
-              <div class="field">
-                <td><%= f.label :phone_number, "電話番号(ハイフンなし)" %></td>
-                <td></td>
-                <td class="pl-0">
-                  <%= f.text_field :phone_number, autofocus: true, placeholder: "00000000000" %>
-                </td>
-              </div>
-            </tr>
-            <tr>
-            <div class="field">
-                <td>
-                  <%= f.label :password, "パスワード(6文字以上)" %>
-                  <% if @minimum_password_length %>
-                    <!-- <em>(<%= @minimum_password_length %> characters minimum)</em> -->
-                  <% end %>
-                </td>
-                <td></td>
-                <td class="pl-0"><%= f.password_field :password, autocomplete: "new-password" %></td>
-              </div>
-            </tr>
-            <tr>
-              <div class="field">
-                <td><%= f.label :password_confirmation, "パスワード(確認用)" %></td>
-                <td></td>
-                <td class="pl-0">
-                  <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-                </td>
-              </div>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <div class="actions">
-                <td class="pl-0">
-                  <%= f.submit "新規会員登録", class: 'btn btn-success', style:"width: 75%" %>
-                </td>
-              </div>
-            </tr>
-          </tbody>
-        </table>
-      <% end %>
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <%= render "public/shared/signup", scope: :user, url: new_user_session_path %>
     </div>
   </div>
-</div>
-<div class="container m-0">
-  <div class="row my-3 ml-5">
-    <div class="col-3 ml-4">
-      <h4 class="text-center bg-light mb-0">既に登録済みの方</h4>
+  <div class="row">
+    <div class="page-title-col col-auto offset-2">
+      <h4 class="page-title">既に登録済みの方</h4>
     </div>
   </div>
-  <div class="row ml-5">
-    <div class="col-1 ml-5 pr-0">
-      <p class="text-right ml-0"><%= render "public/shared/links"%></p>
-    </div>
-    <div class="col">
-      <p>からログインしてください</p>
+  <div class="row justify-content-center">
+    <div class="col-auto mb-5">
+      <%= render "public/shared/links" %>
     </div>
   </div>
 </div>
