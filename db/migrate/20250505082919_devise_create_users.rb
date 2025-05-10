@@ -36,7 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :last_name, null: false
       t.string :first_name, null: false
       t.string :nickname, null: false
-      t.string :bio, null: false, default: "まだ記載はありません"
+      t.string :bio, null: false
       t.boolean :is_active, null: false, default: true
 
       t.timestamps null: false

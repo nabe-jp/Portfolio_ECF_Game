@@ -9,8 +9,16 @@ ja:                                   # 日本語の設定を行う
         published: "公開"
         unpublished: "未公開"
         deleted: "削除"
-  # ここからしたはカリキュラムから抜粋
   activerecord:
+    attributes:
+      user:
+        last_name: "名前の(姓)"
+        first_name: "名前の(名)"
+        nickname: "ニックネーム"
+        bio: "自己紹介"
+      post:
+        title: "タイトル"
+        body: "内容"
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

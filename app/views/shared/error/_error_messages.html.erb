@@ -1,0 +1,31 @@
+<!-- インスタンスを用いてエラーメッセージを表示する場合(renderを使用) -->
+<% if resource.errors.any? %>
+  <div id="error_explanation" data-turbo-cache="false">
+    <h5>
+      <%= I18n.t("errors.messages.not_saved",
+                 count: resource.errors.count,
+                 resource: error_resource_name.downcase) 
+      %>
+    </h5>
+    <ul>
+      <% resource.errors.full_messages.uniq.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<!-- PRGを使うパターンでエラーメッセージを表示する場合 -->
+<% elsif flash[:error_messages].present? %>
+  <div id="error_explanation" data-turbo-cache="false">
+    <h5>
+      <%= I18n.t("errors.messages.not_saved",
+                 count: flash[:error_messages].count,
+                 resource: error_resource_name.downcase) 
+      %>
+    </h5>
+    <ul>
+      <% flash[:error_messages].uniq.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

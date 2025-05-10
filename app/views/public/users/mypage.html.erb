@@ -1,3 +1,29 @@
-<h1>Public::Users#mypage</h1>
-<p>Find me in app/views/public/users/mypage.html.erb</p>
+<h2><%= @user.nickname %>さんのマイページ</h2>
+<h2>ユーザー詳細</h2>
+
+<!-- 自分のマイページを表示する部分 -->
+<% if current_user == @user %>
+  <h2>マイページ</h2>
+  <%= render "public/shared/user/private_profile", f: @user %>
+  
+  <%= render "public/shared/user/public_profile", f: @user %>
+  
+<!-- 他のユーザーのプロフィールを表示する部分 -->
+<% else %>
+  <h2><%= @user.name %>さんのプロフィール</h2>
+  <%= render "public/shared/user/public_profile", f: @user %>
+<% end %>
+
+
+
+<%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary mt-3" %>
+
+
+<%= link_to '退会する', user_withdraw_check_path(@user), class: 'btn btn-danger' %>
+
+<%= link_to "戻る", user_mypage_path(@user), class: "btn btn-secondary mt-3" %>
+
+<%= link_to "プロフィールを見る", user_path(@user), class: "btn btn-outline-primary" %>
+
+<p><%= link_to '投稿一覧を見る', user_posts_path(@user), class: 'btn btn-outline-primary' %></p>
 <%= link_to '新規投稿', new_user_post_path(current_user), class: 'btn btn-primary' %>

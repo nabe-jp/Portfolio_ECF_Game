@@ -1,0 +1,18 @@
+<div class="profile">
+  <h2>個人情報</h2>
+
+  <div class="profile-item">
+    <%= content_tag :label, "名前(姓)" %>
+    <p><%= @user.last_name %></p>
+  </div>
+
+  <div class="profile-item">
+    <%= content_tag :label, "名前(名)" %>
+    <p><%= @user.first_name %></p>
+  </div>
+
+  <div class="profile-item">
+    <%= content_tag :label, "メールアドレス" %>
+    <p><%= @user.email %></p>
+  </div>
+</div>

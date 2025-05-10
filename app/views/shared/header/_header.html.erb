@@ -7,18 +7,18 @@
       <div class="d-flex justify-content-end">                      <!-- 上段：ボタン群 -->
         <ul class="nav">
           <% if admin_signed_in? %>                                 <!-- 管理者がサインインした場合 -->
-            <%= render 'shared/headers/admin_nav' %>
+            <%= render 'shared/header/admin_nav' %>
           <% elsif user_signed_in? %>                               <!-- ユーザーがサインインした場合 -->
-            <%= render 'shared/headers/user_nav' %>
+            <%= render 'shared/header/user_nav' %>
           <% elsif user_signed_in? %>                               <!-- ゲストがサインインした場合 -->
-            <%= render 'shared/headers/guest_nav' %>
+            <%= render 'shared/header/guest_nav' %>
           <% else %>                                                <!-- 誰もサインインしていない場合 -->
-            <%= render 'shared/headers/no_user_nav' %>
+            <%= render 'shared/header/no_user_nav' %>
           <% end %>
         </ul>
       </div>
       <div class="d-flex justify-content-end mt-3">                 <!-- 下段：検索フォーム -->
-        <%= render 'shared/headers/search_form' %>
+        <%= render 'shared/header/search_form' %>
       </div>
     </div>
   </div>

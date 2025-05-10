@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2025_05_08_143126) do
     t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "nickname", null: false
-    t.string "bio", default: "まだ記載はありません", null: false
+    t.string "bio", null: false
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

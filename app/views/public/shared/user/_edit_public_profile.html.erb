@@ -1,0 +1,12 @@
+<div class="edit-profile">
+  <h2>公開プロフィール編集</h2>
+
+  <%= f.label :nickname, "ニックネーム" %>
+  <%= f.text_field :nickname, class: "form-control", placeholder: "ニックネームを入力" %>
+
+  <%= f.label :bio, "自己紹介" %>
+  <%= f.text_area :bio, class: "form-control", placeholder: "自己紹介を入力" %>
+
+  <%= f.submit "更新する", class: "btn btn-primary" %>
+<% end %>
+</div>

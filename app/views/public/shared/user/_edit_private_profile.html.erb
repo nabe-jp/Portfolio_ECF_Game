@@ -1,0 +1,15 @@
+<div class="edit-profile">
+  <h2>個人情報編集</h2>
+
+  <%= f.label :last_name, "名前(姓)" %>
+  <%= f.text_field :last_name, class: "form-control", placeholder: "姓を入力" %>
+
+  <%= f.label :first_name, "名前(名)" %>
+  <%= f.text_field :first_name, class: "form-control", placeholder: "名を入力" %>
+
+  <%= f.label :email, "メールアドレス" %>
+  <%= f.email_field :email, class: "form-control", placeholder: "メールアドレスを入力" %>
+
+  <%= f.submit "更新する", class: "btn btn-primary" %>
+<% end %>
+</div>

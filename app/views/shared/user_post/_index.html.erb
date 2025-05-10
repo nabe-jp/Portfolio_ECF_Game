@@ -1,0 +1,19 @@
+<div>
+<% @recent_posts.each_with_index do |post, index| %>
+  <div class="post">
+    <h3><%= link_to post.title, user_post_path(post.user, post) %></h3>
+    <p><%= link_to user_post_path(post.user, post) do %>
+      <%= image_tag("no_image.jpg", size: "100x100") %>
+    <% end %></p>
+    <p><%= truncate(post.body, length: 100) %></p>
+    <p><%= post.created_at.strftime("%Y-%m-%d") %></p>
+  </div>
+  
+  <% if index == @recent_posts.length - 1 %>
+    <!-- 最後の投稿の右端に「全件確認」のリンク -->
+    <div class="view-all-link">
+      <%= link_to '全件確認', user_posts_path(post.user), class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+<% end %>
+</div>

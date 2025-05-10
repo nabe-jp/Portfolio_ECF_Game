@@ -72,7 +72,7 @@ footer {
 }
 // ラベルに使用
 .form-label-and-input label {
-  width: 35%;
+  width: 50%;
 }
 // 入力欄に使用
 .form-label-and-input input {
@@ -194,6 +194,14 @@ form .btn-outline-info:active {
 // フォーカス時
 .new-user-btn:focus {
   box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); // 緑色の影が少し広がる
+}
+
+
+/*   エラーメッセージの設定   */
+// ulの表示で使用
+#error_explanation ul {
+  padding-left: 20px;               // スペースを追加してリストを右に寄せる 
+  margin-bottom: 3rem;              // エラーメッセージと入力フォームの間に余白を設定
 }
 
 

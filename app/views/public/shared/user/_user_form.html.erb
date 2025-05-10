@@ -1,0 +1,30 @@
+<%= form_with(model: @user, local: true) do |f| %>
+  <%= render "shared/error/error_messages", resource: @user, error_resource_name: "更新" %>
+
+  <div class="form-group">
+    <%= f.label :last_name, "名前(姓)" %>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :first_name, "名前(名)" %>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :nickname, "ニックネーム" %>
+    <%= f.text_field :nickname, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :bio, "自己紹介" %>
+    <%= f.text_area :bio, class: "form-control" %>
+  </div>
+
+  <%= f.submit submit_label || "更新する", class: "btn btn-primary" %>
+<% end %>

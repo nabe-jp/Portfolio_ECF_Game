@@ -1,0 +1,15 @@
+<%= form_with(model: [@user, @post], local: true) do |f| %>
+  <%= render "shared/error/error_messages", resource: @post, error_resource_name: error_resource_name %>
+
+  <div class="form-group">
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力してください" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :body, "内容" %>
+    <%= f.text_area :body, class: "form-control", placeholder: "内容を入力してください" %>
+  </div>
+
+  <%= f.submit submit_label || "投稿する", class: "btn btn-primary" %>
+<% end %>
