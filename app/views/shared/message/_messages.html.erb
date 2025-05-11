@@ -1,5 +1,5 @@
 <!-- インスタンスを用いてエラーメッセージを表示する場合(renderを使用) -->
-<% if resource.errors.any? %>
+<% if defined?(resource) && resource.errors.any? %>
   <div id="error_explanation" data-turbo-cache="false">
     <h5>
       <%= I18n.t("errors.messages.not_saved",
@@ -27,5 +27,14 @@
         <li><%= msg %></li>
       <% end %>
     </ul>
+  </div>
+<!-- コントローラー内で設定したメッセージを表示する場合 -->
+<% elsif flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
   </div>
 <% end %>

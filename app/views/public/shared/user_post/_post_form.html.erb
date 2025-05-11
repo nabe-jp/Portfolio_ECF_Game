@@ -1,5 +1,5 @@
-<%= form_with(model: [@user, @post], local: true) do |f| %>
-  <%= render "shared/error/error_messages", resource: @post, error_resource_name: error_resource_name %>
+<%= form_with(model: [user, post], local: true) do |f| %>
+  <%= render "shared/message/messages", resource: post, error_resource_name: error_resource_name %>
 
   <div class="form-group">
     <%= f.label :title, "タイトル" %>

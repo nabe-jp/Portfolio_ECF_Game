@@ -1,29 +1,33 @@
 class Public::UsersController < ApplicationController
-  before_action :set_user, only: [:mypage, :show, :edit, :update, :withdraw_check, :withdraw]
+  before_action :authenticate_user!
+  before_action :set_current_user, only: [:edit, :update, :mypage, :settings, :check, :withdraw]
+  before_action :set_user, only: [:show]
 
-  def mypage
-    @user = User.find(params[:id])
-  end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: "ユーザー情報を更新しました。"
+      redirect_to user_mypage_path, notice: "ユーザー情報を更新しました。"
     else
       render :edit
     end
   end
 
-  def withdraw_check
-    # 退会確認画面
+  # ユーザー詳細
+  def mypage
+  end
+
+  # 設定変更への一覧表示
+  def settings
+  end
+
+  # 退会確認画面
+  def check
   end
 
   def withdraw
@@ -35,10 +39,14 @@ class Public::UsersController < ApplicationController
   private
 
   # ユーザー情報を取得
+  def set_current_user
+    @user = current_user
+  end
+
   def set_user
     @user = User.find(params[:id])
   end
-
+ 
   # ユーザーパラメータの制御
   def user_params
     params.require(:user).permit(:last_name, :first_name, :nickname, :email, :password, :bio, :is_active)

@@ -1,5 +1,5 @@
 <%= form_with scope: scope, url: url, local: true do |f| %>
-  <%= render "/shared/error/error_messages", resource: resource %>
+  <%= render "shared/message/messages", resource: resource, error_resource_name: "ログイン" %>
   <div class="form-label-and-input">
     <label><%= f.label :email, "メールアドレス" %></label>
     <%= f.email_field :email, placeholder: "sample@example.com" %>

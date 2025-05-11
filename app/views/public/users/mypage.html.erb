@@ -1,29 +1,28 @@
 <h2><%= @user.nickname %>さんのマイページ</h2>
+<%= render "shared/message/messages" %>
 <h2>ユーザー詳細</h2>
 
 <!-- 自分のマイページを表示する部分 -->
-<% if current_user == @user %>
-  <h2>マイページ</h2>
-  <%= render "public/shared/user/private_profile", f: @user %>
-  
-  <%= render "public/shared/user/public_profile", f: @user %>
-  
-<!-- 他のユーザーのプロフィールを表示する部分 -->
-<% else %>
-  <h2><%= @user.name %>さんのプロフィール</h2>
-  <%= render "public/shared/user/public_profile", f: @user %>
+<h2>マイページ</h2>
+<%= render "public/shared/user/private_profile", user: @user %>
+
+リンクテスト
+<%= render "public/shared/user/user_links", show_edit: true %>
+<%= render "public/shared/user/user_links", settings: true %>
+<%= render "public/shared/user/user_links", withdraw: true %>
+<%= render "public/shared/user/user_links", mypage_back: true %>
+<%= render "public/shared/user/user_links", back: true %>
+<%= render "public/shared/user/user_links", profile: true %>
+<%= render "public/shared/user/user_links", my_posts_index: true %>
+<%= render "public/shared/user/user_links", mypage_back: true %>
+<%= render "public/shared/user/user_links", all_posts_index: true %>
+<%= render "public/shared/user/user_links", new_post: true %>
+
+
+
+<% if defined?(my_posts_index) && my_posts_index && defined?(@user) %>
+  <%= link_to '自分の投稿一覧を見る', user_posts_path(@user), class: 'btn btn-outline-primary' %>
 <% end %>
-
-
-
-<%= link_to "編集する", edit_user_path(@user), class: "btn btn-primary mt-3" %>
-
-
-<%= link_to '退会する', user_withdraw_check_path(@user), class: 'btn btn-danger' %>
-
-<%= link_to "戻る", user_mypage_path(@user), class: "btn btn-secondary mt-3" %>
-
-<%= link_to "プロフィールを見る", user_path(@user), class: "btn btn-outline-primary" %>
-
-<p><%= link_to '投稿一覧を見る', user_posts_path(@user), class: 'btn btn-outline-primary' %></p>
-<%= link_to '新規投稿', new_user_post_path(current_user), class: 'btn btn-primary' %>
+<% if defined?(new_post) && new_post && defined?(@user) %>
+  <%= link_to '新規投稿', new_user_post_path(@user), class: 'btn btn-primary' %>
+<% end %>

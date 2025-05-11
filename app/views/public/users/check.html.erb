@@ -4,5 +4,5 @@
 <%= form_with url: user_withdraw_path(@user), method: :patch do |f| %>
     <%= f.submit 'アカウントを削除する', class: 'btn btn-danger',
       data: { confirm: '本当にアカウントを削除してもよろしいですか？' } %>
-  <%= link_to 'アカウント削除をしない', user_path(@user), class: 'btn btn-secondary' %>
+  ボタンリンク追加
 <% end %>

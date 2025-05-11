@@ -1,0 +1,27 @@
+<h3>メールアドレスと名前の変更</h3>
+
+<%= form_with(model: resource, url: registration_path(user), method: :put, local: true) do |f| %>
+  <%= render "shared/message/messages", resource: resource, error_resource_name: "更新" %>
+
+  <div class="form-group">
+    <%= f.label :last_name, "名前(姓)" %>
+    <%= f.text_field :last_name, class: "form-control", value: resource.last_name %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :first_name, "名前(名)" %>
+    <%= f.text_field :first_name, class: "form-control", value: resource.first_name %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email, class: "form-control", value: resource.email %>
+  </div>
+
+    <!-- 隠しフィールドでフォームタイプを送信 -->
+  <%= f.hidden_field :form_type, value: "profile" %>
+
+  <div class="form-group">
+    <%= f.submit "更新する", class: "btn btn-primary" %>
+  </div>
+<% end %>

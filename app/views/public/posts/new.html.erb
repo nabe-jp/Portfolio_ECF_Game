@@ -1,4 +1,5 @@
 <h2>新規投稿</h2>
-<%= render "public/shared/user_post/post_form", submit_label: "投稿する", error_resource_name: "投稿"  %>
+<%= render "public/shared/user_post/post_form", user: @user, post: @post, 
+submit_label: "投稿する", error_resource_name: "投稿"  %>
 
 <%= link_to '戻る', user_posts_path(current_user), class: 'btn btn-secondary mt-3' %>

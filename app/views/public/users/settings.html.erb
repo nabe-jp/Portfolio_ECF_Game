@@ -1,0 +1,10 @@
+<h2>設定</h2>
+
+<!-- 設定メニュー -->
+<div class="settings-menu mb-4">
+  <%= render "public/shared/user/user_links", show_edit: true %>
+  <%= render "public/shared/auth/auth_links", private: true %>
+  <%= render "public/shared/auth/auth_links", password: true %>
+  <%= render "public/shared/user/user_links", withdraw: true %>
+</div>
+

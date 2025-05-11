@@ -1,6 +1,7 @@
 <div class="edit-profile">
   <h2>公開プロフィール編集</h2>
-
+  <%= form_with model: user, url: users_path, method: :patch, local: true do |f| %>
+  <%= render "shared/message/messages", resource: user, error_resource_name: "更新" %>
   <%= f.label :nickname, "ニックネーム" %>
   <%= f.text_field :nickname, class: "form-control", placeholder: "ニックネームを入力" %>
 

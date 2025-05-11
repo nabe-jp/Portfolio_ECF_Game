@@ -1,5 +1,5 @@
 <%= form_with(url: user_registration_path, scope: :user, local: true) do |f| %>
-  <%= render "/shared/error/error_messages", resource: resource, error_resource_name: "会員情報" %>
+  <%= render "shared/message/messages", resource: resource, error_resource_name: "新規会員登録" %>
   <div class="form-label-and-input">
     <%= f.label :last_name, "名前" %>
     <div class="name-fields">

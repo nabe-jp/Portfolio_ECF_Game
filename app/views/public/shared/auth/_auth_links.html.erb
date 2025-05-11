@@ -1,0 +1,22 @@
+<!-- ログイン前用 -->
+<% if !user_signed_in? %>
+  <%- if controller_name != 'sessions' %>
+    <%= link_to "こちら", new_session_path(resource_name) %>からログインを行ってください
+  <% end %>
+
+  <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+    <%= link_to "こちら", new_registration_path(resource_name) %>から新規登録を行ってください
+  <% end %>
+
+<!-- ログイン後用 -->
+<% else %>
+  <% if defined?(private) && private %>
+    <%= link_to "個人情報編集", edit_user_registration_path(profile: true), 
+      class: "btn btn-outline-primary" %>
+  <% end %>
+
+  <% if defined?(password) && password %>
+    <%= link_to "パスワード変更", edit_user_registration_path(password: true), 
+      class: "btn btn-outline-primary" %>
+  <% end %>
+<% end %>

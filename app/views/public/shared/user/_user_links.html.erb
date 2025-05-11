@@ -1,0 +1,36 @@
+<!-- 未定義かを判定し、定義されていればその中身がtrueかを判定 -->
+<% if defined?(show_edit) && show_edit %>
+  <%= link_to "プロフィールを編集する", edit_users_path, class: "btn btn-primary mt-3" %>
+<% end %>
+
+<% if defined?(settings) && settings %>
+  <%= link_to "登録情報を編集する", user_settings_path, class: "btn btn-primary mt-3" %>
+<% end %>
+
+<% if defined?(withdraw) && withdraw %>
+  <%= link_to '退会する', user_check_path, class: 'btn btn-danger' %>
+<% end %>
+
+<% if defined?(mypage_back) && mypage_back %>
+  <%= link_to "マイページに戻る", user_mypage_path, class: "btn btn-secondary mt-3" %>
+<% end %>
+
+<% if defined?(back) && back %>
+  <%= link_to "戻る", request.referer || root_path, class: "btn btn-secondary" %>
+<% end %>
+
+<% if defined?(profile) && profile %>
+  <%= link_to "プロフィールを見る", user_path(@user), class: "btn btn-outline-primary" %>
+<% end %>
+
+<% if defined?(my_posts_index) && my_posts_index && defined?(@user) %>
+  <%= link_to '自分の投稿一覧を見る', user_posts_path(@user), class: 'btn btn-outline-primary' %>
+<% end %>
+
+<% if defined?(all_posts_index) && all_posts_index %>
+  <%= link_to 'すべての投稿一覧を見る', posts_path, class: 'btn btn-outline-primary' %>
+<% end %>
+
+<% if defined?(new_post) && new_post && defined?(@user) %>
+  <%= link_to '新規投稿', new_user_post_path(@user), class: 'btn btn-primary' %>
+<% end %>

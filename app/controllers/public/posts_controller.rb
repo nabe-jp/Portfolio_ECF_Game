@@ -1,9 +1,6 @@
 class Public::PostsController < ApplicationController
-  before_action :set_user
+  before_action :set_user, except: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-
-  # 編集・削除権限を確認
-  before_action :authorize_user, only: [:edit, :update, :destroy]
   
   # 新規投稿作成フォーム
   def new
@@ -13,8 +10,16 @@ class Public::PostsController < ApplicationController
 
   # 投稿一覧
   def index
-    @user = User.find(params[:user_id])
-    @posts = @user.posts.order(created_at: :desc)
+    if params[:user_id].present?
+      @user = User.find_by(id: params[:user_id])
+      if @user
+        @posts = @user.posts.order(created_at: :desc)
+      else
+        redirect_to posts_path, alert: "ユーザーが見つかりません" and return
+      end
+    else
+      @posts = Post.all.order(created_at: :desc)
+    end
   end
 
   # 投稿詳細
