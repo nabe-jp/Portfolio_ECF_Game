@@ -38,3 +38,6 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# カリキュラムの開発環境準備にて追加
+/.env
