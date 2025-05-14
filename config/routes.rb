@@ -57,13 +57,29 @@ Rails.application.routes.draw do
     # resources :posts, only: [:index]
 
 
-    resources :user, only: [:show, :edit, :update] do
-        get 'mypage', to: 'user#mypage', as: 'mypage'
-        get 'settings', to: 'user#settings', as: 'settings'
-        get 'check', to: 'user#check', as: 'check'
-        patch 'withdraw', to: 'user#withdraw', as: 'withdraw'
-      resources :posts, only: [:index, :new, :show, :create, :edit, :update, :destroy]
+    # 自分自身の設定(単数リソースを使用、usersリソースとの衝突を避けるためcontrollerオプションで設定)
+    # :idは付きませんがユーザーに対する操作であることを明示的にするためにmemberを使用しています
+    resource :user, only: [:show, :edit, :update], controller: 'user' do
+      member do
+        get 'mypage'
+        get 'settings'
+        get 'check'
+        patch 'withdraw'
+      end
     end
+    
+    # showはresource_userにもあるのでuser_post_pathに配置される、そこでも衝突が起こるのでpathを設定しています
+    # リソースフルにするために投稿はresource_userにネストせずresources_usersにネストしました
+    resources :users, only: [] do
+      member do
+        get 'show', as: 'show'
+      end
+      resources :posts, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    end
+
+    # ユーザーの全投稿用(indexだけのためresourcesは使用せずカスタム)
+    get 'users/posts', to: 'posts#index', as: 'user_all_posts'
+
 
     # 他の会員用ルーティング
   end

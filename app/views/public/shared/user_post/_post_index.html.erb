@@ -1,12 +1,23 @@
+<h2>
+  <% if @user %>
+    <%= @user.nickname %>さんの投稿一覧
+  <% else %>
+    すべての投稿一覧
+  <% end %>
+</h2>
+
+<% if @posts.any? %>
 <% @posts.each do |post| %>
   <div class="post">
-    <p><%= post.user.nickname %></p> <!-- postのユーザー名を表示 -->
-    <% if post.user == current_user %>
-      <h3><%= link_to post.title, post_show_user_path(post) %></h3>
-    <% else %>
-      <h3><%= link_to post.title, user_post_path(post.user.id, post.id) %></h3>
+    <%= link_to post.user.nickname, show_user_path(post.user.id) %>
+    <%= link_to user_post_path(post.user, post) do %>
+      <%= image_tag(post.post_image, size: "100x100") %>
     <% end %>
-    <p><%= truncate(post.body, length: 100) %></p>
-    <p><%= post.created_at.strftime("%Y-%m-%d") %></p>
+    <%= link_to post.title, user_post_path(post.user.id, post.id) %>
+    <%= truncate(post.body, length: 100) %>
+    <%= post.created_at.strftime("%Y-%m-%d") %>
   </div>
+<% end %>
+<% else %>
+  <p>投稿がありません。</p>
 <% end %>

@@ -61,12 +61,12 @@ class Public::RegistrationsController < Devise::RegistrationsController
 
   # 新規登録後のリダイレクト先
   def after_sign_up_path_for(resource)
-    user_mypage_path
+    mypage_user_path
   end
 
   # アカウント更新後のリダイレクト先（任意で追加）
   def after_update_path_for(resource)
-    user_mypage_path
+    mypage_user_path
   end
 
   # サインアップ時に許可するパラメータ

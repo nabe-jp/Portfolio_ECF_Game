@@ -2,8 +2,6 @@ class Public::UserController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user, only: [:show, :edit, :update, :mypage, :settings, :check, :withdraw]
 
-  def show
-  end
 
   def edit
     # エラー時にはセッションからユーザーの入力内容を再設定
@@ -16,13 +14,13 @@ class Public::UserController < ApplicationController
   def update
     if @user.update(user_params)
       session.delete(:user_attributes)
-      redirect_to user_mypage_path, notice: "ユーザー情報を更新しました。"
+      redirect_to mypage_user_path, notice: "ユーザー情報を更新しました。"
     else
       # 機密性もなく、長文を取り扱う可能性もあるためセッションに保存
       session[:user_attributes] = @user.attributes.slice("nickname", "bio")
       flash[:error_name] = "パスワード更新"
       flash[:error_messages] = @user.errors.full_messages
-      redirect_to user_path and return
+      redirect_to edit_user_path and return
     end
   end
 

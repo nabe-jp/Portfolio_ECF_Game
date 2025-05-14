@@ -1,43 +1,40 @@
 class Public::PostsController < ApplicationController
-  before_action :set_user, except: [:index]
-  before_action :current_user, only: [:new, :create, :edit, :updated, :estroy]
-  before_action :set_post, only: [:show, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_user, only: [:show]
+  before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # 投稿一覧
   def index
-    # user_idがparamsに含まれている場合、そのユーザーを取得、なければすべての投稿を表示
+    # user_idがparamsに含まれている場合、そのユーザーの投稿一覧を表示し、なければ全ユーザーの投稿を表示
     if params[:user_id].present?
       @user = User.find_by(id: params[:user_id])
 
-      # @userがnilの場合、リダイレクト、または自分の投稿一覧か 他のユーザーの投稿一覧かを判別
+      # @userが見つからない場合も想定
       if @user.nil?
-        redirect_to posts_path, alert: '指定されたユーザーが見つかりませんでした。'
+        redirect_to root_path, alert: '指定されたユーザーが見つかりませんでした。'
         return
-      elsif @user == current_user
-        @posts = current_user.posts
-      else
-        @posts = @user.posts
       end
+      @posts = @user.posts.order(created_at: :desc)
     else
-      @posts = Post.all
+      @posts = Post.includes(:user).order(created_at: :desc)
     end
   end
 
   def show
-
   end
 
   def new
-    @url = user_posts_path
+    @url = user_posts_path(@user)
     @verd = :post
-    @post = current_user.posts.new(session[:post_attributes] || {})
+    @post = @user.posts.new(session[:post_attributes] || {})
   end
 
   def create
     @post = current_user.posts.new(post_params)
   
     if @post.save
-      redirect_to post_show_user_path(@post), notice: "投稿が作成されました。"
+      redirect_to user_post_path(@user, @post), notice: "投稿が作成されました。"
     else
       store_form_data(attributes: post_params, error_messages: 
         @post.errors.full_messages, error_name: "投稿")
@@ -46,7 +43,7 @@ class Public::PostsController < ApplicationController
   end 
 
   def edit
-    @url = user_post_path(@post.id)
+    @url = user_post_path(@user.id)
     @verd = :patch
     if session[:post_attributes]
       @post.assign_attributes(session[:post_attributes]) if session[:post_attributes]
@@ -55,34 +52,35 @@ class Public::PostsController < ApplicationController
   end
   
   def update
-    # タイミングが早すぎるのかset_postを使用するとnilになるので直接記載し@userの参照を遅らせる
-    @post = @user.posts.find_by(id: params[:id])
     if @post.update(post_params)
       session.delete(:post_attributes)
-      redirect_to post_show_user_path(@post), notice: '投稿を更新しました。'
+      redirect_to user_post_path(@user, @post), notice: '投稿を更新しました。'
     else
       store_form_data(attributes: post_params, error_messages: @post.errors.full_messages)
-      redirect_to edit_user_post_path(@post)
+      redirect_to edit_user_post_path(@user, @post)
     end
   end
   
   def destroy
-    @post.destroy
-    redirect_to post_index_user_path, notice: '投稿を削除しました。'
+    if @post.destroy
+      redirect_to user_posts_path(@user), notice: '投稿を削除しました。'
+    else
+      redirect_to root_path, alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
+    end
   end
 
   private
 
   # ユーザーを取得
   def set_user
-    # user_idがparamsに含まれている場合、そのユーザーを取得,なければカレントユーザーをセット
     if params[:user_id].present?
       @user = User.find_by(id: params[:user_id])
-    elsif current_user
-      @user = current_user
-    else
-      # ログインしていなければ、ログインページにリダイレクト
-      redirect_to login_path, alert: 'ログインが必要です。'
+
+      # ユーザーが見つからない場合はTOPページに行く
+      unless @user
+        redirect_to root_path, alert: '指定されたユーザーが見つかりませんでした。'
+        return
+      end
     end
   end
 
@@ -95,9 +93,6 @@ class Public::PostsController < ApplicationController
     # user_idが指定されている場合はそのユーザーの投稿を取得
     if @user
       @post = @user.posts.find_by(id: params[:id])
-    else
-      # ログインしていなければ、ログインページにリダイレクト
-      redirect_to login_path, alert: 'ログインが必要です。'
     end
   end
 

@@ -11,7 +11,7 @@
 <p><%= @post.body %></p>
 <p><%= @post.created_at.strftime("%Y-%m-%d") %></p>
 <% if current_user == @post.user %>
-<%= link_to '編集', edit_user_post_path(@post), class: 'btn btn-sm btn-outline-primary' %>
-<%= link_to '削除', user_post_path(@post.id), method: :delete, 
+<%= link_to '編集', edit_user_post_path(current_user, @post), class: 'btn btn-sm btn-outline-primary' %>
+<%= link_to '削除', user_post_path(current_user, @post), method: :delete, 
   data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
   <% end %>
