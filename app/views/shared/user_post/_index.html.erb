@@ -1,19 +1,34 @@
-<div>
-<% @recent_posts.each_with_index do |post, index| %>
-  <div class="post">
-    <h3><%= link_to post.title, user_post_path(post.user, post) %></h3>
-    <p><%= link_to user_post_path(post.user, post) do %>
-      <%= image_tag("no_image.jpg", size: "100x100") %>
-    <% end %></p>
-    <p><%= truncate(post.body, length: 100) %></p>
-    <p><%= post.created_at.strftime("%Y-%m-%d") %></p>
-  </div>
-  
-  <% if index == @recent_posts.length - 1 %>
-    <!-- 最後の投稿の右端に「全件確認」のリンク -->
-    <div class="view-all-link">
-      <%= link_to '全件確認', user_posts_path(post.user), class: 'btn btn-primary' %>
+<div class="posts-container">
+  <% @recent_posts.each_with_index do |post, index| %>
+    <div class="post-card">
+      <!-- 投稿ヘッダー: ユーザー画像とニックネーム -->
+      <div class="post-header">
+        <%= image_tag(post.user.profile_image, size: "40x40", class: "rounded-circle") %>
+        <strong><%= post.user.nickname %></strong>
+      </div>
+
+      <!-- 投稿内容: 画像とタイトル -->
+      <div class="post-body">
+        <%= link_to user_post_path(post.user, post) do %>
+          <%= image_tag(post.post_image, size: "100x100") %>
+        <% end %>
+        <h5>
+          <%= link_to post.title, user_post_path(post.user, post), class: "text-decoration-none" %>
+        </h5>
+      </div>
+
+      <!-- 投稿日時 -->
+      <p class="text-muted small"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
     </div>
   <% end %>
-<% end %>
+
+    <!-- 最後の1件 (同じサイズで全件リンク) -->
+    <% if @recent_posts.length >= PostConstants::MAX_DISPLAY_COUNT %>
+      <div class="post-card">
+        <div class="post-body">
+          <%= link_to '全件確認', user_posts_path(current_user), class: 'btn btn-primary w-100' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

@@ -1,12 +1,17 @@
 <h1>Public::Posts#show</h1>
-<%= render "shared/message/messages" %>
 <p>Find me in app/views/public/posts/show.html.erb</p>
+
+<%= image_tag(@post.user.profile_image, size: "40x40", class: "rounded-circle", style: "margin-right: 8px;") %>
+
 <h2><%= @post.title %></h2>
+
+  <%= image_tag(@post.post_image, size: "100x100", style: "margin-right: 12px;") %>
+
 <p><%= @user.nickname %></p>
 <p><%= @post.body %></p>
 <p><%= @post.created_at.strftime("%Y-%m-%d") %></p>
 <% if current_user == @post.user %>
-<%= link_to '編集', edit_user_post_path(@user, @post), class: 'btn btn-sm btn-outline-primary' %>
-<%= link_to '削除', user_post_path(@user, @post), method: :delete, 
+<%= link_to '編集', edit_user_post_path(@post), class: 'btn btn-sm btn-outline-primary' %>
+<%= link_to '削除', user_post_path(@post.id), method: :delete, 
   data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
   <% end %>

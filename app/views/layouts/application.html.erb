@@ -14,10 +14,16 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <!-- bodyを動的にし、bodyの短くなり見栄えが悪くならないように高さを取る -->
+  <!-- bodyを動的にし、bodyが短くなり見栄えが悪くならないように高さを取る -->
   <body class="d-flex flex-column <%= controller.controller_name %> <%= controller.action_name %> vh-100">
     <%= render 'shared/header/header' %>
     <main class="mb-auto">
+    <div class="container">
+      <div class="row justify-content-center">
+        <%= render "shared/message/messages" %>
+      </div>
+    </div>
+
       <%= yield %>
     </main>
     <%= render 'shared/footer/footer' %>

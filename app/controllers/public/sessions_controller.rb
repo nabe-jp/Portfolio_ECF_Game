@@ -10,11 +10,13 @@ class Public::SessionsController < Devise::SessionsController
       if resource.is_active
         super
       else
+        flash[:error_name] = "ログイン"
         flash[:error_messages] = ['退会済みアカウントの為、使用できません']
         redirect_to new_user_session_path
       end
     else
       # エラーメッセージがある場合にflash[:error_messages]にセット
+      flash[:error_name] = "ログイン"
       flash[:error_messages] = ['メールアドレスかパスワードが正しくありません']
       redirect_to new_user_session_path
     end

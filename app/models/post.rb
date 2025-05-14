@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
+  has_one_attached :post_image
+
 
   # 空の場合、長さはスキップする
   validates :title, presence: { message: "を入力してください" }
@@ -9,4 +11,23 @@ class Post < ApplicationRecord
   validates :body, presence: { message: "を入力してください" }
   validates :body, length: { maximum: 200, 
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }  
+
+
+  # 投稿作成時に必ずデフォルト画像を設定
+  after_create :set_default_post_image
+
+
+  private
+  
+  # デフォルトの画像をアタッチ
+  def set_default_post_image
+    # アタッチされた画像がある場合デフォルト画像をアタッチしない
+    unless post_image.attached?
+      # デフォルト画像のパスを指定
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_image.jpeg')
+      # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
+      post_image.attach(io: File.open(default_image_path), 
+        filename: 'default_user.jpeg', content_type: 'image/jpeg')
+    end
+  end
 end

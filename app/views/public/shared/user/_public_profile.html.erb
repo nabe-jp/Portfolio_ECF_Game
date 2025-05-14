@@ -2,6 +2,12 @@
   <h2>公開プロフィール</h2>
 
   <div class="profile-item">
+    <%= content_tag :label, "ユーザー画像" %>
+    <%= image_tag(user.profile_image, size: "40x40", 
+      class: "rounded-circle", style: "margin-right: 8px;") %>
+  </div>
+
+  <div class="profile-item">
     <%= content_tag :label, "ニックネーム" %>
     <p><%= user.nickname %></p>
   </div>

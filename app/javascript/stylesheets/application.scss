@@ -38,18 +38,19 @@ label {
 
 
 /*    ヘッダーの設定    */
-// ヘッダーの色
+// ヘッダータグの設定
 header {
   background-color: #333333;
-  padding: 15px 0;                   // ヘッターの上下に余白を追加
+  margin-bottom: 2rem;              // ヘッダーとbodyの間の余白、my-5 相当
+  padding: 15px 0;                  // ヘッターの上下に余白を追加
 }
 // リンクボタンの設定
 .nav-item {
-  display: flex;                     // フレックスコンテナとして、子要素を柔軟に並べる
-  margin-right: 10px;                // 右に10pxの余白を追加
+  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
+  margin-right: 10px;               // 右に10pxの余白を追加
 }
 .nav-item:last-child {
-  margin-right: 0;                   // 最後のボタンの右余白をなくす
+  margin-right: 0;                  // 最後のボタンの右余白をなくす
 }
 
 
@@ -201,14 +202,13 @@ form .btn-outline-info:active {
 // ulの表示で使用
 #error_explanation ul {
   padding-left: 20px;               // スペースを追加してリストを右に寄せる 
-  margin-bottom: 3rem;              // エラーメッセージと入力フォームの間に余白を設定
+  margin-bottom: 2rem;              // エラーメッセージと入力フォームの間に余白を設定
 }
 
 
 /*   ページのタイトルの設定   */
 // rowの中で使用
 .page-title-col {
-  margin-top: 3rem;                 // my-5 相当
   margin-bottom: 3rem;              // my-5 相当
   background-color:#f8f9fa;       // 背景色
 }
@@ -279,4 +279,64 @@ body.homes.about section p {
 .contact-info {
   background-color: #c22fdb;
   color: black;
+}
+
+
+
+
+
+
+/* 全体のコンテナ */
+.posts-container {
+  display: flex;
+  flex-wrap: wrap; /* 行が折り返し可能に */
+  justify-content: space-between; /* 各投稿の間にスペースを設定 */
+  gap: 20px; /* 投稿間の間隔を調整 */
+}
+
+/* 各投稿カード */
+.post-card {
+  width: 19%; /* 投稿の幅を5等分 (100% / 5 = 20%、ただし余裕を持たせるために19%に) */
+  background-color: #f8f9fa; /* 背景色 */
+  border-radius: 8px; /* 角を丸く */
+  padding: 10px; /* 内部の余白 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 薄い影 */
+  overflow: hidden; /* 内容がはみ出ないように */
+}
+
+/* 投稿のヘッダー (ユーザー画像とニックネーム) */
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-header img {
+  margin-right: 10px;
+}
+
+/* 全件確認リンクのスタイル */
+.post-card .post-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.post-card .post-body .btn-primary {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.post-body img {
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+/* 投稿日時 */
+.text-muted {
+  font-size: 0.8rem;
+  color: #6c757d;
 }

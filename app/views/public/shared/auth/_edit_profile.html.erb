@@ -1,8 +1,6 @@
 <h3>メールアドレスと名前の変更</h3>
 
 <%= form_with(model: resource, url: registration_path(user), method: :put, local: true) do |f| %>
-  <%= render "shared/message/messages", resource: resource, error_resource_name: "更新" %>
-
   <div class="form-group">
     <%= f.label :last_name, "名前(姓)" %>
     <%= f.text_field :last_name, class: "form-control", value: resource.last_name %>
