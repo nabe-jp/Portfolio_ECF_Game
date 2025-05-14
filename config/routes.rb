@@ -24,47 +24,47 @@ Rails.application.routes.draw do
     # resource :user, only: [:update, :destroy], path: 'user/profile', as: 'user' do
     #   get 'edit', to: 'user#edit', as: ''
     # end
-
-
-
-    # 説明用の記述
-    # get 'user/show', to: 'user#show', as: 'user_show'
-    # get 'user/post/index', to: 'user#post#index', as: 'user_post_index'
-    # get 'user/post/:id/show', to: 'user#post#show', as: 'user_post_show'
-  
+ 
     #  resource :user, only: [show] do
     #   resources :posts, only: [:index, :show]
     # end
 
+    # # updateやdestroyのControllerがusersになるためカスタムで作成(応急処置)
+    # get 'user/profile/edit', to: 'user#edit', as: 'user'
+    # patch 'user/profile/edit', to: 'user#update', as: ''
+    # delete 'user/profile/edit', to: 'user#destroy', as: ''
+
+    # get 'user/show', to: 'user#show', as: 'user_show'
+    # get 'user/mypage', to: 'user#mypage', as: 'user_mypage'
+    # get 'user/settings', to: 'user#settings', as: 'user_settings'
+    # get 'user/check', to: 'user#check', as: 'user_check'
+    # patch 'user/withdraw', to: 'user#withdraw', as: 'user_withdraw'
+
+    # # 自分(ログインユーザー)の投稿操作(更新後に自身の投稿も閲覧するのでindex、showも含めている)
+    # resource :user, only: [] do
+    #   get 'post/index', to: 'posts#index', as: 'post_index'
+    #   get 'post/:id/show', to: 'posts#show', as: 'post_show'
+
+    #   resources :posts, only: [:new, :create, :edit, :update, :destroy]
+    # end
+
+    # # ほかのユーザーの投稿を見るため
+    # resources :users, only: [:show] do
+    #   resources :posts, only: [:index, :show]
+    # end
+
+    # # 自身も含めたすべての投稿を見るため
+    # resources :posts, only: [:index]
 
 
-
-    # updateやdestroyのControllerがusersになるためカスタムで作成(応急処置)
-    get 'user/profile/edit', to: 'user#edit', as: 'user'
-    patch 'user/profile/edit', to: 'user#update', as: ''
-    delete 'user/profile/edit', to: 'user#destroy', as: ''
-
-    get 'user/show', to: 'user#show', as: 'user_show'
-    get 'user/mypage', to: 'user#mypage', as: 'user_mypage'
-    get 'user/settings', to: 'user#settings', as: 'user_settings'
-    get 'user/check', to: 'user#check', as: 'user_check'
-    patch  'user/withdraw', to: 'user#withdraw', as: 'user_withdraw'
-
-    # 自分(ログインユーザー)の投稿操作(更新後に自身の投稿も閲覧するのでindex、showも含めている)
-    resource :user, only: [] do
-      get 'post/index', to: 'posts#index', as: 'post_index'
-      get 'post/:id/show', to: 'posts#show', as: 'post_show'
-
-      resources :posts, only: [:new, :create, :edit, :update, :destroy]
+    resources :user, only: [:show, :edit, :update] do
+        get 'mypage', to: 'user#mypage', as: 'mypage'
+        get 'settings', to: 'user#settings', as: 'settings'
+        get 'check', to: 'user#check', as: 'check'
+        patch 'withdraw', to: 'user#withdraw', as: 'withdraw'
+      resources :posts, only: [:index, :new, :show, :create, :edit, :update, :destroy]
     end
 
-    # ほかのユーザーの投稿を見るため
-    resources :users, only: [:show] do
-      resources :posts, only: [:index, :show]
-    end
-
-    # 自身も含めたすべての投稿を見るため
-    resources :posts, only: [:index]
     # 他の会員用ルーティング
   end
 
