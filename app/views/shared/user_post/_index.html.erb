@@ -1,34 +1,33 @@
 <div class="posts-container">
   <% @recent_posts.each_with_index do |post, index| %>
-    <div class="post-card">
+    <%= link_to user_post_path(post.user.id, post), class: "box-link" do %>
       <!-- 投稿ヘッダー: ユーザー画像とニックネーム -->
       <div class="post-header">
-        <%= image_tag(post.user.profile_image, size: "40x40", class: "rounded-circle") %>
-        <strong><%= post.user.nickname %></strong>
+        <%= image_tag(post.user.profile_image, size: "40x40", class: "user-image") %>
+        <strong class="user-name"><%= post.user.nickname %></strong>
       </div>
 
       <!-- 投稿内容: 画像とタイトル -->
       <div class="post-body">
-        <%= link_to user_post_path(post.user, post) do %>
-          <%= image_tag(post.post_image, size: "100x100") %>
-        <% end %>
-        <h5>
-          <%= link_to post.title, user_post_path(post.user, post), class: "text-decoration-none" %>
+        <h5 class="post-title">
+          <%= post.title %> <!-- タイトルそのものはリンク内にあります -->
         </h5>
+        <%= image_tag(post.post_image, size: "100x100", class: "post-image") %>
       </div>
 
       <!-- 投稿日時 -->
-      <p class="text-muted small"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-    </div>
-  <% end %>
-
-    <!-- 最後の1件 (同じサイズで全件リンク) -->
-    <% if @recent_posts.length >= PostConstants::MAX_DISPLAY_COUNT %>
-      <div class="post-card">
-        <div class="post-body">
-          <%= link_to '全件確認', user_posts_path(current_user), class: 'btn btn-primary w-100' %>
-        </div>
+      <div class="post-footer">
+        <%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
       </div>
     <% end %>
-  </div>
+  <% end %>
+
+  <!-- ダミー画像表示: 投稿が足りない場合 -->
+  <% if @dummy_images.present? %>
+    <% @dummy_images.each do |dummy_image| %>
+      <div class="box-link">
+        <%= image_tag("card_#{dummy_image}.png", size: "150x230", class: "post-image") %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

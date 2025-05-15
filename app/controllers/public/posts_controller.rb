@@ -48,6 +48,8 @@ class Public::PostsController < ApplicationController
     if session[:post_attributes]
       @post.assign_attributes(session[:post_attributes]) if session[:post_attributes]
       session.delete(:post_attributes)
+    else
+      @post = @post
     end
   end
   

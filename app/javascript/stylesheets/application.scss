@@ -3,6 +3,13 @@
 
 
 /*    初期化    */
+// html、bodyの初期化
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 横スクロールを無効化 */
+}
 // container、row、colの初期化
 .container {
   width: 100%;
@@ -26,7 +33,7 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box;            // パディングを幅と高さに含める
 }
 // 上の記載では初期化できなかったため初期化し、追加事項を記載
 label {
@@ -37,29 +44,89 @@ label {
 }
 
 
+/* ルートで変数を設定 */
+// ヘッダー、サイドバー、フッターの設定
+:root {
+  --header-height: 110px;            // ヘッダーの高さ
+  --footer-height: 50px;             // フッターの高さ
+  --sidebar-width: 200px;            // サイドバーの幅
+}
+
+
 /*    ヘッダーの設定    */
 // ヘッダータグの設定
 header {
+  height: var(--header-height);
   background-color: #333333;
-  margin-bottom: 2rem;              // ヘッダーとbodyの間の余白、my-5 相当
-  padding: 15px 0;                  // ヘッターの上下に余白を追加
+  position: fixed;                   // 画面上の固定位置に要素を配置
+  padding-top: 5px;
+  top: 0;
+  width: 100%;
+  z-index: 1000;                     // 前面に出す
 }
 // リンクボタンの設定
 .nav-item {
-  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
-  margin-right: 10px;               // 右に10pxの余白を追加
+  display: flex;                     // フレックスコンテナとして、子要素を柔軟に並べる
+  margin-right: 1rem;                // 右に10pxの余白を追加
 }
 .nav-item:last-child {
-  margin-right: 0;                  // 最後のボタンの右余白をなくす
+  margin-right: 0;                   // 最後のボタンの右余白をなくす
+}
+
+
+/*    サイドバーの設定    */
+// サイドバーの共通設定 
+.sidebar {
+  background-color: #4f4f4f;
+  height: 100vh;
+  width: var(--sidebar-width);
+  position: fixed;                   // 画面上の固定位置に要素を配置
+  top: var(--header-height); 
+  bottom: var(--footer-height);
+  padding: 1rem 0.75rem 0;
+  z-index: 998;                      // 前面に出す
+}
+// 左サイドバータグの設定
+.sidebar-left {
+  left: 0;
+}
+// 右サイドバータグの設定
+.sidebar-right {
+  right: 0;
+}
+
+
+/*    メインコンテンツの設定    */
+// メインコンテンツタグの設定
+.main-content {
+  position: relative;
+  top: var(--header-height);
+  bottom: var(--footer-height);
+  margin: 20px var(--sidebar-width); // ヘッダーとフッターの間に余白
+  overflow-y: auto;
+  height: calc(100vh - var(--header-height) - var(--footer-height) - 40px);
+  padding: 1rem;
+  -ms-overflow-style: none;          // スクロールバーを非表示、Internet Explorer 10+ 対応
+  scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応
+}
+// Webkit系ブラウザ(Chrome、Safariなど)にスクロールバーを非表示にする
+.main-content::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 
 /*    フッターの設定    */
-// フッターの色
+// フッタータグの設定
 footer {
+  height: var(--footer-height);
   background-color: #333333;
-  padding: 15px 0;                   // フッターの上下に余白を追加
+  position: fixed;                   // 画面上の固定位置に要素を配置
+  bottom: 0;
   text-align: center;                // フッター内のテキストを中央揃え
+  width: 100%;
+  z-index: 999;                      // 前面に出す
 }
 
 
@@ -85,8 +152,8 @@ footer {
 }
 // ボタンに使用する
 .form-submit {
-  text-align: center;  /* ボタンを中央揃え */
-  margin-top: 2rem;    /* ボタンに上の余白を追加 */
+  text-align: center;               // ボタンを中央揃え
+  margin-top: 2rem;                 // ボタンに上の余白を追加
 }
 // 横並びの姓と名のフィールド
 .name-fields {
@@ -150,6 +217,7 @@ form .btn-outline-info:active {
 }
 // ヘッダー以外で使用するボタンの基本設定
 // 通常時
+
 .btn-base {
   padding: 0.25rem 1.5rem;          // ボタンの大きさ
   font-size: 1rem;                  // 文字サイズ
@@ -230,22 +298,22 @@ body.homes.about {
 // すべてのセクションの共通設定
 body.homes.about section {
   width: 80%;
-  margin: 0 auto 20px;              // 左右中央揃え、下側に余白
-  padding: 40px;
-  border-radius: 30px;              // 角に丸みを追加
+  margin: 0 auto 1.5rem;            // 左右中央揃え、下側に余白
+  padding: 2.5rem;
+  border-radius: 2rem;              // 角に丸みを追加
   text-align: left;                 // テキストを左揃え
 }
 // すべてのsection内のh、pタグの共通設定(hタグはh3を使用しているためh3を指定)
 body.homes.about section h3 {
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 body.homes.about section p {
-  padding-left: 10px;
+  padding-left: 1rem;
 }
 // ヘッダー
 .about-page-header {
   width: 90%;
-  margin: 20px auto;                // 左右中央揃え、上下側に余白
+  margin: 1.5rem auto;              // 左右中央揃え、上下側に余白
   background-color: #6c63ff;
   color: white;
   text-align: center;
@@ -282,61 +350,102 @@ body.homes.about section p {
 }
 
 
-
-
-
-
-/* 全体のコンテナ */
+/*    トップページの設定    */
+// トップページの余白の色
+body.homes.top {
+  background-color: #8edaf8;      // トップページの背景色
+}
+// 投稿コンテナのレイアウト設定
 .posts-container {
-  display: flex;
-  flex-wrap: wrap; /* 行が折り返し可能に */
-  justify-content: space-between; /* 各投稿の間にスペースを設定 */
-  gap: 20px; /* 投稿間の間隔を調整 */
+  display: flex;                    // フレックスボックスを使用
+  flex-wrap: wrap;                  // 要素がはみ出さないように折り返し
+  gap: 0.75rem;                     // 投稿間の隙間（間隔）
+  justify-content: space-between;   // 横方向に均等に配置
+  margin: 0.75rem;
 }
-
-/* 各投稿カード */
-.post-card {
-  width: 19%; /* 投稿の幅を5等分 (100% / 5 = 20%、ただし余裕を持たせるために19%に) */
-  background-color: #f8f9fa; /* 背景色 */
-  border-radius: 8px; /* 角を丸く */
-  padding: 10px; /* 内部の余白 */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 薄い影 */
-  overflow: hidden; /* 内容がはみ出ないように */
+// リンクボックスの設定
+.box-link {
+  display: block;                   // ボックス全体をリンクとして表示
+  width: calc(20% - 1rem);          // ボックス幅を縮小して5つ並べる
+  text-align: left;                 // テキストを左揃え
+  text-align: left;                 // テキストを左揃え
+  border: 1px solid #ddd;         // ボーダー
+  border-radius: 16px;               // 角を丸く
+  overflow: hidden;                 // 内容がはみ出さないようにする
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  color: inherit;                   // 親要素の色を引き継ぐ
+  text-decoration: none;            // リンクの下線を消す
+  margin-bottom: 4rem;              // ボックス間の余白
 }
-
-/* 投稿のヘッダー (ユーザー画像とニックネーム) */
+// ホバー時
+.box-link:hover {
+  background-color: #28b379;      // ボックスのホバー時に緑色
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;            // リンクの下線を消す
+  transform: scale(1.1);            // ボックスを少し拡大
+  color: #ffffff;                 // ホバー時に文字色を白に
+}
+// ユーザー画像とニックネームが使用するタグの設定
 .post-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  display: flex;                    // フレックスで横並び
+  align-items: center;              // 垂直方向に中央揃え
+  padding: 1rem;
+  margin-bottom: 1rem;              // ヘッダー下の余白
 }
-
-.post-header img {
-  margin-right: 10px;
+// ユーザー画像のスタイル
+.user-image {
+  border-radius: 50%;               // 円形のユーザー画像
+  margin-right: 1rem;               // 画像と名前の間に余白を追加
 }
-
-/* 全件確認リンクのスタイル */
-.post-card .post-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+// ユーザー名のスタイル
+.user-name {
+  font-weight: bold;
+  font-size: 1rem;
 }
-
-.post-card .post-body .btn-primary {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
+// 投稿タイトルに使用するタグの設定
+.post-body {
+  padding: 1rem;
+}
+// 投稿タイトルタグの設定
+.post-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  white-space: nowrap;              // タイトルが長い場合に折り返さない
+  text-overflow: ellipsis;          // 長すぎる場合に省略記号
+  overflow: hidden;                 // ボックスを超えた部分を隠す
+}
+// 投稿画像の設定
+.post-image {
+  display: block;
+  margin: 1rem auto;                // 左右中央揃え、上下側に余白
+  border-radius: 8px;
+  max-width: 100%;                  // 親要素を超えないように最大幅を設定
+}
+// 投稿日時に使用するタグの設定
+.post-footer {
+  padding: 1rem;
+  font-size: 0.875rem;
   text-align: center;
 }
-
-.post-body img {
-  margin-right: 10px;
-  border-radius: 5px;
+// レスポンシブ調整
+@media (min-width: 1024px) {
+  .box-link {
+    width: calc(20% - 2rem);        // 5つ並べる
+  }
 }
-
-/* 投稿日時 */
-.text-muted {
-  font-size: 0.8rem;
-  color: #6c757d;
+@media (max-width: 1024px) {
+  .box-link {
+    width: calc(33.33% - 2rem);     // 3つ並べる
+  }
+}
+@media (max-width: 768px) {
+  .box-link {
+    width: calc(50% - 2rem);        // 2つ並べる
+  }
+}
+@media (max-width: 480px) {
+  .box-link {
+    width: 100%;                    // 1つ並べる
+  }
 }
