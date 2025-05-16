@@ -1,3 +1,13 @@
 <!-- 自分のプロフィールを表示する部分 -->
+<div>
   <h2><%= @user.nickname %>さんのプロフィール</h2>
+</div>
+
+<div>
   <%= render "public/shared/user/public_profile" %>
+</div>
+
+<div>
+  <%= render "public/shared/user/user_links", show_edit: true, as: :button %>
+  <%= render "public/shared/user/user_links", back: true, as: :button %>
+</div>

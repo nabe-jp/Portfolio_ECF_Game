@@ -1,0 +1,15 @@
+<% if title == PostConstants::NOTIFICATION_TITLE %>
+  <h3><%= title %></h3>
+<% elsif title == PostConstants::LATEST_POST_TITLE %>
+  <div class="image-container image-container-title">
+    <h3><%= title %></h3>
+  </div>
+<% elsif title == PostConstants::LATEST_GROUP_POST_TITLE %>
+  <div class="image-container image-container-title">
+    <h3><%= title %></h3>
+  </div>
+<% elsif title == PostConstants::TODAY_TOP_LIKES_TITLE %>
+  <div class="image-container image-container-title">
+    <h3><%= title %></h3>
+  </div>
+<% end %>

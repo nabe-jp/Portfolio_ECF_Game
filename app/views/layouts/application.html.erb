@@ -24,11 +24,7 @@
 
         <!-- 左サイドバー -->
         <div class="sidebar sidebar-left">
-          <h5>ナビゲーション</h5>
-          <ul class="nav flex-column">
-            <li class="nav-item"><%= link_to 'ホーム', root_path, class: 'nav-link' %></li>
-            <li class="nav-item"><%= link_to 'マイページ', user_path(current_user), class: 'nav-link' if user_signed_in? %></li>
-          </ul>
+          <%= render 'shared/sidebar/left_sidebar' %>
         </div>
 
         <!-- メインコンテンツ -->
@@ -41,11 +37,7 @@
 
         <!-- 右サイドバー -->
         <div class="sidebar sidebar-right">
-          <h5>おすすめ</h5>
-          <ul class="list-unstyled">
-            <li><%= link_to '人気投稿', root_path, class: 'nav-link' %></li>
-            <li><%= link_to '新着ユーザー', root_path, class: 'nav-link' %></li>
-          </ul>
+          <%= render 'shared/sidebar/right_sidebar' %>
         </div>
       
       </div>

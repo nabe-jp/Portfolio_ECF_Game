@@ -44,7 +44,31 @@ label {
 }
 
 
-/* ルートで変数を設定 */
+/*    共通で使用    */
+// class間でのスペースを空ける
+.space-between {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+.space-between-top {
+  margin-top: 4rem;
+}
+.space-between-bottom {
+  margin-bottom: 4rem;
+}
+.space-between-mini {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.space-between-mini-top {
+  margin-top: 2rem;
+}
+.space-between-mini-bottom {
+  margin-bottom: 2rem;
+}
+
+
+/*    ルートで変数を設定    */
 // ヘッダー、サイドバー、フッターの設定
 :root {
   --header-height: 110px;            // ヘッダーの高さ
@@ -176,6 +200,39 @@ input.short-input {
 .sub-label {
   margin-right: 0;
 }
+// 画像フォームの設定
+.profile-image-upload {
+  display: flex;
+  flex-direction: column;           // 子要素を縦並びに
+  align-items: center;              // 中央揃え
+  margin-bottom: 1.5rem;
+}
+// 画像の入力フォームの設定
+.file-input-custom {
+  border: none;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  font-size: 1rem;
+  color: #333;
+}
+// 自己紹介フォームの設定
+.bio-form {
+  display: flex;                    // flexboxでレイアウト
+  flex-direction: column;           // 垂直方向に並べる
+  margin-bottom: 1rem;            // 下部に余白
+  align-items: center;              // コンテンツを中央揃え
+}
+// 自己紹介フォームの入力欄の設定
+.bio-input {
+  width: 100%;
+  padding: 0.8rem;                  // 内側の余白
+  font-size: 1rem;                  // 文字サイズ
+  border: 1px solid #ccc;         // 枠線
+  border-radius: 4px;               // 角を丸く
+  resize: vertical;                 // 縦方向にリサイズ可能
+  box-sizing: border-box;           // paddingを含めた幅を計算
+}
 
 
 /*    ボタンの設定   */
@@ -217,7 +274,6 @@ form .btn-outline-info:active {
 }
 // ヘッダー以外で使用するボタンの基本設定
 // 通常時
-
 .btn-base {
   padding: 0.25rem 1.5rem;          // ボタンの大きさ
   font-size: 1rem;                  // 文字サイズ
@@ -226,6 +282,8 @@ form .btn-outline-info:active {
 }
 // ホバー時
 .btn-base:hover {
+  color: rgb(138, 51, 252);
+  border-color: black;
   transform: scale(1.05);           // 少し大きく
 }
 // フォーカス時
@@ -237,6 +295,7 @@ form .btn-outline-info:active {
   transform: scale(0.95);           // 少し小さく
 }
 // フォームのログインボタンの設定
+// ログイン
 // 通常時
 .login-btn {
   background-color: #007bff;      // ボタン背景色
@@ -251,6 +310,7 @@ form .btn-outline-info:active {
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); // 青色の影が少し広がる
 }
 // フォームの新規会員登録ボタンの設定
+// サインアップ
 // 通常時
 .new-user-btn {
   background-color: #28a745;      // ボタン背景色
@@ -263,6 +323,21 @@ form .btn-outline-info:active {
 // フォーカス時
 .new-user-btn:focus {
   box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); // 緑色の影が少し広がる
+}
+// フォームの更新ボタンの設定
+// 更新用
+// 通常時
+.update-btn {
+  background-color: #ff7f50;      // ボタン背景色
+  color: white;                   // 文字色
+}
+// ホバー時
+.update-btn:hover {
+  background-color: #e0673c;
+}
+// フォーカス時
+.update-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 127, 80, 0.5); // オレンジの影が少し広がる
 }
 
 
@@ -353,8 +428,52 @@ body.homes.about section p {
 /*    トップページの設定    */
 // トップページの余白の色
 body.homes.top {
-  background-color: #8edaf8;      // トップページの背景色
+  background-color: #8edaf8;        // トップページの背景色
 }
+// お知らせ箇所の設定
+// 背景画像の設定
+.image-container {
+  background-size: cover;  // 画像がボックスを埋める
+  background-position: center center; // 画像を中央に配置 
+  display: flex;
+  justify-content: center;            // 横方向の中央揃え
+  align-items: center;                // 縦方向の中央揃え
+  position: relative;
+  overflow: hidden;                   // 画像がはみ出さないように設定
+  margin: 0 auto;                     // 左右中央揃え
+}
+.image-container-notice {
+  background-image: url('/assets/notice_board.png'); // 背景画像
+  width: 60%;
+  height: 700px;
+}
+.image-container-title {
+  background-image: url('/assets/title_labelt'); // 背景画像
+  width: 40%;
+  height: 300px;
+}
+// スクロールとテキストの設定
+.scrollable-box {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // 文字に影をつける
+  text-align: left;                  // 文字を左揃え
+  width: 65%;
+  height: 45%;
+  overflow-y: scroll;                // 下にスクロール可能にする
+  position: relative;
+  top: -20px;                        // ボックスの位置の調整
+  padding: 10px;                     // 内側の余白を追加(文字がボックスに接触しないようにするため)
+  box-sizing: border-box;            // paddingを要素のサイズに含める
+  -ms-overflow-style: none;          // Internet Explorer 10+ 対応
+  scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応
+}
+.scrollable-box::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+// 投稿についての設定
 // 投稿コンテナのレイアウト設定
 .posts-container {
   display: flex;                    // フレックスボックスを使用
@@ -378,6 +497,10 @@ body.homes.top {
   text-decoration: none;            // リンクの下線を消す
   margin-bottom: 4rem;              // ボックス間の余白
 }
+// 継承
+.box-link-cards {
+  background-color: #28b379;
+}
 // ホバー時
 .box-link:hover {
   background-color: #28b379;      // ボックスのホバー時に緑色
@@ -392,6 +515,13 @@ body.homes.top {
   align-items: center;              // 垂直方向に中央揃え
   padding: 1rem;
   margin-bottom: 1rem;              // ヘッダー下の余白
+}
+// 継承
+.post-header-cards {
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #28b379;
 }
 // ユーザー画像のスタイル
 .user-image {
@@ -449,3 +579,5 @@ body.homes.top {
     width: 100%;                    // 1つ並べる
   }
 }
+
+

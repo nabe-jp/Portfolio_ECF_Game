@@ -1,21 +1,16 @@
-<h2><%= @user.nickname %>さんのマイページ</h2>
-<h2>ユーザー詳細</h2>
+<!-- 自分のプロフィールを表示する部分 -->
+<div>
+  <h2>マイページ</h2>
+</div>
 
-<!-- 自分のマイページを表示する部分 -->
-<h2>マイページ</h2>
-<%= render "public/shared/user/private_profile", user: @user %>
+<div>
+  <%= render "public/shared/user/private_profile" %>
+</div>
 
-リンクテスト
-<%= render "public/shared/user/user_links", show_edit: true %>
-<%= render "public/shared/user/user_links", settings: true %>
-<%= render "public/shared/user/user_links", withdraw: true %>
-<%= render "public/shared/user/user_links", mypage_back: true %>
-<%= render "public/shared/user/user_links", back: true %>
-<%= render "public/shared/user/user_links", profile: true %>
-<%= render "public/shared/user/user_links", my_posts_index: true %>
-<%= render "public/shared/user/user_links", mypage_back: true %>
-<%= render "public/shared/user/user_links", all_posts_index: true %>
-<%= render "public/shared/user/user_links", new_post: true %>
+<div>
+  <%= render "public/shared/user/user_links", settings: true %>
+  <%= render "public/shared/user/user_links", back: true %>
+</div>
 
 
 

@@ -87,6 +87,9 @@ Rails.application.routes.draw do
   # 管理者用ルーティング
   namespace :admin do
     root to: "dashboard#top"
+
+    # リンクをテストするためのページ
+    get 'button/test', to: 'button#test', as: 'button_test'
     # 他の管理用ルーティング
   end
 end

@@ -2,10 +2,11 @@ module HomesHelper
   # ホームズ用の乱数生成メソッド
   class WhispersOfLuck
     def initialize(max_luck_count)
-      @max_luck_count = max_luck_count  # MAX_DISPLAY_COUNTはmax_luck_countに変更
-      @count = 0                        # 現在のカウント
-      @used_values = Hash.new(0)        # 使用された値のカウント
-      @luck_whispers = 0                # j -> luck_whispers（運命のささやき）
+      @max_luck_count = max_luck_count                # 処理を行う回数
+      @count = 0                                      # 現在の処理の回数
+      if @max_luck_count >= 2
+        @used_values = Array.new(max_luck_count - 2)  # 使用された値を格納、0から始まり最後の1回は記載しない-2
+      end
     end
   
     def generate_lucky_numbers
@@ -14,32 +15,17 @@ module HomesHelper
       while @count < @max_luck_count
         drawn_number = rand(1..53)  # num -> drawn_number
   
-        if drawn_number == 53
-          # 53が出た場合、幸運のささやきのカウントを1増やし、再度ランダム選択
-          @luck_whispers += 1
-          next if @luck_whispers < 2
-          lucky_numbers << 14  # 14は「選ばれし番号」
+        # 同じ結果は数字は使わない、処理回数が1回なら使用した数字を記録しない
+        if @max_luck_count != 1 && @used_values.include?(drawn_number) == false
+          lucky_numbers << drawn_number
+          @used_values << drawn_number
+          @count += 1
+        elsif @max_luck_count == 1
+          lucky_numbers << drawn_number
           @count += 1
         else
-          # 53以外が出た場合、4で割ってその結果を使う
-          lucky_value = drawn_number / 4  # result -> lucky_value
-          remainder = drawn_number % 4   # remainder -> remainder (変更なし)
-          
-          if remainder != 0
-            # あまりが出た場合、幸運のささやきを1増やして再度ランダム選択
-            @luck_whispers += 1
-            next if @luck_whispers < 2
-          end
-  
-          # 同じ結果は4回まで使える
-          if @used_values[lucky_value] < 4
-            lucky_numbers << lucky_value
-            @used_values[lucky_value] += 1
-            @count += 1
-          else
-            # 使った結果が4回以上の場合、再度ランダムで選び直し
-            next
-          end
+          # 使った結果が4回以上の場合、再度ランダムで選び直し
+          next
         end
       end
       lucky_numbers  # 配列を返す

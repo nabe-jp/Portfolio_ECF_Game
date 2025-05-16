@@ -1,15 +1,20 @@
-<div class="edit-profile">
-  <h2>公開プロフィール編集</h2>
-  <%= form_with model: @user, method: :patch, local: true do |f| %>
-    <%= f.label :nickname, "ニックネーム" %>
-    <%= f.text_field :nickname, class: "form-control", placeholder: "ニックネームを入力" %>
+   <%= form_with model: @user, method: :patch, local: true do |f| %>
+    <div class="form-label-and-input">
+      <%= f.label :nickname, "ニックネーム", class: "form-label-and-input label" %>
+      <%= f.text_field :nickname, class: "form-label-and-input input", placeholder: "ニックネームを入力" %>
+    </div>
 
-    <%= f.label :profile_image, "プロフィール画像" %>
-    <%= f.file_field :profile_image %>
+    <div class="profile-image-upload">
+      <%= f.label :profile_image, "プロフィール画像" %>
+      <%= f.file_field :profile_image, class: "file-input-custom" %>
+    </div>
 
-    <%= f.label :bio, "自己紹介" %>
-    <%= f.text_area :bio, class: "form-control", placeholder: "自己紹介を入力" %>
+    <div class="bio-form">
+      <%= f.label :bio, "自己紹介", class: "form-label-and-input label" %>
+      <%= f.text_area :bio, class: "bio-input", placeholder: "自己紹介を入力してください" %>
+    </div>
 
-    <%= f.submit "更新する", class: "btn btn-primary" %>
+    <div class="text-center">
+      <%= f.submit "更新する", class: "btn btn-base update-btn" %>
+    </div>
   <% end %>
-</div>
