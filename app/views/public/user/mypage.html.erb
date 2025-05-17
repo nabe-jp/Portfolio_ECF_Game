@@ -1,22 +1,35 @@
-<!-- 自分のプロフィールを表示する部分 -->
-<div>
-  <h2>マイページ</h2>
+<!-- 自分のプロフィールや個人情報を表示する部分 -->
+<div class="mypage-container">
+  <div class="left-column">
+    <!-- 公開プロフィール -->
+    <div class="left-titel">公開プロフィール</div>
+    <div class="public-profile">
+      <%= render "public/shared/user/public_profile" %>
+    </div>
+  </div>
+
+  <div class="right-column">
+    <!-- 個人情報 -->
+    <div class="right-titel">個人情報 </div>
+    <div class="private-profile">
+      <%= render "public/shared/user/private_profile" %>
+    </div>
+  </div>
 </div>
 
-<div>
-  <%= render "public/shared/user/private_profile" %>
+<div class="mypage-container">
+  <div class="left-column">
+    <!-- プロフィールページとプロフィール編集ボタンを中央揃え -->
+    <div class="profile-buttons">
+      <%= render "shared/link/public/links", profile_page: true, as: :button %>
+      <%= render "shared/link/public/links", profile_edit: true, as: :button %>
+    </div>
+  </div>
+
+  <div class="right-column">
+    <!-- 設定ボタンを中央揃え -->
+    <div class="settings-button-wrapper">
+      <%= render "shared/link/public/links", settings: true, as: :button %>
+    </div>
+  </div>
 </div>
-
-<div>
-  <%= render "public/shared/user/user_links", settings: true %>
-  <%= render "public/shared/user/user_links", back: true %>
-</div>
-
-
-
-<% if defined?(my_posts_index) && my_posts_index && defined?(@user) %>
-  <%= link_to '自分の投稿一覧を見る', user_posts_path(@user), class: 'btn btn-outline-primary' %>
-<% end %>
-<% if defined?(new_post) && new_post && defined?(@user) %>
-  <%= link_to '新規投稿', new_user_post_path(@user), class: 'btn btn-primary' %>
-<% end %>

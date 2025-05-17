@@ -1,2 +1,4 @@
-<h2>投稿を編集</h2>
-<%= render "public/shared/user_post/post_form", url: @url, verd: @verd %>
+<h2 class="text-center">投稿を編集</h2>
+<div class="post-form-container">
+  <%= render "public/shared/user_post/post_form", url: @url, verd: @verd, submit_label: "投稿する" %>
+</div>

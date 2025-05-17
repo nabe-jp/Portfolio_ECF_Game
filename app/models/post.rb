@@ -27,7 +27,7 @@ class Post < ApplicationRecord
       default_image_path = Rails.root.join('app', 'assets', 'images', 'no_image.jpeg')
       # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
       post_image.attach(io: File.open(default_image_path), 
-        filename: 'default_user.jpeg', content_type: 'image/jpeg')
+        filename: 'no_image.jpeg', content_type: 'image/jpeg')
     end
   end
 end

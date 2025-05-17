@@ -27,13 +27,14 @@ class Public::PostsController < ApplicationController
   def new
     @url = user_posts_path(@user)
     @verd = :post
-    @post = @user.posts.new(session[:post_attributes] || {})
+    @post = @user.posts.new(post_attributes_from_session)
   end
 
   def create
     @post = current_user.posts.new(post_params)
   
     if @post.save
+      session[:post_attributes] = nil
       redirect_to user_post_path(@user, @post), notice: "投稿が作成されました。"
     else
       store_form_data(attributes: post_params, error_messages: 
@@ -102,12 +103,16 @@ class Public::PostsController < ApplicationController
   def store_form_data(attributes:, error_messages:, error_name: nil)
     # error_nameがnilなら"更新"を設定
     error_name ||= "更新"
-    session[:post_attributes] = attributes
+    session[:post_attributes] = attributes.except("post_image")
     flash[:error_messages] = error_messages
     flash[:error_name] = error_name
   end
 
   def post_params
     params.require(:post).permit(:post_image, :title, :body)
+  end
+
+  def post_attributes_from_session
+    session[:post_attributes] || {}
   end
 end

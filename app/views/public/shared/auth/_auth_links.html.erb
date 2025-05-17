@@ -10,13 +10,15 @@
 
 <!-- ログイン後用 -->
 <% else %>
+  <% is_button = (local_assigns[:as] == :button) %>
+
   <% if defined?(private) && private %>
     <%= link_to "個人情報編集", edit_user_registration_path(profile: true), 
-      class: "btn btn-outline-primary" %>
+      class: (is_button ? 'btn btn-base edit-private-btn' : nil) %>
   <% end %>
 
   <% if defined?(password) && password %>
     <%= link_to "パスワード変更", edit_user_registration_path(password: true), 
-      class: "btn btn-outline-primary" %>
+    class: (is_button ? 'btn btn-base change-password-btn' : nil) %>
   <% end %>
 <% end %>

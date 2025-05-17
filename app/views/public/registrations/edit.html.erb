@@ -1,7 +1,15 @@
-<h2>アカウント情報編集</h2>
+<div class="container">
+  <div class="row">
+    <div class="page-title-col col-auto offset-2">
+      <h4 class="page-title">アカウント情報編集</h4>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-5">
+    <% if @profile_edit %>
+    <%= render "public/shared/auth/edit_profile", user: resource %>
+  <% elsif @password_edit %>
+    <%= render "public/shared/auth/edit_password", user: resource %>
+  <% end %>
+</div>
 
-<% if @profile_edit %>
-  <%= render "public/shared/auth/edit_profile", user: resource, submit_label: "更新する" %>
-<% elsif @password_edit %>
-  <%= render "public/shared/auth/edit_password", user: resource, submit_label: "更新する" %>
-<% end %>

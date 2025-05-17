@@ -1,3 +1,2 @@
-<!-- 他のユーザーのプロフィールを表示する部分 -->
-<h2><%= @user.nickname %>さんのプロフィール</h2>
-<%= render "public/shared/user/public_profile" %>
+<!-- userとusersのshowは共通の画面を使用 -->
+<%= render 'shared/user/user_show' %>

@@ -2,6 +2,9 @@ class Public::UserController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user, only: [:show, :edit, :update, :mypage, :settings, :check, :withdraw]
 
+  def show
+    
+  end
 
   def edit
     # エラー時にはセッションからユーザーの入力内容を再設定

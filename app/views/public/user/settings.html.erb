@@ -1,19 +1,27 @@
-<h2>設定</h2>
+<h2 class="text-center  mb-5">設定</h2>
 
-<!-- 設定メニュー -->
-<div>
-  <%= render 'public/shared/user/user_links', show_edit: true, as: :button %>
+<div class="container">
+  <!-- 設定メニューを横並びにする -->
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-3 mb-3 text-center">
+      <%= render "shared/link/public/links", profile_edit: true, as: :button %>
+    </div>
+
+    <div class="col-md-3 mb-3 text-center">
+      <%= render 'public/shared/auth/auth_links', private: true, as: :button %>
+    </div>
+
+    <div class="col-md-3 mb-3 text-center">
+      <%= render 'public/shared/auth/auth_links', password: true, as: :button %>
+    </div>
+
+    <div class="col-md-3 mb-3 text-center">
+      <%= render "shared/link/public/links", withdraw: true, as: :button %>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center mt-5">
+    <div class="col-md-3 mb-3 text-center">
+      <%= render "shared/link/public/links", back: true, as: :button %>
+    </div>
+  </div>
 </div>
-
-<div>
-  <%= render 'public/shared/auth/auth_links', private: true, as: :button %>
-</div>
-
-<div>
-  <%= render 'public/shared/auth/auth_links', password: true, as: :button %>
-</div>
-
-<div>
-  <%= render 'public/shared/user/user_links', withdraw: true, as: :button %>
-</div>
-

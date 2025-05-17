@@ -1,10 +1,20 @@
-<div class="space-between-top">
-  <%= image_tag(@user.profile_image, size: "40x40", 
-    class: "rounded-circle", style: "margin-right: 8px;") %>
-  <%= @user.nickname %>
-</div>
+<div class="profile-box">
+  <!-- プロフィール画像 -->
+  <div class="profile-image">
+    <%= image_tag(@user.profile_image, size: "200x200", class: "rounded-circle") %>
+  </div>
 
-<div class="space-between">
-  <%= content_tag :label, "自己紹介" %>
-  <p><%= @user.bio %></p>
+  <div class="profile-info">
+    <!-- ニックネームボックス -->
+    <div class="info-box">
+      <div class="profile-title">ニックネーム</div>
+      <div class="nickname"><%= @user.nickname %></div>
+    </div>
+
+    <!-- 自己紹介ボックス -->
+    <div class="info-box">
+      <div class="profile-title">自己紹介</div>
+      <p class="bio"><%= @user.bio %></p>
+    </div>
+  </div>
 </div>

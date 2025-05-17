@@ -1,0 +1,49 @@
+<% is_button = (local_assigns[:as] == :button) %>
+
+<% if defined?(home) && home %>
+  <%= link_to 'ホーム', root_path, class: (is_button ? 'btn btn-base home-btn' : nil) %>
+<% end %>
+<% if defined?(profile_page) && profile_page && user_signed_in? || admin_signed_in? %>
+  <%= link_to 'プロフィール', user_path(current_user), 
+    class: (is_button ? 'btn btn-base profile-btn' : nil) %>
+<% end %>
+
+<% if defined?(profile_edit) && profile_edit && defined?(@user) && @user == current_user %>
+  <%= link_to 'プロフィールを編集', edit_user_path, 
+    class: (is_button ? 'btn btn-base edit-profile-btn' : nil) %>
+<% end %>
+
+<% if defined?(mypage) && mypage %>
+  <%= link_to 'マイページ', mypage_user_path, 
+    class: (is_button ? 'btn btn-base mypage-btn' : nil) %>
+<% end %>
+
+<% if defined?(settings) && settings %>
+  <%= link_to '登録情報を編集する', settings_user_path, 
+    class: (is_button ? 'btn btn-base settings-btn' : nil) %>
+<% end %>
+
+<% if defined?(withdraw) && withdraw %>
+  <%= link_to '退会確認', check_user_path, 
+    class: (is_button ? 'btn btn-base withdraw-btn' : nil) %>
+<% end %>
+
+<% if defined?(my_posts_index) && my_posts_index && user_signed_in? || admin_signed_in? %>
+  <%= link_to '自分の投稿一覧', user_posts_path(current_user), 
+    class: (is_button ? 'btn btn-base my-posts-btn' : nil) %>
+<% end %>
+
+<% if defined?(all_posts_index) && all_posts_index %>
+  <%= link_to 'すべての投稿一覧', user_all_posts_path, 
+    class: (is_button ? 'btn btn-base all-posts-btn' : nil) %>
+<% end %>
+
+<% if defined?(new_post) && new_post && user_signed_in? || admin_signed_in? %>
+  <%= link_to '新規投稿', new_user_post_path(current_user), 
+    class: (is_button ? 'btn btn-base new-post-btn' : nil) %>
+<% end %>
+
+<% if defined?(back) && back %>
+  <%= link_to '戻る', request.referer || root_path, 
+    class: (is_button ? 'btn btn-base back-btn' : nil) %>
+<% end %>

@@ -1,24 +1,25 @@
 <% if @post.present? && @post.user.present? %>
   <%= form_with model: @post, url: url, method: verd, local: true do |f| %>
 
-    <div class="form-group">
-      <%= f.label :title, "タイトル" %>
-      <%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力してください" %>
+    <div class="post-title-box">
+      <%= f.label :title, "投稿のタイトル" %>
+      <%= f.text_field :title, class: "post-title-input", placeholder: "タイトルを入力してください" %>
+    </div>
+  
+    <div class="post-image-box">
+      <%= f.label :post_image, "投稿画像" %>
+      <%= f.file_field :post_image, class: "post-image-input" %>
+    </div>
+  
+    <div class="post-body-box">
+      <%= f.label :body, "投稿の内容" %>
+      <%= f.text_area :body, class: "post-body-input", placeholder: "内容を入力してください" %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :post_image, "投稿したい画像" %>
-      <%= f.file_field :post_image %>
+    <div class="text-center">
+      <%= f.submit submit_label ||= "更新する", class: "btn btn-base update-btn" %>
     </div>
-
-    <div class="form-group">
-      <%= f.label :body, "内容" %>
-      <%= f.text_area :body, class: "form-control", placeholder: "内容を入力してください" %>
-    </div>
-
-    <%= f.submit submit_label ||= "更新する", class: "btn btn-primary" %>
   <% end %>
 <% else %>
-<%= @post %><%= @post %>
   <p>投稿が見つかりませんでした。</p>
 <% end %>

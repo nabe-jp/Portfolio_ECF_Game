@@ -1,17 +1,48 @@
-<h1>Public::Posts#show</h1>
-<p>Find me in app/views/public/posts/show.html.erb</p>
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <!-- 右側に日時と編集・削除ボタン -->
+    <div class="col-10 text-right mr-3">
+      <!-- 投稿日時を1列分左に移動 -->
+      <p class="post-date">
+        <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>
+      </p>
+    </div>
 
-<%= image_tag(@post.user.profile_image, size: "40x40", class: "rounded-circle", style: "margin-right: 8px;") %>
+    <div class="col-11 text-right">
+      <!-- 編集・削除ボタン -->
+      <% if current_user == @post.user %>
+        <div>
+          <%= link_to '編集', edit_user_post_path(current_user, @post), class: 'btn btn-base' %>
+          <%= link_to '削除', user_post_path(current_user, @post), method: :delete, 
+                      data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-<h2><%= @post.title %></h2>
+<div class="container mt-5">
+  <div class="row justify-content-center my-5">
+    <!-- 左側に投稿画像 -->
+    <div class="col-12 col-md-6 d-flex justify-content-center">
+      <%= image_tag(@post.post_image, size: "400x400", class: "post-image") %>
+    </div>
 
-  <%= image_tag(@post.post_image, size: "100x100", style: "margin-right: 12px;") %>
+    <!-- 右側にプロフィール画像と名前、投稿タイトル、投稿内容 -->
+    <div class="col-12 col-md-6 d-flex flex-column justify-content-center pr-5">
+      <!-- プロフィール画像と名前 -->
+      <div class="d-flex align-items-center">
+        <%= image_tag(@post.user.profile_image, size: "40x40", class: "rounded-circle") %>
+        <span class="ml-2"><%= @post.user.nickname %></span>
+      </div>
 
-<p><%= @user.nickname %></p>
-<p><%= @post.body %></p>
-<p><%= @post.created_at.strftime("%Y-%m-%d") %></p>
-<% if current_user == @post.user %>
-<%= link_to '編集', edit_user_post_path(current_user, @post), class: 'btn btn-sm btn-outline-primary' %>
-<%= link_to '削除', user_post_path(current_user, @post), method: :delete, 
-  data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
-  <% end %>
+      <!-- 投稿タイトル -->
+      <h2 class="mt-3"><%= @post.title %></h2>
+
+      <!-- 投稿内容 -->
+      <p class="text-left my-3" style="word-wrap: break-word;">
+        <%= @post.body %>
+      </p>
+    </div>
+  </div>
+</div>

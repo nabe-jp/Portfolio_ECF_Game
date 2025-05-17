@@ -1,23 +1,31 @@
-<h2>
-  <% if @user %>
-    <%= @user.nickname %>さんの投稿一覧
-  <% else %>
-    すべての投稿一覧
-  <% end %>
-</h2>
-
 <% if @posts.any? %>
-<% @posts.each do |post| %>
-  <div class="post">
-    <%= link_to post.user.nickname, show_user_path(post.user.id) %>
-    <%= link_to user_post_path(post.user, post) do %>
-      <%= image_tag(post.post_image, size: "100x100") %>
+  <div class="row">
+    <% @posts.each_slice(2) do |pair| %> <!-- 2件ずつ取り出す -->
+      <div class="col-12 col-md-6">
+        <% pair.each do |post| %>
+          <div class="post">
+            <!-- 投稿全体をリンクにする -->
+            <%= link_to user_post_path(post.user.id, post.id), class: 'post-link' do %>
+              <div class="d-flex">
+                <!-- 左側の画像 -->
+                <div class="post-image-wrapper">
+                  <%= image_tag(post.post_image, size: "150x150", class: "post-image") %>
+                </div>
+
+                <!-- 右側の内容（名前、タイトル、内容） -->
+                <div class="post-details">
+                  <span class="post-user-name"><%= post.user.nickname %></span>
+                  <h3 class="post-title"><%= post.title %></h3>
+                  <p class="post-body"><%= truncate(post.body, length: 100) %></p>
+                  <p class="post-date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
-    <%= link_to post.title, user_post_path(post.user.id, post.id) %>
-    <%= truncate(post.body, length: 100) %>
-    <%= post.created_at.strftime("%Y-%m-%d") %>
   </div>
-<% end %>
 <% else %>
   <p>投稿がありません。</p>
 <% end %>

@@ -196,6 +196,18 @@ input.short-input {
   display: flex;
   align-items: center;
 }
+// 親要素の左端に寄せるために追加
+.parent-element {
+  position: relative;               // 親要素にrelativeを指定して基準を設定
+  margin-top: 1.5rem;
+}
+// メールアドレス入力フォーム
+.email-input {
+  position: absolute;               // 親要素に対して絶対位置を設定
+  right: 0;                         // 親要素の右端に合わせる
+  width: 60%;                       // 親要素の幅に合わせてフォームの幅を広げる
+  box-sizing: border-box;           // paddingを含めた幅を計算
+}
 // 共通設定でlabelの右側にmarginを設けているので削除
 .sub-label {
   margin-right: 0;
@@ -203,17 +215,20 @@ input.short-input {
 // 画像フォームの設定
 .profile-image-upload {
   display: flex;
-  flex-direction: column;           // 子要素を縦並びに
   align-items: center;              // 中央揃え
   margin-bottom: 1.5rem;
+}// ラベルに使用
+.profile-image-upload label {
+  width: 50%;
+  margin-bottom: 1.5rem;
 }
-// 画像の入力フォームの設定
-.file-input-custom {
-  border: none;
-  background: none;
-  box-shadow: none;
-  padding: 0;
-  font-size: 1rem;
+// 入力欄に使用
+.profile-image-upload input {
+  border: none;                     // 枠線を消す
+  background: none;                 // 背景を消す
+  box-shadow: none;                 // ボックスシャドウを消す
+  padding: 0;                       // 内側の余白をなくす
+  font-size: 1rem;                  // フォントサイズの調整
   color: #333;
 }
 // 自己紹介フォームの設定
@@ -275,10 +290,14 @@ form .btn-outline-info:active {
 // ヘッダー以外で使用するボタンの基本設定
 // 通常時
 .btn-base {
+  display: inline-block;            // 要素いっぱいに広がらないように設定
   padding: 0.25rem 1.5rem;          // ボタンの大きさ
+  margin: 0 1rem;                   // 左右の間隔
   font-size: 1rem;                  // 文字サイズ
   font-weight: bold;                // 文字を太く
   border-radius: 0.25rem;           // 角を丸く
+  width: auto;                      // 要素いっぱいに広がらないように念のために設定
+  align-self: flex-start;           // 親要素に引き伸ばされないように設定
 }
 // ホバー時
 .btn-base:hover {
@@ -298,12 +317,12 @@ form .btn-outline-info:active {
 // ログイン
 // 通常時
 .login-btn {
-  background-color: #007bff;      // ボタン背景色
-  color: white;                   // 文字色
+  background-color: #007bff;
+  color: white;
 }
 // ホバー時
 .login-btn:hover {
-  background-color: #0056b3;      // 背景色を変更
+  background-color: #0056b3;
 }
 // フォーカス時
 .login-btn:focus {
@@ -313,23 +332,23 @@ form .btn-outline-info:active {
 // サインアップ
 // 通常時
 .new-user-btn {
-  background-color: #28a745;      // ボタン背景色
-  color: white;                   // 文字色
+  background-color: #28a745;
+  color: white;
 }
 // ホバー時
 .new-user-btn:hover {
-  background-color: #218838;      // 背景色を濃い緑に変更
+  background-color: #218838;
 }
 // フォーカス時
 .new-user-btn:focus {
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); // 緑色の影が少し広がる
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);  // 緑色の影が少し広がる
 }
 // フォームの更新ボタンの設定
 // 更新用
 // 通常時
 .update-btn {
-  background-color: #ff7f50;      // ボタン背景色
-  color: white;                   // 文字色
+  background-color: #ff7f50;
+  color: white;
 }
 // ホバー時
 .update-btn:hover {
@@ -338,6 +357,197 @@ form .btn-outline-info:active {
 // フォーカス時
 .update-btn:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 127, 80, 0.5); // オレンジの影が少し広がる
+}
+// リンクボタンの設定
+// ホーム
+// 通常時
+.home-btn {
+  background-color: #6f42c1;
+  color: white;
+}
+// ホバー時
+.home-btn:hover {
+  background-color: #5936a2;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.home-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5); // 紫色の影が少し広がる
+}
+// 公開プロフィール
+// 通常時
+.profile-btn {
+  background-color: #2ecc71;  /* 明るい緑色に変更 */
+  color: white;
+}
+// ホバー時
+.profile-btn:hover {
+  background-color: #27ae60;  /* 少し暗めの緑に変更 */
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.profile-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(46, 204, 113, 0.5); // 緑色の影が少し広がる
+}
+// 公開プロフィール編集
+// 通常時
+.edit-profile-btn {
+  background-color: #ff7f50;
+  color: white;
+}
+// ホバー時
+.edit-profile-btn:hover {
+  background-color: #e0673c;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.edit-profile-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 127, 80, 0.5); // オレンジ色の影が少し広がる
+}
+// マイページ
+// 通常時
+.mypage-btn {
+  background-color: #28a745;
+  color: white;
+}
+// ホバー時
+.mypage-btn:hover {
+  background-color: #218838;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.mypage-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); // 緑色の影が少し広がる
+}
+// 登録情報編集
+// 通常時
+.settings-btn {
+  background-color: #17a2b8;
+  color: white;
+}
+// ホバー時
+.settings-btn:hover {
+  background-color: #138496;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.settings-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); // 青色の影が少し広がる
+}
+// 個人情報編集
+// 通常時
+.edit-private-btn {
+  background-color: #800020;
+  color: #fff8dc;
+}
+// ホバー時
+.edit-private-btn:hover {
+  background-color: #a00028;
+  color: #ffffff;
+  border-color: black;
+}
+// フォーカス時
+.edit-private-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(128, 0, 32, 0.5); // ワインレッドの影
+}
+// パスワード変更
+// 通常時
+.change-password-btn {
+  background-color: #002147;
+  color: #fff8dc;
+}
+// ホバー時
+.change-password-btn:hover {
+  background-color: #003366;
+  color: #ffffff;
+  border-color: black;
+}
+// フォーカス時
+.change-password-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 33, 71, 0.5); // ダークネイビーの影
+}
+// 退会確認、実行ボタン
+// 通常時
+.withdraw-btn {
+  background-color: #9e1b32;
+  color: white;
+}
+// ホバー時
+.withdraw-btn:hover {
+  background-color: #7a1521;
+}
+// フォーカス時
+.withdraw-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(158, 27, 50, 0.5); // ダークレッドの影
+}
+// 自分の投稿一覧
+// 通常時
+.my-posts-btn {
+  background-color: #339af0;
+  color: white;
+}
+// ホバー時
+.my-posts-btn:hover {
+  background-color: #1c7ed6;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.my-posts-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(51, 154, 240, 0.5); // 明るい青の影が少し広がる
+}
+// 投稿一覧(全体)
+// 通常時
+.all-posts-btn {
+  background-color: #1c7ed6;
+  color: white;
+}
+// ホバー時
+.all-posts-btn:hover {
+  background-color: #1864ab;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.all-posts-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(28, 126, 214, 0.5); // 青色の影が少し広がる
+}
+// 新規投稿
+// 通常時
+.new-post-btn {
+  background-color: #007bff;
+  color: white;
+}
+// ホバー時
+.new-post-btn:hover {
+  background-color: #0056b3;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.new-post-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 91, 187, 0.5); // 青色の影が少し広がる
+}
+// 戻る
+// 通常時
+.back-btn {
+  background-color: #6c757d;
+  color: white;
+}
+// ホバー時
+.back-btn:hover {
+  background-color: #5a6268;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.back-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); // 灰色の影が少し広がる
 }
 
 
@@ -430,39 +640,76 @@ body.homes.about section p {
 body.homes.top {
   background-color: #8edaf8;        // トップページの背景色
 }
+// 各タイトルの設定
+// タイトルの設定
+.title-container {
+  text-align: center;
+}
+// お知らせタイトルのスタイル
+.notice-title {
+  color: #E0E0E0;
+  font-size: 2rem;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);  // 輪郭のにじみ
+  margin-bottom: 1rem;
+}
+// 最新の投稿タイトルのスタイル
+.latest-post-title {
+  font-size: 2rem;
+  color: #9b59b6;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+// 最新のグループ投稿タイトルのスタイル
+.latest-group-post-title {
+  font-size: 2rem;
+  color: #2ecc71;
+  text-shadow: 0px 0px px rgba(0, 0, 0, 0.5);
+}
+// 本日のいいねタイトルのスタイル
+.today-top-likes-title {
+  font-size: 2rem;
+  color: #f39c12;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
 // お知らせ箇所の設定
 // 背景画像の設定
 .image-container {
-  background-size: cover;  // 画像がボックスを埋める
+  background-size: cover;             // 画像がボックスを埋める
   background-position: center center; // 画像を中央に配置 
   display: flex;
-  justify-content: center;            // 横方向の中央揃え
-  align-items: center;                // 縦方向の中央揃え
+  flex-direction: column;             // 縦並びにする
+  justify-content: center;            // 縦方向の中央揃え
+  align-items: center;                // 横方向の中央揃え
   position: relative;
   overflow: hidden;                   // 画像がはみ出さないように設定
   margin: 0 auto;                     // 左右中央揃え
 }
 .image-container-notice {
-  background-image: url('/assets/notice_board.png'); // 背景画像
+  background-image: url('/assets/notice_board.png');  // 背景画像
   width: 60%;
   height: 700px;
 }
 .image-container-title {
-  background-image: url('/assets/title_labelt'); // 背景画像
+  background-image: url('/assets/title_labelt');  // 背景画像
   width: 40%;
   height: 300px;
+}
+// お知らせのボックスの設定
+.notice-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 // スクロールとテキストの設定
 .scrollable-box {
   color: white;
   font-size: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // 文字に影をつける
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  // 文字に影をつける
   text-align: left;                  // 文字を左揃え
   width: 65%;
-  height: 45%;
+  height: 60%;
   overflow-y: scroll;                // 下にスクロール可能にする
   position: relative;
-  top: -20px;                        // ボックスの位置の調整
+  top: 2rem;                         // ボックスの位置の調整
   padding: 10px;                     // 内側の余白を追加(文字がボックスに接触しないようにするため)
   box-sizing: border-box;            // paddingを要素のサイズに含める
   -ms-overflow-style: none;          // Internet Explorer 10+ 対応
@@ -529,13 +776,17 @@ body.homes.top {
   margin-right: 1rem;               // 画像と名前の間に余白を追加
 }
 // ユーザー名のスタイル
-.user-name {
+.post-user-name {
   font-weight: bold;
   font-size: 1rem;
 }
 // 投稿タイトルに使用するタグの設定
 .post-body {
-  padding: 1rem;
+  white-space: nowrap;              // テキストを1行に収める
+  overflow: hidden;                 // はみ出したテキストを隠す
+  text-overflow: ellipsis;          // 省略記号(...)を表示
+  max-width: 250px;                 // タイトルの最大幅を設定
+  overflow: hidden;                 // ボックスを超えた部分を隠す
 }
 // 投稿タイトルタグの設定
 .post-title {
@@ -543,6 +794,7 @@ body.homes.top {
   font-weight: bold;
   white-space: nowrap;              // タイトルが長い場合に折り返さない
   text-overflow: ellipsis;          // 長すぎる場合に省略記号
+  max-width: 250px;                 // タイトルの最大幅を設定
   overflow: hidden;                 // ボックスを超えた部分を隠す
 }
 // 投稿画像の設定
@@ -581,3 +833,229 @@ body.homes.top {
 }
 
 
+/*    ユーザーページ(一部マイページ)の設定    */
+// プロフィール表示ボックスの設定
+.profile-box {
+  display: flex;
+  align-items: center;                // 縦方向の中央揃え
+  justify-content: center;            // 横方向の中央揃え
+  gap: 2rem;                          // 画像とテキストの間隔
+  margin: 2rem 0;                     // 上下の余白
+}
+// 画像のサイズ調整
+.profile-image {
+  max-width: 200px;
+}
+// ボックスの設定
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;                          // ニックネームと自己紹介の間隔
+  width: 100%;
+}
+// ニックネーム、自己紹介、名前(マイページ)、メールアドレス(マイページ)の内容の設定
+.info-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;            // 左揃え
+  gap: 0.5rem;                        // タイトルと内容の間隔
+  width: 100%;                        // 横幅を100%にして、狭くなる領域にも対応
+}
+// ニックネーム、自己紹介のタイトルの設定
+.profile-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+// ニックネーム、名前(マイページ)の設定
+.nickname, .private-name {
+  white-space: nowrap;                // 折り返しなし
+  overflow: hidden;
+  text-overflow: ellipsis;            // 省略記号を表示
+  font-size: 1.2rem;
+}
+// 自己紹介、メールアドレス(マイページ)の設定
+.bio, .email {
+  white-space: normal;                // 折り返しあり
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+// レスポンシブ調整
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;           // 折り返しあり
+    align-items: center;
+  }
+  // 画像の調整
+  .profile-image {
+    max-width: 100px;
+    margin-bottom: 15px;              // 画像とテキストの間隔
+  }
+}
+
+
+/*    マイページの設定    */
+// マイページ全体のレイアウト
+.mypage-container {
+  display: flex;
+  justify-content: space-between;     // 左右に分ける
+  gap: 2rem; // セクション間のスペース
+}
+// 左右のボックスの設定
+.left-column, .right-column {
+  flex: 1;                            // 左右に均等にスペースを割り当てる
+}
+// 左右のタイトルの設定
+.left-titel, .right-titel {
+  text-align: left;                   // 左寄せ
+  font-size: 1.5rem;                  // タイトルの文字サイズ
+  font-weight: bold;                  // 太字にして目立たせる
+  margin-bottom: 1rem;                // 下に余白を追加
+}
+// 公開プロフィール部分
+.public-profile, .private-profile {
+  margin-bottom: 3rem;                // 公開プロフィールの下に余白
+}
+// 名前(姓) と 名前(名) を横並びにするための新しいクラス
+.name-container {
+  display: flex;
+  gap: 2rem;                          // 名前の間に間隔
+}
+// ボタンを中央揃え
+.profile-buttons, .settings-button-wrapper {
+  display: flex;
+  justify-content: center;            // 中央揃え
+}
+// レスポンシブ対応: 画面が狭くなった場合、縦並びに変更
+@media (max-width: 768px) {
+  .mypage-container {
+    flex-direction: column;           // 縦並びに変更
+    align-items: center;              // 中央揃え
+  }
+  // 左右のボックスの設定
+  .left-column, .right-column {
+    flex: none;                       // 縦並びになるため、各セクションの幅を調整
+    width: 100%;                      // 各セクションを100%の幅に
+    margin-bottom: 20px;              // 各セクション間に余白
+  }
+  // プロフィールボタンを縦並びに変更
+  .profile-buttons {
+    flex-direction: column;           // 縦並び
+    gap: 10px;                        // ボタン間隔を縮める
+  }
+  // 設定ボタンの位置調整
+  .settings-button-wrapper {
+    margin-top: 30px;                 // 上部にスペース
+  }
+  // 名前(姓)と名前(名)の縦並び表示
+  .name-container {
+    flex-direction: column;           // 縦並びに変更
+    gap: 10px;                        // ボックス間隔を調整
+  }
+}
+
+
+/*    マイページの設定    */
+// 投稿フォームのボックスの設定
+.post-form-container {
+  max-width: 600px;
+  margin: 0 auto;                     // 上下左右中央揃え
+  padding: 2rem;                      // 内側の余白
+}
+// 各ボックスの設定
+.post-title-box,
+.post-image-box,
+.post-body-box {
+  margin-bottom: 1.5rem;              // 各項目間の余白
+}
+// 各ラベルの設定
+.post-title-box label,
+.post-image-box label,
+.post-body-box label {
+  font-weight: bold;                  // ラベルを太字に
+  display: block;                     // ラベルをブロック要素にして、上の内容と改行を確保
+  margin-bottom: 0.5rem;              // ラベルと入力フィールドの間隔
+}
+// 投稿タイトルの設定
+.post-title-input {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+// 画像の入力フィールド
+.post-image-input {
+  width: 100%;
+  border: none;                       // 枠線を消す
+  background: none;                   // 背景を消す
+  box-shadow: none;                   // ボックスシャドウを消す
+  padding: 0;                         // 内側の余白をなくす
+  font-size: 1rem;                    // フォントサイズの調整
+  color: #333;
+}
+
+// 投稿内容の設定
+.post-body-input {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+// レスポンシブ対応
+@media (max-width: 768px) {
+  .post-form-container {
+    padding: 1rem;                    // 小さい画面での内側の余白調整
+  }
+}
+
+
+/*    ユーザー投稿一覧の設定    */
+// タイトルの設定
+.user-posts-title {
+  text-align: center;
+  margin-bottom: 4rem;                // タイトル下に余白を追加
+}
+// 投稿のボックスの設定
+.post {
+  display: flex;
+  justify-content: flex-start;        // 左詰め
+  align-items: flex-start;            // 上詰め
+}
+// 詳細ボックスの設定
+.post-details {
+  margin-top: 1.5rem;
+  margin-left: 1rem;                  // 画像とテキストの間隔
+  text-align: left;                   // 左寄せ
+  justify-content: flex-start;        // 左揃え
+}
+// 各要素の共通の設定
+.post-date {
+  margin-bottom: 10px;                // 各要素間にスペースを確保
+}
+// 投稿のリンクの設定
+.post-link {
+  display: flex;
+  text-decoration: none;              // リンクの下線を消す
+  color: inherit;                     // 親要素の色を継承
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;                        // 横幅は100%
+  height: 200px;                      // 高さ固定
+  padding: 1rem;                      // 内側の余白
+  border-radius: 8px;                 // 角を丸める
+  margin-bottom: 2rem;                // ボックス間のスペース
+  overflow: hidden;                   // 内容がはみ出さないように制御
+}
+// マウスオーバー時のスタイル
+.post-link:hover {
+  color: #007bff;                   // 文字色を青色に変更
+  background-color: #8aaaf0;        // 背景色を変更
+  text-decoration: none;              // ホバー時にも下線を消す 
+}

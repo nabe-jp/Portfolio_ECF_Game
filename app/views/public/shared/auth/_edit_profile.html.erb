@@ -1,25 +1,34 @@
-<h3>メールアドレスと名前の変更</h3>
+<h3 class="text-center mb-4">メールアドレスと名前の変更</h3>
 
 <%= form_with(model: resource, url: registration_path(user), method: :put, local: true) do |f| %>
-  <div class="form-group">
-    <%= f.label :last_name, "名前(姓)" %>
-    <%= f.text_field :last_name, class: "form-control", value: resource.last_name %>
+  <div class="form-label-and-input">
+    <%= f.label :last_name, "名前" %>
+    <div class="name-fields">
+      <!-- 左：姓 -->
+      <div class="name-group">
+        <%= f.label :last_name, "(姓)", class: "sub-label" %>
+        <%= f.text_field :last_name, placeholder: "山田", class: "short-input" %>
+      </div>
+      <!-- 右：名 -->
+      <div class="name-group ml-3">
+        <%= f.label :first_name, "(名)", class: "sub-label" %>
+        <%= f.text_field :first_name, placeholder: "太郎", class: "short-input" %>
+      </div>
+    </div>
   </div>
 
-  <div class="form-group">
-    <%= f.label :first_name, "名前(名)" %>
-    <%= f.text_field :first_name, class: "form-control", value: resource.first_name %>
-  </div>
+  <!-- メールアドレス フォーム -->
+  <div class="form-label-and-input parent-element">
+    <%= f.label :email, "メールアドレス", class: "form-label" %>
+      <%= f.email_field :email, class: "email-input", value: resource.email %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :email, "メールアドレス" %>
-    <%= f.email_field :email, class: "form-control", value: resource.email %>
-  </div>
+    <!-- 隠しフィールド -->
+    <%= f.hidden_field :form_type, value: "profile" %>
 
-    <!-- 隠しフィールドでフォームタイプを送信 -->
-  <%= f.hidden_field :form_type, value: "profile" %>
-
-  <div class="form-group">
-    <%= f.submit "更新する", class: "btn btn-primary" %>
+    <!-- 更新ボタン -->
+    <div class="form-submit">
+      <%= f.submit "更新する", class: "btn btn-base update-btn" %>
+    </div>
   </div>
 <% end %>
