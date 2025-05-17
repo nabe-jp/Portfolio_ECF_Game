@@ -3,10 +3,12 @@
     <label><%= f.label :email, "メールアドレス" %></label>
     <%= f.email_field :email, placeholder: "sample@example.com" %>
   </div>
+
   <div class="form-label-and-input">
     <label><%= f.label :password, "パスワード" %></label>
     <%= f.password_field :password %>
   </div>
+  
   <div class="form-submit">
     <%= f.submit "ログイン", class: "btn btn-base login-btn" %>
   </div>
