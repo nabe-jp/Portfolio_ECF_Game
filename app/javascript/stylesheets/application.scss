@@ -188,7 +188,7 @@ footer {
 }
 // 姓・名で使用する短い入力フォームのスタイル
 input.short-input {
-  max-width: 100px;
+  max-width: 90px;
   width: auto;
 }
 // 姓・名の上下中央寄せ
@@ -235,7 +235,7 @@ input.short-input {
 .bio-form {
   display: flex;                    // flexboxでレイアウト
   flex-direction: column;           // 垂直方向に並べる
-  margin-bottom: 1rem;            // 下部に余白
+  margin-bottom: 1rem;              // 下部に余白
   align-items: center;              // コンテンツを中央揃え
 }
 // 自己紹介フォームの入力欄の設定
@@ -378,12 +378,12 @@ form .btn-outline-info:active {
 // 公開プロフィール
 // 通常時
 .profile-btn {
-  background-color: #2ecc71;  /* 明るい緑色に変更 */
+  background-color: #2ecc71;
   color: white;
 }
 // ホバー時
 .profile-btn:hover {
-  background-color: #27ae60;  /* 少し暗めの緑に変更 */
+  background-color: #27ae60;
   color: white;
   border-color: black;
 }
@@ -406,6 +406,22 @@ form .btn-outline-info:active {
 // フォーカス時
 .edit-profile-btn:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 127, 80, 0.5); // オレンジ色の影が少し広がる
+}
+// 投稿者のプロフィール
+// 通常時
+.check-profile-btn {
+  background-color: #66bb6a;
+  color: white;
+}
+// ホバー時
+.check-profile-btn:hover {
+  background-color: #57925a;
+  color: white;
+  border-color: black;
+}
+// フォーカス時
+.check-profile-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.5); // 明るい緑の影
 }
 // マイページ
 // 通常時
@@ -649,7 +665,7 @@ body.homes.top {
 .notice-title {
   color: #E0E0E0;
   font-size: 2rem;
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);  // 輪郭のにじみ
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); // 輪郭のにじみ
   margin-bottom: 1rem;
 }
 // 最新の投稿タイトルのスタイル
@@ -684,12 +700,12 @@ body.homes.top {
   margin: 0 auto;                     // 左右中央揃え
 }
 .image-container-notice {
-  background-image: url('../images/notice_board.png');  // 背景画像
+  background-image: url('../images/notice_board.png'); // 背景画像
   width: 60%;
   height: 700px;
 }
 .image-container-title {
-  background-image: url('../images/title_labelt');  // 背景画像
+  background-image: url('../images/title_labelt'); // 背景画像
   width: 40%;
   height: 300px;
 }
@@ -703,7 +719,7 @@ body.homes.top {
 .scrollable-box {
   color: white;
   font-size: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  // 文字に影をつける
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // 文字に影をつける
   text-align: left;                  // 文字を左揃え
   width: 65%;
   height: 60%;
@@ -837,10 +853,10 @@ body.homes.top {
 // プロフィール表示ボックスの設定
 .profile-box {
   display: flex;
-  align-items: center;                // 縦方向の中央揃え
-  justify-content: center;            // 横方向の中央揃え
-  gap: 2rem;                          // 画像とテキストの間隔
-  margin: 2rem 0;                     // 上下の余白
+  align-items: center;               // 縦方向の中央揃え
+  justify-content: center;           // 横方向の中央揃え
+  gap: 2rem;                         // 画像とテキストの間隔
+  margin: 2rem 0;                    // 上下の余白
 }
 // 画像のサイズ調整
 .profile-image {

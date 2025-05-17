@@ -43,6 +43,11 @@
     class: (is_button ? 'btn btn-base new-post-btn' : nil) %>
 <% end %>
 
+<% if defined?(@user) && defined?(check_poster_profile) && check_poster_profile %>
+  <%= link_to '投稿者のプロフィール', show_user_path(@user), 
+    class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
+<% end %>
+
 <% if defined?(back) && back %>
   <%= link_to '戻る', request.referer || root_path, 
     class: (is_button ? 'btn btn-base back-btn' : nil) %>

@@ -18,9 +18,9 @@
   </div>
 
   <!-- メールアドレス フォーム -->
-  <div class="form-label-and-input parent-element">
-    <%= f.label :email, "メールアドレス", class: "form-label" %>
-      <%= f.email_field :email, class: "email-input", value: resource.email %>
+  <div class="form-label-and-input">
+    <%= f.label :email, "メールアドレス" %>
+      <%= f.email_field :email, autofocus: true, class: "email", placeholder: "sample@exmple.com" %>
     </div>
 
     <!-- 隠しフィールド -->
