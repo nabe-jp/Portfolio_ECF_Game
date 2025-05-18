@@ -1,5 +1,4 @@
 class Public::HomesController < ApplicationController
-# コントローラ（app/controllers/public/homes_controller.rb）
 
   def top
     # 投稿が足りない場合に表示するダミー画像の数を計算
@@ -16,9 +15,6 @@ class Public::HomesController < ApplicationController
     # ダミー画像用の番号を取得
     @dummy_images = whisper_of_luck.generate_lucky_numbers
   end
-
-
-
 
   def about
   end

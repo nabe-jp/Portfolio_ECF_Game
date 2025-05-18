@@ -2,6 +2,7 @@ class Public::SessionsController < Devise::SessionsController
   # ログイン失敗時にエラーメッセージをflash[:error_messages]し新規会員登録側と表示を合わせる為に作成
   # オーバライドしたので退会ユーザーかのチェックも行う
   def create
+    
     # 入力されたメールアドレスに該当するユーザーを探し、そのユーザーをresourceにセット
     self.resource = User.find_for_authentication(email: params[:user][:email])
 

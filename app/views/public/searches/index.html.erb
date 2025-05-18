@@ -1,0 +1,48 @@
+<h1>検索結果</h1>
+
+<% if @results.empty? %>
+  <p>検索結果は見つかりませんでした。</p>
+<% else %>
+  <% @results.each do |result| %>
+    <div class="search-result">
+      <% if result.is_a?(User) %>
+        <!-- ユーザー情報の表示 -->
+        <div class="user-result">
+          <%= link_to user_path(result) do %>  <!-- ユーザーのプロフィールページに遷移 -->
+            <div class="user-box">
+              <div class="profile-image-container">
+                <% if result.profile_image.attached? %>
+                  <%= image_tag(result.profile_image, class: "profile-image") %> <!-- 添付された画像を表示 -->
+                <% else %>
+                  <%= image_tag('default_profile_image.jpg', class: "profile-image") %> <!-- 画像がない場合はデフォルト画像を表示 -->
+                <% end %>
+              </div>
+              <p class="nickname"><%= result.nickname %></p>
+              <p class="bio"><%= highlight(result.bio, params[:q]) %></p>
+            </div>
+          <% end %>
+        </div>
+
+      <% elsif result.is_a?(Post) %>
+        <!-- 投稿情報の表示 -->
+        <div class="post-result">
+          <h3 class="title"><%= highlight(result.title, params[:q]) %></h3>
+          <p class="body"><%= highlight(result.body, params[:q]) %></p>
+        </div>
+
+      <% elsif result.is_a?(Group) %>
+        <!-- グループ情報の表示 -->
+        <div class="group-result">
+          <h3 class="group-name"><%= result.name %></h3>
+        </div>
+
+      <% elsif result.is_a?(GroupPost) %>
+        <!-- グループ内投稿情報の表示 -->
+        <div class="group-post-result">
+          <h3 class="group-post-title"><%= highlight(result.title, params[:q]) %></h3>
+          <p class="group-post-body"><%= highlight(result.body, params[:q]) %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

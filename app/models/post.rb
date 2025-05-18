@@ -1,5 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :user
+
+  acts_as_taggable_on :tags
+  acts_as_taggable_on :user_post_tags
+
   has_one_attached :post_image
 
 

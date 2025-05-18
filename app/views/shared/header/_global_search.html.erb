@@ -1,0 +1,18 @@
+<%= form_with url: searches_path, method: :get, local: true, html: { class: "global-search-form" } do %>
+  <div class="search-categories">
+    <%  PostConstants::SEARCH_TYPES.each do |type| %>
+      <label class="search-category <%= 'selected' if Array(params[:types]).include?(type) %>">
+        <%= check_box_tag 'types[]', type, Array(
+          params[:types]).include?(type), class: "search-checkbox" %>
+        <%= type %>
+      </label>
+    <% end %>
+  </div>
+
+  <div class="search-inputs">
+    <%= text_field_tag :q, params[:q], 
+      placeholder: "含めたいワード（タイトル・本文）", class: "search-field" %>
+    <%= text_field_tag :not_q, params[:not_q], placeholder: "除外したいワード", class: "exclude-field" %>
+    <%= submit_tag "検索", class: "search-button" %>
+  </div>
+<% end %>

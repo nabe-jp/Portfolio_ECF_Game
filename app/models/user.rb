@@ -3,6 +3,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :posts, dependent: :destroy
+
+  acts_as_taggable_on :user_tags
+
   has_one_attached :profile_image
   
   validates :last_name, :first_name, :nickname, :bio, presence: true      # 空でない
@@ -18,6 +21,17 @@ class User < ApplicationRecord
   def seeding?
     defined?($skip_callbacks) && $skip_callbacks
   end
+
+  # ここにRansackableの設定(検索可能な属性)を追加します
+  # attributesがカラムなどの本体情報、associationsは関連
+  def self.ransackable_attributes(auth_object = nil)
+    ["nickname", "bio", "user_tags"]
+  end
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
+
+
 
   private
 

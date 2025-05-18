@@ -64,6 +64,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
 end
+# ここまで
 
 # enumの為追加
 gem "enum_help"
@@ -76,3 +77,4 @@ end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
+# ここまで

@@ -6,6 +6,9 @@ module PostConstants
   POSTS_RANGE_DAYS = 7           # 最近の投稿の表示期間(/日)
 
   # 文字列の管理
+  # 検索フォームで使用
+  SEARCH_TYPES = %w[すべて ユーザー 投稿 グループ グループ内投稿].freeze
+  
   # トップページで使用
   NOTIFICATION_TITLE = "お知らせ"
   LATEST_POST_TITLE = "最新の投稿"
