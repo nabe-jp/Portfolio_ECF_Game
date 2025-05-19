@@ -1,13 +1,6 @@
-<li class="nav-item">
-  <%= link_to 'トップ', root_path, class: 'btn btn-outline-secondary' %>
-</li>
-<li class="nav-item">
-  <%#= link_to 'グループ一覧', groups_path, class: 'btn btn-outline-secondary' %>
-  <%= link_to 'グループ一覧', '#', class: 'btn btn-outline-secondary' %>
-</li>
-<li class="nav-item">
+<li class="header__nav-item">
   <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-outline-secondary' %>
 </li>
-  <li class="nav-item">
+  <li class="header__nav-item--last">
   <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-outline-secondary' %>
 </li>

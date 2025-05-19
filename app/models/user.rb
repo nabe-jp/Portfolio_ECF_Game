@@ -31,8 +31,7 @@ class User < ApplicationRecord
     []
   end
 
-
-
+  
   private
 
   # デフォルトの画像をアタッチ

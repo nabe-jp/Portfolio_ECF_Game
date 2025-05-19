@@ -1,10 +1,13 @@
 <header class="container-fluid">
   <div class="row">
-    <div class="col-2 d-flex justify-content-start offset-1 align-items-center">
+    <div class="col-2 mt-2 d-flex justify-content-start offset-1 align-items-center">
       <%= link_to image_tag("logo.jpg", size: "120x80"), about_path %>
     </div>
-    <div class="col-8">                                             <!-- 右側：2段 -->
-      <div class="d-flex justify-content-end mt-1">                 <!-- 上段：ボタン群 -->
+    <div class="col-6 mt-1">                                         <!-- 上段：ボタン群 -->
+      <%= render 'shared/header/global_search' %> <!-- 下段：検索フォーム -->
+    </div>
+    <div class="col-3">
+        <div class="d-flex justify-content-end mt-1"> 
         <ul class="nav">
           <% if admin_signed_in? %>                                 <!-- 管理者がサインインした場合 -->
             <%= render 'shared/header/admin_nav' %>
@@ -16,9 +19,6 @@
             <%= render 'shared/header/no_user_nav' %>
           <% end %>
         </ul>
-      </div>
-      <div class="d-flex justify-content-end mt-3">                 <!-- 下段：検索フォーム -->
-        <%= render 'shared/header/global_search' %>
       </div>
     </div>
   </div>

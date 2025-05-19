@@ -1,0 +1,133 @@
+/*    ユーザーページ(一部マイページ)の設定    */
+// プロフィール表示ボックスの設定
+.profile-box {
+  display: flex;
+  align-items: center;               // 縦方向の中央揃え
+  justify-content: center;           // 横方向の中央揃え
+  gap: 2rem;                         // 画像とテキストの間隔
+  margin: 2rem 0;                    // 上下の余白
+}
+
+// 画像のサイズ調整
+.profile-box__image {
+  max-width: 200px;
+  border-radius: 50%
+}
+
+// ボックスの設定
+.profile-box__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;                          // ニックネームと自己紹介の間隔
+  width: 100%;
+}
+
+// ニックネーム、自己紹介、名前(マイページ)、メールアドレス(マイページ)の内容の設定
+.profile-box__info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;            // 左揃え
+  gap: 0.5rem;                        // タイトルと内容の間隔
+  width: 100%;                        // 横幅を100%にして、狭くなる領域にも対応
+}
+
+// ニックネーム、自己紹介のタイトルの設定
+.profile-box__title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+// ニックネーム、名前(マイページ)の設定
+.profile-box__nickname, .private-name {
+  white-space: nowrap;                // 折り返しなし
+  overflow: hidden;
+  text-overflow: ellipsis;            // 省略記号を表示
+  font-size: 1.2rem;
+}
+
+// 自己紹介、メールアドレス(マイページ)の設定
+.profile-box__bio, .private-email {
+  white-space: normal;                // 折り返しあり
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+// レスポンシブ調整
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;           // 折り返しあり
+    align-items: center;
+  }
+  // 画像の調整
+  .profile-box__image {
+    max-width: 100px;
+    margin-bottom: 15px;              // 画像とテキストの間隔
+  }
+}
+
+/*    マイページの設定    */
+// マイページ全体のレイアウト
+.mypage__container {
+  display: flex;
+  justify-content: space-between;     // 左右に分ける
+  gap: 2rem; // セクション間のスペース
+}
+
+// 左右のボックスの設定
+.mypage__container-left-column, .mypage__container-right-column {
+  flex: 1;                            // 左右に均等にスペースを割り当てる
+}
+
+// 左右のタイトルの設定
+.mypage__container-left-column-title, .mypage__container-right-column-title {
+  text-align: left;                   // 左寄せ
+  font-size: 1.5rem;                  // タイトルの文字サイズ
+  font-weight: bold;                  // 太字にして目立たせる
+  margin-bottom: 1rem;                // 下に余白を追加
+}
+
+// 公開プロフィール部分
+.mypage__public-profile, .mypage__private-profile {
+  margin-bottom: 3rem;                // 公開プロフィールの下に余白
+}
+
+// 名前(姓) と 名前(名) を横並びにするための新しいクラス
+.mypage__name-container {
+  display: flex;
+  gap: 2rem;                          // 名前の間に間隔
+}
+
+// ボタンを中央揃え
+.mypage__buttons, .mypage__settings-button-wrapper {
+  display: flex;
+  justify-content: center;            // 中央揃え
+}
+
+// レスポンシブ対応: 画面が狭くなった場合、縦並びに変更
+@media (max-width: 768px) {
+  .mypage__container {
+    flex-direction: column;           // 縦並びに変更
+    align-items: center;              // 中央揃え
+  }
+  // 左右のボックスの設定
+  .mypage__container-left-column, .mypage__container-right-column {
+    flex: none;                       // 縦並びになるため、各セクションの幅を調整
+    width: 100%;                      // 各セクションを100%の幅に
+    margin-bottom: 20px;              // 各セクション間に余白
+  }
+  // プロフィールボタンを縦並びに変更
+  .mypage__buttons {
+    flex-direction: column;           // 縦並び
+    gap: 10px;                        // ボタン間隔を縮める
+  }
+  // 設定ボタンの位置調整
+  .mypage__settings-button-wrapper {
+    margin-top: 30px;                 // 上部にスペース
+  }
+  // 名前(姓)と名前(名)の縦並び表示
+  .mypage__name-container {
+    flex-direction: column;           // 縦並びに変更
+    gap: 10px;                        // ボックス間隔を調整
+  }
+}

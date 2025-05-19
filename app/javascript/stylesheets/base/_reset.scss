@@ -1,0 +1,43 @@
+/*    初期化    */
+// html、bodyの初期化
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;                // 横スクロールを無効化
+}
+
+// container、row、colの初期化
+.container {
+  width: 100%;
+  max-width: none;                   // 幅の制限を設けない
+  margin: 0;
+  padding: 0;
+}
+.row {
+  margin: 0;
+  padding: 0;
+  display: flex;                     // Flexboxで並べる
+  flex-wrap: wrap;                   // 子要素が折り返すように
+}
+.col {
+  margin: 0;
+  padding: 0;
+}
+
+// CSSの初期化(疑似要素も含む)
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;            // パディングを幅と高さに含める
+}
+
+// 上の記載では初期化できなかったため初期化し、追加事項を記載
+label {
+  margin: 0 1rem 0 0;                // 入力欄との余白
+  padding: 0;
+  text-align: left;
+  white-space: nowrap;               // labelの中のテキスト自体を折り返さない
+}

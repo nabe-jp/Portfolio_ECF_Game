@@ -1,0 +1,7 @@
+/*    ルートで変数を設定    */
+// ヘッダー、サイドバー、フッターの設定
+:root {
+  --header-height: 110px;            // ヘッダーの高さ
+  --footer-height: 50px;             // フッターの高さ
+  --sidebar-width: 200px;            // サイドバーの幅
+}

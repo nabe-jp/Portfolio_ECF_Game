@@ -1,34 +1,34 @@
 <!-- 自分のプロフィールや個人情報を表示する部分 -->
-<div class="mypage-container">
-  <div class="left-column">
+<div class="mypage__container">
+  <div class="mypage__container-left-column">
     <!-- 公開プロフィール -->
-    <div class="left-titel">公開プロフィール</div>
-    <div class="public-profile">
+    <div class="mypage__container-left-column-title">公開プロフィール</div>
+    <div class="mypage__public-profile">
       <%= render "public/shared/user/public_profile" %>
     </div>
   </div>
 
-  <div class="right-column">
+  <div class="mypage__container-right-column">
     <!-- 個人情報 -->
-    <div class="right-titel">個人情報 </div>
-    <div class="private-profile">
+    <div class="mypage__container-right-column-title">個人情報 </div>
+    <div class="mypage__private-profile">
       <%= render "public/shared/user/private_profile" %>
     </div>
   </div>
 </div>
 
-<div class="mypage-container">
-  <div class="left-column">
+<div class="mypage__container">
+  <div class="mypage__container-left-column">
     <!-- プロフィールページとプロフィール編集ボタンを中央揃え -->
-    <div class="profile-buttons">
+    <div class="mypage__buttons">
       <%= render "shared/link/public/links", profile_page: true, as: :button %>
       <%= render "shared/link/public/links", profile_edit: true, as: :button %>
     </div>
   </div>
 
-  <div class="right-column">
+  <div class="mypage__container-right-column">
     <!-- 設定ボタンを中央揃え -->
-    <div class="settings-button-wrapper">
+    <div class="mypage__settings-button-wrapper">
       <%= render "shared/link/public/links", settings: true, as: :button %>
     </div>
   </div>

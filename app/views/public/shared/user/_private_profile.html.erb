@@ -1,20 +1,20 @@
 <div class="profile-box">
-  <div class="profile-info">
-    <div class="name-container">
-      <div class="info-box">
-        <div class="profile-title">名前(姓)</div>
+  <div class="profile-box__info">
+    <div class="mypage__name-container">
+      <div class="profile-box__info-item">
+        <div class="profile-box__title">名前(姓)</div>
         <div class="private-name"><%= @user.last_name %></div>
       </div>
 
-      <div class="info-box">
-        <div class="profile-title">名前(名)</div>
+      <div class="profile-box__info-item">
+        <div class="profile-box__title">名前(名)</div>
         <div class="private-name"><%= @user.first_name %></div>
       </div>
     </div>
 
-    <div class="info-box">
-      <div class="profile-title">メールアドレス</div>
-      <div class="email"><%= @user.email %></div>
+    <div class="profile-box__info-item">
+      <div class="profile-box__title">メールアドレス</div>
+      <div class="private-email"><%= @user.email %></div>
     </div>
   </div>
 </div>

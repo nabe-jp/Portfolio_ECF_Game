@@ -1,0 +1,14 @@
+/*   ページのタイトルの設定   */
+// rowの中で使用
+.page-title-col {
+  margin-bottom: 3rem;              // my-5 相当
+  background-color:#f8f9fa;       // 背景色
+}
+// <h4>の見出しタグに使用
+.page-title {
+  display: flex;
+  align-items: center;              // 垂直方向に中央揃え
+  justify-content: center;          // 水平方向に中央揃え
+  height: 100%;                     // 高さを指定して中央揃えができるようにする
+  font-size: 1.4rem;                // 文字サイズを調整(h4より少し小さめ)
+}

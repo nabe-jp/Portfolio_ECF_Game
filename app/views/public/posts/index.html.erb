@@ -1,7 +1,14 @@
-<% if @user.present? %>
-  <h2 class="user-posts-title"><%= @user.nickname %>さんの投稿一覧</h2>
-<% else %>
-  <h2 class="user-posts-title">全体の投稿一覧</h2>
-<% end %>
-
-<%= render 'public/shared/user_post/post_index' %>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <% if @user.present? %>
+        <h2 class="user-posts__title"><%= @user.nickname %>さんの投稿一覧</h2>
+      <% else %>
+        <h2 class="user-posts__title">全体の投稿一覧</h2>
+      <% end %>
+      <div class="col-12">
+        <%= render 'public/shared/user_post/post_index' %>
+      </div>
+    </div>
+  </div>
+</div>

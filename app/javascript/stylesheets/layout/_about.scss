@@ -1,0 +1,68 @@
+/*    アバウトページの設定    */
+// アバウトページの余白の色
+body.homes.about {
+  background-color: #5ac2eb;
+}
+
+// すべてのセクションの共通設定
+body.homes.about section {
+  width: 80%;
+  margin: 0 auto 1.5rem;            // 左右中央揃え、下側に余白
+  padding: 2.5rem;
+  border-radius: 2rem;              // 角に丸みを追加
+  text-align: left;                 // テキストを左揃え
+}
+
+// すべてのsection内のh、pタグの共通設定(hタグはh3を使用しているためh3を指定)
+body.homes.about section h3 {
+  margin-bottom: 1.5rem;
+}
+
+body.homes.about section p {
+  padding-left: 1rem;
+}
+
+// ヘッダー
+.about-page-header {
+  width: 90%;
+  margin: 1.5rem auto;              // 左右中央揃え、上下側に余白
+  background-color: #6c63ff;
+  color: white;
+  text-align: center;
+}
+
+// サイトの目的
+.site-purpose {
+  background-color: #4caf50;
+  color: black;
+}
+
+// 運営者情報
+.about-creator {
+  background-color: #607d8b;
+  color: black;
+}
+
+// 取り扱っているコンテンツ
+.site-content {
+  background-color: #f44336;
+  color: black;
+}
+
+// ターゲット
+.target-audience {
+  background-color: #ffc107;
+  color: black;
+}
+
+// 今後の展望
+.future-goals {
+  background-color: #00bcd4;
+  color: black;
+}
+
+// お問い合わせ
+.contact-info {
+  background-color: #c22fdb;
+  color: black;
+}

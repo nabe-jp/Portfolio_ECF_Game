@@ -1,0 +1,332 @@
+// ボタンに使用する
+.form-submit {
+  text-align: center;               // ボタンを中央揃え
+  margin-top: 2rem;                 // ボタンに上の余白を追加
+}
+
+// ヘッダー以外で使用するボタンの基本設定
+// 通常時
+.btn-base {
+  display: inline-block;            // 要素いっぱいに広がらないように設定
+  padding: 0.25rem 1.5rem;          // ボタンの大きさ
+  margin: 0 1rem;                   // 左右の間隔
+  font-size: 1rem;                  // 文字サイズ
+  font-weight: bold;                // 文字を太く
+  border-radius: 0.25rem;           // 角を丸く
+  width: auto;                      // 要素いっぱいに広がらないように念のために設定
+  align-self: flex-start;           // 親要素に引き伸ばされないように設定
+}
+
+// ホバー時
+.btn-base:hover {
+  color: rgb(138, 51, 252);
+  border-color: black;
+  transform: scale(1.05);           // 少し大きく
+}
+// フォーカス時
+.btn-base:focus {
+  outline: none;                    // フォーカスのアウトラインを消す
+}
+// クリック時
+.btn-base:active {
+  transform: scale(0.95);           // 少し小さく
+}
+
+// フォームのログインボタンの設定
+// ログイン
+// 通常時
+.login-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+// ホバー時
+.login-btn:hover {
+  background-color: #0056b3;
+}
+
+// フォーカス時
+.login-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); // 青色の影が少し広がる
+}
+
+// フォームの新規会員登録ボタンの設定
+// サインアップ
+// 通常時
+.new-user-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+// ホバー時
+.new-user-btn:hover {
+  background-color: #218838;
+}
+
+// フォーカス時
+.new-user-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);  // 緑色の影が少し広がる
+}
+
+// フォームの更新ボタンの設定
+// 更新用
+// 通常時
+.update-btn {
+  background-color: #ff7f50;
+  color: white;
+}
+
+// ホバー時
+.update-btn:hover {
+  background-color: #e0673c;
+}
+// フォーカス時
+.update-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 127, 80, 0.5); // オレンジの影が少し広がる
+}
+
+// リンクボタンの設定
+// ホーム
+// 通常時
+.home-btn {
+  background-color: #6f42c1;
+  color: white;
+}
+
+// ホバー時
+.home-btn:hover {
+  background-color: #5936a2;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.home-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.5); // 紫色の影が少し広がる
+}
+
+// 公開プロフィール
+// 通常時
+.profile-btn {
+  background-color: #2ecc71;
+  color: white;
+}
+// ホ
+バー時
+.profile-btn:hover {
+  background-color: #27ae60;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.profile-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(46, 204, 113, 0.5); // 緑色の影が少し広がる
+}
+
+// 公開プロフィール編集
+// 通常時
+.edit-profile-btn {
+  background-color: #ff7f50;
+  color: white;
+}
+
+// ホバー時
+.edit-profile-btn:hover {
+  background-color: #e0673c;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.edit-profile-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 127, 80, 0.5); // オレンジ色の影が少し広がる
+}
+
+// 投稿者のプロフィール
+// 通常時
+.check-profile-btn {
+  background-color: #66bb6a;
+  color: white;
+}
+
+// ホバー時
+.check-profile-btn:hover {
+  background-color: #57925a;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.check-profile-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.5); // 明るい緑の影
+}
+
+// マイページ
+// 通常時
+.mypage-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+// ホバー時
+.mypage-btn:hover {
+  background-color: #218838;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.mypage-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); // 緑色の影が少し広がる
+}
+
+// 登録情報編集
+// 通常時
+.settings-btn {
+  background-color: #17a2b8;
+  color: white;
+}
+
+// ホバー時
+.settings-btn:hover {
+  background-color: #138496;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.settings-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5); // 青色の影が少し広がる
+}
+
+// 個人情報編集
+// 通常時
+.edit-private-btn {
+  background-color: #800020;
+  color: #fff8dc;
+}
+
+// ホバー時
+.edit-private-btn:hover {
+  background-color: #a00028;
+  color: #ffffff;
+  border-color: black;
+}
+
+// フォーカス時
+.edit-private-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(128, 0, 32, 0.5); // ワインレッドの影
+}
+
+// パスワード変更
+// 通常時
+.change-password-btn {
+  background-color: #002147;
+  color: #fff8dc;
+}
+
+// ホバー時
+.change-password-btn:hover {
+  background-color: #003366;
+  color: #ffffff;
+  border-color: black;
+}
+
+// フォーカス時
+.change-password-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 33, 71, 0.5); // ダークネイビーの影
+}
+
+// 退会確認、実行ボタン
+// 通常時
+.withdraw-btn {
+  background-color: #9e1b32;
+  color: white;
+}
+
+// ホバー時
+.withdraw-btn:hover {
+  background-color: #7a1521;
+}
+
+// フォーカス時
+.withdraw-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(158, 27, 50, 0.5); // ダークレッドの影
+}
+
+// 自分の投稿一覧
+// 通常時
+.my-posts-btn {
+  background-color: #339af0;
+  color: white;
+}
+
+// ホバー時
+.my-posts-btn:hover {
+  background-color: #1c7ed6;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.my-posts-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(51, 154, 240, 0.5); // 明るい青の影が少し広がる
+}
+
+// 投稿一覧(全体)
+// 通常時
+.all-posts-btn {
+  background-color: #1c7ed6;
+  color: white;
+}
+
+// ホバー時
+.all-posts-btn:hover {
+  background-color: #1864ab;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.all-posts-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(28, 126, 214, 0.5); // 青色の影が少し広がる
+}
+
+// 新規投稿
+// 通常時
+.new-post-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+// ホバー時
+.new-post-btn:hover {
+  background-color: #0056b3;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.new-post-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 91, 187, 0.5); // 青色の影が少し広がる
+}
+
+// 戻る
+// 通常時
+.back-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+// ホバー時
+.back-btn:hover {
+  background-color: #5a6268;
+  color: white;
+  border-color: black;
+}
+
+// フォーカス時
+.back-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); // 灰色の影が少し広がる
+}

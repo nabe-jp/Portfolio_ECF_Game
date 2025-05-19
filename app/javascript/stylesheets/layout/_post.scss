@@ -1,0 +1,188 @@
+/*    投稿の設定    */
+// 投稿フォームのボックスの設定
+.post-form__container {
+  max-width: 600px;
+  margin: 0 auto;                     // 上下左右中央揃え
+  padding: 2rem;                      // 内側の余白
+}
+
+// 各ボックスの設定
+.post-form__title-box,
+.post-form__image-box,
+.post-form__body-box {
+  margin-bottom: 1.5rem;              // 各項目間の余白
+}
+
+// 各ラベルの設定
+.post-form__title-box label,
+.post-form__image-box label,
+.post-form__body-box label {
+  font-weight: bold;                  // ラベルを太字に
+  display: block;                     // ラベルをブロック要素にして、上の内容と改行を確保
+  margin-bottom: 0.5rem;              // ラベルと入力フィールドの間隔
+}
+
+// 投稿タイトルの設定
+.post-form__title-input {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+// 画像の入力フィールド
+.post-form__image-input {
+  width: 100%;
+  border: none;                       // 枠線を消す
+  background: none;                   // 背景を消す
+  box-shadow: none;                   // ボックスシャドウを消す
+  padding: 0;                         // 内側の余白をなくす
+  font-size: 1rem;                    // フォントサイズの調整
+  color: #333;
+}
+
+// 投稿内容の設定
+.post-form__body-input {
+  width: 100%;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 80px;
+  margin-bottom: 1rem;
+}
+
+/*    ユーザー投稿一覧の設定    */
+// ページタイトルの設定
+.user-posts__title {
+  text-align: center;
+  margin-bottom: 4rem;                // タイトル下に余白を追加
+}
+
+// 投稿のリンクの設定
+.user-posts__link {
+  display: flex;
+  text-decoration: none;              // リンクの下線を消す
+  color: inherit;                     // 親要素の色を継承
+  flex-direction: row;                // 横並びに変更
+  justify-content: flex-start;        // 左揃えにする
+  align-items: stretch;               // 高さを合わせる
+  max-width: 48%;
+  height: 200px;                      // 高さ固定
+  padding: 1rem;                      // 内側の余白
+  border-radius: 8px;                 // 角を丸める
+  margin-bottom: 2rem;                // ボックス間のスペース
+  overflow: hidden;                   // 内容がはみ出さないように制御
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+}
+
+// マウスオーバー時のスタイル
+.user-posts__link:hover {
+  color: #007bff;                   // 文字色を青色に変更
+  background-color: #8aaaf0;        // 背景色を変更
+  text-decoration: none;              // ホバー時にも下線を消す 
+}
+
+// 投稿ボックスの設定
+.post-list {
+  display: flex;                      // 横並びにする
+  flex-wrap: wrap;                    // 要素が画面幅を超えた場合に次の行に折り返す
+  gap: 0.5rem;
+  width: 100%;
+}
+
+// 画像ボックスのスタイル
+.post-list__image-box {
+  max-width: 45%;
+  display: flex;
+  justify-content: center;            // 横方向に中央揃え
+  align-items: center;                // 縦方向にも中央揃え
+}
+
+// 投稿画像の設定(index用)
+.post-list__image {
+  border-radius: 8px;
+  max-width: 100%;                    // 親要素を超えないように最大幅を設定
+}
+
+// 投稿画像の設定(show用)
+.post-detail__image {
+  border-radius: 8px;
+  max-width: 100%;                    // 親要素を超えないように最大幅を設定
+}
+
+// コンテンツボックスの設定
+.post-list__content-box {
+  max-width: 50%;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;             // 縦並びにする
+}
+
+// 名前の設定(index用)
+.post-list__user {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 1rem 0;
+  white-space: nowrap;                // 1行で表示
+  overflow: hidden;
+  text-overflow: ellipsis;            // 省略文字(...)
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める 
+}
+
+// 名前の設定(show用)
+.post-detai__user {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 1rem 0;
+  white-space: nowrap;                // 1行で表示
+  overflow: hidden;
+  text-overflow: ellipsis;            // 省略文字(...)
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める 
+}
+
+// タイトルのスタイル
+.post-list__title {
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+}
+
+// 内容のスタイル
+.post-list__description {
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;              // 最大2行まで表示
+  -webkit-box-orient: vertical;
+  overflow: hidden;                   // はみ出した部分は非表示
+  text-overflow: ellipsis;            // 省略文字「...」を表示
+  white-space: normal;                // 折り返しを許可
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+}
+
+// 更新日のスタイル
+.post-list__date {
+  font-size: 0.9rem;
+  color: gray;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+}
+
+// レスポンシブ対応
+@media (max-width: 768px) {
+  .user-posts__link {
+    width: 100%;                      // 小さい画面では横並びを解消して縦並びにする
+  }
+  
+  .post-list {
+    flex-direction: column;           // 1列に並べる
+  }
+}

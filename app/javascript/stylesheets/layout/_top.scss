@@ -1,0 +1,220 @@
+/*    トップページの設定    */
+// トップページの余白の色
+body.homes.top {
+  background-color: #8edaf8;        // トップページの背景色
+}
+
+// 各タイトルの設定
+// タイトルの設定
+.title-container {
+  text-align: center;
+}
+
+// お知らせタイトルのスタイル
+.notice-title {
+  color: #E0E0E0;
+  font-size: 2rem;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); // 輪郭のにじみ
+  margin-bottom: 1rem;
+}
+
+// 最新の投稿タイトルのスタイル
+.latest-post-title {
+  font-size: 2rem;
+  color: #9b59b6;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+// 最新のグループ投稿タイトルのスタイル
+.latest-group-post-title {
+  font-size: 2rem;
+  color: #2ecc71;
+  text-shadow: 0px 0px px rgba(0, 0, 0, 0.5);
+}
+
+// 本日のいいねタイトルのスタイル
+.today-top-likes-title {
+  font-size: 2rem;
+  color: #f39c12;
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+}
+
+// お知らせ箇所の設定
+// 背景画像の設定
+.image-container {
+  background-size: cover;             // 画像がボックスを埋める
+  background-position: center center; // 画像を中央に配置 
+  display: flex;
+  flex-direction: column;             // 縦並びにする
+  justify-content: center;            // 縦方向の中央揃え
+  align-items: center;                // 横方向の中央揃え
+  position: relative;
+  overflow: hidden;                   // 画像がはみ出さないように設定
+  margin: 0 auto;                     // 左右中央揃え
+}
+
+.image-container-notice {
+  background-image: url('../images/notice_board.png'); // 背景画像
+  width: 60%;
+  height: 700px;
+}
+
+.image-container-title {
+  background-image: url('../images/title_labelt'); // 背景画像
+  width: 40%;
+  height: 300px;
+}
+
+// お知らせのボックスの設定
+.notice-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// スクロールとテキストの設定
+.scrollable-box {
+  color: white;
+  font-size: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // 文字に影をつける
+  text-align: left;                  // 文字を左揃え
+  width: 65%;
+  height: 60%;
+  overflow-y: scroll;                // 下にスクロール可能にする
+  position: relative;
+  top: 2rem;                         // ボックスの位置の調整
+  padding: 10px;                     // 内側の余白を追加(文字がボックスに接触しないようにするため)
+  box-sizing: border-box;            // paddingを要素のサイズに含める
+  -ms-overflow-style: none;          // Internet Explorer 10+ 対応
+  scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応
+}
+
+.scrollable-box::-webkit-scrollbar {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+
+// 投稿についての設定
+// 投稿コンテナのレイアウト設定
+.posts-container {
+  display: flex;                    // フレックスボックスを使用
+  flex-wrap: wrap;                  // 要素がはみ出さないように折り返し
+  gap: 0.75rem;                     // 投稿間の隙間（間隔）
+  justify-content: space-between;   // 横方向に均等に配置
+  margin: 0.75rem;
+}
+
+// リンクボックスの設定
+.box-link {
+  display: block;                   // ボックス全体をリンクとして表示
+  width: calc(20% - 1rem);          // ボックス幅を縮小して5つ並べる
+  text-align: left;                 // テキストを左揃え
+  text-align: left;                 // テキストを左揃え
+  border: 1px solid #ddd;         // ボーダー
+  border-radius: 16px;               // 角を丸く
+  overflow: hidden;                 // 内容がはみ出さないようにする
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  color: inherit;                   // 親要素の色を引き継ぐ
+  text-decoration: none;            // リンクの下線を消す
+  margin-bottom: 4rem;              // ボックス間の余白
+}
+
+// 継承
+.box-link-cards {
+  background-color: #28b379;
+}
+
+// ホバー時
+.box-link:hover {
+  background-color: #28b379;      // ボックスのホバー時に緑色
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none;            // リンクの下線を消す
+  transform: scale(1.1);            // ボックスを少し拡大
+  color: #ffffff;                 // ホバー時に文字色を白に
+}
+
+// ユーザー画像とニックネームが使用するタグの設定
+.post-header {
+  display: flex;                    // フレックスで横並び
+  align-items: center;              // 垂直方向に中央揃え
+  padding: 1rem;
+  margin-bottom: 1rem;              // ヘッダー下の余白
+}
+
+// 継承
+.post-header-cards {
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+  background-color: #28b379;
+}
+
+// ユーザー画像のスタイル
+.user-image {
+  border-radius: 50%;               // 円形のユーザー画像
+  margin-right: 1rem;               // 画像と名前の間に余白を追加
+}
+
+// ユーザー名のスタイル
+.post-user-name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+// 投稿タイトルに使用するタグの設定
+.post-body {
+  white-space: nowrap;              // テキストを1行に収める
+  overflow: hidden;                 // はみ出したテキストを隠す
+  text-overflow: ellipsis;          // 省略記号(...)を表示
+  max-width: 250px;                 // タイトルの最大幅を設定
+  overflow: hidden;                 // ボックスを超えた部分を隠す
+}
+
+// 投稿タイトルタグの設定
+.post-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  white-space: nowrap;              // タイトルが長い場合に折り返さない
+  text-overflow: ellipsis;          // 長すぎる場合に省略記号
+  max-width: 250px;                 // タイトルの最大幅を設定
+  overflow: hidden;                 // ボックスを超えた部分を隠す
+}
+
+// 投稿画像の設定
+.post-image {
+  display: block;
+  margin: 1rem auto;                // 左右中央揃え、上下側に余白
+  border-radius: 8px;
+  max-width: 100%;                  // 親要素を超えないように最大幅を設定
+}
+
+// 投稿日時に使用するタグの設定
+.post-footer {
+  padding: 1rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+// レスポンシブ調整
+@media (min-width: 1024px) {
+  .box-link {
+    width: calc(20% - 2rem);        // 5つ並べる
+  }
+}
+
+@media (max-width: 1024px) {
+  .box-link {
+    width: calc(33.33% - 2rem);     // 3つ並べる
+  }
+}
+@media (max-width: 768px) {
+  .box-link {
+    width: calc(50% - 2rem);        // 2つ並べる
+  }
+}
+@media (max-width: 480px) {
+  .box-link {
+    width: 100%;                    // 1つ並べる
+  }
+}

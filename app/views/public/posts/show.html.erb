@@ -3,7 +3,7 @@
     <!-- 右側に日時と編集・削除ボタン -->
     <div class="col-10 text-right mr-3">
       <!-- 投稿日時を1列分左に移動 -->
-      <p class="post-date">
+      <p class="post__date">
         <%= @post.created_at.strftime("%Y-%m-%d %H:%M") %>
       </p>
     </div>
@@ -23,29 +23,6 @@
 
 <div class="container mt-5">
   <div class="row justify-content-center my-5">
-    <!-- 左側に投稿画像 -->
-    <div class="col-12 col-md-6 d-flex justify-content-center">
-      <%= image_tag(@post.post_image, size: "400x400", class: "post-image") %>
-    </div>
-
-    <!-- 右側にプロフィール画像と名前、投稿タイトル、投稿内容 -->
-    <div class="col-12 col-md-6 d-flex flex-column justify-content-center pr-5">
-      <!-- プロフィール画像と名前 -->
-      <div class="d-flex align-items-center">
-        <%= image_tag(@post.user.profile_image, size: "40x40", class: "rounded-circle") %>
-        <span class="ml-2"><%= @post.user.nickname %></span>
-      </div>
-
-      <!-- 投稿タイトル -->
-      <h2 class="my-3"><%= @post.title %></h2>
-
-      <!-- 投稿内容 -->
-      <p class="text-left my-3" style="word-wrap: break-word;">
-        <%= @post.body %>
-      </p>
-      <div class="row justify-content-center mt-3">
-        <%= render "shared/link/public/links", check_poster_profile: true, as: :button %>
-      </div>
-    </div>
+    <%= render 'shared/user_post/post_show' %>
   </div>
 </div>
