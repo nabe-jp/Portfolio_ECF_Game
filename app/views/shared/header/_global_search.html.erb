@@ -1,17 +1,30 @@
-<%= form_with url: searches_path, method: :get, local: true, html: { class: "search-form" } do %>
+<%= form_with url: searches_path, method: :get, 
+  local: true, html: { class: "search-form" } do %>
+
   <div class="search-form__categories">
+
+    <!-- すべての選択肢: params[:type] が空または "すべて" のときに checked -->
+    <input type="radio" name="type" value="すべて" id="radio_all" 
+    <%= 'checked' if params[:type].blank? || params[:type] == 'すべて' %> />
+    <label for="radio_all" class="search-form__category">すべて</label>
+  
     <% PostConstants::SEARCH_TYPES.each_with_index do |type, index| %>
-      <input type="radio" name="search" value="<%= type %>" id="radio_<%= index %>" 
-        <%= 'checked' if index == 0 %> />
+      <input type="radio" name="type" value="<%= type %>" id="radio_<%= index %>"
+        <%= 'checked' if params[:type] == type %> />
       <label for="radio_<%= index %>" class="search-form__category"><%= type %></label>
     <% end %>
+
   </div>
 
   <div class="search-form__inputs">
-    <%= text_field_tag :q, params[:q], placeholder: "含めたいワード（タイトル・本文）", 
+
+    <%= search_field_tag :words, params[:words], placeholder: "含めたいワード", 
       class: "search-form__field" %>
-    <%= text_field_tag :not_q, params[:not_q], placeholder: "除外したいワード", 
+
+    <%= search_field_tag :not_words, params[:not_words], placeholder: "除外したいワード", 
       class: "search-form__exclude-field" %>
     <%= submit_tag "検索", class: "btn btn-base search-form__button" %>
+
   </div>
 <% end %>
+

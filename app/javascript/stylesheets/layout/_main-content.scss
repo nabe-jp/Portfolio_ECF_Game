@@ -7,6 +7,7 @@
   margin: 20px var(--sidebar-width); // ヘッダーとフッターの間に余白
   overflow-y: auto;
   height: calc(100vh - var(--header-height) - var(--footer-height) - 40px);
+  width: 100%;
   padding: 1rem;
   -ms-overflow-style: none;          // スクロールバーを非表示、Internet Explorer 10+ 対応
   scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応

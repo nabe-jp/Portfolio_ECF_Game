@@ -6,8 +6,7 @@
       <% else %>
         <h2 class="user-posts__title">全体の投稿一覧</h2>
       <% end %>
-      <div class="col-12">
-        <%= render 'public/shared/user_post/post_index' %>
+        <%= render 'shared/user_post/post_index', posts: @posts %>
       </div>
     </div>
   </div>

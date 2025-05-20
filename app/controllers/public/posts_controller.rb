@@ -15,9 +15,9 @@ class Public::PostsController < ApplicationController
         redirect_to root_path, alert: '指定されたユーザーが見つかりませんでした。'
         return
       end
-      @posts = @user.posts.order(created_at: :desc)
+      @posts = @user.posts.order(created_at: :desc).page(params[:page])
     else
-      @posts = Post.includes(:user).order(created_at: :desc)
+      @posts = Post.includes(:user).order(created_at: :desc).page(params[:page])
     end
   end
 

@@ -70,7 +70,7 @@
   flex-direction: row;                // 横並びに変更
   justify-content: flex-start;        // 左揃えにする
   align-items: stretch;               // 高さを合わせる
-  max-width: 48%;
+  max-width: 95%;
   height: 200px;                      // 高さ固定
   padding: 1rem;                      // 内側の余白
   border-radius: 8px;                 // 角を丸める
@@ -83,7 +83,7 @@
 .user-posts__link:hover {
   color: #007bff;                   // 文字色を青色に変更
   background-color: #8aaaf0;        // 背景色を変更
-  text-decoration: none;              // ホバー時にも下線を消す 
+  text-decoration: none;              // ホバー時の下線を消す 
 }
 
 // 投稿ボックスの設定
@@ -91,10 +91,10 @@
   display: flex;                      // 横並びにする
   flex-wrap: wrap;                    // 要素が画面幅を超えた場合に次の行に折り返す
   gap: 0.5rem;
-  width: 100%;
+  width: 95%;
 }
 
-// 画像ボックスのスタイル
+// 左側：画像エリア
 .post-list__image-box {
   max-width: 45%;
   display: flex;
@@ -114,7 +114,7 @@
   max-width: 100%;                    // 親要素を超えないように最大幅を設定
 }
 
-// コンテンツボックスの設定
+// 右側：情報エリア
 .post-list__content-box {
   max-width: 50%;
   margin-left: 1rem;
@@ -174,15 +174,4 @@
   overflow: hidden;
   text-overflow: ellipsis;
   box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
-}
-
-// レスポンシブ対応
-@media (max-width: 768px) {
-  .user-posts__link {
-    width: 100%;                      // 小さい画面では横並びを解消して縦並びにする
-  }
-  
-  .post-list {
-    flex-direction: column;           // 1列に並べる
-  }
 }

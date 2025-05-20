@@ -1,0 +1,36 @@
+<div class="posts-container">
+  <% @recent_posts.each_with_index do |post, index| %>
+    <%= link_to user_post_path(post.user.id, post), class: "box-link" do %>
+      <!-- 投稿ヘッダー: ユーザー画像とニックネーム -->
+      <div class="post-header">
+        <%= image_tag(post.user.profile_image, size: "40x40", class: "user-image") %>
+        <strong class="post-user-name"><%= post.user.nickname %></strong>
+      </div>
+
+      <!-- 投稿内容: 画像とタイトル -->
+      <div class="post-body">
+        <h5 class="post-title ml-2">
+          <%= post.title %>
+        </h5>
+        <%= image_tag(post.post_image, size: "100x100", class: "post-image") %>
+      </div>
+
+      <!-- 投稿日時 -->
+      <div class="post-footer">
+        <%= post.created_at.strftime("%Y-%m-%d %H:%M") %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <!-- ダミー画像表示: 投稿が足りない場合 -->
+  <% if @dummy_images.present? %>
+    <% @dummy_images.each do |dummy_image| %>
+      <div class="box-link box-link-cards">
+        <div class="post-header post-header-cards">
+          <strong><%= PostConstants::LATEST_POST_TITLE %>はありません</strong>
+         </div>
+        <%= image_tag("card/#{dummy_image}.png", size: "150x230", class: "post-image") %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

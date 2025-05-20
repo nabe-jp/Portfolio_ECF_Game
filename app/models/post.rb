@@ -20,6 +20,15 @@ class Post < ApplicationRecord
   # 投稿作成時に必ずデフォルト画像を設定
   after_create :set_default_post_image
 
+    # ここにRansackableの設定(検索可能な属性)を追加します
+  # attributesがカラムなどの本体情報、associationsは関連
+  def self.ransackable_attributes(auth_object = nil)
+    ["title", "body"]
+  end
+  
+  def self.ransackable_associations(auth_object = nil)
+    []
+  end
 
   private
   

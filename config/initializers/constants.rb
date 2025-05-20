@@ -7,7 +7,7 @@ module PostConstants
 
   # 文字列の管理
   # 検索フォームで使用
-  SEARCH_TYPES = %w[すべて ユーザー 投稿 グループ グループ内投稿].freeze
+  SEARCH_TYPES = %w[ユーザー 投稿 グループ グループ内投稿].freeze
   
   # トップページで使用
   NOTIFICATION_TITLE = "お知らせ"
