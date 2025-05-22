@@ -72,7 +72,7 @@ class Public::SearchesController < ApplicationController
   end
 
   def search_user_posts
-    search_model_optimized(Post, %w[title body]).page(params[:page])
+    search_model_optimized(UserPost, %w[title body]).page(params[:page])
   end
 
   def search_groups

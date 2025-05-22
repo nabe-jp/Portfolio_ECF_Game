@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_08_143126) do
+ActiveRecord::Schema.define(version: 2025_05_22_132205) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,16 @@ ActiveRecord::Schema.define(version: 2025_05_08_143126) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "admin_notes", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.integer "admin_id", null: false
+    t.boolean "is_pinned", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_admin_notes_on_admin_id"
+  end
+
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -52,12 +62,17 @@ ActiveRecord::Schema.define(version: 2025_05_08_143126) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "title"
-    t.text "body"
+  create_table "information", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "body", null: false
+    t.datetime "published_at"
+    t.boolean "visible", default: true
+    t.boolean "pinned", default: false
+    t.datetime "deleted_at"
+    t.integer "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_information_on_admin_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -76,6 +91,31 @@ ActiveRecord::Schema.define(version: 2025_05_08_143126) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "user_post_comments", force: :cascade do |t|
+    t.text "body", null: false
+    t.integer "user_id", null: false
+    t.integer "user_post_id", null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_post_comments_on_user_id"
+    t.index ["user_post_id"], name: "index_user_post_comments_on_user_post_id"
+  end
+
+  create_table "user_posts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "body"
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,5 +137,10 @@ ActiveRecord::Schema.define(version: 2025_05_08_143126) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "admin_notes", "admins"
+  add_foreign_key "information", "admins"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "user_post_comments", "user_posts"
+  add_foreign_key "user_post_comments", "users"
+  add_foreign_key "user_posts", "users"
 end

@@ -12,7 +12,7 @@
           <% when @decide_types[0] %>
             <%= render 'shared/search/result/users', users: result[:records] %>
           <% when @decide_types[1] %>
-            <%= render 'shared/search/result/user_posts', posts: result[:records] %>
+            <%= render 'shared/search/result/user_posts', user_posts: result[:records] %>
           <% when @decide_types[2] %>
             <%= render 'shared/search/result/groups', groups: result[:records] %>
           <% when @decide_types[3] %>
@@ -26,7 +26,7 @@
         <% when @decide_types[0] %>
           <%= render 'shared/search/result/users', users: matched_result[:records] %>
         <% when @decide_types[1] %>
-          <%= render 'shared/search/result/user_posts', posts: matched_result[:records] %>
+          <%= render 'shared/search/result/user_posts', user_posts: matched_result[:records] %>
         <% when @decide_types[2] %>
           <%= render 'shared/search/result/groups', groups: matched_result[:records] %>
         <% when @decide_types[3] %>

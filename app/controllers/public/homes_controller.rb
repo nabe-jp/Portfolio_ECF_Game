@@ -2,12 +2,12 @@ class Public::HomesController < ApplicationController
 
   def top
     # 投稿が足りない場合に表示するダミー画像の数を計算
-    @recent_posts = Post.order(created_at: :desc)
+    @recent_user_posts = UserPost.order(created_at: :desc)
                       .where('created_at >= ?', Time.now - ::PostConstants::POSTS_RANGE_DAYS.days)
                       .limit(PostConstants::MAX_DISPLAY_COUNT)
 
     # ダミー画像を表示するために足りない分の投稿数を計算
-    dummy_image_count = (PostConstants::MAX_DISPLAY_COUNT - @recent_posts.size || 0)
+    dummy_image_count = (PostConstants::MAX_DISPLAY_COUNT - @recent_user_posts.size || 0)
 
     # ダミー画像の番号を生成するためにWhispersOfLuckを使う
     whisper_of_luck = HomesHelper::WhispersOfLuck.new(dummy_image_count)

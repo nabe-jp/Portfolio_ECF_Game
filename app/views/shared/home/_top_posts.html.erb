@@ -1,5 +1,5 @@
 <div class="posts-container">
-  <% @recent_posts.each_with_index do |post, index| %>
+  <% @recent_user_posts.each_with_index do |post, index| %>
     <%= link_to user_post_path(post.user.id, post), class: "box-link" do %>
       <!-- 投稿ヘッダー: ユーザー画像とニックネーム -->
       <div class="post-header">
@@ -12,7 +12,7 @@
         <h5 class="post-title ml-2">
           <%= post.title %>
         </h5>
-        <%= image_tag(post.post_image, size: "100x100", class: "post-image") %>
+        <%= image_tag(post.user_post_image, size: "100x100", class: "post-image") %>
       </div>
 
       <!-- 投稿日時 -->

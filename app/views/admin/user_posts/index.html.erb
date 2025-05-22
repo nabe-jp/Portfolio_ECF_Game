@@ -1,0 +1,29 @@
+<h1>投稿一覧（削除済み含む）</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>ユーザー</th>
+      <th>本文</th>
+      <th>状態</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_posts.each do |post| %>
+      <tr>
+        <td><%= post.id %></td>
+        <td><%= post.user.name %></td>
+        <td><%= truncate(post.body, length: 100) %></td>
+        <td><%= post.is_deleted ? "削除済み" : "公開中" %></td>
+        <td>
+          <%= link_to '詳細', admin_user_post_path(post) %>
+          <% unless post.is_deleted %>
+            <%= link_to '削除', admin_user_post_path(post), method: :delete, data: { confirm: "削除しますか？" } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

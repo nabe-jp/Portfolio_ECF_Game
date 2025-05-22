@@ -2,7 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :posts, dependent: :destroy
+  has_many :user_posts, dependent: :destroy
+  has_many :user_post_comments, dependent: :destroy
 
   acts_as_taggable_on :user_tags
 

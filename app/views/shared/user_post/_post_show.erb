@@ -1,22 +1,22 @@
 <!-- 左側に投稿画像 -->
 <div class="col-12 col-md-6 d-flex justify-content-center">
-  <%= image_tag(@post.post_image, size: "400x400", class: "post-detail__image") %>
+  <%= image_tag(@user_post.user_post_image, size: "400x400", class: "post-detail__image") %>
 </div>
 
 <!-- 右側にプロフィール画像と名前、投稿タイトル、投稿内容 -->
 <div class="col-12 col-md-6 d-flex flex-column justify-content-center pr-5">
   <!-- プロフィール画像と名前 -->
   <div class="d-flex align-items-center">
-    <%= image_tag(@post.user.profile_image, size: "40x40", class: "post__user-profile-image rounded-circle") %>
-    <span class="ml-2 post-detai__user"><%= @post.user.nickname %></span>
+    <%= image_tag(@user_post.user.profile_image, size: "40x40", class: "post__user-profile-image rounded-circle") %>
+    <span class="ml-2 post-detai__user"><%= @user_post.user.nickname %></span>
   </div>
 
   <!-- 投稿タイトル -->
-  <h2 class="my-3 post__title"><%= @post.title %></h2>
+  <h2 class="my-3 post__title"><%= @user_post.title %></h2>
 
   <!-- 投稿内容 -->
   <p class="text-left my-2 post__body" style="word-wrap: break-word;">
-    <%= @post.body %>
+    <%= @user_post.body %>
   </p>
   <div class="row justify-content-center mt-3">
     <%= render "shared/link/public/links", check_poster_profile: true, as: :button %>

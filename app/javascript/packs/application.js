@@ -15,9 +15,9 @@ import "bootstrap";
 import "../stylesheets/application"; 
 // ここまで
 
-// Rails.start()
-// Turbolinks.start()
-// ActiveStorage.start()
+Rails.start()
+Turbolinks.start()
+ActiveStorage.start()
 
 
 

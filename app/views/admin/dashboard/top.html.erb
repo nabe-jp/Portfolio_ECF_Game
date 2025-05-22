@@ -1,2 +1,30 @@
 <h1>Admin::Dashboard#top</h1>
 <p>Find me in app/views/admin/dashboard/top.html.erb</p>
+
+<h1>管理ダッシュボード</h1>
+
+<section>
+  <h2>📌 申し送り</h2>
+  <ul>
+    <% @admin_notes.each do |note| %>
+      <li>
+        <strong><%= note.title %></strong> - <%= l(note.created_at, format: :short) %>
+        [<%= link_to "編集", edit_admin_admin_note_path(note) %>]
+      </li>
+    <% end %>
+  </ul>
+</section>
+
+<section>
+  <h2>📢 お知らせ</h2>
+  <ul>
+    <% @informations.each do |info| %>
+      <li>
+        <strong><%= info.title %></strong> - <%= l(info.published_at || info.created_at, format: :short) %>
+        <% if info.pinned %><span style="color: red;">[ピン留め]</span><% end %>
+        <% unless info.visible %><span style="color: gray;">[非公開]</span><% end %>
+        [<%= link_to "編集", edit_admin_information_path(info) %>]
+      </li>
+    <% end %>
+  </ul>
+</section>

@@ -1,14 +1,14 @@
 <div class="container">
   <div class="row">
-    <% if posts.any? %>
-      <% posts.each do |post| %> 
+    <% if user_posts.any? %>
+      <% user_posts.each do |post| %> 
         <!-- 投稿全体をリンクにする -->
         <div class="col-6">
           <%= link_to user_post_path(post.user.id, post.id), class: 'user-posts__link' do %>
             <div class="post-list">
               <!-- 左側の画像 -->
               <div class="post-list__image-box">
-                <%= image_tag(post.post_image, size: "150x150", class: "post-list__image") %>
+                <%= image_tag(post.user_post_image, size: "150x150", class: "post-list__image") %>
               </div>
 
               <!-- 右側の内容(名前、タイトル、内容) -->

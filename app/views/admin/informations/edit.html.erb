@@ -1,0 +1,30 @@
+<h1>お知らせを編集</h1>
+
+<%= form_with model: [:admin, @information], local: true do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body, "本文" %><br>
+    <%= f.text_area :body, rows: 6 %>
+  </div>
+
+  <div>
+    <%= f.label :published_at, "公開日" %><br>
+    <%= f.datetime_select :published_at %>
+  </div>
+
+  <div>
+    <%= f.check_box :visible %>
+    <%= f.label :visible, "公開する" %>
+  </div>
+
+  <div>
+    <%= f.check_box :pinned %>
+    <%= f.label :pinned, "ピン留め" %>
+  </div>
+
+  <%= f.submit "更新する" %>
+<% end %>

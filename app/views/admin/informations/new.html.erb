@@ -1,0 +1,41 @@
+<h2>新しいお知らせ</h2>
+
+<%= form_with model: [:admin, @information], local: true do |f| %>
+  <% if @information.errors.any? %>
+    <div class="error-messages">
+      <h4>エラーがあります:</h4>
+      <ul>
+        <% @information.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <div>
+    <%= f.label :published_at %>
+    <%= f.datetime_select :published_at %>
+  </div>
+
+  <div>
+    <%= f.label :visible %>
+    <%= f.check_box :visible %>
+  </div>
+
+  <div>
+    <%= f.label :pinned %>
+    <%= f.check_box :pinned %>
+  </div>
+
+  <%= f.submit "作成" %>
+<% end %>

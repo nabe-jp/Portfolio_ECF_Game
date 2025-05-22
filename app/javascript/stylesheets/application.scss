@@ -11,7 +11,8 @@
 @use 'layout/about';
 @use 'layout/top';
 @use 'layout/user';
-@use 'layout/post';
+@use 'layout/user_post';
+@use 'layout/user_post_comments';
 @use 'layout/search';
 @use 'utils/variables';
 @use 'utils/mixins';

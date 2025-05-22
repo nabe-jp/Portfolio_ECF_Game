@@ -1,0 +1,24 @@
+<% @user_post.user_post_comments.order(created_at: :desc).page(params[:page]).per(20).each do |comment| %>
+  <div class="comment-item">
+
+    <% if comment.is_deleted %>
+      <p class="comment-item__deleted">このコメントは削除されました。</p>
+
+    <% else %>
+      <p class="user-comments__body"><%= comment.body %></p>
+      <p class="comment-item__user"><%= comment.user.nickname %></p>
+      <div class="comment-item__deleted">
+        <% if comment.user == current_user || @user_post.user == current_user || 
+              (current_user.respond_to?(:admin?) && current_user.admin?) %>
+          <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
+            method: :delete, data: { confirm: "本当に削除しますか？" },
+              class: "comment-item__delete-btn" %>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+  <hr>
+<% end %>
+
+<%= paginate @user_post.user_post_comments.order(created_at: :desc).page(params[:page]).per(20) %>

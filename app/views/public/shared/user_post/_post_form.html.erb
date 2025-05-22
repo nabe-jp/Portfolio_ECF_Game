@@ -1,5 +1,5 @@
-<% if @post.present? && @post.user.present? %>
-  <%= form_with model: @post, url: url, method: verd, local: true do |f| %>
+<% if @user_post.present? && @user_post.user.present? %>
+  <%= form_with model: @user_post, url: url, method: verd, local: true do |f| %>
 
     <div class="post-form__title-box">
       <%= f.label :title, "投稿のタイトル" %>
@@ -7,7 +7,7 @@
     </div>
   
     <div class="post-form__image-box">
-      <%= f.label :post_image, "投稿画像" %>
+      <%= f.label :user_post_image, "投稿画像" %>
       <%= f.file_field :post_image, class: "post-form__image-input" %>
     </div>
   

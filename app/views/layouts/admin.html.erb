@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>管理画面</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <!-- レスポンシブデザイン用、
+      ページとデバイスの画面幅を合わせ、スケールを1に設定、ユーザーがズームインできなくする -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- WebpackerによるJavaScriptとCSSをバンドルして読み込む -->
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+   </head>
+
+  <!-- bodyを動的にし、bodyが短くなり見栄えが悪くならないように高さを取る -->
+  <body class="d-flex flex-column <%= controller.controller_name %> <%= controller.action_name %> vh-100">
+  
+    <!-- ヘッダー -->
+    <%= render 'shared/header/header' %>
+    <div class="container">
+      <div class="row">
+
+        <!-- 左サイドバー -->
+        <div class="sidebar sidebar-left">
+          <%= render 'shared/sidebar/left_sidebar' %>
+        </div>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+
+          <!-- メッセージ -->
+          <span class="d-flex justify-content-center"><%= render "shared/message/messages" %></span>
+
+          <!-- 管理者用ナビゲーション -->
+          <%= yield %>
+        </main>
+
+        <!-- 右サイドバー -->
+        <div class="sidebar sidebar-right">
+          <%= render 'shared/sidebar/right_sidebar' %>
+        </div>
+      
+      </div>
+    </div>
+
+    <!-- フッター -->
+    <%= render 'shared/footer/footer' %>
+
+  </body>
+</html>

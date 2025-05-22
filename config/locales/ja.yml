@@ -10,6 +10,11 @@ ja:                                   # 日本語の設定を行う
         unpublished: "未公開"
         deleted: "削除"
   activerecord:
+    models:
+      user: "ユーザー"
+      post: "投稿"
+      user_post_comment: "コメント"
+      news: "ニュース"
     attributes:
       user:
         last_name: "名前の(姓)"
@@ -19,9 +24,12 @@ ja:                                   # 日本語の設定を行う
       post:
         title: "タイトル"
         body: "内容"
+      user_post_comment:
+        title: "タイトル"
+        body: "コメント"
     errors:
       messages:
-        record_invalid: 'バリデーションに失敗しました: %{errors}'
+        record_invalid: "バリデーションに失敗しました: %{errors}"
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"

@@ -47,51 +47,68 @@ female_user.profile_image.attach(io: File.open(female_image), filename: 'user_2.
 User.set_callback(:create, :after, :set_default_profile_image)
 
 puts "男性ユーザー（英語）と女性ユーザー（日本語）を作成しました。"
+puts "各投稿の作成を開始します。"
 
 # 男性ユーザーの投稿（チェス）
-post_1 = Post.create!(
+user_post_1 = UserPost.create!(
   user_id: male_user.id,  # 男性ユーザーのIDを設定
   title: 'Let\'s Play Chess!',
   body: 'I love playing chess. It\'s a great way to sharpen the mind and have fun. Anyone up for a game? Feel free to reach out if you want to play some chess with me!',
 )
 
 # チェスの画像を投稿にアタッチ
-post_1_image = Rails.root.join('app', 'assets', 'images', 'post_1_chess.jpg')
-post_1.post_image.attach(io: File.open(post_1_image), filename: 'post_1_chess.jpg', content_type: 'image/jpeg')
+user_post_1_image = Rails.root.join('app', 'assets', 'images', 'user_post_1_chess.jpg')
+user_post_1.user_post_image.attach(io: File.open(user_post_1_image), filename: 'user_post_1_chess.jpg', content_type: 'image/jpeg')
 
 # 男性ユーザーの投稿（ビリヤード）
-post_2 = Post.create!(
+user_post_2 = UserPost.create!(
   user_id: male_user.id,  # 男性ユーザーのIDを設定
   title: 'Billiards Game Night',
   body: 'Billiards is my favorite game! I\'ve been practicing a lot lately. Let\'s have a game night sometime! Who\'s interested in playing billiards with me? I could use some practice!',
 )
 
 # ビリヤードの画像を投稿にアタッチ
-post_2_image = Rails.root.join('app', 'assets', 'images', 'post_2_billiards.jpg')
-post_2.post_image.attach(io: File.open(post_2_image), filename: 'post_2_billiards.jpg', content_type: 'image/jpeg')
+user_post_2_image = Rails.root.join('app', 'assets', 'images', 'user_post_2_billiards.jpg')
+user_post_2.user_post_image.attach(io: File.open(user_post_2_image), filename: 'user_post_2_billiards.jpg', content_type: 'image/jpeg')
 
 # 女性ユーザーの投稿（トランプ）
-post_3 = Post.create!(
+user_post_3 = UserPost.create!(
   user_id: female_user.id,  # 女性ユーザーのIDを設定
   title: 'トランプゲームが楽しい！',
   body: 'トランプは友達と遊ぶのに最高のゲームです！最近、新しいトリックを覚えました。もし一緒に遊べる人がいたら、ぜひ声をかけてくださいね！ゲーム好きな人、集まれ！',
 )
 
 # トランプの画像を投稿にアタッチ
-post_3_image = Rails.root.join('app', 'assets', 'images', 'post_3_playing_cards.jpg')
-post_3.post_image.attach(io: File.open(post_3_image), filename: 'post_3_playing_cards.jpg', content_type: 'image/jpeg')
+user_post_3_image = Rails.root.join('app', 'assets', 'images', 'user_post_3_playing_cards.jpg')
+user_post_3.user_post_image.attach(io: File.open(user_post_3_image), filename: 'user_post_3_playing_cards.jpg', content_type: 'image/jpeg')
 
 # 女性ユーザーの投稿（アドベンチャーゲーム）
-post_4 = Post.create!(
+user_post_4 = UserPost.create!(
   user_id: female_user.id,  # 女性ユーザーのIDを設定
   title: 'アドベンチャーゲームの攻略情報',
   body: '最近、アドベンチャーゲームにハマっています！ストーリーが面白くて、ついつい長時間プレイしてしまいます。もしゲーム攻略のコツがあれば教えてください！みんなで情報を交換しませんか？',
 )
 
 # アドベンチャーゲームの画像を投稿にアタッチ
-post_4_image = Rails.root.join('app', 'assets', 'images', 'post_4_adventure.png')
-post_4.post_image.attach(io: File.open(post_4_image), filename: 'post_4_adventure.png', content_type: 'image/png')
+user_post_4_image = Rails.root.join('app', 'assets', 'images', 'user_post_4_adventure.png')
+user_post_4.user_post_image.attach(io: File.open(user_post_4_image), filename: 'user_post_4_adventure.png', content_type: 'image/png')
 
 puts "男性と女性の投稿（ゲームに関する内容）を作成しました。"
+puts "管理側の作成を開始します。"
 
-puts "seedの実行が完了しました"
+admin_email = ENV['ADMIN_EMAIL']
+admin_password = ENV['ADMIN_PASSWORD']
+
+if admin_email.blank? || admin_password.blank?
+  puts "⚠ 管理者の環境変数が設定されていません"
+else
+  Admin.find_or_create_by!(email: admin_email) do |admin|
+    admin.password = admin_password
+    admin.password_confirmation = admin_password
+  end
+
+  puts "管理側の作成を完了します。"
+end
+
+
+puts "seedの実行が完了しました。"

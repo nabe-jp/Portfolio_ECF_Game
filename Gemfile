@@ -78,3 +78,6 @@ gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
 # ここまで
+
+# .envに記載した情報をENV['キー名'] として使えるようにする
+gem 'dotenv-rails', groups: [:development, :test]

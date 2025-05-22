@@ -1,18 +1,24 @@
-   <%= form_with model: @user, method: :patch, local: true do |f| %>
-    <div class="form-label-and-input">
-      <%= f.label :nickname, "ニックネーム", class: "form-label-and-input label" %>
-      <%= f.text_field :nickname, class: "form-label-and-input input", placeholder: "ニックネームを入力" %>
+<%= form_with model: @user, method: :patch, local: true, html: { class: "user-profile-edit" } do |f| %>
+  <div class="user-profile-edit__row">
+    <%= f.label :nickname, "ニックネーム", class: "user-profile-edit__label" %>
+    <div class="user-profile-edit__input-wrapper">
+      <%= f.text_field :nickname, class: "user-profile-edit__input", placeholder: "ニックネームを入力" %>
     </div>
+  </div>
 
-    <div class="profile-image-upload">
-      <%= f.label :profile_image, "プロフィール画像" %>
-      <%= f.file_field :profile_image, class: "profile-image-upload input" %>
+  <div class="user-profile-edit__row">
+    <%= f.label :profile_image, "プロフィール画像", class: "user-profile-edit__label" %>
+    <div class="user-profile-edit__input-wrapper">
+      <%= f.file_field :profile_image, class: "user-profile-edit__file-input" %>
     </div>
+  </div>
 
-    <div class="bio-form">
-      <%= f.label :bio, "自己紹介", class: "form-label-and-input label" %>
-      <%= f.text_area :bio, class: "bio-input", placeholder: "自己紹介を入力してください" %>
+  <div class="user-profile-edit__bio-section">
+    <div class="user-profile-edit__bio-label">自己紹介</div>
+    <div class="user-profile-edit__input-wrapper mx-auto" style="width: 100%;">
+      <%= f.text_area :bio, class: "user-profile-edit__textarea", placeholder: "自己紹介を入力してください" %>
     </div>
+  </div>
 
     <div class="text-center">
       <%= f.submit "更新する", class: "btn btn-base update-btn" %>
