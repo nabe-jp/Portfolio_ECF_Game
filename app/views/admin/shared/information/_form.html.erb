@@ -1,0 +1,50 @@
+<%= form_with model: model, url: url, local: true do |f| %>
+  <div class="row justify-content-center">
+    <div class="col-11">
+
+      <!-- タイトルと 公開日 ラベル -->
+      <div class="row mb-2">
+        <div class="col-6 offset-1">
+          <%= f.label :title, 'タイトル' %>
+        </div>
+        <div class="col-4">
+          <%= f.label :published_at, '公開日' %>
+        </div>
+      </div>
+
+      <!-- タイトル入力と公開日 -->
+      <div class="row mb-2">
+        <div class="col-6 offset-1">
+          <%= f.text_field :title, class: 'form-control' %>
+        </div>
+        <div class="col-4 mt-1">
+          <%= f.datetime_select :published_at, class: 'form-control' %>
+        </div>
+      </div>
+
+      <!-- 内容と 公開・固定 -->
+      <div class="row mb-2">
+        <div class="col-6 offset-1">
+          <%= f.label :body, '内容' %>
+          <%= f.text_area :body, class: 'form-control' %>
+        </div>
+        <div class="col-2 mt-3 d-flex align-items-center">
+          <div>
+            <%= f.label :visible, '公開する' %>
+            <%= f.check_box :visible, class: 'ms-2' %>
+            <%= f.label :is_pinned, '固定表示' %>
+            <%= f.check_box :is_pinned, class: 'ms-2' %>
+          </div>
+        </div>
+      </div>
+
+      <!-- 送信ボタン -->
+      <div class="row mb-4">
+        <div class="col-12 mt-4 text-center">
+          <%= f.submit submit_label || "保存", class: 'btn btn-primary col-2' %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+<% end %>

@@ -5,6 +5,7 @@ class CreateAdminNotes < ActiveRecord::Migration[6.1]
       t.text :body, null: false
       t.references :admin, null: false, foreign_key: true
       t.boolean :is_pinned, default: false, null: false
+      t.datetime :deleted_at
 
       t.timestamps
     end

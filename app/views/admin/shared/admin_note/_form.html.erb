@@ -1,0 +1,28 @@
+<%= form_with model: admin_note, url: form_url, local: true do |f| %>
+  <!-- タイトル入力と固定表示 -->
+  <div class="row mb-2 align-items-center">
+    <div class="col-7 offset-1">
+      <%= f.label :title, 'タイトル' %>
+      <%= f.text_field :title, class: 'form-control' %>
+    </div>
+    <div class="col-3 mt-3 d-flex align-items-center">
+      <%= f.label :is_pinned, '固定表示' %>
+      <%= f.check_box :is_pinned, class: 'me-2 mb-0' %>
+    </div>
+  </div>
+
+  <!-- 内容 -->
+  <div class="row mb-3">
+    <div class="col-10 offset-1">
+      <%= f.label :body, '内容' %>
+      <%= f.text_area :body, class: 'form-control', rows: 4 %>
+    </div>
+  </div>
+
+  <!-- 送信ボタン -->
+  <div class="row mb-4">
+    <div class="col-12 mt-4 text-center">
+      <%= f.submit submit_label, class: 'btn btn-primary col-2' %>
+    </div>
+  </div>
+<% end %>

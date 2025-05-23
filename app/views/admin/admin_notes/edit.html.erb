@@ -1,15 +1,11 @@
-<h1>申し送りを編集</h1>
+<div class="container my-4">
+  <h2 class="text-center mb-4">申し送りを編集</h2>
+    <%= render partial: "admin/shared/admin_note/form", locals: { admin_note: @admin_note, 
+      form_url: admin_note_path(@admin_note), submit_label: "更新する" } %>
 
-<%= form_with model: [:admin, @admin_note], local: true do |f| %>
-  <div>
-    <%= f.label :title, "タイトル" %><br>
-    <%= f.text_field :title %>
+    <!-- 戻るリンク -->
+    <div class="text-center">
+      <%= link_to "一覧に戻る", admin_notes_path %>
+    </div>
   </div>
-
-  <div>
-    <%= f.label :body, "本文" %><br>
-    <%= f.text_area :body, rows: 6 %>
-  </div>
-
-  <%= f.submit "更新する" %>
-<% end %>
+</div>

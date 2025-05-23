@@ -1,40 +1,5 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'messages/destroy'
-  end
-  namespace :admin do
-    get 'dm_rooms/index'
-    get 'dm_rooms/show'
-    get 'dm_rooms/destroy'
-  end
-  namespace :admin do
-    get 'group_post_comments/destroy'
-  end
-  namespace :admin do
-    get 'group_posts/index'
-    get 'group_posts/show'
-    get 'group_posts/destroy'
-  end
-  namespace :admin do
-    get 'groups/index'
-    get 'groups/show'
-    get 'groups/destroy'
-  end
-  namespace :admin do
-    get 'user_post_comments/destroy'
-  end
-  namespace :admin do
-    get 'user_posts/index'
-    get 'user_posts/show'
-    get 'user_posts/destroy'
-  end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
-    get 'users/update'
-  end
-  # ネストが深くなると可読性、保守性が下がるので命名を短くしました
-  # その為、同じ名前が出てくるのでパスプレフィックス(/users, /groups)にてルートを分けています
+  # ネストによるヘルパー名やURLの冗長性を抑え、可読性を意識したルーティング設計
 
   # 会員側
   devise_for :users, skip: [:passwords, :cancel], controllers: {
@@ -57,7 +22,7 @@ Rails.application.routes.draw do
 
     # マイページは個人情報を取り扱い、自分の設定の変更はほかのユーザーはしないのでidを持たないように設計
     # usersを作成しているためこのままではusersのコントローラーを使用するのでcontrollerを設定
-    # :idは付きませんがユーザーに対する操作であることを明示的にするためにmemberを使用しています
+    # :idは付きませんがユーザーに対する操作であることを明示的にするためにmemberを使用
     resource :user, only: [:show, :edit, :update], controller: 'user' do
       member do
         get 'mypage'
@@ -67,8 +32,8 @@ Rails.application.routes.draw do
       end
     end
     
-    # showはresource_userにもあるのでuser_post_pathに配置される、そこでは衝突が起こるのでpathを設定しています
-    # リソースフルにするために投稿はresource_userにネストせずresources_usersにネストしました
+    # showはresource_userにもあるのでuser_post_pathに配置される、そこでは衝突が起こるのでpathを設定
+    # リソースフルにするために投稿はresource_userにネストせずresources_usersにネスト
     resources :users, only: [] do
       member do
         get 'show', as: 'show'
@@ -80,10 +45,8 @@ Rails.application.routes.draw do
     end
 
     # ユーザーの全投稿用(indexだけのためresourcesは使用せずカスタム)
-    # 将来の拡張性を考えpublic側とadmin側に分ける設計を行いました
     get 'users/posts', to: 'user_posts#index', as: 'user_all_posts'
 
-    # 他の会員用ルーティング
   end
 
   # 管理者用ルーティング
@@ -91,31 +54,44 @@ Rails.application.routes.draw do
     root to: "dashboard#top"
   
     # 管理者への申し送りなどの記載に使用するために設置
-    resources :admin_notes, only: [:edit, :update], path: "notes", as: "notes"
+    resources :admin_notes, only: [:index, :create, :edit, :update, :destroy], path: "notes", as: "notes" do
+      member do
+        patch :restore
+      end
+    end
 
     # ユーザーへのニュースやお知らせ
-    resources :informations, only: [:edit, :update], path: "posts", as: "posts"
-
-    resources :user_posts, only: [:show, :destroy] do
-      resources :user_post_comments, only: [:destroy], path: "comments", as: "comments"
+    resources :informations, only: [:index, :create, :edit, :update, :destroy] do
+      member do
+        patch :restore
+      end
     end
-  
+
     # ユーザー管理
-    resources :users, only: [:index, :show, :update] do
+    resources :users, only: [:index, :showe] do
       member do
         patch 'deactivate'   # 凍結や強制退会等
         patch 'reactivate'   # 再開
       end
     end
 
-    # 投稿管理(全ユーザーの投稿を一覧・閲覧・削除など)
-    get 'users/posts', to: 'user_posts#index', as: 'user_all_posts'
+    # ユーザーの投稿管理
+    resources :user_posts, only: [:index, :show, :destroy] do
+      resources :user_post_comments, only: [:destroy], path: "comments", as: "comments"
+    end
   
-    # グループ機能(今後予定)
+    # 今後実装予定
+    # グループ管理
     resources :groups, only: [:index, :show, :destroy] do
-      resources :group_posts, only: [:index, :show, :destroy], path: "posts", as: "posts" do
-        resources :group_post_comments, only: [:destroy], path: "comments", as: "comments"
+      member do
+        patch 'deactivate'   # 凍結や強制退会等
+        patch 'reactivate'   # 再開
       end
+    end
+
+    # グループ内投稿の管理
+    resources :group_posts, only: [:index, :show, :destroy], path: "posts", as: "posts" do
+      resources :group_post_comments, only: [:destroy], path: "comments", as: "comments"
     end
   
     # DM機能(フレンド同士)

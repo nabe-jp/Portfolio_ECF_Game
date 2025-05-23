@@ -10,13 +10,13 @@
         <div class="d-flex justify-content-end mt-1"> 
         <ul class="nav">
           <% if admin_signed_in? %>                                 <!-- 管理者がサインインした場合 -->
-            <%= render 'admin/shared/header/admin_nav' %>
+            <%= render 'shared/header/admin_nav' %>
           <% elsif user_signed_in? %>                               <!-- ユーザーがサインインした場合 -->
-            <%= render 'public/shared/header/user_nav' %>
+            <%= render 'shared/header/user_nav' %>
           <% elsif user_signed_in? %>                               <!-- ゲストがサインインした場合 -->
-            <%= render 'public/shared/header/guest_nav' %>
+            <%= render 'shared/header/guest_nav' %>
           <% else %>                                                <!-- 誰もサインインしていない場合 -->
-            <%= render 'public/shared/header/no_user_nav' %>
+            <%= render 'shared/header/no_user_nav' %>
           <% end %>
         </ul>
       </div>

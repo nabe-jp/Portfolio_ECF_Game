@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.text "body", null: false
     t.integer "admin_id", null: false
     t.boolean "is_pinned", default: false, null: false
+    t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_admin_notes_on_admin_id"
@@ -67,7 +68,7 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.text "body", null: false
     t.datetime "published_at"
     t.boolean "visible", default: true
-    t.boolean "pinned", default: false
+    t.boolean "is_pinned", default: false
     t.datetime "deleted_at"
     t.integer "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false

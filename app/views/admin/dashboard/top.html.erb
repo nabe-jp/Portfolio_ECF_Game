@@ -1,30 +1,45 @@
-<h1>Admin::Dashboard#top</h1>
-<p>Find me in app/views/admin/dashboard/top.html.erb</p>
+<h2 class="text-center my-4">管理ダッシュボード</h2>
 
-<h1>管理ダッシュボード</h1>
+<div class="container">
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-8 border p-4 rounded">
+      <h3 class="text-center border-bottom pb-4 mb-4">📌 申し送り</h3>
+      <% @admin_notes.each do |note| %>
+        <div class="mb-4 border-bottom pb-2">
+          <div class="d-flex justify-content-between">
+            <strong><%= note.title %></strong>
+            <small class="text-muted"><%= l(note.created_at, format: :short) %></small>
+          </div>
+          <div class="mt-2">
+            <%= simple_format(note.body) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<section>
-  <h2>📌 申し送り</h2>
-  <ul>
-    <% @admin_notes.each do |note| %>
-      <li>
-        <strong><%= note.title %></strong> - <%= l(note.created_at, format: :short) %>
-        [<%= link_to "編集", edit_admin_admin_note_path(note) %>]
-      </li>
-    <% end %>
-  </ul>
-</section>
-
-<section>
-  <h2>📢 お知らせ</h2>
-  <ul>
-    <% @informations.each do |info| %>
-      <li>
-        <strong><%= info.title %></strong> - <%= l(info.published_at || info.created_at, format: :short) %>
-        <% if info.pinned %><span style="color: red;">[ピン留め]</span><% end %>
-        <% unless info.visible %><span style="color: gray;">[非公開]</span><% end %>
-        [<%= link_to "編集", edit_admin_information_path(info) %>]
-      </li>
-    <% end %>
-  </ul>
-</section>
+  <div class="row justify-content-center">
+    <div class="col-md-8 border p-4 rounded">
+      <h3 class="text-center border-bottom pb-4 mb-4">📢 お知らせ</h3>
+      <% @informations.each do |info| %>
+        <div class="mb-4 border-bottom pb-2">
+          <div class="d-flex justify-content-between">
+            <strong><%= info.title %></strong>
+            <small class="text-muted"><%= l(info.published_at || info.created_at, format: :short) %></small>
+          </div>
+          <div class="mt-2">
+            <% if info.is_pinned %>
+              <span class="badge bg-danger me-1">ピン留め</span>
+            <% end %>
+            <% unless info.visible %>
+              <span class="badge bg-warning text-dark fs-6 fw-bold">非公開</span>
+            <% end %>
+            <div class="mt-1">
+              <%= simple_format(info.body) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

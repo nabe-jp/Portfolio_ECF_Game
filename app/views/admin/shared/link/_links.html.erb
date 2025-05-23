@@ -1,0 +1,26 @@
+<% is_button = (local_assigns[:as] == :button) %>
+
+<% if defined?(dashboard) && dashboard && admin_signed_in? %>
+  <%= link_to 'ホーム', admin_root_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+<% end %>
+
+<% if defined?(users) && users && admin_signed_in? %>
+  <%= link_to 'ユーザー一覧', admin_users_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+<% end %>
+
+<% if defined?(user_posts) && user_posts && admin_signed_in? %>
+  <%= link_to 'ユーザー投稿一覧', admin_user_posts_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+<% end %>
+
+<% if defined?(notes) && notes && admin_signed_in? %>
+  <%= link_to '申し送り一覧', admin_notes_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+<% end %>
+
+<% if defined?(informations) && informations && admin_signed_in? %>
+  <%= link_to 'お知らせ一覧', admin_informations_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+<% end %>

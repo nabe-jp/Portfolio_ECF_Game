@@ -24,11 +24,11 @@
 
         <!-- 左サイドバー -->
         <div class="sidebar sidebar-left">
-          <%= render 'shared/sidebar/left_sidebar' %>
+          <%= render 'admin/shared/sidebar/left_sidebar' %>
         </div>
 
         <!-- メインコンテンツ -->
-        <main class="main-content">
+        <main class="admin-main-content">
 
           <!-- メッセージ -->
           <span class="d-flex justify-content-center"><%= render "shared/message/messages" %></span>
@@ -36,11 +36,6 @@
           <!-- 管理者用ナビゲーション -->
           <%= yield %>
         </main>
-
-        <!-- 右サイドバー -->
-        <div class="sidebar sidebar-right">
-          <%= render 'shared/sidebar/right_sidebar' %>
-        </div>
       
       </div>
     </div>

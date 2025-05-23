@@ -1,0 +1,67 @@
+<div class="container my-4">
+  <h2 class="text-center mb-4">お知らせ一覧</h2>
+
+  <%= render partial: "admin/shared/information/form", locals: { model: @information, 
+    url: admin_informations_path, submit_label: "作成" } %>
+
+  <hr>
+
+  <!-- フィルター -->
+  <div class="row mb-3">
+    <div class="col-2 text-center">
+      <%= link_to '新しい順', admin_informations_path(direction: 'desc', 
+        show_deleted: params[:show_deleted]) %>｜<%= link_to '古い順', 
+          admin_informations_path(direction: 'asc', show_deleted: params[:show_deleted]) %>
+    </div>
+    <div class="col-3 text-center">
+      <%= link_to '削除済みを非表示', admin_informations_path(show_deleted: false, 
+        direction: params[:direction]) %>｜<%= link_to '削除済みを表示', 
+          admin_informations_path(show_deleted: true, direction: params[:direction]) %>
+    </div>
+  </div>
+
+
+  <!-- お知らせ一覧 -->
+  <div class="row justify-content-center">
+    <div class="col-8">
+      <% @informations.each do |info| %>
+        <div class="card mb-3 <%= 'bg-light text-muted' if info.deleted_at.present? %>">
+          <div class="card-body">
+            <div class="row align-items-start mb-2">
+              <div class="col-9">
+                <h5 class="card-title mb-0"><%= info.title %></h5>
+              </div>
+              <div class="col-3 text-end">
+                <% if info.deleted_at.present? %>
+                  <span class="badge bg-danger">削除済み</span>
+                <% end %>
+                <% if info.is_pinned %>
+                  <span class="badge bg-warning text-dark">固定</span>
+                <% end %>
+                <% unless info.visible %>
+                  <span class="badge bg-secondary text-light">非公開</span>
+                <% end %>
+              </div>
+            </div>
+            <p class="card-text"><%= info.body %></p>
+            <p class="card-text"><small class="text-muted">公開日: 
+              <%= l(info.published_at || info.created_at, format: :short) %></small></p>
+            <div class="text-end">
+              <% if info.deleted_at.present? %>
+                <%= link_to '復元', restore_admin_information_path(info), 
+                  method: :patch, class: 'btn btn-sm btn-outline-success' %>
+              <% else %>
+                <%= link_to '編集', edit_admin_information_path(info), 
+                  class: 'btn btn-sm btn-outline-secondary me-2' %>
+                <%= link_to '削除', admin_information_path(info), 
+                  method: :delete, data: { confirm: '削除しますか？' }, 
+                    class: 'btn btn-sm btn-outline-danger' %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%= paginate @informations %>
+    </div>
+  </div>
+</div>
