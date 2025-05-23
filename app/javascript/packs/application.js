@@ -15,10 +15,17 @@ import "bootstrap";
 import "../stylesheets/application"; 
 // ここまで
 
+// リンクやフォームを非同期にしたり、data-remoteを使えるようにする
 Rails.start()
+
+// HTMLだけを読み込むことで高速表示を実現、`DOMContentLoaded`イベントは発火しなくなる
 Turbolinks.start()
+
+// ファイルアップロードに関するJS(ActiveStorage)
 ActiveStorage.start()
 
+// ページ読み込み時の表示位置を設定できるようにするために使用
+require("./scroll");
 
 
 // import { Turbo } from "@hotwired/turbo-rails"

@@ -21,15 +21,15 @@
   <div class="mypage__container-left-column">
     <!-- プロフィールページとプロフィール編集ボタンを中央揃え -->
     <div class="mypage__buttons">
-      <%= render "shared/link/public/links", profile_page: true, as: :button %>
-      <%= render "shared/link/public/links", profile_edit: true, as: :button %>
+      <%= render "public/shared/link/links", profile_page: true, as: :button %>
+      <%= render "public/shared/link/links", profile_edit: true, as: :button %>
     </div>
   </div>
 
   <div class="mypage__container-right-column">
     <!-- 設定ボタンを中央揃え -->
     <div class="mypage__settings-button-wrapper">
-      <%= render "shared/link/public/links", settings: true, as: :button %>
+      <%= render "public/shared/link/links", settings: true, as: :button %>
     </div>
   </div>
 </div>

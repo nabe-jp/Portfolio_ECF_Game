@@ -4,9 +4,9 @@ class Admin::AdminNotesController < ApplicationController
   before_action :set_admin_note, only: [:edit, :update, :destroy]
 
   def index
-    @admin_note = AdminNote.new
+    @admin_note = AdminNote.new(session.delete(:admin_note_attributes) || {})
   
-    # 並び順（初期表示は 'desc'＝新しい順）
+    # 並び順(初期表示は 'desc'＝新しい順)
     sort_direction = %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   
     # 削除済みの表示切り替え
@@ -30,19 +30,31 @@ class Admin::AdminNotesController < ApplicationController
     if @admin_note.save
       redirect_to admin_notes_path, notice: "申し送りを作成しました。"
     else
-      @admin_notes = AdminNote.where(deleted_at: nil).order(created_at: :desc)
-      flash.now[:alert] = "作成に失敗しました。"
-      render :index, status: :unprocessable_entity
+      store_form_data(
+        attributes: admin_note_params,
+        error_messages: @admin_note.errors.full_messages,
+        error_name: "作成"
+      )
+      redirect_to admin_notes_path
     end
   end
 
-  def edit; end
+  def edit
+    if session[:admin_note_attributes]
+      @admin_note.assign_attributes(session[:admin_note_attributes])
+      session.delete(:admin_note_attributes)
+    end
+  end
 
   def update
     if @admin_note.update(admin_note_params)
       redirect_to admin_notes_path, notice: "申し送りを更新しました。"
     else
-      render :edit
+      store_form_data(
+        attributes: admin_note_params,
+        error_messages: @admin_note.errors.full_messages
+      )
+      redirect_to edit_admin_note_path(@admin_note)
     end
   end
 
@@ -52,6 +64,13 @@ class Admin::AdminNotesController < ApplicationController
   end
 
   private
+
+  def store_form_data(attributes:, error_messages:, error_name: nil)
+    error_name ||= "更新"
+    session[:admin_note_attributes] = attributes
+    flash[:error_messages] = error_messages
+    flash[:error_name] = error_name
+  end
 
   def set_admin_note
     @admin_note = AdminNote.find(params[:id])

@@ -8,15 +8,17 @@
 
   <!-- フィルター -->
   <div class="row mb-3">
-    <div class="col-2 text-center">
+    <div class="col-2 text-center" id="sort-button">
       <%= link_to '新しい順', admin_notes_path(direction: 'desc', 
-        show_deleted: params[:show_deleted]) %>｜<%= link_to '古い順', 
-          admin_notes_path(direction: 'asc', show_deleted: params[:show_deleted]) %>
+        show_deleted: params[:show_deleted], scroll_to: "sort-button") %>｜
+          <%= link_to '古い順', admin_notes_path(direction: 'asc', 
+            show_deleted: params[:show_deleted], scroll_to: "sort-button") %>
     </div>
     <div class="col-3 text-center">
       <%= link_to '削除済みを非表示', admin_notes_path(show_deleted: false, 
-        direction: params[:direction])%>｜<%= link_to '削除済みを表示', 
-          admin_notes_path(show_deleted: true, direction: params[:direction]) %>
+        direction: params[:direction], scroll_to: "sort-button") %>｜
+          <%= link_to '削除済みを表示', admin_notes_path(show_deleted: true, 
+            direction: params[:direction], scroll_to: "sort-button") %>
     </div>
   </div>
 
@@ -27,7 +29,7 @@
         <div class="card mb-3 <%= 'bg-light text-muted' if note.deleted_at.present? %>">
           <div class="card-body">
             <div class="row align-items-start mb-2">
-              <div class="col-9">
+              <div class="col-9  pl-0">
                 <h5 class="card-title mb-0"><%= note.title %></h5>
               </div>
               <div class="col-3 text-end">
@@ -47,10 +49,13 @@
 
             <div class="text-end">
               <% if note.deleted_at.present? %>
-                <%= link_to '復元', restore_admin_note_path(note), method: :patch, class: 'btn btn-sm btn-outline-success' %>
+                <%= link_to '復元', restore_admin_note_path(note), 
+                  method: :patch, class: 'btn btn-sm btn-outline-success' %>
               <% else %>
-                <%= link_to '編集', edit_admin_note_path(note), class: 'btn btn-sm btn-outline-secondary me-2' %>
-                <%= link_to '削除', admin_note_path(note), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
+                <%= link_to '編集', edit_admin_note_path(note), class: 
+                  'btn btn-sm btn-outline-secondary me-2' %>
+                <%= link_to '削除', admin_note_path(note), method: :delete, 
+                  data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
               <% end %>
             </div>
           </div>

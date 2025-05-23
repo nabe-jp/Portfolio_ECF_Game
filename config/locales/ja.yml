@@ -14,7 +14,9 @@ ja:                                   # 日本語の設定を行う
       user: "ユーザー"
       post: "投稿"
       user_post_comment: "コメント"
-      news: "ニュース"
+      admin_notes: "申し送り"
+      informations: "お知らせ"
+
     attributes:
       user:
         last_name: "名前の(姓)"
@@ -25,6 +27,12 @@ ja:                                   # 日本語の設定を行う
         title: "タイトル"
         body: "内容"
       user_post_comment:
+        title: "タイトル"
+        body: "コメント"
+      admin_note:
+        title: "タイトル"
+        body: "コメント"
+      information:
         title: "タイトル"
         body: "コメント"
     errors:

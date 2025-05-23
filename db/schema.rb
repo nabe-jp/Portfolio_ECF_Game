@@ -71,6 +71,8 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.boolean "is_pinned", default: false
     t.datetime "deleted_at"
     t.integer "admin_id", null: false
+    t.string "audience", default: "all"
+    t.integer "view_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_information_on_admin_id"
@@ -101,6 +103,9 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.integer "parent_comment_id"
+    t.integer "like_count", default: 0, null: false
+    t.datetime "replied_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_post_comments_on_user_id"
@@ -114,6 +119,9 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.integer "like_count", default: 0, null: false
+    t.datetime "last_commented_at"
+    t.boolean "is_public", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_posts_on_user_id"
@@ -130,6 +138,12 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.string "nickname", null: false
     t.string "bio", null: false
     t.boolean "is_active", default: true, null: false
+    t.datetime "last_logged_in_at"
+    t.integer "login_count", default: 0, null: false
+    t.integer "user_post_count", default: 0, null: false
+    t.integer "user_post_comment_count", default: 0, null: false
+    t.datetime "last_user_posted_at"
+    t.integer "role", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -38,6 +38,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :nickname, null: false
       t.string :bio, null: false
       t.boolean :is_active, null: false, default: true
+      t.datetime :last_logged_in_at                                     # 最終ログイン日時の記録
+      t.integer :login_count, default: 0, null: false                   # ログイン回数
+      t.integer :user_post_count, default: 0, null: false               # 投稿数のキャッシュ
+      t.integer :user_post_comment_count, default: 0, null: false       # コメント数のキャッシュ
+      t.datetime :last_user_posted_at                                   # 最後に投稿した日時
+      t.integer :role, default: 0, null: false                          # enumとして管理者や一般を識別可能化
 
       t.timestamps null: false
     end

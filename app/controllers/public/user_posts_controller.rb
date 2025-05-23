@@ -55,10 +55,8 @@ class Public::UserPostsController < ApplicationController
     @url = user_post_path(@user.id)
     @verd = :patch
     if session[:user_post_attributes]
-      @user_post.assign_attributes(session[:user_post_attributes]) if session[:user_post_attributes]
+      @user_post.assign_attributes(session[:user_post_attributes])
       session.delete(:user_post_attributes)
-    else
-      @user_post = @user_post
     end
   end
   
