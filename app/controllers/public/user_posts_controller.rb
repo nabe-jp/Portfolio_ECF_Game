@@ -34,7 +34,7 @@ class Public::UserPostsController < ApplicationController
 
   def new
     @url = user_posts_path(@user)
-    @verd = :user_post
+    @verd = :post
     @user_post = @user.user_posts.new(user_post_attributes_from_session)
   end
 
@@ -42,6 +42,8 @@ class Public::UserPostsController < ApplicationController
     @user_post = current_user.user_posts.new(user_post_params)
   
     if @user_post.save
+      # 投稿成功 → 最終投稿日時を更新
+      @user.update(last_user_posted_at: Time.current)
       session[:user_post_attributes] = nil
       redirect_to user_post_path(@user, @user_post), notice: "投稿が作成されました。"
     else

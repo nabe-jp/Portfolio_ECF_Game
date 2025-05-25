@@ -27,6 +27,9 @@ ActiveStorage.start()
 // ページ読み込み時の表示位置を設定できるようにするために使用
 require("./scroll");
 
+// フォームないでボタンを押した際の振る舞いを姓よするために使用
+require("./form_behavior");
+
 
 // import { Turbo } from "@hotwired/turbo-rails"
 // import "./controllers"

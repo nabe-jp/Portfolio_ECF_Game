@@ -1,2 +1,66 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<h2 class="mb-5">ユーザー詳細</h2>
+
+<table class="table table-striped align-middle custom-bordered">
+  <tbody>
+    <tr>
+      <!-- 左側: 画像 -->
+      <th style="width: 25%; background-color: white;" rowspan="5" class="text-center align-middle">
+        <%= image_tag url_for(@user.profile_image), alt: "#{@user.nickname}の画像", 
+          class: "rounded-circle img-thumbnail", width: 200, height: 200 %>
+      </th>
+      <th class="with-left-border" style="width: 15%;">ID</th>
+      <td><%= @user.id %></td>
+    </tr>
+    <tr>
+      <th class="with-left-border">名前(姓)</th>
+      <td><%= @user.last_name %></td>
+    </tr>
+    <tr>
+      <th class="with-left-border">名前(名)</th>
+      <td><%= @user.first_name %></td>
+    </tr>
+    <tr>
+      <th class="with-left-border">ニックネーム</th>
+      <td><%= @user.nickname %></td>
+    </tr>
+    <tr>
+      <th class="with-left-border">メールアドレス</th>
+      <td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <th colspan="2">ステータス</th>
+      <td><%= @user.is_deleted ? '無効' : '有効' %></td>
+    </tr>
+    <tr>
+      <th colspan="2">投稿数</th>
+      <td><%= @user.user_posts.count %></td>
+    </tr>
+    <tr>
+      <th colspan="2">登録日</th>
+      <td><%= @user.created_at.strftime('%Y-%m-%d') %></td>
+    </tr>
+    <tr>
+      <th colspan="2">最終ログイン</th>
+      <td><%= @user.last_sign_in_at&.strftime('%Y-%m-%d %H:%M') || '未ログイン' %></td>
+    </tr>
+    <tr>
+      <th colspan="2">最後の投稿日時</th>
+      <td><%= @user.last_user_posted_at&.strftime('%Y-%m-%d %H:%M') || 'なし' %></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- 凍結・復元ボタン -->
+<div class="mt-5 mb-3">
+  <% if @user.is_deleted? %>
+    <%= link_to '復元', reactivate_admin_user_path(@user), method: :patch,
+      data: { confirm: "このユーザーを復元すると、ログインや投稿が可能になります。\n復元処理を実施しますか？" },
+      class: 'btn btn-success' %>
+  <% else %>
+    <%= link_to '凍結・退会', deactivate_admin_user_path(@user), method: :patch,
+      data: { confirm: "このユーザーを凍結・退会にすると、ログインや投稿ができなくなります。\n凍結・退会処理を実施しますか？" },
+      class: 'btn btn-danger' %>
+  <% end %>
+</div>
+
+<%= link_to '一覧へ戻る', admin_users_path, class: 'btn btn-secondary mt-3' %>

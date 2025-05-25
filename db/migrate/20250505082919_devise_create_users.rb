@@ -14,12 +14,12 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       ## Rememberable
       t.datetime :remember_created_at
 
-      ## Trackable
-      # t.integer  :sign_in_count, default: 0, null: false
-      # t.datetime :current_sign_in_at
-      # t.datetime :last_sign_in_at
-      # t.string   :current_sign_in_ip
-      # t.string   :last_sign_in_ip
+      # Trackable
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string   :current_sign_in_ip
+      t.string   :last_sign_in_ip
 
       ## Confirmable
       # t.string   :confirmation_token
@@ -33,16 +33,25 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       # ユーザーで使用するカラムを追加
+      # 基本情報
       t.string :last_name, null: false
       t.string :first_name, null: false
       t.string :nickname, null: false
       t.string :bio, null: false
-      t.boolean :is_active, null: false, default: true
-      t.datetime :last_logged_in_at                                     # 最終ログイン日時の記録
+
+      # 状態制御(削除・非表示)
+      t.boolean :is_deleted, default: false, null: false                # 論理削除フラグ
+      t.datetime :deleted_at                                            # 削除日時
+      t.integer :deleted_by_id                                          # 削除した管理者 or 操作者のID
+      t.boolean :hidden_by_parent, default: false, null: false          # 関連元の削除/非公開による非表示
+
+      # 統計情報・アクティビティ
       t.integer :login_count, default: 0, null: false                   # ログイン回数
       t.integer :user_post_count, default: 0, null: false               # 投稿数のキャッシュ
       t.integer :user_post_comment_count, default: 0, null: false       # コメント数のキャッシュ
       t.datetime :last_user_posted_at                                   # 最後に投稿した日時
+
+      # 権限
       t.integer :role, default: 0, null: false                          # enumとして管理者や一般を識別可能化
 
       t.timestamps null: false

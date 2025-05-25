@@ -43,7 +43,7 @@ class Public::UserController < ApplicationController
 
   # 退会処理
   def withdraw
-    @user.update(is_active: false)
+    @user.update(is_deleted: true)
     reset_session
     redirect_to root_path, notice: "アカウントを削除しました。"
   end

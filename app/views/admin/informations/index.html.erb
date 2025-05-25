@@ -6,23 +6,35 @@
 
   <hr>
 
-  <!-- フィルター -->
-  <div class="row mb-3">
-    <div class="col-2 text-center" id="sort-button">
-      <%= link_to '新しい順', admin_informations_path(direction: 'desc', 
-        show_deleted: params[:show_deleted], scroll_to: "sort-button") %>｜
-          <%= link_to '古い順', admin_informations_path(direction: 'asc', 
-            show_deleted: params[:show_deleted], scroll_to: "sort-button") %>
-    </div>
-    <div class="col-3 text-center">
-      <%= link_to '削除済みを非表示', admin_informations_path(show_deleted: false, 
-        direction: params[:direction], scroll_to: "sort-button") %>｜
-          <%= link_to '削除済みを表示', admin_informations_path(show_deleted: true, 
-            direction: params[:direction], scroll_to: "sort-button") %>
+  <!-- 表示（上段） -->
+  <div class="row ml-3 mb-2" id="sort-button">
+    <div class="col-3">
+      表示：
+      <% if params[:show_deleted] == "true" %>
+        <%= link_to '削除済みを非表示', admin_informations_path(show_deleted: false, 
+          sort_by: params[:sort_by], direction: params[:direction], scroll_to: 'sort-button') %>
+      <% else %>
+        <%= link_to '削除済みを表示', admin_informations_path(show_deleted: true,
+          sort_by: params[:sort_by], direction: params[:direction], scroll_to: 'sort-button') %>
+      <% end %>
     </div>
   </div>
-
-
+  
+  <!-- 並び順（下段） -->
+  <div class="row ml-3 mb-3">
+    <div class="col-8">
+      並び順：
+      <%= link_to '投稿日時（新しい順）', admin_informations_path(sort_by: 'posted_at', 
+        direction: 'desc', show_deleted: params[:show_deleted], scroll_to: 'sort-button') %>｜
+          <%= link_to '投稿日時（古い順）', admin_informations_path(sort_by: 'posted_at', 
+            direction: 'asc', show_deleted: params[:show_deleted], scroll_to: 'sort-button') %>｜
+              <%= link_to '公開日時（新しい順）', admin_informations_path(sort_by: 'published_at',
+                direction: 'desc', show_deleted: params[:show_deleted], scroll_to: 'sort-button') %>｜
+                  <%= link_to '公開日時（古い順）', admin_informations_path(sort_by: 'published_at',
+                    direction: 'asc', show_deleted: params[:show_deleted], scroll_to: 'sort-button') %>
+    </div>
+  </div>
+  
   <!-- お知らせ一覧 -->
   <div class="row justify-content-center">
     <div class="col-8">
@@ -40,15 +52,24 @@
                 <% if info.is_pinned %>
                   <span class="badge bg-warning text-dark">固定</span>
                 <% end %>
-                <% unless info.visible %>
+                <% unless info.is_public %>
                   <span class="badge bg-secondary text-light">非公開</span>
                 <% end %>
               </div>
             </div>
             <p class="card-text"><%= info.body %></p>
-            <p class="card-text"><small class="text-muted">公開日: 
-              <%= l(info.published_at || info.created_at, format: :short) %></small></p>
-            <div class="text-end">
+            <p class="card-text mb-1">
+              <small class="text-muted">公開日: <%= l(info.published_at, format: :short) %></small>
+            </p>
+            <p class="card-text mb-1">
+              <small class="text-muted">投稿日: <%= l(info.created_at, format: :short) %></small>
+            </p>
+            <% if info.is_pinned %>
+              <p class="card-text mb-1">
+                <small class="text-muted">優先順位: <%= info.sort_order %></small>
+              </p>
+            <% end %>
+            <div class="text-end mt-3">
               <% if info.deleted_at.present? %>
                 <%= link_to '復元', restore_admin_information_path(info), 
                   method: :patch, class: 'btn btn-sm btn-outline-success' %>

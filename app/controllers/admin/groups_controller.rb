@@ -1,6 +1,4 @@
-class Admin::GroupsController < ApplicationController
-  layout 'admin'
-  before_action :authenticate_admin!
+class Admin::GroupsController < Admin::ApplicationController
 
   end
 

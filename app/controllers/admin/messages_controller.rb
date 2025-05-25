@@ -1,6 +1,4 @@
-class Admin::MessagesController < ApplicationController
-  layout 'admin'
-  before_action :authenticate_admin!
+class Admin::MessagesController < Admin::ApplicationController
 
   def destroy
   end

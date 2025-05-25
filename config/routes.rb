@@ -68,7 +68,7 @@ Rails.application.routes.draw do
     end
 
     # ユーザー管理
-    resources :users, only: [:index, :showe] do
+    resources :users, only: [:index, :show, :update] do
       member do
         patch 'deactivate'   # 凍結や強制退会等
         patch 'reactivate'   # 再開
@@ -77,8 +77,22 @@ Rails.application.routes.draw do
 
     # ユーザーの投稿管理
     resources :user_posts, only: [:index, :show, :destroy] do
-      resources :user_post_comments, only: [:destroy], path: "comments", as: "comments"
+      member do
+        patch 'reactivate'        # 論理削除から復元
+        patch 'hide'              # 非公開にする
+        patch 'publish'           # 公開にする
+      end
     end
+
+    # ユーザーの投稿hへのコメント管理
+    resources :user_post_comments, only: [:index, :show, :destroy] do
+      member do
+        patch 'reactivate'        # 論理削除から復元
+        patch 'hide'              # 非公開にする
+        patch 'publish'           # 公開にする
+      end
+    end
+
   
     # 今後実装予定
     # グループ管理

@@ -1,2 +1,84 @@
-<h1>Admin::UserPosts#show</h1>
-<p>Find me in app/views/admin/user_posts/show.html.erb</p>
+<h2 class="mb-3">投稿詳細</h2>
+
+<div class="row mb-4">
+  <!-- 投稿画像 -->
+  <div class="col-md-7 d-flex justify-content-center align-items-end ml-5 pl-5">
+    <%= image_tag url_for(@user_post.user_post_image), class: "img-fluid rounded shadow", 
+      alt: "投稿画像", style: "max-height: 400px;" %>
+  </div>
+
+  <!-- 投稿者情報 -->
+  <div class="col-md-3 d-flex flex-column justify-content- align-items-center mt-5">
+    <%= image_tag url_for(@user_post.user.profile_image), width: 200, height: 200, 
+      class: "rounded-circle img-thumbnail mb-2" %>
+    <p><strong><%= @user_post.user.nickname %></strong></p>
+    <%= link_to "ユーザー詳細", admin_user_path(@user_post.user), class: "btn btn-outline-primary btn-sm" %>
+  </div>
+</div>
+
+<table class="table table-striped custom-bordered">
+  <tr>
+    <th style="width: 30%;">ID</th>
+    <td><%= @user_post.id %></td>
+  </tr>
+  <tr>
+    <th>タイトル</th>
+    <td><%= @user_post.title %></td>
+  </tr>
+  <tr>
+    <th>本文</th>
+    <td><%= simple_format(@user_post.body) %></td>
+  </tr>
+  <tr>
+    <th>ニックネーム</th>
+    <td><%= link_to @user_post.user.nickname, admin_user_path(@user_post.user) %></td>
+  </tr>
+  <tr>
+    <th>ステータス</th>
+    <td>
+      <% if @user_post.is_deleted %>
+        削除済み
+      <% elsif @user_post.is_public %>
+        公開中
+      <% else %>
+        非公開
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>いいね数</th>
+    <td><%= @user_post.like_count %></td>
+  </tr>
+  <tr>
+    <th>最終コメント日時</th>
+    <td><%= @user_post.last_commented_at&.strftime('%Y-%m-%d %H:%M') || 'なし' %></td>
+  </tr>
+  <tr>
+    <th>作成日</th>
+    <td><%= @user_post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+  </tr>
+</table>
+
+<div class="mt-5 mb-3">
+  <% if @user_post.is_public %>
+    <%= link_to "非公開にする", hide_admin_user_post_path(@user_post), method: :patch,
+      data: { confirm: "この投稿を非公開にします。よろしいですか？" },
+      class: "btn btn-warning" %>
+  <% else %>
+    <%= link_to "公開にする", publish_admin_user_post_path(@user_post), method: :patch,
+      data: { confirm: "この投稿を公開にします。よろしいですか？" },
+      class: "btn btn-primary" %>
+  <% end %>
+
+  <% if @user_post.is_deleted %>
+    <%= link_to "復元", reactivate_admin_user_post_path(@user_post), method: :patch,
+      data: { confirm: "この投稿を復元してもよろしいですか？" },
+      class: "btn btn-success ml-5" %>
+  <% else %>
+    <%= link_to "削除", admin_user_post_path(@user_post), method: :delete,
+      data: { confirm: "この投稿を削除してもよろしいですか？" },
+      class: "btn btn-danger ml-5" %>
+  <% end %>
+</div>
+
+<%= link_to '一覧へ戻る', admin_user_posts_path, class: 'btn btn-secondary mt-3' %>

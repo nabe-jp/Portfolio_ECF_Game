@@ -1,15 +1,21 @@
-class Admin::DashboardController < ApplicationController
-  layout 'admin'
-  before_action :authenticate_admin!
+class Admin::DashboardController < Admin::ApplicationController
   
   def top
-    @admin_notes = AdminNote.where(deleted_at: nil).order(created_at: :desc).limit(5)
+    # 申し送り(AdminNote)
+    note_base = AdminNote.where(deleted_at: nil)
 
-    base_scope = Information.where(deleted_at: nil)
-  
-    pinned = base_scope.where(is_pinned: true).order(published_at: :desc)
-    unpinned = base_scope.where(is_pinned: false).order(published_at: :asc)
-  
-    @informations = (pinned + unpinned).first(5)
+    pinned_notes = note_base.where(is_pinned: true).order(created_at: :desc)
+    unpinned_notes = note_base.where(is_pinned: false).order(created_at: :desc)
+
+    @admin_notes = (pinned_notes + unpinned_notes).first(5)
+
+    # お知らせ(Information)、非公開は非表示、固定と非固定で分けて表示(公開日順に新しいものが上)
+    base_scope = Information.where(deleted_at: nil, is_public: true)
+
+    pinned_informations = base_scope.where(is_pinned: true).order(:sort_order, published_at: :desc)
+    unpinned_informations = base_scope.where(is_pinned: false).order(published_at: :desc)
+
+    @informations = (pinned_informations + unpinned_informations).first(5)
+
   end
 end

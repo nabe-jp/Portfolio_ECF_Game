@@ -8,10 +8,15 @@
         <div class="mb-4 border-bottom pb-2">
           <div class="d-flex justify-content-between">
             <strong><%= note.title %></strong>
-            <small class="text-muted"><%= l(note.created_at, format: :short) %></small>
+            <small class="text-muted">投稿日：<%= l(note.created_at, format: :short) %></small>
           </div>
           <div class="mt-2">
-            <%= simple_format(note.body) %>
+            <% if note.is_pinned %>
+              <span class="badge bg-danger me-1">ピン留め</span>
+            <% end %>
+            <div class="mt-2">
+              <%= simple_format(note.body) %>
+            </div>
           </div>
         </div>
       <% end %>
@@ -25,13 +30,13 @@
         <div class="mb-4 border-bottom pb-2">
           <div class="d-flex justify-content-between">
             <strong><%= info.title %></strong>
-            <small class="text-muted"><%= l(info.published_at || info.created_at, format: :short) %></small>
+            <small class="text-muted">公開日：<%= l(info.published_at, format: :short) %></small>
           </div>
           <div class="mt-2">
             <% if info.is_pinned %>
               <span class="badge bg-danger me-1">ピン留め</span>
             <% end %>
-            <% unless info.visible %>
+            <% unless info.is_public %>
               <span class="badge bg-warning text-dark fs-6 fw-bold">非公開</span>
             <% end %>
             <div class="mt-1">

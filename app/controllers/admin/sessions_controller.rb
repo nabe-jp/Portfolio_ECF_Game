@@ -1,7 +1,7 @@
 class Admin::SessionsController < Devise::SessionsController
   # Deviseの登録機能をオーバーライドしたいときに使用
   # 管理者としてログインしていなければ、ログインページへリダイレクト
-  before_action :authenticate_admin!
+  layout 'admin'
 
   protected
 

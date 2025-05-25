@@ -20,11 +20,14 @@ class UserPost < ApplicationRecord
   validates :body, length: { maximum: 200, 
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }  
 
-
   # 投稿作成時に必ずデフォルト画像を設定
   after_create :set_default_user_post_image
 
-    # ここにRansackableの設定(検索可能な属性)を追加します
+  # 投稿論理削除・非公開時に関連コメントも非公開または削除
+  after_update :cascade_hide_comments_if_unpublished_or_deleted, 
+    if: :saved_change_to_is_deleted_or_is_published?
+
+  # ここにRansackableの設定(検索可能な属性)を追加します
   # attributesがカラムなどの本体情報、associationsは関連
   def self.ransackable_attributes(auth_object = nil)
     ["title", "body"]
@@ -41,10 +44,26 @@ class UserPost < ApplicationRecord
     # アタッチされた画像がある場合デフォルト画像をアタッチしない
     unless user_post_image.attached?
       # デフォルト画像のパスを指定
-      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_image.jpeg')
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_user_post.png')
       # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
       user_post_image.attach(io: File.open(default_image_path), 
-        filename: 'no_image.jpeg', content_type: 'image/jpeg')
+        filename: 'no_user_post.png', content_type: 'image/png')
+    end
+  end
+
+  def saved_change_to_is_deleted_or_is_published?
+    saved_change_to_is_deleted? || saved_change_to_is_public?
+  end
+
+  def cascade_hide_comments_if_unpublished_or_deleted
+    if is_deleted || !is_public
+      user_post_comments.find_each do |comment|
+        comment.update(hidden_by_parent: true)
+      end
+    else
+      user_post_comments.find_each do |comment|
+        comment.update(hidden_by_parent: false)
+      end
     end
   end
 end

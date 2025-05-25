@@ -1,7 +1,5 @@
-class Admin::GroupPostsController < ApplicationController
-  layout 'admin'
-  before_action :authenticate_admin!
-  
+class Admin::GroupPostsController < Admin::ApplicationController
+
   def index
   end
 

@@ -1,0 +1,70 @@
+/*    admin側の設定    */
+
+// ヘッダー、サイドバー、フッターの設定
+.admin-root {
+  --header-height: 110px;            // ヘッダーの高さ
+  --footer-height: 50px;             // フッターの高さ
+  --sidebar-width: 220px;            // サイドバーの幅
+}
+
+// メインコンテンツタグの設定
+.admin-root .admin-main-content {
+  position: relative;
+  top: var(--header-height);
+  bottom: var(--footer-height);
+  margin: 20px 0 20px var(--sidebar-width); // ヘッダーとフッターの間に余白
+  overflow-y: auto;
+  height: calc(100vh - var(--header-height) - var(--footer-height) - 40px);
+  width: 100%;
+  padding: 1rem;
+  -ms-overflow-style: none;          // スクロールバーを非表示、Internet Explorer 10+ 対応
+  scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応
+}
+
+// サイドバーの共通設定 
+.admin-root .sidebar {
+  background-color: #4f4f4f;
+  height: 100vh;
+  width: var(--sidebar-width);
+  position: fixed;                   // 画面上の固定位置に要素を配置
+  top: var(--header-height); 
+  bottom: var(--footer-height);
+  padding: 1rem 0.75rem 0;
+  z-index: 998;                      // 前面に出す
+}
+
+// 左サイドバータグの設定
+.sidebar-left {
+  left: 0;
+}
+
+// Webkit系ブラウザ(Chrome、Safariなど)にスクロールバーを非表示にする
+.main-content::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+// 枠だけ線ありのテーブル
+.custom-bordered {
+  border: 1px solid #dee2e6;       /* 全体の枠 */
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+// 枠だけ線ありのテーブル(画像との境目)
+.with-left-border {
+  border-left: 1px solid #ccc;
+}
+
+// スピンボタンを非表示にする
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+// Firefox 対応 
+.no-spinner {
+  -moz-appearance: textfield;
+}

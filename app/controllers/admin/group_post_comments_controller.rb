@@ -1,6 +1,4 @@
-class Admin::GroupPostCommentsController < ApplicationController
-  layout 'admin'
-  before_action :authenticate_admin!
+class Admin::GroupPostCommentsController < Admin::ApplicationController
   
   def destroy
   end

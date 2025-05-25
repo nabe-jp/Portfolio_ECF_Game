@@ -6,21 +6,32 @@
 
   <hr>
 
-  <!-- フィルター -->
-  <div class="row mb-3">
-    <div class="col-2 text-center" id="sort-button">
-      <%= link_to '新しい順', admin_notes_path(direction: 'desc', 
-        show_deleted: params[:show_deleted], scroll_to: "sort-button") %>｜
-          <%= link_to '古い順', admin_notes_path(direction: 'asc', 
-            show_deleted: params[:show_deleted], scroll_to: "sort-button") %>
-    </div>
-    <div class="col-3 text-center">
-      <%= link_to '削除済みを非表示', admin_notes_path(show_deleted: false, 
-        direction: params[:direction], scroll_to: "sort-button") %>｜
-          <%= link_to '削除済みを表示', admin_notes_path(show_deleted: true, 
-            direction: params[:direction], scroll_to: "sort-button") %>
+  <!-- フィルター：表示（上段） -->
+  <div class="row ml-3 mb-2 justify-content-start" id="sort-button">
+    <div class="col-auto text-start">
+      表示：
+      <% if params[:show_deleted] == "true" %>
+        <%= link_to '削除済みを非表示', admin_notes_path(show_deleted: false,
+          direction: params[:direction], scroll_to: 'sort-button') %>
+      <% else %>
+        <%= link_to '削除済みを表示', admin_notes_path(show_deleted: true,
+          direction: params[:direction], scroll_to: 'sort-button') %>
+      <% end %>
     </div>
   </div>
+  
+  <!-- フィルター：並び順（下段） -->
+  <div class="row ml-3 mb-3 justify-content-start">
+    <div class="col-auto text-start">
+      並び順：
+      <%= link_to '新しい順', admin_notes_path(direction: 'desc',
+        show_deleted: params[:show_deleted], scroll_to: 'sort-button') %>
+      <span class="mx-1">｜</span>
+      <%= link_to '古い順', admin_notes_path(direction: 'asc',
+        show_deleted: params[:show_deleted], scroll_to: 'sort-button') %>
+    </div>
+  </div>
+  
 
   <!-- ノート一覧 -->
   <div class="row justify-content-center">

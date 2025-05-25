@@ -43,9 +43,11 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
   create_table "admin_notes", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
-    t.integer "admin_id", null: false
     t.boolean "is_pinned", default: false, null: false
+    t.integer "admin_id", null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
+    t.integer "deleted_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_admin_notes_on_admin_id"
@@ -66,13 +68,15 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
   create_table "information", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
+    t.boolean "is_public", default: true, null: false
     t.datetime "published_at"
-    t.boolean "visible", default: true
-    t.boolean "is_pinned", default: false
-    t.datetime "deleted_at"
-    t.integer "admin_id", null: false
-    t.string "audience", default: "all"
+    t.datetime "posted_at"
     t.integer "view_count", default: 0, null: false
+    t.integer "admin_id", null: false
+    t.boolean "is_pinned", default: false, null: false
+    t.integer "sort_order", default: 0, null: false
+    t.datetime "deleted_at"
+    t.string "audience", default: "all"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_information_on_admin_id"
@@ -97,15 +101,17 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
   end
 
   create_table "user_post_comments", force: :cascade do |t|
-    t.text "body", null: false
     t.integer "user_id", null: false
     t.integer "user_post_id", null: false
+    t.text "body", null: false
+    t.boolean "is_public", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.boolean "hidden_by_parent", default: false, null: false
     t.integer "parent_comment_id"
-    t.integer "like_count", default: 0, null: false
     t.datetime "replied_at"
+    t.integer "like_count", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_post_comments_on_user_id"
@@ -116,12 +122,17 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.integer "user_id", null: false
     t.string "title", null: false
     t.text "body"
+    t.boolean "is_public", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.boolean "hidden_by_parent", default: false, null: false
+    t.boolean "is_pinned", default: false, null: false
+    t.integer "sort_order", default: 0, null: false
     t.integer "like_count", default: 0, null: false
+    t.datetime "posted_at"
+    t.datetime "published_at"
     t.datetime "last_commented_at"
-    t.boolean "is_public", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_posts_on_user_id"
@@ -133,12 +144,19 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
     t.string "last_name", null: false
     t.string "first_name", null: false
     t.string "nickname", null: false
     t.string "bio", null: false
-    t.boolean "is_active", default: true, null: false
-    t.datetime "last_logged_in_at"
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.boolean "hidden_by_parent", default: false, null: false
     t.integer "login_count", default: 0, null: false
     t.integer "user_post_count", default: 0, null: false
     t.integer "user_post_comment_count", default: 0, null: false

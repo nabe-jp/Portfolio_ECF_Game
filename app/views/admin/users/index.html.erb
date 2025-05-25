@@ -1,2 +1,58 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<h2 class="mb-3 text-center">ユーザー一覧</h2>
+
+<div class="mb-3 d-flex justify-content-start">
+  <div>
+    <% 
+    case params[:status]
+    when "inactive"
+      current_label = "無効のユーザーを表示中"
+      next_status = "all"
+      next_label  = "すべてのユーザーを表示"
+    when "active"
+      current_label = "有効のユーザーを表示中"
+      next_status = "inactive"
+      next_label  = "無効のユーザーを表示"
+    else
+      current_label = "すべてのユーザーを表示中"
+      next_status = "active"
+      next_label  = "有効のユーザーを表示"
+    end
+  %>
+  
+  <strong>表示画面：</strong><%= current_label %>｜
+  <%= link_to next_label, admin_users_path(status: next_status, direction: params[:direction]) %>
+  
+  </div>
+ 
+
+
+
+  <div class="ml-4">
+    <strong>並び順:</strong>
+    <%= link_to "新しい順", admin_users_path(status: params[:status], direction: "desc") %>｜
+    <%= link_to "古い順", admin_users_path(status: params[:status], direction: "asc") %>
+  </div>
+</div>
+
+<table class="table table-hover table-bordered">
+  <thead class="text-center thead-light">
+    <tr>
+      <th>ID</th>
+      <th>ニックネーム</th>
+      <th>ステータス</th>
+      <th>詳細</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="text-center <%= row_class(user) %>">
+        <td><%= user.id %></td>
+        <td><%= user.nickname %></td>
+        <td><%= status_label(user) %></td>
+        <td><%= link_to '詳細', admin_user_path(user) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @users %>

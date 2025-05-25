@@ -35,6 +35,7 @@ ja:                                   # 日本語の設定を行う
       information:
         title: "タイトル"
         body: "コメント"
+        sort_order: "表示順を制御にチェックが入っているので数値"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

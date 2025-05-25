@@ -1,6 +1,4 @@
-class Admin::DmRoomsController < ApplicationController
-  layout 'admin'
-  before_action :authenticate_admin!
+class Admin::DmRoomsController < Admin::ApplicationController
   
   def index
   end

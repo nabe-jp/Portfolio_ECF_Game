@@ -28,14 +28,35 @@
           <%= f.label :body, '内容' %>
           <%= f.text_area :body, class: 'form-control' %>
         </div>
-        <div class="col-2 mt-3 d-flex align-items-center">
-          <div>
-            <%= f.label :visible, '公開する' %>
-            <%= f.check_box :visible, class: 'ms-2' %>
-            <%= f.label :is_pinned, '固定表示' %>
-            <%= f.check_box :is_pinned, class: 'ms-2' %>
+
+        <div class="col-2 mt-1">
+          <div class="form-check">
+            <%= f.check_box :is_public, class: 'form-check-input', id: 'is_public' %>
+            <%= f.label :is_public, '公開する', class: 'form-check-label', for: 'is_public' %>
+          </div>
+          <div class="form-check mt-2">
+            <%= f.check_box :is_pinned, class: 'form-check-input', id: 'is_pinned' %>
+            <%= f.label :is_pinned, '固定表示', class: 'form-check-label', for: 'is_pinned' %>
+          </div>
+          <div class="form-check mt-2">
+            <%= f.check_box :enable_sort_order, 
+              { class: 'form-check-input', id: 'enable_sort_order' }, true, false %>
+            <%= f.label :enable_sort_order, '表示順を制御', class: 'form-check-label ms-2' %>
           </div>
         </div>
+
+        <!-- 表示順を制御 チェックボックス -->
+        <div class="col-2 mt-1">
+
+        <!-- sort_order入力欄（初期状態は非表示） -->
+        <div id="sort_order_field" style="display: none; text-align: center;">
+        <%= f.label :sort_order, '固定表示時のみ有効<br>小さいほど上に表示'.html_safe,
+          class: 'd-block', style: 'margin-left: 0.5rem;' %>
+        <%= f.number_field :sort_order, class: 'form-control',
+          style: 'width: 50%; height: 30px; margin: 0 auto; text-align: center;', min: 0, max: 999 %>
+      </div>
+      </div>
+
       </div>
 
       <!-- 送信ボタン -->
