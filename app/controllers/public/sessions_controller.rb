@@ -8,7 +8,7 @@ class Public::SessionsController < Devise::SessionsController
 
     # ユーザーが見つかり、パスワードが合っているか確認、退会していなければDevise標準のログイン処理を行う
     if resource && resource.valid_password?(params[:user][:password])
-      if resource.is_active
+      if !resource.is_deleted
         super
       else
         flash[:error_name] = "ログイン"

@@ -71,14 +71,13 @@
             <% end %>
             <div class="text-end mt-3">
               <% if info.deleted_at.present? %>
-                <%= link_to '復元', restore_admin_information_path(info), 
-                  method: :patch, class: 'btn btn-sm btn-outline-success' %>
+                <%= link_to '復元', reactivate_admin_information_path(info), method: :patch, 
+                  data: { confirm: '復元しますか？' }, class: 'btn btn-sm btn-outline-success' %>
               <% else %>
                 <%= link_to '編集', edit_admin_information_path(info), 
                   class: 'btn btn-sm btn-outline-secondary me-2' %>
-                <%= link_to '削除', admin_information_path(info), 
-                  method: :delete, data: { confirm: '削除しますか？' }, 
-                    class: 'btn btn-sm btn-outline-danger' %>
+                <%= link_to '削除', admin_information_path(info), method: :delete, 
+                  data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
               <% end %>
             </div>
           </div>

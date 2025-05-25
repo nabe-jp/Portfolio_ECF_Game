@@ -1,0 +1,19 @@
+<div class="image-container image-container-notice">
+  <div class="title-container notice-box">
+    <div class="notice-title">
+      <%= render 'public/shared/home/title', title: PostConstants::NOTIFICATION_TITLE %>
+    </div>
+
+    <div class="scrollable-box">
+      <% @information_list.each do |info| %>
+        <div class="info-item mb-4">
+          <div class="d-flex align-items-baseline">
+            <div class="mr-3"><%= info.published_at&.strftime("%Y/%m/%d") %></div>
+            <div class="fw-bold"><%= info.title %></div>
+          </div>
+          <small class="text-secondary mt-1"><%= info.body %></small>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

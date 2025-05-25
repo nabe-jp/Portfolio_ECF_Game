@@ -1,7 +1,7 @@
 <h2 class="mb-3 text-center">ユーザー投稿一覧</h2>
 
 <!-- フィルター -->
-<div class="d-flex align-items-center mb-2">
+<div class="d-flex align-items-center mb-2 ml-2">
   <strong class="me-2">表示：</strong>
   <% show_param = params[:show] %>
   <% show_deleted = ActiveModel::Type::Boolean.new.cast(params[:show_deleted]) %>
@@ -35,8 +35,7 @@
 <% current_show_non_public = params[:show_non_public] %>
 <% current_show_deleted = params[:show_deleted] %>
 
-
-<div class="d-flex align-items-center mb-3">
+<div class="d-flex align-items-center mb-4 ml-2">
 <strong class="me-2">並び順：</strong>
   
 <%= link_to '新しい順', admin_user_posts_path( direction: "desc", show: current_show,
@@ -76,4 +75,6 @@
   </tbody>
 </table>
 
-<%= paginate @user_posts %>
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @user_posts %>
+</div>

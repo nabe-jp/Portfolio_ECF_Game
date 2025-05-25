@@ -1,6 +1,6 @@
 <h2 class="mb-3 text-center">ユーザー一覧</h2>
 
-<div class="mb-3 d-flex justify-content-start">
+<div class="my-4 ml-2 d-flex justify-content-start">
   <div>
     <% 
     case params[:status]
@@ -17,15 +17,11 @@
       next_status = "active"
       next_label  = "有効のユーザーを表示"
     end
-  %>
+    %>
   
-  <strong>表示画面：</strong><%= current_label %>｜
-  <%= link_to next_label, admin_users_path(status: next_status, direction: params[:direction]) %>
-  
+    <strong>表示画面：</strong><%= current_label %>｜
+    <%= link_to next_label, admin_users_path(status: next_status, direction: params[:direction]) %>
   </div>
- 
-
-
 
   <div class="ml-4">
     <strong>並び順:</strong>
@@ -55,4 +51,6 @@
   </tbody>
 </table>
 
-<%= paginate @users %>
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @users %>
+</div>

@@ -1,4 +1,4 @@
-<h2 class="mb-3">投稿詳細</h2>
+<h2 class="mb-4 text-center">投稿詳細</h2>
 
 <div class="row mb-4">
   <!-- 投稿画像 -->
@@ -59,26 +59,29 @@
   </tr>
 </table>
 
-<div class="mt-5 mb-3">
+<div class="text-center mb-4">
+
+  <%= link_to '前のページに戻る', 'javascript:history.back()', class: 'btn btn-outline-secondary mr-5' %>
+
+  <%= link_to '一覧へ戻る', admin_user_posts_path, class: 'btn btn-secondary' %>
+
   <% if @user_post.is_public %>
     <%= link_to "非公開にする", hide_admin_user_post_path(@user_post), method: :patch,
       data: { confirm: "この投稿を非公開にします。よろしいですか？" },
-      class: "btn btn-warning" %>
+      class: "btn btn-warning mx-5" %>
   <% else %>
     <%= link_to "公開にする", publish_admin_user_post_path(@user_post), method: :patch,
       data: { confirm: "この投稿を公開にします。よろしいですか？" },
-      class: "btn btn-primary" %>
+      class: "btn btn-primary mx-5" %>
   <% end %>
 
   <% if @user_post.is_deleted %>
     <%= link_to "復元", reactivate_admin_user_post_path(@user_post), method: :patch,
       data: { confirm: "この投稿を復元してもよろしいですか？" },
-      class: "btn btn-success ml-5" %>
+      class: "btn btn-success" %>
   <% else %>
     <%= link_to "削除", admin_user_post_path(@user_post), method: :delete,
       data: { confirm: "この投稿を削除してもよろしいですか？" },
-      class: "btn btn-danger ml-5" %>
+      class: "btn btn-danger" %>
   <% end %>
 </div>
-
-<%= link_to '一覧へ戻る', admin_user_posts_path, class: 'btn btn-secondary mt-3' %>

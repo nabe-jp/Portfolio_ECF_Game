@@ -74,8 +74,10 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.integer "view_count", default: 0, null: false
     t.integer "admin_id", null: false
     t.boolean "is_pinned", default: false, null: false
-    t.integer "sort_order", default: 0, null: false
+    t.integer "sort_order", default: 999, null: false
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
+    t.integer "deleted_by_id"
     t.string "audience", default: "all"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

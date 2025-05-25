@@ -68,3 +68,8 @@
 .no-spinner {
   -moz-appearance: textfield;
 }
+
+// simple_formatのmarginを0にする
+.no-p-margin p {
+  margin-bottom: 0;
+}

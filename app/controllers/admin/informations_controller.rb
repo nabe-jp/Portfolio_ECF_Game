@@ -1,6 +1,6 @@
 class Admin::InformationsController < Admin::ApplicationController
 
-  before_action :set_information, only: [:edit, :update, :destroy, :restore]
+  before_action :set_information, only: [:edit, :update, :destroy, :reactivate]
 
   def index
     @information = Information.new(session.delete(:information_attributes) || {})
@@ -53,7 +53,7 @@ class Admin::InformationsController < Admin::ApplicationController
     redirect_to admin_informations_path, notice: "お知らせを削除しました。"
   end
 
-  def restore
+  def reactivate
     @information.update(deleted_at: nil)
     redirect_to admin_informations_path, notice: 'お知らせを復元しました'
   end

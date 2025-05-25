@@ -56,22 +56,22 @@ Rails.application.routes.draw do
     # 管理者への申し送りなどの記載に使用するために設置
     resources :admin_notes, only: [:index, :create, :edit, :update, :destroy], path: "notes", as: "notes" do
       member do
-        patch :restore
+        patch 'reactivate'        # 論理削除から復元
       end
     end
 
     # ユーザーへのニュースやお知らせ
     resources :informations, only: [:index, :create, :edit, :update, :destroy] do
       member do
-        patch :restore
+        patch 'reactivate'        # 論理削除から復元
       end
     end
 
     # ユーザー管理
     resources :users, only: [:index, :show, :update] do
       member do
-        patch 'deactivate'   # 凍結や強制退会等
-        patch 'reactivate'   # 再開
+        patch 'deactivate'        # 凍結や強制退会等
+        patch 'reactivate'        # 論理削除から復元
       end
     end
 
@@ -98,8 +98,8 @@ Rails.application.routes.draw do
     # グループ管理
     resources :groups, only: [:index, :show, :destroy] do
       member do
-        patch 'deactivate'   # 凍結や強制退会等
-        patch 'reactivate'   # 再開
+        patch 'deactivate'        # 凍結や強制退会等
+        patch 'reactivate'        # 論理削除から復元
       end
     end
 

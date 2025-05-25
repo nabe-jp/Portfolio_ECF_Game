@@ -12,10 +12,11 @@ body.homes.top {
 
 // お知らせタイトルのスタイル
 .notice-title {
+  position: absolute;
+  top: 85px;                          // 背景画像に応じて位置を調整
   color: #E0E0E0;
   font-size: 2rem;
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); // 輪郭のにじみ
-  margin-bottom: 1rem;
 }
 
 // 最新の投稿タイトルのスタイル
@@ -57,6 +58,7 @@ body.homes.top {
   background-image: url('../images/notice_board.png'); // 背景画像
   width: 60%;
   height: 700px;
+  position: relative;                 // 相対位置を指定して、子の絶対配置を基準にする
 }
 
 .image-container-title {
@@ -74,19 +76,20 @@ body.homes.top {
 
 // スクロールとテキストの設定
 .scrollable-box {
+  position: absolute;
+  top: 175px;                         // 背景画像に応じて位置を調整
+  left: 5.8rem;                         // 背景画像に応じて位置を調整
   color: white;
   font-size: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // 文字に影をつける
-  text-align: left;                  // 文字を左揃え
-  width: 65%;
-  height: 60%;
-  overflow-y: scroll;                // 下にスクロール可能にする
-  position: relative;
-  top: 2rem;                         // ボックスの位置の調整
-  padding: 10px;                     // 内側の余白を追加(文字がボックスに接触しないようにするため)
-  box-sizing: border-box;            // paddingを要素のサイズに含める
-  -ms-overflow-style: none;          // Internet Explorer 10+ 対応
-  scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応
+  text-align: left;                   // 文字を左揃え
+  width: 62%;
+  height: 45%;
+  overflow-y: scroll;                 // 下にスクロール可能にする
+  padding: 10px;                      // 内側の余白を追加(文字がボックスに接触しないようにするため)
+  box-sizing: border-box;             // paddingを要素のサイズに含める
+  -ms-overflow-style: none;           // Internet Explorer 10+ 対応
+  scrollbar-width: none;              // スクロールバーを非表示、Firefox 64+ 対応
 }
 
 .scrollable-box::-webkit-scrollbar {

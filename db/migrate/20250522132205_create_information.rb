@@ -16,10 +16,11 @@ class CreateInformation < ActiveRecord::Migration[6.1]
 
       # 固定表示制御
       t.boolean :is_pinned, default: false, null: false                 # 固定表示
-      t.integer :sort_order, default: 999, null: false                    # 固定表示時の手動並び順
+      t.integer :sort_order, default: 999, null: false                  # 固定表示時の手動並び順
 
       # 削除制御
-      t.datetime :deleted_at                                            # 論理削除の時刻
+      t.datetime :deleted_at                                            # 削除日時
+      t.integer :deleted_by_id                                          # 削除したユーザーID
 
       # 対象範囲
       t.string :audience, default: "all"                                # 対象の範囲(例：all, admin, member)

@@ -60,8 +60,8 @@
 
             <div class="text-end">
               <% if note.deleted_at.present? %>
-                <%= link_to '復元', restore_admin_note_path(note), 
-                  method: :patch, class: 'btn btn-sm btn-outline-success' %>
+                <%= link_to '復元', reactivate_admin_note_path(note), method: :patch, 
+                  data: { confirm: '復元しますか？' }, class: 'btn btn-sm btn-outline-success' %>
               <% else %>
                 <%= link_to '編集', edit_admin_note_path(note), class: 
                   'btn btn-sm btn-outline-secondary me-2' %>

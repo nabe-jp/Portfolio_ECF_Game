@@ -1,6 +1,6 @@
 class Admin::AdminNotesController < Admin::ApplicationController
 
-  before_action :set_admin_note, only: [:edit, :update, :destroy, :restore]
+  before_action :set_admin_note, only: [:edit, :update, :destroy, :reactivate]
 
   def index
     @admin_note = AdminNote.new(session.delete(:admin_note_attributes) || {})
@@ -62,7 +62,7 @@ class Admin::AdminNotesController < Admin::ApplicationController
     redirect_to admin_notes_path, notice: "申し送りを削除しました。"
   end
 
-  def restore
+  def reactivate
     @admin_note.update(deleted_at: nil)
     redirect_to admin_notes_path, notice: 'お知らせを復元しました'
   end

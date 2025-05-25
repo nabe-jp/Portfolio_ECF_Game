@@ -2,38 +2,38 @@
   <div class="row justify-content-center text-center space-between">
     <!-- お知らせ -->
     <div class="col-12 space-between-bottom">
-      <%= render 'shared/home/notice' %>
+      <%= render 'public/shared/home/notice' %>
     </div>
 
     <!-- 最新の投稿 -->
     <div class="col-12 space-between">
       <div class="title-container latest-post-title">
-        <%= render 'shared/home/title', title: PostConstants::LATEST_POST_TITLE %>
+        <%= render 'public/shared/home/title', title: PostConstants::LATEST_POST_TITLE %>
       </div>
     </div>
     <div class="col-12 space-between-bottom">
-      <%= render 'shared/home/top_posts' %>
+      <%= render 'public/shared/home/top_posts' %>
     </div>
     
     <!-- 最新のグループ投稿 -->
     <div class="col-12 space-between">
       <div class="title-container latest-group-post-title">
-        <%= render 'shared/home/title', title: PostConstants::LATEST_GROUP_POST_TITLE %>
+        <%= render 'public/shared/home/title', title: PostConstants::LATEST_GROUP_POST_TITLE %>
       </div>
     </div>
     <div class="col-12 space-between-bottom">
-      <%= render 'shared/group_post/index' %>
+      <%= render 'public/shared/group_post/index' %>
     </div>
     
     <!-- 本日のいいね -->
     <div class="col-12 space-between">
       <div class="title-container today-top-likes-title">
-        <%= render 'shared/home/title', title: PostConstants::TODAY_TOP_LIKES_TITLE %>
+        <%= render 'public/shared/home/title', title: PostConstants::TODAY_TOP_LIKES_TITLE %>
       </div>
     </div>
     
     <div class="col-12">
-      <%= render 'shared/home/likes_top' %>
+      <%= render 'public/shared/home/likes_top' %>
     </div>
   </div>
 </div>

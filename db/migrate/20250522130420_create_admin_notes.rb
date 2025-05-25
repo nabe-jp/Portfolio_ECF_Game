@@ -12,7 +12,6 @@ class CreateAdminNotes < ActiveRecord::Migration[6.1]
       t.references :admin, null: false, foreign_key: true               # 投稿者
 
       # 削除情報
-      t.boolean :is_deleted, default: false, null: false                # 論理削除フラグ
       t.datetime :deleted_at                                            # 削除日時
       t.integer :deleted_by_id                                          # 削除したユーザーID
 
