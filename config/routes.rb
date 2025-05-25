@@ -12,9 +12,6 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  # 検索機能
-  resources :searches, only: [:index]
-
   # 会員用ルーティング
   scope module: :public do
     root to: "homes#top"
@@ -47,6 +44,9 @@ Rails.application.routes.draw do
     # ユーザーの全投稿用(indexだけのためresourcesは使用せずカスタム)
     get 'users/posts', to: 'user_posts#index', as: 'user_all_posts'
 
+    # 検索機能
+    resources :searches, only: [:index]
+    
   end
 
   # 管理者用ルーティング
@@ -93,7 +93,6 @@ Rails.application.routes.draw do
       end
     end
 
-  
     # 今後実装予定
     # グループ管理
     resources :groups, only: [:index, :show, :destroy] do

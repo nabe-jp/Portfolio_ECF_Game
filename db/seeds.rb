@@ -11,8 +11,9 @@ puts "ユーザーの作成を開始します"
 # コールバックをスキップ
 User.skip_callback(:create, :after, :set_default_profile_image)
 
-# ユーザー（英語）
-male_user_1 = User.create!(
+# === ユーザー（英語）
+male_user_1 = User.find_or_initialize_by(id: 1)
+male_user_1.update!(
   email: 'aa@aa',
   password: 'aaaaaa',
   password_confirmation: 'aaaaaa',
@@ -23,10 +24,11 @@ male_user_1 = User.create!(
   is_deleted: false
 )
 male_image_1 = Rails.root.join('app', 'assets', 'images', 'user_1.jpg')
-male_user_1.profile_image.attach(io: File.open(male_image_1), filename: 'user_1.jpg', content_type: 'image/jpeg')
+male_user_1.profile_image.attach(io: File.open(male_image_1), filename: 'user_1.jpg', content_type: 'image/jpeg') unless male_user_1.profile_image.attached?
 
-# ユーザー（日本語）
-female_user_2 = User.create!(
+# === ユーザー（日本語）
+female_user_2 = User.find_or_initialize_by(id: 2)
+female_user_2.update!(
   email: 'bb@bb',
   password: 'bbbbbb',
   password_confirmation: 'bbbbbb',
@@ -37,10 +39,10 @@ female_user_2 = User.create!(
   is_deleted: false
 )
 female_image_2 = Rails.root.join('app', 'assets', 'images', 'user_2.jpg')
-female_user_2.profile_image.attach(io: File.open(female_image_2), filename: 'user_2.jpg', content_type: 'image/jpeg')
+female_user_2.profile_image.attach(io: File.open(female_image_2), filename: 'user_2.jpg', content_type: 'image/jpeg') unless female_user_2.profile_image.attached?
 
-# ユーザー（日本語）
-female_user_3 = User.create!(
+female_user_3 = User.find_or_initialize_by(id: 3)
+female_user_3.update!(
   email: 'cc@cc',
   password: 'cccccc',
   password_confirmation: 'cccccc',
@@ -51,10 +53,10 @@ female_user_3 = User.create!(
   is_deleted: false
 )
 female_image_3 = Rails.root.join('app', 'assets', 'images', 'user_3.jpg')
-female_user_3.profile_image.attach(io: File.open(female_image_3), filename: 'user_3.jpg', content_type: 'image/jpeg')
+female_user_3.profile_image.attach(io: File.open(female_image_3), filename: 'user_3.jpg', content_type: 'image/jpeg') unless female_user_3.profile_image.attached?
 
-# ユーザー（日本語）
-male_user_4 = User.create!(
+male_user_4 = User.find_or_initialize_by(id: 4)
+male_user_4.update!(
   email: 'dd@dd',
   password: 'dddddd',
   password_confirmation: 'dddddd',
@@ -65,10 +67,11 @@ male_user_4 = User.create!(
   is_deleted: false
 )
 male_image_4 = Rails.root.join('app', 'assets', 'images', 'user_4.jpg')
-male_user_4.profile_image.attach(io: File.open(male_image_4), filename: 'user_4.jpg', content_type: 'image/jpeg')
+male_user_4.profile_image.attach(io: File.open(male_image_4), filename: 'user_4.jpg', content_type: 'image/jpeg') unless male_user_4.profile_image.attached?
 
-# ユーザー（削除ユーザー・画像なし）
-deleted_user_5 = User.create!(
+# === 削除ユーザー（画像なし）
+deleted_user_5 = User.find_or_initialize_by(id: 5)
+deleted_user_5.update!(
   email: 'ee@ee',
   password: 'eeeeee',
   password_confirmation: 'eeeeee',
@@ -80,10 +83,10 @@ deleted_user_5 = User.create!(
   deleted_at: Time.current
 )
 deleted_image_5 = Rails.root.join('app', 'assets', 'images', 'no_user.png')
-deleted_user_5.profile_image.attach(io: File.open(deleted_image_5), filename: 'no_user.png', content_type: 'image/png')
+deleted_user_5.profile_image.attach(io: File.open(deleted_image_5), filename: 'no_user.png', content_type: 'image/png') unless deleted_user_5.profile_image.attached?
 
-# ユーザー（英語）
-female_user_6 = User.create!(
+female_user_6 = User.find_or_initialize_by(id: 6)
+female_user_6.update!(
   email: 'ff@ff',
   password: 'ffffff',
   password_confirmation: 'ffffff',
@@ -94,11 +97,10 @@ female_user_6 = User.create!(
   is_deleted: false
 )
 female_image_6 = Rails.root.join('app', 'assets', 'images', 'user_6.jpg')
-female_user_6.profile_image.attach(io: File.open(female_image_6), filename: 'user_6.jpg', content_type: 'image/jpeg')
+female_user_6.profile_image.attach(io: File.open(female_image_6), filename: 'user_6.jpg', content_type: 'image/jpeg') unless female_user_6.profile_image.attached?
 
-# ユーザー（画像なし）
-user_7 = User.create!(
-  id: 7,
+user_7 = User.find_or_initialize_by(id: 7)
+user_7.update!(
   email: 'gg@gg',
   password: 'gggggg',
   password_confirmation: 'gggggg',
@@ -109,10 +111,10 @@ user_7 = User.create!(
   is_deleted: false
 )
 user_image_7 = Rails.root.join('app', 'assets', 'images', 'no_user.png')
-user_7.profile_image.attach(io: File.open(user_image_7), filename: 'no_user.png', content_type: 'image/png')
+user_7.profile_image.attach(io: File.open(user_image_7), filename: 'no_user.png', content_type: 'image/png') unless user_7.profile_image.attached?
 
-# ユーザー（英語）
-female_user_8 = User.create!(
+female_user_8 = User.find_or_initialize_by(id: 8)
+female_user_8.update!(
   email: 'hh@hh',
   password: 'hhhhhh',
   password_confirmation: 'hhhhhh',
@@ -123,10 +125,10 @@ female_user_8 = User.create!(
   is_deleted: false
 )
 female_image_8 = Rails.root.join('app', 'assets', 'images', 'user_8.jpg')
-female_user_8.profile_image.attach(io: File.open(female_image_8), filename: 'user_8.jpg', content_type: 'image/jpeg')
+female_user_8.profile_image.attach(io: File.open(female_image_8), filename: 'user_8.jpg', content_type: 'image/jpeg') unless female_user_8.profile_image.attached?
 
-# ユーザー（日本語）
-male_user_9 = User.create!(
+male_user_9 = User.find_or_initialize_by(id: 9)
+male_user_9.update!(
   email: 'ii@ii',
   password: 'iiiiii',
   password_confirmation: 'iiiiii',
@@ -137,10 +139,10 @@ male_user_9 = User.create!(
   is_deleted: false
 )
 male_image_9 = Rails.root.join('app', 'assets', 'images', 'user_9.jpg')
-male_user_9.profile_image.attach(io: File.open(male_image_9), filename: 'user_9.jpg', content_type: 'image/jpeg')
+male_user_9.profile_image.attach(io: File.open(male_image_9), filename: 'user_9.jpg', content_type: 'image/jpeg') unless male_user_9.profile_image.attached?
 
-# ユーザー（画像なし）
-user_10 = User.create!(
+user_10 = User.find_or_initialize_by(id: 10)
+user_10.update!(
   email: 'jj@jj',
   password: 'jjjjjj',
   password_confirmation: 'jjjjjj',
@@ -151,10 +153,10 @@ user_10 = User.create!(
   is_deleted: false
 )
 user_image_10 = Rails.root.join('app', 'assets', 'images', 'no_user.png')
-user_10.profile_image.attach(io: File.open(user_image_10), filename: 'no_user.png', content_type: 'image/png')
+user_10.profile_image.attach(io: File.open(user_image_10), filename: 'no_user.png', content_type: 'image/png') unless user_10.profile_image.attached?
 
-# ユーザー（英語）
-male_user_11 = User.create!(
+male_user_11 = User.find_or_initialize_by(id: 11)
+male_user_11.update!(
   email: 'kk@kk',
   password: 'kkkkkk',
   password_confirmation: 'kkkkkk',
@@ -165,10 +167,10 @@ male_user_11 = User.create!(
   is_deleted: false
 )
 male_image_11 = Rails.root.join('app', 'assets', 'images', 'user_11.jpg')
-male_user_11.profile_image.attach(io: File.open(male_image_11), filename: 'user_11.jpg', content_type: 'image/jpeg')
+male_user_11.profile_image.attach(io: File.open(male_image_11), filename: 'user_11.jpg', content_type: 'image/jpeg') unless male_user_11.profile_image.attached?
 
-# ユーザー（画像なし）
-user_12 = User.create!(
+user_12 = User.find_or_initialize_by(id: 12)
+user_12.update!(
   email: 'll@ll',
   password: 'llllll',
   password_confirmation: 'llllll',
@@ -179,7 +181,8 @@ user_12 = User.create!(
   is_deleted: false
 )
 user_image_12 = Rails.root.join('app', 'assets', 'images', 'no_user.png')
-user_12.profile_image.attach(io: File.open(user_image_12), filename: 'no_user.png', content_type: 'image/png')
+user_12.profile_image.attach(io: File.open(user_image_12), filename: 'no_user.png', content_type: 'image/png') unless user_12.profile_image.attached?
+
 
 # コールバックを再登録
 User.set_callback(:create, :after, :set_default_profile_image)

@@ -1,7 +1,5 @@
 class Admin::GroupsController < Admin::ApplicationController
 
-  end
-
   def show
   end
 
