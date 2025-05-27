@@ -1,0 +1,31 @@
+<h2><%= @group_event.title %></h2>
+
+<p>
+  <strong>開始日時:</strong>
+  <%= l(@group_event.start_time, format: :long) %>
+</p>
+
+<% if @group_event.end_time.present? %>
+  <p>
+    <strong>終了日時:</strong>
+    <%= l(@group_event.end_time, format: :long) %>
+  </p>
+<% end %>
+
+<% if @group_event.description.present? %>
+  <p>
+    <strong>説明:</strong><br>
+    <%= simple_format(@group_event.description) %>
+  </p>
+<% end %>
+
+<p>
+  <strong>公開状態:</strong>
+  <%= @group_event.is_public ? "公開" : "非公開" %>
+</p>
+
+<hr>
+
+<%= link_to "編集", edit_group_event_path(@group, @group_event), class: "btn btn-primary" if @group.owner == current_user %>
+<%= link_to "イベント一覧に戻る", group_events_path(@group), class: "btn btn-secondary" %>
+<%= link_to "ダッシュボードに戻る", dashboard_group_path(@group), class: "btn btn-secondary" %>

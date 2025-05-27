@@ -73,9 +73,11 @@ class Public::UserPostsController < ApplicationController
   end
   
   def destroy
-    if @user_post.destroy
+    begin
+      Deleter::UserPostDeleter.call(@user_post, deleted_by: current_user)
       redirect_to user_posts_path(@user), notice: '投稿を削除しました。'
-    else
+    rescue => e
+      Rails.logger.error("UserPost削除エラー: #{e.message}")
       redirect_to root_path, alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
     end
   end

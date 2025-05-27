@@ -1,0 +1,68 @@
+<h2><%= @group.name %></h2>
+
+<div>
+  <%= image_tag @group.group_image.variant(resize_to_limit: [400, 400]) %>
+</div>
+
+<p><%= @group.description %></p>
+<p>公開設定: <%= @group.is_public ? '公開' : '非公開' %></p>
+<p>参加メンバー数: <%= @group.group_memberships.count %>人</p>
+
+<hr>
+
+<% if user_signed_in? %>
+  <% if @group.group_memberships.exists?(user_id: current_user.id) %>
+    <%= button_to 'グループを退出する', leave_group_path(@group), method: :delete, data: { confirm: '本当に退出しますか？' } %>
+  <% else %>
+    <%= button_to 'グループに参加する', join_group_path(@group), method: :post %>
+  <% end %>
+<% else %>
+  <p><%= link_to 'ログインして参加する', new_user_session_path %></p>
+<% end %>
+
+
+
+
+<% if @group.owner == current_user %>
+  <% if @group.is_public? %>
+    <%= link_to '非公開にする', hide_public_group_path(@group), method: :patch, data: { confirm: "非公開にしますか？" } %>
+  <% else %>
+    <%= link_to '公開にする', publish_public_group_path(@group), method: :patch, data: { confirm: "公開にしますか？" } %>
+  <% end %>
+<% end %>
+
+
+
+<hr><hr>
+
+<h2><%= @group.name %></h2>
+
+<!-- グループ画像 -->
+<div class="group-image">
+  <%= image_tag @group.group_image.variant(resize_to_limit: [300, 300]) if @group.group_image.attached? %>
+</div>
+
+<!-- 説明 -->
+<p><%= simple_format(@group.description) %></p>
+
+<!-- メンバー数 -->
+<p>メンバー数: <%= @group.group_memberships.count %>人</p>
+
+<!-- 参加/退出ボタン -->
+<% if @group.group_memberships.exists?(user_id: current_user.id) %>
+  <%= button_to 'グループから退出する', group_membership_path(@group), method: :delete, class: "btn btn-danger" %>
+<% else %>
+  <%= button_to 'グループに参加する', group_memberships_path(@group), method: :post, class: "btn btn-primary" %>
+<% end %>
+
+<hr>
+
+<h3>メンバー一覧</h3>
+<ul class="group-members">
+  <% @group.users.each do |user| %>
+    <li>
+      <%= image_tag user.profile_image.variant(resize_to_limit: [50, 50]) if user.profile_image.attached? %>
+      <%= user.name %>
+    </li>
+  <% end %>
+</ul>

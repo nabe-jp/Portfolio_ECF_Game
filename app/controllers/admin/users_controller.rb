@@ -35,8 +35,17 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def deactivate
-    @user.update(is_deleted: true)
-    redirect_to admin_user_path(@user), notice: 'ユーザーを凍結または退会状態にしました。'
+    if @user.is_deleted
+      redirect_to admin_user_path(@user), alert: 'すでに削除されています'
+      return
+    end
+
+    begin
+      Deleter::UserDeleter.call(@user, deleted_by: current_admin)
+      redirect_to admin_user_path(@user), notice: 'ユーザーと関連データを削除しました'
+    rescue => e
+      redirect_to root_path, alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
+    end
   end
 
   def reactivate

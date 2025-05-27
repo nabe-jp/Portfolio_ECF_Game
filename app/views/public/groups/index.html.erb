@@ -1,0 +1,28 @@
+<h2>グループ一覧</h2>
+
+<div class="group-list">
+  <% @groups.each do |group| %>
+    <div class="group-card">
+      <!-- 画像 -->
+      <%= image_tag group.group_image.variant(resize_to_limit: [150, 150]), class: "group-thumbnail" if group.group_image.attached? %>
+
+      <!-- グループ名 -->
+      <h3>
+        <%= link_to group.name, group_path(group) %>
+      </h3>
+
+      <!-- 説明（先頭50文字） -->
+      <p><%= truncate(group.description, length: 50) %></p>
+
+      <!-- メンバー数 -->
+      <p>メンバー数: <%= group.group_memberships.count %>人</p>
+
+      <!-- 参加/退出ボタン -->
+      <% if current_user.group.include?(group) %>
+        <%= button_to '退出する', leave_public_group_path(group), method: :delete, class: "btn btn-danger" %>
+      <% else %>
+        <%= button_to '参加する', join_public_group_path(group), method: :post, class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

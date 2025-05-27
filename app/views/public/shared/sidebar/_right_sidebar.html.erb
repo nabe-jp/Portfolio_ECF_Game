@@ -1,6 +1,21 @@
-<h5>おすすめ</h5>
+<h5>投稿</h5>
 <ul class="list-unstyled">
-  <li><%= render "public/shared/link/links", my_posts_index: true %></li>
-  
   <li><%= render "public/shared/link/links", all_posts_index: true %></li>
+
+  <li><%= render "public/shared/link/links", posts_index: true %></li>
+
+  <li><%= render "public/shared/link/links", check_poster_profile: true %></li>
+
+  <li><%= render "public/shared/link/links", new_post: true %></li>
+</ul>
+
+<h5 class="mt-5">コミュニティ</h5>
+<ul class="list-unstyled">
+  <li><%= render "public/shared/link/links", groups_index: true %></li>
+
+  <li><%= render "public/shared/link/links", my_groups: true %></li>
+
+  <li><%= render "public/shared/link/links", new_group_post: true %></li>
+
+  <li><%= render "public/shared/link/links", new_group: true %></li>
 </ul>

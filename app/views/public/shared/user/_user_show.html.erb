@@ -12,7 +12,9 @@
   <!-- 編集ボタン -->
   <div class="row justify-content-center mt-4">
     <div class="col-md-8 text-center">
-      <%= render "public/shared/link/links", profile_edit: true, as: :button %>
+      <% if @user == current_user %>
+        <%= render "public/shared/link/links", profile_edit: true, as: :button %>
+      <% end %>
     </div>
   </div>
 </div>

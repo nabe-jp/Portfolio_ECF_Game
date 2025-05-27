@@ -3,13 +3,19 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :trackable
 
+  # 現在未実装(Gemインストール済み)
+  # acts_as_taggable_on :user_tags
+
   has_many :user_posts, dependent: :destroy
   has_many :user_post_comments, dependent: :destroy
 
-  acts_as_taggable_on :user_tags
+  has_many :group_memberships, dependent: :destroy
+  has_many :joined_groups, through: :group_memberships, source: :group
+
+  has_many :owned_groups, class_name: 'Group', foreign_key: 'owner_id'
 
   has_one_attached :profile_image
-  
+
   # 多くの実在英語名が20〜30文字未満ですがまれに非常に長い名前も存在し、複数名・複合姓(スペースなど)も考慮し50文字
   validates :last_name, presence: { message: "を入力してください" }
   validates :last_name, length: { maximum: 50,
@@ -27,6 +33,7 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 100,
     message: "は1～100文字以内で入力してください" }, if: -> { bio.present? }
 
+  scope :active, -> { where(is_deleted: false, is_public: true, hidden_by_parent: false) }
 
   # ユーザー作成時にデフォルト画像を設定
   after_create :set_default_profile_image
@@ -39,15 +46,15 @@ class User < ApplicationRecord
     defined?($skip_callbacks) && $skip_callbacks
   end
 
-  # ここにRansackableの設定(検索可能な属性)を追加します
+  # ここにRansackableの設定(検索可能な属性)を追加(現在未使用のためコメント化)
   # attributesがカラムなどの本体情報、associationsは関連
-  def self.ransackable_attributes(auth_object = nil)
-    ["nickname", "bio", "user_tags"]
-  end
+  # def self.ransackable_attributes(auth_object = nil)
+  #   ["nickname", "bio", "user_tags"]
+  # end
   
-  def self.ransackable_associations(auth_object = nil)
-    []
-  end
+  # def self.ransackable_associations(auth_object = nil)
+  #   []
+  # end
 
   private
 
@@ -58,35 +65,5 @@ class User < ApplicationRecord
     # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
     profile_image.attach(io: File.open(default_image_path), 
       filename: 'no_user.png', content_type: 'image/png')
-  end
-
-  # ユーザー論理削除時に紐づく関連投稿やコメントの非公開、また復元時の復元処理
-  def cascade_hide_children_if_deleted
-    if is_deleted
-      # ユーザー投稿とそのコメントを非表示にする（hidden_by_parent: true）
-      user_posts.find_each do |post|
-        post.update(hidden_by_parent: true)
-        post.user_post_comments.find_each do |comment|
-          comment.update(hidden_by_parent: true)
-        end
-      end
-
-      # ユーザーが直接持つコメントも非表示にする
-      user_post_comments.find_each do |comment|
-        comment.update(hidden_by_parent: true)
-      end
-    else
-      # ユーザー復元時、子要素も復元
-      user_posts.find_each do |post|
-        post.update(hidden_by_parent: false)
-        post.user_post_comments.find_each do |comment|
-          comment.update(hidden_by_parent: false)
-        end
-      end
-
-      user_post_comments.find_each do |comment|
-        comment.update(hidden_by_parent: false)
-      end
-    end
   end
 end

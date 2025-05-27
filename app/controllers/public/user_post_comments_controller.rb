@@ -21,14 +21,12 @@ class Public::UserPostCommentsController < ApplicationController
     @user_post = UserPost.find(params[:post_id])
     @comment = @user_post.user_post_comments.find(params[:id])
   
-    if  @comment.user == current_user || @user_post.user == current_user
-      @comment.update(is_deleted: true)
-      flash[:notice] = "コメントを削除しました"
-    else
-      flash[:alert] = "削除権限がありません"
+    begin
+      Deleter::UserPostCommentDeleter.call(@comment, deleted_by: current_user)
+      redirect_to user_post_path(@comment.user_post), notice: 'コメントを削除しました。'
+    rescue => e
+      redirect_to user_post_path(@comment.user_post), alert: '削除に失敗しました。'
     end
-  
-    redirect_to  user_post_path(@user_post.user, @user_post)
   end
 
   private

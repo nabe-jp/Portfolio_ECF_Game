@@ -1,0 +1,15 @@
+<h2><%= @group_notice.title %></h2>
+
+<p><%= simple_format(@group_notice.body) %></p>
+
+<p>
+  <small>作成者: <%= @group_notice.user.nickname %><br>
+  投稿日時: <%= l(@group_notice.created_at, format: :long) %></small>
+</p>
+
+<% if @group_notice.user == current_user || @group.owner == current_user %>
+  <%= link_to "編集", edit_group_posts_notice_path(@group, @group_notice), class: "btn btn-secondary" %>
+  <%= link_to "削除", group_posts_notice_path(@group, @group_notice), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+<% end %>
+
+<%= link_to "戻る", dashboard_group_path(@group), class: "btn btn-outline-primary" %>

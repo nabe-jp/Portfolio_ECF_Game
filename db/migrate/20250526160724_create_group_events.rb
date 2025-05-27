@@ -1,0 +1,23 @@
+class CreateGroupEvents < ActiveRecord::Migration[6.1]
+  def change
+    create_table :group_events do |t|
+      # 紐づけ・基本情報
+      t.references :group, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true
+      t.string :title, null: false
+      t.text :description
+
+      # 日時の表示
+      t.datetime :start_time, null: false                               # 開始日時
+      t.datetime :end_time                                              # 終了日時
+
+      # 表示・公開制御
+      t.boolean :is_public, default: true, null: false                  # 公開/非公開の切り替え
+      t.boolean :is_deleted, default: false, null: false                # 論理削除フラグ
+      t.datetime :deleted_at                                            # 削除日時
+      t.integer :deleted_by_id                                          # 削除したユーザーID
+
+      t.timestamps
+    end
+  end
+end

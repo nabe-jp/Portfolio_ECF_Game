@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group: one
+  user: one
+  title: MyString
+  body: MyText
+  is_public: false
+  default: 
+  is_deleted: false
+  default: 
+  deleted_at: 2025-05-26 17:27:57
+  deleted_by_id: 1
+
+two:
+  group: two
+  user: two
+  title: MyString
+  body: MyText
+  is_public: false
+  default: 
+  is_deleted: false
+  default: 
+  deleted_at: 2025-05-26 17:27:57
+  deleted_by_id: 1

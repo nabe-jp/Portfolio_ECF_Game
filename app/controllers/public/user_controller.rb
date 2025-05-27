@@ -2,9 +2,7 @@ class Public::UserController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user, only: [:show, :edit, :update, :mypage, :settings, :check, :withdraw]
 
-  def show
-    
-  end
+  def show; end
 
   def edit
     # エラー時にはセッションからユーザーの入力内容を再設定
@@ -30,22 +28,23 @@ class Public::UserController < ApplicationController
   # === 以下、カスタムアクション ===
 
   # 自身の詳細ページ
-  def mypage
-  end
+  def mypage; end
 
   # 自身の設定一覧ページ
-  def settings
-  end
+  def settings; end
 
   # 退会確認画面
-  def check
-  end
+  def check; end
 
   # 退会処理
   def withdraw
-    @user.update(is_deleted: true)
-    reset_session
-    redirect_to root_path, notice: "アカウントを削除しました。"
+    begin
+      Deleter::UserDeleter.call(current_user, deleted_by: current_user)
+      reset_session
+      redirect_to root_path, notice: "退会処理を完了しました。"
+    rescue => e
+      redirect_to root_path, alert: '予期せぬエラーにより、退会処理が行えませんでした。'
+    end
   end
 
   private

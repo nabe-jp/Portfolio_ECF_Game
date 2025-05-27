@@ -1,0 +1,24 @@
+<h2>作成したグループ</h2>
+<% if current_user.owned_groups.any? %>
+  <ul>
+    <% current_user.owned_groups.each do |group| %>
+      <li><%= link_to group.name, public_group_path(group) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>作成したグループはありません。</p>
+<% end %>
+
+<hr>
+
+<h2>参加中のグループ</h2>
+<% joined_groups = current_user.joined_groups.where.not(id: current_user.owned_groups.pluck(:id)) %>
+<% if joined_groups.any? %>
+  <ul>
+    <% joined_groups.each do |group| %>
+      <li><%= link_to group.name, public_group_path(group) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>他のグループに参加していません。</p>
+<% end %>

@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  slug: MyString
+  icon: MyString
+  owner_id: 1
+  is_deleted: false
+  deleted_at: 2025-05-26 04:41:49
+  deleted_by_id: 1
+  is_public: false
+  hidden_by_parent: false
+  user_count: 1
+  post_count: 1
+  last_posted_at: 2025-05-26 04:41:49
+
+two:
+  name: MyString
+  description: MyText
+  slug: MyString
+  icon: MyString
+  owner_id: 1
+  is_deleted: false
+  deleted_at: 2025-05-26 04:41:49
+  deleted_by_id: 1
+  is_public: false
+  hidden_by_parent: false
+  user_count: 1
+  post_count: 1
+  last_posted_at: 2025-05-26 04:41:49

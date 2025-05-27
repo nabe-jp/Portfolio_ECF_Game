@@ -16,7 +16,11 @@ ja:                                   # 日本語の設定を行う
       user_post_comment: "コメント"
       admin_notes: "申し送り"
       informations: "お知らせ"
-
+      group: "グループ"
+      group_notice: "お知らせ"
+      group_event: "イベント"
+      group_post: "投稿"
+      group_post_comment: "コメント"
     attributes:
       user:
         last_name: "名前の(姓)"
@@ -36,6 +40,20 @@ ja:                                   # 日本語の設定を行う
         title: "タイトル"
         body: "コメント"
         sort_order: "表示順を制御にチェックが入っているので数値"
+      group: 
+        name: "グループ名"
+        description: "説明"
+        slug: "スラッグURL"
+        
+      group_notice:
+      group_event:
+
+      group_post:
+        title: "タイトル"
+        body: "コメント"
+      group_post_comment:
+        title: "タイトル"
+        body: "コメント"
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"

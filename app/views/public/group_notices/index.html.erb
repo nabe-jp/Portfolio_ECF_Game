@@ -1,0 +1,19 @@
+<h2>お知らせ一覧</h2>
+
+<% if @notices.any? %>
+  <ul>
+    <% @notices.each do |notice| %>
+      <li>
+        <strong><%= link_to notice.title, group_posts_notice_path(@group, notice) %></strong>
+        <br>
+        <small>投稿者: <%= notice.user.nickname %> / 投稿日時: <%= l(notice.created_at, format: :short) %></small>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>まだお知らせがありません。</p>
+<% end %>
+
+<% if @group.owner == current_user %>
+  <%= link_to "新しいお知らせを作成", new_group_posts_notice_path(@group), class: "btn btn-primary" %>
+<% end %>

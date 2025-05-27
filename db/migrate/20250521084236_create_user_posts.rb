@@ -15,7 +15,7 @@ class CreateUserPosts < ActiveRecord::Migration[6.1]
 
       # 表示状態関連(ピン留め・並び順)
       t.boolean :is_pinned, default: false, null: false                 # 固定表示
-      t.integer :sort_order, default: 0, null: false                    # 固定表示時の手動並び順
+      t.integer :sort_order, default: 999, null: false                  # 固定表示時の手動並び順
 
        # 統計・時系列
       t.integer :like_count, default: 0, null: false                    # いいね数をキャッシュ

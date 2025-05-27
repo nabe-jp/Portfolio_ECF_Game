@@ -2,11 +2,19 @@
 <ul class="nav flex-column">
   <li><%= render "public/shared/link/links", home: true %></li>
   
-  <li><%= render "public/shared/link/links", profile_page: true %></li>
-
-  <li><%= render "public/shared/link/links", mypage: true %></li>
-
-  <li><%= render "public/shared/link/links", new_post: true %></li>
-
   <li><%= render "public/shared/link/links", back: true %></li>
 </ul>
+
+<% if user_signed_in? %>
+  <h5 class="mt-5">マイメニュー</h5>
+  <ul class="nav flex-column">
+    
+    <li><%= render "public/shared/link/links", profile_page: true %></li>
+
+    <li><%= render "public/shared/link/links", profile_edit: true %></li>
+
+    <li><%= render "public/shared/link/links", mypage: true %></li>
+    
+    <li><%= render "public/shared/link/links", settings: true %></li> 
+  </ul>
+<% end %>

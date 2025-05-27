@@ -281,7 +281,6 @@ user_post_7 = UserPost.create!(
 user_post_image_7 = Rails.root.join('app', 'assets', 'images', 'no_user_post.png')
 user_post_7.user_post_image.attach(io: File.open(user_post_image_7), filename: 'no_user_post.png', content_type: 'image/png')
 
-
 # 投稿ID: 8（サッカー）
 user_post_8 = UserPost.create!(
   id: 8,

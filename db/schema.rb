@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_05_22_132205) do
+ActiveRecord::Schema.define(version: 2025_05_26_221008) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.text "body", null: false
     t.boolean "is_pinned", default: false, null: false
     t.integer "admin_id", null: false
-    t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -65,6 +64,114 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "group_events", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "description"
+    t.datetime "start_time", null: false
+    t.datetime "end_time"
+    t.boolean "is_public", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_events_on_group_id"
+    t.index ["user_id"], name: "index_group_events_on_user_id"
+  end
+
+  create_table "group_memberships", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "joined_at"
+    t.integer "invited_by_id"
+    t.text "note"
+    t.integer "role", default: 0, null: false
+    t.integer "status", default: 0, null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_memberships_on_group_id"
+    t.index ["user_id", "group_id"], name: "index_group_memberships_on_user_id_and_group_id", unique: true
+    t.index ["user_id"], name: "index_group_memberships_on_user_id"
+  end
+
+  create_table "group_notices", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.boolean "is_public", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_notices_on_group_id"
+    t.index ["user_id"], name: "index_group_notices_on_user_id"
+  end
+
+  create_table "group_post_comments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_post_id", null: false
+    t.text "body"
+    t.boolean "is_public", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.boolean "hidden_by_parent", default: false, null: false
+    t.integer "parent_comment_id"
+    t.datetime "replied_at"
+    t.integer "like_count", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_post_id"], name: "index_group_post_comments_on_group_post_id"
+    t.index ["user_id"], name: "index_group_post_comments_on_user_id"
+  end
+
+  create_table "group_posts", force: :cascade do |t|
+    t.integer "group_id", null: false
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.text "body"
+    t.boolean "is_public", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.boolean "hidden_by_parent", default: false, null: false
+    t.boolean "is_pinned", default: false, null: false
+    t.integer "sort_order", default: 999, null: false
+    t.integer "like_count", default: 0, null: false
+    t.datetime "posted_at"
+    t.datetime "published_at"
+    t.datetime "last_commented_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_posts_on_group_id"
+    t.index ["user_id"], name: "index_group_posts_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.string "slug", null: false
+    t.integer "owner_id", null: false
+    t.integer "user_count", default: 0, null: false
+    t.integer "post_count", default: 0, null: false
+    t.datetime "last_posted_at"
+    t.boolean "is_owner_visible", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.boolean "is_public", default: true, null: false
+    t.boolean "hidden_by_parent", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "information", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
@@ -75,7 +182,6 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.integer "admin_id", null: false
     t.boolean "is_pinned", default: false, null: false
     t.integer "sort_order", default: 999, null: false
-    t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
     t.string "audience", default: "all"
@@ -130,7 +236,7 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
     t.integer "deleted_by_id"
     t.boolean "hidden_by_parent", default: false, null: false
     t.boolean "is_pinned", default: false, null: false
-    t.integer "sort_order", default: 0, null: false
+    t.integer "sort_order", default: 999, null: false
     t.integer "like_count", default: 0, null: false
     t.datetime "posted_at"
     t.datetime "published_at"
@@ -173,6 +279,16 @@ ActiveRecord::Schema.define(version: 2025_05_22_132205) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_notes", "admins"
+  add_foreign_key "group_events", "groups"
+  add_foreign_key "group_events", "users"
+  add_foreign_key "group_memberships", "groups"
+  add_foreign_key "group_memberships", "users"
+  add_foreign_key "group_notices", "groups"
+  add_foreign_key "group_notices", "users"
+  add_foreign_key "group_post_comments", "group_posts"
+  add_foreign_key "group_post_comments", "users"
+  add_foreign_key "group_posts", "groups"
+  add_foreign_key "group_posts", "users"
   add_foreign_key "information", "admins"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_post_comments", "user_posts"
