@@ -17,6 +17,7 @@ class GroupPost < ApplicationRecord
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }
 
   scope :active_group, -> { where(is_deleted: false, is_public: true, hidden_by_parent: false, is_owner_visible: true) }
+  scope :public_visible_to_non_members, -> { where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_by_parent: false).order(created_at: :desc) }
 
   after_create :set_default_group_post_image
 

@@ -68,19 +68,27 @@ class Public::SearchesController < ApplicationController
   
   # 各モデルに応じた検索メソッド
   def search_users
-    search_model_optimized(User, %w[nickname bio]).page(params[:page])
+    search_model_optimized(User.where(is_deleted: false, 
+      hidden_by_parent: false), %w[nickname bio]).page(params[:page]).per(10)
   end
-
+  
   def search_user_posts
-    search_model_optimized(UserPost, %w[title body]).page(params[:page])
+    search_model_optimized(UserPost.where(is_deleted: false, 
+      is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
   end
 
+  #　現在未実装
   def search_groups
-    raise NotImplementedError, 'グループ検索は未実装です' # 実装予定ならここを変更
+    # search_model_optimized(Group.where(is_deleted: false, 
+    #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
+    Group.none.page(params[:page])
   end
 
+  #　現在未実装
   def search_group_posts
-    raise NotImplementedError, 'グループ内投稿検索は未実装です' # 実装予定ならここを変更
+    # search_model_optimized(GroupPost.where(is_deleted: false, 
+    #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
+    GroupPost.none.page(params[:page])
   end
 
   # 入力が空なら空配列を返す、全角スペースを半角にし、記号を削除し、文字列の前後の空白を取り除く

@@ -18,7 +18,9 @@ class UserPost < ApplicationRecord
   validates :body, length: { maximum: 200, 
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }  
 
-  scope :active, -> { where(is_deleted: false, is_public: true, hidden_by_parent: false) }
+  scope :active, -> { where(is_deleted: false, is_public: true, 
+    hidden_by_parent: false).order(created_at: :desc) }
+
 
   # 投稿作成時に必ずデフォルト画像を設定
   after_create :set_default_user_post_image

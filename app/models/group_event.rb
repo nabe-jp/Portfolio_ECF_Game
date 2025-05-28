@@ -4,10 +4,11 @@ class GroupEvent < ApplicationRecord
 
   validates :title, presence: { message: "を入力してください" }
   validates :title, length: { maximum: 30, 
-    message: "は1～30文字以内で入力してください" }, if: -> { title.present? }
+    message: "は1～20文字以内で入力してください" }, if: -> { title.present? }
 
-  validates :description, 
-    length: { maximum: 500, message: "は500文字以内で入力してください" }, allow_blank: true
+  validates :description, presence: { message: "を入力してください" }
+  validates :description, length: { maximum: 100, 
+    message: "は500文字以内で入力してください" }, if: -> { description.present? }
 
   validates :start_time, presence: { message: "を入力してください" }
 

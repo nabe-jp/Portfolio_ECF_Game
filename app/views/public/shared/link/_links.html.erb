@@ -50,7 +50,7 @@
 <% end %>
 
 <% if defined?(new_post) && new_post && user_signed_in? %>
-  <%= link_to '新規投稿', new_user_post_path(current_user), 
+  <%= link_to '投稿の作成', new_user_post_path(current_user), 
     class: (is_button ? 'btn btn-base new-post-btn' : nil) %>
 <% end %>
 
@@ -59,7 +59,7 @@
     class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
 <% end %>
 
-<% if defined?(groups_index) && groups_index && user_signed_in? %>
+<% if defined?(groups_index) && groups_index %>
   <%= link_to "グループ一覧", groups_path, 
     class: (is_button ? 'btn btn-base' : nil) %>
 <% end %>
@@ -69,12 +69,19 @@
     class: (is_button ? 'btn btn-base' : nil) %>
 <% end %>
 
-<% if defined?(new_group_post) && new_group_post && user_signed_in? && @group&.id %>
-  <%= link_to "新規グループ内投稿", new_group_post_path(@group), 
+<% if defined?(new_group_post) && new_group_post && user_signed_in? && 
+  @group && @group.group_memberships.exists?(user_id: current_user.id) %>
+  <%= link_to "グループ内投稿の作成", new_group_post_path(@group), 
     class: (is_button ? 'btn btn-base' : nil) %>
 <% end %>
 
 <% if defined?(new_group) && new_group && user_signed_in? %>
   <%= link_to "グループ作成", new_group_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+<% end %>
+
+<% if defined?(dashboard_group) && dashboard_group && user_signed_in? && 
+  @group && @group.group_memberships.exists?(user_id: current_user.id) %>
+  <%= link_to "グループTOP", dashboard_group_path(@group), 
     class: (is_button ? 'btn btn-base' : nil) %>
 <% end %>

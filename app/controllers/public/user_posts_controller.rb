@@ -8,16 +8,16 @@ class Public::UserPostsController < ApplicationController
   def index
     # user_idがparamsに含まれている場合、そのユーザーの投稿一覧を表示し、なければ全ユーザーの投稿を表示
     if params[:user_id].present?
-      @user = User.find_by(id: params[:user_id])
+      @user = User.where(is_deleted: false).find_by(id: params[:user_id])
 
       # @userが見つからない場合も想定
       if @user.nil?
         redirect_to root_path, alert: '指定されたユーザーが見つかりませんでした。'
         return
       end
-      @user_posts = @user.user_posts.order(created_at: :desc).page(params[:page])
+      @user_posts = @user.user_posts.active.page(params[:page])
     else
-      @user_posts = UserPost.includes(:user).order(created_at: :desc).page(params[:page])
+      @user_posts = UserPost.includes(:user).active.page(params[:page])
     end
   end
 
@@ -109,6 +109,10 @@ class Public::UserPostsController < ApplicationController
     end
   end
 
+  def user_post_attributes_from_session
+    session[:user_post_attributes] || {}
+  end
+
   # 入力情報とエラーメッセージをセットする
   def store_form_data(attributes:, error_messages:, error_name: nil)
     # error_nameがnilなら"更新"を設定
@@ -120,9 +124,5 @@ class Public::UserPostsController < ApplicationController
 
   def user_post_params
     params.require(:user_post).permit(:user_post_image, :title, :body)
-  end
-
-  def user_post_attributes_from_session
-    session[:user_post_attributes] || {}
   end
 end

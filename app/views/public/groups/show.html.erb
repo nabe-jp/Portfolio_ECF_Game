@@ -1,68 +1,41 @@
-<h2><%= @group.name %></h2>
-
 <div>
-  <%= image_tag @group.group_image.variant(resize_to_limit: [400, 400]) %>
+  <%= image_tag(@group.group_image, size: "200x200", class: "img-fluid") %>
 </div>
 
-<p><%= @group.description %></p>
-<p>公開設定: <%= @group.is_public ? '公開' : '非公開' %></p>
-<p>参加メンバー数: <%= @group.group_memberships.count %>人</p>
+<h3 class="my-3"><%= @group.name %></h3>
 
-<hr>
+<p><%= @group.description %></p>
+<p>参加メンバー数: <%= @group.group_memberships.count %>人</p>
 
 <% if user_signed_in? %>
   <% if @group.group_memberships.exists?(user_id: current_user.id) %>
-    <%= button_to 'グループを退出する', leave_group_path(@group), method: :delete, data: { confirm: '本当に退出しますか？' } %>
+    <%= link_to 'グループマイページへ', dashboard_group_path(@group), class: "btn btn-primary" %>
   <% else %>
-    <%= button_to 'グループに参加する', join_group_path(@group), method: :post %>
+    <%= button_to 'グループに参加する', join_group_path(@group), method: :post, class: "btn btn-success" %>
   <% end %>
 <% else %>
   <p><%= link_to 'ログインして参加する', new_user_session_path %></p>
 <% end %>
 
-
-
-
-<% if @group.owner == current_user %>
-  <% if @group.is_public? %>
-    <%= link_to '非公開にする', hide_public_group_path(@group), method: :patch, data: { confirm: "非公開にしますか？" } %>
-  <% else %>
-    <%= link_to '公開にする', publish_public_group_path(@group), method: :patch, data: { confirm: "公開にしますか？" } %>
-  <% end %>
-<% end %>
-
-
-
-<hr><hr>
-
-<h2><%= @group.name %></h2>
-
-<!-- グループ画像 -->
-<div class="group-image">
-  <%= image_tag @group.group_image.variant(resize_to_limit: [300, 300]) if @group.group_image.attached? %>
-</div>
-
-<!-- 説明 -->
-<p><%= simple_format(@group.description) %></p>
-
-<!-- メンバー数 -->
-<p>メンバー数: <%= @group.group_memberships.count %>人</p>
-
-<!-- 参加/退出ボタン -->
-<% if @group.group_memberships.exists?(user_id: current_user.id) %>
-  <%= button_to 'グループから退出する', group_membership_path(@group), method: :delete, class: "btn btn-danger" %>
-<% else %>
-  <%= button_to 'グループに参加する', group_memberships_path(@group), method: :post, class: "btn btn-primary" %>
-<% end %>
-
 <hr>
 
-<h3>メンバー一覧</h3>
-<ul class="group-members">
-  <% @group.users.each do |user| %>
-    <li>
-      <%= image_tag user.profile_image.variant(resize_to_limit: [50, 50]) if user.profile_image.attached? %>
-      <%= user.name %>
-    </li>
+<% if @public_posts.any? %>
+  <h3>公開中の投稿</h3>
+  <% @public_posts.each do |post| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= post.title %></h5>
+        <p class="card-text"><%= truncate(post.body, length: 100) %></p>
+        <p class="text-muted">投稿者: <%= post.user.nickname %> / 投稿日: <%= l(post.created_at, format: :short) %></p>
+        <%= link_to '詳細を見る', group_post_path(@group, post), class: "btn btn-outline-primary btn-sm" %>
+      </div>
+    </div>
   <% end %>
-</ul>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @public_posts %>
+  </div>
+  
+<% else %>
+  <p>このグループには現在、公開されている投稿はありません。</p>
+<% end %>

@@ -25,19 +25,20 @@ class Public::UserPostCommentsController < ApplicationController
       Deleter::UserPostCommentDeleter.call(@comment, deleted_by: current_user)
       redirect_to user_post_path(@comment.user_post), notice: 'コメントを削除しました。'
     rescue => e
+      Rails.logger.error("コメント削除エラー: #{e.message}")
       redirect_to user_post_path(@comment.user_post), alert: '削除に失敗しました。'
     end
   end
 
   private
 
-  def user_post_comment_params
-    params.require(:user_post_comment).permit(:body)
-  end
-
   def store_form_data(attributes:, error_messages:)
     session[:user_post_comment_attributes] = attributes
     flash[:error_messages] = error_messages
     flash[:error_name] = "コメントの投稿"
+  end
+  
+  def user_post_comment_params
+    params.require(:user_post_comment).permit(:body)
   end
 end

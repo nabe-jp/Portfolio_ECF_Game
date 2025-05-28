@@ -1,41 +1,39 @@
-<%= form_with(model: [@group, @group_event], local: true) do |form| %>
-  <% if @group_event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@group_event.errors.count, "件のエラー") %>が発生しました:</h2>
-      <ul>
-        <% @group_event.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= form_with(model: @group_event, url: @form_url, local: true, html: { class: "row" }) do |f| %>
+
+  <!-- 左カラム: タイトル・説明 -->
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :title, "タイトル", class: "control-label" %>
+      <%= f.text_field :title, class: "form-control w-100" %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title, "タイトル" %><br>
-    <%= form.text_field :title %>
+    <div class="form-group mt-3">
+      <%= f.label :description, "説明", class: "control-label" %>
+      <%= f.text_area :description, class: "form-control w-100", rows: 5 %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :description, "説明" %><br>
-    <%= form.text_area :description %>
+  <!-- 右カラム: 開始・終了日時 -->
+  <div class="col-md-6 d-flex flex-column justify-content-start">
+
+    <div class="form-group">
+      <%= f.label :start_time, "開始日時", class: "control-label" %>
+      <div class="form-inline flex-wrap">
+        <%= f.datetime_select :start_time, {}, class: "form-control mr-1 mb-1" %>
+      </div>
+    </div>
+
+    <div class="form-group”>
+      <%= f.label :end_time, "終了日時", class: "control-label" %>
+      <div class="form-inline flex-wrap">
+        <%= f.datetime_select :end_time, {}, class: "form-control mr-1 mb-1" %>
+      </div>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= form.label :start_time, "開始日時" %><br>
-    <%= form.datetime_select :start_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :end_time, "終了日時" %><br>
-    <%= form.datetime_select :end_time %>
-  </div>
-
-  <div class="field">
-    <%= form.label :is_public, "公開する" %>
-    <%= form.check_box :is_public %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <!-- 登録ボタン -->
+  <div class="col-12 text-center mt-4">
+    <%= f.submit submit_label ||= "イベントを更新する", class: "btn btn-primary px-4 py-2" %>
   </div>
 <% end %>

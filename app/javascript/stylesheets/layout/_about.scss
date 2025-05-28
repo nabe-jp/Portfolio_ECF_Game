@@ -1,7 +1,11 @@
 /*    アバウトページの設定    */
 // アバウトページの余白の色
 body.homes.about {
-  background-color: #5ac2eb;
+  background-image: url('../images/home_about_background.jpg');
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 // すべてのセクションの共通設定

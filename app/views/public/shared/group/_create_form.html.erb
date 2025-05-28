@@ -1,0 +1,29 @@
+<%= form_with model: @group, local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :name, "グループ名" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :slug, "スラッグURL" %>
+    <%= f.text_field :slug, class: "form-control", 
+      placeholder: "英数字とハイフンのみ（例: example-group）" %>
+    <small class="form-text text-muted">
+      ※ URLに使われます。例: https://yourdomain.com/groups/<strong>example-group</strong>
+    </small>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :group_image, "グループ画像" %>
+    <%= f.file_field :group_image, class: "form-control border-0 p-0" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "説明" %>
+    <%= f.text_area :description, rows: 3, class: "form-control" %>
+  </div>
+
+  <div class="text-center mt-3">
+    <%= f.submit "グループを作成", class: "btn btn-primary px-5" %>
+  </div>
+<% end %>

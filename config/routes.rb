@@ -47,7 +47,8 @@ Rails.application.routes.draw do
       end
     end
     
-    resources :groups do
+    # スラッグを使用
+    resources :groups, param: :slug do
       member do
         patch :hide_from_owner    # 非公開にする
         patch :show_by_owner      # 公開にする

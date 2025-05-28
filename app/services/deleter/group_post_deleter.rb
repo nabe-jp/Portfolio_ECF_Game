@@ -1,5 +1,5 @@
 module Deleter
-  class GroupPostSoftDeleter
+  class GroupPostDeleter
     def initialize(group_post, deleted_by:)
       @group_post = group_post
       @deleted_by = deleted_by

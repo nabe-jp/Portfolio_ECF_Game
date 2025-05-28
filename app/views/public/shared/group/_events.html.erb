@@ -1,0 +1,39 @@
+<div class="dashboard-group__board dashboard-group__events">
+  <h3 class="dashboard-group__board-title">イベントボード</h3>
+  <% if @group_events.any? %>
+    <ul class="dashboard-group__event-list list-unstyled">
+      <% @group_events.first(3).each do |event| %>
+        <li class="dashboard-group__event-item mb-3">
+          <strong><%= event.title %></strong><br>
+
+          <!-- 日時は横並び -->
+          <div class="d-flex align-items-center mt-2">
+            <!-- 開始日時ボックス -->
+            <div class="d-flex flex-column text-center mr-3">
+              <span class="font-weight-bold">開始予定日時</span>
+              <span><%= l(event.start_time, format: :short) %></span>
+            </div>
+
+            <!-- 間の「～」 -->
+            <div class="mx-2" style="font-size: 1.5rem; line-height: 1;">
+              ～
+            </div>
+
+            <!-- 終了日時ボックス -->
+            <div class="d-flex flex-column text-center ml-3">
+              <span class="font-weight-bold">終了予定日時</span>
+              <span><%= l(event.end_time, format: :short) %></span>
+            </div>
+          </div>
+        </li>
+
+      <% end %>
+    </ul>
+  <% else %>
+    <p>イベントはまだありません。</p>
+  <% end %>
+</div>
+
+<div class="dashboard-group__link-right">
+  <%= link_to "▶︎ イベント一覧", group_events_path(@group), class: "dashboard-group__more-link" %>
+</div>

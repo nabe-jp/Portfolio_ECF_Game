@@ -1,5 +1,5 @@
 module Deleter
-  class GroupSoftDeleter
+  class GroupDeleter
     def initialize(group, deleted_by:)
       @group = group
       @deleted_by = deleted_by

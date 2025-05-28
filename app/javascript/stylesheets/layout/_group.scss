@@ -1,0 +1,255 @@
+.groups__title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.groups {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  text-decoration: none;
+  background-color: white;
+  color: inherit;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.group-card:hover {
+  background-color: #007bff;
+  color: white !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.group-card:hover h3,
+.group-card:hover p,
+.group-card:hover span {
+  color: white !important;
+  text-decoration: none;
+}
+
+.group-card__image {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+}
+
+.group-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.group-card__content {
+  margin-left: 2rem;
+  height: 200px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.group-card__name {
+  flex: 0 0 25%;
+  display: flex;
+  align-items: center;
+}
+
+.group-card__name h3 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.group-card__description {
+  flex: 0 0 50%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  word-break: break-word;
+  margin-top: 0.25rem;
+}
+
+.group-card__description p {
+  margin: 0;
+}
+
+.group-card__meta {
+  flex: 0 0 25%;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.group-card__meta span + span {
+  margin-left: 1rem;
+}
+
+.my-groups-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.my-groups-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 180px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: background-color 0.3s;
+  text-decoration: none !important;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #e9ecef;
+    text-decoration: none !important;
+  }
+
+  &__upper {
+    display: flex;
+    align-items: flex-start; /* 画像とタイトル上詰め */
+    margin-bottom: 0.5rem;
+  }
+
+  &__image-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+  }
+
+  &__info {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  &__name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40;
+    margin: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__description {
+    font-size: 0.9rem;
+    color: #495057;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin: 0;
+  }
+}
+
+.dashboard__section {
+  padding: 24px;
+  margin-bottom: 40px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.dashboard__section-title {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.dashboard__section-footer {
+  margin-top: 16px;
+  text-align: right;
+}
+
+.dashboard__link {
+  text-decoration: none;
+  color: #007bff;
+  font-size: 0.9rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.dashboard__notice-list,
+.dashboard__event-list,
+.dashboard__post-list,
+.dashboard__member-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.dashboard__notice-item,
+.dashboard__event-item,
+.dashboard__post-item,
+.dashboard__member-item {
+  margin-bottom: 12px;
+}
+
+.dashboard__notice-body,
+.dashboard__event-description,
+.dashboard__post-meta {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.dashboard__event-datetime {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.dashboard__post-link {
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.dashboard__pin {
+  color: gold;
+  margin-left: 8px;
+}
+
+.dashboard-group__link-right {
+  text-align: right;
+  margin-top: 0.5rem;
+}
+
+.dashboard-group__more-link {
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(version: 2025_05_26_221008) do
     t.boolean "hidden_by_parent", default: false, null: false
     t.boolean "is_pinned", default: false, null: false
     t.integer "sort_order", default: 999, null: false
+    t.boolean "visible_to_non_members", default: false, null: false
     t.integer "like_count", default: 0, null: false
     t.datetime "posted_at"
     t.datetime "published_at"

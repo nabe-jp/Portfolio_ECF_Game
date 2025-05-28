@@ -1,0 +1,15 @@
+<div  class="user-comments__form-wrapper">
+  <%= form_with(model: [@group_post, @group_post_comment],
+    url: group_post_comments_path(@group, @group_post), local: true) do |f| %>
+
+    <div class="user-comments__form-row">
+      <%= f.text_area :body, placeholder: "コメントを入力", 
+        class: "user-comments__textarea", rows: 2 %>
+
+      <div class="comment-form__submit">
+        <%= f.submit "コメントする" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

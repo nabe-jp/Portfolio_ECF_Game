@@ -43,6 +43,7 @@ class Public::UserController < ApplicationController
       reset_session
       redirect_to root_path, notice: "退会処理を完了しました。"
     rescue => e
+      Rails.logger.error("コメント削除エラー: #{e.message}")
       redirect_to root_path, alert: '予期せぬエラーにより、退会処理が行えませんでした。'
     end
   end

@@ -1,37 +1,42 @@
-<h2><%= @group_post.title %></h2>
+<div class="container">
+  <div class="row  text-center">
+    <!-- 右側に日時と編集・削除ボタン・公開ステータス -->
+    <div class="col-4 offset-8 mr-3 d-flex flex-column">
+      <p class="post__date">
+        公開ステータス：<strong><%= @group_post.visible_to_non_members ? '公開中' : '非公開中' %></strong>
+      </p>
+      <p class="post__date"><%= @group_post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+    </div>
 
-<p>
-  <strong>投稿者:</strong> <%= @group_post.user.nickname %><br>
-  <strong>投稿日:</strong> <%= l(@group_post.created_at, format: :long) %>
-</p>
-
-<% if @group_post.group_post_image.attached? %>
-  <div class="post-image">
-    <%= image_tag @group_post.group_post_image.variant(resize_to_limit: [600, 400]) %>
+    <div class="col-4 offset-8">
+      <!-- 編集・削除ボタン -->
+      <% if @group_post.user == current_user || @group_post.group.owner == current_user %>
+        <div>
+          <%= link_to '編集', edit_group_post_path(@group, @group_post), class: 'btn btn-base' %>
+          <%= link_to '削除', group_post_path(@group, @group_post), method: :delete, 
+                      data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
-
-<div class="post-body">
-  <%= simple_format(@group_post.body) %>
 </div>
 
-<% if @group_post.tag_list.present? %>
-  <p>
-    <strong>タグ:</strong>
-    <%= @group_post.tag_list.map { |tag| "##{tag}" }.join(' ') %>
-  </p>
-<% end %>
+<div class="container mt-5">
+  <div class="row my-5">
+    <%= render 'public/shared/group_post/show' %>
+  </div>
+</div>
 
-<% if current_user == @group_post.user || current_user == @group.owner %>
-  <%= link_to "編集", edit_group_post_path(@group, @group_post), class: "btn btn-outline-primary" %>
-  <%= link_to "削除", group_post_path(@group, @group_post), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-outline-danger" %>
+<h2 id="comment_form", class="text-center">コメント</h2>
+
+<hr>
+
+<% if user_signed_in? %>
+  <%= render 'public/shared/group_post_comment/form', group_post: @group_post %>
+<% else %>
+  <p class="text-center">コメントするにはログインが必要です。</p>
 <% end %>
 
 <hr>
 
-<h3>コメント</h3>
-<%= render partial: 'public/shared/group_post_comments/comment_form', locals: { group_post: @group_post } %>
-
-<% @group_post.group_post_comments.order(created_at: :asc).each do |comment| %>
-  <%= render partial: 'public/shared/group_post_comments/comment', locals: { comment: comment } %>
-<% end %>
+<%= render 'public/shared/group_post_comment/list', group_post: @group_post %>

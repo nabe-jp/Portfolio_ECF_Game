@@ -10,9 +10,10 @@ class User < ApplicationRecord
   has_many :user_post_comments, dependent: :destroy
 
   has_many :group_memberships, dependent: :destroy
+  has_many :members, through: :group_memberships, source: :user
   has_many :joined_groups, through: :group_memberships, source: :group
-
-  has_many :owned_groups, class_name: 'Group', foreign_key: 'owner_id'
+  has_many :owned_groups, class_name: "Group", foreign_key: "owner_id"
+  has_many :group_posts, dependent: :destroy
 
   has_one_attached :profile_image
 

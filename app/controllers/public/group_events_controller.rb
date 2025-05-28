@@ -1,17 +1,27 @@
 class Public::GroupEventsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize_group_member!
   before_action :set_group
+  before_action :authorize_group_member!
+  before_action :authorize_group_manager!, only: [:edit, :update, :destroy]
   before_action :set_group_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = @group.group_events.where(is_deleted: false).order(start_time: :asc)
+    @events = if @group.owner == current_user
+      # 管理者：新着順（最新の作成日時が上に来る）
+      @group.group_events.active_group_info.order(created_at: :desc)
+    else
+      # メンバー：開催日が近い順(upcomingスコープ)
+      @group.group_events.active_group_info.upcoming
+    end
+
+    @events = @events.page(params[:page]).per(10)
   end
 
   def show; end
 
   def new
-    @group_event = @group.group_events.new
+    @form_url = group_events_path(@group)
+    @group_event = @group.group_events.new(group_event_attributes_from_session)
   end
 
   def create
@@ -19,32 +29,42 @@ class Public::GroupEventsController < ApplicationController
     @group_event.user = current_user
 
     if @group_event.save
-      redirect_to dashboard_group_path(@group), notice: 'イベントを作成しました。'
+      session[:group_event_attributes] = nil
+      redirect_to group_events_path(@group), notice: 'イベントを作成しました。'
     else
-      flash.now[:alert] = 'イベントの作成に失敗しました'
-      render :new
+      store_form_data(attributes: group_event_params, 
+        error_messages: @group_event.errors.full_messages, error_name: "イベントの作成")
+      redirect_to new_group_event_path(@group)
     end
   end
 
-  def edit ; end
+  def edit
+    @form_url = group_event_path(@group, @group_event)
+    if session[:group_event_attributes]
+      @group_event.assign_attributes(session[:group_event_attributes])
+      session.delete(:group_event_attributes)
+    end
+  end
 
   def update
     if @group_event.update(group_event_params)
-      redirect_to dashboard_group_path(@group), notice: 'イベントを更新しました'
+      session.delete(:group_event_attributes)
+      redirect_to group_events_path(@group), notice: 'イベントを更新しました'
     else
-      render :edit
+      store_form_data(attributes: group_event_params, error_messages: @group_event.errors.full_messages)
+      redirect_to edit_group_event_path(@group, @group_event)
     end
   end
 
   def destroy
     @group_event.update(is_deleted: true, deleted_at: Time.current, deleted_by_id: current_user.id)
-    redirect_to dashboard_group_path(@group), alert: 'イベントを削除しました'
+    redirect_to group_events_path(@group), alert: 'イベントを削除しました'
   end
 
   private
 
   def set_group
-    @group = Group.find(params[:group_id])
+    @group = Group.find_by!(slug: params[:group_slug])
   end
 
   def set_group_event
@@ -57,7 +77,25 @@ class Public::GroupEventsController < ApplicationController
     end
   end
 
+  def authorize_group_manager!
+    unless @group.owner == current_user
+      redirect_to dashboard_group_path(@group), alert: "管理者のみ実行できる操作です。"
+    end
+  end
+
+
+  def group_event_attributes_from_session
+    session[:group_event_attributes] || {}
+  end
+
+  def store_form_data(attributes:, error_messages:, error_name: nil)
+    error_name ||= "イベントの更新"
+    session[:group_event_attributes] = attributes
+    flash[:error_messages] = error_messages
+    flash[:error_name] = error_name
+  end
+
   def group_event_params
-    params.require(:group_event).permit(:title, :description, :start_time, :end_time, :is_public)
+    params.require(:group_event).permit(:title, :description, :start_time, :end_time)
   end
 end

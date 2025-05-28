@@ -5,15 +5,13 @@
     </div>
     <div class="col-6 mt-1">
       <% if user_signed_in? %>
-        <%= render 'shared/header/global_search' %>                   <!-- 下段：検索フォーム -->
+        <%= render 'shared/header/global_search' %>                 <!-- 検索フォーム -->
       <% end %>
     </div>
     <div class="col-3">
         <div class="d-flex justify-content-end mt-1"> 
         <ul class="nav">
-          <% if admin_signed_in? %>                                 <!-- 管理者がサインインした場合 -->
-            <%= render 'admin/shared/header/admin_nav' %>
-          <% elsif user_signed_in? %>                               <!-- ユーザーがサインインした場合 -->
+          <% if user_signed_in? %>                                  <!-- ユーザーがサインインした場合 -->
             <%= render 'public/shared/header/user_nav' %>
           <% elsif user_signed_in? %>                               <!-- ゲストがサインインした場合 -->
             <%= render 'public/shared/header/guest_nav' %>

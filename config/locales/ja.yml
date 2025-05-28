@@ -28,29 +28,31 @@ ja:                                   # 日本語の設定を行う
         nickname: "ニックネーム"
         bio: "自己紹介"
       post:
-        title: "タイトル"
-        body: "内容"
+        title: "投稿のタイトル"
+        body: "投稿の内容"
       user_post_comment:
         title: "タイトル"
         body: "コメント"
       admin_note:
         title: "タイトル"
-        body: "コメント"
+        body: "内容"
       information:
         title: "タイトル"
-        body: "コメント"
+        body: "内容"
         sort_order: "表示順を制御にチェックが入っているので数値"
       group: 
         name: "グループ名"
         description: "説明"
         slug: "スラッグURL"
-        
-      group_notice:
       group_event:
+        title: "タイトル"
+        description: "説明"
+        end_time: "終了日時"
+      group_notice:
 
       group_post:
-        title: "タイトル"
-        body: "コメント"
+        title: "投稿のタイトル"
+        body: "投稿の内容"
       group_post_comment:
         title: "タイトル"
         body: "コメント"

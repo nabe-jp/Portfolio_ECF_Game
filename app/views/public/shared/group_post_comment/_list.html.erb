@@ -1,4 +1,4 @@
-<% @user_post.user_post_comments.order(created_at: :desc).page(params[:page]).per(20).each do |comment| %>
+<% @group_post_comments.each do |comment| %>
   <div class="comment-item">
 
     <% if comment.is_deleted %>
@@ -8,8 +8,9 @@
       <p class="user-comments__body"><%= comment.body %></p>
       <p class="comment-item__user"><%= comment.user.nickname %></p>
       <div class="comment-item__deleted">
-        <% if comment.user == current_user || @user_post.user == current_user %>
-          <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
+        <% if comment.user == current_user || @group_post.user == current_user || 
+          @group_post.group.owner == current_user  %>
+          <%= button_to "削除", group_post_comment_path(@group, @group_post, comment),
             method: :delete, data: { confirm: "本当に削除しますか？" },
               class: "comment-item__delete-btn" %>
         <% end %>
@@ -20,4 +21,6 @@
   <hr>
 <% end %>
 
-<%= paginate @user_post.user_post_comments.order(created_at: :desc).page(params[:page]).per(20) %>
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @group_post_comments %>
+</div>

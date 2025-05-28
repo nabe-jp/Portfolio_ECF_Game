@@ -1,45 +1,31 @@
-<%= form_with(model: [@group, group_post], local: true) do |form| %>
-  <% if group_post.errors.any? %>
-    <div class="alert alert-danger">
-      <h4>エラーがあります:</h4>
-      <ul>
-        <% group_post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<% if @group.present? && @group_post.present? %>
+  <%= form_with model: @group_post, url: url, method: verd, local: true do |f| %>
+
+    <div class="post-form__title-box">
+      <%= f.label :title, "投稿のタイトル" %>
+      <%= f.text_field :title, class: "post-form__title-input", placeholder: "タイトルを入力してください" %>
+    </div>
+  
+    <div class="post-form__image-box">
+      <%= f.label :group_post_image, "投稿画像" %>
+      <%= f.file_field :group_post_image, class: "post-form__image-input" %>
+    </div>
+  
+    <div class="post-form__body-box">
+      <%= f.label :body, "投稿の内容" %>
+      <%= f.text_area :body, class: "post-form__body-input", placeholder: "内容を入力してください" %>
+    </div>
+
+    <div class="post-form__visible-box">
+      <%= f.check_box :visible_to_non_members, id: "visible_to_non_members" %>
+      <%= f.label :visible_to_non_members, "グループに参加していないユーザーも閲覧できます" %>
+      <p class="note">※チェックを入れるとグループに参加していないユーザーもこの投稿を閲覧可能になります。</p>
+    </div>
+
+    <div class="text-center">
+      <%= f.submit submit_label ||= "更新する", class: "btn btn-base update-btn" %>
     </div>
   <% end %>
-
-  <div class="mb-3">
-    <%= form.label :title, "タイトル" %>
-    <%= form.text_field :title, class: 'form-control' %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :body, "本文" %>
-    <%= form.text_area :body, rows: 10, class: 'form-control' %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :group_post_image, "画像" %>
-    <%= form.file_field :group_post_image, class: 'form-control' %>
-    <% if group_post.group_post_image.attached? %>
-      <p>現在の画像:</p>
-      <%= image_tag group_post.group_post_image.variant(resize_to_limit: [300, 200]) %>
-    <% end %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :tag_list, "タグ (カンマ区切り)" %>
-    <%= form.text_field :tag_list, value: group_post.tag_list.join(", "), class: 'form-control' %>
-  </div>
-
-  <div class="form-check mb-3">
-    <%= form.check_box :is_public, class: 'form-check-input' %>
-    <%= form.label :is_public, "公開する", class: 'form-check-label' %>
-  </div>
-
-  <div class="text-center">
-    <%= form.submit class: 'btn btn-primary' %>
-  </div>
+<% else %>
+  <p>投稿が見つかりませんでした。</p>
 <% end %>

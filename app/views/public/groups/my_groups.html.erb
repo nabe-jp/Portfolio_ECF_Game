@@ -1,10 +1,26 @@
 <h2>作成したグループ</h2>
-<% if current_user.owned_groups.any? %>
-  <ul>
-    <% current_user.owned_groups.each do |group| %>
-      <li><%= link_to group.name, public_group_path(group) %></li>
+<% if @owned_groups.any? %>
+  <div class="my-groups-list">
+    <% @owned_groups.each do |group| %>
+      <%= link_to dashboard_group_path(group), class: "my-groups-card" do %>
+        <div class="my-groups-card__upper">
+          <div class="my-groups-card__image-wrapper">
+            <%= image_tag(group.group_image, class: "my-groups-card__image") %>
+          </div>
+          <div class="my-groups-card__info">
+            <h3 class="my-groups-card__name"><%= group.name %></h3>
+          </div>
+        </div>
+        <div class="my-groups-card__description">
+          <%= truncate(group.description, length: 100) %>
+        </div>
+      <% end %>
     <% end %>
-  </ul>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @owned_groups, param_name: :owned_page %>
+  </div>
 <% else %>
   <p>作成したグループはありません。</p>
 <% end %>
@@ -12,13 +28,28 @@
 <hr>
 
 <h2>参加中のグループ</h2>
-<% joined_groups = current_user.joined_groups.where.not(id: current_user.owned_groups.pluck(:id)) %>
-<% if joined_groups.any? %>
-  <ul>
-    <% joined_groups.each do |group| %>
-      <li><%= link_to group.name, public_group_path(group) %></li>
+<% if @joined_groups.any? %>
+  <div class="my-groups-list">
+    <% @joined_groups.each do |group| %>
+      <%= link_to dashboard_group_path(group), class: "my-groups-card" do %>
+        <div class="my-groups-card__upper">
+          <div class="my-groups-card__image-wrapper">
+            <%= image_tag(group.group_image, class: "my-groups-card__image") %>
+          </div>
+          <div class="my-groups-card__info">
+            <h3 class="my-groups-card__name"><%= group.name %></h3>
+          </div>
+        </div>
+        <div class="my-groups-card__description">
+          <%= truncate(group.description, length: 100) %>
+        </div>
+      <% end %>
     <% end %>
-  </ul>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @joined_groups, param_name: :joined_page %>
+  </div>
 <% else %>
   <p>他のグループに参加していません。</p>
 <% end %>

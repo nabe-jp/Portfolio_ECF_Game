@@ -1,0 +1,21 @@
+<div class="dashboard-group__board dashboard-group__notices">
+  <h3 class="dashboard-group__board-title">お知らせボード</h3>
+  <% if @group_notices.any? %>
+    <ul class="dashboard-group__notice-list">
+      <% @group_notices.first(3).each do |notice| %>
+        <li class="dashboard-group__notice-item">
+          <strong><%= notice.title %></strong><br>
+          <span><%= truncate(notice.body, length: 50) %></span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>お知らせはまだありません。</p>
+  <% end %>
+
+  <!-- 現在未実装 -->
+  <div class="dashboard-group__link-right">
+    <%= link_to "▶︎ お知らせ一覧(現在未実装)", "#", class: "dashboard-group__more-link disabled-link", onclick: "return false;" %>
+    <%#= link_to "▶︎ お知らせ一覧", group_notices_path(@group), class: "dashboard-group__more-link" %>
+  </div>
+</div>

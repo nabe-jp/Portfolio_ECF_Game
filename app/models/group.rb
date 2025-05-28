@@ -11,8 +11,6 @@ class Group < ApplicationRecord
   has_many :group_events, dependent: :destroy
   has_many :group_notices, dependent: :destroy
   has_many :group_posts, dependent: :destroy
-  has_many :group_post_comments, dependent: :destroy
-  has_many :owned_groups, class_name: 'Group', foreign_key: 'owner_id', dependent: :destroy
 
   # アイコン画像
   has_one_attached :group_image
@@ -22,19 +20,37 @@ class Group < ApplicationRecord
     message: "は1～20文字以内で入力してください" }, if: -> { name.present? }
 
   validates :description, presence: { message: "を入力してください" }
-  validates :description, length: { maximum: 100,
-    message: "は1～100文字以内で入力してください" }, if: -> { description.present? }
+  validates :description, length: { maximum: 200,
+    message: "は1～200文字以内で入力してください" }, if: -> { description.present? }
 
-  validate :slug_validation
+  # 作成時だけslugの内容検証を行う
+  validate :slug_validation, on: :create
+
+  # 更新時にはslugが変更されていないことを検証する
+  validate :slug_unchanged, on: :update
 
   # 公開制御
-  scope :active_group, -> { where(is_deleted: false, is_public: true, hidden_by_parent: false, is_owner_visible: true) }
+  scope :active_group, -> { 
+    where(is_deleted: false, is_public: true, hidden_by_parent: false, is_owner_visible: true)
+      .order(created_at: :desc) }
+  # グループメンバーではないユーザーが閲覧するページに使用
+  scope :public_visible_to_non_members, -> { 
+    where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_by_parent: false)
+      .order(created_at: :desc) }
 
   # 投稿作成時に必ずデフォルト画像を設定
   after_create :set_default_group_image
+  
+  # グループ作成時、作成者もメンバーに入れる
+  after_create :add_owner_to_members
 
   # 論理削除と連動処理
   after_update :cascade_soft_delete_associations, if: :saved_change_to_is_deleted?
+
+  # URLをslugベースに変更するために使用
+  def to_param
+    slug
+  end
 
   private
 
@@ -42,9 +58,13 @@ class Group < ApplicationRecord
   def set_default_group_image
     unless group_image.attached?
       default_image_path = Rails.root.join('app', 'assets', 'images', 'no_group.png')
-      group_image.attach(io: File.open(default_image_path), 
-        filename: 'no_group.png', content_type: 'image/png')
+        group_image.attach(io: File.open(default_image_path), 
+          filename: 'no_group.png', content_type: 'image/png')
     end
+  end
+
+  def add_owner_to_members
+    group_memberships.create(user_id: owner_id)
   end
  
   # urlスラッグのカスタムバリデーション
@@ -57,6 +77,12 @@ class Group < ApplicationRecord
       errors.add(:slug, "は英数字とハイフン(-)のみ使用できます")
     elsif Group.exists?(slug: slug)
       errors.add(:slug, "は既に使用されています")
+    end
+  end
+
+  def slug_unchanged
+    if slug_changed?
+      errors.add(:slug, "は作成後に変更できません")
     end
   end
 end

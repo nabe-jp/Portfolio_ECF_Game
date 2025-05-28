@@ -8,12 +8,14 @@
 @use 'layout/main-content';
 @use 'layout/footer';
 @use 'layout/layout';
+@use 'layout/background';
 @use 'layout/about';
 @use 'layout/top';
 @use 'layout/user';
 @use 'layout/user_post';
 @use 'layout/user_post_comments';
 @use 'layout/search';
+@use 'layout/group';
 @use 'layout/admin';
 @use 'utils/variables';
 @use 'utils/mixins';

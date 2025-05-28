@@ -1,0 +1,15 @@
+<%= form_with model: @group, local: true do |f| %>
+  <div class="form-group mt-5">
+    <%= f.label :group_image, "グループ画像" %>
+    <%= f.file_field :group_image, class: "form-control border-0 p-0" %>
+  </div>
+
+  <div class="form-group mt-5">
+    <%= f.label :description, "説明" %>
+    <%= f.text_area :description, rows: 3, class: "form-control" %>
+  </div>
+
+  <div class="text-center mt-5">
+    <%= f.submit "更新する", class: "btn btn-primary px-5" %>
+  </div>
+<% end %>

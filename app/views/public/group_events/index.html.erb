@@ -1,29 +1,43 @@
-<h2 class="text-xl font-bold mb-4"><%= @group.name %> のイベント一覧</h2>
+<div class="row align-items-center">
+  <div class="col-10">
+    <h2 class="my-5"><%= @group.name %> のイベント一覧</h2>
+  </div>
+  <div class="col-2 text-right">
+    <% if current_user.id == @group.owner_id %>
+      <%= link_to '＋新しいイベント', new_group_event_path(@group),
+          class: 'btn btn-primary btn-sm' %>
+    <% end %>
+  </div>
+</div>
 
 <% if @events.any? %>
   <ul class="space-y-4">
     <% @events.each do |event| %>
       <li class="border p-4 rounded shadow">
-        <h3 class="text-lg font-semibold"><%= event.title %></h3>
-        <p><strong>開始:</strong> <%= l(event.start_time, format: :long) %></p>
-        <p><strong>終了:</strong> <%= l(event.end_time, format: :long) %></p>
-        <p class="mt-2 text-gray-700"><%= simple_format(event.description) %></p>
+        <h3 class="text-lg font-semibold mb-3">イベント名：<%= event.title %></h3>
+        <p><strong>開始予定日時:</strong> <%= l(event.start_time, format: :long) %></p>
+        <p><strong>終了予定日時:</strong> <%= l(event.end_time, format: :long) %></p>
+        <p class="mt-2 text-gray-700">
+          イベント内容<br>
+          <%= simple_format(event.description, {}, wrapper_tag: :span) %>
+        </p>
 
         <% if current_user.id == @group.owner_id %>
           <div class="mt-3">
             <%= link_to '編集', edit_group_event_path(@group, event), class: 'text-blue-600 hover:underline' %> |
-            <%= link_to '削除', group_event_path(@group, event), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'text-red-600 hover:underline' %>
+            <%= link_to '削除', group_event_path(@group, event),
+                  method: :delete, data: { confirm: '本当に削除しますか？' },
+                  class: 'text-red-600 hover:underline' %>
           </div>
         <% end %>
       </li>
     <% end %>
   </ul>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @events %> 
+  </div>
+
 <% else %>
   <p>イベントはまだ登録されていません。</p>
-<% end %>
-
-<% if current_user.id == @group.owner_id %>
-  <div class="mt-6">
-    <%= link_to '新しいイベントを作成', new_group_event_path(@group), class: 'bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded' %>
-  </div>
 <% end %>
