@@ -1,4 +1,4 @@
-<h2>作成したグループ</h2>
+<h2 class="groups__title">作成したグループ</h2>
 <% if @owned_groups.any? %>
   <div class="my-groups-list">
     <% @owned_groups.each do |group| %>
@@ -21,13 +21,14 @@
   <div class="d-flex justify-content-center mt-4">
     <%= paginate @owned_groups, param_name: :owned_page %>
   </div>
+  
 <% else %>
-  <p>作成したグループはありません。</p>
+  <p style="text-align: center;">作成したグループはありません。</p>
 <% end %>
 
 <hr>
 
-<h2>参加中のグループ</h2>
+<h2 class="groups__title">参加中のグループ</h2>
 <% if @joined_groups.any? %>
   <div class="my-groups-list">
     <% @joined_groups.each do |group| %>
@@ -50,6 +51,7 @@
   <div class="d-flex justify-content-center mt-4">
     <%= paginate @joined_groups, param_name: :joined_page %>
   </div>
+
 <% else %>
-  <p>他のグループに参加していません。</p>
+  <p style="text-align: center;">他のグループに参加していません。</p>
 <% end %>

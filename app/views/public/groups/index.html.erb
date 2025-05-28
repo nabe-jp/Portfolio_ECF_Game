@@ -1,28 +1,33 @@
 <h2 class="groups__title">グループ一覧</h2>
-
-<div class="groups">
-  <% @groups.each do |group| %>
-    <%= link_to group_path(group), class: "group-card" do %>
-      <div class="group-card__image">
-        <%= image_tag(group.group_image, size: "200x200", class: "img-fluid") %>
-      </div>
-      <div class="group-card__content">
-        <div class="group-card__name">
-          <h3><%= group.name %></h3>
+<% if @groups.any? %>
+  <div class="groups">
+    <% @groups.each do |group| %>
+      <%= link_to group_path(group), class: "group-card" do %>
+        <div class="group-card__image">
+          <%= image_tag(group.group_image, size: "200x200", class: "img-fluid") %>
         </div>
-        <div class="group-card__description">
-          <p><%= group.description %></p>
+        <div class="group-card__content">
+          <div class="group-card__name">
+            <h3><%= group.name %></h3>
+          </div>
+          <div class="group-card__description">
+            <p><%= group.description %></p>
+          </div>
+          <div class="group-card__meta">
+            <span>メンバー数: <%= group.group_memberships.count %>人</span>
+            <span>最終投稿: <%= group.last_posted_at ? 
+              l(group.last_posted_at, format: :short) : "なし" %></span>
+          </div>
         </div>
-        <div class="group-card__meta">
-          <span>メンバー数: <%= group.group_memberships.count %>人</span>
-          <span>最終投稿: <%= group.last_posted_at ? 
-            l(group.last_posted_at, format: :short) : "なし" %></span>
-        </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
 
-<div class="d-flex justify-content-center mt-4">
-  <%= paginate @groups %>
-</div>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @groups %>
+  </div>
+
+<% else %>
+  <p style="text-align: center;">表示出来るグループはありません。</p>
+<% end %>
+

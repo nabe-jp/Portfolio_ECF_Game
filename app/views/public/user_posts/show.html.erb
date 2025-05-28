@@ -14,7 +14,7 @@
         <div>
           <%= link_to '編集', edit_user_post_path(current_user, @user_post), class: 'btn btn-base' %>
           <%= link_to '削除', user_post_path(current_user, @user_post), method: :delete, 
-                      data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
+            data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
         </div>
       <% end %>
     </div>
@@ -23,7 +23,7 @@
 
 <div class="container mt-5">
   <div class="row my-5">
-    <%= render 'shared/user_post/post_show' %>
+    <%= render 'public/shared/user_post/post_show' %>
   </div>
 </div>
 
@@ -32,11 +32,11 @@
 <hr>
 
 <% if user_signed_in? %>
-  <%= render 'shared/user_post_comment/form', user_post: @user_post %>
+  <%= render 'public/shared/user_post_comment/form', user_post: @user_post %>
 <% else %>
   <p class="text-center">コメントするにはログインが必要です。</p>
 <% end %>
 
 <hr>
 
-<%= render 'shared/user_post_comment/list', user_post: @user_post %>
+<%= render 'public/shared/user_post_comment/list', user_post: @user_post %>
