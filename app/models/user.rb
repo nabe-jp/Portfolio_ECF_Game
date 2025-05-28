@@ -39,9 +39,6 @@ class User < ApplicationRecord
   # ユーザー作成時にデフォルト画像を設定
   after_create :set_default_profile_image
 
-  # ユーザー論理削除時に紐づく関連投稿やコメントの非公開、また復元時の復元処理
-  after_update :cascade_hide_children_if_deleted, if: :saved_change_to_is_deleted?
-
   # シードデータ作成時にコールバックを実行しないようにするフラグ
   def seeding?
     defined?($skip_callbacks) && $skip_callbacks
