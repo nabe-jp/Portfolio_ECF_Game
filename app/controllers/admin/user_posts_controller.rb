@@ -1,7 +1,7 @@
 class Admin::UserPostsController < Admin::ApplicationController
-
   before_action :set_user_post, only: [:show, :destroy, :reactivate, :hide, :publish]
 
+  # 一覧の絞り込みロジック
   include Admin::FilteredRecords
 
   def index
@@ -22,6 +22,14 @@ class Admin::UserPostsController < Admin::ApplicationController
     @user_post.update(is_deleted: true, is_public: false, deleted_at: Time.current,
       deleted_by_id: current_admin.id)
     redirect_to admin_user_post_path(@user_post), notice: "投稿を削除しました"
+
+    begin
+      Deleter::UserPostDeleter.call(@user_post, deleted_by: current_admin)
+      redirect_to admin_user_post_path(@user_post), notice: "投稿を削除しました"
+    rescue => e
+      Rails.logger.error("UserPost削除エラー: #{e.message}")
+      redirect_to admin_root_path, alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
+    end
   end
   
   def reactivate

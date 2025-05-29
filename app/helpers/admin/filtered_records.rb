@@ -1,7 +1,7 @@
 module Admin::FilteredRecords
     # 投稿一覧の絞り込みロジック
     def filtered_records(model_class)
-      base = model_class.includes(:user)                            # N+1回避のためにユーザー情報を事前読み込み
+      base = model_class.includes(:user)                         # N+1回避のためにユーザー情報を事前読み込み
 
       # 各表示状態に対応するスコープを定義(独立していて互いに影響を与えない)
       public_scope     = model_class.where(is_public: true, is_deleted: false)

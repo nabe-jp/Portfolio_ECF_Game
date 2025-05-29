@@ -3,14 +3,13 @@
 .main-content {
   position: relative;
   top: var(--header-height);
-  bottom: var(--footer-height);
-  margin: 20px var(--sidebar-width); // ヘッダーとフッターの間に余白
+  left: var(--sidebar-width);
   overflow-y: auto;
-  height: calc(100vh - var(--header-height) - var(--footer-height) - 40px);
-  width: 100%;
-  padding: 1rem;
-  -ms-overflow-style: none;          // スクロールバーを非表示、Internet Explorer 10+ 対応
-  scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応
+  height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--sidebar-width) * 2); 
+  padding: 1rem;                      // ヘッダーとフッターの間に余白
+  -ms-overflow-style: none;           // スクロールバーを非表示、Internet Explorer 10+ 対応
+  scrollbar-width: none;              // スクロールバーを非表示、Firefox 64+ 対応
 }
 
 // Webkit系ブラウザ(Chrome、Safariなど)にスクロールバーを非表示にする

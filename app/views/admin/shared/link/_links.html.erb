@@ -5,6 +5,12 @@
     class: (is_button ? 'btn btn-base' : nil) %>
 <% end %>
 
+<% if defined?(back) && back %>
+  <%= link_to '戻る', 'javascript:history.back()', 
+    class: (is_button ? 'btn btn-base back-btn' : nil) %>
+<% end %>
+
+
 <% if defined?(users) && users && admin_signed_in? %>
   <%= link_to 'ユーザー一覧', admin_users_path, 
     class: (is_button ? 'btn btn-base' : nil) %>

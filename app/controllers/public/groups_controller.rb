@@ -1,5 +1,5 @@
 class Public::GroupsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_group, only: 
     [:show, :edit, :update, :destroy, :join, :leave, :hide_from_owner, :show_by_owner, :dashboard]
   before_action :authorize_group_member!, only: [:dashboard]
@@ -21,6 +21,7 @@ class Public::GroupsController < ApplicationController
   def new
     @group = Group.new(group_attributes_from_session)
   end
+  
   def create
     session[:group_attributes] = nil
     # オーナーに現在のログインユーザーを設定

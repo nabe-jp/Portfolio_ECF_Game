@@ -17,9 +17,14 @@ class Admin::UserPostCommentsController < Admin::ApplicationController
   # 削除時、非公開にもする
   def destroy
     @user_post_comment = UserPostComment.find(params[:id])
-    @user_post_comment.update(is_deleted: true, is_public: false, 
-      deleted_at: Time.current, deleted_by_id: current_admin.id)
-    redirect_to admin_user_post_comment_path(@user_post_comment), notice: "コメントを削除しました"
+  
+    begin
+      Deleter::UserPostCommentDeleter.call(@comment, deleted_by: current_admin)
+      redirect_to admin_user_post_comment_path(@user_post_comment), notice: "コメントを削除しました"
+    rescue => e
+      Rails.logger.error("UserPostCmment削除エラー: #{e.message}")
+      redirect_to admin_root_path, alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
+    end
   end
 
   def reactivate

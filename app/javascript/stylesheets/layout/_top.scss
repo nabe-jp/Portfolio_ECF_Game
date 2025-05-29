@@ -1,9 +1,4 @@
 /*    トップページの設定    */
-// トップページの余白の色
-body.homes.top {
-  background-color: #8edaf8;        // トップページの背景色
-}
-
 // 各タイトルの設定
 // タイトルの設定
 .title-container {
@@ -14,7 +9,7 @@ body.homes.top {
 .notice-title {
   position: absolute;
   top: 85px;                          // 背景画像に応じて位置を調整
-  color: #E0E0E0;
+  color: #99CC99;
   font-size: 2rem;
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); // 輪郭のにじみ
 }
@@ -98,6 +93,10 @@ body.homes.top {
   height: 0px;
 }
 
+.scrollable-box-text {
+  color: rgb(26, 26, 26);
+}
+
 // 投稿についての設定
 // 投稿コンテナのレイアウト設定
 .posts-container {
@@ -118,7 +117,7 @@ body.homes.top {
   border-radius: 16px;               // 角を丸く
   overflow: hidden;                 // 内容がはみ出さないようにする
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background-color: #8FA3B8;
   color: inherit;                   // 親要素の色を引き継ぐ
   text-decoration: none;            // リンクの下線を消す
   margin-bottom: 4rem;              // ボックス間の余白

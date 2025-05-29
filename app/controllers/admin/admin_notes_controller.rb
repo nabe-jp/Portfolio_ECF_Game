@@ -1,5 +1,4 @@
 class Admin::AdminNotesController < Admin::ApplicationController
-
   before_action :set_admin_note, only: [:edit, :update, :destroy, :reactivate]
 
   def index
@@ -30,10 +29,7 @@ class Admin::AdminNotesController < Admin::ApplicationController
       redirect_to admin_notes_path, notice: "申し送りを作成しました。"
     else
       store_form_data(
-        attributes: admin_note_params,
-        error_messages: @admin_note.errors.full_messages,
-        error_name: "作成"
-      )
+        attributes: admin_note_params, error_messages: @admin_note.errors.full_messages, error_name: "作成")
       redirect_to admin_notes_path
     end
   end
@@ -49,10 +45,7 @@ class Admin::AdminNotesController < Admin::ApplicationController
     if @admin_note.update(admin_note_params)
       redirect_to admin_notes_path, notice: "申し送りを更新しました。"
     else
-      store_form_data(
-        attributes: admin_note_params,
-        error_messages: @admin_note.errors.full_messages
-      )
+      store_form_data(attributes: admin_note_params, error_messages: @admin_note.errors.full_messages)
       redirect_to edit_admin_note_path(@admin_note)
     end
   end

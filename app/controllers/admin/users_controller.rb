@@ -1,5 +1,4 @@
 class Admin::UsersController < Admin::ApplicationController
-
   before_action :set_user, only: [:show, :update, :deactivate, :reactivate]
 
   def index
@@ -35,22 +34,23 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def deactivate
-    if @user.is_deleted
-      redirect_to admin_user_path(@user), alert: 'すでに削除されています'
-      return
-    end
-
     begin
       Deleter::UserDeleter.call(@user, deleted_by: current_admin)
       redirect_to admin_user_path(@user), notice: 'ユーザーと関連データを削除しました'
     rescue => e
-      redirect_to root_path, alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
+      Rails.logger.error("User削除エラー: #{e.message}")
+      redirect_to admin_root_path, alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
     end
   end
 
   def reactivate
-    @user.update(is_deleted: false)
-    redirect_to admin_user_path(@user), notice: 'ユーザーを復元しました。'
+    begin
+      Restorer::UserRestorer.call(@user)
+      redirect_to admin_user_path(@user), notice: 'ユーザーと関連データを復元しました'
+    rescue => e
+      Rails.logger.error("User復元エラー: #{e.message}")
+      redirect_to admin_root_path, alert: '予期せぬエラーにより、ユーザーと関連データの復元が行えませんでした。'
+    end
   end
 
   private

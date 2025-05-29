@@ -44,9 +44,6 @@ class Group < ApplicationRecord
   # グループ作成時、作成者もメンバーに入れる
   after_create :add_owner_to_members
 
-  # 論理削除と連動処理
-  after_update :cascade_soft_delete_associations, if: :saved_change_to_is_deleted?
-
   # URLをslugベースに変更するために使用
   def to_param
     slug

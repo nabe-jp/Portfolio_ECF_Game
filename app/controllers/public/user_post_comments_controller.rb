@@ -25,7 +25,7 @@ class Public::UserPostCommentsController < ApplicationController
       Deleter::UserPostCommentDeleter.call(@comment, deleted_by: current_user)
       redirect_to user_post_path(@comment.user_post), notice: 'コメントを削除しました。'
     rescue => e
-      Rails.logger.error("コメント削除エラー: #{e.message}")
+      Rails.logger.error("UserPostComment削除エラー: #{e.message}")
       redirect_to user_post_path(@comment.user_post), alert: '削除に失敗しました。'
     end
   end

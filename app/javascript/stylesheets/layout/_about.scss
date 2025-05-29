@@ -1,13 +1,4 @@
 /*    アバウトページの設定    */
-// アバウトページの余白の色
-body.homes.about {
-  background-image: url('../images/home_about_background.jpg');
-  background-size: 80%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-}
-
 // すべてのセクションの共通設定
 body.homes.about section {
   width: 80%;
@@ -30,43 +21,43 @@ body.homes.about section p {
 .about-page-header {
   width: 90%;
   margin: 1.5rem auto;              // 左右中央揃え、上下側に余白
-  background-color: #6c63ff;
+  background-color: rgba(108, 99, 255, 0.8);
   color: white;
   text-align: center;
 }
 
 // サイトの目的
 .site-purpose {
-  background-color: #4caf50;
+  background-color: rgba(76, 175, 80, 0.8);
   color: black;
 }
 
 // 運営者情報
 .about-creator {
-  background-color: #607d8b;
+  background-color: rgba(96, 125, 139, 0.8);
   color: black;
 }
 
 // 取り扱っているコンテンツ
 .site-content {
-  background-color: #f44336;
+  background-color: rgba(244, 67, 54, 0.8);
   color: black;
 }
 
 // ターゲット
 .target-audience {
-  background-color: #ffc107;
+  background-color: rgba(255, 193, 7, 0.8);
   color: black;
 }
 
 // 今後の展望
 .future-goals {
-  background-color: #00bcd4;
+  background-color: rgba(0, 188, 212, 0.8);
   color: black;
 }
 
 // お問い合わせ
 .contact-info {
-  background-color: #c22fdb;
+  background-color: rgba(194, 47, 219, 0.8);
   color: black;
 }

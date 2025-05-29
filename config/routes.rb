@@ -116,7 +116,7 @@ Rails.application.routes.draw do
       end
     end
 
-    # 今後実装予定
+    # -----今後実装予定-----
     # グループ管理
     resources :groups, only: [:index, :show, :destroy] do
       member do
@@ -134,8 +134,6 @@ Rails.application.routes.draw do
     resources :dm_rooms, only: [:index, :show, :destroy] do
       resources :messages, only: [:destroy]
     end
-  
-    # その他の管理用ツール
-    get 'button/test', to: 'button#test', as: :button_test
+
   end
 end  

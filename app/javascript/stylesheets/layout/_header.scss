@@ -108,24 +108,25 @@ input[type="radio"]:checked + label {
 // 検索ボタン 
 // 通常時
 .search-form__button {
-  color: #808080;
-  border-color: #808080;
+  color: white;
+  border-color: white;
   height: 30px;
   margin: 0;
+  line-height: 1;                   // テキストの余白によるズレを回避 
 }
 
 // ホバー時
 .search-form__button:hover {
   color: black;
   border-color: black;
-  background-color: white;
+  background-color: #a6c9a7;
 }
 
 // クリック時
 .search-form__button:active {
   color: #FFFFFF;
   border-color: #388E3C;
-  background-color: #388E3C;
+  background-color: #a6c9a7;
 }
 
 // フォーカス時

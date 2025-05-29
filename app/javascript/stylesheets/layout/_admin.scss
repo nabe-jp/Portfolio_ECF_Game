@@ -1,21 +1,18 @@
 /*    admin側の設定    */
-
 // ヘッダー、サイドバー、フッターの設定
 .admin-root {
-  --header-height: 110px;            // ヘッダーの高さ
-  --footer-height: 50px;             // フッターの高さ
-  --sidebar-width: 220px;            // サイドバーの幅
+  --header-height: 15vh;            // ヘッダーの高さ
+  --sidebar-width: 15vw;            // サイドバーの幅
 }
 
 // メインコンテンツタグの設定
 .admin-root .admin-main-content {
   position: relative;
   top: var(--header-height);
-  bottom: var(--footer-height);
-  margin: 20px 0 20px var(--sidebar-width); // ヘッダーとフッターの間に余白
+  left: var(--sidebar-width);
   overflow-y: auto;
-  height: calc(100vh - var(--header-height) - var(--footer-height) - 40px);
-  width: 100%;
+  height: calc(100vh - var(--header-height));
+  width: calc(100vw - var(--sidebar-width)); 
   padding: 1rem;
   -ms-overflow-style: none;          // スクロールバーを非表示、Internet Explorer 10+ 対応
   scrollbar-width: none;             // スクロールバーを非表示、Firefox 64+ 対応

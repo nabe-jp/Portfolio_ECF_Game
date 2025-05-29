@@ -3,5 +3,6 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # Adminが削除された場合、admin_idをNULLにする(情報自体は削除しない)
+  has_many :admin_note, dependent: :nullify
   has_many :informations, dependent: :nullify
 end

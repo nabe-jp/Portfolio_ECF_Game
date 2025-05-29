@@ -13,7 +13,7 @@ module Restorer
     private
 
     def restore(records)
-      records.update_all(is_deleted: false, deleted_at: nil, deleted_by_id: nil)
+      records.update_all(is_deleted: false, deleted_at: nil, deleted_by_id: nil, is_public: false)
     end
   end
 end
