@@ -1,9 +1,30 @@
-<h4>グループの検索結果</h4>
+<h4 id="groups-results">グループの検索結果</h4>
 <% if groups.any?  %>
   <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(groups) %></p>
 
+  <div class="container">
+    <div class="row">
+      <% groups.each do |group| %> 
+        <div class="col-6">
+          <%#= link_to user_post_path(post.user.id, post.id), class: 'user-posts__link' do %>
 
-  
+
+
+
+
+
+             </div>
+          <%# end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <%= paginate groups, param_name: :ugroup_page, 
+        params: request.query_parameters.merge(scroll_to: 'groups-results') %>
+    </div>
+  </div>
+
 <% else %>
   <p class="text-center">検索結果は見つかりませんでした。</p>
 <% end %>

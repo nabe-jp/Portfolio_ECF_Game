@@ -69,25 +69,25 @@ class Public::SearchesController < ApplicationController
   # 各モデルに応じた検索メソッド
   def search_users
     search_model_optimized(User.where(is_deleted: false, 
-      hidden_by_parent: false), %w[nickname bio]).page(params[:page]).per(10)
+      hidden_by_parent: false), %w[nickname bio]).page(params[:user_page]).per(10)
   end
   
   def search_user_posts
     search_model_optimized(UserPost.where(is_deleted: false, 
-      is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
+      is_public: true, hidden_by_parent: false), %w[title body]).page(params[:post_page]).per(10)
   end
 
   #　現在未実装
   def search_groups
     # search_model_optimized(Group.where(is_deleted: false, 
-    #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
+    #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:group_page]).per(10)
     Group.none.page(params[:page]).per(10)
   end
 
   #　現在未実装
   def search_group_posts
     # search_model_optimized(GroupPost.where(is_deleted: false, 
-    #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
+    #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:group_post_page]).per(10)
     GroupPost.none.page(params[:page]).per(10)
   end
 

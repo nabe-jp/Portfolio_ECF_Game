@@ -1,4 +1,4 @@
-<h4>ユーザーの検索結果</h4>
+<h4 id="users-results">ユーザーの検索結果</h4>
 <% if users.any?  %>
   <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(users) %></p>
 
@@ -26,6 +26,11 @@
           <% end %>
         </div>
       <% end %>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <%= paginate users, param_name: :user_page, 
+        params: request.query_parameters.merge(scroll_to: 'users-results') %>
     </div>
   </div>
 

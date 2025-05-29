@@ -1,7 +1,29 @@
-<h4>グループ内投稿の検索結果</h4>
+<h4 id="group-posts-results">グループ内投稿の検索結果</h4>
 <% if group_posts.any?  %>
   <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(group_posts) %></p>
 
+  <div class="container">
+    <div class="row">
+      <% group_posts.each do |post| %> 
+        <div class="col-6">
+          <%#= link_to user_post_path(post.user.id, post.id), class: 'user-posts__link' do %>
+
+
+
+
+
+
+             </div>
+          <%# end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <%= paginate group_posts, param_name: :group_post_page, 
+        params: request.query_parameters.merge(scroll_to: 'group-posts-results') %>
+    </div>
+  </div>
   
 <% else %>
   <p class="text-center">検索結果は見つかりませんでした。</p>
