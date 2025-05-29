@@ -16,7 +16,7 @@
           <% when @decide_types[2] %>
             <%= render 'shared/search/result/groups', groups: result[:records] %>
           <% when @decide_types[3] %>
-            <%= render 'shared/search/result/group_posts', posts: result[:records] %>
+            <%= render 'shared/search/result/group_posts', group_posts: result[:records] %>
           <% end %>
         <% end %>
       

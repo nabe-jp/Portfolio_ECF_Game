@@ -1,3 +1,9 @@
+<h4>ユーザー投稿の検索結果</h4>
+<% if user_posts.any?  %>
 <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(user_posts) %></p>
 
-<%= render 'shared/user_post/post_index', user_posts: user_posts %>
+<%= render 'public/shared/user_post/post_index', user_posts: user_posts %>
+
+<% else %>
+  <p class="text-center">検索結果は見つかりませんでした。</p>
+<% end %>

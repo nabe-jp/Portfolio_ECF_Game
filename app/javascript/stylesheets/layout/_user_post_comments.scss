@@ -27,6 +27,7 @@
 
 .comment-item {
   display: flex;
+  align-items: center;
   margin: 0;
 }
 
@@ -41,7 +42,6 @@
 .comment-item__user {
   width: 20%;
   margin: 0;
-  text-align: center;
   word-break: break-word;
   box-sizing: border-box;
 }

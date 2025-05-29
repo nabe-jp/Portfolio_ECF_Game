@@ -1,5 +1,9 @@
-<p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(posts) %></p>
-<% @results.each do |result| %>
+<h4>グループの検索結果</h4>
+<% if groups.any?  %>
+  <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(groups) %></p>
 
 
+  
+<% else %>
+  <p class="text-center">検索結果は見つかりませんでした。</p>
 <% end %>

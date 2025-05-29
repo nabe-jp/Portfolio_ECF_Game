@@ -1,28 +1,34 @@
-<p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(users) %></p>
+<h4>ユーザーの検索結果</h4>
+<% if users.any?  %>
+  <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(users) %></p>
 
-<div class="container">
-  <div class="row">
-    <% users.each do |user| %> 
-      <div class="col-6">
-        <%= link_to show_user_path(user), class: 'search-user__link' do %>
-          
-          <div class="search-user__card">
-            <!-- 左側：プロフィール画像 -->
-            <div class="search-user__image-box">
-              <%= image_tag(user.profile_image, size: "200x200", class: "search-user__image") %>
+  <div class="container">
+    <div class="row">
+      <% users.each do |user| %> 
+        <div class="col-6">
+          <%= link_to show_user_path(user), class: 'search-user__link' do %>
+            
+            <div class="search-user__card">
+              <!-- 左側：プロフィール画像 -->
+              <div class="search-user__image-box">
+                <%= image_tag(user.profile_image, size: "200x200", class: "search-user__image") %>
+              </div>
+
+              <!-- 右側：プロフィール情報 -->
+              <div class="search-user__info-box">
+                <p class="search-user__label">ニックネーム</p>
+                <p class="search-user__nickname"><%= user.nickname %></p>
+                <p class="search-user__label">自己紹介</p>
+                <p class="search-user__bio"><%= user.bio %></p>
+              </div>
+
             </div>
-
-            <!-- 右側：プロフィール情報 -->
-            <div class="search-user__info-box">
-              <p class="search-user__label">ニックネーム</p>
-              <p class="search-user__nickname"><%= user.nickname %></p>
-              <p class="search-user__label">自己紹介</p>
-              <p class="search-user__bio"><%= user.bio %></p>
-            </div>
-
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
+
+<% else %>
+  <p class="text-center">検索結果は見つかりませんでした。</p>
+<% end %>

@@ -81,14 +81,14 @@ class Public::SearchesController < ApplicationController
   def search_groups
     # search_model_optimized(Group.where(is_deleted: false, 
     #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
-    Group.none.page(params[:page])
+    Group.none.page(params[:page]).per(10)
   end
 
   #　現在未実装
   def search_group_posts
     # search_model_optimized(GroupPost.where(is_deleted: false, 
     #   is_public: true, hidden_by_parent: false), %w[title body]).page(params[:page]).per(10)
-    GroupPost.none.page(params[:page])
+    GroupPost.none.page(params[:page]).per(10)
   end
 
   # 入力が空なら空配列を返す、全角スペースを半角にし、記号を削除し、文字列の前後の空白を取り除く

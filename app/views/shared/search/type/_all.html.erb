@@ -1,36 +1,27 @@
 <% @results.each do |result| %>
+
   <!-- ユーザー情報の表示 -->
   <% if result.is_a?(User) %>
 
-      <%= render  'shared/search/result/users' %>
+    <%= render  'shared/search/result/users' %>
 
   <!-- 投稿情報の表示 -->
   <% elsif result.is_a?(Post) %>
 
-  <div class="group-result">
     <%= render  'shared/search/result/user_posts' %>
-  </div>
 
   <!-- グループ情報の表示 -->
   <% elsif result.is_a?(Group) %>
         
-
     <%= render  'shared/search/result/groups' %>
 
-
-  <div class="group-result">
-    <h3 class="group-name"><%= result.name %></h3>
   </div>
 
   <!-- グループ内投稿情報の表示 -->
   <% elsif result.is_a?(GroupPost) %>
 
     <%= render  'shared/search/result/group_posts' %>
-
-
-    <div class="group-post-result">
-      <h3 class="group-post-title"><%= highlight(result.title, params[:q]) %></h3>
-      <p class="group-post-body"><%= highlight(result.body, params[:q]) %></p>
-    </div>
+    
+  </div>
   <% end %>
 <% end %>

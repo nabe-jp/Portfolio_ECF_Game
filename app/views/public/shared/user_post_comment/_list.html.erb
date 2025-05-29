@@ -6,7 +6,9 @@
 
     <% else %>
       <p class="user-comments__body"><%= comment.body %></p>
-      <p class="comment-item__user"><%= comment.user.nickname %></p>
+      <p class="comment-item__user">
+        <%= image_tag(comment.user.profile_image, size: "35x35", class: "profile-box__image") %>
+        <%= comment.user.nickname %></p>
       <div class="comment-item__deleted">
         <% if comment.user == current_user || @user_post.user == current_user %>
           <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),

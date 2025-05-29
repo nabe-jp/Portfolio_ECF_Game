@@ -11,7 +11,7 @@
 </div>
 
 <% if @events.any? %>
-  <ul class="space-y-4">
+  <ul class="space-y-4" style="list-style-type: none;">
     <% @events.each do |event| %>
       <li class="border p-4 rounded shadow">
         <h3 class="text-lg font-semibold mb-3">イベント名：<%= event.title %></h3>
