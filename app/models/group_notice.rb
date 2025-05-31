@@ -10,5 +10,5 @@ class GroupNotice < ApplicationRecord
   validates :body, length: { maximum: 200, 
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }  
 
-  scope :active_group_info, -> { where(is_deleted: false, is_public: true) }
+  scope :active_group_info, -> { where(is_deleted: false, is_public: true).order(created_at: :desc) }
 end

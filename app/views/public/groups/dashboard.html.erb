@@ -14,9 +14,11 @@
     </div>
 
     <!-- 右下に編集ボタンを配置 -->
-    <div class="position-absolute" style="bottom: 0; right: 0;">
-      <%= link_to "グループを編集", edit_group_path(@group), class: "btn btn-outline-primary btn-sm" %>
-    </div>
+    <% if current_user.id == @group.owner_id %>
+      <div class="position-absolute" style="bottom: 0; right: 0;">
+        <%= link_to "グループを編集", edit_group_path(@group), class: "btn btn-outline-primary btn-sm" %>
+      </div>
+    <% end %>
   </div>
 
   <hr>

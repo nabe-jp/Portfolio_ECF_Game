@@ -6,12 +6,13 @@ class Public::GroupNoticesController < ApplicationController
   before_action :set_group_notice, only: [:show, :edit, :update, :destroy]
 
   def index
-    @notices = @group.group_notices.active.order(created_at: :desc)
+    @notices = @group.group_notices.active_group_info.page(params[:page]).per(10)
   end
 
   def show; end
 
   def new
+    @form_url = group_notices_path(@group)
     @group_notice = @group.group_notices.new(group_notice_attributes_from_session)
   end
 
@@ -21,7 +22,7 @@ class Public::GroupNoticesController < ApplicationController
 
     if @group_notice.save
       session[:group_notice_attributes] = nil
-      redirect_to dashboard_group_path(@group), notice: "お知らせを作成しました。"
+      redirect_to group_notices_path(@group), notice: "お知らせを作成しました。"
     else
       store_form_data(attributes: group_notice_params, 
         error_messages: @group_notice.errors.full_messages, error_name: "お知らせ")
@@ -30,6 +31,7 @@ class Public::GroupNoticesController < ApplicationController
   end
 
   def edit
+    @form_url = group_notice_path(@group, @group_notice)
     if session[:group_notice_attributes]
       @group_notice.assign_attributes(session[:group_notice_attributes])
       session.delete(:group_notice_attributes)
@@ -39,7 +41,7 @@ class Public::GroupNoticesController < ApplicationController
   def update
     if @group_notice.update(group_notice_params)
       session.delete(:group_notice_attributes)
-      redirect_to dashboard_group_path(@group), notice: "お知らせを更新しました。"
+      redirect_to group_notices_path(@group), notice: "お知らせを更新しました。"
     else
       store_form_data(attributes: group_notice_params, 
         error_messages: @group_notice.errors.full_messages, error_name: "お知らせ")
@@ -48,8 +50,14 @@ class Public::GroupNoticesController < ApplicationController
   end
 
   def destroy
-    @group_notice.soft_delete(current_user.id)
-    redirect_to dashboard_group_path(@group), alert: "お知らせを削除しました。"
+    begin
+      Deleter::GroupNoticeDeleter.call(@group_notice, deleted_by: current_user)
+      redirect_to group_notices_path(@group),
+      notice: "お知らせを削除しました"
+    rescue => e
+      Rails.logger.error("お知らせ削除エラー: #{e.message}")
+      redirect_to group_notices_path(@group), alert: '予期せぬエラーにより、お知らせの削除が行えませんでした。'
+    end
   end
 
   private

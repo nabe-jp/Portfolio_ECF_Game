@@ -11,7 +11,9 @@ class CreateUserPosts < ActiveRecord::Migration[6.1]
       t.boolean :is_deleted, default: false, null: false                # 論理削除フラグ
       t.datetime :deleted_at                                            # 削除日時
       t.integer :deleted_by_id                                          # 削除したユーザーID
-      t.boolean :hidden_by_parent, default: false, null: false          # 親ユーザーが非表示のとき制御用
+      t.string :deleted_reason                                          # 削除理由
+      t.boolean :deleted_due_to_parent, default: false, null: false     # 連動削除の有無
+      t.boolean :hidden_on_parent_restore, default: false, null: false  # 連動削除後、親の復元に連動して非公開
 
       # 表示状態関連(ピン留め・並び順)
       t.boolean :is_pinned, default: false, null: false                 # 固定表示

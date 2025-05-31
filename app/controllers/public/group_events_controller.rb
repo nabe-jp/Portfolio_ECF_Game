@@ -57,8 +57,14 @@ class Public::GroupEventsController < ApplicationController
   end
 
   def destroy
-    @group_event.update(is_deleted: true, deleted_at: Time.current, deleted_by_id: current_user.id)
-    redirect_to group_events_path(@group), alert: 'イベントを削除しました'
+    begin
+      Deleter::GroupEventDeleter.call(@group_event, deleted_by: current_user)
+      redirect_to group_events_path(@group),
+      notice: "イベントを削除しました"
+    rescue => e
+      Rails.logger.error("イベント削除エラー: #{e.message}")
+      redirect_to group_events_path(@group), alert: '予期せぬエラーにより、イベントの削除が行えませんでした。'
+    end
   end
 
   private

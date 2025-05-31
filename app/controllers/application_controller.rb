@@ -9,13 +9,14 @@ class ApplicationController < ActionController::Base
   private
 
   def handle_invalid_auth_token
-    # ログインしているならログアウトさせる
-    sign_out current_user if user_signed_in?
-
-    # フラッシュメッセージを表示
-    flash[:alert] = "セッションの有効期限が切れました。もう一度ログインしてください。"
-
-    # Deviseのログイン画面へリダイレクト
-    redirect_to root_path
+    if admin_signed_in? || request.path.starts_with?('/admin')
+      sign_out current_admin if admin_signed_in?
+      flash[:alert] = "セッションの有効期限が切れました。もう一度ログインしてください。"
+      redirect_to new_admin_session_path
+    else
+      sign_out current_user if user_signed_in?
+      flash[:alert] = "セッションの有効期限が切れました。もう一度ログインしてください。"
+      redirect_to new_user_session_path
+    end
   end
 end

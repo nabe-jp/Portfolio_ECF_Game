@@ -8,14 +8,18 @@ class CreateGroupMemberships < ActiveRecord::Migration[6.1]
       t.integer :invited_by_id                                          # 招待したユーザーID
       t.text :note                                                      # 管理者メモ
 
-       # 権限・状態
-      t.integer :role, default: 0, null: false                          # 権限(enum: 一般, モデレーター, 管理者など)
-      t.integer :status, default: 0, null: false                        # 状態(enum: pending, active, suspended など)
-
-      # 削除制御
+      # 表示・公開制御
+      t.boolean :is_public, default: true, null: false                  # 公開/非公開の切り替え
       t.boolean :is_deleted, default: false, null: false                # 論理削除
       t.datetime :deleted_at                                            # 削除日時
       t.integer :deleted_by_id                                          # 削除したユーザーID
+      t.string :deleted_reason                                          # 削除理由
+      t.boolean :deleted_due_to_parent, default: false, null: false     # 連動削除の有無
+      t.boolean :hidden_on_parent_restore, default: false, null: false  # 連動削除後、親の復元に連動して非公開
+
+       # 権限・状態
+      t.integer :role, default: 0, null: false                          # 権限(enum: 一般, モデレーター, 管理者など)
+      t.integer :status, default: 0, null: false                        # 状態(enum: pending, active, suspended など)
 
       t.timestamps
     end
