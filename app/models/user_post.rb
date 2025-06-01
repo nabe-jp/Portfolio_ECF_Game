@@ -1,8 +1,8 @@
 class UserPost < ApplicationRecord
   
   # 現在未実装(Gemインストール済み)
-  # acts_as_taggable_on :tags
-  # acts_as_taggable_on :user_post_tags
+  acts_as_taggable_on :tags
+  acts_as_taggable_on :user_post_tags
 
   belongs_to :user
   has_many :user_post_comments, dependent: :destroy

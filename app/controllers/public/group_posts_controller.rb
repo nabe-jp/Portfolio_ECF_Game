@@ -58,7 +58,7 @@ class Public::GroupPostsController < ApplicationController
 
   def destroy
     begin
-      Deleter::GroupPostDeleter.new(@group_post, deleted_by: current_user).call
+      Deleter::GroupPostDeleter.call(@group_post, deleted_by: current_user)
       redirect_to dashboard_group_path(@group), notice: '投稿を削除しました。'
     rescue => e
       Rails.logger.error("GroupPost削除エラー: #{e.message}")

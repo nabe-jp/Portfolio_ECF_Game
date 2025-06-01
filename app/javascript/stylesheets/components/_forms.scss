@@ -108,3 +108,22 @@ input.short-input {
   padding-left: 20px;               // スペースを追加してリストを右に寄せる 
   margin-bottom: 2rem;              // エラーメッセージと入力フォームの間に余白を設定
 }
+
+.tag-box {
+  margin-top: 1rem;
+}
+
+.tag-box__label {
+  background-color: #337ab7;
+  font-weight: 500;
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}

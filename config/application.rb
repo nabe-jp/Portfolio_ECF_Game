@@ -11,6 +11,9 @@ module PortfolioEcfGame
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # カリキュラムより抜粋、libを読み込みAPIを使用する為に設定
+    config.paths.add 'lib', eager_load: true 
+
     # カリキュラムより抜粋、日本語化
     config.i18n.default_locale = :ja
 

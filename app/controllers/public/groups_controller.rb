@@ -57,7 +57,7 @@ class Public::GroupsController < ApplicationController
   def destroy
     begin
       # サービスオブジェクトをにてグループとグループに紐づくものを論理削除
-      Deleter::GroupDeleter.new(@group, current_user).call
+      Deleter::GroupDeleter.call(@group, current_user)
       redirect_to public_groups_path, notice: "グループを削除しました"
     rescue => e
       Rails.logger.error("コメント削除エラー: #{e.message}")

@@ -1,10 +1,10 @@
 module Deleter
   class UserDeleter
     def self.call(user, deleted_by:)
-      new(user, deleted_by).call
+      new(user, deleted_by: deleted_by).call
     end
 
-    def initialize(user, deleted_by)
+    def initialize(user, deleted_by:)
       @user = user
       @deleted_by = deleted_by
       @now = Time.current

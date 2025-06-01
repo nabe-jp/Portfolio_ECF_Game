@@ -1,5 +1,9 @@
 module Deleter
   class UserPostDeleter
+    def self.call(user_post, deleted_by:)
+      new(user_post, deleted_by: deleted_by).call
+    end
+
     def initialize(user_post, deleted_by:)
       @user_post = user_post
       @deleted_by = deleted_by
@@ -8,7 +12,6 @@ module Deleter
 
     def call
       @user_post.update!(is_deleted: true, deleted_at: @now, deleted_by_id: @deleted_by.id)
-
       soft_delete(@user_post.user_post_comments)
     end
 

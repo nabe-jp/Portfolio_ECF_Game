@@ -1,5 +1,9 @@
 module Deleter
   class GroupPostDeleter
+    def self.call(group_post, deleted_by:)
+      new(group_post, deleted_by: deleted_by).call
+    end
+
     def initialize(group_post, deleted_by:)
       @group_post = group_post
       @deleted_by = deleted_by

@@ -41,7 +41,16 @@ class Public::UserPostsController < ApplicationController
   def create
     @user_post = current_user.user_posts.new(user_post_params)
   
+    # AI機能(API)実装のため一時的に追加
+    tags = Vision.get_image_data(user_post_params[:user_post_image])
+    # -------------------------------
+
     if @user_post.save
+      # AI機能(API)実装のため一時的に追加
+      @user_post.tag_list.add(tags)  # tagsは配列またはカンマ区切り文字列で渡す
+      @user_post.save
+      # -------------------------------
+
       # 投稿成功 → 最終投稿日時を更新
       @user.update(last_user_posted_at: Time.current)
       session[:user_post_attributes] = nil

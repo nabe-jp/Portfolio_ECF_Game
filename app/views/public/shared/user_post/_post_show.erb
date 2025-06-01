@@ -19,6 +19,13 @@
   <p class="text-left my-2 post__body" style="word-wrap: break-word;">
     <%= @user_post.body %>
   </p>
+
+  <!-- タグの表示 -->
+  <div class="tag-box">
+    <% @user_post.tag_list.each do |tag| %>
+      <span class="tag-box__label"><%= tag %></span>
+  <% end %>
+
   <div class="row justify-content-center mt-3">
     <%= render "public/shared/link/links", check_poster_profile: true, as: :button %>
   </div>
