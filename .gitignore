@@ -41,3 +41,5 @@ yarn-debug.log*
 
 # カリキュラムの開発環境準備にて追加
 /.env
+
+/vendor/bundle/*
