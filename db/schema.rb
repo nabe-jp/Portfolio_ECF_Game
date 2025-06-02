@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.integer "record_id", null: false
-    t.integer "blob_id", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -43,10 +43,10 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   create_table "admin_notes", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
-    t.boolean "is_pinned", default: false, null: false
-    t.integer "admin_id", null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.boolean "is_pinned", default: false, null: false
+    t.integer "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_admin_notes_on_admin_id"
@@ -69,12 +69,16 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.integer "user_id", null: false
     t.string "title", null: false
     t.text "description"
-    t.datetime "start_time", null: false
-    t.datetime "end_time"
     t.boolean "is_public", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
-    t.integer "deleted_by_id"
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
+    t.boolean "is_pinned", default: false, null: false
+    t.integer "sort_order", default: 999, null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_events_on_group_id"
@@ -87,11 +91,15 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "joined_at"
     t.integer "invited_by_id"
     t.text "note"
-    t.integer "role", default: 0, null: false
-    t.integer "status", default: 0, null: false
+    t.boolean "is_public", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
+    t.integer "role", default: 0, null: false
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_memberships_on_group_id"
@@ -108,6 +116,11 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
+    t.boolean "is_pinned", default: false, null: false
+    t.integer "sort_order", default: 999, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_notices_on_group_id"
@@ -122,7 +135,9 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.boolean "hidden_by_parent", default: false, null: false
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "parent_comment_id"
     t.datetime "replied_at"
     t.integer "like_count", default: 0, null: false
@@ -141,9 +156,9 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.boolean "hidden_by_parent", default: false, null: false
-    t.boolean "is_pinned", default: false, null: false
-    t.integer "sort_order", default: 999, null: false
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
     t.boolean "visible_to_non_members", default: false, null: false
     t.integer "like_count", default: 0, null: false
     t.datetime "posted_at"
@@ -159,16 +174,18 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.string "name", null: false
     t.text "description", null: false
     t.string "slug", null: false
+    t.boolean "is_public", default: true, null: false
+    t.boolean "is_deleted", default: false, null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "owner_id", null: false
     t.integer "user_count", default: 0, null: false
     t.integer "post_count", default: 0, null: false
     t.datetime "last_posted_at"
     t.boolean "is_owner_visible", default: true, null: false
-    t.boolean "is_deleted", default: false, null: false
-    t.datetime "deleted_at"
-    t.integer "deleted_by_id"
-    t.boolean "is_public", default: true, null: false
-    t.boolean "hidden_by_parent", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -176,15 +193,14 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   create_table "information", force: :cascade do |t|
     t.string "title", null: false
     t.text "body", null: false
+    t.datetime "deleted_at"
+    t.integer "deleted_by_id"
     t.boolean "is_public", default: true, null: false
     t.datetime "published_at"
     t.datetime "posted_at"
-    t.integer "view_count", default: 0, null: false
     t.integer "admin_id", null: false
     t.boolean "is_pinned", default: false, null: false
     t.integer "sort_order", default: 999, null: false
-    t.datetime "deleted_at"
-    t.integer "deleted_by_id"
     t.string "audience", default: "all"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -201,7 +217,6 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "created_at"
     t.string "tenant", limit: 128
     t.index ["context"], name: "index_taggings_on_context"
-    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
     t.index ["taggable_id", "taggable_type", "context"], name: "taggings_taggable_context_idx"
     t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
@@ -230,7 +245,9 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.boolean "hidden_by_parent", default: false, null: false
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "parent_comment_id"
     t.datetime "replied_at"
     t.integer "like_count", default: 0, null: false
@@ -248,7 +265,9 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.boolean "hidden_by_parent", default: false, null: false
+    t.string "deleted_reason"
+    t.boolean "deleted_due_to_parent", default: false, null: false
+    t.boolean "hidden_on_parent_restore", default: false, null: false
     t.boolean "is_pinned", default: false, null: false
     t.integer "sort_order", default: 999, null: false
     t.integer "like_count", default: 0, null: false

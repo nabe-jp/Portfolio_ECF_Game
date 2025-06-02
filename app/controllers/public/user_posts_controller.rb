@@ -46,23 +46,27 @@ class Public::UserPostsController < ApplicationController
     # -------------------------------
 
     if @user_post.save
-      # AI機能(API)実装のため一時的に追加
-      # AIタグ付け処理 with リトライ対応
-      retries = 0
 
-      begin
+      # AI機能(API)実装のため一時的に追加
+      
+      # 現在非同期を切ることで対応中の為、下記コメントアウト
+      # # AIタグ付け処理 withリトライ対応
+      # retries = 0
+      
+      # begin
         @user_post.tag_list.add(tags)
         @user_post.save!
-      rescue SQLite3::BusyException
-        retries += 1
-        if retries <= 3
-          sleep(0.2)  # 少し待ってから再試行（200ミリ秒）
-          retry
-        else
-          flash[:alert] = "データベースが一時的に使用中です。もう一度お試しください。"
-          return redirect_to new_user_post_path(@user)
-        end
-      end
+      # rescue SQLite3::BusyException
+      #   retries += 1
+      #   if retries <= 3
+      #     sleep(0.2)  # 少し待ってから再試行(200ミリ秒)
+      #     retry
+      #   else
+      #     flash[:alert] = "データベースが一時的に使用中です。もう一度お試しください。"
+      #     return redirect_to new_user_post_path(@user)
+      #   end
+      # end
+
       # -------------------------------
 
       # 投稿成功 → 最終投稿日時を更新

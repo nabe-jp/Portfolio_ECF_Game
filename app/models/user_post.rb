@@ -19,7 +19,7 @@ class UserPost < ApplicationRecord
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }  
 
   scope :active, -> { where(is_deleted: false, is_public: true, 
-    hidden_by_parent: false).order(created_at: :desc) }
+    hidden_on_parent_restore: false).order(created_at: :desc) }
 
 
   # 投稿作成時に必ずデフォルト画像を設定

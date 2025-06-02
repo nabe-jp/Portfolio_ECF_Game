@@ -73,4 +73,8 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # AIのAPI(画像のtag付け)を導入したことでdbへの書き込みやアクセスが増え、タイムアウトする
+  # 非同期ではなく、即時(同期)に実行することで解決可能(開発環境だけ使用するためにここに配置)
+  config.active_job.queue_adapter = :inline
 end

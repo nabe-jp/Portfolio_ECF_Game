@@ -9,5 +9,5 @@ class GroupPostComment < ApplicationRecord
   validates :body, length: { maximum: 50, 
     message: "は1～50文字以内で入力してください" }, if: -> { body.present? }
   
-  scope :active_comment, -> { where(is_public: true, hidden_by_parent: false) }
+  scope :active_comment, -> { where(is_public: true, hidden_on_parent_restoret: false) }
 end

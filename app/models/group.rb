@@ -31,11 +31,11 @@ class Group < ApplicationRecord
 
   # 公開制御
   scope :active_group, -> { 
-    where(is_deleted: false, is_public: true, hidden_by_parent: false, is_owner_visible: true)
+    where(is_deleted: false, is_public: true, hidden_on_parent_restore: false, is_owner_visible: true)
       .order(created_at: :desc) }
   # グループメンバーではないユーザーが閲覧するページに使用
   scope :public_visible_to_non_members, -> { 
-    where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_by_parent: false)
+    where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_on_parent_restore: false)
       .order(created_at: :desc) }
 
   # 投稿作成時に必ずデフォルト画像を設定
