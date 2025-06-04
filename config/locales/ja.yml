@@ -49,7 +49,8 @@ ja:                                   # 日本語の設定を行う
         description: "説明"
         end_time: "終了日時"
       group_notice:
-
+        title: "タイトル"
+        body: "内容"
       group_post:
         title: "投稿のタイトル"
         body: "投稿の内容"

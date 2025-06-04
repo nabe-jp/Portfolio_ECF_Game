@@ -11,7 +11,7 @@ class Public::GroupsController < ApplicationController
 
   def show
     if user_signed_in? && @group.group_memberships.exists?(user_id: current_user.id)
-      redirect_to dashboard_group_path(@group) and return
+      redirect_to group_dashboard_path(@group) and return
     else
       # 非メンバー用の公開投稿のみ取得 + ページネーション
       @public_posts = @group.group_posts.public_visible_to_non_members.page(params[:page]).per(10)
@@ -87,23 +87,6 @@ class Public::GroupsController < ApplicationController
       flash[:alert] = "参加していません"
     end
     redirect_to group_path(@group)
-  end
-
-  def hide_from_owner
-    @group.update(is_public: false)
-    redirect_to group_path(@group), notice: "グループを非公開にしました"
-  end
-  
-  def show_by_owner
-    @group.update(is_public: true)
-    redirect_to group_path(@group), notice: "グループを公開しました"
-  end
-
-  def dashboard
-    @group_posts    = @group.group_posts.where(is_deleted: false).order(created_at: :desc)
-    @group_events   = @group.group_events.where(is_deleted: false).order(start_time: :asc)
-    @group_notices  = @group.group_notices.where(is_deleted: false).order(created_at: :desc)
-    @members        = @group.members
   end
 
   def my_groups

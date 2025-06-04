@@ -1,0 +1,84 @@
+<div class="container dashboard-group">
+  <!-- グループタイトルを中央揃え -->
+  <h1 class="dashboard-group__title text-center mb-4">
+    <%= @group.name %>
+  </h1>
+
+  <div class="dashboard-group__info mb-4">
+    <div class="row">
+      <!-- 左側：グループ画像 -->
+      <div class="col-md-4">
+        <%= image_tag @group.group_image, class: "img-fluid rounded" %>
+      </div>
+
+      <!-- 右側：説明とメンバー一覧を上下に分割 -->
+      <div class="col-md-8 d-flex flex-column" style="min-height: 100%;">
+        <!-- 説明 -->
+        <div class="flex-fill position-relative">
+          <h4 class="dashboard-group__section-title">グループ説明</h4>
+          <p class="dashboard-group__description"><%= @group.description %></p>
+          
+          <% if current_user.id == @group.owner_id %>
+            <div class="position-absolute" style="bottom: 10px; right: 10px;">
+              <%= link_to "グループを編集", edit_group_path(@group), 
+                class: "btn btn-outline-primary btn-sm" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- メンバー一覧 -->
+        <div class="flex-fill position-relative">
+          <h4 class="dashboard-group__section-title">メンバー一覧</h4>
+          <ul class="dashboard-group__list list-inline">
+            <% @group.members.each do |member| %>
+              <li class="list-inline-item mr-3"><%= member.nickname %></li>
+            <% end %>
+          </ul>
+
+          <!-- メンバー一覧リンク -->
+          <div class="position-absolute" style="bottom: 10px; right: 10px;">
+            <%= link_to "▶︎ メンバー一覧(現在未実装)", "#", 
+              class: "dashboard-group__more-link disabled-link", onclick: "return false;" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- お知らせボード -->
+  <%= render 'public/shared/group/events' %>
+
+  <hr>
+
+  <!-- イベントボード -->
+  <%= render 'public/shared/group/notices' %>
+
+  <hr>
+
+  <!-- 投稿一覧 -->
+  <div class="dashboard-group__posts mb-5">
+    <h3 class="dashboard-group__section-title">投稿一覧</h3>
+    <% if @group_posts.any? %>
+      <ul class="dashboard-group__list list-unstyled">
+        <% @group_posts.each do |post| %>
+          <li class="dashboard-group__list-item mb-3">
+            <%= link_to post.title, group_post_path(@group, post), class: "font-weight-bold text-dark", style: "text-decoration: none;" %>
+            <% if post.is_pinned %>
+              <span class="ml-2 text-warning">📌 ピン留め</span>
+            <% end %>
+            <br>
+            <small class="text-muted">投稿日: <%= l(post.posted_at || post.created_at, format: :short) %></small>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">まだ投稿がありません。</p>
+    <% end %>
+    <div class="dashboard-group__link-right">
+      <%= link_to "▶︎ 投稿一覧(現在未実装)", "#", 
+      class: "dashboard-group__more-link disabled-link", onclick: "return false;" %>
+    </div>
+  </div>
+</div>

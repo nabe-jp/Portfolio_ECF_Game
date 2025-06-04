@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     # 検索機能
     resources :searches, only: [:index]
 
-    # ユーザーの全投稿用(indexだけのためresourcesは不使用)
-    get 'users/posts', to: 'user_posts#index', as: :user_all_posts
+    # ユーザーの全投稿用(indexだけのためresourcesは不使用、全表示の為トップレベルに配置)
+    get 'users/posts', to: 'all_user_posts#index', as: :user_all_posts
 
     # 自身のものを取り扱う(個人情報なども含まれている)のでidを持たないように設計
     # usersを作成しているためこのままではusersのコントローラーを使用するのでcontrollerを設定
@@ -36,40 +36,44 @@ Rails.application.routes.draw do
       end
     end
 
-    # showはresource_userにもあるのでuser_post_pathに配置される、そこでは衝突が起こるのでpathを設定
+    # showはresource_userにもあるのでそのまま使用するとuser_post_pathに配置され衝突が起こる
+    # resource_usersにasを使用するとネストにも影響を与えるため、only: []、memberに配置しasを使用しpathを設定
     # リソースフルにするために投稿はresource_userにネストせずresources_usersにネスト
     resources :users, only: [] do
       member do
         get :show, as: :show
       end
-      resources :user_posts, path: 'posts', as: :posts do
-        resources :user_post_comments, only: [:create, :destroy], path: 'comments', as: :comments
+      resources :user_posts, path: 'posts', as: :posts, module: :users do
+        resources :user_post_comments, only: [:create, :destroy], path: 'comments', 
+          as: :comments, module: :users
       end
     end
     
-    # スラッグを使用
-    resources :groups, param: :slug do
-      member do
-        patch :hide_from_owner    # 非公開にする
-        patch :show_by_owner      # 公開にする
-        post :join                # 参加する
-        delete :leave             # 退出する
-        get :dashboard            # グループメンバーの専用ページ
-      end
-
-      # dashboardの中に組み込まれるのでindexは省略
-      resources :group_posts, except: [:index], path: 'posts', as: :posts do
-        resources :group_post_comments, only: [:create, :destroy], path: 'comments', as: :comments
-      end
-
-      resources :group_events, path: 'events', as: :events
-
-      resources :group_notices, path: 'notices', as: :notices
-    end
-
     # 自分が所属しているグループ一覧 を表示する機能(責務を混ぜず、IDも必要ないので独立ルート)
     get 'my_groups', to: 'groups#my_groups'
 
+    # スラッグを使用
+    resources :groups, param: :slug do
+      member do
+        post :join                # 参加する
+        delete :leave             # 退出する
+      end
+
+      # グループメンバーの専用ページ
+      # dashboardはこのままでは複数形のコントローラーが使用されるので単数形を使用するように変更
+      scope module: :groups do
+        resource :group_dashboard, only: [:show], path: 'dashboard', as: :dashboard, 
+          controller: 'group_dashboard'
+
+        resources :group_events, path: 'events', as: :events
+        resources :group_notices, path: 'notices', as: :notices
+        resources :group_members, only: [:index, :show, :update, :destroy], path: 'members', as: :members
+
+        resources :group_posts, path: 'posts', as: :posts do
+          resources :group_post_comments, only: [:create, :destroy], path: 'comments', as: :comments
+        end
+      end
+    end
   end
 
   # 管理者用ルーティング

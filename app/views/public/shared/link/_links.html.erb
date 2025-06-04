@@ -82,6 +82,6 @@
 
 <% if defined?(dashboard_group) && dashboard_group && user_signed_in? && 
   @group && @group.group_memberships.exists?(user_id: current_user.id) %>
-  <%= link_to "グループTOP", dashboard_group_path(@group), 
+  <%= link_to "グループTOP", group_dashboard_path(@group), 
     class: (is_button ? 'btn btn-base' : nil) %>
 <% end %>

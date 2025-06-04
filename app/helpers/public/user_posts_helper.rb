@@ -1,2 +1,0 @@
-module Public::UserPostsHelper
-end
