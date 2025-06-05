@@ -44,6 +44,17 @@ ja:                                   # 日本語の設定を行う
         name: "グループ名"
         description: "説明"
         slug: "スラッグURL"
+      group_membership:
+        role:
+          member: "メンバー"
+          moderator: "管理者"
+          owner: "オーナー"
+        deleted_reason:
+          voluntarily_left: "自主退出による削除"
+          kicked_by_group_owner: "グループ管理者による削除"
+          group_disbanded: "グループ削除による削除"
+          removed_by_admin: "サイト管理者による削除"
+        note: "管理者メモ"
       group_event:
         title: "タイトル"
         description: "説明"

@@ -1,0 +1,16 @@
+<% if memberships.present? %>
+  <div class="group-members__list">
+    <% memberships.each do |membership| %>
+      <div class="group-members__item">
+        <%= link_to group_member_path(membership.group, membership), class: "group-members__link" do %>
+          <div class="group-members__image-wrapper">
+            <%= image_tag(membership.user.profile_image, size: "35x35", alt: membership.user.nickname, class: "group-members__image") %>
+          </div>
+          <span class="group-members__name"><%= membership.user.nickname %></span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-muted my-4 ml-1"><%= title %>はいません</p>
+<% end %>

@@ -2,86 +2,89 @@
 
 <% if defined?(home) && home %>
   <%= link_to 'ホーム', root_path, class: (is_button ? 'btn btn-base home-btn' : nil) %>
-<% end %>
 
-<% if defined?(back) && back %>
+<% elsif defined?(back) && back %>
   <%= link_to '戻る', 'javascript:history.back()', 
     class: (is_button ? 'btn btn-base back-btn' : nil) %>
-<% end %>
 
-<% if defined?(profile_page) && profile_page && user_signed_in? %>
-  <%= link_to 'プロフィール', user_path(current_user), 
-    class: (is_button ? 'btn btn-base profile-btn' : nil) %>
-<% end %>
-
-<% if defined?(profile_edit) && profile_edit && user_signed_in? %>
-  <%= link_to 'プロフィールを編集', edit_user_path, 
-    class: (is_button ? 'btn btn-base edit-profile-btn' : nil) %>
-<% end %>
-
-<% if defined?(mypage) && mypage && user_signed_in? %>
-  <%= link_to 'マイページ', mypage_user_path, 
-    class: (is_button ? 'btn btn-base mypage-btn' : nil) %>
-<% end %>
-
-<% if defined?(settings) && settings %>
-  <%= link_to '登録情報を編集', settings_user_path, 
-    class: (is_button ? 'btn btn-base settings-btn' : nil) %>
-<% end %>
-
-<% if defined?(withdraw) && withdraw %>
-  <%= link_to '退会確認', check_user_path, 
-    class: (is_button ? 'btn btn-base withdraw-btn' : nil) %>
-<% end %>
-
-<% if defined?(all_posts_index) && all_posts_index %>
+<% elsif defined?(all_posts_index) && all_posts_index %>
   <%= link_to 'すべての投稿一覧', user_all_posts_path, 
     class: (is_button ? 'btn btn-base all-posts-btn' : nil) %>
-<% end %>
 
-<% if defined?(posts_index) && posts_index && user_signed_in? %>
-  <% if @user&.id && @user.id != current_user.id %>
-    <%= link_to 'ユーザーの投稿一覧', user_posts_path(@user), 
-      class: (is_button ? 'btn btn-base my-posts-btn' : nil) %>
-  <% else %>
-    <%= link_to '自分の投稿一覧', user_posts_path(current_user), 
-      class: (is_button ? 'btn btn-base my-posts-btn' : nil) %>
-  <% end %>
-<% end %>
-
-<% if defined?(new_post) && new_post && user_signed_in? %>
-  <%= link_to '投稿の作成', new_user_post_path(current_user), 
-    class: (is_button ? 'btn btn-base new-post-btn' : nil) %>
-<% end %>
-
-<% if defined?(check_poster_profile) && check_poster_profile && @user&.id && @user_post&.id %>
-  <%= link_to '投稿者のプロフィール', show_user_path(@user), 
-    class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
-<% end %>
-
-<% if defined?(groups_index) && groups_index %>
+<% elsif defined?(groups_index) && groups_index %>
   <%= link_to "グループ一覧", groups_path, 
     class: (is_button ? 'btn btn-base' : nil) %>
-<% end %>
 
-<% if defined?(my_groups) && my_groups && user_signed_in? %>
-  <%= link_to "参加グループ一覧", my_groups_path, 
-    class: (is_button ? 'btn btn-base' : nil) %>
-<% end %>
+<% elsif user_signed_in? %>
+  <% if defined?(profile_page) && profile_page %>
+    <%= link_to 'プロフィール', user_path(current_user), 
+      class: (is_button ? 'btn btn-base profile-btn' : nil) %>
 
-<% if defined?(new_group_post) && new_group_post && user_signed_in? && 
-  @group && @group.group_memberships.exists?(user_id: current_user.id) %>
-  <%= link_to "グループ内投稿の作成", new_group_post_path(@group), 
-    class: (is_button ? 'btn btn-base' : nil) %>
-<% end %>
+  <% elsif defined?(profile_edit) && profile_edit %>
+    <%= link_to 'プロフィールを編集', edit_user_path, 
+      class: (is_button ? 'btn btn-base edit-profile-btn' : nil) %>
 
-<% if defined?(new_group) && new_group && user_signed_in? %>
-  <%= link_to "グループ作成", new_group_path, 
-    class: (is_button ? 'btn btn-base' : nil) %>
-<% end %>
+  <% elsif defined?(mypage) && mypage %>
+    <%= link_to 'マイページ', mypage_user_path, 
+      class: (is_button ? 'btn btn-base mypage-btn' : nil) %>
 
-<% if defined?(dashboard_group) && dashboard_group && user_signed_in? && 
-  @group && @group.group_memberships.exists?(user_id: current_user.id) %>
-  <%= link_to "グループTOP", group_dashboard_path(@group), 
-    class: (is_button ? 'btn btn-base' : nil) %>
+  <% elsif defined?(settings) && settings %>
+    <%= link_to '登録情報を編集', settings_user_path, 
+      class: (is_button ? 'btn btn-base settings-btn' : nil) %>
+
+  <% elsif defined?(withdraw) && withdraw %>
+    <%= link_to '退会確認', check_user_path, 
+      class: (is_button ? 'btn btn-base withdraw-btn' : nil) %>
+
+  <% elsif defined?(posts_index) && posts_index %>
+    <% if @user&.id && @user.id != current_user.id %>
+      <%= link_to 'ユーザーの投稿一覧', user_posts_path(@user), 
+        class: (is_button ? 'btn btn-base my-posts-btn' : nil) %>
+    <% else %>
+      <%= link_to '自分の投稿一覧', user_posts_path(current_user), 
+        class: (is_button ? 'btn btn-base my-posts-btn' : nil) %>
+    <% end %>
+
+  <% elsif defined?(new_post) && new_post %>
+    <%= link_to '投稿の作成', new_user_post_path(current_user), 
+      class: (is_button ? 'btn btn-base new-post-btn' : nil) %>
+
+  <% elsif defined?(check_poster_profile) && check_poster_profile && @user&.id && @user_post&.id %>
+    <%= link_to '投稿者のプロフィール', show_user_path(@user), 
+      class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
+
+  <% elsif defined?(my_groups) && my_groups %>
+    <%= link_to "参加グループ一覧", my_groups_path, 
+      class: (is_button ? 'btn btn-base' : nil) %>
+
+  <% elsif defined?(new_group) && new_group %>
+    <%= link_to "グループ作成", new_group_path, 
+      class: (is_button ? 'btn btn-base' : nil) %>
+
+  <% elsif @group && @group.group_memberships.exists?(user_id: current_user.id) %>
+    <% if defined?(dashboard_group) && dashboard_group %>
+      <%= link_to "グループTOP", group_dashboard_path(@group), 
+        class: (is_button ? 'btn btn-base' : nil) %>
+
+    <% elsif defined?(group_members) && group_member %>
+      <%= link_to "メンバー一覧", group_members_path(@group), 
+        class: (is_button ? 'btn btn-base' : nil) %>
+
+    <% elsif defined?(group_events) && group_events %>
+      <%= link_to "イベント一覧", group_events_path(@group), 
+        class: (is_button ? 'btn btn-base' : nil) %>
+
+    <% elsif defined?(group_notices) && group_notices && %>
+      <%= link_to "お知らせ一覧", group_notices_path(@group), 
+        class: (is_button ? 'btn btn-base' : nil) %>
+
+    <% elsif defined?(group_posts) && group_posts && %>
+      <%= link_to "グループ内投稿一覧", group_posts_path(@group), 
+        class: (is_button ? 'btn btn-base' : nil) %>
+
+    <% elsif defined?(new_group_post) && new_group_post && %>
+      <%= link_to "グループ内投稿の作成", new_group_post_path(@group), 
+        class: (is_button ? 'btn btn-base' : nil) %>
+    <% end %>
+  <% end %>
 <% end %>

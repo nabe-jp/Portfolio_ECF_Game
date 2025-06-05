@@ -1,0 +1,35 @@
+<div class="dashboard-group__posts mb-5">
+  <h4 class="dashboard-group__section-title">投稿一覧</h4>
+  <% if @group_posts.any? %>
+    <ul class="dashboard-group__list list-unstyled">
+      <% @group_posts.first(5).each do |post| %>
+        <li class="dashboard-group__list-item mb-3 border rounded p-3">
+          <%= link_to group_post_path(@group, post), 
+            class: "text-dark", style: "text-decoration: none;" do %>
+            <div class="row">
+              <div class="col-9 font-weight-bold">
+                <%= post.title %>
+              </div>
+              <div class="col-3 text-right text-muted">
+                <small><%= post.member.user.nickname %></small>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col-9">
+                <%= truncate(post.body, length: 100) %>
+              </div>
+              <div class="col-3 text-right text-muted">
+                <small>投稿日: <%= l(post.posted_at || post.created_at, format: :short) %></small>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-muted">まだ投稿がありません。</p>
+  <% end %>
+  <div class="dashboard-group__link-right">
+    <%= link_to "▶︎ 投稿一覧", group_posts_path(@group), class: "dashboard-group__more-link disabled-link" %>
+  </div>
+</div>

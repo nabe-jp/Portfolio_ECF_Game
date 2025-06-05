@@ -1,6 +1,6 @@
 class GroupNotice < ApplicationRecord
   belongs_to :group
-  belongs_to :user
+  belongs_to :member, class_name: "GroupMembership"
 
   validates :title, presence: { message: "を入力してください" }
   validates :title, length: { maximum: 20, 

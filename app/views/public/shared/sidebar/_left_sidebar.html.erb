@@ -18,3 +18,12 @@
     <li><%= render "public/shared/link/links", settings: true %></li> 
   </ul>
 <% end %>
+
+<h5 class="mt-5">コミュニティ</h5>
+<ul class="list-unstyled">
+  <li><%= render "public/shared/link/links", groups_index: true %></li>
+
+  <li><%= render "public/shared/link/links", my_groups: true %></li>
+
+  <li><%= render "public/shared/link/links", new_group: true %></li>
+</ul>

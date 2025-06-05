@@ -43,6 +43,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.boolean :is_deleted, default: false, null: false                # 論理削除フラグ
       t.datetime :deleted_at                                            # 削除日時
       t.integer :deleted_by_id                                          # 削除した管理者 or 操作者のID
+      t.integer :deleted_reason                                         # 削除理由(enumで管理)
       t.boolean :hidden_by_parent, default: false, null: false          # 関連元の削除/非公開による非表示
 
       # 統計情報・アクティビティ

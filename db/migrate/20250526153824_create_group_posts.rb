@@ -3,7 +3,7 @@ class CreateGroupPosts < ActiveRecord::Migration[6.1]
     create_table :group_posts do |t|
       # 紐づけ・基本情報
       t.references :group, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true
+      t.references :member, null: false, foreign_key: { to_table: :group_memberships }
       t.string :title, null: false
       t.text :body
 

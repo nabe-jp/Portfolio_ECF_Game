@@ -11,22 +11,21 @@
 </div>
 
 <% if @events.any? %>
-  <ul class="space-y-4" style="list-style-type: none;">
+  <ul class="pl-0" style="list-style-type: none;">
     <% @events.each do |event| %>
-      <li class="border p-4 rounded shadow">
-        <h3 class="text-lg font-semibold mb-3">イベント名：<%= event.title %></h3>
-        <p><strong>開始予定日時:</strong> <%= l(event.start_time, format: :long) %></p>
-        <p><strong>終了予定日時:</strong> <%= l(event.end_time, format: :long) %></p>
-        <p class="mt-2 text-gray-700">
-          イベント内容<br>
-          <%= simple_format(event.description, {}, wrapper_tag: :span) %>
-        </p>
-
-        <% if current_user.id == @group.owner_id %>
-          <div class="mt-3">
-            <%= link_to '編集', edit_group_event_path(@group, event) %> | <%= link_to '削除', 
-              group_event_path(@group, event), method: :delete, data: { confirm: '本当に削除しますか？' } %>
-          </div>
+      <li class="dashboard-group__event-item mb-4">
+        <%= link_to group_event_path(@group, event), 
+          class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
+          <h3 class="h5 font-weight-bold mb-3">イベント名：<%= event.title %></h3>
+          <p><strong>開始予定日時:</strong> <%= l(event.start_time, format: :long) %></p>
+          <p><strong>終了予定日時:</strong> <%= l(event.end_time, format: :long) %></p>
+          <p class="mt-2 text-secondary">
+            イベント内容<br>
+            <%= simple_format(event.description, {}, wrapper_tag: :span) %>
+          </p>
+          <small>
+            投稿者: <%= event.member.user.nickname %> / 投稿日時: <%= l(event.created_at, format: :short) %>
+          </small>
         <% end %>
       </li>
     <% end %>

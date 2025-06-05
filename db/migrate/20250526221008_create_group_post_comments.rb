@@ -2,8 +2,8 @@ class CreateGroupPostComments < ActiveRecord::Migration[6.1]
   def change
     create_table :group_post_comments do |t|
       # 紐づけ・基本情報
-      t.references :user, null: false, foreign_key: true
       t.references :group_post, null: false, foreign_key: true
+      t.references :member, null: false, foreign_key: { to_table: :group_memberships }
       t.text :body
 
       # 表示・公開制御

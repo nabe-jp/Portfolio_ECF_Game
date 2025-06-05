@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :public do
+    namespace :groups do
+      get 'group_members/index'
+    end
+  end
   # ネストによるヘルパー名やURLの冗長性を抑え、可読性を意識したルーティング設計
   # as:はURLヘルパー名として使われるのでシンボルに、path: は実際のルーティングURL文字列になるので文字列で記載
 
@@ -67,7 +72,13 @@ Rails.application.routes.draw do
 
         resources :group_events, path: 'events', as: :events
         resources :group_notices, path: 'notices', as: :notices
-        resources :group_members, only: [:index, :show, :update, :destroy], path: 'members', as: :members
+        resources :group_members, only: [:index, :show, :destroy], path: 'members', as: :members  do
+          member do
+            get :edit_note
+            patch :update_role
+            patch :update_note
+          end
+        end
 
         resources :group_posts, path: 'posts', as: :posts do
           resources :group_post_comments, only: [:create, :destroy], path: 'comments', as: :comments

@@ -1,0 +1,29 @@
+<div class="d-flex align-items-center">
+  <h2 class="group-members__title">メンバー一覧</h2>
+  <h4><span class="badge badge-secondary ml-3"><%= @group.active_members.size %>人</span></h4>
+</div>
+
+<div class="group-members__section bg-light p-3 mb-4">
+  <h4 class="group-members__title d-flex align-items-center">オーナー</h4>
+  <%= render partial: 'public/shared/group/member/membership_table', 
+    locals: { title: 'オーナー', memberships: @owner_memberships } %>
+</div>
+
+<div class="group-members__section bg-light p-3 mb-4">
+  <h4 class="group-members__title d-flex align-items-center">
+    管理者一覧<span class="badge badge-secondary ml-2"><%= @moderator_memberships.size %>人</span>
+  </h4>
+
+  <%= render partial: 'public/shared/group/member/membership_table', 
+    locals: { title: '管理者', memberships: @moderator_memberships } %>
+</div>
+
+<div class="group-members__section bg-light p-3 mb-4">
+  <h4 class="group-members__title d-flex align-items-center">
+    メンバー一覧<span class="badge badge-secondary ml-2"><%= @member_memberships.size %>人</span>
+  </h4>
+
+  <%= render partial: 'public/shared/group/member/membership_table', 
+    locals: { title: 'メンバー', memberships: @member_memberships } %>
+</div>
+

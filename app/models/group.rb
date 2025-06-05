@@ -6,7 +6,15 @@ class Group < ApplicationRecord
   belongs_to :owner, class_name: 'User'
  
   has_many :group_memberships, dependent: :destroy
+  has_many :active_group_memberships, -> { where(is_deleted: false, is_public: true) }, 
+    class_name: 'GroupMembership'
+  
   has_many :members, through: :group_memberships, source: :user
+  has_many :active_members, through: :active_group_memberships, source: :user
+
+  # dashboardの管理者一覧に使用
+  has_many :moderator_memberships, -> { where(role: :moderator) }, class_name: 'GroupMembership'
+  has_many :moderators, through: :moderator_memberships, source: :user
 
   has_many :group_events, dependent: :destroy
   has_many :group_notices, dependent: :destroy
@@ -61,7 +69,7 @@ class Group < ApplicationRecord
   end
 
   def add_owner_to_members
-    group_memberships.create(user_id: owner_id)
+    group_memberships.create(user_id: owner_id, role: :owner)
   end
  
   # urlスラッグのカスタムバリデーション

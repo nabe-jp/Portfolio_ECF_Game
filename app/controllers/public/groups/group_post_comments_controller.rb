@@ -1,12 +1,14 @@
 class Public::Groups::GroupPostCommentsController < ApplicationController
+  include ::Public::Concerns::AuthorizeGroup
+
   before_action :authenticate_user!
-  before_action :set_group
   before_action :set_group_post
   before_action :authorize_group_member!
+  before_action :set_current_user, only: [:create]
 
   def create
     @group_post_comment =  @group_post.group_post_comments.build(comment_params)
-    @group_post_comment.user = current_user
+    @group_post_comment.member = @group_membership
 
     if @group_post_comment.save
       session[:group_post_comment_attributes] = nil
@@ -36,22 +38,16 @@ class Public::Groups::GroupPostCommentsController < ApplicationController
 
   private
 
-  def set_group
-    @group = Group.find_by!(slug: params[:group_slug])
-  end
-
   def set_group_post
     @group_post = @group.group_posts.find(params[:post_id])
   end
 
-  def authorize_group_member!
-    unless @group.members.include?(current_user)
-      redirect_to group_path(@group), alert: 'このグループのメンバーのみアクセスできます。'
-    end
+  def set_current_user
+    @group_membership = @group.group_memberships.find_by(user_id: current_user.id)
   end
 
   def authorize_comment_deletion!(comment)
-    unless comment.user == current_user || comment.group_post.user == current_user || 
+    unless comment.member.user == current_user || comment.group_post.member.user == current_user || 
       comment.group_post.group.owner_id == current_user.id
       redirect_back(fallback_location: root_path, alert: "削除権限がありません") and return
     end

@@ -10,11 +10,11 @@
 
     <div class="col-4 offset-8">
       <!-- 編集・削除ボタン -->
-      <% if @group_post.user == current_user || @group_post.group.owner == current_user %>
+      <% if @group_post.member.user == current_user || @group_post.group.owner == current_user %>
         <div>
           <%= link_to '編集', edit_group_post_path(@group, @group_post), class: 'btn btn-base' %>
           <%= link_to '削除', group_post_path(@group, @group_post), method: :delete, 
-                      data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
+            data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
         </div>
       <% end %>
     </div>
@@ -23,7 +23,7 @@
 
 <div class="container mt-5">
   <div class="row my-5">
-    <%= render 'public/shared/group_post/show' %>
+    <%= render 'public/shared/group/post/show' %>
   </div>
 </div>
 
@@ -32,11 +32,11 @@
 <hr>
 
 <% if user_signed_in? %>
-  <%= render 'public/shared/group_post_comment/form', group_post: @group_post %>
+  <%= render 'public/shared/group/post_comment/form', group_post: @group_post %>
 <% else %>
   <p class="text-center">コメントするにはログインが必要です。</p>
 <% end %>
 
 <hr>
 
-<%= render 'public/shared/group_post_comment/list', group_post: @group_post %>
+<%= render 'public/shared/group/post_comment/list', group_post: @group_post %>

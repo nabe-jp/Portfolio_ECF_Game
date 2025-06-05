@@ -1,5 +1,3 @@
-<!-- 現在未実装 -->
-
 <h2><%= @group_event.title %></h2>
 
 <p>
@@ -21,13 +19,13 @@
   </p>
 <% end %>
 
-<p>
-  <strong>公開状態:</strong>
-  <%= @group_event.is_public ? "公開" : "非公開" %>
-</p>
-
 <hr>
 
-<%= link_to "編集", edit_group_event_path(@group, @group_event), class: "btn btn-primary" if @group.owner == current_user %>
+<% if @group_event.member.user == current_user || @group.owner == current_user || 
+  @group.moderators == current_user %>
+  <%= link_to "編集", edit_group_event_path(@group, @group_event), class: "btn btn-secondary" %>
+  <%= link_to "削除", group_event_path(@group, @group_event), 
+    method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+<% end %>
+
 <%= link_to "イベント一覧に戻る", group_events_path(@group), class: "btn btn-secondary" %>
-<%= link_to "ダッシュボードに戻る", dashboard_group_path(@group), class: "btn btn-secondary" %>

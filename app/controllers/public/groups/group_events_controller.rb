@@ -1,9 +1,11 @@
 class Public::Groups::GroupEventsController < ApplicationController
+  include ::Public::Concerns::AuthorizeGroup
+
   before_action :authenticate_user!
-  before_action :set_group
   before_action :authorize_group_member!
-  before_action :authorize_group_manager!, only: [:edit, :update, :destroy]
+  before_action :authorize_group_moderator!, only: [:edit, :update, :destroy]
   before_action :set_group_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_user, only: [:create]
 
   def index
     @events = if @group.owner == current_user
@@ -26,7 +28,7 @@ class Public::Groups::GroupEventsController < ApplicationController
 
   def create
     @group_event = @group.group_events.build(group_event_params)
-    @group_event.user = current_user
+    @group_event.member = @group_membership
 
     if @group_event.save
       session[:group_event_attributes] = nil
@@ -69,24 +71,12 @@ class Public::Groups::GroupEventsController < ApplicationController
 
   private
 
-  def set_group
-    @group = Group.find_by!(slug: params[:group_slug])
-  end
-
   def set_group_event
     @group_event = @group.group_events.find(params[:id])
   end
-
-  def authorize_group_member!
-    unless @group.members.include?(current_user)
-      redirect_to groups_path, alert: 'このグループのメンバーのみアクセスできます。'
-    end
-  end
-
-  def authorize_group_manager!
-    unless @group.owner == current_user
-      redirect_to dashboard_group_path(@group), alert: "管理者のみ実行できる操作です。"
-    end
+  
+  def set_current_user
+    @group_membership = @group.group_memberships.find_by(user_id: current_user.id)
   end
 
 

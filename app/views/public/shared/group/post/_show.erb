@@ -7,9 +7,9 @@
 <div class="col-12 col-md-6 d-flex flex-column justify-content-center pr-5">
   <!-- プロフィール画像と名前 -->
   <div class="d-flex align-items-center">
-    <%= image_tag(@group_post.user.profile_image, size: "40x40", 
+    <%= image_tag(@group_post.member.user.profile_image, size: "40x40", 
         class: "post__user-profile-image rounded-circle") %>
-    <span class="ml-2 post-detai__user"><%= @group_post.user.nickname %></span>
+    <span class="ml-2 post-detai__user"><%= @group_post.member.user.nickname %></span>
   </div>
 
   <!-- 投稿タイトル -->

@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+
+      <h3 class="my-4 text-center">メンバー詳細</h3>
+
+      <p><strong>ニックネーム:</strong> <%= @membership.user.nickname %></p>
+      <p><strong>参加日時:</strong> <%= @membership.joined_at&.strftime("%Y年%m月%d日 %H:%M") %></p>
+      <p><strong>現在の役職:</strong> <%= @membership.role_i18n %></p>
+
+      <p><strong>管理者メモ:</strong></p>
+      <p><%= @membership.note.presence || "なし" %></p>
+
+      <% if current_user == @group.owner && @membership.user != current_user %>
+
+        <hr>
+
+        <div class="row align-items-center">
+          <div class="col-2">
+            <%= link_to "メモを編集", edit_note_group_member_path(@group, @membership), 
+              class: "btn btn-sm btn-secondary" %>
+          </div>
+
+          <div class="col-4 offset-1 d-flex justify-content-center">
+            <%= form_with url: update_role_group_member_path(@group, @membership), 
+              method: :patch, scope: :group_membership, local: true do |f| %>
+              <div class="form-inline">
+                <%= f.select :role, GroupMembership.roles.keys.map { 
+                  |r| [I18n.t("activerecord.attributes.group_membership.role.#{r}"), r] }, 
+                    class: "form-control form-control-sm mr-2" %>
+                <%= f.submit "権限を編集", class: "btn btn-sm btn-primary ml-3" %>
+              </div>
+            <% end %>
+          </div>
+
+          <div class="col-2 offset-1">
+            <%= link_to "メンバーを追放", group_member_path(@group, @membership),
+              method: :delete, data: { confirm: "本当にこのメンバーを追放しますか？" },
+                class: "btn btn-sm btn-danger" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="rowjustify-content-start mt-4">   
+        <div class="col-auto">
+          <%= link_to "プロフィールを表示", show_user_path(@membership.user), 
+            class: "btn btn-sm btn-secondary" %>
+        </div>
+      </div>
+  
+      <div class="rowjustify-content-start mt-4">   
+        <div class="col-auto">
+          <%= link_to "メンバー一覧に戻る", group_members_path(@group), 
+            class: "btn btn-sm btn-secondary" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

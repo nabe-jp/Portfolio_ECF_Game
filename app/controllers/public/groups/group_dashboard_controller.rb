@@ -1,16 +1,10 @@
-class Public::Groups::GroupDashboardController < ApplicationController
-  before_action :set_group
+class Public::Groups::GroupDashboardController < Public::ApplicationController
+  include ::Public::Concerns::AuthorizeGroup
 
   def show
-    @group_posts    = @group.group_posts.where(is_deleted: false).order(created_at: :desc)
-    @group_events   = @group.group_events.where(is_deleted: false).order(start_time: :asc)
-    @group_notices  = @group.group_notices.where(is_deleted: false).order(created_at: :desc)
-    @members        = @group.members
-  end
-
-  private
-
-  def set_group
-    @group = Group.find_by!(slug: params[:group_slug])
+    @group_events = active_scope_asc(@group.group_events)
+    @group_notices  = active_scope_desc(@group.group_notices)
+    @members = active_scope_desc(@group.members)
+    @group_posts = active_scope_desc(@group.group_posts)
   end
 end

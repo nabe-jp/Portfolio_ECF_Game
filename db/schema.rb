@@ -66,12 +66,13 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
 
   create_table "group_events", force: :cascade do |t|
     t.integer "group_id", null: false
-    t.integer "user_id", null: false
+    t.integer "member_id", null: false
     t.string "title", null: false
     t.text "description"
     t.boolean "is_public", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
+    t.integer "deleted_by_id"
     t.string "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
@@ -82,7 +83,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_events_on_group_id"
-    t.index ["user_id"], name: "index_group_events_on_user_id"
+    t.index ["member_id"], name: "index_group_events_on_member_id"
   end
 
   create_table "group_memberships", force: :cascade do |t|
@@ -95,7 +96,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "role", default: 0, null: false
@@ -109,7 +110,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
 
   create_table "group_notices", force: :cascade do |t|
     t.integer "group_id", null: false
-    t.integer "user_id", null: false
+    t.integer "member_id", null: false
     t.string "title"
     t.text "body"
     t.boolean "is_public", default: true, null: false
@@ -124,12 +125,12 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_notices_on_group_id"
-    t.index ["user_id"], name: "index_group_notices_on_user_id"
+    t.index ["member_id"], name: "index_group_notices_on_member_id"
   end
 
   create_table "group_post_comments", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.integer "group_post_id", null: false
+    t.integer "member_id", null: false
     t.text "body"
     t.boolean "is_public", default: true, null: false
     t.boolean "is_deleted", default: false, null: false
@@ -144,12 +145,12 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_post_id"], name: "index_group_post_comments_on_group_post_id"
-    t.index ["user_id"], name: "index_group_post_comments_on_user_id"
+    t.index ["member_id"], name: "index_group_post_comments_on_member_id"
   end
 
   create_table "group_posts", force: :cascade do |t|
     t.integer "group_id", null: false
-    t.integer "user_id", null: false
+    t.integer "member_id", null: false
     t.string "title", null: false
     t.text "body"
     t.boolean "is_public", default: true, null: false
@@ -167,7 +168,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_posts_on_group_id"
-    t.index ["user_id"], name: "index_group_posts_on_user_id"
+    t.index ["member_id"], name: "index_group_posts_on_member_id"
   end
 
   create_table "groups", force: :cascade do |t|
@@ -297,6 +298,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
+    t.integer "deleted_reason"
     t.boolean "hidden_by_parent", default: false, null: false
     t.integer "login_count", default: 0, null: false
     t.integer "user_post_count", default: 0, null: false
@@ -312,16 +314,16 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "admin_notes", "admins"
+  add_foreign_key "group_events", "group_memberships", column: "member_id"
   add_foreign_key "group_events", "groups"
-  add_foreign_key "group_events", "users"
   add_foreign_key "group_memberships", "groups"
   add_foreign_key "group_memberships", "users"
+  add_foreign_key "group_notices", "group_memberships", column: "member_id"
   add_foreign_key "group_notices", "groups"
-  add_foreign_key "group_notices", "users"
+  add_foreign_key "group_post_comments", "group_memberships", column: "member_id"
   add_foreign_key "group_post_comments", "group_posts"
-  add_foreign_key "group_post_comments", "users"
+  add_foreign_key "group_posts", "group_memberships", column: "member_id"
   add_foreign_key "group_posts", "groups"
-  add_foreign_key "group_posts", "users"
   add_foreign_key "information", "admins"
   add_foreign_key "taggings", "tags"
   add_foreign_key "user_post_comments", "user_posts"

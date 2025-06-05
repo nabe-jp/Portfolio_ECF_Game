@@ -1,9 +1,11 @@
 class Public::Groups::GroupNoticesController < ApplicationController
+  include ::Public::Concerns::AuthorizeGroup
+
   before_action :authenticate_user!
-  before_action :set_group
   before_action :authorize_group_member!
-  before_action :authorize_group_manager!, only: [:edit, :update, :destroy]
+  before_action :authorize_group_moderator!, only: [:edit, :update, :destroy]
   before_action :set_group_notice, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_user, only: [:create]
 
   def index
     @notices = @group.group_notices.active_group_info.page(params[:page]).per(10)
@@ -18,14 +20,14 @@ class Public::Groups::GroupNoticesController < ApplicationController
 
   def create
     @group_notice = @group.group_notices.build(group_notice_params)
-    @group_notice.user = current_user
+    @group_notice.member = @group_membership
 
     if @group_notice.save
       session[:group_notice_attributes] = nil
       redirect_to group_notices_path(@group), notice: "お知らせを作成しました。"
     else
       store_form_data(attributes: group_notice_params, 
-        error_messages: @group_notice.errors.full_messages, error_name: "お知らせ")
+        error_messages: @group_notice.errors.full_messages, error_name: "お知らせの作成")
       redirect_to new_group_notice_path(@group)
     end
   end
@@ -43,8 +45,7 @@ class Public::Groups::GroupNoticesController < ApplicationController
       session.delete(:group_notice_attributes)
       redirect_to group_notices_path(@group), notice: "お知らせを更新しました。"
     else
-      store_form_data(attributes: group_notice_params, 
-        error_messages: @group_notice.errors.full_messages, error_name: "お知らせ")
+      store_form_data(attributes: group_notice_params, error_messages: @group_notice.errors.full_messages)
       redirect_to edit_group_notice_path(@group, @group_notice)
     end
   end
@@ -62,32 +63,21 @@ class Public::Groups::GroupNoticesController < ApplicationController
 
   private
 
-  def set_group
-    @group = Group.find_by!(slug: params[:group_slug])
-  end
-
   def set_group_notice
     @group_notice = @group.group_notices.find(params[:id])
   end
 
-  def authorize_group_member!
-    unless @group.members.include?(current_user)
-      redirect_to groups_path, alert: 'このグループのメンバーのみアクセスできます。'
-    end
+  def set_current_user
+    @group_membership = @group.group_memberships.find_by(user_id: current_user.id)
   end
 
-  def authorize_group_manager!
-    unless @group.owner == current_user
-      redirect_to dashboard_group_path(@group), alert: "管理者のみ実行できる操作です。"
-    end
-  end
 
   def group_notice_attributes_from_session
     session[:group_notice_attributes] || {}
   end
 
   def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "更新"
+    error_name ||= "お知らせの更新"
     session[:group_notice_attributes] = attributes
     flash[:error_messages] = error_messages
     flash[:error_name] = error_name

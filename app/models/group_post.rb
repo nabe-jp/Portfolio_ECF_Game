@@ -3,7 +3,7 @@ class GroupPost < ApplicationRecord
   acts_as_taggable_on :group_post_tags
 
   belongs_to :group
-  belongs_to :user
+  belongs_to :member, class_name: "GroupMembership"
   has_many :group_post_comments, dependent: :destroy
 
   has_one_attached :group_post_image

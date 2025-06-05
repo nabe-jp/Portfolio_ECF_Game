@@ -1,13 +1,19 @@
 class Public::Groups::GroupPostsController < ApplicationController
+  include ::Public::Concerns::AuthorizeGroup
+
   before_action :authenticate_user!
-  before_action :set_group
   before_action :authorize_group_member!, except: [:show]
   before_action :set_group_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_group_operator!, only: [:edit, :update, :destroy]
+  before_action :authorize_group_moderator!, only: [:edit, :update, :destroy]
+  before_action :set_current_user, only: [:create]
   
+  def index
+    @group_posts = @group.group_posts.order(created_at: :desc).page(params[:page])
+  end
+
   def show
-    @group_post_comments= @group_post.group_post_comments.active_comment
-      .includes(:user, :parent_comment).order(created_at: :desc).page(params[:page]).per(20)
+    @group_post_comments = @group_post.group_post_comments.active_comment
+      .includes([ { member: :user }, :parent_comment ]).order(created_at: :desc).page(params[:page]).per(20)
    
     if session[:group_post_comment_attributes]
       @group_post_comment = @group_post.group_post_comments.new(session[:group_post_comment_attributes])
@@ -24,21 +30,23 @@ class Public::Groups::GroupPostsController < ApplicationController
   end
 
   def create
-    @group_post = current_user.group_posts.new(group_post_params)
+    @group_post = GroupPost.new(group_post_params)
+    @group_post.member = @group_membership
     @group_post.group = @group
 
     if @group_post.save
       @group.update_column(:last_posted_at, Time.current)
       session[:group_post_attributes] = nil
-      redirect_to dashboard_group_path(@group), notice: '投稿を作成しました。'
+      redirect_to group_post_path(@group, @group_post), notice: '投稿を作成しました。'
     else
-      store_form_data(attributes: group_post_params, error_messages: @group_post.errors.full_messages, error_name: "投稿")
+      store_form_data(attributes: group_post_params, 
+        error_messages: @group_post.errors.full_messages, error_name: "投稿")
       redirect_to new_group_post_path(@group)
     end
   end
 
   def edit
-    @url = group_post_path(@group.id)
+    @url = group_post_path(@group.slug)
     @verd = :patch
     if session[:group_post_attributes]
       @group_post.assign_attributes(session[:group_post_attributes])
@@ -59,7 +67,7 @@ class Public::Groups::GroupPostsController < ApplicationController
   def destroy
     begin
       Deleter::GroupPostDeleter.call(@group_post, deleted_by: current_user)
-      redirect_to dashboard_group_path(@group), notice: '投稿を削除しました。'
+      redirect_to group_dashboard_path(@group), notice: '投稿を削除しました。'
     rescue => e
       Rails.logger.error("GroupPost削除エラー: #{e.message}")
       redirect_to root_path, alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
@@ -68,24 +76,12 @@ class Public::Groups::GroupPostsController < ApplicationController
 
   private
 
-  def set_group
-    @group = Group.find_by!(slug: params[:group_slug])
-  end
-
   def set_group_post
     @group_post = @group.group_posts.find(params[:id])
   end
 
-  def authorize_group_member!
-    unless @group.members.include?(current_user)
-      redirect_to group_path(@group), alert: 'このグループのメンバーのみアクセスできます。'
-    end
-  end
-
-  def authorize_group_operator!
-    unless @group_post.user == current_user || @group.owned_by?(current_user)
-      redirect_to dashboard_group_path(@group), alert: '権限がありません。'
-    end
+  def set_current_user
+    @group_membership = @group.group_memberships.find_by(user_id: current_user.id)
   end
 
   def group_post_attributes_from_session
