@@ -1,14 +1,19 @@
-ja:                                   # 日本語の設定を行う
-  enums:                              # enumの設定を行う
-    group:                            # モデル名
-      accessibility_status:           # グループのステータス
-        accessible: "公開"
-        restricted: "未公開"
-        deleted: "削除"
-      post_status:                    # グループ内の投稿ステータス
-        published: "公開"
-        unpublished: "未公開"
-        deleted: "削除"
+ja:
+  enums:
+    deleted_reason:
+      self_deleted: "ユーザー本人による削除"
+      voluntarily_left_group: "グループから自発的に退会"
+      removed_by_group_authority: "グループ管理権限者による削除"
+      removed_by_admin: "サイト管理者による削除"
+      parent_user_deleted: "ユーザーが削除されたことによる削除"
+      parent_user_post_deleted: "ユーザーの投稿が削除されたことによる削除"
+      parent_user_post_comment_deleted: "投稿コメントが削除されたことによる削除"
+      parent_group_deleted: "グループ自体が削除されたことによる削除"
+      parent_group_member_deleted: "メンバーが削除されたことによる削除"
+      parent_group_event_deleted: "グループ内イベントが削除されたことによる削除"
+      parent_group_notice_deleted: "グループ内お知らせが削除されたことによる削除"
+      parent_group_post_deleted: "グループ投稿が削除されたことによる削除"
+      parent_group_post_comment_deleted: "グループ投稿のコメントが削除されたことによる削除"
   activerecord:
     models:
       user: "ユーザー"

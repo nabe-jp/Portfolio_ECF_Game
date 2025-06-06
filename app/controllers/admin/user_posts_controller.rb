@@ -19,22 +19,26 @@ class Admin::UserPostsController < Admin::ApplicationController
   
   # 削除時、非公開にもする
   def destroy
-    @user_post.update(is_deleted: true, is_public: false, deleted_at: Time.current,
-      deleted_by_id: current_admin.id)
-    redirect_to admin_user_post_path(@user_post), notice: "投稿を削除しました"
-
     begin
-      Deleter::UserPostDeleter.call(@user_post, deleted_by: current_admin)
+      Deleter::UserPostDeleter.new(@user_post, 
+        deleted_by: current_admin, deleted_reason: :removed_by_admin).call
       redirect_to admin_user_post_path(@user_post), notice: "投稿を削除しました"
     rescue => e
       Rails.logger.error("UserPost削除エラー: #{e.message}")
-      redirect_to admin_root_path, alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
+      redirect_to admin_user_post_path(@user_post), 
+        alert: '予期せぬエラーにより、投稿と関連データの削除が行えませんでした。'
     end
   end
   
   def reactivate
-    @user_post.update(is_deleted: false, deleted_at: nil, deleted_by_id: nil)
-    redirect_to admin_user_post_path(@user_post), notice: "投稿を復元しました"
+    begin
+      Restorer::UserPostRestorer.new(@user_post).call
+      redirect_to admin_user_post_path(@user_post), notice: '投稿と関連データを復元しました'
+    rescue => e
+      Rails.logger.error("UserPost復元エラー: #{e.message}")
+      redirect_to admin_user_post_path(@user_post), 
+        alert: '予期せぬエラーにより、投稿と関連データの復元が行えませんでした。'
+    end
   end
   
   def hide

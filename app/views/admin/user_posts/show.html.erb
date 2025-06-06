@@ -46,8 +46,8 @@
     </td>
   </tr>
   <tr>
-    <th colspan="2">ステータス無効の理由</th>
-    <td><%= @user_post.deleted_reason.present? ? @user_post.deleted_reason : '-' %></td>
+    <th>削除の理由</th>
+    <td><%= enum_i18n(@user_post.deleted_reason, :deleted_reason) %></td>
   </tr>
   <tr>
     <th>いいね数</th>

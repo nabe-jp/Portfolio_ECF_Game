@@ -15,15 +15,15 @@ module Restorer
 
         # 子要素の連鎖復元
         @user.user_posts.each do |post|
-          Restorer::UserPostRestorer.new(post, restored_due_to_parent: true).call
+          Restorer::UserPostRestorer.new(post, restored_via_parent: true).call
         end
 
         @user.owned_groups.each do |group|
-          Restorer::GroupRestorer.new(group, restored_due_to_parent: true).call
+          Restorer::GroupRestorer.new(group, restored_via_parent: true).call
         end
 
         @memberships.each do |membership|
-          Restorer::GroupMemberRestorer.new(membership, restored_due_to_parent: true).call
+          Restorer::GroupMemberRestorer.new(membership, restored_via_parent: true).call
         end
       end
     end

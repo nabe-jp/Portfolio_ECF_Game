@@ -1,3 +1,4 @@
+# グループ情報の設定とグループで使用するアクセス制限
 module Public::Concerns::AuthorizeGroup
   # included do ... endを使えるようにし、モジュールを取り込んだコントローラーで自動的に特定の処理を実行する
   extend ActiveSupport::Concern

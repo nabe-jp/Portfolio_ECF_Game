@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.boolean "is_pinned", default: false, null: false
@@ -117,7 +117,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.boolean "is_pinned", default: false, null: false
@@ -136,7 +136,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "parent_comment_id"
@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.boolean "visible_to_non_members", default: false, null: false
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "owner_id", null: false
@@ -246,7 +246,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "parent_comment_id"
@@ -266,7 +266,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
-    t.string "deleted_reason"
+    t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.boolean "is_pinned", default: false, null: false

@@ -33,7 +33,7 @@
     </tr>
     <tr>
       <th colspan="2">ステータス無効の理由</th>
-      <td><%= @user.deleted_reason ? '-' : @user.deleted_reason %></td>
+      <td><%= enum_i18n(@user.deleted_reason, :deleted_reason) %></td>
     </tr>
     <tr>
       <th colspan="2">投稿数</th>
