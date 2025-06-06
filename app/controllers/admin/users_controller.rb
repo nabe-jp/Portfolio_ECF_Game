@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
-  before_action :set_user, only: [:show, :update, :deactivate, :reactivate]
+  before_action :set_user, only: [:show, :destroy, :reactivate]
 
   def index
     # 初期アクセス時に status パラメータがなければ、有効ユーザーにリダイレクト
@@ -24,18 +24,14 @@ class Admin::UsersController < Admin::ApplicationController
     @users = @users.page(params[:page]).per(10)
   end
   
-
   def show
     @user_posts = @user.user_posts.order(created_at: :desc)
   end
 
-  def update
-    # 未使用
-  end
-
-  def deactivate
+  def destroy
     begin
-      Deleter::UserDeleter.call(@user, deleted_by: current_admin)
+      Rails.logger.error("User削除エラー: #{:removed_by_admin}")
+      Deleter::UserDeleter.call(@user, deleted_by: current_admin, deleted_reason: :removed_by_admin)
       redirect_to admin_user_path(@user), notice: 'ユーザーと関連データを削除しました'
     rescue => e
       Rails.logger.error("User削除エラー: #{e.message}")
@@ -45,7 +41,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def reactivate
     begin
-      Restorer::UserRestorer.call(@user)
+      Restorer::UserRestorer.new(@user).call
       redirect_to admin_user_path(@user), notice: 'ユーザーと関連データを復元しました'
     rescue => e
       Rails.logger.error("User復元エラー: #{e.message}")

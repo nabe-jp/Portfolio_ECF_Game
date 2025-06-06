@@ -1,4 +1,6 @@
 class GroupNotice < ApplicationRecord
+  include DeletableReason
+  
   belongs_to :group
   belongs_to :member, class_name: "GroupMembership"
 

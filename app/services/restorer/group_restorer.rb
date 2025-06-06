@@ -1,35 +1,35 @@
 module Restorer
   class GroupRestorer
-    def initialize(group)
+    def initialize(group, restored_due_to_parent: false)
       @group = group
+      @restored_due_to_parent = restored_due_to_parent
     end
 
     def call
-      @group.update!(is_deleted: false, deleted_at: nil, deleted_by_id: nil)
+      ActiveRecord::Base.transaction do
+        restore_params = {is_deleted: false, deleted_at: nil, deleted_by_id: nil,
+          deleted_reason: nil, deleted_due_to_parent: false}
 
-      restore_without_is_public(@group.group_memberships)
-      restore(@group.group_events)
-      restore(@group.group_notices)
-      restore(@group.group_posts)
-      # 投稿にぶら下がったコメントは、1対多なので配列処理(groupと直接アソシエーションが繋がっていない)
-      group_post_comments = @group.group_posts.flat_map(&:group_post_comments)
-      restore_each(group_post_comments)
-    end
+        # 親の連鎖削除で削除されたものを復元
+        if @restored_due_to_parent && @group.deleted_due_to_parent
+          restore_params[:hidden_on_parent_restore] = true
 
-    private
+        # 個別の復元
+        elsif !@restored_due_to_parent && !@group.deleted_due_to_parent
+          restore_params[:is_public] = false
 
-    def restore(records)
-      records.update_all(is_deleted: false, deleted_at: nil, deleted_by_id: nil, is_public: false)
-    end
+        # 想定していないアクセス
+        else
+          raise "#{self.class.name}で想定外のアクセスです"
+        end
 
-    def restore_each(records)
-      Array(records).each do |record|
-        record.update!(is_deleted: false, deleted_at: nil, deleted_by_id: nil, is_public: false)
+        @group.update!(restore_params)
+
+        # 子要素の連鎖復元
+        @group.group_memberships.each do |membership|
+          Restorer::GroupMemberRestorer.new(membership, restored_due_to_parent: true).call
+        end
       end
-    end
-    
-    def restore_without_is_public(records)
-      records.update_all(is_deleted: false, deleted_at: nil, deleted_by_id: nil)
     end
   end
 end

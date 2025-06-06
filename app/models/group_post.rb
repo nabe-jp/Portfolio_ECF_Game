@@ -1,4 +1,5 @@
 class GroupPost < ApplicationRecord
+  include DeletableReason
   
   acts_as_taggable_on :group_post_tags
 

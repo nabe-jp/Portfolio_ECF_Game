@@ -1,4 +1,5 @@
 class UserPost < ApplicationRecord
+  include DeletableReason
   
   # 現在未実装(Gemインストール済み)
   acts_as_taggable_on :tags

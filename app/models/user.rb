@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # 削除理由のenumの読み込み
+  include DeletableReason
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable

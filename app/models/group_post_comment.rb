@@ -1,4 +1,6 @@
 class GroupPostComment < ApplicationRecord
+  include DeletableReason
+  
   belongs_to :member, class_name: "GroupMembership"
 
   belongs_to :parent_comment, class_name: 'GroupPostComment', optional: true

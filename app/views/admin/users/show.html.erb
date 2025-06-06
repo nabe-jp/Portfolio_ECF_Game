@@ -32,6 +32,10 @@
       <td><%= @user.is_deleted ? '無効' : '有効' %></td>
     </tr>
     <tr>
+      <th colspan="2">ステータス無効の理由</th>
+      <td><%= @user.deleted_reason ? '-' : @user.deleted_reason %></td>
+    </tr>
+    <tr>
       <th colspan="2">投稿数</th>
       <td><%= @user.user_posts.count %></td>
     </tr>
@@ -62,7 +66,7 @@
       data: { confirm: "このユーザーを復元すると、ログインや投稿が可能になります。\n復元処理を実施しますか？" },
       class: 'btn btn-success' %>
   <% else %>
-    <%= link_to '凍結・退会', deactivate_admin_user_path(@user), method: :patch,
+    <%= link_to '凍結・退会', admin_user_path(@user), method: :delete,
       data: { confirm: "このユーザーを凍結・退会にすると、ログインや投稿ができなくなります。\n凍結・退会処理を実施しますか？" },
       class: 'btn btn-danger' %>
   <% end %>

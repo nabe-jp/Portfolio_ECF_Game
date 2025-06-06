@@ -1,4 +1,6 @@
 class UserPostComment < ApplicationRecord
+  include DeletableReason
+  
   belongs_to :user
   belongs_to :user_post
 

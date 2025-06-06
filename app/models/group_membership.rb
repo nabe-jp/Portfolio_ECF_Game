@@ -1,4 +1,6 @@
 class GroupMembership < ApplicationRecord
+  include DeletableReason
+  
   belongs_to :user
   belongs_to :group
 
@@ -12,9 +14,7 @@ class GroupMembership < ApplicationRecord
 
  
   enum role: { member: 0, moderator: 1, owner: 2 }
-  enum deleted_reason: { 
-    voluntarily_left: 0, kicked_by_group_owner: 1, group_disbanded: 2, removed_by_admin: 3 }, _prefix: true
-
+ 
   # 将来的に承認待ち・参加中・保留中を実装する際に使用
   # enum status: { pending: 0, active: 1, suspended: 2 }
 

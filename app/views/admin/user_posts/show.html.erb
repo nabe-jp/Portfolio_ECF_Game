@@ -46,6 +46,10 @@
     </td>
   </tr>
   <tr>
+    <th colspan="2">ステータス無効の理由</th>
+    <td><%= @user_post.deleted_reason.present? ? @user_post.deleted_reason : '-' %></td>
+  </tr>
+  <tr>
     <th>いいね数</th>
     <td><%= @user_post.like_count %></td>
   </tr>

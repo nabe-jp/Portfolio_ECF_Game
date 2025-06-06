@@ -1,47 +1,39 @@
 module Deleter
   class UserDeleter
-    def self.call(user, deleted_by:)
-      new(user, deleted_by: deleted_by).call
+    def self.call(user, deleted_by:, deleted_reason:)
+      new(user, deleted_by: deleted_by, deleted_reason: deleted_reason).call
     end
 
-    def initialize(user, deleted_by:)
+    def initialize(user, deleted_by:, deleted_reason:)
       @user = user
       @deleted_by = deleted_by
-      @now = Time.current
+      @deleted_reason = deleted_reason
+      @parent_deletion_reason = :parent_user_deleted
     end
 
     def call
+      now = Time.current
       ActiveRecord::Base.transaction do
-        soft_delete(@user.user_posts)
-        soft_delete(@user.user_post_comments)
-
-        soft_delete(@user.group_posts)
-
-        # 投稿にぶら下がったコメントは、1対多なので配列処理(userと直接アソシエーションが繋がっていない)
-        group_post_comments = @user.group_posts.flat_map(&:group_post_comments)
-        soft_delete_each(group_post_comments)
-
-        soft_delete(@user.group_memberships)
-
-        # 所有していたグループ
-        @user.owned_groups.each do |group|
-          Deleter::GroupDeleter.new(group, deleted_by: @deleted_by).call
+        # ユーザー本人の投稿削除
+        @user.user_posts.find_each do |post|
+          Deleter::UserPostDeleter.call(post, deleted_by: @deleted_by, deleted_reason: @deleted_reason)
         end
 
-        # 最後にユーザー自身を論理削除
-        @user.update!(is_deleted: true, deleted_at: @now, deleted_by_id: @deleted_by.id)
-      end
-    end
+        # 所属グループメンバーシップをまとめて削除(内部で関連イベント・通知・投稿も削除)
+        @user.group_memberships.find_each do |membership|
+          Deleter::GroupMemberDeleter.call(membership, 
+            deleted_by: @deleted_by, deleted_reason: @parent_deletion_reason)
+        end
 
-    private
+        # 所有グループの削除(内部で再帰的処理)
+        @user.owned_groups.find_each do |group|
+          Deleter::GroupDeleter.new(group, 
+            deleted_by: @deleted_by, deleted_reason: @parent_deletion_reason).call
+        end
 
-    def soft_delete(records)
-      records.update_all(is_deleted: true, deleted_at: @now, deleted_by_id: @deleted_by.id)
-    end
-
-    def soft_delete_each(records)
-      Array(records).each do |record|
-        record.update!(is_deleted: true, deleted_at: @now, deleted_by_id: @deleted_by.id)
+        # ユーザー自身の論理削除
+        @user.update!(is_deleted: true, 
+          deleted_at: now, deleted_by_id: @deleted_by.id, deleted_reason: @deleted_reason)
       end
     end
   end

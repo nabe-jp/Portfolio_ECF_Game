@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  namespace :public do
-    namespace :groups do
-      get 'group_members/index'
-    end
-  end
   # ネストによるヘルパー名やURLの冗長性を抑え、可読性を意識したルーティング設計
   # as:はURLヘルパー名として使われるのでシンボルに、path: は実際のルーティングURL文字列になるので文字列で記載
 
@@ -87,64 +82,60 @@ Rails.application.routes.draw do
     end
   end
 
+  # 論理削除から復元
+  concern :admin_reactivatable do
+    patch :reactivate, on: :member
+  end
+
+  # 公開制御
+  concern :admin_publishable do
+    patch :hide, on: :member               # 非公開にする
+    patch :publish, on: :member            # 公開にする
+  end
+
   # 管理者用ルーティング
   namespace :admin do
     root to: 'dashboard#top'
   
     # 管理者への申し送りなどの記載に使用するために設置
-    resources :admin_notes, only: [:index, :create, :edit, :update, :destroy], path: 'notes', as: :notes do
-      member do
-        patch :reactivate         # 論理削除から復元
-      end
-    end
+    resources :admin_notes, only: [:index, :create, :edit, :update, :destroy], 
+      path: 'notes', as: :notes, concerns: :admin_reactivatable
 
     # ユーザーへのニュースやお知らせ
-    resources :informations, only: [:index, :create, :edit, :update, :destroy] do
-      member do
-        patch :reactivate         # 論理削除から復元
-      end
-    end
+    resources :informations, only: [:index, :create, :edit, :update, :destroy], 
+      concerns: :admin_reactivatable
 
     # ユーザー管理
-    resources :users, only: [:index, :show, :update] do
-      member do
-        patch :deactivate         # 凍結や強制退会等
-        patch :reactivate         # 論理削除から復元
-      end
-    end
+    resources :users, only: [:index, :show, :destroy], concerns: :admin_reactivatable
 
     # ユーザーの投稿管理
-    resources :user_posts, only: [:index, :show, :destroy] do
-      member do
-        patch :reactivate         # 論理削除から復元
-        patch :hide               # 非公開にする
-        patch :publish            # 公開にする
-      end
-    end
+    resources :user_posts, only: [:index, :show, :destroy], 
+      concerns: [:admin_reactivatable, :admin_publishable]
 
-    # ユーザーの投稿hへのコメント管理
-    resources :user_post_comments, only: [:index, :show, :destroy] do
-      member do
-        patch :reactivate         # 論理削除から復元
-        patch :hide               # 非公開にする
-        patch :publish            # 公開にする
-      end
-    end
+    # ユーザーの投稿へのコメント管理
+    resources :user_post_comments, only: [:index, :show, :destroy], 
+      concerns: [:admin_reactivatable, :admin_publishable]
 
-    # -----今後実装予定-----
     # グループ管理
-    resources :groups, only: [:index, :show, :destroy] do
-      member do
-        patch :deactivate         # 凍結や強制退会等
-        patch :reactivate         # 論理削除から復元
+    resources :groups, only: [:index, :show, :destroy] , 
+      concerns: [:admin_reactivatable, :admin_publishable] do
+
+      scope module: :groups do
+        resources :group_events, only: [:index, :show, :destroy], 
+          path: 'events', as: :events, concerns: [:admin_reactivatable, :admin_publishable]
+
+        resources :group_notices, only: [:index, :show, :destroy], 
+          path: 'notices', as: :notices, concerns: [:admin_reactivatable, :admin_publishable]
+
+        resources :group_posts, only: [:index, :show, :destroy], 
+          path: 'posts', as: :posts, concerns: [:admin_reactivatable, :admin_publishable] do
+
+          resources :group_post_comments, only: [:destroy], 
+            path: 'comments', as: :comments, concerns: [:admin_reactivatable, :admin_publishable]
+        end 
       end
     end
 
-    # グループ内投稿の管理
-    resources :group_posts, only: [:index, :show, :destroy], path: 'posts', as: :posts do
-      resources :group_post_comments, only: [:destroy], path: 'comments', as: :comments
-    end
-  
     # DM機能(フレンド同士)
     resources :dm_rooms, only: [:index, :show, :destroy] do
       resources :messages, only: [:destroy]

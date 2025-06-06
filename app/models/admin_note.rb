@@ -1,4 +1,6 @@
 class AdminNote < ApplicationRecord
+  include DeletableReason
+  
   belongs_to :admin
 
   validates :title, presence: { message: "を入力してください" }

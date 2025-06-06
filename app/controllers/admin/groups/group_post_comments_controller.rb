@@ -1,4 +1,4 @@
-class Admin::GroupPostCommentsController < Admin::ApplicationController
+class Admin::Groups::GroupPostCommentsController < Admin::ApplicationController
   
   def destroy
 

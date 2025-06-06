@@ -1,4 +1,4 @@
-class Admin::GroupPostsController < Admin::ApplicationController
+class Admin::Groups::GroupPostsController < Admin::ApplicationController
 
   def index
   end

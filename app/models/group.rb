@@ -1,4 +1,6 @@
 class Group < ApplicationRecord
+  include DeletableReason
+  
   # タグ
   acts_as_taggable_on :group_tags
 

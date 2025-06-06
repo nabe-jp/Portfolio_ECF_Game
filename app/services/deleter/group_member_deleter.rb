@@ -7,31 +7,31 @@ module Deleter
     def initialize(member, deleted_by:, deleted_reason:)
       @member = member
       @deleted_by = deleted_by
-      @now = Time.current
       @deleted_reason = deleted_reason
+      @parent_deletion_reason = :parent_group_member_deleted
     end
 
     def call
-      @member.update!(is_deleted: true, deleted_at: @now, 
-        deleted_by_id: @deleted_by.id, deleted_reason: @deleted_reason)
+      now = Time.current
+      # 途中で失敗したら全体ロールバック
+      ActiveRecord::Base.transaction do
+        @member.update!(is_deleted: true, deleted_at: now, 
+          deleted_by_id: @deleted_by.id, deleted_reason: @deleted_reason)
 
-      soft_delete(@member.group_events)
-      soft_delete(@member.group_notices)
-      soft_delete(@member.group_posts)
+        @member.group_events.each do |event|
+          Deleter::GroupEventDeleter.call(event, 
+            deleted_by: @deleted_by, deleted_reason: @parent_deletion_reason)
+        end
 
-      group_post_comments = @member.group_posts.flat_map(&:group_post_comments)
-      soft_delete_each(group_post_comments)
-    end
+        @member.group_notices.each do |notice|
+          Deleter::GroupNoticeDeleter.call(notice, 
+            deleted_by: @deleted_by, deleted_reason: @parent_deletion_reason)
+        end
 
-    private
-
-    def soft_delete(records)
-      records.update_all(is_deleted: true, deleted_at: @now, deleted_by_id: @deleted_by.id)
-    end
-
-    def soft_delete_each(records)
-      Array(records).each do |record|
-        record.update!(is_deleted: true, deleted_at: @now, deleted_by_id: @deleted_by.id)
+        @member.group_posts.each do |post|
+          Deleter::GroupPostDeleter.call(post, 
+            deleted_by: @deleted_by, deleted_reason: @parent_deletion_reason)
+        end
       end
     end
   end
