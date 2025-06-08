@@ -40,7 +40,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :bio, null: false
 
       # 状態制御(削除・非表示)
-      t.boolean :is_deleted, default: false, null: false                # 論理削除フラグ
+      t.integer :user_status, default: 0, null: false                   # ユーザーのステータス
       t.datetime :deleted_at                                            # 削除日時
       t.integer :deleted_by_id                                          # 削除した管理者 or 操作者のID
       t.integer :deleted_reason                                         # 削除理由(enumで管理)

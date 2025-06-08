@@ -43,10 +43,10 @@ class UserPost < ApplicationRecord
     # アタッチされた画像がある場合デフォルト画像をアタッチしない
     unless user_post_image.attached?
       # デフォルト画像のパスを指定
-      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_user_post.png')
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_user_post.jpg')
       # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
       user_post_image.attach(io: File.open(default_image_path), 
-        filename: 'no_user_post.png', content_type: 'image/png')
+        filename: 'no_user_post.jpg', content_type: 'image/jpg')
     end
   end
 end

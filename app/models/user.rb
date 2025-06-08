@@ -19,6 +19,8 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
+  enum user_status: { active: 0, deactivated: 1, banned: 2, suspended: 3 }
+
   # 多くの実在英語名が20〜30文字未満ですがまれに非常に長い名前も存在し、複数名・複合姓(スペースなど)も考慮し50文字
   validates :last_name, presence: { message: "を入力してください" }
   validates :last_name, length: { maximum: 50,
@@ -29,8 +31,8 @@ class User < ApplicationRecord
     message: "は1～50文字以内で入力してください" }, if: -> { first_name.present? }
 
   validates :nickname, presence: { message: "を入力してください" }
-  validates :nickname, length: { maximum: 10,
-    message: "は1～10文字以内で入力してください" }, if: -> { nickname.present? }
+  validates :nickname, length: { maximum: 20,
+    message: "は1～20文字以内で入力してください" }, if: -> { nickname.present? }
   
   validates :bio, presence: { message: "を入力してください" }
   validates :bio, length: { maximum: 100,
@@ -61,9 +63,9 @@ class User < ApplicationRecord
   # デフォルトの画像をアタッチ
   def set_default_profile_image
     # デフォルト画像のパスを指定
-    default_image_path = Rails.root.join('app', 'assets', 'images', 'no_user.png')
+    default_image_path = Rails.root.join('app', 'assets', 'images', 'no_user.jpg')
     # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
     profile_image.attach(io: File.open(default_image_path), 
-      filename: 'no_user.png', content_type: 'image/png')
+      filename: 'no_user.jpg', content_type: 'image/jpg')
   end
 end

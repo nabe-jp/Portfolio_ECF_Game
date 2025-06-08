@@ -1,5 +1,10 @@
 ja:
   enums:
+    user_status:
+      active: "利用中"
+      deactivated: "退会済み"
+      banned: "利用禁止"
+      suspended: "一時停止中"
     deleted_reason:
       self_deleted: "ユーザー本人による削除"
       voluntarily_left_group: "グループから自発的に退会"

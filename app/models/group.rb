@@ -64,9 +64,9 @@ class Group < ApplicationRecord
   # デフォルトの画像をアタッチ
   def set_default_group_image
     unless group_image.attached?
-      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_group.png')
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_group.jpg')
         group_image.attach(io: File.open(default_image_path), 
-          filename: 'no_group.png', content_type: 'image/png')
+          filename: 'no_group.jpg', content_type: 'image/jpg')
     end
   end
 

@@ -29,8 +29,8 @@ class GroupPost < ApplicationRecord
 
   def set_default_group_post_image
     unless group_post_image.attached?
-      group_post_image.attach( io: File.open(Rails.root.join("app/assets/images/no_group_post.png")),
-        filename: "no_group_post.jpg", content_type: "image/png")
+      group_post_image.attach( io: File.open(Rails.root.join("app/assets/images/no_group_post.jpg")),
+        filename: "no_group_post.jpg", content_type: "image/jpg")
     end
   end
 end
