@@ -13,7 +13,4 @@ class UserPostComment < ApplicationRecord
     message: "は1～50文字以内で入力してください" }, if: -> { body.present? }
 
   scope :active, -> { where(is_deleted: false, is_public: true, hidden_on_parent_restore: false) }
-    
-  # コメントが作成された後に、親が非公開/削除されていたら自動で非表示に
-  # after_create :check_parent_visibility
 end

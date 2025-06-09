@@ -27,7 +27,8 @@
 
 .comment-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin: 0;
 }
 
@@ -59,4 +60,61 @@
   text-align: center;
   box-sizing: border-box;
   color: #c90909;
+}
+
+.comment-body {
+  word-break: break-word;
+  max-width: 100%;
+}
+
+.comment-item {
+  width: 100%;
+}
+
+.collapse .user-comments__form-wrapper {
+  width: 100%;
+}
+
+.user-comments__form-row {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.user-comments__textarea {
+  flex: 1;
+  resize: vertical;
+}
+
+.comment-form__submit {
+  display: flex;
+  align-items: center;
+}
+
+.comment-form__submit input[type="submit"] {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+.reply-form-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.reply-form-wrapper textarea {
+  width: 80%;
+  height: 2.5rem;
+  resize: none;
+  font-size: 0.9rem;
+}
+
+.reply-form-wrapper input[type="submit"] {
+  width: 15%;
+  height: 2.5rem;
+  font-size: 0.9rem;
+}
+.comment-body p {
+  margin-bottom: 0;
 }

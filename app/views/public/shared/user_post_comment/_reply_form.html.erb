@@ -1,0 +1,22 @@
+<%= form_with(model: [user_post, user_post_comment],
+  url: user_post_comments_path(user_post.user, user_post), local: true) do |f| %>
+
+  <%# "コメントへの返信に使用" %>
+  <%= f.hidden_field :parent_comment_id, value: user_post_comment.parent_comment_id %>
+
+  <div class="row align-items-center no-gutters mb-2">
+
+    <!-- 入力エリア（60% = col-6） -->
+    <div class="col-7 pl-3">
+      <%= f.text_area :body, rows: 1, class: "form-control", placeholder: "返信を入力...", style: "resize: none;" %>
+    </div>
+
+    <!-- 空欄（画像+ニックネーム用のスペース・20% = col-2） -->
+    <div class="col-2"></div>
+
+    <!-- 送信ボタン（10% = col-2） -->
+    <div>
+      <%= f.submit "返信する", class: "btn btn-primary btn-sm btn-block" %>
+    </div>
+  </div>
+<% end %>

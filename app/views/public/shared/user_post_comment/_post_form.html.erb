@@ -3,8 +3,7 @@
     url: user_post_comments_path(@user_post.user, @user_post), local: true) do |f| %>
 
     <div class="user-comments__form-row">
-      <%= f.text_area :body, placeholder: "コメントを入力", 
-        class: "user-comments__textarea", rows: 2 %>
+      <%= f.text_area :body, rows: 2, class: "user-comments__textarea", placeholder: "コメントを入力" %>
 
       <div class="comment-form__submit">
         <%= f.submit "コメントする" %>

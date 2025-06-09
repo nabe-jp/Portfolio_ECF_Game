@@ -32,7 +32,7 @@
 <hr>
 
 <% if user_signed_in? %>
-  <%= render 'public/shared/user_post_comment/form', user_post: @user_post %>
+  <%= render 'public/shared/user_post_comment/post_form', user_post: @user_post %>
 <% else %>
   <p class="text-center">コメントするにはログインが必要です。</p>
 <% end %>

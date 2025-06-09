@@ -23,14 +23,16 @@ class GroupPost < ApplicationRecord
     where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_on_parent_restore: false)
       .order(created_at: :desc) }
 
-  after_create :set_default_group_post_image
+  # 投稿作成時に必ずデフォルト画像を設定(seed作成時は作動しないように設定)
+  after_create :set_default_group_post_image, unless: :seeding?
 
   private
 
   def set_default_group_post_image
     unless group_post_image.attached?
-      group_post_image.attach( io: File.open(Rails.root.join("app/assets/images/no_group_post.jpg")),
-        filename: "no_group_post.jpg", content_type: "image/jpg")
-    end
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
+      group_post_image.attach(io: File.open(default_image_path), filename: 'no_group_post.jpg', 
+          content_type: 'image/jpeg')
+      end
   end
 end

@@ -48,8 +48,8 @@ class Group < ApplicationRecord
     where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_on_parent_restore: false)
       .order(created_at: :desc) }
 
-  # 投稿作成時に必ずデフォルト画像を設定
-  after_create :set_default_group_image
+  # 投稿作成時に必ずデフォルト画像を設定(seed作成時は作動しないように設定)
+  after_create :set_default_group_image, unless: :seeding?
   
   # グループ作成時、作成者もメンバーに入れる
   after_create :add_owner_to_members
@@ -64,9 +64,9 @@ class Group < ApplicationRecord
   # デフォルトの画像をアタッチ
   def set_default_group_image
     unless group_image.attached?
-      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_group.jpg')
-        group_image.attach(io: File.open(default_image_path), 
-          filename: 'no_group.jpg', content_type: 'image/jpg')
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group.jpg')
+      group_image.attach(io: File.open(default_image_path), filename: 'no_group.jpg', 
+        content_type: 'image/jpeg')
     end
   end
 

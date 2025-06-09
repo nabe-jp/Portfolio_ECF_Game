@@ -40,13 +40,8 @@ class User < ApplicationRecord
 
   scope :active, -> { where(is_deleted: false, is_public: true, hidden_by_parent: false) }
 
-  # ユーザー作成時にデフォルト画像を設定
-  after_create :set_default_profile_image
-
-  # シードデータ作成時にコールバックを実行しないようにするフラグ
-  def seeding?
-    defined?($skip_callbacks) && $skip_callbacks
-  end
+  # ユーザー作成時にデフォルト画像を設定(seed作成時は作動しないように設定)
+  after_create :set_default_profile_image, unless: :seeding?
 
   # ここにRansackableの設定(検索可能な属性)を追加(現在未使用のためコメント化)
   # attributesがカラムなどの本体情報、associationsは関連
@@ -63,9 +58,9 @@ class User < ApplicationRecord
   # デフォルトの画像をアタッチ
   def set_default_profile_image
     # デフォルト画像のパスを指定
-    default_image_path = Rails.root.join('app', 'assets', 'images', 'no_user.jpg')
+    default_image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_user.jpg')
     # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
     profile_image.attach(io: File.open(default_image_path), 
-      filename: 'no_user.jpg', content_type: 'image/jpg')
+      filename: 'no_user.jpg', content_type: 'image/jpeg')
   end
 end

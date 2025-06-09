@@ -15,7 +15,15 @@ class Public::Users::UserPostsController < ApplicationController
   end
 
   def show
-    @user_post_comments = @user_post.user_post_comments.includes(:user).order(created_at: :desc)
+    @parent_comments = @user_post.user_post_comments
+    .active
+    .where(parent_comment_id: nil)
+    .includes(:user, replies: :user)
+    .order(created_at: :desc)
+    .page(params[:page])
+    .per(20)
+
+    #@user_post_comments = @user_post.user_post_comments.includes(:user).order(created_at: :desc)
     # 入力値がセッションに残っている場合、フォームに表示
     if session[:user_post_comment_attributes]
       @user_post_comment = @user_post.user_post_comments.new(session[:user_post_comment_attributes])
@@ -94,7 +102,8 @@ class Public::Users::UserPostsController < ApplicationController
   
   def destroy
     begin
-      Deleter::UserPostDeleter.call(@user_post, deleted_by: current_user)
+      Deleter::UserPostDeleter.new(@user_post, deleted_by: current_user, 
+        deleted_reason: :self_deleted).new
       redirect_to user_posts_path(@user), notice: '投稿を削除しました。'
     rescue => e
       Rails.logger.error("UserPost削除エラー: #{e.message}")

@@ -7,6 +7,7 @@ ja:
       suspended: "一時停止中"
     deleted_reason:
       self_deleted: "ユーザー本人による削除"
+      post_user: "投稿を作成したユーザーによる削除"
       voluntarily_left_group: "グループから自発的に退会"
       removed_by_group_authority: "グループ管理権限者による削除"
       removed_by_admin: "サイト管理者による削除"

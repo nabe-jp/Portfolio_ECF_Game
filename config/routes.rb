@@ -45,7 +45,7 @@ Rails.application.routes.draw do
       end
       resources :user_posts, path: 'posts', as: :posts, module: :users do
         resources :user_post_comments, only: [:create, :destroy], path: 'comments', 
-          as: :comments, module: :users
+          as: :comments
       end
     end
     

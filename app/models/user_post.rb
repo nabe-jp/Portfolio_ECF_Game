@@ -22,9 +22,8 @@ class UserPost < ApplicationRecord
   scope :active, -> { where(is_deleted: false, is_public: true, 
     hidden_on_parent_restore: false).order(created_at: :desc) }
 
-
-  # 投稿作成時に必ずデフォルト画像を設定
-  after_create :set_default_user_post_image
+  # 投稿作成時に必ずデフォルト画像を設定(seed作成時は作動しないように設定)
+  after_create :set_default_user_post_image, unless: :seeding?
 
   # ここにRansackableの設定(検索可能な属性)を追加(現在未使用のためコメント化)
   # attributesがカラムなどの本体情報、associationsは関連
@@ -43,10 +42,10 @@ class UserPost < ApplicationRecord
     # アタッチされた画像がある場合デフォルト画像をアタッチしない
     unless user_post_image.attached?
       # デフォルト画像のパスを指定
-      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_user_post.jpg')
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_user_post.jpg')
       # content_typeはMIMEタイプを指しており、MIMEタイプはimage/jpeg(.jpgは拡張子なのであまりよろしくない)らしい)
       user_post_image.attach(io: File.open(default_image_path), 
-        filename: 'no_user_post.jpg', content_type: 'image/jpg')
+        filename: 'no_user_post.jpg', content_type: 'image/jpeg')
     end
   end
 end

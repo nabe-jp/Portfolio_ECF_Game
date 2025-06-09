@@ -5,8 +5,9 @@ module DeletableReason
     enum deleted_reason: {
       # 0〜99: ユーザー都合
       self_deleted: 0,                            # 自身で削除(例: アカウント削除)
-      voluntarily_left_group: 1,                  # グループから自発的に退会
-      removed_by_group_authority: 2,              # グループ管理権限者(オーナーまたはマネージャー)による削除
+      post_user: 1,                               # 投稿を作成したユーザーによる削除
+      voluntarily_left_group: 2,                  # グループから自発的に退会
+      removed_by_group_authority: 3,              # グループ管理権限者(オーナーまたはマネージャー)による削除
 
       # 100〜199: 管理者都合
       removed_by_admin: 100,                      # サイト管理者による削除
