@@ -1,5 +1,5 @@
 class Public::Groups::GroupMembersController < Public::ApplicationController
-  include ::Public::Concerns::AuthorizeGroup
+  include Public::AuthorizeGroup
 
   before_action :authorize_group_member!
   before_action :authorize_group_owner!, only: [:edit_note, :destroy, :update_note, :update_role]

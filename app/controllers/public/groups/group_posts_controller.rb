@@ -1,5 +1,5 @@
 class Public::Groups::GroupPostsController < Public::ApplicationController
-  include ::Public::Concerns::AuthorizeGroup
+  include Public::AuthorizeGroup
 
   before_action :authenticate_user!
   before_action :authorize_group_member!, except: [:show]

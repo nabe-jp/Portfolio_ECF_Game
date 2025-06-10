@@ -1,6 +1,5 @@
 class Public::Groups::GroupEventsController < Public::ApplicationController
-  include Scopes::Public::Groups
-  include ::Public::Concerns::AuthorizeGroup
+  include Public::AuthorizeGroup
 
   before_action :authenticate_user!
   before_action :authorize_group_member!

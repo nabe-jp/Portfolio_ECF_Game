@@ -1,6 +1,9 @@
 class Admin::UsersController < Admin::ApplicationController
   before_action :set_user, only: [:show, :destroy, :reactivate]
 
+  # ステータス表示のヘルパー
+  include Admin::StatusHelper
+
   def index
     # 初期アクセス時に status パラメータがなければ、有効ユーザーにリダイレクト
     unless params.key?(:status)
@@ -8,7 +11,7 @@ class Admin::UsersController < Admin::ApplicationController
     end
 
     # デフォルト: 有効ユーザー
-    @users = User.where(is_deleted: false)
+    @users = User.where(user_status: :active)
   
     case params[:status]
     when "inactive"

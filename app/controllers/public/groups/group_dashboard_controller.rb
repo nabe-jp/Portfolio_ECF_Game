@@ -1,5 +1,5 @@
 class Public::Groups::GroupDashboardController < Public::ApplicationController
-  include ::Public::Concerns::AuthorizeGroup
+  include Public::AuthorizeGroup
   
   def show
     # @group_events = active_scope_asc(@group.group_events)

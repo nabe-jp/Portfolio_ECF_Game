@@ -584,6 +584,7 @@ ActiveRecord::Base.transaction do
           この度はお忙しい中、ご覧いただき誠にありがとうございます。
           ご不明な点やご質問がございましたら、どうぞお気軽にお知らせください。
         TEXT
+        is_pinned: true,
         created_at: Time.current
       }
     ])
@@ -662,7 +663,8 @@ ActiveRecord::Base.transaction do
           ご利用の際はご留意くださいますよう、何卒よろしくお願い申し上げます。
         TEXT
         published_at: 12.hours.ago,
-        sort_order: '0',
+        sort_order: 0,
+        is_pinned: true,
         created_at: 12.hours.ago
       },
       {

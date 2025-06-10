@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <th colspan="2">ステータス</th>
-      <td><%= @user.is_deleted ? '無効' : '有効' %></td>
+      <td><%= enum_i18n(@user.user_status, :user_status) %></td>
     </tr>
     <tr>
       <th colspan="2">ステータス無効の理由</th>
@@ -61,7 +61,7 @@
 
   <%= link_to '一覧へ戻る', admin_users_path, class: 'btn btn-secondary mx-5' %>
 
-  <% if @user.is_deleted? %>
+  <% if !@user.active? %>
     <%= link_to '復元', reactivate_admin_user_path(@user), method: :patch,
       data: { confirm: "このユーザーを復元すると、ログインや投稿が可能になります。\n復元処理を実施しますか？" },
       class: 'btn btn-success' %>

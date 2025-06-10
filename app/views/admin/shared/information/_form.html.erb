@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-11">
 
-      <!-- タイトルと 公開日 ラベル -->
+      <!-- タイトルと公開日のラベル -->
       <div class="row mb-2">
         <div class="col-6 offset-1">
           <%= f.label :title, 'タイトル' %>
@@ -48,14 +48,14 @@
         <!-- 表示順を制御 チェックボックス -->
         <div class="col-2 mt-1">
 
-        <!-- sort_order入力欄（初期状態は非表示） -->
-        <div id="sort_order_field" style="display: none; text-align: center;">
-        <%= f.label :sort_order, '固定表示時のみ有効<br>小さいほど上に表示'.html_safe,
-          class: 'd-block', style: 'margin-left: 0.5rem;' %>
-        <%= f.number_field :sort_order, class: 'form-control',
-          style: 'width: 50%; height: 30px; margin: 0 auto; text-align: center;', min: 0, max: 999 %>
-      </div>
-      </div>
+        <%# sort_order入力欄（初期状態は非表示） #%>
+          <div id="sort_order_field" style="display: none; text-align: center;">
+            <%= f.label :sort_order, '固定表示時のみ有効<br>小さいほど上に表示'.html_safe,
+              class: 'd-block', style: 'margin-left: 0.5rem;' %>
+            <%= f.number_field :sort_order, class: 'form-control',
+              style: 'width: 50%; height: 30px; margin: 0 auto; text-align: center;', min: 0, max: 999 %>
+          </div>
+        </div>
 
       </div>
 

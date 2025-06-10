@@ -1,5 +1,5 @@
 class Public::Groups::GroupMembershipsController < Public::ApplicationController
-  include ::Public::Concerns::AuthorizeGroup
+  include Public::AuthorizeGroup
 
   before_action :authenticate_user!
 

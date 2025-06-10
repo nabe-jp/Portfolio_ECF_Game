@@ -1,9 +1,6 @@
 class Admin::UserPostsController < Admin::ApplicationController
   before_action :set_user_post, only: [:show, :destroy, :reactivate, :hide, :publish]
 
-  # 一覧の絞り込みロジック
-  include Admin::FilteredRecords
-
   def index
     # パラメータを論理値に変換して状態を保持
     @show_non_public = ActiveModel::Type::Boolean.new.cast(params[:show_non_public])

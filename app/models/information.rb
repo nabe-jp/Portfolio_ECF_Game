@@ -21,8 +21,8 @@ class Information < ApplicationRecord
   # 表示順が指定されなければデフォルト値を入れる
   def set_default_sort_order
     unless ActiveModel::Type::Boolean.new.cast(enable_sort_order)
-      # チェックなし → 自動で999（並び順制御しない扱い）
-      self.sort_order = 999
+      # チェックなし → 自動で999(並び順制御しない扱い)
+      self.sort_order = 999 if sort_order.nil?
     end
   end
 end

@@ -69,23 +69,25 @@
 
   <%= link_to '一覧へ戻る', admin_user_posts_path, class: 'btn btn-secondary' %>
 
-  <% if @user_post.is_public %>
-    <%= link_to "非公開にする", hide_admin_user_post_path(@user_post), method: :patch,
-      data: { confirm: "この投稿を非公開にします。よろしいですか？" },
-      class: "btn btn-warning mx-5" %>
-  <% else %>
-    <%= link_to "公開にする", publish_admin_user_post_path(@user_post), method: :patch,
-      data: { confirm: "この投稿を公開にします。よろしいですか？" },
-      class: "btn btn-primary mx-5" %>
+  <% if !@user_post.is_deleted %>
+    <% if @user_post.is_public %>
+      <%= link_to "非公開にする", hide_admin_user_post_path(@user_post), method: :patch,
+        data: { confirm: "この投稿を非公開にします。よろしいですか？" },
+        class: "btn btn-warning ml-5" %>
+    <% else %>
+      <%= link_to "公開にする", publish_admin_user_post_path(@user_post), method: :patch,
+        data: { confirm: "この投稿を公開にします。よろしいですか？" },
+        class: "btn btn-primary ml-5" %>
+    <% end %>
   <% end %>
 
   <% if @user_post.is_deleted %>
     <%= link_to "復元", reactivate_admin_user_post_path(@user_post), method: :patch,
       data: { confirm: "この投稿を復元してもよろしいですか？" },
-      class: "btn btn-success" %>
+      class: "btn btn-success ml-5" %>
   <% else %>
     <%= link_to "削除", admin_user_post_path(@user_post), method: :delete,
       data: { confirm: "この投稿を削除してもよろしいですか？" },
-      class: "btn btn-danger" %>
+      class: "btn btn-danger ml-5" %>
   <% end %>
 </div>

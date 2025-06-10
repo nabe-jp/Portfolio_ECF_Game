@@ -6,7 +6,7 @@ class Admin::InformationsController < Admin::ApplicationController
     @information = Information.new(session.delete(:information_attributes) || {})
 
     # 並び替えの対象（デフォルト: posted_at）
-    sort_key = %w(posted_at published_at).include?(params[:sort_by]) ? params[:sort_by] : "posted_at"
+    sort_key = %w(posted_at published_at).include?(params[:sort_by]) ? params[:sort_by] : "created_at"
 
     # 並び順（デフォルト: desc）
     direction = %w(asc desc).include?(params[:direction]) ? params[:direction] : "desc"

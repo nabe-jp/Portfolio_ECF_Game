@@ -1,5 +1,4 @@
 class Public::Users::UserPostsController < Public::ApplicationController
-
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_user, only: [:index, :show]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
