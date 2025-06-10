@@ -1,4 +1,4 @@
-class Public::Groups::GroupNoticesController < ApplicationController
+class Public::Groups::GroupNoticesController < Public::ApplicationController
   include ::Public::Concerns::AuthorizeGroup
 
   before_action :authenticate_user!

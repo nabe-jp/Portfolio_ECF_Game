@@ -39,7 +39,8 @@ class Public::UserController < ApplicationController
   # 退会処理
   def withdraw
     begin
-      Deleter::UserDeleter.call(current_user, deleted_by: current_user)
+      Deleter::UserDeleter.new(current_user, deleted_by: current_user, 
+        deleted_reason: :self_deleted).call
       reset_session
       redirect_to root_path, notice: "退会処理を完了しました。"
     rescue => e
@@ -57,6 +58,6 @@ class Public::UserController < ApplicationController
 
   # ユーザーパラメータの制御
   def user_params
-    params.require(:user).permit(:profile_image, :nickname, :bio, :is_active)
+    params.require(:user).permit(:profile_image, :nickname, :bio)
   end
 end

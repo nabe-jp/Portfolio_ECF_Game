@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+
   before_action :set_user, only: [:show]
   
   def show; end
@@ -7,6 +8,6 @@ class Public::UsersController < ApplicationController
 
   # ユーザー情報を取得
   def set_user
-    @user = User.find(params[:id])
+    @user = User.active_users.find(params[:id])
   end
 end

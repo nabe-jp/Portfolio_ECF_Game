@@ -1,4 +1,5 @@
 class UserPost < ApplicationRecord
+  include Scopes::Public::Users
   include DeletableReason
   
   # 現在未実装(Gemインストール済み)
@@ -18,9 +19,6 @@ class UserPost < ApplicationRecord
   validates :body, presence: { message: "を入力してください" }
   validates :body, length: { maximum: 200, 
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }  
-
-  scope :active, -> { where(is_deleted: false, is_public: true, 
-    hidden_on_parent_restore: false).order(created_at: :desc) }
 
   # 投稿作成時に必ずデフォルト画像を設定(seed作成時は作動しないように設定)
   after_create :set_default_user_post_image, unless: :seeding?

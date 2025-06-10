@@ -1,4 +1,5 @@
 class GroupPost < ApplicationRecord
+  include Scopes::Public::Groups
   include DeletableReason
   
   acts_as_taggable_on :group_post_tags
@@ -16,12 +17,6 @@ class GroupPost < ApplicationRecord
   validates :body, presence: { message: "を入力してください" }
   validates :body, length: { maximum: 200, 
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }
-
-  scope :active_group, -> { 
-    where(is_deleted: false, is_public: true, hidden_on_parent_restore: false, is_owner_visible: true) }
-  scope :public_visible_to_non_members, -> { 
-    where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_on_parent_restore: false)
-      .order(created_at: :desc) }
 
   # 投稿作成時に必ずデフォルト画像を設定(seed作成時は作動しないように設定)
   after_create :set_default_group_post_image, unless: :seeding?

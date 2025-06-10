@@ -1,4 +1,5 @@
 class UserPostComment < ApplicationRecord
+  include Scopes::Public::Users
   include DeletableReason
   
   belongs_to :user
@@ -11,6 +12,4 @@ class UserPostComment < ApplicationRecord
   validates :body, presence: { message: "を入力してください" }
   validates :body, length: { maximum: 50, 
     message: "は1～50文字以内で入力してください" }, if: -> { body.present? }
-
-  scope :active, -> { where(is_deleted: false, is_public: true, hidden_on_parent_restore: false) }
 end

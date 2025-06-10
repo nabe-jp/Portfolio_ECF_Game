@@ -1,4 +1,5 @@
 class Information < ApplicationRecord
+  include Scopes::Public::Homes
   belongs_to :admin
 
   attr_accessor :enable_sort_order
@@ -14,9 +15,6 @@ class Information < ApplicationRecord
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }
 
   validates :sort_order, presence: true, if: -> { ActiveModel::Type::Boolean.new.cast(enable_sort_order) }
-
-  scope :active, -> { where(deleted_at: nil) }
-  scope :deleted, -> { where.not(deleted_at: nil) }
 
   private
 

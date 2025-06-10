@@ -1,4 +1,5 @@
 class GroupPostComment < ApplicationRecord
+  include Scopes::Public::Groups
   include DeletableReason
   
   belongs_to :member, class_name: "GroupMembership"
@@ -10,6 +11,4 @@ class GroupPostComment < ApplicationRecord
   validates :body, presence: { message: "を入力してください" }
   validates :body, length: { maximum: 50, 
     message: "は1～50文字以内で入力してください" }, if: -> { body.present? }
-  
-  scope :active_comment, -> { where(is_public: true, hidden_on_parent_restore: false) }
 end

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # スコープの読み込み
+  include Scopes::Public::Users
+  
   # 削除理由のenumの読み込み
   include DeletableReason
 
@@ -37,8 +40,6 @@ class User < ApplicationRecord
   validates :bio, presence: { message: "を入力してください" }
   validates :bio, length: { maximum: 100,
     message: "は1～100文字以内で入力してください" }, if: -> { bio.present? }
-
-  scope :active, -> { where(is_deleted: false, is_public: true, hidden_by_parent: false) }
 
   # ユーザー作成時にデフォルト画像を設定(seed作成時は作動しないように設定)
   after_create :set_default_profile_image, unless: :seeding?

@@ -1,4 +1,5 @@
 class Public::GroupsController < ApplicationController
+
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_group, only: 
     [:show, :edit, :update, :destroy, :join, :leave, :hide_from_owner, :show_by_owner, :dashboard]
@@ -6,7 +7,7 @@ class Public::GroupsController < ApplicationController
   before_action :authorize_group_manager!,only: [:edit, :update, :destroy, :hide_from_owner, :show_by_owner]
 
   def index
-    @groups = Group.active_group.order(created_at: :desc).page(params[:page]).per(10)
+    @groups = Group.active_groups_desc.page(params[:page])
   end
 
   def show
@@ -14,7 +15,7 @@ class Public::GroupsController < ApplicationController
       redirect_to group_dashboard_path(@group) and return
     else
       # 非メンバー用の公開投稿のみ取得 + ページネーション
-      @public_posts = @group.group_posts.public_visible_to_non_members.page(params[:page]).per(10)
+      @public_posts = @group.group_posts.active_group_posts_for_all_desc.page(params[:page])
     end
   end
 
@@ -57,11 +58,11 @@ class Public::GroupsController < ApplicationController
   def destroy
     begin
       # サービスオブジェクトをにてグループとグループに紐づくものを論理削除
-      Deleter::GroupDeleter.call(@group, current_user)
-      redirect_to public_groups_path, notice: "グループを削除しました"
+      Deleter::GroupDeleter.newl(@group, current_user).call
+      redirect_to my_groups_path, notice: "グループを削除しました"
     rescue => e
       Rails.logger.error("コメント削除エラー: #{e.message}")
-      redirect_to root_path, alert: '予期せぬエラーにより、グループの削除が行えませんでした。'
+      redirect_to my_groups_path, alert: '予期せぬエラーにより、グループの削除が行えませんでした。'
     end
   end
 
@@ -90,10 +91,12 @@ class Public::GroupsController < ApplicationController
   end
 
   def my_groups
-    @owned_groups = current_user.owned_groups.merge(Group.active_group).page(params[:owned_page]).per(6)
+    @owned_groups = current_user
+      .owned_groups.merge(Group.active_groups_desc).page(params[:owned_page]).per(6)
 
-    @joined_groups = current_user.joined_groups.where.not(id: current_user.owned_groups.pluck(:id))
-      .merge(Group.active_group).page(params[:joined_page]).per(6)
+    @joined_groups = current_user
+      .joined_groups.where.not(id: current_user.owned_groups.pluck(:id))
+        .merge(Groupactive_groups_desc).page(params[:joined_page]).per(6)
   end
 
   private

@@ -1,4 +1,4 @@
-class Public::Groups::GroupPostsController < ApplicationController
+class Public::Groups::GroupPostsController < Public::ApplicationController
   include ::Public::Concerns::AuthorizeGroup
 
   before_action :authenticate_user!
@@ -8,12 +8,12 @@ class Public::Groups::GroupPostsController < ApplicationController
   before_action :set_current_user, only: [:create]
   
   def index
-    @group_posts = @group.group_posts.order(created_at: :desc).page(params[:page])
+    @group_posts = @group.group_posts.active_group_posts_for_members_desc.page(params[:page])
   end
 
   def show
-    @group_post_comments = @group_post.group_post_comments.active_comment
-      .includes([ { member: :user }, :parent_comment ]).order(created_at: :desc).page(params[:page]).per(20)
+    @group_post_comments = @group_post.group_post_comments
+      .visible_top_level.includes([ { member: :user }, :parent_comment ]).page(params[:page]).per(20)
    
     if session[:group_post_comment_attributes]
       @group_post_comment = @group_post.group_post_comments.new(session[:group_post_comment_attributes])

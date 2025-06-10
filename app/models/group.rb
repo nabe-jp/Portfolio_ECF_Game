@@ -1,4 +1,5 @@
 class Group < ApplicationRecord
+  include Scopes::Public::Groups
   include DeletableReason
   
   # タグ
@@ -38,15 +39,6 @@ class Group < ApplicationRecord
 
   # 更新時にはslugが変更されていないことを検証する
   validate :slug_unchanged, on: :update
-
-  # 公開制御
-  scope :active_group, -> { 
-    where(is_deleted: false, is_public: true, hidden_on_parent_restore: false, is_owner_visible: true)
-      .order(created_at: :desc) }
-  # グループメンバーではないユーザーが閲覧するページに使用
-  scope :public_visible_to_non_members, -> { 
-    where(visible_to_non_members: true, is_deleted: false, is_public: true, hidden_on_parent_restore: false)
-      .order(created_at: :desc) }
 
   # 投稿作成時に必ずデフォルト画像を設定(seed作成時は作動しないように設定)
   after_create :set_default_group_image, unless: :seeding?

@@ -1,4 +1,4 @@
-class Public::Groups::GroupPostCommentsController < ApplicationController
+class Public::Groups::GroupPostCommentsController < Public::ApplicationController
   include ::Public::Concerns::AuthorizeGroup
 
   before_action :authenticate_user!

@@ -1,9 +1,7 @@
-class Public::Users::UserPostCommentsController < ApplicationController
+class Public::Users::UserPostCommentsController < Public::ApplicationController
   before_action :authenticate_user!
 
   def create
-Rails.logger.info "送信されたparams: #{params[:user_post_comment].inspect}"
-
     @user_post = UserPost.find(params[:post_id])
     @user_post_comment =  @user_post.user_post_comments.build(user_post_comment_params)
     @user_post_comment.user = current_user

@@ -1,4 +1,5 @@
-class Public::Users::UserPostsController < ApplicationController
+class Public::Users::UserPostsController < Public::ApplicationController
+
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_user, only: [:index, :show]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]
@@ -11,17 +12,12 @@ class Public::Users::UserPostsController < ApplicationController
         redirect_to root_path, alert: '指定されたユーザーが見つかりませんでした。'
         return
       end
-      @user_posts = @user.user_posts.active.page(params[:page])
+      @user_posts = @user.user_posts.active_posts_desc.page(params[:page])
   end
 
   def show
     @parent_comments = @user_post.user_post_comments
-    .active
-    .where(parent_comment_id: nil)
-    .includes(:user, replies: :user)
-    .order(created_at: :desc)
-    .page(params[:page])
-    .per(20)
+      .visible_top_level.includes(:user, replies: :user).page(params[:page]).per(20)
 
     #@user_post_comments = @user_post.user_post_comments.includes(:user).order(created_at: :desc)
     # 入力値がセッションに残っている場合、フォームに表示

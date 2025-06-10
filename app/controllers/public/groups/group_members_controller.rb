@@ -6,8 +6,8 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
   before_action :set_membership, only: [:show, :edit_note, :destroy, :update_note, :update_role]
 
   def index
-    memberships = @group.group_memberships.includes(:user)
-    @memberships = active_scope_desc(memberships)
+    @memberships = @group.group_memberships
+    .joins(:user).merge(User.active_users_desc).includes(:user)
   
     @owner_memberships = @memberships.select(&:owner?)
     @moderator_memberships = @memberships.select(&:moderator?)

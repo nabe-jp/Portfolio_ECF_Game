@@ -17,7 +17,13 @@ module Deleter
         # ユーザー本人の投稿削除
         @user.user_posts.find_each do |post|
           Deleter::UserPostDeleter.new(post, deleted_by: @deleted_by,
-          deleted_reason: APPLIED_DELETION_REASON, deleted_via_parent: true).call
+            deleted_reason: APPLIED_DELETION_REASON, deleted_via_parent: true).call
+        end
+
+        # ユーザー本人のコメント削除
+        @user.user_post_comments.find_each do |comment|
+          Deleter::UserPostCmmentDeleter.new(comment, deleted_by: @deleted_by,
+            deleted_reason: APPLIED_DELETION_REASON, deleted_via_parent: true).call
         end
 
         # 所有グループの削除(内部で再帰的処理)
@@ -33,7 +39,7 @@ module Deleter
         end
 
         # ユーザー自身の論理削除
-        @user.update!(is_deleted: true,
+        @user.update!(user_status: :deactivated, 
           deleted_at: now, deleted_by_id: @deleted_by.id, deleted_reason: @deleted_reason)
       end
     end
