@@ -33,7 +33,8 @@ class Admin::UsersController < Admin::ApplicationController
 
   def destroy
     begin
-      Deleter::UserDeleter.new(@user, deleted_by: current_admin, deleted_reason: :removed_by_admin).call
+      Deleter::UserDeleter.new(@user, deleted_by: current_admin, 
+        deleted_reason: :removed_by_admin, deleted_by_type: :admin).call
       redirect_to admin_user_path(@user), notice: 'ユーザーと関連データを削除しました'
     rescue => e
       Rails.logger.error("User削除エラー: #{e.message}")

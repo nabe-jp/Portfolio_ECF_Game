@@ -3,15 +3,15 @@
     <h2 class="my-5"><%= @group.name %> のお知らせ一覧</h2>
   </div>
   <div class="col-2 text-right">
-    <% if current_user.id == @group.owner_id %>
+    <% if group_moderator? %>
       <%= link_to '＋新しいお知らせ', new_group_notice_path(@group), class: 'btn btn-primary btn-sm' %>
     <% end %>
   </div>
 </div>
 
-<% if @notices.any? %>
+<% if @group_notices.any? %>
   <ul class="pl-0" style="list-style-type: none;">
-    <% @notices.each do |notice| %>
+    <% @group_notices.each do |notice| %>
       <li class="dashboard-group__notice-item mb-4">
         <%= link_to group_notice_path(@group, notice), 
           class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
@@ -26,7 +26,7 @@
   </ul>
 
   <div class="d-flex justify-content-center mt-4">
-    <%= paginate @notices %> 
+    <%= paginate @group_notices %> 
   </div>
 
 <% else %>

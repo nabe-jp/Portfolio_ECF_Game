@@ -14,15 +14,16 @@ module Scopes::Public::Groups
         .order(created_at: :desc)
     }
 
-    # グループ内のお知らせに使用
-    scope :active_group_notices_pinned, -> {
-      where(is_deleted: false, is_public: true, is_pinned: true, hidden_on_parent_restore: false)
-        .order(sort_order: :acs, published_at: :desc)
+    # メンバーに使用
+    scope :active_members, -> {
+      where(is_deleted: false,)
+        .order(created_at: :asc)
     }
 
-    scope :active_group_notices_not_pinned, -> {
-      where(is_deleted: false, is_public: true, is_pinned: false, hidden_on_parent_restore: false)
-        .order(published_at: :desc)
+    # グループ内のお知らせに使用
+    scope :active_group_notices, -> {
+      where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)
+        .order(is_pinned: :desc, sort_order: :asc, created_at: :desc)
     }
 
     # グループ内のイベントに使用
@@ -37,8 +38,6 @@ module Scopes::Public::Groups
           .order(:start_time) 
     }
     
-
-
     # グループ内投稿、グループ内での表示に使用
     scope :active_group_posts_for_members_asc, -> {
       where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)

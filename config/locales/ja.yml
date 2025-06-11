@@ -10,6 +10,8 @@ ja:
       post_user: "投稿を作成したユーザーによる削除"
       voluntarily_left_group: "グループから自発的に退会"
       removed_by_group_authority: "グループ管理権限者による削除"
+      kicked_by_group_moderator: "グループ管理者による強制退会"
+      group_disbanded: "グループ削除による強制退会"
       removed_by_admin: "サイト管理者による削除"
       parent_user_deleted: "ユーザーが削除されたことによる削除"
       parent_user_post_deleted: "ユーザーの投稿が削除されたことによる削除"
@@ -60,11 +62,6 @@ ja:
           member: "メンバー"
           moderator: "管理者"
           owner: "オーナー"
-        deleted_reason:
-          voluntarily_left: "自主退出による削除"
-          kicked_by_group_owner: "グループ管理者による削除"
-          group_disbanded: "グループ削除による削除"
-          removed_by_admin: "サイト管理者による削除"
         note: "管理者メモ"
       group_event:
         title: "タイトル"

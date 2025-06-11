@@ -74,15 +74,15 @@
       <%= link_to "イベント一覧", group_events_path(@group), 
         class: (is_button ? 'btn btn-base' : nil) %>
 
-    <% elsif defined?(group_notices) && group_notices && %>
+    <% elsif defined?(group_notices) && group_notices %>
       <%= link_to "お知らせ一覧", group_notices_path(@group), 
         class: (is_button ? 'btn btn-base' : nil) %>
 
-    <% elsif defined?(group_posts) && group_posts && %>
+    <% elsif defined?(group_posts) && group_posts %>
       <%= link_to "グループ内投稿一覧", group_posts_path(@group), 
         class: (is_button ? 'btn btn-base' : nil) %>
 
-    <% elsif defined?(new_group_post) && new_group_post && %>
+    <% elsif defined?(new_group_post) && new_group_post %>
       <%= link_to "グループ内投稿の作成", new_group_post_path(@group), 
         class: (is_button ? 'btn btn-base' : nil) %>
     <% end %>

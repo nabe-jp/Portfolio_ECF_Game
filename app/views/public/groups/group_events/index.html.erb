@@ -3,16 +3,13 @@
     <h2 class="my-5"><%= @group.name %> のイベント一覧</h2>
   </div>
   <div class="col-2 text-right">
-    <% if current_user.id == @group.owner_id %>
-      <%= link_to '＋新しいイベント', new_group_event_path(@group),
-          class: 'btn btn-primary btn-sm' %>
-    <% end %>
+    <%= link_to '＋新しいイベント', new_group_event_path(@group), class: 'btn btn-primary btn-sm' %>
   </div>
 </div>
 
-<% if @events.any? %>
+<% if @group_events.any? %>
   <ul class="pl-0" style="list-style-type: none;">
-    <% @events.each do |event| %>
+    <% @group_events.each do |event| %>
       <li class="dashboard-group__event-item mb-4">
         <%= link_to group_event_path(@group, event), 
           class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
@@ -32,7 +29,7 @@
   </ul>
 
   <div class="d-flex justify-content-center mt-4">
-    <%= paginate @events %> 
+    <%= paginate @group_events %> 
   </div>
 
 <% else %>

@@ -11,45 +11,68 @@
       <p><strong>管理者メモ:</strong></p>
       <p><%= @membership.note.presence || "なし" %></p>
 
-      <% if current_user == @group.owner && @membership.user != current_user %>
+      <hr>
 
-        <hr>
-
+      <%# グループ管理者のみ表示 #%>
+      <% if group_moderator? %>
         <div class="row align-items-center">
           <div class="col-2">
             <%= link_to "メモを編集", edit_note_group_member_path(@group, @membership), 
               class: "btn btn-sm btn-secondary" %>
           </div>
 
-          <div class="col-4 offset-1 d-flex justify-content-center">
-            <%= form_with url: update_role_group_member_path(@group, @membership), 
-              method: :patch, scope: :group_membership, local: true do |f| %>
-              <div class="form-inline">
-                <%= f.select :role, GroupMembership.roles.keys.map { 
-                  |r| [I18n.t("activerecord.attributes.group_membership.role.#{r}"), r] }, 
-                    class: "form-control form-control-sm mr-2" %>
-                <%= f.submit "権限を編集", class: "btn btn-sm btn-primary ml-3" %>
-              </div>
-            <% end %>
-          </div>
+          <%# 自身の権限は表示せず、代わりに脱退リンクを表示、オーナーであれば脱退できない旨のメッセージを表示 #%>
+          <% if current_user != @membership.user %>
+            <div class="col-4 offset-1 d-flex justify-content-center">
+              <%= form_with url: update_role_group_member_path(@group, @membership), 
+                method: :patch, scope: :group_membership, local: true do |f| %>
+                <div class="form-inline">
+                  <% roles = GroupMembership.roles.keys %>
+                  <% roles -= ["owner"] unless group_owner? %>
+                  <%= f.select :role, roles.map { 
+                    |r| [I18n.t("activerecord.attributes.group_membership.role.#{r}"), r] }, 
+                      class: "form-control form-control-sm mr-2" %>
+                  <%= f.submit "権限を編集", class: "btn btn-sm btn-primary ml-3" %>
+                </div>
+              <% end %>
+            </div>
 
-          <div class="col-2 offset-1">
-            <%= link_to "メンバーを追放", group_member_path(@group, @membership),
-              method: :delete, data: { confirm: "本当にこのメンバーを追放しますか？" },
-                class: "btn btn-sm btn-danger" %>
-          </div>
+            <div class="col-3 offset-1 d-flex justify-content-center">
+              <%= link_to "メンバーを追放", group_member_path(@group, @membership),
+                method: :delete, data: { confirm: "本当にこのメンバーを追放しますか？" },
+                  class: "btn btn-sm btn-danger" %>
+            </div>
+
+          <% elsif !group_owner? %>
+            <div class="col-8 offset-1 d-flex justify-content-center">
+              <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
+                data: { confirm: "本当にグループを脱退しますか？" }, class: "btn btn-sm btn-warning" %>
+            </div>
+          <% elsif %>
+            <div class="col-8 offset-1 d-flex justify-content-center">
+              <p class="text-danger mb-0">オーナーはグループを脱退できません。権限譲渡をお願いします。</p>
+            </div>
+          <% end %>
         </div>
       <% end %>
 
-      <div class="rowjustify-content-start mt-4">   
-        <div class="col-auto">
+      <div class="row align-items-center mt-4">
+        <div class="col-3">
           <%= link_to "プロフィールを表示", show_user_path(@membership.user), 
             class: "btn btn-sm btn-secondary" %>
         </div>
+
+        <%# グループ管理者ではグループメンバーにのみ脱退リンクを表示 #%>
+        <% if !group_moderator? %>
+          <div class="col-3 offset-1 d-flex justify-content-center">
+            <%= link_to "グループから脱退する", leave_group_path(@group), method: :delete,
+              data: { confirm: "本当にグループを脱退しますか？" }, class: "btn btn-sm btn-warning" %>
+          </div>
+        <% end %>
       </div>
   
-      <div class="rowjustify-content-start mt-4">   
-        <div class="col-auto">
+      <div class="row justify-content-start mt-4">
+        <div class="col-3">
           <%= link_to "メンバー一覧に戻る", group_members_path(@group), 
             class: "btn btn-sm btn-secondary" %>
         </div>

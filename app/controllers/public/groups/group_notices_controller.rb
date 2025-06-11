@@ -1,6 +1,9 @@
 class Public::Groups::GroupNoticesController < Public::ApplicationController
   include Public::AuthorizeGroup
 
+  # 読み込んだモジュールのメソッドをviewで使用する為に必要
+  helper_method :group_moderator?
+
   before_action :authenticate_user!
   before_action :authorize_group_member!
   before_action :authorize_group_moderator!, only: [:edit, :update, :destroy]
@@ -8,7 +11,7 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
   before_action :set_current_user, only: [:create]
 
   def index
-    @notices = @group.group_notices.active_group_info.page(params[:page]).per(10)
+    @group_notices = @group.group_notices.active_group_notices.page(params[:page])
   end
 
   def show; end
@@ -52,9 +55,9 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
 
   def destroy
     begin
-      Deleter::GroupNoticeDeleter.call(@group_notice, deleted_by: current_user)
-      redirect_to group_notices_path(@group),
-      notice: "お知らせを削除しました"
+      Deleter::GroupNoticeDeleter.new(@group_notice, deleted_by: current_user, 
+        deleted_reason: :removed_by_group_authority).call
+      redirect_to group_notices_path(@group), notice: "お知らせを削除しました"
     rescue => e
       Rails.logger.error("お知らせ削除エラー: #{e.message}")
       redirect_to group_notices_path(@group), alert: '予期せぬエラーにより、お知らせの削除が行えませんでした。'
@@ -70,7 +73,6 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
   def set_current_user
     @group_membership = @group.group_memberships.find_by(user_id: current_user.id)
   end
-
 
   def group_notice_attributes_from_session
     session[:group_notice_attributes] || {}

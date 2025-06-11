@@ -1,22 +1,22 @@
 class Public::Groups::GroupEventsController < Public::ApplicationController
   include Public::AuthorizeGroup
 
+  # 読み込んだモジュールのメソッドをviewで使用する為に必要
+  helper_method :group_event_editor?
+
   before_action :authenticate_user!
   before_action :authorize_group_member!
-  before_action :authorize_group_moderator!, only: [:edit, :update, :destroy]
   before_action :set_group_event, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_group_event_editor!, only: [:edit, :update, :destroy]
   before_action :set_current_user, only: [:create]
 
   def index
-    @events = if @group.owner == current_user
-      # 管理者：新着順（最新の作成日時が上に来る）
-      @group.group_events.active_group_info.order(created_at: :desc)
+    # 管理者のみすべて見える(投稿者本人も終わったイベントは見えない)
+    if group_moderator?
+      @group_events = @group.group_events.active_events_for_moderators.page(params[:page])
     else
-      # メンバー：開催日が近い順(upcomingスコープ)
-      @group.group_events.active_group_info.upcoming
+      @group_events = @group.group_events.active_events_for_members.page(params[:page])
     end
-
-    @events = @events.page(params[:page]).per(10)
   end
 
   def show; end
@@ -59,10 +59,17 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
   end
 
   def destroy
+    # イベントを投稿したユーザーかグループ管理者かの判定
+    if @group_event.member.user == current_user
+      deleted_reason = :self_deleted
+    else
+      deleted_reason = :removed_by_group_authority
+    end
+
     begin
-      Deleter::GroupEventDeleter.call(@group_event, deleted_by: current_user)
-      redirect_to group_events_path(@group),
-      notice: "イベントを削除しました"
+      Deleter::GroupEventDeleter.new(@group_event, deleted_by: current_user, 
+        deleted_reason: deleted_reason).call
+      redirect_to group_events_path(@group), notice: "イベントを削除しました"
     rescue => e
       Rails.logger.error("イベント削除エラー: #{e.message}")
       redirect_to group_events_path(@group), alert: '予期せぬエラーにより、イベントの削除が行えませんでした。'
@@ -72,13 +79,12 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
   private
 
   def set_group_event
-    @group_event = @group.group_events.find(params[:id])
+    @group_event = @group.group_events.active_events_for_members.find(params[:id])
   end
   
   def set_current_user
-    @group_membership = @group.group_memberships.find_by(user_id: current_user.id)
+    @group_membership = @group.group_memberships.active_members.find_by(user_id: current_user.id)
   end
-
 
   def group_event_attributes_from_session
     session[:group_event_attributes] || {}

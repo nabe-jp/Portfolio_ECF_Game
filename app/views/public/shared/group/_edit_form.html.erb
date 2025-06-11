@@ -9,7 +9,15 @@
     <%= f.text_area :description, rows: 3, class: "form-control" %>
   </div>
 
-  <div class="text-center mt-5">
+  <div class="text-center my-5">
     <%= f.submit "更新する", class: "btn btn-primary px-5" %>
+  </div>
+<% end %>
+
+<% if group_owner? %>
+  <hr>
+
+  <div class="text-center mt-5">
+    <%= link_to "グループを削除する", confirm_destroy_group_path(@group), class: "btn btn-danger"%>
   </div>
 <% end %>

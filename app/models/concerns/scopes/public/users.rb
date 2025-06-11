@@ -5,16 +5,16 @@ module Scopes::Public::Users
   included do
     # ユーザーに使用
     scope :active_users, -> {
-      where(user_status: :active, is_public: true)
+      where(user_status: :active)
     }
 
     scope :active_users_asc, -> {
-      where(user_status: :active, is_public: true)
+      where(user_status: :active)
         .order(created_at: :asc)
     }
 
     scope :active_users_desc, -> {
-      where(user_status: :active, is_public: true)
+      where(user_status: :active)
         .order(created_at: :desc)
     }
 

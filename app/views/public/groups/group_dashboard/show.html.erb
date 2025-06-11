@@ -12,14 +12,14 @@
       </div>
 
       <!-- 右側：説明とメンバー一覧を上下に分割 -->
-      <div class="col-md-8 d-flex flex-column" style="min-height: 100%;">
+      <div class="col-md-8 d-flex flex-column pr-0" style="min-height: 100%;">
         <!-- 説明 -->
         <div class="flex-fill position-relative">
           <h4 class="dashboard-group__section-title">グループ説明</h4>
           <p class="dashboard-group__description"><%= @group.description %></p>
           
-          <% if current_user.id == @group.owner_id %>
-            <div class="position-absolute" style="bottom: 10px; right: 10px;">
+          <% if group_moderator? %>
+            <div class="position-absolute" style="bottom: 10px; right: 0px;">
               <%= link_to "グループを編集", edit_group_path(@group), 
                 class: "btn btn-outline-primary btn-sm" %>
             </div>
@@ -44,7 +44,7 @@
           <% end %>
 
           <!-- メンバー一覧リンク -->
-          <div class="position-absolute" style="bottom: 10px; right: 10px;">
+          <div class="position-absolute" style="bottom: 10px; right: 0;">
             <%= link_to "▶︎ メンバー一覧", group_members_path(@group), 
               class: "dashboard-group__more-link disabled-link" %>
           </div>
@@ -56,12 +56,12 @@
   <hr>
 
   <!-- お知らせボード -->
-  <%= render 'public/shared/group/dashboard/events' %>
+  <%= render 'public/shared/group/dashboard/notices' %>
 
   <hr>
 
   <!-- イベントボード -->
-  <%= render 'public/shared/group/dashboard/notices' %>
+  <%= render 'public/shared/group/dashboard/events' %>
 
   <hr>
 

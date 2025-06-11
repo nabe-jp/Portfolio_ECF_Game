@@ -14,7 +14,7 @@
             <p><%= group.description %></p>
           </div>
           <div class="group-card__meta">
-            <span>メンバー数: <%= group.group_memberships.count %>人</span>
+            <span>メンバー数: <%= group.group_memberships.active_members.count %>人</span>
             <span>最終投稿: <%= group.last_posted_at ? 
               l(group.last_posted_at, format: :short) : "なし" %></span>
           </div>

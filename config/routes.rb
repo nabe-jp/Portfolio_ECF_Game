@@ -54,14 +54,16 @@ Rails.application.routes.draw do
 
     # スラッグを使用
     resources :groups, param: :slug do
-      member do
-        post :join                # 参加する
-        delete :leave             # 退出する
-      end
+      get :confirm_destroy, on: :member       # 削除確認画面
 
       # グループメンバーの専用ページ
       # dashboardはこのままでは複数形のコントローラーが使用されるので単数形を使用するように変更
       scope module: :groups do
+        resource :group_membership, only: [], path: 'membership', as: :membership do
+          post :join                          # 参加する
+          delete :leave                       # 退出する
+        end
+
         resource :group_dashboard, only: [:show], path: 'dashboard', as: :dashboard, 
           controller: 'group_dashboard'
 

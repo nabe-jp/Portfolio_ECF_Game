@@ -1,11 +1,14 @@
 class Public::Groups::GroupPostsController < Public::ApplicationController
   include Public::AuthorizeGroup
 
+  # 読み込んだモジュールのメソッドをviewで使用する為に必要
+  helper_method :group_post_editor?
+
   before_action :authenticate_user!
   before_action :authorize_group_member!, except: [:show]
   before_action :set_group_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_group_moderator!, only: [:edit, :update, :destroy]
   before_action :set_current_user, only: [:create]
+  before_action :authorize_group_post_editor!, only: [:edit, :update, :destroy]
   
   def index
     @group_posts = @group.group_posts.active_group_posts_for_members_desc.page(params[:page])
@@ -13,7 +16,7 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
 
   def show
     @group_post_comments = @group_post.group_post_comments
-      .visible_top_level.includes([ { member: :user }, :parent_comment ]).page(params[:page]).per(20)
+      .visible_top_level.includes(member: :user, replies: { member: :user }).page(params[:page]).per(20)
    
     if session[:group_post_comment_attributes]
       @group_post_comment = @group_post.group_post_comments.new(session[:group_post_comment_attributes])
@@ -65,8 +68,16 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
   end
 
   def destroy
+    # ユーザー自身かグループ管理者かの判定
+    if @group_post.member.user == current_user
+      deleted_reason = :self_deleted
+    elsif group_moderator?
+      deleted_reason = :removed_by_group_authority
+    end
+
     begin
-      Deleter::GroupPostDeleter.call(@group_post, deleted_by: current_user)
+      Deleter::GroupPostDeleter.new(@group_post, deleted_by: current_user, 
+        deleted_reason: deleted_reason).call
       redirect_to group_dashboard_path(@group), notice: '投稿を削除しました。'
     rescue => e
       Rails.logger.error("GroupPost削除エラー: #{e.message}")
@@ -77,11 +88,11 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
   private
 
   def set_group_post
-    @group_post = @group.group_posts.find(params[:id])
+    @group_post = @group.group_posts.active_group_posts_for_all_desc.find(params[:id])
   end
 
   def set_current_user
-    @group_membership = @group.group_memberships.find_by(user_id: current_user.id)
+    @group_membership = @group.group_memberships.active_members.find_by(user_id: current_user.id)
   end
 
   def group_post_attributes_from_session
@@ -96,6 +107,6 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
   end
   
   def group_post_params
-    params.require(:group_post).permit(:group_post_image, :title, :body, :visible_to_non_members)
+    params.require(:group_post).permit(:group_post_image, :title, :body)
   end
 end

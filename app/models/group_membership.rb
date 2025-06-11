@@ -1,4 +1,5 @@
 class GroupMembership < ApplicationRecord
+  include Scopes::Public::Groups
   include DeletableReason
   
   belongs_to :user
@@ -13,7 +14,7 @@ class GroupMembership < ApplicationRecord
   # belongs_to :inviter, class_name: 'User', optional: true, foreign_key: 'invited_by_id'
 
  
-  enum role: { member: 0, moderator: 1, owner: 2 }
+  enum role: { member: 0, moderator: 1, owner: 2 }, _prefix: true
  
   # 将来的に承認待ち・参加中・保留中を実装する際に使用
   # enum status: { pending: 0, active: 1, suspended: 2 }

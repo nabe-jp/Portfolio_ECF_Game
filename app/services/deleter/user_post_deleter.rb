@@ -12,10 +12,10 @@ module Deleter
     end
 
     def call
-      now = Time.current
-
       # 途中で失敗したら全体をロールバック
       ActiveRecord::Base.transaction do
+        now = Time.current
+        
         delete_params = {is_deleted: true, deleted_at: now, deleted_by_id: @deleted_by.id,
           deleted_due_to_parent: false, hidden_on_parent_restore: false}
 

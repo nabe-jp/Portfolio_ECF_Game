@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_many :group_memberships, dependent: :destroy
   has_many :joined_groups, through: :group_memberships, source: :group
   has_many :owned_groups, class_name: "Group", foreign_key: "owner_id"
+  has_many :active_group_memberships, -> { where(is_deleted: false) }, class_name: 'GroupMembership'
+  has_many :active_joined_groups, through: :active_group_memberships, source: :group
   has_many :group_posts, dependent: :destroy
 
   has_one_attached :profile_image

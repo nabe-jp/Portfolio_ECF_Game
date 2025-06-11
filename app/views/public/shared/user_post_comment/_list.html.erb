@@ -1,8 +1,9 @@
 <% @parent_comments.each do |comment| %>
   <div class="row align-items-center no-gutters mb-2">
-    <!-- コメント本文（60% = col-6） -->
+    <!-- コメント本文 -->
     <div class="col-7 pr-2 comment-body">
-      <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
+      <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
+        simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
     </div>
 
     <!-- プロフィール画像＋ニックネーム -->
@@ -16,6 +17,12 @@
     <!-- 返信リンク -->
     <div class="col-1 pl-1">
       <% unless comment.is_deleted %>
+        <%#
+          data-toggle="collapse"はBootstrapのCollapse機能、リンクのクリックによりフォームの表示・非表示制御
+          href=～はどの返信フォームを開くか識別するためのID指定
+          aria-expanded="false"とaria-controlsはアクセシビリティ関連の属性
+          aria-expandedはフォームの開閉すを示し、aria-controlsはどの要素を開閉するかを明示
+        #%>
         <a data-toggle="collapse" href="#reply-form-<%= comment.id %>" role="button"
           aria-expanded="false" aria-controls="reply-form-<%= comment.id %>">
           返信する
@@ -27,8 +34,7 @@
     <div class="col-2">
       <% if !comment.is_deleted && (comment.user == current_user || @user_post.user == current_user) %>
         <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
-              method: :delete, data: { confirm: "本当に削除しますか？" },
-              class: "btn btn-danger btn-sm" %>
+          method: :delete, data: { confirm: "本当に削除しますか？" },class: "btn btn-danger btn-sm" %>
       <% end %>
     </div>
   </div>
@@ -36,44 +42,40 @@
   <!-- 返信フォーム -->
   <% reply_form_comment = UserPostComment.new(parent_comment_id: comment.id) %>
   <div class="collapse mb-2" id="reply-form-<%= comment.id %>">
-    <div>
-      <%= render partial: 'public/shared/user_post_comment/reply_form', locals: {
-            user_post: @user_post,
-            user_post_comment: UserPostComment.new(parent_comment_id: comment.id),
-            submit_label: "返信する",
-            reply_form_comment: reply_form_comment
+    <%= render partial: 'public/shared/user_post_comment/reply_form', 
+      locals: {
+        user_post: @user_post, 
+        user_post_comment: UserPostComment.new(parent_comment_id: comment.id), 
+        submit_label: "返信する"
       } %>
-    </div>
   </div>
 
   <!-- 子コメント -->
   <% comment.replies.visible_replies.each do |reply| %>
-    <div>
-      <div class="row align-items-center no-gutters mb-2">
-        <!-- 子コメント本文（60%） -->
-        <div class="col-7 pl-4  comment-body">
-          <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
-        </div>
+    <div class="row align-items-center no-gutters mb-2">
+      <!-- 子コメント本文 -->
+      <div class="col-7 pl-4  comment-body">
+        <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
+          simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
+      </div>
 
-        <!-- 子コメント画像＋ニックネーム -->
-        <div class="col-2 pl-4 d-flex align-items-center">
-          <% unless reply.is_deleted %>
-            <%= image_tag(reply.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
-            <span><%= reply.user.nickname %></span>
-          <% end %>
-        </div>
+      <!-- 子コメント画像＋ニックネーム -->
+      <div class="col-2 pl-4 d-flex align-items-center">
+        <% unless reply.is_deleted %>
+          <%= image_tag(reply.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
+          <span><%= reply.user.nickname %></span>
+        <% end %>
+      </div>
 
-        <!-- 返信リンク -->
-        <div class="col-1"></div>
+      <!-- 返信リンク -->
+      <div class="col-1"></div>
 
-        <!-- 削除ボタン -->
-        <div class="col-2">
-          <% if !reply.is_deleted && (reply.user == current_user || @user_post.user == current_user) %>
-            <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply),
-                  method: :delete, data: { confirm: "本当に削除しますか？" },
-                  class: "btn btn-danger btn-sm" %>
-          <% end %>
-        </div>
+      <!-- 削除ボタン -->
+      <div class="col-2">
+        <% if !reply.is_deleted && (reply.user == current_user || @user_post.user == current_user) %>
+          <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply),
+            method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+        <% end %>
       </div>
     </div>
   <% end %>

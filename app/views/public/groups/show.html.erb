@@ -5,13 +5,14 @@
 <h3 class="my-3"><%= @group.name %></h3>
 
 <p><%= @group.description %></p>
-<p>参加メンバー数: <%= @group.group_memberships.count %>人</p>
+<p>参加メンバー数: <%= @group.group_memberships.active_members.count %>人</p>
 
 <% if user_signed_in? %>
-  <% if @group.group_memberships.exists?(user_id: current_user.id) %>
+  <% if group_member? %>
     <%= link_to 'グループマイページへ', dashboard_group_path(@group), class: "btn btn-primary" %>
   <% else %>
-    <%= button_to 'グループに参加する', join_group_path(@group), method: :post, class: "btn btn-success" %>
+    <%= button_to 'グループに参加する', join_group_membership_path(@group), 
+      method: :post, class: "btn btn-success" %>
   <% end %>
 <% else %>
   <p><%= link_to 'ログインして参加する', new_user_session_path %></p>
@@ -26,7 +27,7 @@
       <div class="card-body">
         <h5 class="card-title"><%= post.title %></h5>
         <p class="card-text"><%= truncate(post.body, length: 100) %></p>
-        <p class="text-muted">投稿者: <%= post.user.nickname %> / 投稿日: <%= l(post.created_at, format: :short) %></p>
+        <p class="text-muted">投稿者: <%= post.member.user.nickname %> / 投稿日: <%= l(post.created_at, format: :short) %></p>
         <%= link_to '詳細を見る', group_post_path(@group, post), class: "btn btn-outline-primary btn-sm" %>
       </div>
     </div>

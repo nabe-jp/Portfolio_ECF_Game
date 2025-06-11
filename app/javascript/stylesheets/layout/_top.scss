@@ -159,19 +159,27 @@
   margin-right: 1rem;               // 画像と名前の間に余白を追加
 }
 
-// ユーザー名のスタイル
-.post-user-name {
+// グループ画像のスタイル
+.group-image {
+  border-radius: 8px;               // 角を丸める
+  margin-right: 1rem;               // 画像と名前の間に余白を追加
+}
+
+// ユーザー名とグループ名のスタイル
+.post-user-name, .post-group-name {
   font-weight: bold;
   font-size: 1rem;
+  white-space: nowrap;              // 折り返しなし
+  overflow: hidden;                 // はみ出した部分を非表示
+  text-overflow: ellipsis;          // 省略記号(...)を表示
 }
 
 // 投稿タイトルに使用するタグの設定
 .post-body {
-  white-space: nowrap;              // テキストを1行に収める
-  overflow: hidden;                 // はみ出したテキストを隠す
-  text-overflow: ellipsis;          // 省略記号(...)を表示
   max-width: 250px;                 // タイトルの最大幅を設定
-  overflow: hidden;                 // ボックスを超えた部分を隠す
+  white-space: nowrap;              // 折り返しなし
+  overflow: hidden;                 // はみ出した部分を非表示
+  text-overflow: ellipsis;          // 省略記号(...)を表示
 }
 
 // 投稿タイトルタグの設定

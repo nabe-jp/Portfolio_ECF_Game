@@ -1,17 +1,22 @@
 class Public::GroupsController < ApplicationController
+  include Public::AuthorizeGroup
+  
+  # 読み込んだモジュールのメソッドをviewで使用する為に必要
+  helper_method :group_owner?, :group_member?
 
+  # 読み込んだモジュールの自動アクションを除外
+  skip_before_action :set_group, only: [:index, :my_groups] 
+  
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_group, only: 
-    [:show, :edit, :update, :destroy, :join, :leave, :hide_from_owner, :show_by_owner, :dashboard]
-  before_action :authorize_group_member!, only: [:dashboard]
-  before_action :authorize_group_manager!,only: [:edit, :update, :destroy, :hide_from_owner, :show_by_owner]
+  before_action :authorize_group_moderator!,only: [:edit, :update]
+  before_action :authorize_group_owner!,only: [:confirm_destroy, :destroy]
 
   def index
     @groups = Group.active_groups_desc.page(params[:page])
   end
 
   def show
-    if user_signed_in? && @group.group_memberships.exists?(user_id: current_user.id)
+    if user_signed_in? && @group.group_memberships.active_members.exists?(user_id: current_user.id)
       redirect_to group_dashboard_path(@group) and return
     else
       # 非メンバー用の公開投稿のみ取得 + ページネーション
@@ -66,61 +71,20 @@ class Public::GroupsController < ApplicationController
     end
   end
 
-  def join
-    if current_user && !@group.group_memberships.exists?(user_id: current_user.id)
-      if @group.group_memberships.create(user: current_user)
-        flash[:notice] = "グループに参加しました"
-      else
-        flash[:alert] = "参加に失敗しました"
-      end
-    else
-      flash[:alert] = "ログインしてください"
-    end
-    redirect_to group_path(@group)
-  end
-
-  def leave
-    membership = @group.group_memberships.find_by(user_id: current_user.id)
-    if membership
-      membership.destroy
-      flash[:notice] = "グループを退出しました"
-    else
-      flash[:alert] = "参加していません"
-    end
-    redirect_to group_path(@group)
-  end
-
   def my_groups
     @owned_groups = current_user
       .owned_groups.merge(Group.active_groups_desc).page(params[:owned_page]).per(6)
 
     @joined_groups = current_user
-      .joined_groups.where.not(id: current_user.owned_groups.pluck(:id))
-        .merge(Groupactive_groups_desc).page(params[:joined_page]).per(6)
+    .active_joined_groups.where.not(id: current_user.owned_groups.pluck(:id))
+        .merge(Group.active_groups_desc).page(params[:joined_page]).per(6)
   end
+
+   # 削除確認画面
+   def confirm_destroy; end
 
   private
-
-  def set_group
-    @group = Group.find_by!(slug: params[:slug])
-    rescue ActiveRecord::RecordNotFound
-      redirect_to root_path, alert: "指定されたグループが見つかりませんでした"
-  end
-
-  # 作成者か確認
-  def authorize_group_manager!
-    unless @group.owner_id == current_user.id
-      redirect_to group_path(@group), alert: "管理者のみ実行できる操作です。"
-    end
-  end
-
-  # グループメンバーか確認
-  def authorize_group_member!
-    unless @group.members.include?(current_user)
-      redirect_to group_path(@group), alert: "このグループのメンバーのみアクセスできます。"
-    end
-  end
-
+  
   def group_attributes_from_session
     session[:group_attributes] || {}
   end
@@ -133,6 +97,6 @@ class Public::GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:group_image, :name, :description, :slug, :is_public, tag_list: [])
+    params.require(:group).permit(:group_image, :name, :description, :slug, tag_list: [])
   end
 end

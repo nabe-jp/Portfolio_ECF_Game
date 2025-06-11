@@ -40,7 +40,7 @@ class Public::UserController < ApplicationController
   def withdraw
     begin
       Deleter::UserDeleter.new(current_user, deleted_by: current_user, 
-        deleted_reason: :self_deleted).call
+        deleted_reason: :self_deleted, deleted_by_type: :user).call
       reset_session
       redirect_to root_path, notice: "退会処理を完了しました。"
     rescue => e

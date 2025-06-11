@@ -10,7 +10,7 @@
 
     <div class="col-4 offset-8">
       <!-- 編集・削除ボタン -->
-      <% if @group_post.member.user == current_user || @group_post.group.owner == current_user %>
+      <% if group_post_editor? %>
         <div>
           <%= link_to '編集', edit_group_post_path(@group, @group_post), class: 'btn btn-base' %>
           <%= link_to '削除', group_post_path(@group, @group_post), method: :delete, 
@@ -32,7 +32,7 @@
 <hr>
 
 <% if user_signed_in? %>
-  <%= render 'public/shared/group/post_comment/form', group_post: @group_post %>
+  <%= render 'public/shared/group/post_comment/post_form', group_post: @group_post %>
 <% else %>
   <p class="text-center">コメントするにはログインが必要です。</p>
 <% end %>

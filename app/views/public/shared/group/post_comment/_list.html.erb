@@ -1,28 +1,82 @@
 <% @group_post_comments.each do |comment| %>
-  <div class="comment-item">
+  <div class="row align-items-center no-gutters mb-2">
+    <!-- コメント本文 -->
+    <div class="col-7 pr-2 comment-body">
+      <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
+        simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
+    </div>
 
-    <% if comment.is_deleted %>
-      <p class="comment-item__deleted">このコメントは削除されました。</p>
+    <!-- プロフィール画像＋ニックネーム -->
+    <div class="col-2 d-flex align-items-center">
+      <% unless comment.is_deleted %>
+        <%= image_tag(comment.member.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
+        <span><%= comment.member.user.nickname %></span>
+      <% end %>
+    </div>
 
-    <% else %>
-      <p class="user-comments__body"><%= comment.body %></p>
-      <p class="comment-item__user">
-        <%= image_tag(comment.member.user.profile_image, size: "35x35", class: "profile-box__image") %>
-        <%= comment.member.user.nickname %></p>
-      <div class="comment-item__deleted">
-        <% if comment.member.user == current_user || @group_post.member.user == current_user || 
-          @group_post.group.owner == current_user  %>
-          <%= button_to "削除", group_post_comment_path(@group, @group_post, comment),
-            method: :delete, data: { confirm: "本当に削除しますか？" },
-              class: "comment-item__delete-btn" %>
+    <!-- 返信リンク -->
+    <div class="col-1 pl-1">
+      <% unless comment.is_deleted %>
+        <a data-toggle="collapse" href="#reply-form-<%= comment.id %>" role="button"
+          aria-expanded="false" aria-controls="reply-form-<%= comment.id %>">
+          返信する
+        </a>
+      <% end %>
+    </div>
+
+    <!-- 削除ボタン -->
+    <div class="col-2">
+      <% if !comment.is_deleted && (comment.member.user == current_user || 
+        @group_post.member.user == current_user || @group_post.group.owner == current_user) %>
+        <%= button_to "削除", group_post_comment_path(@group, @group_post, comment),
+          method: :delete, data: { confirm: "本当に削除しますか？" },class: "btn btn-danger btn-sm" %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- 返信フォーム -->
+  <% reply_form_comment = GroupPostComment.new(parent_comment_id: comment.id) %>
+  <div class="collapse mb-2" id="reply-form-<%= comment.id %>">
+    <%= render partial: 'public/shared/group/post_comment/reply_form', 
+      locals: {
+        group_post: @group_post,
+        group_post_comment: GroupPostComment.new(parent_comment_id: comment.id),
+        submit_label: "返信する"
+      } %>
+  </div>
+
+  <!-- 子コメント -->
+  <% comment.replies.visible_replies.each do |reply| %>
+    <div class="row align-items-center no-gutters mb-2">
+      <!-- 子コメント本文 -->
+      <div class="col-7 pl-4  comment-body">
+        <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
+          simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
+      </div>
+
+      <!-- 子コメント画像＋ニックネーム -->
+      <div class="col-2 pl-4 d-flex align-items-center">
+        <% unless reply.is_deleted %>
+          <%= image_tag(reply.member.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
+          <span><%= reply.member.user.nickname %></span>
         <% end %>
       </div>
-    <% end %>
 
-  </div>
+      <!-- 返信リンク -->
+      <div class="col-1"></div>
+
+      <!-- 削除ボタン -->
+      <div class="col-2">
+        <% if !reply.is_deleted && (reply.member.user == current_user || 
+          @group_post.member.user == current_user || @group_post.group.owner == current_user) %>
+          <%= button_to "削除", group_post_comment_path(@group, @group_post, reply),
+            method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
   <hr>
 <% end %>
 
-<div class="d-flex justify-content-center mt-4">
-  <%= paginate @group_post_comments %>
-</div>
+<%= paginate @group_post_comments %>

@@ -7,10 +7,14 @@ module DeletableReason
       self_deleted: 0,                            # 自身で削除(例: アカウント削除)
       post_user: 1,                               # 投稿を作成したユーザーによる削除
       voluntarily_left_group: 2,                  # グループから自発的に退会
-      removed_by_group_authority: 3,              # グループ管理権限者(オーナーまたはマネージャー)による削除
 
-      # 100〜199: 管理者都合
-      removed_by_admin: 100,                      # サイト管理者による削除
+      # 100〜199: グループ管理者都合
+      removed_by_group_authority: 100,            # グループ管理権限者(オーナーまたはマネージャー)による削除
+      kicked_by_group_moderator: 101,             # グループ管理者による強制退会
+      group_disbanded: 102,                       # グループ削除による強制退会
+
+      # 200〜299: サイト管理者都合
+      removed_by_admin: 200,                      # サイト管理者による削除
 
       # 1000〜1999: 削除伝播(親リソースの削除により削除)
       parent_user_deleted: 1000,                  # ユーザーが削除されたことによる削除

@@ -10,8 +10,7 @@ module Restorer
     def call
       ActiveRecord::Base.transaction do
         # Userは直接復元扱い(deleted_due_to_parentではないためhidden_on_parent_restoreは使わない)
-        @user.update!(is_deleted: false, deleted_at: nil, deleted_by_id: nil, 
-          deleted_reason: nil, hidden_by_parent: true)
+        @user.update!(is_deleted: false, deleted_at: nil, deleted_by_id: nil, deleted_reason: nil)
 
         # 子要素の連鎖復元
         @user.user_posts.each do |post|

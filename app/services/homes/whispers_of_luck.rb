@@ -1,4 +1,4 @@
-module HomesHelper
+module Homes
   # ホームズ用の乱数生成メソッド
   class WhispersOfLuck
     def initialize(max_luck_count)
