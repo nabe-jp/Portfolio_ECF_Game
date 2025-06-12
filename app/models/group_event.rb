@@ -6,12 +6,12 @@ class GroupEvent < ApplicationRecord
   belongs_to :member, class_name: "GroupMembership"
 
   validates :title, presence: { message: "を入力してください" }
-  validates :title, length: { maximum: 30, 
+  validates :title, length: { maximum: 20, 
     message: "は1～20文字以内で入力してください" }, if: -> { title.present? }
 
   validates :description, presence: { message: "を入力してください" }
   validates :description, length: { maximum: 100, 
-    message: "は500文字以内で入力してください" }, if: -> { description.present? }
+    message: "は100文字以内で入力してください" }, if: -> { description.present? }
 
   validates :start_time, presence: { message: "を入力してください" }
 

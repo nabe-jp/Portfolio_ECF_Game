@@ -545,72 +545,107 @@ ActiveRecord::Base.transaction do
     groups = [
       {
         owner_id: 1,
-        name: 'Blade Chronicles Lab',
-        slug: 'blade-chronicles',
-        description: 'Discuss strategies, character builds, and rare item hunts in Blade Chronicles. All adventurers welcome!',
+        moderators: [2, 3, 4],
+        members: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+        name: 'テスト用グループ、タイトル文字数上限２０',
+        slug: 'test-group',
+        description = <<~TEXT.strip
+          このグループは各種テストのため、グループタイトルやグループ説明を文字数上限まで記
+          載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          TEXT
         image: 'no_group'
       },
       {
-        owner_id: 2,
-        name: '虚空の塔 攻略同好会',
-        slug: 'kokuu-club',
-        description: '虚空の塔を制覇するための情報を共有しましょう。初心者から上級者まで歓迎！',
+        owner_id: 8,
+        moderators: [],
+        members: [14],
+        name: 'Low HP, High Vibes',
+        slug: 'low-hp-high-vibes',
+        description: 'We may not play to win, but we play to feel good. A chill corner for good mood gamers.',
+        image: 'no_group'
+      },
+      {
+        owner_id: 1,
+        moderators: [],
+        members: [2, 7],
+        name: 'Campfire Lounge',
+        slug: 'campfire-lounge',
+        description: '焚き火を囲むような気持ちで、まったりとゲームの話を楽しみましょう。攻略というより、楽しみ方を共有する場所です。',
+        image: 'no_group'
+      },
+      {
+        owner_id: 9,
+        moderators: [],
+        members: [],
+        name: 'Melody Quest',
+        slug: 'melody-quest',
+        description: 'A casual place for rhythm gamers and music lovers to talk scores, games, and groove.',
         image: 'no_group'
       },
       {
         owner_id: 3,
-        name: 'Project MIRAGE',
-        slug: 'mirage-project',
-        description: 'High-level coordination group for Project MIRAGE fans. Weekly boss raid schedules and meta discussions.',
-        image: 'no_group'
-      },
-      {
-        owner_id: 4,
+        moderators: [],
+        members: [1, 7],
         name: 'ドラゴンの巣調査隊',
         slug: 'dragon-nest',
         description: 'ドラゴンの巣の地図・敵配置・素材集めなどを語る場所です。情報提供歓迎。',
         image: 'no_group'
       },
       {
-        owner_id: 5,
-        name: '犬好きの集い',
+        owner_id: 14,
+        moderators: [],
+        members: [],
+        name: 'Dog Lovers',
         slug: 'dog-lovers',
-        description: 'このグループはゲーム関係ないけど、犬が好きな人集まって語ろう！わん！',
-        image: 'no_group'
-      },
-      {
-        owner_id: 6,
-        name: 'Forgotten Spells Archive',
-        slug: 'forgotten-spells',
-        description: 'Deep dives into arcane spell effects, locations, and combinations in the Forgotten Realms.',
-        image: 'no_group'
-      },
-      {
-        owner_id: 7,
-        name: '神域探訪録',
-        slug: 'shiniki-record',
-        description: '神域の各エリア攻略やマップ情報をまとめています。寄稿歓迎！',
-        image: 'no_group'
-      },
-      {
-        owner_id: 8,
-        name: 'Silent Citadel Raiders',
-        slug: 'silent-citadel',
-        description: 'Strategy hub for Silent Citadel. Join raids, theorycraft, and conquer the unknown!',
+        description: 'A chill place for people who love dogs. Share stories, pics, and just say "woof!"',
         image: 'no_group'
       },
       {
         owner_id: 9,
-        name: 'ギルド「暁」',
-        slug: 'guild-akatsuki',
-        description: '攻略ギルド「暁」の連絡と戦略共有の場です。参加者のみ閲覧可。',
+        moderators: [],
+        members: [10, 13, 14],
+        name: 'EchoStage',
+        slug: 'echostage',
+        description: 'A virtual stage to talk about rhythm games, game OSTs, and musical adventures.',
         image: 'no_group'
       },
       {
-        owner_id: 10,
-        name: 'Mecha Core Devs',
-        slug: 'mecha-core',
-        description: 'Discuss mechanics, patch changes, and optimization for Mecha Core simulator.',
+        owner_id: 1,
+        moderators: [],
+        members: [4, 5, 7],
+        name: '初心者ボードゲーム部',
+        slug: 'beginner-boardclub',
+        description: 'ボードゲーム初心者歓迎。ルールの質問やおすすめも共有しましょう。',
+        image: 'no_group'
+      },
+      {
+        owner_id: 13,
+        moderators: [9],
+        members: [8, 11, 12, 14],
+        name: 'The Quiet Grind',
+        slug: 'quiet-grind',
+        description: 'A group for those who enjoy peaceful farming, crafting, and slow progression games.',
+        image: 'no_group'
+      },
+      {
+        owner_id: 5,
+        moderators: [1,4,13],
+        members: [2, 3, 6, 7, 10, 11, 12, 14],
+        name: '夜空カフェ',
+        slug: 'yozora-cafe',
+        description: '夜の静かな時間、ふと開きたくなるようなゲームの話をここで。ジャンル不問、ただしほっとする作品の話題歓迎です。',
+        image: 'no_group'
+      },
+      {
+        owner_id: 12,
+        moderators: [9, 11],
+        members: [2, 4, 5, 7, 8, 10, 13 , 14],
+        name: 'Tavern of Tales',
+        slug: 'tavern-of-tales',
+        description: 'A cozy guild for sharing fantasy stories, RPG screenshots, and questing tips.',
         image: 'no_group'
       }
     ]
@@ -621,16 +656,239 @@ ActiveRecord::Base.transaction do
         name: attrs[:name],
         slug: attrs[:slug],
         description: attrs[:description],
-        created_at: Time.current,
-        updated_at: Time.current
+        created_at: Time.current
       )
     
       image_path = Rails.root.join('app', 'assets', 'images', 'group', "#{attrs[:image]}.jpg")
       group.group_image.attach(io: File.open(image_path), filename: "#{attrs[:image]}.jpg", content_type: 'image/jpeg')
-    end
     
+      group_members = [{ id: attrs[:owner_id], role: :owner }]
+      group_members += Array(attrs[:moderators]).map { |id| { id: id, role: :moderator } }
+      group_members += Array(attrs[:members]).map    { |id| { id: id, role: :member } }
+    
+      group_members.each do |entry|
+        GroupMembership.create!(
+          group: group,
+          user_id: entry[:id],
+          role: entry[:role],
+          joined_at: Time.current
+        )
+      end
+    end
+    is_pinned
     
     puts "グループの作成が完了しました。"
+    puts "グループ内お知らせの作成を開始します。"
+
+    group_notices = [
+      {
+        group_id: 1,
+        member_id: 1,
+        title: '最初に作成した非固定のお知らせ文字数上限',
+        body = <<~TEXT.strip
+          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          TEXT
+      },
+      {
+        group_id: 1,
+        member_id: 2,
+        title: 'こちらは２番目に作成した固定のお知らせ',
+        body = <<~TEXT
+          ５行の改行をしています。文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          TEXT
+        is_pinned: true
+      },
+      {
+        group_id: 1,
+        member_id: 3,
+        title: '３番目に作成した非固定のお知らせ',
+          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          TEXT
+      },
+      {
+        group_id: 1,
+        member_id: 4,
+        title: '４番目に作成した非固定のお知らせ',
+          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          TEXT
+      },
+      {
+        group_id: 7,
+        member_id: 13,
+        title: 'Event Cancellation',
+        body: 'Unfortunately, the event planned for next month has been canceled due to unforeseen circumstances. Thank you for understanding.'
+      }      
+      {
+        group_id: 9,
+        member_id: 5,
+        title: '過去ログの整理について',
+        body: '掲示板の過去の投稿を月末に一部整理します。必要な内容は保存してください。'
+      },
+      {
+        group_id: 9,
+        member_id: 5,
+        title: '新メンバー歓迎会',
+        body: '新しく加入したメンバーの歓迎会を開催します。詳細は別途連絡します。'
+      },
+      {
+        group_id: 9,
+        member_id: 1,
+        title: '投稿マナーについてのお願い',
+        body: '読みやすい投稿を心がけましょう。改行や句読点の使用にもご配慮ください。'
+      },
+      {
+        group_id: 10,
+        member_id: 9,
+        title: 'Spoiler Warning',
+        body: 'Please use spoiler tags or warnings when discussing recent events or endings. Let’s keep it fun for everyone!'
+      },
+      {
+        group_id: 10,
+        member_id: 11,
+        title: 'Login Posts Banned',
+        body: 'Posts like “I logged in” are discouraged. Please share something meaningful to keep the group engaging.'
+      }      
+    ]
+
+    group_notices.each do |attrs|
+      GroupNotice.create!(attrs)
+    end
+
+    puts "グループ内お知らせの作成が完了しました。"
+    puts "グループ内イベントの作成を開始します。"
+
+    group_events = [
+      {
+        group_id: 1,
+        member_id: 1,
+        title: '１番目に作成したイベント文字数上限ＸＸＸ',
+        description = <<~TEXT.strip
+          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          TEXT
+        start_time: Time.current + 2.months + 1.day,
+        end_time: Time.current + 2.months + 1.day + 1.hours
+      },
+      {
+        group_id: 1,
+        member_id: 5,
+        title: '２番目に作成したイベント文字数上限ＸＸＸ',
+        description = <<~TEXT
+          ５行の改行しています。文字数上限まで記載
+          しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          TEXT
+        start_time: Time.current + 2.months + 3.days,
+        end_time: Time.current + 2.months + 3.days + 2.hours
+      },
+      {
+        group_id: 1,
+        member_id: 5,
+        title: '３番目に作成したイベント文字数上限ＸＸＸ',
+        description = <<~TEXT
+          この投稿と2番目に作成した投稿は同じ投稿者で管理し権限のないメンバー
+          イベントは管理権限がなくても作成可能
+          2番目に作成したイベントよりも1日早く開催するように設定している
+          TEXT
+        start_time: Time.current + 2.months + 2.day,
+        end_time: Time.current + 2.months + 2.day + 2.hours
+      },
+      {
+        group_id: 1,
+        member_id: 3,
+        title: '４番目に作成したイベント文字数上限ＸＸＸ',
+        description = <<~TEXT.strip
+          イベントは5つ作成してあり5番目のイベントは既に終了しているので管理権限があるメンバーしか見えない
+          TEXT
+        start_time: Time.current + 2.months + 4.day,
+        end_time: Time.current + 2.months + 4.day + 4.hours
+      },
+      {
+        group_id: 1,
+        member_id: 3,
+        title: '５番目に作成したイベント文字数上限ＸＸＸ',
+        description = <<~TEXT.strip
+          このイベントはすでに終了しているので管理権限のあるメンバーにしか見えてはいけない
+          TEXT
+        start_time: Time.current - 1.day,
+        end_time: Time.current - 1.day
+      },
+      {
+        group_id: 9,
+        member_id: 1,
+        title: '世界観研究読書会',
+        description: '設定資料や小説版を読んで、背景世界について語り合いましょう。',
+        start_time: Time.current + 2.months + 1.day,
+        end_time: Time.current + 2.months + 1.day + 2.hours
+      },
+      {
+        group_id: 9,
+        member_id: 5,
+        title: '雑談だけの夜',
+        description: 'ゲームから離れて、たまには雑談だけで盛り上がる夜を楽しみましょう。お菓子持参歓迎！',
+        start_time: Time.current + 2.months + 2.day,
+        end_time: Time.current + 2.months + 2.day + 3.hours
+      },
+      {
+        group_id: 10,
+        member_id: 11,
+        title: 'Beginner Build Tips',
+        description: 'Learn the basics of gear and skill selection for character building. Perfect for new players.',
+        start_time: Time.current + 2.months + 6.days,
+        end_time: Time.current + 2.months + 6.days + 2.hours
+      },
+      {
+        group_id: 10,
+        member_id: 12,
+        title: 'Endurance Raid Run',
+        description: 'Join us in a limited-time high-difficulty raid! Team up and come well prepared for battle!',
+        start_time: Time.current + 2.months + 7.days,
+        end_time: Time.current + 2.months + 9.days
+      },
+      {
+        group_id: 10,
+        member_id: 8,
+        title: 'Pre-Tourney Practice',
+        description: 'Get ready for next month’s official tournament with full-on mock battle sessions!',
+        start_time: Time.current + 2.months + 10.days,
+        end_time: Time.current + 2.months + 10.days + 5.hours
+      }
+    ]
+    
+    group_events.each do |attrs|
+      GroupEvent.create!(attrs)
+    end    
+
+    puts "グループ内イベントの作成が完了しました。"
+    puts "グループ内投稿の作成を開始します。"
+
+
+    
+    puts "グループ内投稿の作成が完了しました。"
+    puts "グループ内投稿に対してのコメントの作成を開始します。"
+
+
+
+    puts "グループ内投稿に対してのコメントの作成が完了しました。"
     puts "管理側ノートの作成を開始します。"
 
     AdminNote.create!([
