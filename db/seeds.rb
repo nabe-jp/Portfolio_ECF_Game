@@ -540,6 +540,97 @@ ActiveRecord::Base.transaction do
     ])
       
     puts "アクティブでないユーザーとそれに紐づく投稿・コメントの作成が完了しました。"
+    puts "グループの作成を開始します。"
+
+    groups = [
+      {
+        owner_id: 1,
+        name: 'Blade Chronicles Lab',
+        slug: 'blade-chronicles',
+        description: 'Discuss strategies, character builds, and rare item hunts in Blade Chronicles. All adventurers welcome!',
+        image: 'no_group'
+      },
+      {
+        owner_id: 2,
+        name: '虚空の塔 攻略同好会',
+        slug: 'kokuu-club',
+        description: '虚空の塔を制覇するための情報を共有しましょう。初心者から上級者まで歓迎！',
+        image: 'no_group'
+      },
+      {
+        owner_id: 3,
+        name: 'Project MIRAGE',
+        slug: 'mirage-project',
+        description: 'High-level coordination group for Project MIRAGE fans. Weekly boss raid schedules and meta discussions.',
+        image: 'no_group'
+      },
+      {
+        owner_id: 4,
+        name: 'ドラゴンの巣調査隊',
+        slug: 'dragon-nest',
+        description: 'ドラゴンの巣の地図・敵配置・素材集めなどを語る場所です。情報提供歓迎。',
+        image: 'no_group'
+      },
+      {
+        owner_id: 5,
+        name: '犬好きの集い',
+        slug: 'dog-lovers',
+        description: 'このグループはゲーム関係ないけど、犬が好きな人集まって語ろう！わん！',
+        image: 'no_group'
+      },
+      {
+        owner_id: 6,
+        name: 'Forgotten Spells Archive',
+        slug: 'forgotten-spells',
+        description: 'Deep dives into arcane spell effects, locations, and combinations in the Forgotten Realms.',
+        image: 'no_group'
+      },
+      {
+        owner_id: 7,
+        name: '神域探訪録',
+        slug: 'shiniki-record',
+        description: '神域の各エリア攻略やマップ情報をまとめています。寄稿歓迎！',
+        image: 'no_group'
+      },
+      {
+        owner_id: 8,
+        name: 'Silent Citadel Raiders',
+        slug: 'silent-citadel',
+        description: 'Strategy hub for Silent Citadel. Join raids, theorycraft, and conquer the unknown!',
+        image: 'no_group'
+      },
+      {
+        owner_id: 9,
+        name: 'ギルド「暁」',
+        slug: 'guild-akatsuki',
+        description: '攻略ギルド「暁」の連絡と戦略共有の場です。参加者のみ閲覧可。',
+        image: 'no_group'
+      },
+      {
+        owner_id: 10,
+        name: 'Mecha Core Devs',
+        slug: 'mecha-core',
+        description: 'Discuss mechanics, patch changes, and optimization for Mecha Core simulator.',
+        image: 'no_group'
+      }
+    ]
+    
+    groups.each do |attrs|
+      group = Group.create!(
+        owner_id: attrs[:owner_id],
+        name: attrs[:name],
+        slug: attrs[:slug],
+        description: attrs[:description],
+        created_at: Time.current,
+        updated_at: Time.current
+      )
+    
+      image_path = Rails.root.join('app', 'assets', 'images', 'group', "#{attrs[:image]}.jpg")
+      group.group_image.attach(io: File.open(image_path), filename: "#{attrs[:image]}.jpg", content_type: 'image/jpeg')
+    end
+    
+    
+    puts "グループの作成が完了しました。"
     puts "管理側ノートの作成を開始します。"
 
     AdminNote.create!([

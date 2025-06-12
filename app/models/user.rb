@@ -12,15 +12,19 @@ class User < ApplicationRecord
   # 現在未実装(Gemインストール済み)
   # acts_as_taggable_on :user_tags
 
+  # ユーザーが作成したもの、削除された際に関連して削除される
   has_many :user_posts, dependent: :destroy
   has_many :user_post_comments, dependent: :destroy
 
+  # グループに関連するアソシエーション
+  # GroupMembershipとアソシエーション、Userがメンバー又はオーナーであるグループを取得できるよう定義
   has_many :group_memberships, dependent: :destroy
   has_many :joined_groups, through: :group_memberships, source: :group
   has_many :owned_groups, class_name: "Group", foreign_key: "owner_id"
-  has_many :active_group_memberships, -> { where(is_deleted: false) }, class_name: 'GroupMembership'
+
+  # 上記のアクティブなものを定義(メンバーまたはオーナーとして参加・所有していて脱退していないもの)
+  has_many :active_group_memberships, -> { active_members }, class_name: 'GroupMembership'
   has_many :active_joined_groups, through: :active_group_memberships, source: :group
-  has_many :group_posts, dependent: :destroy
 
   has_one_attached :profile_image
 

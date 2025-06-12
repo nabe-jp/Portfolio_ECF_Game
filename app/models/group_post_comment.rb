@@ -2,8 +2,8 @@ class GroupPostComment < ApplicationRecord
   include Scopes::Public::Groups
   include DeletableReason
   
-  belongs_to :member, class_name: "GroupMembership"
   belongs_to :group_post
+  belongs_to :member, class_name: "GroupMembership"
 
   belongs_to :parent_comment, class_name: 'GroupPostComment', optional: true
   has_many :replies, class_name: 'GroupPostComment', foreign_key: :parent_comment_id, dependent: :destroy

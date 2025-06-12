@@ -8,17 +8,20 @@ class Group < ApplicationRecord
   # 所有者情報(ownerに明示的にモデルを持たせる)
   belongs_to :owner, class_name: 'User'
  
+  # GroupMembershipとのアソシエーション、GroupMembership側で定義しているスコープを適用したものを定義
   has_many :group_memberships, dependent: :destroy
   has_many :active_group_memberships, -> { active_members }, class_name: 'GroupMembership'
   
+  # GroupMembershipをmembersとして定義、上がすべてで下がアクティブ、GroupMembershipに紐づくモデルをuserに定義
   has_many :members, through: :group_memberships, source: :user
   has_many :active_members, through: :active_group_memberships, source: :user
 
-  # dashboardの管理者一覧に使用
+  # dashboardの管理者一覧に使用、GroupMembershipのmoderator権限を持つアクティブなユーザーをmoderatorsとして定義
   has_many :moderator_memberships, -> { where(role: :moderator).merge(GroupMembership.active_members) }, 
     class_name: 'GroupMembership'
   has_many :moderators, through: :moderator_memberships, source: :user
 
+  # グループが作成したもの、削除された際に関連して削除される
   has_many :group_events, dependent: :destroy
   has_many :group_notices, dependent: :destroy
   has_many :group_posts, dependent: :destroy

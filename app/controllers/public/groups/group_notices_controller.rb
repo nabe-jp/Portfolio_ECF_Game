@@ -59,7 +59,7 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
         deleted_reason: :removed_by_group_authority).call
       redirect_to group_notices_path(@group), notice: "お知らせを削除しました"
     rescue => e
-      Rails.logger.error("お知らせ削除エラー: #{e.message}")
+      Rails.logger.error("GroupNotice削除エラー: #{e.message}")
       redirect_to group_notices_path(@group), alert: '予期せぬエラーにより、お知らせの削除が行えませんでした。'
     end
   end

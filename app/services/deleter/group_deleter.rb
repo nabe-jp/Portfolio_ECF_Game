@@ -19,6 +19,7 @@ module Deleter
         delete_params = {is_deleted: true, deleted_at: now, deleted_by_id: @deleted_by.id,
           deleted_due_to_parent: false, hidden_on_parent_restore: false}
 
+        # 連鎖削除の場合
         if @deleted_via_parent
           return if @group.is_deleted
 

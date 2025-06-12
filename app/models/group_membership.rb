@@ -5,6 +5,7 @@ class GroupMembership < ApplicationRecord
   belongs_to :user
   belongs_to :group
 
+  # メンバーが作成したもの、削除された際に関連して削除される
   has_many :group_events, foreign_key: :member_id, dependent: :destroy
   has_many :group_notices, foreign_key: :member_id, dependent: :destroy
   has_many :group_posts, foreign_key: :member_id, dependent: :destroy
@@ -13,7 +14,7 @@ class GroupMembership < ApplicationRecord
   # 将来的に招待機能を実装する際に使用
   # belongs_to :inviter, class_name: 'User', optional: true, foreign_key: 'invited_by_id'
 
- 
+  # _prefix: trueを使い.role_～という形で使えるようにし、名前の衝突を避ける
   enum role: { member: 0, moderator: 1, owner: 2 }, _prefix: true
  
   # 将来的に承認待ち・参加中・保留中を実装する際に使用

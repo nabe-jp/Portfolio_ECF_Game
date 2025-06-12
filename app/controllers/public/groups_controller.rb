@@ -63,11 +63,12 @@ class Public::GroupsController < ApplicationController
   def destroy
     begin
       # サービスオブジェクトをにてグループとグループに紐づくものを論理削除
-      Deleter::GroupDeleter.newl(@group, current_user).call
+      Deleter::GroupDeleter.new(@group, deleted_by: current_user, 
+        deleted_reason: :removed_by_group_authority).call
       redirect_to my_groups_path, notice: "グループを削除しました"
     rescue => e
-      Rails.logger.error("コメント削除エラー: #{e.message}")
-      redirect_to my_groups_path, alert: '予期せぬエラーにより、グループの削除が行えませんでした。'
+      Rails.logger.error("Group削除エラー: #{e.message}")
+      redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、グループの削除が行えませんでした。'
     end
   end
 
@@ -76,7 +77,7 @@ class Public::GroupsController < ApplicationController
       .owned_groups.merge(Group.active_groups_desc).page(params[:owned_page]).per(6)
 
     @joined_groups = current_user
-    .active_joined_groups.where.not(id: current_user.owned_groups.pluck(:id))
+      .active_joined_groups.where.not(id: current_user.owned_groups.pluck(:id))
         .merge(Group.active_groups_desc).page(params[:joined_page]).per(6)
   end
 

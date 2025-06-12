@@ -98,7 +98,7 @@ class Public::Users::UserPostsController < Public::ApplicationController
   def destroy
     begin
       Deleter::UserPostDeleter.new(@user_post, deleted_by: current_user, 
-        deleted_reason: :self_deleted).new
+        deleted_reason: :self_deleted).call
       redirect_to user_posts_path(@user), notice: '投稿を削除しました。'
     rescue => e
       Rails.logger.error("UserPost削除エラー: #{e.message}")
