@@ -37,6 +37,7 @@ ActiveRecord::Base.transaction do
     puts "ユーザーの作成を開始します"
 
     # 英語・日本語によるユーザーの作成(male、femaleで性別を分け、中性はuser、削除専用はdeleted)
+    # ユーザーID:100, 101は削除用、ID:200は非公開用(両方ともユーザー投稿のコメントを作成した後に作成)
     user_images = [
       'user_ja_male_1',
       'user_ja_male_2',
@@ -205,23 +206,21 @@ ActiveRecord::Base.transaction do
 
     user_post_images = [
       'user_post_1_chess',
-      'user_post_2_billiards',
-      'user_post_3_playing_cards',
-      'user_post_4_dice',
-      'user_post_5_love_affair',
-      'user_post_6_horror',
-      'user_post_7_survival',
-      'user_post_8_racing',
-      'user_post_9_fighting_games',
-      'user_post_11_music',
-      'user_post_12_puzzle',
-      'user_post_14_adventure',
-      'user_post_15_dark_fantasy',
-      'user_post_16_fantasy',
-      'user_post_17_city_planning_simulation',
-      'user_post_18_cultivation',
-      'user_post_19_strategy',
-      'user_post_20_sf_strategy'
+      'user_post_2_playing_cards',
+      'user_post_3_love_affair',
+      'user_post_4_horror',
+      'user_post_5_survival',
+      'user_post_6_racing',
+      'user_post_7_fighting_games',
+      'user_post_8_music',
+      'user_post_9_puzzle',
+      'user_post_10_adventure',
+      'user_post_11_dark_fantasy',
+      'user_post_12_fantasy',
+      'user_post_13_city_planning_simulation',
+      'user_post_14_cultivation',
+      'user_post_15_strategy',
+      'user_post_16_sf_strategy'
     ]
 
     user_posts = [
@@ -235,103 +234,91 @@ ActiveRecord::Base.transaction do
         user_index: 0,
         title: '宇宙戦線へ出撃',
         body: '宇宙空間での戦闘がテーマのSF戦略ゲームにドハマリ中。',
-        image: 'user_post_20_sf_strategy'
-      },
-      {
-        user_index: 1,
-        title: 'ナイスショット！',
-        body: '最近、ビリヤードでブレイクショットがきれいに決まるようになった。',
-        image: 'user_post_2_billiards'
+        image: 'user_post_16_sf_strategy'
       },
       {
         user_index: 2,
         title: '夜の森を抜けて',
         body: 'サバイバルゲームで無人島を探索。準備が命を分ける！',
-        image: 'user_post_7_survival'
+        image: 'user_post_5_survival'
       },
       {
         user_index: 3,
         title: '神経戦の日々',
         body: 'トランプゲームでの心理戦がやめられない。いつも全力で挑んでいます。',
-        image: 'user_post_3_playing_cards'
-      },
-      {
-        user_index: 3,
-        title: 'ダイス運命論',
-        body: 'サイコロ一投で運命が決まるのがスリリングで好き。',
-        image: 'user_post_4_dice'
+        image: 'user_post_2_playing_cards'
       },
       {
         user_index: 4,
         title: '乙女の恋模様',
         body: 'ゲーム内での恋愛シナリオが切なくて胸がきゅんとする。',
-        image: 'user_post_5_love_affair'
+        image: 'user_post_3_love_affair'
       },
       {
         user_index: 5,
         title: '深夜の恐怖体験',
         body: 'ホラーゲームの音と演出がリアルすぎて一人でできないレベル。',
-        image: 'user_post_6_horror'
+        image: 'user_post_4_horror'
       },
       {
         user_index: 5,
         title: '戦術勝負が熱い',
         body: '相手の動きを読んで勝利する戦略ゲームに夢中。',
-        image: 'user_post_19_strategy'
+        image: 'user_post_15_strategy'
       },
       {
         user_index: 6,
         title: '街を駆け抜ける',
         body: 'レースゲームのタイムアタックで自己ベスト更新を目指してます。',
-        image: 'user_post_8_racing'
+        image: 'user_post_6_racing'
       },
       {
         user_index: 7,
         title: 'Fighting Spirit!',
         body: 'Practicing combos is tough, but the thrill of victory in a match is unbeatable.',
-        image: 'user_post_9_fighting_games'
+        image: 'user_post_7_fighting_games'
       },
       {
         user_index: 8,
         title: 'Feel the Rhythm',
         body: 'Trying to achieve a full combo on my favorite music game. Love the tempo!',
-        image: 'user_post_11_music'
+        image: 'user_post_8_music'
       },
       {
         user_index: 9,
         title: 'Puzzle Joy',
         body: 'There’s nothing like the satisfaction of cracking a tough puzzle.',
-        image: 'user_post_12_puzzle'
+        image: 'user_post_9_puzzle'
       },
       {
         user_index: 10,
         title: 'Onward Adventure',
         body: 'Exploring new lands in adventure games always gets me excited.',
-        image: 'user_post_14_adventure'
+        image: 'user_post_10_adventure'
       },
       {
         user_index: 11,
         title: 'Light & Darkness',
         body: 'I adore the world-building in dark fantasy RPGs—so immersive.',
-        image: 'user_post_15_dark_fantasy'
+        image: 'user_post_11_dark_fantasy'
       },
       {
         user_index: 11,
         title: 'Magic & Swords',
         body: 'Learning spells and fighting through a fantasy world is my kind of fun!',
-        image: 'user_post_16_fantasy'
+        image: 'user_post_12_fantasy'
       },
       {
         user_index: 12,
         title: 'City Planning',
         body: 'Designing livable cities through simulation games is my passion.',
-        image: 'user_post_17_city_planning_simulation'
+        image: 'user_post_13_city_planning_simulation'
       },
       {
         user_index: 12,
         title: 'From the Farm',
         body: 'Raising crops and selling them—life sim games give me peace.',
-        image: 'user_post_18_cultivation'
+        image: 'user_post_14_cultivation'
       }
     ]
 
@@ -347,13 +334,6 @@ ActiveRecord::Base.transaction do
         content_type: 'image/jpeg')
     end
 
-    # 非公開の投稿の作成(日本語と英語で分けて投稿した為、順番が変わらないように新規作成ではなく更新)
-    mo_public_user_post = User.find_by(id: 4).user_posts.find_by(id: 6)
-    mo_public_user_post.update!(is_public: false)
-
-    # コールバックを再登録
-    UserPost.set_callback(:create, :after, :set_default_user_post_image)
-
     puts "ユーザー投稿の作成が完了しました"
     puts "ユーザー投稿に対してのコメントの作成を開始しました"
 
@@ -366,69 +346,62 @@ ActiveRecord::Base.transaction do
       { user_id:5, user_post_id:2, body: '宇宙戦、私も最近ハマってます！' },
 
       # --- 投稿ID 3(user_id:2)---
+      # ※コメント無し 
+
+      # --- 投稿ID 4(user_id:4)---
+      { user_id:1, user_post_id:4, body: '心理戦は勝ったときの快感がたまりませんね。' },      
+
+      # --- 投稿ID 5(user_id:5)---
+      { user_id:6, user_post_id:5, body: '切ない恋って、時々心に残りますよね。' },
+      { user_id:7, user_post_id:5, body: '恋愛イベントは泣ける展開が多くて好き！' },
+      { user_id:12, user_post_id:5, body: 'I’m learning Japanese through love games too!' },
+
+      # --- 投稿ID 6(user_id:6)---
+      { user_id:4, user_post_id:6, body: '怖すぎて途中でやめちゃうことあります笑' },
+      { user_id:1, user_post_id:6, body: '夜中にやると夢に出ますよね…' },
+      { user_id:11, user_post_id:6, body: 'Love horror too! Got any recommendations?' },
+
+      # --- 投稿ID 7(user_id:6)---
+      { user_id:5, user_post_id:7, body: '戦略ゲー好きです！今何やってるんですか？' },
+
+      # --- 投稿ID 8(user_id:7)---
       # ※コメント無し
 
-      # --- 投稿ID 4(user_id:3)---
+      # --- 投稿ID 9(user_id:8)---
+      { user_id:10, user_post_id:9, body: 'Combos are hard but worth it!' },
+
+      # --- 投稿ID 10(user_id:9)---
       # ※コメント無し
 
-      # --- 投稿ID 5(user_id:4)---
-      { user_id:1, user_post_id:5, body: '心理戦は勝ったときの快感がたまりませんね。' },
+      # --- 投稿ID 11(user_id:10)---
+      { user_id:8, user_post_id:11, body: 'Puzzles make me feel smart too!' },
 
-      # --- 投稿ID 6(user_id:4)---
-      # 投稿が非表示
-      { user_id:2, user_post_id:6, body: '運任せなところが逆に燃えますよね！' },
+      # --- 投稿ID 12(user_id:11)---
+      { user_id:13, user_post_id:12, body: 'Adventure games always take me to another world.' },
 
-      # --- 投稿ID 7(user_id:5)---
-      { user_id:6, user_post_id:7, body: '切ない恋って、時々心に残りますよね。' },
-      { user_id:7, user_post_id:7, body: '恋愛イベントは泣ける展開が多くて好き！' },
-      { user_id:12, user_post_id:7, body: 'I’m learning Japanese through love games too!' },
+      # --- 投稿ID 13(user_id:12)---
+      { user_id:8, user_post_id:13, body: 'Dark fantasy is so gripping!' },
+      { user_id:10, user_post_id:13, body: 'I love the storytelling in dark fantasy RPGs too!' },
+      { user_id:13, user_post_id:13, body: 'I always get lost in those immersive worlds.' },
 
-      # --- 投稿ID 8(user_id:6)---
-      { user_id:4, user_post_id:8, body: '怖すぎて途中でやめちゃうことあります笑' },
-      { user_id:1, user_post_id:8, body: '夜中にやると夢に出ますよね…' },
-      { user_id:11, user_post_id:8, body: 'Love horror too! Got any recommendations?' },
+      # --- 投稿ID 14(user_id:12)---
+      { user_id:11, user_post_id:14, body: 'Fantasy RPGs are the best way to escape reality.' },
+      { user_id:10, user_post_id:14, body: 'Learning spells is half the fun!' },
+      { user_id:13, user_post_id:14, body: 'Same here! Love fighting with swords and magic.' },
 
-      # --- 投稿ID 9(user_id:6)---
-      { user_id:5, user_post_id:9, body: '戦略ゲー好きです！今何やってるんですか？' },
+      # --- 投稿ID 15(user_id:13)---
+      { user_id:8, user_post_id:15, body: 'I play city builders too, what’s your favorite?' },
+      { user_id:12, user_post_id:15, body: 'Creating sustainable cities is so satisfying.' },
 
-      # --- 投稿ID 10(user_id:7)---
-      # ※コメント無し
+      # --- 投稿ID 16(user_id:13)---
+      { user_id:11, user_post_id:16, body: 'Cultivation games bring me peace too!' },
+      { user_id:10, user_post_id:16, body: 'Life sims are such a relaxing break.' },
 
-      # --- 投稿ID 11(user_id:8)---
-      { user_id:10, user_post_id:11, body: 'Combos are hard but worth it!' },
+      # --- 返信(投稿ID 5, コメントID 6に返信)---
+      { user_id:5, user_post_id:5, parent_comment_id:6, body: 'わかります！特に最後の選択肢とか！' },
 
-      # --- 投稿ID 12(user_id:9)---
-      # ※コメント無し
-
-      # --- 投稿ID 13(user_id:10)---
-      { user_id:8, user_post_id:12, body: 'Puzzles make me feel smart too!' },
-
-      # --- 投稿ID 14(user_id:11)---
-      { user_id:13, user_post_id:14, body: 'Adventure games always take me to another world.' },
-
-      # --- 投稿ID 15(user_id:12)---
-      { user_id:8, user_post_id:15, body: 'Dark fantasy is so gripping!' },
-      { user_id:10, user_post_id:15, body: 'I love the storytelling in dark fantasy RPGs too!' },
-      { user_id:13, user_post_id:15, body: 'I always get lost in those immersive worlds.' },
-
-      # --- 投稿ID 16(user_id:12)---
-      { user_id:11, user_post_id:16, body: 'Fantasy RPGs are the best way to escape reality.' },
-      { user_id:10, user_post_id:16, body: 'Learning spells is half the fun!' },
-      { user_id:13, user_post_id:16, body: 'Same here! Love fighting with swords and magic.' },
-
-      # --- 投稿ID 17(user_id:13)---
-      { user_id:8, user_post_id:17, body: 'I play city builders too, what’s your favorite?' },
-      { user_id:12, user_post_id:17, body: 'Creating sustainable cities is so satisfying.' },
-
-      # --- 投稿ID 18(user_id:13)---
-      { user_id:11, user_post_id:18, body: 'Cultivation games bring me peace too!' },
-      { user_id:10, user_post_id:18, body: 'Life sims are such a relaxing break.' },
-
-      # --- 返信(投稿ID 7, コメントID 7に返信)---
-      { user_id:5, user_post_id:7, parent_comment_id:7, body: 'わかります！特に最後の選択肢とか！' },
-
-      # --- 返信(投稿ID 8,0 コメントID 11に返信)---
-      { user_id:6, user_post_id:8, parent_comment_id:11, body: '最近やったのは「影の館」ってやつです！' }
+      # --- 返信(投稿ID 6,コメントID 10に返信)---
+      { user_id:6, user_post_id:6, parent_comment_id:10, body: '最近やったのは「影の館」ってやつです！' }
     ]
 
     user_post_comments.each do |comment_attrs|
@@ -437,19 +410,13 @@ ActiveRecord::Base.transaction do
       comment.update!(parent_comment_id: parent_id) if parent_id
     end
 
-    # 非公開の投稿の作成(コメントはわかりやすく表示されている最後の投稿に対して行う為、順番を気にせず新規作成)
-    UserPostComment.create!(
-      user_id: 1, 
-      user_post_id: 18, 
-      body: 'これは非表示のコメントです(初期設定でこの内容が見える場合、問題があります)',
-      is_public: false
-    )
-
     puts "ユーザー投稿に対してのコメントの作成が完了しました。"
-    puts "アクティブでないユーザーとそれに紐づく投稿・コメントの作成を開始します。"
+    puts "テスト用ユーザーとそれに紐づく投稿・コメントの作成を開始します。"
 
+    # --- 削除関連 ---
     # 削除ユーザー(サイト管理者により削除)
     deleted_user_1 = User.create!(
+      id: 100,
       email: 'zz@zz',
       password: 'zzzzzz',
       password_confirmation: 'zzzzzz',
@@ -463,12 +430,13 @@ ActiveRecord::Base.transaction do
       deleted_reason: :removed_by_admin
     )
 
-    deleted_image_1 = Rails.root.join('app', 'assets', 'images', 'user', 'deleted_user_1.jpg')
-    deleted_user_1.profile_image.attach(io: File.open(deleted_image_1), filename: 'deleted_user_1.jpg', 
+    image_path = Rails.root.join('app', 'assets', 'images', 'user', 'deleted_user_1.jpg')
+    deleted_user_1.profile_image.attach(io: File.open(image_path), filename: 'deleted_user_1.jpg', 
       content_type: 'image/jpeg')
     
     # 削除ユーザー(自主退会)
     deleted_user_2 = User.create!(
+      id: 101,
       email: 'yy@yy',
       password: 'yyyyyy',
       password_confirmation: 'yyyyyy',
@@ -482,11 +450,11 @@ ActiveRecord::Base.transaction do
       deleted_reason: :self_deleted
     )
 
-    deleted_image_2 = Rails.root.join('app', 'assets', 'images', 'user', 'deleted_user_2.jpg')
-    deleted_user_2.profile_image.attach(io: File.open(deleted_image_2), filename: 'deleted_user_2.jpg', 
+    image_path = Rails.root.join('app', 'assets', 'images', 'user', 'deleted_user_2.jpg')
+    deleted_user_2.profile_image.attach(io: File.open(image_path), filename: 'deleted_user_2.jpg', 
       content_type: 'image/jpeg')
     
-    # 連鎖削除された投稿
+    # 連鎖削除された投稿とコメント
     delete_user_post_1 = UserPost.create!(
       user_id: deleted_user_1.id,
       title: "#{deleted_user_1.nickname}の投稿(連鎖削除)",
@@ -498,11 +466,22 @@ ActiveRecord::Base.transaction do
       deleted_due_to_parent: true
     )
 
-    deleted_image_3 = Rails.root.join('app', 'assets', 'images', 'user_post', 'user_post_10_sports.jpg')
-    delete_user_post_1.user_post_image.attach(io: File.open(deleted_image_3), 
-      filename: 'user_post_10_sports.jpg', content_type: 'image/jpeg')
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'deleted_user_post_1_sports.jpg')
+    delete_user_post_1.user_post_image.attach(io: File.open(image_path), 
+      filename: 'deleted_user_post_1_sports.jpg', content_type: 'image/jpeg')
 
-    # 自主削除された投稿
+    UserPostComment.create!(
+      user_id:deleted_user_1.id, 
+      user_post_id:18, 
+      body: 'ユーザーが強制退会、連鎖削除コメント(初期設定でこの内容が見える場合、問題があります)', 
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: admin.id,
+      deleted_reason: :parent_user_deleted,
+      deleted_due_to_parent: true
+    )
+
+    # 自主削除された投稿とコメント
     delete_user_post_2 = UserPost.create!(
       user_id: deleted_user_2.id,
       title: "#{deleted_user_2.nickname}の投稿(自主削除)",
@@ -513,43 +492,88 @@ ActiveRecord::Base.transaction do
       deleted_reason: :self_deleted
     )
 
-    deleted_image_4 = Rails.root.join('app', 'assets', 'images', 'user_post', 'user_post_13_action.jpg')
-    delete_user_post_2.user_post_image.attach(io: File.open(deleted_image_4), 
-      filename: 'user_post_13_action.jpg', content_type: 'image/jpeg')
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'deleted_user_post_2_action.jpg')
+    delete_user_post_2.user_post_image.attach(io: File.open(image_path), 
+      filename: 'deleted_user_post_2_action.jpg', content_type: 'image/jpeg')
 
-    UserPostComment.create!([
-      {
-        user_id:deleted_user_1.id, 
-        user_post_id:18, 
-        body: 'ユーザーが強制退会、連鎖削除コメント(初期設定でこの内容が見える場合、問題があります)', 
-        is_deleted: true,
-        deleted_at: Time.current,
-        deleted_by_id: admin.id,
-        deleted_reason: :parent_user_deleted,
-        deleted_due_to_parent: true
-      },
-      {
-        user_id:deleted_user_2.id, 
-        user_post_id:8, 
-        body: 'ユーザーが自主削除したコメント(初期設定でこの内容が見える場合、問題があります)', 
-        is_deleted: true,
-        deleted_at: Time.current,
-        deleted_by_id: deleted_user_2.id,
-        deleted_reason: :self_deleted
-      }
-    ])
+    UserPostComment.create!(
+      user_id:deleted_user_2.id, 
+      user_post_id:8, 
+      body: 'ユーザーが自主削除したコメント(初期設定でこの内容が見える場合、問題があります)', 
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: deleted_user_2.id,
+      deleted_reason: :self_deleted
+
+    )
+
+    # --- 非公開関連 ---
+    # 非公開投稿関連データを持つユーザー
+    private_user_1 = User.create!(
+      id: 200,
+      email: 'private@private',
+      password: 'aaaaaa',
+      password_confirmation: 'aaaaaa',
+      last_name: 'テスト用',
+      first_name: 'ユーザー',
+      nickname: 'テスト用ユーザー',
+      bio: <<~TEXT
+        皆様に見ていただく際に少しでも内容がわかりやすくなるよう非公開用ユーザーを作成しました。
+        関連データは非公開、画像はデフォルト、seed作成直後は最新のIDを持ちます。
+        TEXT
+    )
       
-    puts "アクティブでないユーザーとそれに紐づく投稿・コメントの作成が完了しました。"
+    image_path = Rails.root.join('app', 'assets', 'images', 'user', 'no_user.jpg')
+    private_user_1.profile_image.attach(io: File.open(image_path), filename: 'no_user.jpg', 
+      content_type: 'image/jpeg')
+
+    private_user_post_1 = UserPost.create!(
+      user_id: private_user_1.id,
+      title: '非公開の投稿',
+      body: '非公開の投稿です(初期設定でこの投稿が表示される場合、問題があります)',
+      is_public: false
+    )
+
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'no_user_post.jpg')
+    delete_user_post_2.user_post_image.attach(io: File.open(image_path), 
+      filename: 'no_user_post.jpg', content_type: 'image/jpeg')
+
+    private_user_post_2 = UserPost.create!(
+      user_id: private_user_1.id,
+      title: '連鎖復元後の非公開の投稿',
+      body: '連鎖復元後に非表示処理された投稿です(初期設定でこの投稿が表示される場合、問題があります)',
+      hidden_on_parent_restore: false
+    )
+  
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'no_user_post.jpg')
+    delete_user_post_2.user_post_image.attach(io: File.open(image_path), 
+      filename: 'no_user_post.jpg', content_type: 'image/jpeg')
+    
+    UserPostComment.create!(
+      user_id: private_user_1.id,
+      user_post_id: 19, 
+      body: '非表示のコメントです(初期設定でこのコメントが表示される場合、問題があります)',
+      is_public: false
+    )
+
+    UserPostComment.create!(
+      user_id: private_user_1.id,
+      user_post_id: 19, 
+      body: '連鎖復元後に非表示処理されたコメントです(初期設定でこのコメントが表示される見える場合、問題があります)',
+      hidden_on_parent_restore: false
+    )
+
+    puts "テスト用ユーザーとそれに紐づく投稿・コメントの作成が完了しました。"
     puts "グループの作成を開始します。"
 
     groups = [
       {
         owner_id: 1,
-        moderators: [2, 3, 4],
+        moderators: [2, 3, 4, 100, 101, 200],
         members: [5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
         name: 'テスト用グループ、タイトル文字数上限２０',
         slug: 'test-group',
-        description = <<~TEXT.strip
+        description: <<~TEXT.strip,
           このグループは各種テストのため、グループタイトルやグループ説明を文字数上限まで記
           載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
@@ -636,7 +660,7 @@ ActiveRecord::Base.transaction do
         members: [2, 3, 6, 7, 10, 11, 12, 14],
         name: '夜空カフェ',
         slug: 'yozora-cafe',
-        description: '夜の静かな時間、ふと開きたくなるようなゲームの話をここで。ジャンル不問、ただしほっとする作品の話題歓迎です。',
+        description: '夜の静かな時間、ふと開きたくなるようなゲームの話をここで。ジャンル不問、ほっとする作品の話題歓迎です。',
         image: 'no_group'
       },
       {
@@ -660,7 +684,8 @@ ActiveRecord::Base.transaction do
       )
     
       image_path = Rails.root.join('app', 'assets', 'images', 'group', "#{attrs[:image]}.jpg")
-      group.group_image.attach(io: File.open(image_path), filename: "#{attrs[:image]}.jpg", content_type: 'image/jpeg')
+      group.group_image.attach(io: File.open(image_path), filename: "#{attrs[:image]}.jpg", 
+        content_type: 'image/jpeg')
     
       group_members = [{ id: attrs[:owner_id], role: :owner }]
       group_members += Array(attrs[:moderators]).map { |id| { id: id, role: :moderator } }
@@ -680,25 +705,27 @@ ActiveRecord::Base.transaction do
     puts "グループの作成が完了しました。"
     puts "グループ内お知らせの作成を開始します。"
 
+    long_notice_body = <<~TEXT.strip
+      文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+    TEXT
+
     group_notices = [
       {
         group_id: 1,
         member_id: 1,
-        title: '最初に作成した非固定のお知らせ文字数上限',
-        body = <<~TEXT.strip
-          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          TEXT
+        title: '一番目に作成した非固定お知らせ文字数上限',
+        body: long_notice_body
       },
       {
         group_id: 1,
         member_id: 2,
-        title: 'こちらは２番目に作成した固定のお知らせ',
-        body = <<~TEXT
-          ５行の改行をしています。文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸ
+        title: '二番目に作成した固定のお知らせ',
+        body: <<~TEXT,
+          五行の改行をしています。文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
@@ -709,36 +736,26 @@ ActiveRecord::Base.transaction do
       {
         group_id: 1,
         member_id: 3,
-        title: '３番目に作成した非固定のお知らせ',
-          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          TEXT
+        title: '三番目に作成した非固定のお知らせ',
+        body: long_notice_body
       },
       {
         group_id: 1,
         member_id: 4,
-        title: '４番目に作成した非固定のお知らせ',
-          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          TEXT
+        title: '四番目に作成した非固定のお知らせ',
+        body: long_notice_body
       },
       {
         group_id: 7,
         member_id: 13,
         title: 'Event Cancellation',
         body: 'Unfortunately, the event planned for next month has been canceled due to unforeseen circumstances. Thank you for understanding.'
-      }      
+      },
       {
-        group_id: 9,
+      group_id: 9,
         member_id: 5,
-        title: '過去ログの整理について',
-        body: '掲示板の過去の投稿を月末に一部整理します。必要な内容は保存してください。'
+        title: '投稿マナーについてのお願い',
+        body: 'みんなが気持ちよく利用できるよう、投稿の際は誹謗中傷や過度なネガティブコメントを控えていただけると助かります。ご協力よろしくお願いします。'
       },
       {
         group_id: 9,
@@ -748,9 +765,9 @@ ActiveRecord::Base.transaction do
       },
       {
         group_id: 9,
-        member_id: 1,
-        title: '投稿マナーについてのお願い',
-        body: '読みやすい投稿を心がけましょう。改行や句読点の使用にもご配慮ください。'
+        member_id: 5,
+        title: '過去ログの整理について',
+        body: '掲示板の過去の投稿を月末に一部整理します。必要な内容は保存してください。'
       },
       {
         group_id: 10,
@@ -761,9 +778,15 @@ ActiveRecord::Base.transaction do
       {
         group_id: 10,
         member_id: 11,
+        title: 'Share Your Tips!',
+        body: 'If you know handy tricks, shortcuts, or little secrets, please share them with the group! Let's help each other and make the community more fun and active together.'
+      },
+      {
+        group_id: 10,
+        member_id: 11,
         title: 'Login Posts Banned',
         body: 'Posts like “I logged in” are discouraged. Please share something meaningful to keep the group engaging.'
-      }      
+      }
     ]
 
     group_notices.each do |attrs|
@@ -777,8 +800,8 @@ ActiveRecord::Base.transaction do
       {
         group_id: 1,
         member_id: 1,
-        title: '１番目に作成したイベント文字数上限ＸＸＸ',
-        description = <<~TEXT.strip
+        title: '一番目に作成したイベント文字数上限ＸＸＸ',
+        description: <<~TEXT.strip,
           文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
@@ -789,8 +812,8 @@ ActiveRecord::Base.transaction do
       {
         group_id: 1,
         member_id: 5,
-        title: '２番目に作成したイベント文字数上限ＸＸＸ',
-        description = <<~TEXT
+        title: '二番目に作成したイベント文字数上限ＸＸＸ',
+        description: <<~TEXT,
           ５行の改行しています。文字数上限まで記載
           しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
@@ -803,11 +826,11 @@ ActiveRecord::Base.transaction do
       {
         group_id: 1,
         member_id: 5,
-        title: '３番目に作成したイベント文字数上限ＸＸＸ',
-        description = <<~TEXT
-          この投稿と2番目に作成した投稿は同じ投稿者で管理し権限のないメンバー
+        title: '三番目に作成したイベント文字数上限ＸＸＸ',
+        description: <<~TEXT
+          この投稿と2番目に作成した投稿は同じ投稿者で管理者権限のないメンバーです
           イベントは管理権限がなくても作成可能
-          2番目に作成したイベントよりも1日早く開催するように設定している
+          二番目に作成したイベントよりも早く開催するように設定してあります
           TEXT
         start_time: Time.current + 2.months + 2.day,
         end_time: Time.current + 2.months + 2.day + 2.hours
@@ -815,9 +838,9 @@ ActiveRecord::Base.transaction do
       {
         group_id: 1,
         member_id: 3,
-        title: '４番目に作成したイベント文字数上限ＸＸＸ',
-        description = <<~TEXT.strip
-          イベントは5つ作成してあり5番目のイベントは既に終了しているので管理権限があるメンバーしか見えない
+        title: '四番目に作成したイベント文字数上限ＸＸＸ',
+        description: <<~TEXT.strip
+          五番目のイベントは既に終了しているので管理権限があるメンバーしか見えない
           TEXT
         start_time: Time.current + 2.months + 4.day,
         end_time: Time.current + 2.months + 4.day + 4.hours
@@ -825,8 +848,8 @@ ActiveRecord::Base.transaction do
       {
         group_id: 1,
         member_id: 3,
-        title: '５番目に作成したイベント文字数上限ＸＸＸ',
-        description = <<~TEXT.strip
+        title: '五番目に作成したイベント文字数上限ＸＸＸ',
+        description: <<~TEXT.strip
           このイベントはすでに終了しているので管理権限のあるメンバーにしか見えてはいけない
           TEXT
         start_time: Time.current - 1.day,
@@ -847,6 +870,14 @@ ActiveRecord::Base.transaction do
         description: 'ゲームから離れて、たまには雑談だけで盛り上がる夜を楽しみましょう。お菓子持参歓迎！',
         start_time: Time.current + 2.months + 2.day,
         end_time: Time.current + 2.months + 2.day + 3.hours
+      },
+      {
+        group_id: 9,
+        member_id: 5,
+        title: 'ゲーム小話シェア会',
+        description: 'ゲームの裏話や面白エピソードを気軽に語り合う会です。堅苦しくなく、リラックスしてご参加ください。',
+        start_time: Time.current + 2.months + 9.days,
+        end_time: Time.current + 2.months + 9.days + 2.hours
       },
       {
         group_id: 10,
@@ -876,26 +907,346 @@ ActiveRecord::Base.transaction do
     
     group_events.each do |attrs|
       GroupEvent.create!(attrs)
-    end    
+    end
 
     puts "グループ内イベントの作成が完了しました。"
     puts "グループ内投稿の作成を開始します。"
 
-
+    group_posts = [
+      {
+        group_id: 6,
+        member_id: 1,
+        title: 'Pet Talent Contest',
+        body: 'My dog's amazing at jumping! If your pet has cool skills, in-game or real life, please share. Join the group and let's talk!',
+        image: 'no_group_post',
+        visible: true
+      },
+      {
+        group_id: 7,
+        member_id: 1,
+        title: 'Favorite BGM Poll',
+        body: 'Share your favorite game BGM! From battle themes to relaxing tunes, all are welcome. Let's discover great music together!',
+        image: 'no_group_post',
+        visible: false
+      },
+      {
+        group_id: 8,
+        member_id: 1,
+        title: 'オンライン対戦で気をつけてること',
+        body: '時間切れしやすい人は、序盤の手はパターン化しておくと集中力が持続します。あとチャットは短く！',
+        image: 'no_group_post',
+        visible: false
+      },
+      {
+        group_id: 9,
+        member_id: 1,
+        title: 'Recommended Automation',
+        body: 'Arrange small sprinklers, tillers, and harvest robots in that order. By morning, your farm will be perfectly maintained—ideal for efficiency lovers!',
+        image: 'no_group_post',
+        visible: false
+      },
+      {
+        group_id: 10,
+        member_id: 2,
+        title: '初プレイ体験談',
+        body: 'ゲームを始めたばかりの頃の思い出や苦労話を語り合いましょう。初心者歓迎です。',
+        image: 'no_group_post',
+        visible: false
+      },
+      {
+        group_id: 10,
+        member_id: 1,
+        title: '幻の絶景スポット発見',
+        body: '「銀嶺の谷」にある隠れ滝は朝日が当たると虹がかかり幻想的です。探索ルートが複雑なので地図片手に挑戦を！',
+        image: 'no_group_post',
+        visible: true
+      },
+      {
+        group_id: 10,
+        member_id: 6,
+        title: '珍しいモンスターの生態',
+        body: '「影歩きゴブリン」は日中は動かず夜になると活発化。見つけたら戦うより観察がおすすめです。',
+        image: 'no_group_post',
+        visible: true
+      },
+      {
+        group_id: 11,
+        member_id: 7,
+        title: '敵戦艦の魅力',
+        body: '最新DLCの敵戦艦は独特の曲線デザインで美しい。撃破時の演出も凝っていてファンアートが増えてます。',
+        image: 'no_group_post',
+        visible: false
+      },
+      {
+        group_id: 11,
+        member_id: 8,
+        title: 'Best Controller Setup',
+        body: 'Swapping dodge and jump buttons drastically reduced my damage taken. Once used to it, combat becomes much easier and smoother.',
+        image: 'no_group_post',
+        visible: false
+      },
+      {
+        group_id: 11,
+        member_id: 1,
+        title: 'Phase 3 Boss Special Move',
+        body: 'When HP falls below 30%, the boss unleashes an instant-kill attack on all. Stack buffs or use shields beforehand to survive.',
+        image: 'no_group_post',
+        visible: true
+      },
+      {
+        group_id: 11,
+        member_id: 2,
+        title: 'Difference from Guides',
+        body: 'Some guides say a 'hidden boss' appears in area 4, but it's actually random and often doesn't show up in every playthrough.',
+        image: 'no_group_post',
+        visible: false
+      },
+      {
+        group_id: 11,
+        member_id: 1,
+        title: 'Event Farming Tips',
+        body: 'Multiplayer events work best with 3+ players, increasing reward efficiency. Especially during double drop rate periods, team up with friends!',
+        image: 'no_group_post',
+        visible: false
+      }
+    ]
     
+    group_posts.each do |attrs|
+      group_post = GroupPost.create!(
+        group_id: attrs[:group_id],
+        member_id: attrs[:member_id],
+        title: attrs[:title],
+        body: attrs[:body]
+      )
+    
+      image_path = Rails.root.join('app', 'assets', 'images', 'group', "#{attrs[:image]}.jpg")
+      group_post.group_post_image.attach(io: File.open(image_path), filename: "#{attrs[:image]}.jpg",
+        content_type: 'image/jpeg')
+
+      # トップページの"最新のグループ内投稿"の上限値を満たさないように4件のみに定義
+      if attrs[:visible]
+        group_post.update!(visible_to_non_members: true)
+      end
+
+      # 投稿が行われたグループのlast_posted_atを更新
+      group = Group.find(attrs[:group_id])
+      group.update!(last_posted_at: group_post.created_at)
+    end
+
     puts "グループ内投稿の作成が完了しました。"
     puts "グループ内投稿に対してのコメントの作成を開始します。"
 
+    group_post_comments = [
+      # --- 投稿ID 1 ---
+      # ※コメント無し 
+
+      # --- 投稿ID 2 ---
+      { group_post_id: 2, member_id: 2, body: 'The puzzle game’s BGM I play is very relaxing.' },
+
+      # --- 投稿ID 3 --- 
+      # ※コメント無し 
+
+      # --- 投稿ID 4 ---
+      { group_post_id: 4, member_id: 5, body: 'Nice!! Now I can sleep soundly lol.' },
+
+      # --- 投稿ID 5 ---
+      { group_post_id: 5, member_id: 5, body: 'クエストの目的がよく理解できなくて困りました。' },
+      { group_post_id: 5, member_id: 2, body: '最初のボス戦で何度もやり直しました。' },
+
+      # --- 投稿ID 6 ---
+      { group_post_id: 6, member_id: 5, body: '隠れ滝の虹、本当に綺麗で感動しました！' },
+      { group_post_id: 6, member_id: 3, body: '地図がないと迷ってしまう難しさですね。' },
+      { group_post_id: 6, member_id: 9, body: 'This view is unbelievably beautiful!' },
+
+      # --- 投稿ID 7 ---
+      # ※コメント無し
+
+      # --- 投稿ID 8 ---
+      { group_post_id: 8, member_id: 11, body: 'Haha, even my Japanese friend gets it!' },
+
+      # --- 投稿ID 9 ---
+      { group_post_id: 9, member_id: 2, body: 'Hard to learn, but yeah, this is great.' },
+
+      # --- 投稿ID 10 ---
+      { group_post_id: 10, member_id: 2, body: 'The real fight begins below 30% HP.' },
+      { group_post_id: 10, member_id: 9, body: 'I got nuked so fast, I blinked and died!' },
+
+      # --- 投稿ID 11 ---
+      # ※コメント無し
+
+      # --- 投稿ID 12 ---
+      # ※コメント無し
+
+      # --- 返信(投稿ID 5, コメントID 3,4に返信)---
+      { group_post_id: 5, member_id: 1, parent_comment_id: 3, body: '私もよくあります。行先を間違えてしまったことも...' },
+      { group_post_id: 5, member_id: 1, parent_comment_id: 4, body: '操作に慣れてない時のボス戦は大変ですよね!!' },
+
+      # --- 返信(投稿ID 6, コメントID 5, 6, 7に返信)---
+      { group_post_id: 6, member_id: 7, parent_comment_id: 5, body: '幻想的な滝の景色に癒されました。' },
+      { group_post_id: 6, member_id: 3, parent_comment_id: 5, body: '朝日に照らされる虹の美しさに感動！' },
+      { group_post_id: 6, member_id: 1, parent_comment_id: 6, body: 'その分とても見ごたえがありますよね!!' },
+      { group_post_id: 6, member_id: 4, parent_comment_id: 7, body: 'I saw it too, and it was truly stunning.' },
+      { group_post_id: 6, member_id: 1, parent_comment_id: 7, body: 'はい、とてもきれいな私の一押しスポットです!!' },
+      
+      # --- 返信(投稿ID 10, コメントID 11に返信)---
+      { group_post_id: 10, member_id: 8, parent_comment_id: 11, body: 'Buffs or die. No in-between.' },
+      { group_post_id: 10, member_id: 7, parent_comment_id: 11, body: '海外のゲームはほんと難しい' },
+      { group_post_id: 10, member_id: 11, parent_comment_id: 11, body: 'Jesus!!! That explosion got me again!' },
+      { group_post_id: 10, member_id: 1, parent_comment_id: 11, body: 'Laughed so hard when we all flew into the air!' },
+    ]
+
+    group_post_comments.each do |comment_attrs|
+      parent_id = comment_attrs.delete(:parent_comment_id)
+      comment = GroupPostComment.create!(comment_attrs)
+      comment.update!(parent_comment_id: parent_id) if parent_id
+    end
 
 
     puts "グループ内投稿に対してのコメントの作成が完了しました。"
+
+
+
+
+グループおしらせ、イベント各4つ
+投稿コメント各8
+
+
+
+
+
+    puts "グループ機能のテスト用ユーザーデータの作成を開始します。"
+    
+    # 連鎖削除されたグループ内お知らせとグループ内イベント
+    delete_user_post_1 = UserPost.create!(
+      user_id: deleted_user_1.id,
+      title: "#{deleted_user_1.nickname}の投稿(連鎖削除)",
+      body: '親の削除により連鎖削除された投稿です。',
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: admin.id,
+      deleted_reason: :parent_user_deleted,
+      deleted_due_to_parent: true
+    )
+
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'deleted_user_post_1_sports.jpg')
+    delete_user_post_1.user_post_image.attach(io: File.open(image_path), 
+      filename: 'deleted_user_post_1_sports.jpg', content_type: 'image/jpeg')
+
+    UserPostComment.create!(
+      user_id:deleted_user_1.id, 
+      user_post_id:18, 
+      body: 'ユーザーが強制退会、連鎖削除コメント(初期設定でこの内容が見える場合、問題があります)', 
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: admin.id,
+      deleted_reason: :parent_user_deleted,
+      deleted_due_to_parent: true
+    )
+
+    # 自主削除された投稿とコメント
+    delete_user_post_2 = UserPost.create!(
+      user_id: deleted_user_2.id,
+      title: "#{deleted_user_2.nickname}の投稿(自主削除)",
+      body: '自主削除された投稿です。',
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: deleted_user_2.id,
+      deleted_reason: :self_deleted
+    )
+
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'deleted_user_post_2_action.jpg')
+    delete_user_post_2.user_post_image.attach(io: File.open(image_path), 
+      filename: 'deleted_user_post_2_action.jpg', content_type: 'image/jpeg')
+
+    UserPostComment.create!(
+      user_id:deleted_user_2.id, 
+      user_post_id:8, 
+      body: 'ユーザーが自主削除したコメント(初期設定でこの内容が見える場合、問題があります)', 
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: deleted_user_2.id,
+      deleted_reason: :self_deleted
+
+    )
+
+    # --- 非公開関連 ---
+    # 非公開投稿関連データを持つユーザー
+    private_user_1 = User.create!(
+      id: 200,
+      email: 'private@private',
+      password: 'aaaaaa',
+      password_confirmation: 'aaaaaa',
+      last_name: 'テスト用',
+      first_name: 'ユーザー',
+      nickname: 'テスト用ユーザー',
+      bio: <<~TEXT
+        皆様に見ていただく際に少しでも内容がわかりやすくなるよう非公開用ユーザーを作成しました。
+        関連データは非公開、画像はデフォルト、seed作成直後は最新のIDを持ちます。
+        TEXT
+    )
+      
+    image_path = Rails.root.join('app', 'assets', 'images', 'user', 'no_user.jpg')
+    private_user_1.profile_image.attach(io: File.open(image_path), filename: 'no_user.jpg', 
+      content_type: 'image/jpeg')
+
+    private_user_post_1 = UserPost.create!(
+      user_id: private_user_1.id,
+      title: '非公開の投稿',
+      body: '非公開の投稿です(初期設定でこの投稿が表示される場合、問題があります)',
+      is_public: false
+    )
+
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'no_user_post.jpg')
+    delete_user_post_2.user_post_image.attach(io: File.open(image_path), 
+      filename: 'no_user_post.jpg', content_type: 'image/jpeg')
+
+    private_user_post_2 = UserPost.create!(
+      user_id: private_user_1.id,
+      title: '連鎖復元後の非公開の投稿',
+      body: '連鎖復元後に非表示処理された投稿です(初期設定でこの投稿が表示される場合、問題があります)',
+      hidden_on_parent_restore: false
+    )
+  
+    image_path = Rails.root.join('app', 'assets', 'images', 'user_post', 'no_user_post.jpg')
+    delete_user_post_2.user_post_image.attach(io: File.open(image_path), 
+      filename: 'no_user_post.jpg', content_type: 'image/jpeg')
+    
+    UserPostComment.create!(
+      user_id: private_user_1.id,
+      user_post_id: 19, 
+      body: '非表示のコメントです(初期設定でこのコメントが表示される場合、問題があります)',
+      is_public: false
+    )
+
+    UserPostComment.create!(
+      user_id: private_user_1.id,
+      user_post_id: 19, 
+      body: '連鎖復元後に非表示処理されたコメントです(初期設定でこのコメントが表示される見える場合、問題があります)',
+      hidden_on_parent_restore: false
+    )
+
+    puts "グループ機能のテスト用ユーザーデータの作成が完了しました。"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     puts "管理側ノートの作成を開始します。"
 
     AdminNote.create!([
       {
         admin: admin,
-        title: "削除+固定表示",
-        body: "これは削除され固定表示されたノートです。",
+        title: '削除+固定表示',
+        body: 'これは削除され固定表示されたノートです。',
         is_deleted: true,
         deleted_by_id: admin.id,
         deleted_at: 5.days.ago,
@@ -904,8 +1255,8 @@ ActiveRecord::Base.transaction do
       },
       {
         admin: admin,
-        title: "削除のみ",
-        body: "これは削除されただけのノートです。",
+        title: '削除のみ',
+        body: 'これは削除されただけのノートです。',
         is_deleted: true,
         deleted_by_id: admin.id,
         deleted_at: 3.days.ago,
@@ -913,22 +1264,22 @@ ActiveRecord::Base.transaction do
       },
       {
         admin: admin,
-        title: "固定表示のみ",
-        body: "これは削除されておらず固定表示されているノートです。",
+        title: '固定表示のみ',
+        body: 'これは削除されておらず固定表示されているノートです。',
         is_pinned: true,
         created_at: 2.days.ago
       },
       {
         admin: admin,
-        title: "フラグなし",
-        body: "フラグが立っていないノートです。",
+        title: 'フラグなし',
+        body: 'フラグが立っていないノートです。',
         created_at: 1.days.ago
       },
 
       # 感謝の気持ちなので直接書くべきか悩みましたがseedにて記載させていただきます
       {
         admin: admin,
-        title: "チェックしてくださる皆様へ",
+        title: 'チェックしてくださる皆様へ',
         body: <<~TEXT,
           この度はお忙しい中、ご覧いただき誠にありがとうございます。
           ご不明な点やご質問がございましたら、どうぞお気軽にお知らせください。
@@ -944,8 +1295,8 @@ ActiveRecord::Base.transaction do
     Information.create!([
       {
         admin: admin,
-        title: "削除+固定表示+非公開",
-        body: "すべてのフラグが立っているお知らせです。",
+        title: '削除+固定表示+非公開',
+        body: 'すべてのフラグが立っているお知らせです。',
         is_deleted: true,
         deleted_at: 5.days.ago,
         deleted_by_id: admin.id,
@@ -956,8 +1307,8 @@ ActiveRecord::Base.transaction do
       },
       {
         admin: admin,
-        title: "削除+非公開",
-        body: "削除かつ非公開のお知らせです。",
+        title: '削除+非公開',
+        body: '削除かつ非公開のお知らせです。',
         is_deleted: true,
         deleted_at: 3.days.ago,
         deleted_by_id: admin.id,
@@ -967,8 +1318,8 @@ ActiveRecord::Base.transaction do
       },
       {
         admin: admin,
-        title: "削除+固定表示",
-        body: "削除かつ固定表示のお知らせです。",
+        title: '削除+固定表示',
+        body: '削除かつ固定表示のお知らせです。',
         is_deleted: true,
         deleted_at: Time.current,
         deleted_by_id: admin.id,
@@ -978,8 +1329,8 @@ ActiveRecord::Base.transaction do
       },
       {
         admin: admin,
-        title: "固定表示+非公開",
-        body: "固定表示かつ非公開のお知らせです。",
+        title: '固定表示+非公開',
+        body: '固定表示かつ非公開のお知らせです。',
         is_public: false,
         published_at: 5.day.ago,
         is_pinned: true,
@@ -987,16 +1338,16 @@ ActiveRecord::Base.transaction do
       },
       {
         admin: admin,
-        title: "非公開",
-        body: "非公開のお知らせです。",
+        title: '非公開',
+        body: '非公開のお知らせです。',
         is_public: false,
         published_at: 3.days.ago,
         created_at: 4.days.ago
       },
       {
         admin: admin,
-        title: "固定表示",
-        body: "固定表示されているお知らせです。",
+        title: '固定表示',
+        body: '固定表示されているお知らせです。',
         published_at: 1.days.ago,
         is_pinned: true,
         created_at: 2.days.ago
@@ -1005,7 +1356,7 @@ ActiveRecord::Base.transaction do
       # 固定時の順番の並べ替えを使用(直接表示されるのであえてtitleに入れず、コメントと記載)
       {
         admin: admin,
-        title: "皆様へのお知らせ",
+        title: '皆様へのお知らせ',
         body: <<~TEXT,
           ご訪問いただき誠にありがとうございます。
           当サイトは現在制作途中の為、データが削除される可能性がございます。
@@ -1018,7 +1369,7 @@ ActiveRecord::Base.transaction do
       },
       {
         admin: admin,
-        title: "フラグなし",
+        title: 'フラグなし',
         body: <<~TEXT,
           フラグが立っていないノートです。
           seedにて投稿日公開日を入れている投稿に関しては並び替えが適切に変わらない恐れがあります。
