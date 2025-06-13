@@ -300,7 +300,6 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
     t.integer "deleted_reason"
-    t.boolean "hidden_by_parent", default: false, null: false
     t.integer "login_count", default: 0, null: false
     t.integer "user_post_count", default: 0, null: false
     t.integer "user_post_comment_count", default: 0, null: false

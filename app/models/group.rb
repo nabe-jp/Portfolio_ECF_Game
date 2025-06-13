@@ -46,8 +46,8 @@ class Group < ApplicationRecord
   # 投稿作成時に必ずデフォルト画像を設定(seed作成時は作動しないように設定)
   after_create :set_default_group_image, unless: :seeding?
   
-  # グループ作成時、作成者もメンバーに入れる
-  after_create :add_owner_to_members
+  # グループ作成時、作成者もメンバーに入れる(seed作成時は作動しないように設定)
+  after_create :add_owner_to_members, unless: :seeding?
 
   # URLをslugベースに変更するために使用
   def to_param
