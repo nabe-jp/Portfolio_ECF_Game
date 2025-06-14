@@ -521,7 +521,7 @@ ActiveRecord::Base.transaction do
         関連データは非公開、画像はデフォルト、seed作成直後は最新のIDを持ちます。
       TEXT
     )
-      
+
     image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_user.jpg')
     private_user_1.profile_image.attach(io: File.open(image_path), filename: 'no_user.jpg', 
       content_type: 'image/jpeg')
@@ -548,16 +548,17 @@ ActiveRecord::Base.transaction do
     private_user_post_2.user_post_image.attach(io: File.open(image_path), 
       filename: 'no_user_post.jpg', content_type: 'image/jpeg')
     
+    # 非表示になっているかを確認するために有効な投稿に対してコメントを行なっている
     UserPostComment.create!(
       user_id: private_user_1.id,
-      user_post_id: 19, 
+      user_post_id: 1, 
       body: '非表示のコメントです(初期設定でこのコメントが表示される場合、問題があります)',
       is_public: false
     )
 
     UserPostComment.create!(
       user_id: private_user_1.id,
-      user_post_id: 19, 
+      user_post_id: 1, 
       body: '連鎖復元後に非表示処理されています(初期設定でこのコメントが表示される見える場合、問題があります)',
       hidden_on_parent_restore: true
     )
@@ -573,8 +574,11 @@ ActiveRecord::Base.transaction do
         name: 'テスト用グループ、タイトル文字数上限２０',
         slug: 'test-group',
         description: <<~TEXT.strip,
-          このグループは各種テストのため、グループタイトルやグループ説明を文字数上限まで記
-          載しています。
+          このグループは各種テストのため、グループタイトルやグループ説明を文字数上限まで記\
+          載しています。文字数上限ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
         TEXT
         image: 'no_group'
       },
@@ -701,10 +705,10 @@ ActiveRecord::Base.transaction do
     puts "グループ内お知らせの作成を開始します。"
 
     long_notice_body = <<~TEXT.strip
-      文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+      文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+      ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
       ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
     TEXT
     
@@ -719,7 +723,13 @@ ActiveRecord::Base.transaction do
         group_id: 1,
         member_id: 2,
         title: '二番目に作成した固定のお知らせ',
-
+        body: <<~TEXT.strip,
+          このお知らせは固定のお知らせの為、優先的に上部に表示されます。また、五行の改行\
+          しています。文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+        TEXT
         is_pinned: true
       },
       {
@@ -736,49 +746,61 @@ ActiveRecord::Base.transaction do
       },
       {
         group_id: 7,
-        member_id: 13,
+        member_id: 1,
         title: 'Event Cancellation',
         body: 'Unfortunately, the event planned for next month has been canceled due to unforeseen circumstances. Thank you for understanding.'
       },
       {
-      group_id: 9,
-        member_id: 5,
+        group_id: 10,
+        member_id: 1,
         title: '投稿マナーについてのお願い',
         body: 'みんなが気持ちよく利用できるよう、投稿の際は誹謗中傷や過度なネガティブコメントを控えていただけると助かります。ご協力よろしくお願いします。'
       },
       {
-        group_id: 9,
-        member_id: 5,
+        group_id: 10,
+        member_id: 1,
         title: '新メンバー歓迎会',
         body: '新しく加入したメンバーの歓迎会を開催します。詳細は別途連絡します。'
       },
       {
-        group_id: 9,
-        member_id: 5,
+        group_id: 10,
+        member_id: 2,
         title: '過去ログの整理について',
         body: '掲示板の過去の投稿を月末に一部整理します。必要な内容は保存してください。'
       },
       {
-        group_id: 10,
-        member_id: 9,
+        group_id: 11,
+        member_id: 2,
         title: 'Spoiler Warning',
         body: 'Please use spoiler tags or warnings when discussing recent events or endings. Let’s keep it fun for everyone!'
       },
       {
-        group_id: 10,
-        member_id: 11,
+        group_id: 11,
+        member_id: 3,
         title: 'Share Your Tips!',
         body: "If you know handy tricks, shortcuts, or little secrets, please share them with the group! Let's help each other and make the community more fun and active together.",
       },
       {
-        group_id: 10,
-        member_id: 11,
+        group_id: 11,
+        member_id: 3,
         title: 'Login Posts Banned',
         body: "Posts like “I logged in” are discouraged. Please share something meaningful to keep the group engaging."
       }
     ]
 
     group_notices.each do |attrs|
+      # グループを取得
+      group = Group.find(attrs[:group_id])
+
+      # group内のメンバーの配列を作り、attrs[:member_id]で何番目かを指定(登録順でソート)
+      memberships = group.group_memberships.order(:id)
+    
+      # attrs[:member_id]を1始まりの番号とすると、配列は0始まりなので-1する
+      target_membership = memberships[attrs[:member_id] - 1]
+    
+      # member_idを正しいGroupMembership.idに置き換え
+      attrs[:member_id] = target_membership.id
+
       GroupNotice.create!(attrs)
     end
 
@@ -791,8 +813,8 @@ ActiveRecord::Base.transaction do
         member_id: 1,
         title: '一番目に作成したイベント文字数上限ＸＸＸ',
         description: <<~TEXT.strip,
-          文字数上限まで記載しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          イベントは開始予定日時が近いものから順番に並びます。また、終了予定日時を過ぎると\
+          管理権限があるメンバーにのみ表示されます。文字数上限まで記載しています。ＸＸＸＸ\
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
         TEXT
         start_time: Time.current + 2.months + 1.day,
@@ -800,21 +822,21 @@ ActiveRecord::Base.transaction do
       },
       {
         group_id: 1,
-        member_id: 5,
+        member_id: 8,
         title: '二番目に作成したイベント文字数上限ＸＸＸ',
         description: <<~TEXT,
-          五行の改行しています。文字数上限まで記載
-          しています。ＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
-          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          五行の改行しています。文字数上限まで記
+          載しています。ＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
+          ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
         TEXT
         start_time: Time.current + 2.months + 3.days,
         end_time: Time.current + 2.months + 3.days + 2.hours
       },
       {
         group_id: 1,
-        member_id: 5,
+        member_id: 8,
         title: '三番目に作成したイベント文字数上限ＸＸＸ',
         description: <<~TEXT,
           この投稿と2番目に作成した投稿は同じ投稿者で管理者権限のないメンバーです
@@ -828,7 +850,7 @@ ActiveRecord::Base.transaction do
         group_id: 1,
         member_id: 3,
         title: '四番目に作成したイベント文字数上限ＸＸＸ',
-        description: <<~TEXT.strip,
+        description: <<~TEXT,
           五番目のイベントは既に終了しているので管理権限があるメンバーしか見えない
         TEXT
         start_time: Time.current + 2.months + 4.day,
@@ -838,14 +860,14 @@ ActiveRecord::Base.transaction do
         group_id: 1,
         member_id: 3,
         title: '五番目に作成したイベント文字数上限ＸＸＸ',
-        description: <<~TEXT.strip,
+        description: <<~TEXT,
           このイベントはすでに終了しているので管理権限のあるメンバーにしか見えてはいけない
         TEXT
         start_time: Time.current - 1.day,
         end_time: Time.current - 1.day
       },
       {
-        group_id: 9,
+        group_id: 10,
         member_id: 1,
         title: '世界観研究読書会',
         description: '設定資料や小説版を読んで、背景世界について語り合いましょう。',
@@ -853,39 +875,39 @@ ActiveRecord::Base.transaction do
         end_time: Time.current + 2.months + 1.day + 2.hours
       },
       {
-        group_id: 9,
-        member_id: 5,
+        group_id: 10,
+        member_id: 1,
         title: '雑談だけの夜',
         description: 'ゲームから離れて、たまには雑談だけで盛り上がる夜を楽しみましょう。お菓子持参歓迎！',
         start_time: Time.current + 2.months + 2.day,
         end_time: Time.current + 2.months + 2.day + 3.hours
       },
       {
-        group_id: 9,
-        member_id: 5,
+        group_id: 10,
+        member_id: 1,
         title: 'ゲーム小話シェア会',
         description: 'ゲームの裏話や面白エピソードを気軽に語り合う会です。堅苦しくなく、リラックスしてご参加ください。',
         start_time: Time.current + 2.months + 9.days,
         end_time: Time.current + 2.months + 9.days + 2.hours
       },
       {
-        group_id: 10,
-        member_id: 11,
+        group_id: 11,
+        member_id: 3,
         title: 'Beginner Build Tips',
         description: 'Learn the basics of gear and skill selection for character building. Perfect for new players.',
         start_time: Time.current + 2.months + 6.days,
         end_time: Time.current + 2.months + 6.days + 2.hours
       },
       {
-        group_id: 10,
-        member_id: 12,
+        group_id: 11,
+        member_id: 1,
         title: 'Endurance Raid Run',
         description: 'Join us in a limited-time high-difficulty raid! Team up and come well prepared for battle!',
         start_time: Time.current + 2.months + 7.days,
         end_time: Time.current + 2.months + 9.days
       },
       {
-        group_id: 10,
+        group_id: 11,
         member_id: 8,
         title: 'Pre-Tourney Practice',
         description: 'Get ready for next month’s official tournament with full-on mock battle sessions!',
@@ -895,6 +917,18 @@ ActiveRecord::Base.transaction do
     ]
     
     group_events.each do |attrs|
+      # グループを取得
+      group = Group.find(attrs[:group_id])
+
+      # group内のメンバーの配列を作り、attrs[:member_id]で何番目かを指定(登録順でソート)
+      memberships = group.group_memberships.order(:id)
+    
+      # attrs[:member_id]を1始まりの番号とすると、配列は0始まりなので-1する
+      target_membership = memberships[attrs[:member_id] - 1]
+    
+      # member_idを正しいGroupMembership.idに置き換え
+      attrs[:member_id] = target_membership.id
+
       GroupEvent.create!(attrs)
     end
 
@@ -943,7 +977,7 @@ ActiveRecord::Base.transaction do
       {
         group_id: 9,
         member_id: 1,
-        title: 'Recommended Automation',
+        title: 'Recommended Auto',
         body: 'Arrange small sprinklers, tillers, and harvest robots in that order. By morning, your farm will be perfectly maintained—ideal for efficiency lovers!',
         image: 'no_group_post',
         visible: false
@@ -983,7 +1017,7 @@ ActiveRecord::Base.transaction do
       {
         group_id: 11,
         member_id: 8,
-        title: 'Best Controller Setup',
+        title: 'Best Ctrl Setup',
         body: 'Swapping dodge and jump buttons drastically reduced my damage taken. Once used to it, combat becomes much easier and smoother.',
         image: 'no_group_post',
         visible: false
@@ -991,7 +1025,7 @@ ActiveRecord::Base.transaction do
       {
         group_id: 11,
         member_id: 1,
-        title: 'Phase 3 Boss Special Move',
+        title: 'Phase 3 Boss Move',
         body: 'When HP falls below 30%, the boss unleashes an instant-kill attack on all. Stack buffs or use shields beforehand to survive.',
         image: 'no_group_post',
         visible: true
@@ -999,7 +1033,7 @@ ActiveRecord::Base.transaction do
       {
         group_id: 11,
         member_id: 2,
-        title: 'Difference from Guides',
+        title: 'Guide Differences',
         body: "Some guides say a 'hidden boss' appears in area 4, but it's actually random and often doesn't show up in every playthrough.",
         image: 'no_group_post',
         visible: false
@@ -1007,9 +1041,17 @@ ActiveRecord::Base.transaction do
     ]
     
     group_posts.each do |attrs|
+      group = Group.find(attrs[:group_id])
+
+      # group内のメンバーの配列を作り、attrs[:member_id]で何番目かを指定(登録順でソート)
+      memberships = group.group_memberships.order(:id)
+      
+      # attrs[:member_id]を1始まりの番号とすると、配列は0始まりなので-1する
+      target_membership = memberships[attrs[:member_id] - 1]
+    
       group_post = GroupPost.create!(
-        group_id: attrs[:group_id],
-        member_id: attrs[:member_id],
+        group_id: group.id,
+        member_id: target_membership.id,
         title: attrs[:title],
         body: attrs[:body]
       )
@@ -1091,11 +1133,29 @@ ActiveRecord::Base.transaction do
       { group_post_id: 11, member_id: 1, parent_comment_id: 11, body: 'Laughed so hard when we all flew into the air!' },
     ]
 
-    group_post_comments.each do |comment_attrs|
-      parent_id = comment_attrs.delete(:parent_comment_id)
-      comment = GroupPostComment.create!(comment_attrs)
+    group_post_comments.each do |attrs|
+      # 投稿に紐づくグループを取得
+      group_post = GroupPost.find(attrs[:group_post_id])
+      group = group_post.group
+
+      # group内のメンバーの配列を作り、attrs[:member_id]で何番目かを指定(登録順でソート)
+      memberships = group.group_memberships.order(:id)
+    
+      # attrs[:member_id]を1始まりの番号とすると、配列は0始まりなので-1する
+      target_membership = memberships[attrs[:member_id] - 1]
+    
+      # member_idを正しいGroupMembership.idに置き換え
+      attrs[:member_id] = target_membership.id
+    
+      # parent_comment_id(子コメント)を一旦除外して後から設定
+      parent_id = attrs.delete(:parent_comment_id)
+    
+      # コメント作成
+      comment = GroupPostComment.create!(attrs)
+    
+      # 親コメントの設定
       comment.update!(parent_comment_id: parent_id) if parent_id
-    end
+    end    
 
     puts "グループ内投稿に対してのコメントの作成が完了しました。"
     puts "グループ機能のテスト用ユーザーデータの作成を開始します。"
@@ -1141,7 +1201,7 @@ ActiveRecord::Base.transaction do
     )
 
     image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
-    delete_group_post_1.user_post_image.attach(io: File.open(image_path), 
+    delete_group_post_1.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 
     delete_group_post_comment_1 = GroupPostComment.create!(
@@ -1204,7 +1264,7 @@ ActiveRecord::Base.transaction do
     )
 
     image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
-    delete_group_post_2.user_post_image.attach(io: File.open(image_path), 
+    delete_group_post_2.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 
     delete_group_post_comment_3 = GroupPostComment.create!(
@@ -1259,35 +1319,14 @@ ActiveRecord::Base.transaction do
     private_group_event_2 = GroupEvent.create!(
       group_id: 1,
       member_id: 7,
-      title: '外部への公開設定をした非公開のイベント',
-      description: '外部への公開設定を行っているが非公開のイベント(初期設定でこのイベントが見える場合、問題があります)', 
+      title: '連鎖復元後の非公開のイベント',
+      description: '連鎖復元後に非表示処理された非公開のイベント(初期設定でこのイベントが見える場合、問題があります)', 
       start_time: Time.current + 5.months,
       end_time: Time.current + 5.months + 1.day,
-      is_public: false,
-      visible_to_non_members: true
-    )
-
-    private_group_event_3 = GroupEvent.create!(
-      group_id: 1,
-      member_id: 7,
-      title: '連鎖復元後の非公開のイベント',
-      description: '連鎖復元後に非表示処理されたイベント(初期設定でこのイベントが見える場合、問題があります)', 
-      start_time: Time.current + 6.months,
-      end_time: Time.current + 6.months + 1.day,
       hidden_on_parent_restore: true
     )
 
-    private_group_event_4 = GroupEvent.create!(
-      group_id: 1,
-      member_id: 7,
-      title: '外部への公開設定をした連鎖復元後イベント',
-      description: '外部への公開設定を行っているが連鎖復元後に非表示処理されたイベント(初期設定でこのイベントが見える場合、問題があります)', 
-      start_time: Time.current + 7.months,
-      end_time: Time.current + 7.months + 1.day,
-      hidden_on_parent_restore: true,
-      visible_to_non_members: true
-    )
-
+    # 投稿
     private_group_post_1 = GroupPost.create!(
       group_id: 1,
       member_id: 7,
@@ -1297,10 +1336,23 @@ ActiveRecord::Base.transaction do
     )
 
     image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
-    private_group_post_1.user_post_image.attach(io: File.open(image_path), 
+    private_group_post_1.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 
     private_group_post_2 = GroupPost.create!(
+      group_id: 1,
+      member_id: 7,
+      title: '外部への公開設定をした非公開の投稿',
+      body: '外部への公開設定を行っているが非公開の投稿です(初期設定でこの投稿が見える場合、問題があります)',
+      is_public: false,
+      visible_to_non_members: true
+    )
+
+    image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
+    private_group_post_2.group_post_image.attach(io: File.open(image_path), 
+      filename: 'no_group_post.jpg', content_type: 'image/jpeg')
+
+    private_group_post_3 = GroupPost.create!(
       group_id: 1,
       member_id: 7,
       title: '連鎖復元後の非公開の投稿',
@@ -1309,9 +1361,23 @@ ActiveRecord::Base.transaction do
     )
 
     image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
-    private_group_post_2.user_post_image.attach(io: File.open(image_path), 
+    private_group_post_3.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 
+    private_group_post_4 = GroupPost.create!(
+      group_id: 1,
+      member_id: 7,
+      title: '外部への公開設定をした連鎖復元後の投稿',
+      body: '外部への公開設定を行っているが連鎖復元後に非表示処理された投稿です(初期設定でこの投稿が見える場合、問題があります)',
+      hidden_on_parent_restore: true,
+      visible_to_non_members: true
+    )
+
+    image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
+    private_group_post_4.group_post_image.attach(io: File.open(image_path), 
+      filename: 'no_group_post.jpg', content_type: 'image/jpeg')
+
+    # コメント(すべて同じグループ内にある非表示なっていない投稿にコメントを行っている)
     private_group_post_comment_1 = GroupPostComment.create!(
       group_post_id: 1,
       member_id: 7,

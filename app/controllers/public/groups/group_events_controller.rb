@@ -79,7 +79,12 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
   private
 
   def set_group_event
-    @group_event = @group.group_events.active_events_for_members.find(params[:id])
+    # 管理者のみすべて見える(投稿者本人も終わったイベントは見えない)
+    if group_moderator?
+      @group_event = @group.group_events.active_events_for_moderators.find(params[:id])
+    else
+      @group_event = @group.group_events.active_events_for_members.find(params[:id])
+    end
   end
   
   def set_current_user

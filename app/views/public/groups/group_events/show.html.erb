@@ -1,30 +1,40 @@
-<h2><%= @group_event.title %></h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 space-between-mini-top">
 
-<p>
-  <strong>開始日時:</strong>
-  <%= l(@group_event.start_time, format: :long) %>
-</p>
+      <h2><%= @group_event.title %></h2>
 
-<% if @group_event.end_time.present? %>
-  <p>
-    <strong>終了日時:</strong>
-    <%= l(@group_event.end_time, format: :long) %>
-  </p>
-<% end %>
+      <p class="space-between-mini">
+        <strong>開始日時:</strong>
+        <%= l(@group_event.start_time, format: :long) %>
+      </p>
 
-<% if @group_event.description.present? %>
-  <p>
-    <strong>説明:</strong><br>
-    <%= simple_format(@group_event.description) %>
-  </p>
-<% end %>
+      <p class="space-between-mini">
+        <strong>終了日時:</strong>
+        <%= l(@group_event.end_time, format: :long) %>
+      </p>
 
-<hr>
+      <% if @group_event.description.present? %>
+        <p>
+          <strong>説明:</strong><br>
+          <%= simple_format(@group_event.description) %>
+        </p>
+      <% end %>
+    </div>
 
-<% if group_event_editor? %>
-  <%= link_to "編集", edit_group_event_path(@group, @group_event), class: "btn btn-secondary" %>
-  <%= link_to "削除", group_event_path(@group, @group_event), 
-    method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-<% end %>
+    <div class="col-12">
+      <hr>
+    </div>
 
-<%= link_to "イベント一覧に戻る", group_events_path(@group), class: "btn btn-secondary" %>
+    <div class="col-8 space-between-mini">
+      <% if group_event_editor? %>
+        <%= link_to "編集", edit_group_event_path(@group, @group_event), class: "btn btn-secondary" %>
+        <%= link_to "削除", group_event_path(@group, @group_event), 
+          method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mx-5" %>
+      <% end %>
+
+      <%= link_to "イベント一覧に戻る", group_events_path(@group), class: "btn btn-secondary" %>
+
+    </div>
+  </div>
+</div>

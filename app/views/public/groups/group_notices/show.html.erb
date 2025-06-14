@@ -1,16 +1,30 @@
-<h2><%= @group_notice.title %></h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-8 space-between-mini">
 
-<p><%= simple_format(@group_notice.body) %></p>
+      <h2><%= @group_notice.title %></h2>
 
-<p>
-  <small>作成者: <%= @group_notice.member.user.nickname %><br>
-  投稿日時: <%= l(@group_notice.created_at, format: :long) %></small>
-</p>
+      <p class="space-between-mini"><%= simple_format(@group_notice.body) %></p>
 
-<% if group_moderator? %>
-  <%= link_to "編集", edit_group_notice_path(@group, @group_notice), class: "btn btn-secondary" %>
-  <%= link_to "削除", group_notice_path(@group, @group_notice), 
-    method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-<% end %>
+      <p class="space-between-mini">
+        <small>作成者: <%= @group_notice.member.user.nickname %><br>
+        投稿日時: <%= l(@group_notice.created_at, format: :long) %></small>
+      </p>
+    </div>
 
-<%= link_to "お知らせ一覧に戻る", group_notices_path(@group), class: "btn btn-secondary" %>
+    <div class="col-12">
+      <hr>
+    </div>
+
+    <div class="col-8 space-between-mini">
+      <% if group_moderator? %>
+        <%= link_to "編集", edit_group_notice_path(@group, @group_notice), class: "btn btn-secondary" %>
+        <%= link_to "削除", group_notice_path(@group, @group_notice), 
+          method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mx-5" %>
+      <% end %>
+
+      <%= link_to "お知らせ一覧に戻る", group_notices_path(@group), class: "btn btn-secondary" %>
+
+    </div>
+  </div>
+</div>

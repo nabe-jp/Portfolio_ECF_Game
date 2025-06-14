@@ -18,7 +18,7 @@
           <p><strong>終了予定日時:</strong> <%= l(event.end_time, format: :long) %></p>
           <p class="mt-2 text-secondary">
             イベント内容<br>
-            <%= simple_format(event.description, {}, wrapper_tag: :span) %>
+            <p class="event-index__body mb-2"><%= event.description %></p>
           </p>
           <small>
             投稿者: <%= event.member.user.nickname %> / 投稿日時: <%= l(event.created_at, format: :short) %>

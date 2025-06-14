@@ -88,7 +88,7 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
   private
 
   def set_group_post
-    @group_post = @group.group_posts.active_group_posts_for_all_desc.find(params[:id])
+    @group_post = @group.group_posts.active_group_posts_for_members_desc.find(params[:id])
   end
 
   def set_current_user

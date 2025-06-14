@@ -15,8 +15,8 @@
               </div>
             </div>
             <div class="row mt-2">
-              <div class="col-9">
-                <%= truncate(post.body, length: 100) %>
+              <div class="col-9 text-truncate">
+                <%= truncate(post.body, length: 50) %>
               </div>
               <div class="col-3 text-right text-muted">
                 <small>投稿日: <%= l(post.posted_at || post.created_at, format: :short) %></small>

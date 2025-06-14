@@ -53,6 +53,14 @@
     <%= link_to '投稿者のプロフィール', show_user_path(@user), 
       class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
 
+  <% elsif defined?(check_poster_profile) && check_poster_profile && @group_post&.id %>
+    <%= link_to '投稿者のプロフィール', show_user_path(@group_post.member.user), 
+      class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
+
+  <% elsif defined?(group_hosting_post) && group_hosting_post && @group_post&.id %>
+    <%= link_to '投稿の掲載グループ', group_path(@group_post.group), 
+      class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
+
   <% elsif defined?(my_groups) && my_groups %>
     <%= link_to "参加グループ一覧", my_groups_path, 
       class: (is_button ? 'btn btn-base' : nil) %>

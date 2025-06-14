@@ -16,7 +16,7 @@
         <%= link_to group_notice_path(@group, notice), 
           class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
           <h3 class="text-lg font-semibold mb-3"><%= notice.title %></h3>
-          <p><%= notice.body %></p>
+          <p class="notice-index__body mb-2"><%= notice.body %></p>
           <small>
             投稿者: <%= notice.member.user.nickname %> / 投稿日時: <%= l(notice.created_at, format: :short) %>
           </small>

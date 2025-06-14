@@ -219,6 +219,12 @@
   color: #555;
 }
 
+.dashboard__notice-body {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .dashboard__event-datetime {
   font-size: 0.85rem;
   color: #888;
@@ -324,6 +330,16 @@
 .group-members__name {
   font-weight: 600;
   font-size: 1rem;
+}
+
+/*  group_notice,group_event   */
+.notice-index__body, .event-index__body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-wrap;
 }
 
 /*  group_posts  */
