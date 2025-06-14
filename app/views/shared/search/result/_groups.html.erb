@@ -6,21 +6,27 @@
     <div class="row">
       <% groups.each do |group| %> 
         <div class="col-6">
-          <%#= link_to user_post_path(post.user.id, post.id), class: 'user-posts__link' do %>
+          <%= link_to group_path(group.slug), class: 'search-group__link' do %>
+            <div class="search-group__card">
+              <!-- 左側：プロフィール画像 -->
+              <div class="search-group__image-box">
+                <%= image_tag(group.group_image, size: "200x200", class: "search-group__image") %>
+              </div>
 
-
-
-
-
-
-             </div>
-          <%# end %>
+              <!-- 右側：プロフィール情報 -->
+              <div class="search-group__info-box">
+                <p class="search-group__label"><%= group.name %></p>
+                <p class="search-group__label">説明</p>
+                <p class="search-group__bio"><%= group.description %></p>
+              </div>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
 
     <div class="d-flex justify-content-center mt-4">
-      <%= paginate groups, param_name: :ugroup_page, 
+      <%= paginate groups, param_name: :group_page, 
         params: request.query_parameters.merge(scroll_to: 'groups-results') %>
     </div>
   </div>

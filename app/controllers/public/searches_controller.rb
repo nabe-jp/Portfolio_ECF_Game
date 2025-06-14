@@ -72,20 +72,16 @@ class Public::SearchesController < ApplicationController
   end
   
   def search_user_posts
-    search_model_optimized(UserPost.active_posts_desc, %w[title body]).page(params[:post_page])
+    search_model_optimized(UserPost.active_posts_desc, %w[title body]).page(params[:user_post_page])
   end
 
-  #　現在未実装
   def search_groups
-    # search_model_optimized(Group.active_groups_desc, %w[title body]).page(params[:group_page])
-    Group.none.page(params[:page]).per(10)
+    search_model_optimized(Group.active_groups_desc, %w[name description]).page(params[:group_page])
   end
 
-  #　現在未実装
   def search_group_posts
-    # search_model_optimized(GroupPost.group_posts_for_all_desc, 
-      # %w[title body]).page(params[:group_post_page])
-    GroupPost.none.page(params[:page]).per(10)
+    search_model_optimized(GroupPost.active_group_posts_for_all_desc, 
+      %w[title body]).page(params[:group_post_page])
   end
 
   # 入力が空なら空配列を返す、全角スペースを半角にし、記号を削除し、文字列の前後の空白を取り除く

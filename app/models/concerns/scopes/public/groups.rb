@@ -16,7 +16,7 @@ module Scopes::Public::Groups
 
     # メンバーに使用
     scope :active_members, -> {
-      where(is_deleted: false,)
+      where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :asc)
     }
 

@@ -1158,7 +1158,7 @@ ActiveRecord::Base.transaction do
     end    
 
     puts "グループ内投稿に対してのコメントの作成が完了しました。"
-    puts "グループ機能のテスト用ユーザーデータの作成を開始します。"
+    puts "グループ機能のテスト用ユーザーの更新とデータの作成を開始します。"
     
     # --- 削除関連 ---
     # 連鎖削除されたグループ内のお知らせ・イベント・投稿・コメント
@@ -1408,7 +1408,28 @@ ActiveRecord::Base.transaction do
       hidden_on_parent_restore: true
     )
 
-    puts "グループ機能のテスト用ユーザーデータの作成が完了しました。"
+    # 削除用、非公開用のユーザーデータの更新
+    # 連鎖削除の再現
+    GroupMembership.where(user_id: 100, group_id: 1).update_all(
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: admin.id,
+      deleted_reason: :parent_group_deleted,
+      deleted_due_to_parent: true
+    )
+
+    # 自主脱退の再現
+    GroupMembership.where(user_id: 101, group_id: 1).update_all(
+      is_deleted: true,
+      deleted_at: Time.current,
+      deleted_by_id: deleted_user_2,
+      deleted_reason: :voluntarily_left_group
+    )
+
+    # テスト用非公開ユーザー
+    GroupMembership.where(user_id: 200, group_id: 1).update_all(is_public: false)
+
+    puts "グループ機能のテスト用ユーザーの更新とデータの作成が完了しました。"
     puts "管理側ノートの作成を開始します。"
 
     AdminNote.create!([

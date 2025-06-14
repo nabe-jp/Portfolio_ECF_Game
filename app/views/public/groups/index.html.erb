@@ -4,7 +4,7 @@
     <% @groups.each do |group| %>
       <%= link_to group_path(group), class: "group-card" do %>
         <div class="group-card__image">
-          <%= image_tag(group.group_image, size: "200x200", class: "img-fluid") %>
+          <%= image_tag(group.group_image, class: "group-card__image-img img-fluid") %>
         </div>
         <div class="group-card__content">
           <div class="group-card__name">

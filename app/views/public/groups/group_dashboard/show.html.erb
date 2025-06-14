@@ -7,47 +7,46 @@
   <div class="dashboard-group__info mb-4">
     <div class="row">
       <!-- 左側：グループ画像 -->
-      <div class="col-md-4">
-        <%= image_tag @group.group_image, class: "img-fluid rounded" %>
+      <div class="col-md-4  d-flex align-items-center justify-content-center">
+        <%= image_tag @group.group_image, class: "dashboard-group__image img-fluid" %>
       </div>
 
       <!-- 右側：説明とメンバー一覧を上下に分割 -->
       <div class="col-md-8 d-flex flex-column pr-0" style="min-height: 100%;">
         <!-- 説明 -->
-        <div class="flex-fill position-relative">
-          <h4 class="dashboard-group__section-title">グループ説明</h4>
-          <p class="dashboard-group__description"><%= @group.description %></p>
-          
-          <% if group_moderator? %>
-            <div class="position-absolute" style="bottom: 10px; right: 0px;">
-              <%= link_to "グループを編集", edit_group_path(@group), 
-                class: "btn btn-outline-primary btn-sm" %>
-            </div>
-          <% end %>
+        <div>
+          <h5 class="dashboard-group__section-title mb-0">グループ説明</h5>
+          <p class="dashboard-group__description mb-0"><%= @group.description %></p>
         </div>
+
+        <% if group_moderator? %>
+          <div class="text-right">
+            <%= link_to "グループを編集", edit_group_path(@group), class: "btn btn-outline-primary btn-sm" %>
+          </div>
+        <% end %>
 
         <!-- メンバー一覧 -->
         <div class="flex-fill position-relative">
-          <h4 class="dashboard-group__section-title">管理者一覧</h4>
+          <h5 class="dashboard-group__section-title mb-0">管理者一覧</h5>
           <p class="dashboard-group__subtitle mb-0"><strong>グループオーナー</strong></p>
           <ul class="dashboard-group__list list-inline">
-            <li class="list-inline-item mr-3"><%= @group.owner.nickname %></li>
+            <li class="list-inline-item group-members__name mr-3"><%= @group.owner.nickname %></li>
           </ul>
 
           <% if @group.moderators.any? %>
             <p class="dashboard-group__subtitle mb-0"><strong>グループ管理者</strong></p>
-            <ul class="dashboard-group__list list-inline">
+            <ul class="dashboard-group__list list-inline mb-0">
               <% @group.moderators.each do |moderator| %>
-                <li class="list-inline-item mr-3"><%= moderator.nickname %></li>
+                <li class="list-inline-item group-members__name mr-3"><%= moderator.nickname %></li>
               <% end %>
             </ul>
           <% end %>
+        </div>
 
           <!-- メンバー一覧リンク -->
-          <div class="position-absolute" style="bottom: 10px; right: 0;">
-            <%= link_to "▶︎ メンバー一覧", group_members_path(@group), 
-              class: "dashboard-group__more-link disabled-link" %>
-          </div>
+        <div class="text-right">
+          <%= link_to "▶︎ メンバー一覧", group_members_path(@group), 
+            class: "dashboard-group__more-link disabled-link" %>
         </div>
       </div>
     </div>

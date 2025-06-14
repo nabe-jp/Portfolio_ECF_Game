@@ -12,14 +12,19 @@ class Group < ApplicationRecord
   has_many :group_memberships, dependent: :destroy
   has_many :active_group_memberships, -> { active_members }, class_name: 'GroupMembership'
   
-  # GroupMembershipをmembersとして定義、上がすべてで下がアクティブ、GroupMembershipに紐づくモデルをuserに定義
-  has_many :members, through: :group_memberships, source: :user
-  has_many :active_members, through: :active_group_memberships, source: :user
+  # GroupMembershipをall_membersとして定義(削除されているデータも含むためadmin側にて使用)
+  has_many :all_members, through: :group_memberships, source: :user
+
+  # membersにアクティブなユーザーのみを紐づける(membersにはアクティブなユーザーのみ紐づく)
+  has_many :active_members, -> { merge(User.active_users) }, 
+    through: :active_group_memberships, source: :user
 
   # dashboardの管理者一覧に使用、GroupMembershipのmoderator権限を持つアクティブなユーザーをmoderatorsとして定義
   has_many :moderator_memberships, -> { where(role: :moderator).merge(GroupMembership.active_members) }, 
     class_name: 'GroupMembership'
-  has_many :moderators, through: :moderator_memberships, source: :user
+
+  # moderator_membershipにアクティブなユーザーのみを紐づける(moderatorsにはアクティブなユーザーのみ紐づく)
+  has_many :moderators, -> { merge(User.active_users) },through: :moderator_memberships, source: :user
 
   # グループが作成したもの、削除された際に関連して削除される
   has_many :group_events, dependent: :destroy

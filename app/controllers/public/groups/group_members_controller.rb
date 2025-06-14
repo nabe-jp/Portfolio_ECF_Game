@@ -9,7 +9,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
   before_action :set_membership, only: [:show, :destroy, :edit_note, :update_note, :update_role]
 
   def index
-    @memberships = @group.group_memberships.active_members
+    @memberships = @group.active_group_memberships
       .joins(:user).merge(User.active_users_desc).includes(:user)
   
     @owner_memberships = @memberships.where(role: :owner)

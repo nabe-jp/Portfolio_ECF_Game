@@ -11,7 +11,6 @@
 .group-card {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
   padding: 1rem;
   text-decoration: none;
   background-color: white;
@@ -38,12 +37,27 @@
   flex-shrink: 0;
   width: 200px;
   height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
 }
 
-.group-card__image img {
-  width: 100%;
-  height: 100%;
+.group-card__image-img, .group-show__image {
+  max-width: 100%;
+  width: 180px;
+  height: 150px;
+  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
   object-fit: cover;
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+}
+
+.dashboard-group__image {
+  max-width: 100%;
+  width: 330px;
+  height: 275px;
+  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+  object-fit: cover;
+  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
 }
 
 .group-card__content {
@@ -52,13 +66,12 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .group-card__name {
-  flex: 0 0 25%;
+  flex: 0 0 33%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .group-card__name h3 {
@@ -67,11 +80,11 @@
 }
 
 .group-card__description {
-  flex: 0 0 50%;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
+  flex: 0 0 33%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   word-break: break-word;
   margin-top: 0.25rem;
 }
@@ -81,9 +94,9 @@
 }
 
 .group-card__meta {
-  flex: 0 0 25%;
+  flex: 0 0 33%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   font-size: 0.9rem;
 }
 
@@ -118,23 +131,23 @@
     text-decoration: none !important;
   }
 
-  &__upper {
+  &__center {
     display: flex;
-    align-items: flex-start; /* 画像とタイトル上詰め */
+    align-items: center;
     margin-bottom: 0.5rem;
   }
 
   &__image-wrapper {
     width: 60px;
-    height: 60px;
+    height: 50px;
     margin-right: 1rem;
     flex-shrink: 0;
 
     img {
       width: 100%;
       height: 100%;
+      border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
       object-fit: cover;
-      border-radius: 50%;
       display: block;
     }
   }
@@ -142,6 +155,8 @@
   &__info {
     flex: 1;
     overflow: hidden;
+    display: flex;
+    align-items: center;
   }
 
   &__name {
@@ -152,9 +167,7 @@
     line-height: 1.2;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
   }
 
   &__description {
@@ -165,7 +178,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    margin: 0;
+    margin-top: 1rem;
   }
 }
 
@@ -267,6 +280,13 @@
   transition: background-color 0.3s ease;
 }
 
+.dashboard-group__list {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
 /*  group-members  */
 .group-members__section-divider {
     height: 12px;
@@ -278,7 +298,7 @@
 .group-members__list {
   display: flex;
   flex-wrap: wrap;
-  margin-left: -0.75rem; /* Bootstrap の .row の gutter を真似 */
+  margin-left: -0.75rem;
   margin-right: -0.75rem;
 }
 
@@ -328,8 +348,11 @@
 }
 
 .group-members__name {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /*  group_notice,group_event   */
@@ -349,7 +372,7 @@
   color: inherit;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: stretch;
+  align-items: center;
   max-width: 95%;
   height: 200px;
   padding: 1rem;
