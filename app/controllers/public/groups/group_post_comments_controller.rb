@@ -8,6 +8,7 @@ class Public::Groups::GroupPostCommentsController < Public::ApplicationControlle
   before_action :set_group_post
   before_action :authorize_group_member!
   before_action :set_current_user, only: [:create]
+  before_action :set_comment, only: [:destroy] 
   before_action :authorize_group_post_comment_editor!, only: [:destroy]
 
   def create
@@ -27,13 +28,11 @@ class Public::Groups::GroupPostCommentsController < Public::ApplicationControlle
   end
 
   def destroy
-    @comment = @group_post.group_post_comments.find(params[:id])
-
     # コメントを行ったユーザー自身かグループ管理者か投稿を作成したユーザーかの判定
     if @comment.member.user == current_user
       deleted_reason = :self_deleted
     elsif group_moderator?
-      deleted_reason = :premoved_by_group_authority
+      deleted_reason = :removed_by_group_authority
     else
       deleted_reason = :post_user
     end
@@ -58,6 +57,10 @@ class Public::Groups::GroupPostCommentsController < Public::ApplicationControlle
 
   def set_current_user
     @group_membership = @group.group_memberships.active_members.find_by(user_id: current_user.id)
+  end
+
+  def set_comment
+    @comment = @group_post.group_post_comments.find(params[:id])
   end
   
   def store_form_data(attributes:, error_messages:)

@@ -3,6 +3,7 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
 
   # 読み込んだモジュールのメソッドをviewで使用する為に必要
   helper_method :group_post_editor?
+  helper_method :group_post_comment_editor?
 
   before_action :authenticate_user!
   before_action :authorize_group_member!, except: [:show]

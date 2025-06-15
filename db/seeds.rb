@@ -38,23 +38,6 @@ ActiveRecord::Base.transaction do
 
     # 英語・日本語によるユーザーの作成(male、femaleで性別を分け、中性はuser、削除専用はdeleted)
     # ユーザーID:100, 101は削除用、ID:200は非公開用(両方ともユーザー投稿のコメントを作成した後に作成)
-    user_images = [
-      'user_ja_male_1',
-      'user_ja_male_2',
-      'user_ja_male_3',
-      'user_ja_female_1',
-      'user_ja_female_2',
-      'user_ja_female_3',
-      'user_ja_1',
-      'user_en_male_1',
-      'user_en_male_2',
-      'user_en_male_3',
-      'user_en_female_1',
-      'user_en_female_2',
-      'user_en_female_3',
-      'user_en_1'
-    ]
-
     users = [
       {
         email: 'aa@aa',
@@ -203,25 +186,6 @@ ActiveRecord::Base.transaction do
 
     puts "ユーザーの作成が完了しました"
     puts "ユーザー投稿の作成を開始します"
-
-    user_post_images = [
-      'user_post_1_chess',
-      'user_post_2_playing_cards',
-      'user_post_3_love_affair',
-      'user_post_4_horror',
-      'user_post_5_survival',
-      'user_post_6_racing',
-      'user_post_7_fighting_games',
-      'user_post_8_music',
-      'user_post_9_puzzle',
-      'user_post_10_adventure',
-      'user_post_11_dark_fantasy',
-      'user_post_12_fantasy',
-      'user_post_13_city_planning_simulation',
-      'user_post_14_cultivation',
-      'user_post_15_strategy',
-      'user_post_16_sf_strategy'
-    ]
 
     user_posts = [
       {
@@ -580,7 +544,7 @@ ActiveRecord::Base.transaction do
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
         TEXT
-        image: 'no_group'
+        image: 'group_1'
       },
       {
         owner_id: 8,
@@ -589,7 +553,7 @@ ActiveRecord::Base.transaction do
         name: 'Low HP, High Vibes',
         slug: 'low-hp-high-vibes',
         description: 'We may not play to win, but we play to feel good. A chill corner for good mood gamers.',
-        image: 'no_group'
+        image: 'group_2'
       },
       {
         owner_id: 1,
@@ -598,7 +562,7 @@ ActiveRecord::Base.transaction do
         name: 'Campfire Lounge',
         slug: 'campfire-lounge',
         description: '焚き火を囲むような気持ちで、まったりとゲームの話を楽しみましょう。攻略というより、楽しみ方を共有する場所です。',
-        image: 'no_group'
+        image: 'group_3'
       },
       {
         owner_id: 9,
@@ -607,7 +571,7 @@ ActiveRecord::Base.transaction do
         name: 'Melody Quest',
         slug: 'melody-quest',
         description: 'A casual place for rhythm gamers and music lovers to talk scores, games, and groove.',
-        image: 'no_group'
+        image: 'group_4'
       },
       {
         owner_id: 3,
@@ -616,7 +580,7 @@ ActiveRecord::Base.transaction do
         name: 'ドラゴンの巣調査隊',
         slug: 'dragon-nest',
         description: 'ドラゴンの巣の地図・敵配置・素材集めなどを語る場所です。情報提供歓迎。',
-        image: 'no_group'
+        image: 'group_5'
       },
       {
         owner_id: 14,
@@ -625,7 +589,7 @@ ActiveRecord::Base.transaction do
         name: 'Dog Lovers',
         slug: 'dog-lovers',
         description: 'A chill place for people who love dogs. Share stories, pics, and just say "woof!"',
-        image: 'no_group'
+        image: 'group_6'
       },
       {
         owner_id: 9,
@@ -634,7 +598,7 @@ ActiveRecord::Base.transaction do
         name: 'EchoStage',
         slug: 'echostage',
         description: 'A virtual stage to talk about rhythm games, game OSTs, and musical adventures.',
-        image: 'no_group'
+        image: 'group_7'
       },
       {
         owner_id: 1,
@@ -643,7 +607,7 @@ ActiveRecord::Base.transaction do
         name: '初心者ボードゲーム部',
         slug: 'beginner-boardclub',
         description: 'ボードゲーム初心者歓迎。ルールの質問やおすすめも共有しましょう。',
-        image: 'no_group'
+        image: 'group_8'
       },
       {
         owner_id: 13,
@@ -652,7 +616,7 @@ ActiveRecord::Base.transaction do
         name: 'The Quiet Grind',
         slug: 'quiet-grind',
         description: 'A group for those who enjoy peaceful farming, crafting, and slow progression games.',
-        image: 'no_group'
+        image: 'group_9'
       },
       {
         owner_id: 5,
@@ -661,7 +625,7 @@ ActiveRecord::Base.transaction do
         name: '夜空カフェ',
         slug: 'yozora-cafe',
         description: '夜の静かな時間、ふと開きたくなるようなゲームの話をここで。ジャンル不問、ほっとする作品の話題歓迎です。',
-        image: 'no_group'
+        image: 'group_10'
       },
       {
         owner_id: 12,
@@ -670,7 +634,7 @@ ActiveRecord::Base.transaction do
         name: 'Tavern of Tales',
         slug: 'tavern-of-tales',
         description: 'A cozy guild for sharing fantasy stories, RPG screenshots, and questing tips.',
-        image: 'no_group'
+        image: 'group_11'
       }
     ]
     
@@ -683,7 +647,7 @@ ActiveRecord::Base.transaction do
         created_at: Time.current
       )
     
-      image_path = Rails.root.join('app', 'assets', 'images', 'no_image', "#{attrs[:image]}.jpg")
+      image_path = Rails.root.join('app', 'assets', 'images', 'group', "#{attrs[:image]}.jpg")
       group.group_image.attach(io: File.open(image_path), filename: "#{attrs[:image]}.jpg", 
         content_type: 'image/jpeg')
     
@@ -884,7 +848,7 @@ ActiveRecord::Base.transaction do
       },
       {
         group_id: 10,
-        member_id: 1,
+        member_id: 5,
         title: 'ゲーム小話シェア会',
         description: 'ゲームの裏話や面白エピソードを気軽に語り合う会です。堅苦しくなく、リラックスしてご参加ください。',
         start_time: Time.current + 2.months + 9.days,
@@ -947,7 +911,7 @@ ActiveRecord::Base.transaction do
           投稿を作成しています。ＸＸＸＸＸＸＸＸＸ
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
         TEXT
-        image: 'no_group_post',
+        image: 'group_post_1',
         visible: false
       },
       {
@@ -955,7 +919,7 @@ ActiveRecord::Base.transaction do
         member_id: 1,
         title: 'Pet Talent Contest',
         body: "My dog's amazing at jumping! If your pet has cool skills, in-game or real life, please share. Join the group and let's talk!",
-        image: 'no_group_post',
+        image: 'group_post_2',
         visible: true
       },
       {
@@ -963,7 +927,7 @@ ActiveRecord::Base.transaction do
         member_id: 1,
         title: 'Favorite BGM Poll',
         body: "Share your favorite game BGM! From battle themes to relaxing tunes, all are welcome. Let's discover great music together!",
-        image: 'no_group_post',
+        image: 'group_post_3',
         visible: false
       },
       {
@@ -971,7 +935,7 @@ ActiveRecord::Base.transaction do
         member_id: 1,
         title: 'オンライン対戦で気をつけてること',
         body: '時間切れしやすい人は、序盤の手はパターン化しておくと集中力が持続します。あとチャットは短く！',
-        image: 'no_group_post',
+        image: 'group_post_4',
         visible: false
       },
       {
@@ -979,7 +943,7 @@ ActiveRecord::Base.transaction do
         member_id: 1,
         title: 'Recommended Auto',
         body: 'Arrange small sprinklers, tillers, and harvest robots in that order. By morning, your farm will be perfectly maintained—ideal for efficiency lovers!',
-        image: 'no_group_post',
+        image: 'group_post_5',
         visible: false
       },
       {
@@ -987,7 +951,7 @@ ActiveRecord::Base.transaction do
         member_id: 2,
         title: '初プレイ体験談',
         body: 'ゲームを始めたばかりの頃の思い出や苦労話を語り合いましょう。初心者歓迎です。',
-        image: 'no_group_post',
+        image: 'group_post_6',
         visible: false
       },
       {
@@ -995,7 +959,7 @@ ActiveRecord::Base.transaction do
         member_id: 1,
         title: '幻の絶景スポット発見',
         body: '「銀嶺の谷」にある隠れ滝は朝日が当たると虹がかかり幻想的です。探索ルートが複雑なので地図片手に挑戦を！',
-        image: 'no_group_post',
+        image: 'group_post_7',
         visible: true
       },
       {
@@ -1003,7 +967,7 @@ ActiveRecord::Base.transaction do
         member_id: 6,
         title: '珍しいモンスターの生態',
         body: '「影歩きゴブリン」は日中は動かず夜になると活発化。見つけたら戦うより観察がおすすめです。',
-        image: 'no_group_post',
+        image: 'group_post_8',
         visible: true
       },
       {
@@ -1011,7 +975,7 @@ ActiveRecord::Base.transaction do
         member_id: 7,
         title: '敵戦艦の魅力',
         body: '最新DLCの敵戦艦は独特の曲線デザインで美しい。撃破時の演出も凝っていてファンアートが増えてます。',
-        image: 'no_group_post',
+        image: 'group_post_9',
         visible: false
       },
       {
@@ -1019,7 +983,7 @@ ActiveRecord::Base.transaction do
         member_id: 8,
         title: 'Best Ctrl Setup',
         body: 'Swapping dodge and jump buttons drastically reduced my damage taken. Once used to it, combat becomes much easier and smoother.',
-        image: 'no_group_post',
+        image: 'group_post_10',
         visible: false
       },
       {
@@ -1027,7 +991,7 @@ ActiveRecord::Base.transaction do
         member_id: 1,
         title: 'Phase 3 Boss Move',
         body: 'When HP falls below 30%, the boss unleashes an instant-kill attack on all. Stack buffs or use shields beforehand to survive.',
-        image: 'no_group_post',
+        image: 'group_post_11',
         visible: true
       },
       {
@@ -1035,7 +999,7 @@ ActiveRecord::Base.transaction do
         member_id: 2,
         title: 'Guide Differences',
         body: "Some guides say a 'hidden boss' appears in area 4, but it's actually random and often doesn't show up in every playthrough.",
-        image: 'no_group_post',
+        image: 'group_post_12',
         visible: false
       }
     ]
@@ -1056,7 +1020,7 @@ ActiveRecord::Base.transaction do
         body: attrs[:body]
       )
     
-      image_path = Rails.root.join('app', 'assets', 'images', 'no_image', "#{attrs[:image]}.jpg")
+      image_path = Rails.root.join('app', 'assets', 'images', 'group_post', "#{attrs[:image]}.jpg")
       group_post.group_post_image.attach(io: File.open(image_path), filename: "#{attrs[:image]}.jpg",
         content_type: 'image/jpeg')
 
@@ -1200,7 +1164,7 @@ ActiveRecord::Base.transaction do
       deleted_due_to_parent: true
     )
 
-    image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
+    image_path = Rails.root.join('app', 'assets', 'images', 'group_post', 'deleted_gropu_post_1_billiards.jpg')
     delete_group_post_1.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 
@@ -1263,7 +1227,7 @@ ActiveRecord::Base.transaction do
       deleted_reason: :self_deleted
     )
 
-    image_path = Rails.root.join('app', 'assets', 'images', 'no_image', 'no_group_post.jpg')
+    image_path = Rails.root.join('app', 'assets', 'images', 'group_post', 'deleted_gropu_post_2_dice.jpg')
     delete_group_post_2.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 

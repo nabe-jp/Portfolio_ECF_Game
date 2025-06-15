@@ -64,13 +64,13 @@ module Scopes::Public::Groups
 
     # 親コメントに使用(コメントは削除されたコメントは削除されていると表示する)
     scope :visible_top_level, -> {
-      where(parent_comment_id: nil, is_public: true)
-        .order(created_at: :asc)
+      where(parent_comment_id: nil, is_public: true, hidden_on_parent_restore: false)
+        .order(created_at: :desc)
     }
 
     # 子コメントに使用
     scope :visible_replies, -> {
-      where.not(parent_comment_id: nil).where(is_public: true)
+      where.not(parent_comment_id: nil).where(is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :asc)
     }
   end

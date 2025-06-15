@@ -9,8 +9,10 @@
     <!-- プロフィール画像＋ニックネーム -->
     <div class="col-2 d-flex align-items-center">
       <% unless comment.is_deleted %>
-        <%= image_tag(comment.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
-        <span><%= comment.user.nickname %></span>
+        <%= link_to show_user_path(comment.user), class: "comment__profile-link" do %>
+          <%= image_tag(comment.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
+          <span class="nickname-truncate"><%= comment.user.nickname %></span>
+        <% end %>
       <% end %>
     </div>
 
@@ -62,8 +64,10 @@
       <!-- 子コメント画像＋ニックネーム -->
       <div class="col-2 pl-4 d-flex align-items-center">
         <% unless reply.is_deleted %>
-          <%= image_tag(reply.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
-          <span><%= reply.user.nickname %></span>
+          <%= link_to show_user_path(reply.user), class: "comment__profile-link" do %>
+            <%= image_tag(reply.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
+            <span class="nickname-truncate"><%= reply.user.nickname %></span>
+          <% end %>
         <% end %>
       </div>
 

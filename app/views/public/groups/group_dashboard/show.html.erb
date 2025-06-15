@@ -16,7 +16,9 @@
         <!-- 説明 -->
         <div>
           <h5 class="dashboard-group__section-title mb-0">グループ説明</h5>
-          <p class="dashboard-group__description mb-0"><%= @group.description %></p>
+          
+          <%= simple_format(@group.description, 
+            { class: "dashboard__group-description mb-0" }, sanitize: true) %>
         </div>
 
         <% if group_moderator? %>

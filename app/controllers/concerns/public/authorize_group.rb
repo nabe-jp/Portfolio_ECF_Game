@@ -45,11 +45,26 @@ module Public::AuthorizeGroup
     group_moderator? || @group_post.member.user == current_user
   end
 
-  # コメントの編集・削除権限の判定をメソッド化
-  def group_post_comment_editor?
-    group_post_editor? || @comment.member.user == current_user
+  # 親コメントの編集・削除権限の判定をメソッド化
+  def group_post_top_level_comment_editor?(comment)
+    group_post_editor? || comment.member.user == current_user
+  end
+
+  # 子コメントの編集・削除権限の判定をメソッド化
+  def group_post_reply_comment_editor?(reply)
+    group_post_editor? || reply.member.user == current_user
   end
   
+  # 上記二つをまとめたコメントの編集・削除権限の判定をメソッド化
+  def group_post_comment_editor?(comment)
+
+    if comment.parent_comment_id.nil?
+      group_post_top_level_comment_editor?(comment)
+    else
+      group_post_reply_comment_editor?(comment)
+    end
+  end
+
   # 現在のユーザーが自身より上または同等の権限を持つ相手に対して操作を試みた場合に拒否
   def prohibit_operating_higher_or_equal_role!(target_membership)
     return if current_membership.nil?
@@ -112,7 +127,7 @@ module Public::AuthorizeGroup
 
   # コメントの編集・削除権限判定
   def authorize_group_post_comment_editor!
-    unless group_post_comment_editor?
+    unless group_post_comment_editor?(@comment)
       redirect_to group_post_path(@group, @group_post), alert: "コメントの編集・削除権限がありません。"
     end
   end

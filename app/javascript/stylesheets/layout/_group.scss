@@ -232,6 +232,14 @@
   color: #555;
 }
 
+.dashboard__group-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .dashboard__notice-body {
   white-space: nowrap;
   overflow: hidden;
