@@ -1,0 +1,10 @@
+<h1>お知らせ詳細</h1>
+
+<p><strong>タイトル:</strong> <%= @group_notice.title.presence || "(無題)" %></p>
+<p><strong>投稿者:</strong> <%= link_to @group_notice.member.user.nickname, admin_user_path(@group_notice.member.user) %></p>
+<p><strong>本文:</strong></p>
+<p><%= simple_format(@group_notice.body) %></p>
+<p><strong>投稿日:</strong> <%= @group_notice.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+<p><strong>固定表示:</strong> <%= @group_notice.is_pinned ? "はい" : "いいえ" %></p>
+
+<%= link_to "一覧に戻る", admin_group_notices_path(@group.id), class: "btn btn-secondary" %>

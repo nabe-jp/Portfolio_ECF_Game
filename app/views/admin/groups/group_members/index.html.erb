@@ -1,0 +1,26 @@
+<h1>メンバー一覧 (<%= @group.name %>)</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+      <th>役割</th>
+      <th>加入日</th>
+      <th>状態</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @group_members.each do |member| %>
+      <tr>
+        <td><%= link_to member.user.nickname, admin_user_path(member.user) %></td>
+        <td><%= member.role %></td>
+        <td><%= member.joined_at&.strftime("%Y-%m-%d") %></td>
+        <td><%= member.is_deleted ? "削除済み" : "有効" %></td>
+        <td><%= link_to "詳細", admin_group_member_path(@group.id, member) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "グループ詳細へ戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>

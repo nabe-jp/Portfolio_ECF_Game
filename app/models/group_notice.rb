@@ -1,5 +1,7 @@
 class GroupNotice < ApplicationRecord
+  include Scopes::Admin::Filters
   include Scopes::Public::Groups
+  include Scopes::Shared::Ordering
   include DeletableReason
   
   belongs_to :group

@@ -1,0 +1,23 @@
+<h1>メンバー詳細: <%= @group_member.user.nickname %></h1>
+
+<p><strong>役割:</strong> <%= @group_member.role %></p>
+<p><strong>ノート:</strong> <%= @group_member.note %></p>
+<p><strong>加入日:</strong> <%= @group_member.joined_at&.strftime("%Y-%m-%d") %></p>
+
+<%= form_with url: update_role_admin_group_member_path(@group, @group_member), method: :patch, local: true do |f| %>
+  <div class="form-group">
+    <label>役割を変更</label>
+    <%= f.number_field :role, value: @group_member.role, class: "form-control" %>
+  </div>
+  <%= f.submit "役割を更新", class: "btn btn-primary" %>
+<% end %>
+
+<%= form_with url: update_note_admin_group_member_path(@group, @group_member), method: :patch, local: true do |f| %>
+  <div class="form-group">
+    <label>ノートを更新</label>
+    <%= f.text_area :note, value: @group_member.note, class: "form-control" %>
+  </div>
+  <%= f.submit "ノートを更新", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "一覧に戻る", admin_group_members_path(@group.id), class: "btn btn-secondary" %>

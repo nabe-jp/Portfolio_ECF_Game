@@ -1,24 +1,20 @@
 module Admin::FilteredRecords
     # 投稿一覧の絞り込みロジック
     def filtered_records(model_class)
-      base = model_class.includes(:user)                         # N+1回避のためにユーザー情報を事前読み込み
-
-      # 各表示状態に対応するスコープを定義(独立していて互いに影響を与えない)
-      public_scope     = model_class.where(is_public: true, is_deleted: false)
-      non_public_scope = model_class.where(is_public: false, is_deleted: false)
-      deleted_scope    = model_class.where(is_deleted: true)
+      base = model_class.includes(:user)                                            # N+1回避のために読み込む
 
     # 表示状態の組み合わせに応じてスコープを適用
     if @show_all
       base  # すべての投稿を表示
     elsif @show_non_public && @show_deleted
-      base.merge(non_public_scope.or(deleted_scope))            # 非公開と削除済みを両方表示
+      base.merge(model_class.hidden_only).or(base.merge(model_class.deleted_only))  # 非公開と削除済みを表示
     elsif @show_non_public
-      base.merge(non_public_scope)                              # 非公開のみ表示
+      merged_scope = model_class.hidden_only.undeleted_only                         # 1回のmergeで済むよう定義
+      base.merge(merged_scope)                                                      # 非公開のみ表示
     elsif @show_deleted
-      base.merge(deleted_scope)                                 # 削除済みのみ表示
+      base.merge(model_class.deleted_only)                                          # 削除済みのみ表示
     else
-      base.merge(public_scope)                                  # 初期状態：公開中のみ表示
+      base.merge(model_class.active_only)                                           # 初期状態：公開のみ表示
     end
   end
 

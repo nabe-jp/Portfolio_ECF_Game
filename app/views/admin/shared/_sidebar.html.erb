@@ -1,0 +1,40 @@
+<h5>ナビゲーション</h5>
+<ul class="nav flex-column">
+  <li><%= render 'admin/shared/links', check_dashboard_link: true %></li>
+
+  <li><%= render 'admin/shared/links', check_back_link: true %></li>
+</ul>
+
+<h5 class="mt-3">申し送り</h5>
+<ul class="nav flex-column">
+  <li><%= render 'admin/shared/links', check_notes_link: true %></li>
+</ul>
+
+<h5 class="mt-3">TOP</h5>
+<ul class="nav flex-column">
+  <li><%= render 'admin/shared/links', check_informations_link: true %></li>
+</ul>
+
+<h5 class="mt-3">ユーザー</h5>
+<ul class="nav flex-column">
+  <li><%= render 'admin/shared/links', check_users_link: true %></li>
+
+  <li><%= render 'admin/shared/links', check_user_posts_link: true %></li>
+  
+  <li><%= render 'admin/shared/links', check_user_post_comments_link: true %></li>
+</ul>
+
+<h5 class="mt-3">グループ</h5>
+<ul class="nav flex-column">
+  <li><%= render 'admin/shared/links', check_groups_link: true %></li>
+
+  <li><%= render 'admin/shared/links', check_group_members_link: true %></li>
+  
+  <li><%= render 'admin/shared/links', check_group_notices_link: true %></li>
+
+  <li><%= render 'admin/shared/links', check_group_events_link: true %></li>
+
+  <li><%= render 'admin/shared/links', check_group_posts_link: true %></li>
+
+  <li><%= render 'admin/shared/links', check_group_comments_link: true %></li>
+</ul>

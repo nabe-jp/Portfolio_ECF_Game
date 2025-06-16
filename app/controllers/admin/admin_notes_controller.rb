@@ -8,13 +8,13 @@ class Admin::AdminNotesController < Admin::ApplicationController
     sort_direction = %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   
     # 削除済みの表示切り替え
-    base_scope = params[:show_deleted] == 'true' ? AdminNote.all : AdminNote.active
+    base_scope = params[:show_deleted] == 'true' ? AdminNote.all : AdminNote.undeleted_only
   
     # 固定は常に新しい順
-    pinned_notes = base_scope.where(is_pinned: true).order(created_at: :desc).to_a
+    pinned_notes = base_scope.pinned.created_desc
   
     # 非固定は direction に応じて並び替え
-    unpinned_notes = base_scope.where(is_pinned: false).order(created_at: sort_direction).to_a
+    unpinned_notes = base_scope.unpinned.order(created_at: sort_direction)
   
     # 上に固定、下に非固定を結合
     all_notes = pinned_notes + unpinned_notes

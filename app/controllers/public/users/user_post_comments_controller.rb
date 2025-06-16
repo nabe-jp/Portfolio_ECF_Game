@@ -31,10 +31,12 @@ class Public::Users::UserPostCommentsController < Public::ApplicationController
     begin
       Deleter::UserPostCommentDeleter.new(@comment, deleted_by: current_user, 
         deleted_reason: deleted_reason).call
-      redirect_to user_post_path(@comment.user_post.user, @comment.user_post), notice: 'コメントを削除しました。'
+      redirect_to user_post_path(@comment.user_post.user, @comment.user_post), 
+        notice: 'コメントを削除しました。'
     rescue => e
-      Rails.logger.error("削除エラー: #{e.message}")
-      redirect_to user_post_path(@comment.user_post.user, @comment.user_post), alert: '削除に失敗しました。'
+      Rails.logger.error("UserPostComment削除エラー: #{e.message}")
+      redirect_to user_post_path(@comment.user_post.user, @comment.user_post), 
+        alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
     end
   end
 

@@ -1,5 +1,7 @@
 class GroupPost < ApplicationRecord
+  include Scopes::Admin::Filters
   include Scopes::Public::Groups
+  include Scopes::Shared::Ordering
   include DeletableReason
   
   acts_as_taggable_on :group_post_tags

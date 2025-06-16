@@ -1,0 +1,30 @@
+<h1>イベント一覧 (<%= @group.name %>)</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>開始日時</th>
+      <th>終了日時</th>
+      <th>投稿者</th>
+      <th>公開</th>
+      <th>固定表示</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @group_events.each do |event| %>
+      <tr>
+        <td><%= link_to event.title, admin_group_event_path(@group.id, event) %></td>
+        <td><%= event.start_time.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= event.end_time&.strftime("%Y-%m-%d %H:%M") || "-" %></td>
+        <td><%= link_to event.member.user.nickname, admin_user_path(event.member.user) %></td>
+        <td><%= event.is_public ? "公開" : "非公開" %></td>
+        <td><%= event.is_pinned ? "はい" : "いいえ" %></td>
+        <td><%= link_to "削除", admin_group_event_path(@group, event), method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "グループ詳細に戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>

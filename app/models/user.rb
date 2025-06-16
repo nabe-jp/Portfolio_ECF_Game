@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   # スコープの読み込み
+  include Scopes::Admin::Filters
+  include Scopes::Admin::Users
   include Scopes::Public::Users
+  include Scopes::Shared::Ordering
   
   # 削除理由のenumの読み込み
   include DeletableReason

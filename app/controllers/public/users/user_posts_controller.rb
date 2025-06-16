@@ -102,7 +102,7 @@ class Public::Users::UserPostsController < Public::ApplicationController
       redirect_to user_posts_path(@user), notice: '投稿を削除しました。'
     rescue => e
       Rails.logger.error("UserPost削除エラー: #{e.message}")
-      redirect_to root_path, alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
+      redirect_to user_posts_path(@user), alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
     end
   end
 

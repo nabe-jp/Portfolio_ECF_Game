@@ -1,5 +1,7 @@
 class UserPost < ApplicationRecord
+  include Scopes::Admin::Filters
   include Scopes::Public::Users
+  include Scopes::Shared::Ordering
   include DeletableReason
   
   # 現在未実装(Gemインストール済み)

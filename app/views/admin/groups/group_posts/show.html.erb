@@ -1,0 +1,10 @@
+<h1>投稿詳細</h1>
+
+<p><strong>タイトル:</strong> <%= @group_post.title %></p>
+<p><strong>投稿者:</strong> <%= link_to @group_post.member.user.nickname, admin_user_path(@group_post.member.user) %></p>
+<p><strong>本文:</strong></p>
+<p><%= simple_format(@group_post.body) %></p>
+<p><strong>公開状態:</strong> <%= @group_post.is_public ? "公開" : "非公開" %></p>
+<p><strong>投稿日:</strong> <%= @group_post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+
+<%= link_to "一覧に戻る", admin_group_posts_path(@group.id), class: "btn btn-secondary" %>

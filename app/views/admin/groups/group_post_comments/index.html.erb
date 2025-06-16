@@ -1,0 +1,32 @@
+<h1>グループ投稿コメント一覧 (<%= @group.name %>)</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>投稿</th>
+      <th>コメント本文</th>
+      <th>投稿者</th>
+      <th>投稿日</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @group_post_comments.each do |comment| %>
+      <tr>
+        <td>
+          <%= link_to truncate(comment.group_post.title, length: 30), admin_group_post_path(@group, comment.group_post) %>
+        </td>
+        <td><%= truncate(comment.body, length: 50) %></td>
+        <td><%= link_to comment.member.user.nickname, admin_user_path(comment.member.user) %></td>
+        <td><%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td>
+          <%= link_to "詳細", admin_group_post_comment_path(@group.id, comment), class: "btn btn-sm btn-primary" %>
+          <%= link_to "削除", admin_group_post_comment_path(@group, comment), method: :delete,
+                      data: { confirm: "本当に削除しますか？" }, class: "btn btn-sm btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "グループ詳細に戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>

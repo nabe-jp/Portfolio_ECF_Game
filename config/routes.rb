@@ -119,10 +119,17 @@ Rails.application.routes.draw do
       concerns: [:admin_reactivatable, :admin_publishable]
 
     # グループ管理
-    resources :groups, only: [:index, :show, :destroy] , 
+    resources :groups, only: [:index, :show, :destroy], 
       concerns: [:admin_reactivatable, :admin_publishable] do
 
       scope module: :groups do
+        resources :group_members, only: [:index, :show, :destroy], path: 'members', as: :members do
+          member do
+            patch :update_role
+            patch :update_note
+          end
+        end
+        
         resources :group_events, only: [:index, :show, :destroy], 
           path: 'events', as: :events, concerns: [:admin_reactivatable, :admin_publishable]
 
@@ -130,11 +137,10 @@ Rails.application.routes.draw do
           path: 'notices', as: :notices, concerns: [:admin_reactivatable, :admin_publishable]
 
         resources :group_posts, only: [:index, :show, :destroy], 
-          path: 'posts', as: :posts, concerns: [:admin_reactivatable, :admin_publishable] do
+          path: 'posts', as: :posts, concerns: [:admin_reactivatable, :admin_publishable]
 
-          resources :group_post_comments, only: [:destroy], 
-            path: 'comments', as: :comments, concerns: [:admin_reactivatable, :admin_publishable]
-        end 
+       resources :group_post_comments, only: [:index, :show, :destroy], 
+          path: 'post_comments', as: :post_comments, concerns: [:admin_reactivatable, :admin_publishable]
       end
     end
 

@@ -1,0 +1,26 @@
+<h1>お知らせ一覧 (<%= @group.name %>)</h1>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>投稿者</th>
+      <th>投稿日</th>
+      <th>固定表示</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @group_notices.each do |notice| %>
+      <tr>
+        <td><%= link_to notice.title.presence || "(無題)", admin_group_notice_path(@group.id, notice) %></td>
+        <td><%= link_to notice.member.user.nickname, admin_user_path(notice.member.user) %></td>
+        <td><%= notice.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+        <td><%= notice.is_pinned ? "はい" : "いいえ" %></td>
+        <td><%= link_to "削除", admin_group_notice_path(@group, notice), method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "グループ詳細に戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>

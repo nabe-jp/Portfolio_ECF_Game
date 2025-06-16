@@ -19,29 +19,34 @@ class Admin::UserPostCommentsController < Admin::ApplicationController
     @user_post_comment = UserPostComment.find(params[:id])
   
     begin
-      Deleter::UserPostCommentDeleter.call(@comment, deleted_by: current_admin)
-      redirect_to admin_user_post_comment_path(@user_post_comment), notice: "コメントを削除しました"
+      Deleter::UserPostCommentDeleter.new(@comment, deleted_by: current_admin).call
+      redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを削除しました'
     rescue => e
       Rails.logger.error("UserPostCmment削除エラー: #{e.message}")
-      redirect_to admin_root_path, alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
+      redirect_to admin_root_path, alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
     end
   end
 
   def reactivate
-    @user_post_comment = UserPostComment.find(params[:id])
-    @user_post_comment.update(is_deleted: false, deleted_at: nil, deleted_by_id: nil)
-    redirect_to admin_user_post_comment_path(@user_post_comment), notice: "コメントを復元しました"
+    begin
+      Restorer::UserPostCommentRestorer.new(@user_post).call
+      redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを復元しました'
+    rescue => e
+      Rails.logger.error("UserPostComment復元エラー: #{e.message}")
+      redirect_to admin_user_post_comment_path(@user_post_comment), 
+        alert: '予期せぬエラーにより、コメントの復元が行えませんでした。'
+    end
   end
 
   def hide
     @user_post_comment = UserPostComment.find(params[:id])
     @user_post_comment.update(is_public: false)
-    redirect_to admin_user_post_comment_path(@user_post_comment), notice: "コメントを非公開にしました"
+    redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを非公開にしました'
   end
 
   def publish
     @user_post_comment = UserPostComment.find(params[:id])
     @user_post_comment.update(is_public: true)
-    redirect_to admin_user_post_comment_path(@user_post_comment), notice: "コメントを公開にしました"
+    redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを公開にしました'
   end
 end

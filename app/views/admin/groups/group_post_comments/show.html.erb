@@ -1,0 +1,16 @@
+<h1>コメント詳細</h1>
+
+<p><strong>投稿タイトル:</strong>
+  <%= link_to @group_post_comment.group_post.title, admin_group_post_path(@group, @group_post_comment.group_post) %>
+</p>
+
+<p><strong>投稿者:</strong>
+  <%= link_to @group_post_comment.member.user.nickname, admin_user_path(@group_post_comment.member.user) %>
+</p>
+
+<p><strong>本文:</strong></p>
+<p><%= simple_format(@group_post_comment.body) %></p>
+
+<p><strong>投稿日:</strong> <%= @group_post_comment.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+
+<%= link_to "一覧に戻る", admin_group_post_comments_path(@group.id), class: "btn btn-secondary" %>

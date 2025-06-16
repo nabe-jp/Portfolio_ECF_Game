@@ -1,2 +1,0 @@
-module Admin::GroupPostsHelper
-end

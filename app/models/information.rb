@@ -1,5 +1,7 @@
 class Information < ApplicationRecord
+  include Scopes::Admin::Filters
   include Scopes::Public::Homes
+  include Scopes::Shared::Ordering
   belongs_to :admin
 
   attr_accessor :enable_sort_order

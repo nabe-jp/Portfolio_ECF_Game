@@ -15,7 +15,7 @@ class Admin::UsersController < Admin::ApplicationController
   
     case params[:status]
     when "inactive"
-      @users = User.where(is_deleted: true)
+      @users = User.where.not(user_status: :active)
     when "all"
       @users = User.all
     end

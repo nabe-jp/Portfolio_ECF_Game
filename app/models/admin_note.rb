@@ -1,4 +1,6 @@
 class AdminNote < ApplicationRecord
+  include Scopes::Admin::Filters
+  include Scopes::Shared::Ordering
   include DeletableReason
   
   belongs_to :admin
@@ -11,6 +13,4 @@ class AdminNote < ApplicationRecord
   validates :body, length: { maximum: 200, 
     message: "は1～200文字以内で入力してください" }, if: -> { body.present? }  
     
-  scope :active, -> { where(deleted_at: nil) }
-  scope :deleted, -> { where.not(deleted_at: nil) }
 end

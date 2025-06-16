@@ -1,2 +1,24 @@
-<h1>Admin::Groups#show</h1>
-<p>Find me in app/views/admin/groups/show.html.erb</p>
+<h1>グループ詳細: <%= @group.name %></h1>
+
+<p><strong>説明:</strong> <%= @group.description %></p>
+<p><strong>Slug:</strong> <%= @group.slug %></p>
+<p><strong>所有者:</strong> <%= link_to @group.owner.nickname, admin_user_path(@group.owner) if @group.owner %></p>
+<p><strong>ユーザー数:</strong> <%= @group.user_count %></p>
+<p><strong>投稿数:</strong> <%= @group.post_count %></p>
+<p><strong>公開状態:</strong> <%= @group.is_public ? "公開" : "非公開" %></p>
+<p><strong>削除状態:</strong> <%= @group.is_deleted ? "削除済み" : "有効" %></p>
+
+<hr>
+
+<% unless @group.is_deleted? %>
+  <%= link_to '削除', admin_group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-danger' %>
+<% else %>
+  <%= link_to '復元', reactivate_admin_group_path(@group), method: :patch, class: 'btn btn-sm btn-secondary' %>
+<% end %>
+<% if @group.is_public? %>
+  <%= link_to '非公開にする', hide_admin_group_path(@group), method: :patch, class: 'btn btn-sm btn-warning' %>
+<% else %>
+  <%= link_to '公開にする', publish_admin_group_path(@group), method: :patch, class: 'btn btn-sm btn-success' %>
+<% end %>
+
+<%= link_to "一覧に戻る", admin_groups_path, class: "btn btn-sm btn-secondary" %>

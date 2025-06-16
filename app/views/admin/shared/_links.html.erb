@@ -1,0 +1,60 @@
+<% is_button = (local_assigns[:as] == :button) %>
+
+<% if defined?(check_dashboard_link) && check_dashboard_link %>
+  <%= link_to 'ホーム', admin_root_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+
+<% elsif defined?(check_back_link) && check_back_link %>
+  <%= link_to '戻る', 'javascript:history.back()', 
+    class: (is_button ? 'btn btn-base back-btn' : nil) %>
+
+<%# 申し送り #%>
+<% elsif defined?(check_notes_link) && check_notes_link %>
+  <%= link_to '申し送り一覧', admin_notes_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+
+<%# TOP #%>
+<% elsif defined?(check_informations_link) && check_informations_link %>
+  <%= link_to 'お知らせ一覧', admin_informations_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+
+<%# ユーザー #%>
+<% elsif defined?(check_users_link) && check_users_link %>
+  <%= link_to 'ユーザー一覧', admin_users_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+
+<% elsif defined?(check_user_posts_link) && check_user_posts_link %>
+  <%= link_to '投稿一覧', admin_user_posts_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+
+<% elsif defined?(check_user_post_comments_link) && check_user_post_comments_link %>
+  <%= link_to '投稿コメント一覧', admin_user_post_comments_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+
+<%# グループ #%>
+<% elsif defined?(check_groups_link) && check_groups_link %>
+  <%= link_to 'グループ一覧', admin_groups_path, 
+    class: (is_button ? 'btn btn-base' : nil) %>
+
+<% elsif @group&.id %>
+  <% if defined?(check_group_members_link) && check_group_members_link %>
+    <%= link_to 'メンバー一覧', admin_group_members_path(@group.id), 
+      class: (is_button ? 'btn btn-base' : nil) %>
+
+  <% elsif defined?(check_group_notices_link) && check_group_notices_link %>
+    <%= link_to 'お知らせ一覧', admin_group_notices_path(@group.id), 
+      class: (is_button ? 'btn btn-base' : nil) %>
+
+  <% elsif defined?(check_group_events_link) && check_group_events_link %>
+    <%= link_to 'イベント一覧', admin_group_events_path(@group.id), 
+      class: (is_button ? 'btn btn-base' : nil) %>
+
+  <% elsif defined?(check_group_posts_link) && check_group_posts_link %>
+    <%= link_to '投稿一覧', admin_group_posts_path(@group.id), 
+      class: (is_button ? 'btn btn-base' : nil) %>
+
+  <% elsif defined?(check_group_comments_link) && check_group_comments_link %>
+    <%= link_to '投稿コメント一覧', admin_group_post_comments_path(@group.id), 
+      class: (is_button ? 'btn btn-base' : nil) %>
+  <% end %>
+<% end %>
