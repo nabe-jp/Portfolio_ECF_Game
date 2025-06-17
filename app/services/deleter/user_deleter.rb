@@ -29,7 +29,7 @@ module Deleter
 
         # ユーザー本人のコメント削除
         @user.user_post_comments.find_each do |comment|
-          Deleter::UserPostComentDeleter.new(comment, deleted_by: @deleted_by,
+          Deleter::UserPostCommentDeleter.new(comment, deleted_by: @deleted_by,
             deleted_reason: APPLIED_DELETION_REASON, deleted_via_parent: true).call
         end
 

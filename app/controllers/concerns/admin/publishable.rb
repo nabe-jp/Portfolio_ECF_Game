@@ -14,7 +14,7 @@ module Admin::Publishable
   end
 
   def publish
-    if @resource.update(is_public: true)
+    if @resource.update(is_public: true, hidden_on_parent_restore: false)
       redirect_to after_publication_path, notice: "#{resource_name}を公開しました。"
     else
       redirect_to after_publication_path, alert: "公開に失敗しました。"

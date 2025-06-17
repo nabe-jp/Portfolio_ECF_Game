@@ -6,7 +6,7 @@
       <!-- 左側: 画像 -->
       <th style="width: 25%; background-color: white;" rowspan="5" class="text-center align-middle">
         <%= image_tag url_for(@user.profile_image), alt: "#{@user.nickname}の画像", 
-          class: "rounded-circle img-thumbnail", width: 200, height: 200 %>
+          class: "img-fluid", width: 200, height: 200 %>
       </th>
       <th class="with-left-border" style="width: 15%;">ID</th>
       <td><%= @user.id %></td>
@@ -40,8 +40,8 @@
       <td><%= @user.user_posts.count %></td>
     </tr>
     <tr>
-      <th colspan="2">登録日</th>
-      <td><%= @user.created_at.strftime('%Y-%m-%d') %></td>
+      <th colspan="2">登録日時</th>
+      <td><%= @user.created_at.strftime('%Y-%m-%d %H:%M') %></td>
     </tr>
     <tr>
       <th colspan="2">最終ログイン</th>
@@ -61,10 +61,14 @@
 
   <%= link_to '一覧へ戻る', admin_users_path, class: 'btn btn-secondary mx-5' %>
 
-  <% if !@user.active? %>
+  <% if !@user.user_status_active? && !@user.user_status_restored_pending? %>
     <%= link_to '復元', reactivate_admin_user_path(@user), method: :patch,
       data: { confirm: "このユーザーを復元すると、ログインや投稿が可能になります。\n復元処理を実施しますか？" },
       class: 'btn btn-success' %>
+  <% elsif @user.user_status_restored_pending? %>
+    <%= link_to 'アクティブ化', activate_admin_user_path(@user), method: :patch,
+      data: { confirm: "このユーザーをアクティブにしますか？" },
+      class: 'btn btn-primary' %>
   <% else %>
     <%= link_to '凍結・退会', admin_user_path(@user), method: :delete,
       data: { confirm: "このユーザーを凍結・退会にすると、ログインや投稿ができなくなります。\n凍結・退会処理を実施しますか？" },

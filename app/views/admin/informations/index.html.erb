@@ -38,52 +38,56 @@
   <!-- お知らせ一覧 -->
   <div class="row justify-content-center">
     <div class="col-8">
-      <% @informations.each do |info| %>
-        <div class="card mb-3 <%= 'bg-light text-muted' if info.deleted_at.present? %>">
-          <div class="card-body">
-            <div class="row align-items-start mb-2">
-              <div class="col-9  pl-0">
-                <h5 class="card-title"><%= info.title %></h5>
+      <% if @informations.empty? %>
+        <p class="text-center text-muted">お知らせはありません。</p>
+      <% else %>
+        <% @informations.each do |info| %>
+          <div class="card mb-3 <%= 'bg-light text-muted' if info.deleted_at.present? %>">
+            <div class="card-body">
+              <div class="row align-items-start mb-2">
+                <div class="col-9  pl-0">
+                  <h5 class="card-title"><%= info.title %></h5>
+                </div>
+                <div class="col-3 text-end">
+                  <% if info.deleted_at.present? %>
+                    <span class="badge bg-danger">削除済み</span>
+                  <% end %>
+                  <% if info.is_pinned %>
+                    <span class="badge bg-warning text-dark">固定</span>
+                  <% end %>
+                  <% unless info.is_public %>
+                    <span class="badge bg-secondary text-light">非公開</span>
+                  <% end %>
+                </div>
               </div>
-              <div class="col-3 text-end">
-                <% if info.deleted_at.present? %>
-                  <span class="badge bg-danger">削除済み</span>
-                <% end %>
-                <% if info.is_pinned %>
-                  <span class="badge bg-warning text-dark">固定</span>
-                <% end %>
-                <% unless info.is_public %>
-                  <span class="badge bg-secondary text-light">非公開</span>
-                <% end %>
-              </div>
-            </div>
-            <p class="card-text"><%= info.body %></p>
-            <p class="card-text mb-1">
-              <small class="text-muted">公開日: <%= l(info.published_at, format: :short) %></small>
-            </p>
-            <p class="card-text mb-1">
-              <small class="text-muted">投稿日: <%= l(info.created_at, format: :short) %></small>
-            </p>
-            <% if info.is_pinned %>
+              <p class="card-text"><%= info.body %></p>
               <p class="card-text mb-1">
-                <small class="text-muted">優先順位: <%= info.sort_order %></small>
+                <small class="text-muted">公開日: <%= l(info.published_at, format: :short) %></small>
               </p>
-            <% end %>
-            <div class="text-end mt-3">
-              <% if info.deleted_at.present? %>
-                <%= link_to '復元', reactivate_admin_information_path(info), method: :patch, 
-                  data: { confirm: '復元しますか？' }, class: 'btn btn-sm btn-outline-success' %>
-              <% else %>
-                <%= link_to '編集', edit_admin_information_path(info), 
-                  class: 'btn btn-sm btn-outline-secondary me-2' %>
-                <%= link_to '削除', admin_information_path(info), method: :delete, 
-                  data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
+              <p class="card-text mb-1">
+                <small class="text-muted">投稿日: <%= l(info.created_at, format: :short) %></small>
+              </p>
+              <% if info.is_pinned %>
+                <p class="card-text mb-1">
+                  <small class="text-muted">優先順位: <%= info.sort_order %></small>
+                </p>
               <% end %>
+              <div class="text-end mt-3">
+                <% if info.deleted_at.present? %>
+                  <%= link_to '復元', reactivate_admin_information_path(info), method: :patch, 
+                    data: { confirm: '復元しますか？' }, class: 'btn btn-sm btn-outline-success' %>
+                <% else %>
+                  <%= link_to '編集', edit_admin_information_path(info), 
+                    class: 'btn btn-sm btn-outline-secondary mr-2' %>
+                  <%= link_to '削除', admin_information_path(info), method: :delete, 
+                    data: { confirm: '削除しますか？' }, class: 'btn btn-sm btn-outline-danger' %>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
+        <%= paginate @informations %>
       <% end %>
-      <%= paginate @informations %>
     </div>
   </div>
 </div>

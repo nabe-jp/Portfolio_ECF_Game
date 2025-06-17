@@ -2,6 +2,14 @@ module Scopes::Admin::Filters
   extend ActiveSupport::Concern
 
   included do
+    scope :inactive_users, -> {
+      where.not(user_status: :active)
+    }
+
+    scope :inactive_members, -> {
+      where.not(member_status: :active)
+    }
+
     # 削除されてなく、非公開になっていないもの
     scope :active_only, -> {
       where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)

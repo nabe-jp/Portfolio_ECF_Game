@@ -41,3 +41,7 @@ label {
   text-align: left;
   white-space: nowrap;               // labelの中のテキスト自体を折り返さない
 }
+
+p {
+  margin-bottom: 0;
+}

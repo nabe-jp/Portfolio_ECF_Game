@@ -8,14 +8,19 @@
 <p>参加メンバー数: <%= @group.group_memberships.active_members.count %>人</p>
 
 <% if user_signed_in? %>
-  <% if group_member? %>
-    <%= link_to 'グループマイページへ', dashboard_group_path(@group), class: "btn btn-primary" %>
+  <% membership = @group.group_memberships.find_by(user: current_user) %>
+
+  <% if membership.present? && membership.member_status == 'pending' %>
+    <p>参加申請中です。承認までお待ちください。</p>
+    <%= button_to '申請をキャンセルする', cancel_group_membership_path(@group), 
+          method: :delete, data: { confirm: '申請をキャンセルしてもよろしいですか？' }, class: "btn btn-danger" %>
   <% else %>
-    <%= button_to 'グループに参加する', join_group_membership_path(@group), 
-      method: :post, class: "btn btn-success" %>
+    <%= button_to 'グループに参加申請する', join_group_membership_path(@group), 
+          method: :post, class: "btn btn-success" %>
   <% end %>
+
 <% else %>
-  <p><%= link_to 'ログインして参加する', new_user_session_path %></p>
+  <p><%= link_to 'ログインして参加申請する', new_user_session_path %></p>
 <% end %>
 
 <hr>

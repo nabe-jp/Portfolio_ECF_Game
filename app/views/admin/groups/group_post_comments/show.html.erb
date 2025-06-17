@@ -1,16 +1,88 @@
-<h1>コメント詳細</h1>
+<h2 class="mb-4 text-center">コメント詳細</h2>
 
-<p><strong>投稿タイトル:</strong>
-  <%= link_to @group_post_comment.group_post.title, admin_group_post_path(@group, @group_post_comment.group_post) %>
-</p>
+<div class="row mb-4">
+  <% post = @group_post_comment.group_post %>
+  <% group = post.group %>
 
-<p><strong>投稿者:</strong>
-  <%= link_to @group_post_comment.member.user.nickname, admin_user_path(@group_post_comment.member.user) %>
-</p>
+  <!-- グループ画像 -->
+  <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+    <p><strong>所属グループ</strong></p>
+    <%= image_tag url_for(group.group_image), width: 200, height: 200, class: "img-fluid mb-2" %>
+    <p class="text-truncate w-100 text-center mb-1"><strong><%= group.name %></strong></p>
+    <%= link_to "グループ詳細", admin_group_path(group.id), class: "btn btn-outline-primary btn-sm" %>
+  </div>
 
-<p><strong>本文:</strong></p>
-<p><%= simple_format(@group_post_comment.body) %></p>
+  <!-- 投稿画像 -->
+  <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+    <p><strong>対象投稿</strong></p>
+    <%= image_tag url_for(post.group_post_image), width: 200, height: 200, class: "img-fluid mb-2" %>
+    <p class="text-truncate w-100 text-center mb-1"><strong><%= post.title.presence %></strong></p>
+    <%= link_to "投稿詳細", admin_group_post_path(group.id, post), class: "btn btn-outline-primary btn-sm" %>
+  </div>
+</div>
 
-<p><strong>投稿日:</strong> <%= @group_post_comment.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+<table class="table table-striped custom-bordered">
+  <tr>
+    <th style="width: 30%;">ID</th>
+    <td><%= @group_post_comment.id %></td>
+  </tr>
+  <tr>
+    <th>親コメントID</th>
+    <td>
+      <% if @group_post_comment.parent_comment_id.present? %>
+        <%= link_to @group_post_comment.parent_comment_id, admin_group_post_comment_path(@group_post_comment.group_post.group.id, @group_post_comment.parent_comment_id) %>
+      <% else %>
+        -
+      <% end %>
+    </td>
+  </tr>
+  <tr>
+    <th>本文</th>
+    <td><%= simple_format(@group_post_comment.body) %></td>
+  </tr>
+  <tr>
+    <th>投稿者</th>
+    <td>
+      <%= link_to @group_post_comment.member.user.nickname, 
+        admin_user_path(@group_post_comment.member.user) %>
+    </td>
+  </tr>
+  <tr>
+    <th>ステータス</th>
+    <td><%= status_label(@group_post_comment) %></td>
+  </tr>
+  <tr>
+    <th>親の復元時に非公開</th>
+    <td><%= hidden_on_parent_restore_label(@group_post_comment) %></td>
+  </tr>
+  <tr>
+    <th>削除の理由</th>
+    <td><%= enum_i18n(@group_post_comment.deleted_reason, :deleted_reason) || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除の操作者ID</th>
+    <td><%= @group_post_comment.deleted_by_id || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除日時</th>
+    <td><%= @group_post_comment.deleted_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+  <tr>
+    <th>最終返信日時</th>
+    <td><%= @group_post_comment.replied_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+  <tr>
+    <th>作成日時</th>
+    <td><%= @group_post_comment.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+  </tr>
+</table>
 
-<%= link_to "一覧に戻る", admin_group_post_comments_path(@group.id), class: "btn btn-secondary" %>
+<%= render partial: "admin/shared/admin_resource_controls", locals: {
+  resource: @group_post_comment,
+  index_path: admin_group_post_comments_path(group.id),
+  toggle_path: (!@group_post_comment.is_public || @group_post_comment.hidden_on_parent_restore) ?
+    publish_admin_group_post_comment_path(group.id, @group_post_comment) :
+      hide_admin_group_post_comment_path(group.id, @group_post_comment),
+  restore_path: reactivate_admin_group_post_comment_path(group.id, @group_post_comment),
+  delete_path: admin_group_post_comment_path(group.id, @group_post_comment)
+} %>

@@ -9,9 +9,10 @@ module DeletableReason
       voluntarily_left_group: 2,                  # グループから自発的に退会
 
       # 100〜199: グループ管理者都合
-      removed_by_group_authority: 100,            # グループ管理権限者(オーナーまたはマネージャー)による削除
-      kicked_by_group_moderator: 101,             # グループ管理者による強制退会
-      group_disbanded: 102,                       # グループ削除による強制退会
+      application_rejected: 100,                   # グループへの参加申請を拒否
+      removed_by_group_authority: 101,            # グループ管理権限者(オーナーまたはマネージャー)による削除
+      kicked_by_group_moderator: 102,             # グループ管理者による強制退会
+      group_disbanded: 103,                       # グループ削除による強制退会
 
       # 200〜299: サイト管理者都合
       removed_by_admin: 200,                      # サイト管理者による削除

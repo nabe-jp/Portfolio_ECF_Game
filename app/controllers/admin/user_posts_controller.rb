@@ -1,14 +1,12 @@
 class Admin::UserPostsController < Admin::ApplicationController
-  before_action :set_user_post, only: [:show, :destroy, :reactivate, :hide, :publish]
+  include Admin::Publishable
+  include Admin::FilterableStatus
+
+  before_action :set_user_post, only: [:show, :destroy, :reactivate]
 
   def index
-    # パラメータを論理値に変換して状態を保持
-    @show_non_public = ActiveModel::Type::Boolean.new.cast(params[:show_non_public])
-    @show_deleted = ActiveModel::Type::Boolean.new.cast(params[:show_deleted])
-    @show_all = params[:show] == "all"
-  
     # 絞り込み済みの投稿に並び順を適用し、ページネーション
-    @user_posts = filtered_records(UserPost).order(*sort_order).page(params[:page]).per(10)
+    @user_posts = filtered_records(UserPost).order(*sort_order).page(params[:page])
   end
 
   def show
@@ -33,19 +31,14 @@ class Admin::UserPostsController < Admin::ApplicationController
       redirect_to admin_user_post_path(@user_post), notice: '投稿と関連データを復元しました'
     rescue => e
       Rails.logger.error("UserPost復元エラー: #{e.message}")
-      redirect_to admin_user_post_path(@user_post), 
-        alert: '予期せぬエラーにより、投稿と関連データの復元が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      redirect_to admin_user_post_path(@user_post)
     end
   end
-  
-  def hide
-    @user_post.update(is_public: false)
-    redirect_to admin_user_post_path(@user_post), notice: "投稿を非公開にしました"
-  end
-  
-  def publish
-    @user_post.update(is_public: true)
-    redirect_to admin_user_post_path(@user_post), notice: "投稿を公開にしました"
+
+  # Publishable内で使用する、公開/非公開のために必要
+  def set_resource_for_publication
+    @resource = UserPost.find(params[:id])
   end
 
   private

@@ -34,7 +34,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
         deleted_by: current_user, deleted_reason: :kicked_by_group_moderator).call
       redirect_to group_members_path(@group), notice: "メンバーを追放しました"
     rescue => e
-      Rails.logger.error("メンバー追放エラー: #{e.message}")
+      Rails.logger.error("GroupMember追放エラー: #{e.message}")
       redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、メンバーの追放が行えませんでした。'
     end
   end

@@ -1,26 +1,42 @@
-<h1>グループ投稿一覧 (<%= @group.name %>)</h1>
+<h2 class="text-center mt-3 mb-5">グループ投稿一覧 (<%= @group.name %>)</h2>
 
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>投稿者</th>
-      <th>公開</th>
-      <th>固定表示</th>
-      <th>投稿日</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @group_posts.each do |post| %>
+<%= render "admin/shared/filter_controls", url_helper: method(:admin_group_posts_path) %>
+
+<% if @group_posts.any? %>
+  <table class="table table-hover table-bordered text-center">
+    <thead class="thead-light">
       <tr>
-        <td><%= link_to post.title, admin_group_post_path(@group.id, post) %></td>
-        <td><%= link_to post.member.user.nickname, admin_user_path(post.member.user) %></td>
-        <td><%= post.is_public ? "公開" : "非公開" %></td>
-        <td><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= link_to "削除", admin_group_post_path(@group, post), method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
+        <th style="width: 30%;">タイトル</th>
+        <th style="width: 15%;">投稿日</th>
+        <th style="width: 25%;">投稿者</th>
+        <th style="width: 10%;">公開</th>
+        <th style="width: 12%;">外部公開</th>
+        <th style="width: 8%;">詳細</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @group_posts.each do |post| %>
+        <tr class="text-center <%= row_class(post) %>">
+          <td><%= link_to post.title, admin_group_post_path(@group.id, post) %></td>
+          <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+          <td><%= link_to post.member.user.nickname, admin_user_path(post.member.user) %></td>
+          <td><%= status_label(post) %></td>
+          <td><%= non_member_visibility_label(post) %></td>
+          <td><%= link_to '詳細', admin_group_post_path(@group.id, post) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to "グループ詳細に戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @group_posts %>
+  </div>
+<% else %>
+  <div class="text-center my-5">
+    <p class="h5">まだグループ投稿はありません。</p>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center mt-4">
+  <%= link_to "グループ詳細に戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>
+</div>

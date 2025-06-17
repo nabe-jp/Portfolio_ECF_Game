@@ -16,11 +16,12 @@ class GroupMembership < ApplicationRecord
   # 将来的に招待機能を実装する際に使用
   # belongs_to :inviter, class_name: 'User', optional: true, foreign_key: 'invited_by_id'
 
+  # 参加中・承認待ち・承認拒否・非アクティブ(自主退会・連鎖削除)・グループ管理者空のキック・サイト運営による制限
+  enum member_status: { active: 0, pending: 1, rejected: 2, inactive: 3, kicked: 4, suspended: 5 }, 
+    _prefix: true
+
   # _prefix: trueを使い.role_～という形で使えるようにし、名前の衝突を避ける
   enum role: { member: 0, moderator: 1, owner: 2 }, _prefix: true
- 
-  # 将来的に承認待ち・参加中・保留中を実装する際に使用
-  # enum status: { pending: 0, active: 1, suspended: 2 }
 
   # 重複参加防止
   validates :user_id, uniqueness: { scope: :group_id }

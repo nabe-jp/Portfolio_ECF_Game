@@ -93,15 +93,16 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "joined_at"
     t.integer "invited_by_id"
     t.text "note"
-    t.boolean "is_deleted", default: false, null: false
+    t.integer "member_status", default: 0, null: false
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
     t.integer "deleted_reason"
     t.boolean "deleted_due_to_parent", default: false, null: false
+    t.integer "approved_by_id"
+    t.datetime "approved_at"
     t.boolean "is_public", default: true, null: false
     t.boolean "hidden_on_parent_restore", default: false, null: false
     t.integer "role", default: 0, null: false
-    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["group_id"], name: "index_group_memberships_on_group_id"

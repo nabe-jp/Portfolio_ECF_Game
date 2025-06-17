@@ -1,8 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
-  before_action :set_user, only: [:show, :destroy, :reactivate]
-
-  # ステータス表示のヘルパー
-  include Admin::StatusHelper
+  before_action :set_user, only: [:show, :destroy, :reactivate, :activate]
 
   def index
     # 初期アクセス時に status パラメータがなければ、有効ユーザーにリダイレクト
@@ -24,7 +21,7 @@ class Admin::UsersController < Admin::ApplicationController
     direction = %w(asc desc).include?(params[:direction]) ? params[:direction] : "desc"
     @users = @users.order(id: direction)
   
-    @users = @users.page(params[:page]).per(10)
+    @users = @users.page(params[:page])
   end
   
   def show
@@ -52,6 +49,11 @@ class Admin::UsersController < Admin::ApplicationController
       redirect_to admin_user_path(@user), 
         alert: '予期せぬエラーにより、ユーザーと関連データの復元が行えませんでした。'
     end
+  end
+
+  def activate
+    @user.update!(user_status: :active)
+    redirect_to admin_user_path(@user), notice: "ユーザーをアクティブにしました"
   end
 
   private

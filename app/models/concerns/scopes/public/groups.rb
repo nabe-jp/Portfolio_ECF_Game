@@ -16,10 +16,12 @@ module Scopes::Public::Groups
 
     # メンバーに使用
     scope :active_members, -> {
-      where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)
+      where(member_status: :active, is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :asc)
     }
 
+    scope :pending_members, -> { where(member_status: 'pending') }
+    
     # グループ内のお知らせに使用
     scope :active_group_notices, -> {
       where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)

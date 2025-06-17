@@ -5,7 +5,7 @@
   <div class="col-md-3 d-flex flex-column justify-content-center align-items-center mt-4">
     <% if @user_post_comment.user.profile_image.attached? %>
       <%= image_tag url_for(@user_post_comment.user.profile_image), width: 200, height: 200,
-          class: "rounded-circle img-thumbnail mb-2" %>
+          class: "img-fluid mb-2" %>
     <% end %>
     <p><strong><%= @user_post_comment.user.nickname %></strong></p>
     <%= link_to "ユーザー詳細", admin_user_path(@user_post_comment.user), class: "btn btn-outline-primary btn-sm" %>
@@ -25,6 +25,10 @@
         </td>
       </tr>
       <tr>
+        <th>コメント内容</th>
+        <td class="no-p-margin"><%= simple_format(@user_post_comment.body) %></td>
+      </tr>
+      <tr>
         <th>ユーザー</th>
         <td>
           <%= link_to "#{@user_post_comment.user.nickname} (ID: #{@user_post_comment.user_id})",
@@ -32,32 +36,22 @@
         </td>
       </tr>
       <tr>
-        <th>コメント内容</th>
-        <td class="no-p-margin"><%= simple_format(@user_post_comment.body) %></td>
-      </tr>
-      <tr>
         <th>ステータス</th>
         <td>
-          <% if @user_post_comment.is_deleted %>
-            削除済み
-          <% elsif @user_post_comment.is_public %>
-            公開中
-          <% else %>
-            非公開
-          <% end %>
+          <%= status_label(@user_post_comment) %>
         </td>
       </tr>
       <tr>
         <th>親コメントID</th>
-        <td><%= @user_post_comment.parent_comment_id || 'なし' %></td>
+        <td><%= @user_post_comment.parent_comment_id || '-' %></td>
       </tr>
       <tr>
         <th>削除日時</th>
-        <td><%= @user_post_comment.deleted_at&.strftime('%Y-%m-%d %H:%M') || 'なし' %></td>
+        <td><%= @user_post_comment.deleted_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
       </tr>
       <tr>
-        <th>返信日時</th>
-        <td><%= @user_post_comment.replied_at&.strftime('%Y-%m-%d %H:%M') || 'なし' %></td>
+        <th>最終返信日時</th>
+        <td><%= @user_post_comment.replied_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
       </tr>
       <tr>
         <th>作成日時</th>
@@ -67,30 +61,10 @@
   </div>
 </div>
 
-<!-- アクションボタン -->
-<div class="text-center mb-4">
-
-  <%= link_to '前のページに戻る', 'javascript:history.back()', class: 'btn btn-outline-secondary mr-5' %>
-
-  <%= link_to '一覧へ戻る', admin_user_post_comments_path, class: 'btn btn-secondary' %>
-
-  <% if @user_post_comment.is_public %>
-    <%= link_to "非公開にする", hide_admin_user_post_comment_path(@user_post_comment), method: :patch,
-      data: { confirm: "このコメントを非公開にします。よろしいですか？" },
-      class: "btn btn-warning mx-5" %>
-  <% else %>
-    <%= link_to "公開にする", publish_admin_user_post_comment_path(@user_post_comment), method: :patch,
-      data: { confirm: "このコメントを公開にします。よろしいですか？" },
-      class: "btn btn-primary mx-5" %>
-  <% end %>
-
-  <% if @user_post_comment.is_deleted %>
-    <%= link_to "復元", reactivate_admin_user_post_comment_path(@user_post_comment), method: :patch,
-      data: { confirm: "このコメントを復元してもよろしいですか？" },
-      class: "btn btn-success" %>
-  <% else %>
-    <%= link_to "削除", admin_user_post_comment_path(@user_post_comment), method: :delete,
-      data: { confirm: "このコメントを削除してもよろしいですか？" },
-      class: "btn btn-danger" %>
-  <% end %>
-</div>
+<%= render partial: "admin/shared/admin_resource_controls", locals: {
+  resource: @user_post_comment,
+  index_path: admin_user_post_comments_path,
+  toggle_path: @user_post_comment.is_public ? hide_admin_user_post_comment_path(@user_post_comment) : publish_admin_user_post_comment_path(@user_post_comment),
+  restore_path: reactivate_admin_user_post_comment_path(@user_post_comment),
+  delete_path: admin_user_post_comment_path(@user_post_comment)
+} %>

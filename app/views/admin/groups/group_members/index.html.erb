@@ -1,26 +1,47 @@
-<h1>メンバー一覧 (<%= @group.name %>)</h1>
+<h2 class="text-center mt-3 mb-5">メンバー一覧 (<%= @group.name %>)</h2>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>ユーザー名</th>
-      <th>役割</th>
-      <th>加入日</th>
-      <th>状態</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @group_members.each do |member| %>
+<%# url_helper.callでadmin_group_members_pathを呼び、url_helper.callの()内をoptsとしてパスの引数にする #%>
+<%= render partial: "admin/shared/enum_status_filter",
+  locals: { url_helper: ->(opts) { group_members_url_with(opts) } } %>
+
+<% if @group_members.any? %>
+  <table class="table table-hover table-bordered text-center">
+    <thead class="thead-light">
       <tr>
-        <td><%= link_to member.user.nickname, admin_user_path(member.user) %></td>
-        <td><%= member.role %></td>
-        <td><%= member.joined_at&.strftime("%Y-%m-%d") %></td>
-        <td><%= member.is_deleted ? "削除済み" : "有効" %></td>
-        <td><%= link_to "詳細", admin_group_member_path(@group.id, member) %></td>
+        <th style="width: 30%;">ユーザー名</th>
+        <th style="width: 15%;">役割</th>
+        <th style="width: 15%;">加入日</th>
+        <th style="width: 15%;">公開ステータス</th>
+        <th style="width: 15%;">メンバーステータス</th>
+        <th style="width: 10%;">詳細</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @group_members.each do |member| %>
+        <tr class="text-center <%= row_class(member) %>">
+          <td><%= link_to member.user.nickname, admin_user_path(member.user) %></td>
+          <td><%= enum_i18n(member.role, :role) %></td>
+          <td><%= member.joined_at&.strftime("%Y-%m-%d") %></td>
+          <td><%= status_label(member) %></td>
+          <td><%= enum_i18n(member.member_status, :member_status) %></td>
+          <td>
+            <%= link_to "詳細", admin_group_member_path(@group.id, member), 
+              class: "btn btn-sm btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to "グループ詳細へ戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @group_members %>
+  </div>
+<% else %>
+  <div class="text-center my-5">
+    <p class="h5">まだメンバーはありません。</p>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center mt-4">
+  <%= link_to "グループ詳細へ戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>
+</div>

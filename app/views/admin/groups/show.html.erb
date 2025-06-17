@@ -1,24 +1,125 @@
-<h1>グループ詳細: <%= @group.name %></h1>
+<h1 class="mb-4">グループ詳細</h1>
 
-<p><strong>説明:</strong> <%= @group.description %></p>
-<p><strong>Slug:</strong> <%= @group.slug %></p>
-<p><strong>所有者:</strong> <%= link_to @group.owner.nickname, admin_user_path(@group.owner) if @group.owner %></p>
-<p><strong>ユーザー数:</strong> <%= @group.user_count %></p>
-<p><strong>投稿数:</strong> <%= @group.post_count %></p>
-<p><strong>公開状態:</strong> <%= @group.is_public ? "公開" : "非公開" %></p>
-<p><strong>削除状態:</strong> <%= @group.is_deleted ? "削除済み" : "有効" %></p>
+<div class="row mb-4">
+  <!-- グループ画像（仮にimageカラムがある前提で）-->
+  <div class="col-md-7 d-flex justify-content-center align-items-center">
+    <%= image_tag url_for(@group.group_image), class: "img-fluid", 
+      alt: "投稿画像", style: "max-height: 400px;" %>
+  </div>
+
+  <!-- グループ所有者情報 -->
+  <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+    <p><strong>オーナー</strong></p>
+    <% if @group.owner&.profile_image&.attached? %>
+      <%= image_tag url_for(@group.owner.profile_image), width: 200, height: 200, class: "img-fluid mb-2", alt: "所有者画像" %>
+    <% else %>
+      <%= image_tag 'no_user.png', width: 200, height: 200, class: "img-fluid mb-2", alt: "デフォルトユーザー画像" %>
+    <% end %>
+    <p class="text-truncate" style="max-width: 200px;">
+      <strong><%= @group.owner&.nickname || 'なし' %></strong>
+    </p>
+    <% if @group.owner %>
+      <%= link_to "ユーザー詳細", admin_user_path(@group.owner), class: "btn btn-outline-primary btn-sm" %>
+    <% end %>
+  </div>
+</div>
+
+<table class="table table-striped custom-bordered">
+  <tr>
+    <th style="width: 30%;">グループ名</th>
+    <td><%= @group.name %></td>
+  </tr>
+  <tr>
+    <th>説明</th>
+    <td><%= @group.description %></td>
+  </tr>
+  <tr>
+    <th>Slug</th>
+    <td><%= @group.slug %></td>
+  </tr>
+  <tr>
+    <th>所属人数</th>
+    <td><%= @group.active_members.size %></td>
+  </tr>
+  <tr>
+    <th>投稿数（グループ内）</th>
+    <td><%= @group.group_posts.undeleted_only.unhidden_only.count %></td>
+  </tr>
+  <tr>
+    <th>公開投稿数</th>
+    <td>
+      <%= @group.group_posts.undeleted_only.unhidden_only.
+        where(visible_to_non_members: true).count %>
+    </td>
+  </tr>
+  <tr>
+    <th>総コメント数</th>
+    <td>-</td>
+  </tr>
+  <tr>
+    <th>公開状態</th>
+    <td><%= status_label(@group) %></td>
+  </tr>
+  <tr>
+    <th>削除状態</th>
+    <td><%= @group.is_deleted ? "削除済み" : "有効" %></td>
+  </tr>
+  <tr>
+    <th>削除理由</th>
+    <td><%= enum_i18n(@group.deleted_reason, :deleted_reason) || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除日時</th>
+    <td><%= @group.deleted_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除操作者ID</th>
+    <td><%= @group.deleted_by_id || '-' %></td>
+  </tr>
+  <tr>
+    <th>親の復元時に非公開</th>
+    <td><%= hidden_on_parent_restore_label(@group) %></td>
+  </tr>
+  <tr>
+  <th>最終投稿日時</th>
+  <td><%= @group.last_posted_at.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+    <tr>
+    <th>作成日時</th>
+    <td><%= @group.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+  </tr>
+</table>
 
 <hr>
 
-<% unless @group.is_deleted? %>
-  <%= link_to '削除', admin_group_path(@group), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-sm btn-danger' %>
-<% else %>
-  <%= link_to '復元', reactivate_admin_group_path(@group), method: :patch, class: 'btn btn-sm btn-secondary' %>
-<% end %>
-<% if @group.is_public? %>
-  <%= link_to '非公開にする', hide_admin_group_path(@group), method: :patch, class: 'btn btn-sm btn-warning' %>
-<% else %>
-  <%= link_to '公開にする', publish_admin_group_path(@group), method: :patch, class: 'btn btn-sm btn-success' %>
-<% end %>
+<nav class="my-5">
+  <ul class="list-inline text-center">
+    <li class="list-inline-item">
+      <%= link_to "メンバー一覧", admin_group_members_path(@group.id), class: "btn btn-outline-primary btn-sm px-3" %>
+    </li>
+    <li class="list-inline-item ml-4">
+      <%= link_to "お知らせ一覧", admin_group_notices_path(@group.id), class: "btn btn-outline-info btn-sm px-3" %>
+    </li>
+    <li class="list-inline-item ml-4">
+      <%= link_to "イベント一覧", admin_group_events_path(@group.id), class: "btn btn-outline-success btn-sm px-3" %>
+    </li>
+    <li class="list-inline-item ml-4">
+      <%= link_to "投稿一覧", admin_group_posts_path(@group.id), class: "btn btn-outline-warning btn-sm px-3" %>
+    </li>
+    <li class="list-inline-item ml-4">
+      <%= link_to "投稿コメント一覧", admin_group_post_comments_path(@group.id), class: "btn btn-outline-danger btn-sm px-3" %>
+    </li>
+  </ul>
+</nav>
 
-<%= link_to "一覧に戻る", admin_groups_path, class: "btn btn-sm btn-secondary" %>
+<hr class="mb-5">
+
+<%= render partial: "admin/shared/admin_resource_controls", locals: {
+  resource: @group,
+  index_path: admin_groups_path,
+  toggle_path: (!@group.is_public || @group.hidden_on_parent_restore) ?
+    publish_admin_group_path(@group.id) :
+    hide_admin_group_path(@group.id),
+  restore_path: reactivate_admin_group_path(@group.id),
+  delete_path: admin_group_path(@group.id)
+} %>

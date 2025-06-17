@@ -1,12 +1,87 @@
-<h1>イベント詳細</h1>
+<h2 class="mb-4 text-center">イベント詳細</h2>
 
-<p><strong>タイトル:</strong> <%= @group_event.title %></p>
-<p><strong>開始日時:</strong> <%= @group_event.start_time.strftime("%Y-%m-%d %H:%M") %></p>
-<p><strong>終了日時:</strong> <%= @group_event.end_time&.strftime("%Y-%m-%d %H:%M") || "-" %></p>
-<p><strong>投稿者:</strong> <%= link_to @group_event.member.user.nickname, admin_user_path(@group_event.member.user) %></p>
-<p><strong>説明:</strong></p>
-<p><%= simple_format(@group_event.description) %></p>
-<p><strong>公開状態:</strong> <%= @group_event.is_public ? "公開" : "非公開" %></p>
-<p><strong>固定表示:</strong> <%= @group_event.is_pinned ? "はい" : "いいえ" %></p>
+<div class="row mb-4">
+  <% user = @group_event.member.user %>
+  <% group = @group_event.group %>
 
-<%= link_to "一覧に戻る", admin_group_events_path(@group.id), class: "btn btn-secondary" %>
+  <!-- グループ画像 -->
+  <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+    <p><strong>所属グループ</strong></p>
+    <%= image_tag url_for(group.group_image), width: 200, height: 200, class: "img-fluid mb-2" %>
+    <p class="text-truncate w-100 text-center mb-1"><strong><%= group.name %></strong></p>
+    <%= link_to "グループ詳細", admin_group_path(group.id), class: "btn btn-outline-primary btn-sm" %>
+  </div>
+
+  <!-- ユーザー画像 -->
+  <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
+    <p><strong>企画ユーザー</strong></p>
+    <%= image_tag url_for(user.profile_image), width: 200, height: 200, class: "img-fluid mb-2" %>
+    <p class="text-truncate w-100 text-center mb-1"><strong><%= user.nickname %></strong></p>
+    <%= link_to "ユーザー詳細", admin_user_path(user), class: "btn btn-outline-primary btn-sm" %>
+  </div>
+</div>
+
+<table class="table table-striped custom-bordered">
+  <tr>
+    <th style="width: 30%;">ID</th>
+    <td><%= @group_event.id %></td>
+  </tr>
+  <tr>
+    <th>タイトル</th>
+    <td><%= @group_event.title %></td>
+  </tr>
+  <tr>
+    <th>開始日時</th>
+    <td><%= @group_event.start_time.strftime('%Y-%m-%d %H:%M') %></td>
+  </tr>
+  <tr>
+    <th>終了日時</th>
+    <td><%= @group_event.end_time&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+  <tr>
+    <th>説明</th>
+    <td><%= simple_format(@group_event.description) %></td>
+  </tr>
+  <tr>
+    <th>ニックネーム</th>
+    <td><%= link_to user.nickname, admin_user_path(user) %></td>
+  </tr>
+  <tr>
+    <th>ステータス</th>
+    <td><%= status_label(@group_event) %></td>
+  </tr>
+  <tr>
+    <th>ソート順</th>
+    <td><%= @group_event.sort_order %></td>
+  </tr>
+  <tr>
+    <th>親の復元時に非公開</th>
+    <td><%= hidden_on_parent_restore_label(@group_event) %></td>
+  </tr>
+  <tr>
+    <th>削除の理由</th>
+    <td><%= enum_i18n(@group_event.deleted_reason, :deleted_reason) || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除の操作者ID</th>
+    <td><%= @group_event.deleted_by_id || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除日時</th>
+    <td><%= @group_event.deleted_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+  <tr>
+    <th>作成日時</th>
+    <td><%= @group_event.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+  </tr>
+</table>
+
+<%= render partial: "admin/shared/admin_resource_controls", locals: {
+  resource: @group_event,
+  index_path: admin_group_events_path(@group.id),
+  toggle_path: (!@group_event.is_public || @group_event.hidden_on_parent_restore) ?
+    publish_admin_group_event_path(@group.id, @group_event) :
+      hide_admin_group_event_path(@group.id, @group_event),
+  restore_path: reactivate_admin_group_event_path(@group.id, @group_event),
+  delete_path: admin_group_event_path(@group.id, @group_event)
+} %>

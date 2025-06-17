@@ -1,52 +1,47 @@
 class Admin::UserPostCommentsController < Admin::ApplicationController
+  include Admin::Publishable
+  include Admin::FilterableStatus
 
-  include Admin::FilteredRecords
+  before_action :set_user_post_comment, only: [:show, :destroy, :reactivate]
 
   def index
-    @show_non_public = ActiveModel::Type::Boolean.new.cast(params[:show_non_public])
-    @show_deleted = ActiveModel::Type::Boolean.new.cast(params[:show_deleted])
-    @show_all = params[:show] == "all"
-
-    @user_post_comments = filtered_records(UserPostComment).order(*sort_order).page(params[:page]).per(10)
+    @user_post_comments = filtered_records(UserPostComment).order(*sort_order).page(params[:page])
   end
 
-  def show
-    @user_post_comment = UserPostComment.find(params[:id])
-  end
+  def show; end
 
   # 削除時、非公開にもする
   def destroy
-    @user_post_comment = UserPostComment.find(params[:id])
-  
     begin
-      Deleter::UserPostCommentDeleter.new(@comment, deleted_by: current_admin).call
+      Deleter::UserPostCommentDeleter.new(@user_post_comment, 
+        deleted_by: current_admin, deleted_reason: :removed_by_admin).call
       redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを削除しました'
     rescue => e
       Rails.logger.error("UserPostCmment削除エラー: #{e.message}")
-      redirect_to admin_root_path, alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      redirect_to admin_user_post_comment_path(@user_post_comment), 
+        alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
     end
   end
 
   def reactivate
     begin
-      Restorer::UserPostCommentRestorer.new(@user_post).call
+      Restorer::UserPostCommentRestorer.new(@user_post_comment).call
       redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを復元しました'
     rescue => e
       Rails.logger.error("UserPostComment復元エラー: #{e.message}")
-      redirect_to admin_user_post_comment_path(@user_post_comment), 
-        alert: '予期せぬエラーにより、コメントの復元が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      redirect_to admin_user_post_comment_path(@user_post_comment)
     end
   end
 
-  def hide
-    @user_post_comment = UserPostComment.find(params[:id])
-    @user_post_comment.update(is_public: false)
-    redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを非公開にしました'
+  # Publishable内で使用する、公開/非公開のために必要
+  def set_resource_for_publication
+    @resource = UserPostComment.find(params[:id])
   end
 
-  def publish
+  private
+
+  def set_user_post_comment
     @user_post_comment = UserPostComment.find(params[:id])
-    @user_post_comment.update(is_public: true)
-    redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを公開にしました'
   end
 end

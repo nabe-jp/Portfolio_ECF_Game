@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :public do
+    namespace :groups do
+      get 'group_memberships/index'
+    end
+  end
   # ネストによるヘルパー名やURLの冗長性を抑え、可読性を意識したルーティング設計
   # as:はURLヘルパー名として使われるのでシンボルに、path: は実際のルーティングURL文字列になるので文字列で記載
 
@@ -59,9 +64,19 @@ Rails.application.routes.draw do
       # グループメンバーの専用ページ
       # dashboardはこのままでは複数形のコントローラーが使用されるので単数形を使用するように変更
       scope module: :groups do
+
+        # 管理者が他メンバーを操作する用
+        resources :group_memberships, only: [:index], path: 'memberships' , as: :memberships do
+          member do
+            post :approve                     # 申請承認
+            post :reject                      # 申請却下
+          end
+        end
+
         resource :group_membership, only: [], path: 'membership', as: :membership do
           post :join                          # 参加する
           delete :leave                       # 退出する
+          delete :cancel                      # 参加申請をキャンセルする
         end
 
         resource :group_dashboard, only: [:show], path: 'dashboard', as: :dashboard, 
@@ -108,7 +123,9 @@ Rails.application.routes.draw do
       concerns: :admin_reactivatable
 
     # ユーザー管理
-    resources :users, only: [:index, :show, :destroy], concerns: :admin_reactivatable
+    resources :users, only: [:index, :show, :destroy], concerns: :admin_reactivatable do 
+      patch :activate, on: :member        # アクティブにする
+    end
 
     # ユーザーの投稿管理
     resources :user_posts, only: [:index, :show, :destroy], 
@@ -123,12 +140,8 @@ Rails.application.routes.draw do
       concerns: [:admin_reactivatable, :admin_publishable] do
 
       scope module: :groups do
-        resources :group_members, only: [:index, :show, :destroy], path: 'members', as: :members do
-          member do
-            patch :update_role
-            patch :update_note
-          end
-        end
+        resources :group_members, only: [:index, :show, :destroy], 
+          path: 'members', as: :members, concerns: [:admin_reactivatable, :admin_publishable]
         
         resources :group_events, only: [:index, :show, :destroy], 
           path: 'events', as: :events, concerns: [:admin_reactivatable, :admin_publishable]

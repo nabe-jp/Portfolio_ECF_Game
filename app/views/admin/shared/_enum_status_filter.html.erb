@@ -1,0 +1,98 @@
+<% current_status = params[:status] || "all" %>
+<% current_visibility = params[:visibility] || "all" %>
+<% current_direction = params[:direction] == "asc" ? "asc" : "desc" %>
+
+<% if @type == "member" %>
+  <% visibility_statuses = {
+    "public" => "公開",
+    "private" => "非公開"
+  } %>
+  <% all_visibility_key = "all" %>
+  <% all_visibility_label = "すべて" %>
+
+  <div class="mb-2 ml-2">
+    <strong class="mr-2">公開ステータス：</strong>
+
+    <%= link_to all_visibility_label,
+      url_helper.call(visibility: all_visibility_key, status: current_status, direction: current_direction),
+      class: "mr-3 #{current_visibility == all_visibility_key ? 'font-weight-bold text-primary' : ''}" %>
+
+<% visibility_statuses.each_with_index do |(key, label), index| %>
+  <% selected = (key == current_visibility) %>
+  <%= link_to label,
+    url_helper.call(visibility: key, status: current_status, direction: current_direction),
+    class: "mr-2 #{selected ? 'font-weight-bold text-primary' : ''}" %>
+  <%== '｜' unless index == visibility_statuses.size - 1 %>
+<% end %>
+  </div>
+
+  <% statuses = {
+    "active" => "有効",
+    "not_active" => "非有効",
+    "pending" => "承認待ち",
+    "rejected" => "承認拒否",
+    "inactive" => "自主退会・連鎖削除",
+    "kicked" => "追放",
+    "suspended" => "運営制限"
+  } %>
+  <% all_status_key = "all" %>
+  <% all_status_label = "すべて" %>
+
+  <div class="mb-2 ml-2">
+    <strong class="mr-2">メンバーステータス：</strong>
+
+    <%= link_to all_status_label,
+      url_helper.call(status: all_status_key, visibility: current_visibility, direction: current_direction),
+      class: "mr-3 #{current_status == all_status_key ? 'font-weight-bold text-primary' : ''}" %>
+
+    <% statuses.each_with_index do |(key, label), index| %>
+      <% selected = (key == current_status) %>
+      <%= link_to label,
+        url_helper.call(status: key, visibility: current_visibility, direction: current_direction),
+        class: "mr-2 #{selected ? 'font-weight-bold text-primary' : ''}" %>
+      <%== '｜' unless index == statuses.size - 1 %>
+    <% end %>
+  </div>
+
+<% elsif @type == "user" %>
+  <% statuses = {
+    "active" => "有効",
+    "not_active" => "非有効",
+    "deactivated" => "退会済み",
+    "restored_pending" => "復元待ち",
+    "banned" => "禁止",
+    "suspended" => "運営制限",
+  } %>
+  <% all_status_key = "all" %>
+  <% all_status_label = "すべて" %>
+
+  <div class="mb-3 ml-2">
+    <strong class="mr-2">ユーザーステータス：</strong>
+
+    <%= link_to all_status_label,
+      url_helper.call(status: all_status_key, direction: current_direction),
+      class: "mr-3 #{current_status == all_status_key ? 'font-weight-bold text-primary' : ''}" %>
+
+    <% statuses.each do |key, label| %>
+      <% selected = (key == current_status) %>
+      <%= link_to label,
+        url_helper.call(status: key, direction: current_direction),
+        class: "mr-3 #{selected ? 'font-weight-bold text-primary' : ''}" %>
+    <% end %>
+  </div>
+
+<% end %>
+
+<div class="d-flex align-items-center mb-4 ml-2">
+  <strong class="mr-2">並び順：</strong>
+
+  <%= link_to '新しい順',
+    url_helper.call(status: current_status, direction: "desc"),
+    class: "mr-2 #{current_direction == 'desc' ? 'font-weight-bold text-primary' : ''}" %>
+
+  <span class="mx-1">｜</span>
+
+  <%= link_to '古い順',
+    url_helper.call(status: current_status, direction: "asc"),
+    class: "#{current_direction == 'asc' ? 'font-weight-bold text-primary' : ''}" %>
+</div>

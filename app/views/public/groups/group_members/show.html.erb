@@ -65,7 +65,7 @@
         <%# グループ管理者ではグループメンバーにのみ脱退リンクを表示 #%>
         <% if !group_moderator? %>
           <div class="col-3 offset-1 d-flex justify-content-center">
-            <%= link_to "グループから脱退する", leave_group_path(@group), method: :delete,
+            <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
               data: { confirm: "本当にグループを脱退しますか？" }, class: "btn btn-sm btn-warning" %>
           </div>
         <% end %>

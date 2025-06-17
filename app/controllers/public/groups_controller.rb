@@ -16,12 +16,16 @@ class Public::GroupsController < ApplicationController
   end
 
   def show
-    if user_signed_in? && @group.group_memberships.active_members.exists?(user_id: current_user.id)
-      redirect_to group_dashboard_path(@group) and return
-    else
-      # 非メンバー用の公開投稿のみ取得 + ページネーション
-      @public_posts = @group.group_posts.active_group_posts_for_all_desc.page(params[:page])
+    if user_signed_in?
+      membership = @group.group_memberships.find_by(user_id: current_user.id)
+  
+      if membership&.member_status_active?
+        redirect_to group_dashboard_path(@group) and return
+      end
     end
+
+    # 非メンバー用の公開投稿のみ取得 + ページネーション
+    @public_posts = @group.group_posts.active_group_posts_for_all_desc.page(params[:page])
   end
 
   def new

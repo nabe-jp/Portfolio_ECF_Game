@@ -3,14 +3,14 @@
 <div class="row mb-4">
   <!-- 投稿画像 -->
   <div class="col-md-7 d-flex justify-content-center align-items-end ml-5 pl-5">
-    <%= image_tag url_for(@user_post.user_post_image), class: "img-fluid rounded shadow", 
+    <%= image_tag url_for(@user_post.user_post_image), class: "img-fluid", 
       alt: "投稿画像", style: "max-height: 400px;" %>
   </div>
 
   <!-- 投稿者情報 -->
   <div class="col-md-3 d-flex flex-column justify-content- align-items-center mt-5">
     <%= image_tag url_for(@user_post.user.profile_image), width: 200, height: 200, 
-      class: "rounded-circle img-thumbnail mb-2" %>
+      class: "img-fluid mb-2" %>
     <p><strong><%= @user_post.user.nickname %></strong></p>
     <%= link_to "ユーザー詳細", admin_user_path(@user_post.user), class: "btn btn-outline-primary btn-sm" %>
   </div>
@@ -36,18 +36,15 @@
   <tr>
     <th>ステータス</th>
     <td>
-      <% if @user_post.is_deleted %>
-        削除済み
-      <% elsif @user_post.is_public %>
-        公開中
-      <% else %>
-        非公開
-      <% end %>
+      <%= status_label(@user_post) %>
     </td>
   </tr>
   <tr>
     <th>削除の理由</th>
     <td><%= enum_i18n(@user_post.deleted_reason, :deleted_reason) %></td>
+  </tr>
+  <th>削除の操作者ID</th>
+    <td><%= @user_post.deleted_by_id || '-' %></td>
   </tr>
   <tr>
     <th>いいね数</th>
@@ -55,7 +52,7 @@
   </tr>
   <tr>
     <th>最終コメント日時</th>
-    <td><%= @user_post.last_commented_at&.strftime('%Y-%m-%d %H:%M') || 'なし' %></td>
+    <td><%= @user_post.last_commented_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
   </tr>
   <tr>
     <th>作成日</th>
@@ -63,31 +60,10 @@
   </tr>
 </table>
 
-<div class="text-center mb-4">
-
-  <%= link_to '前のページに戻る', 'javascript:history.back()', class: 'btn btn-outline-secondary mr-5' %>
-
-  <%= link_to '一覧へ戻る', admin_user_posts_path, class: 'btn btn-secondary' %>
-
-  <% if !@user_post.is_deleted %>
-    <% if @user_post.is_public %>
-      <%= link_to "非公開にする", hide_admin_user_post_path(@user_post), method: :patch,
-        data: { confirm: "この投稿を非公開にします。よろしいですか？" },
-        class: "btn btn-warning ml-5" %>
-    <% else %>
-      <%= link_to "公開にする", publish_admin_user_post_path(@user_post), method: :patch,
-        data: { confirm: "この投稿を公開にします。よろしいですか？" },
-        class: "btn btn-primary ml-5" %>
-    <% end %>
-  <% end %>
-
-  <% if @user_post.is_deleted %>
-    <%= link_to "復元", reactivate_admin_user_post_path(@user_post), method: :patch,
-      data: { confirm: "この投稿を復元してもよろしいですか？" },
-      class: "btn btn-success ml-5" %>
-  <% else %>
-    <%= link_to "削除", admin_user_post_path(@user_post), method: :delete,
-      data: { confirm: "この投稿を削除してもよろしいですか？" },
-      class: "btn btn-danger ml-5" %>
-  <% end %>
-</div>
+<%= render partial: "admin/shared/admin_resource_controls", locals: {
+  resource: @user_post,
+  index_path: admin_user_posts_path,
+  toggle_path: @user_post.is_public ? hide_admin_user_post_path(@user_post) : publish_admin_user_post_path(@user_post),
+  restore_path: reactivate_admin_user_post_path(@user_post),
+  delete_path: admin_user_post_path(@user_post)
+} %>

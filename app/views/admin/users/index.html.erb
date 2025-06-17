@@ -30,27 +30,31 @@
   </div>
 </div>
 
-<table class="table table-hover table-bordered">
-  <thead class="text-center thead-light">
-    <tr>
-      <th>ID</th>
-      <th>ニックネーム</th>
-      <th>ステータス</th>
-      <th>詳細</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr class="text-center <%= row_class(user) %>">
-        <td><%= user.id %></td>
-        <td><%= user.nickname %></td>
-        <td><%= status_label(user) %></td>
-        <td><%= link_to '詳細', admin_user_path(user) %></td>
+<% if @users.empty? %>
+  <p class="text-center text-muted">ユーザーはありません。</p>
+<% else %>
+  <table class="table table-hover table-bordered">
+    <thead class="text-center thead-light">
+      <tr>
+        <th>ID</th>
+        <th>ニックネーム</th>
+        <th>ステータス</th>
+        <th>詳細</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr class="text-center <%= row_class(user) %>">
+          <td><%= user.id %></td>
+          <td><%= user.nickname %></td>
+          <td><%= status_label(user) %></td>
+          <td><%= link_to '詳細', admin_user_path(user) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<div class="d-flex justify-content-center mt-4">
-  <%= paginate @users %>
-</div>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @users %>
+  </div>
+<% end %>

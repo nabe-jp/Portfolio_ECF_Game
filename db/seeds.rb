@@ -630,7 +630,7 @@ ActiveRecord::Base.transaction do
       {
         owner_id: 12,
         moderators: [9, 11],
-        members: [2, 4, 5, 7, 8, 10, 13 , 14],
+        members: [2, 4, 5, 7, 8, 10, 13, 14],
         name: 'Tavern of Tales',
         slug: 'tavern-of-tales',
         description: 'A cozy guild for sharing fantasy stories, RPG screenshots, and questing tips.',
@@ -659,6 +659,7 @@ ActiveRecord::Base.transaction do
         GroupMembership.create!(
           group: group,
           user_id: entry[:id],
+          member_status: :active, 
           role: entry[:role],
           joined_at: Time.current
         )
@@ -1375,7 +1376,7 @@ ActiveRecord::Base.transaction do
     # 削除用、非公開用のユーザーデータの更新
     # 連鎖削除の再現
     GroupMembership.where(user_id: 100, group_id: 1).update_all(
-      is_deleted: true,
+      member_status: GroupMembership.member_statuses[:inactive],
       deleted_at: Time.current,
       deleted_by_id: admin.id,
       deleted_reason: :parent_group_deleted,
@@ -1384,9 +1385,9 @@ ActiveRecord::Base.transaction do
 
     # 自主脱退の再現
     GroupMembership.where(user_id: 101, group_id: 1).update_all(
-      is_deleted: true,
+      member_status: GroupMembership.member_statuses[:inactive],
       deleted_at: Time.current,
-      deleted_by_id: deleted_user_2,
+      deleted_by_id: deleted_user_2.id,
       deleted_reason: :voluntarily_left_group
     )
 

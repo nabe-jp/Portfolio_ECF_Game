@@ -1,6 +1,13 @@
-<div class="d-flex align-items-center">
-  <h2 class="group-members__title">メンバー一覧</h2>
-  <h4><span class="badge badge-secondary ml-3"><%= @group.active_members.size %>人</span></h4>
+<div class="d-flex align-items-center justify-content-between mb-2">
+  <div class="d-flex align-items-center">
+    <h2 class="group-members__title mb-0">メンバー一覧</h2>
+    <h4 class="mb-0 ml-3">
+      <span class="badge badge-secondary"><%= @group.active_members.size %>人</span>
+    </h4>
+  </div>
+  <% if group_moderator? %>
+    <%= link_to '参加申請一覧', group_memberships_path(@group), class: 'btn btn-primary' %>
+  <% end %>
 </div>
 
 <div class="group-members__section bg-light p-3 mb-4">
@@ -26,4 +33,3 @@
   <%= render partial: 'public/shared/group/member/membership_table', 
     locals: { title: 'メンバー', memberships: @member_memberships } %>
 </div>
-

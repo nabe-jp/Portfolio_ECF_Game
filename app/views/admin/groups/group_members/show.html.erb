@@ -1,23 +1,84 @@
-<h1>メンバー詳細: <%= @group_member.user.nickname %></h1>
+<h2 class="mb-4 text-center">メンバー詳細</h2>
 
-<p><strong>役割:</strong> <%= @group_member.role %></p>
-<p><strong>ノート:</strong> <%= @group_member.note %></p>
-<p><strong>加入日:</strong> <%= @group_member.joined_at&.strftime("%Y-%m-%d") %></p>
+<div class="row mb-4">
+  <% user = @group_member.user %>
+  <% group = @group_member.group %>
 
-<%= form_with url: update_role_admin_group_member_path(@group, @group_member), method: :patch, local: true do |f| %>
-  <div class="form-group">
-    <label>役割を変更</label>
-    <%= f.number_field :role, value: @group_member.role, class: "form-control" %>
+  <!-- グループ画像 -->
+  <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
+    <p><strong>所属グループ</strong></p>
+    <%= image_tag url_for(group.group_image), width: 200, height: 200, class: "img-fluid mb-2" %>
+    <p class="text-truncate w-100 text-center mb-1"><strong><%= group.name %></strong></p>
+    <%= link_to "グループ詳細", admin_group_path(group.id), class: "btn btn-outline-primary btn-sm" %>
   </div>
-  <%= f.submit "役割を更新", class: "btn btn-primary" %>
-<% end %>
 
-<%= form_with url: update_note_admin_group_member_path(@group, @group_member), method: :patch, local: true do |f| %>
-  <div class="form-group">
-    <label>ノートを更新</label>
-    <%= f.text_area :note, value: @group_member.note, class: "form-control" %>
+  <!-- ユーザー画像 -->
+  <div class="col-md-6 d-flex flex-column justify-content-start align-items-center">
+    <p><strong>ユーザー</strong></p>
+    <%= image_tag url_for(user.profile_image), width: 200, height: 200, class: "img-fluid mb-2" %>
+    <p class="text-truncate w-100 text-center mb-1"><strong><%= user.nickname %></strong></p>
+    <%= link_to "ユーザー詳細", admin_user_path(user), class: "btn btn-outline-primary btn-sm" %>
   </div>
-  <%= f.submit "ノートを更新", class: "btn btn-primary" %>
-<% end %>
+</div>
 
-<%= link_to "一覧に戻る", admin_group_members_path(@group.id), class: "btn btn-secondary" %>
+<table class="table table-striped custom-bordered">
+  <tr>
+    <th style="width: 30%;">ID</th>
+    <td><%= @group_member.id %></td>
+  </tr>
+  <tr>
+    <th>役割</th>
+    <td><%= enum_i18n(@group_member.role, :role)  %></td>
+  </tr>
+  <tr>
+    <th>ノート</th>
+    <td><%= simple_format(@group_member.note) %></td>
+  </tr>
+  <tr>
+    <th>加入日</th>
+    <td><%= @group_member.joined_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+  <tr>
+    <th>招待者ID</th>
+    <td><%= @group_member.invited_by_id || '-' %></td>
+  </tr>
+  <tr>
+    <th>公開ステータス</th>
+    <td><%= status_label(@group_member) %></td>
+  </tr>
+  <tr>
+    <th>メンバーステータス</th>
+    <td><%= enum_i18n(@group_member.member_status, :member_status) %></td>
+  </tr>
+  <tr>
+    <th>親の復元時に非公開</th>
+    <td><%= hidden_on_parent_restore_label(@group_member) %></td>
+  </tr>
+  <tr>
+    <th>削除理由</th>
+    <td><%= enum_i18n(@group_member.deleted_reason, :deleted_reason) || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除の操作者ID</th>
+    <td><%= @group_member.deleted_by_id || '-' %></td>
+  </tr>
+  <tr>
+    <th>削除日時</th>
+    <td><%= @group_member.deleted_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  </tr>
+  <tr>
+    <th>作成日時</th>
+    <td><%= @group_member.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+  </tr>
+</table>
+
+<%= render partial: "admin/shared/admin_resource_controls_enum", locals: {
+  resource: @group_member,
+  index_path: admin_group_members_path(@group_member.group.id),
+  toggle_path: (!@group_member.is_public || @group_member.hidden_on_parent_restore) ?
+    publish_admin_group_member_path(@group_member.group.id, @group_member) :
+      hide_admin_group_member_path(@group_member.group.id, @group_member),
+  restore_path: reactivate_admin_group_member_path(@group_member.group.id, @group_member),
+  suspend_path: admin_group_member_path(@group_member.group.id, @group_member),
+} %>
+

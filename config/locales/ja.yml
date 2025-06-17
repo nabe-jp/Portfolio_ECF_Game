@@ -3,12 +3,25 @@ ja:
     user_status:
       active: "利用中"
       deactivated: "退会済み"
+      restored_pending: "復元後非アクティブ"
       banned: "利用禁止"
       suspended: "一時停止中"
+    member_status:
+      active: "有効"
+      pending: "承認待ち"
+      rejected: "承認拒否"
+      inactive: "自主退会・連鎖削除"
+      kicked: "グループ管理者による追放"
+      suspended: "サイト運営による制限"
+    role:
+      member: "メンバー"
+      moderator: "管理者"
+      owner: "オーナー"
     deleted_reason:
       self_deleted: "ユーザー本人による削除"
       post_user: "投稿を作成したユーザーによる削除"
       voluntarily_left_group: "グループから自発的に退会"
+      application_rejected: "グループへの参加申請を拒否"
       removed_by_group_authority: "グループ管理権限者による削除"
       kicked_by_group_moderator: "グループ管理者による強制退会"
       group_disbanded: "グループ削除による強制退会"
@@ -25,11 +38,12 @@ ja:
   activerecord:
     models:
       user: "ユーザー"
-      post: "投稿"
+      user_post: "投稿"
       user_post_comment: "コメント"
       admin_notes: "申し送り"
       informations: "お知らせ"
       group: "グループ"
+      group_membership: "メンバー"
       group_notice: "お知らせ"
       group_event: "イベント"
       group_post: "投稿"

@@ -1,26 +1,40 @@
-<h1>お知らせ一覧 (<%= @group.name %>)</h1>
+<h2 class="text-center mt-3 mb-5">お知らせ一覧 (<%= @group.name %>)</h2>
 
-<table class="table table-bordered table-hover">
-  <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>投稿者</th>
-      <th>投稿日</th>
-      <th>固定表示</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @group_notices.each do |notice| %>
+<%= render "admin/shared/filter_controls", url_helper: method(:admin_group_notices_path) %>
+
+<% if @group_notices.any? %>
+  <table class="table table-hover table-bordered text-center">
+    <thead class="thead-light">
       <tr>
-        <td><%= link_to notice.title.presence || "(無題)", admin_group_notice_path(@group.id, notice) %></td>
-        <td><%= link_to notice.member.user.nickname, admin_user_path(notice.member.user) %></td>
-        <td><%= notice.created_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= notice.is_pinned ? "はい" : "いいえ" %></td>
-        <td><%= link_to "削除", admin_group_notice_path(@group, notice), method: :delete, data: { confirm: "削除してよろしいですか？" } %></td>
+        <th style="width: 30%;">タイトル</th>
+        <th style="width: 15%;">投稿日</th>
+        <th style="width: 30%;">投稿者</th>
+        <th style="width: 15%;">公開状態</th>
+        <th style="width: 10%;">固定表示</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @group_notices.each do |notice| %>
+        <tr class="text-center <%= row_class(notice) %>">
+          <td><%= link_to notice.title.presence, admin_group_notice_path(@group.id, notice) %></td>
+          <td><%= notice.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+          <td><%= link_to notice.member.user.nickname, admin_user_path(notice.member.user) %></td>
+          <td><%= status_label(notice) %></td>
+          <td><%= notice.is_pinned ? "はい" : "いいえ" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to "グループ詳細に戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @group_notices %>
+  </div>
+<% else %>
+  <div class="text-center my-5">
+    <p class="h5">まだお知らせはありません。</p>
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center mt-4">
+  <%= link_to "グループ詳細に戻る", admin_group_path(@group.id), class: "btn btn-secondary" %>
+</div>

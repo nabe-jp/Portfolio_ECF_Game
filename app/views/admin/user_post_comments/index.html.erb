@@ -1,99 +1,51 @@
 <h2 class="mb-3 text-center">コメント一覧</h2>
 
-<!-- フィルター -->
-<div class="d-flex align-items-center mb-2 ml-2">
-  <strong class="me-2">表示：</strong>
-  <% show_param = params[:show] %>
-  <% show_deleted = ActiveModel::Type::Boolean.new.cast(params[:show_deleted]) %>
-  <% show_non_public = ActiveModel::Type::Boolean.new.cast(params[:show_non_public]) %>
+<%= render "admin/shared/filter_controls", url_helper: method(:admin_user_post_comments_path) %>
 
-  <% if show_param == "all" %>
-    <%= link_to '公開中のみ表示', admin_user_post_comments_path, class: "me-2" %>
-  <% else %>
-    <%= link_to 'すべて表示', admin_user_post_comments_path(show: "all"), class: "me-2" %>
-  <% end %>
-
-  <span class="mx-1">｜</span>
-
-  <% if show_non_public %>
-    <%= link_to '非公開を非表示', 
-      admin_user_post_comments_path(show_deleted: show_deleted), class: "me-2" %>
-  <% else %>
-    <%= link_to '非公開を表示', 
-      admin_user_post_comments_path(show_deleted: show_deleted, show_non_public: true), class: "me-2" %>
-  <% end %>
-
-  <span class="mx-1">｜</span>
-
-  <% if show_deleted %>
-    <%= link_to '削除済みを非表示', 
-      admin_user_post_comments_path(show_non_public: show_non_public), class: "me-2" %>
-  <% else %>
-    <%= link_to '削除済みを表示', admin_user_post_comments_path( show_non_public: show_non_public, 
-      show_deleted: true), class: "me-2" %>
-  <% end %>
-</div>
-
-<!-- 並び順 -->
-<% current_direction = params[:direction] == "asc" ? "asc" : "desc" %>
-<% current_show = params[:show] %>
-<% current_show_non_public = params[:show_non_public] %>
-<% current_show_deleted = params[:show_deleted] %>
-
-<div class="d-flex align-items-center mb-4 ml-2">
-  <strong class="me-2">並び順：</strong>
-
-  <%= link_to '新しい順', admin_user_post_comments_path(direction: "desc", show: current_show,
-    show_non_public: current_show_non_public, show_deleted: current_show_deleted),
-    class: "me-2 #{current_direction == 'desc' ? 'fw-bold' : ''}" %>
-
-  <span class="mx-1">｜</span>
-
-  <%= link_to '古い順', admin_user_post_comments_path(direction: "asc", show: current_show,
-    show_non_public: current_show_non_public, show_deleted: current_show_deleted),
-    class: "#{current_direction == 'asc' ? 'fw-bold' : ''}" %>
-</div>
-
-<table class="table table-bordered table-hover text-center">
-  <thead class="thead-light">
-    <tr>
-      <th>ID</th>
-      <th>投稿</th>
-      <th>本文</th>
-      <th>ユーザー</th>
-      <th>親</th>
-      <th>ステータス</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @user_post_comments.each do |comment| %>
-      <tr class="<%= row_class(comment) %>">
-        <td><%= comment.id %></td>
-        <td >
-          <%= link_to "投稿ID:#{comment.user_post_id}", admin_user_post_path(comment.user_post) %>
-        </td>
-        <td style="max-width: 300px; word-break: break-word;">
-          <%= truncate(comment.body, length: 100) %>
-        </td>
-        <td>
-          <%= link_to comment.user.nickname, admin_user_path(comment.user) %><br>
-          <small>ID:<%= comment.user_id %></small>
-        </td>
-        <td>
-          <%= comment.parent_comment_id.presence || content_tag(:span, "なし", class: "text-muted") %>
-        </td>
-        <td>
-          <%= status_label(comment) %>
-        </td>
-        <td>
-          <%= link_to "詳細", admin_user_post_comment_path(comment), class: "btn btn-sm btn-outline-primary" %>
-        </td>
+<% if @user_post_comments.empty? %>
+  <p class="text-center text-muted">コメントはありません。</p>
+<% else %>
+  <table class="table table-bordered table-hover text-center">
+    <thead class="thead-light">
+      <tr>
+        <th>ID</th>
+        <th>投稿</th>
+        <th>本文</th>
+        <th>ユーザー</th>
+        <th>親</th>
+        <th>ステータス</th>
+        <th>操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @user_post_comments.each do |comment| %>
+        <tr class="<%= row_class(comment) %>">
+          <td><%= comment.id %></td>
+          <td >
+            <%= link_to "投稿ID:#{comment.user_post_id}", admin_user_post_path(comment.user_post) %>
+          </td>
+          <td style="max-width: 300px; word-break: break-word;">
+            <%= truncate(comment.body, length: 100) %>
+          </td>
+          <td>
+            <%= link_to comment.user.nickname, admin_user_path(comment.user) %><br>
+            <small>ID:<%= comment.user_id %></small>
+          </td>
+          <td>
+            <%= comment.parent_comment_id.presence || content_tag(:span, "なし", class: "text-muted") %>
+          </td>
+          <td>
+            <%= status_label(comment) %>
+          </td>
+          <td>
+            <%= link_to "詳細", admin_user_post_comment_path(comment), class: "btn btn-sm btn-outline-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<div class="d-flex justify-content-center mt-4">
-  <%= paginate @user_post_comments %>
-</div>
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @user_post_comments %>
+  </div>
+<% end %>

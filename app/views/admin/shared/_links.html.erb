@@ -37,7 +37,11 @@
     class: (is_button ? 'btn btn-base' : nil) %>
 
 <% elsif @group&.id %>
-  <% if defined?(check_group_members_link) && check_group_members_link %>
+  <% if defined?(check_group_details_link) && check_group_details_link %>
+    <%= link_to 'グループ詳細', admin_group_path(@group.id), 
+      class: (is_button ? 'btn btn-base' : nil) %>
+      
+  <% elsif defined?(check_group_members_link) && check_group_members_link %>
     <%= link_to 'メンバー一覧', admin_group_members_path(@group.id), 
       class: (is_button ? 'btn btn-base' : nil) %>
 

@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   # スコープの読み込み
   include Scopes::Admin::Filters
-  include Scopes::Admin::Users
   include Scopes::Public::Users
   include Scopes::Shared::Ordering
   
@@ -31,7 +30,9 @@ class User < ApplicationRecord
 
   has_one_attached :profile_image
 
-  enum user_status: { active: 0, deactivated: 1, banned: 2, suspended: 3 }
+  # 利用中・退会済み・復元後非アクティブ・利用禁止・サイトによる凍結
+  enum user_status: { active: 0, deactivated: 1, restored_pending: 2, banned: 3, suspended: 4 },
+   _prefix: true
 
   # 多くの実在英語名が20〜30文字未満ですがまれに非常に長い名前も存在し、複数名・複合姓(スペースなど)も考慮し50文字
   validates :last_name, presence: { message: "を入力してください" }

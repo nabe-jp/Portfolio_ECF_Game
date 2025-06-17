@@ -1,24 +1,38 @@
-<h1>グループ一覧</h1>
+<h1 class="text-center mt-3 mb-5">グループ一覧</h1>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>名前</th>
-      <th>公開状態</th>
-      <th>削除状態</th>
-      <th>作成日時</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @groups.each do |group| %>
+<%= render "admin/shared/filter_controls", url_helper: method(:admin_groups_path) %>
+
+<% if @groups.any? %>
+  <table class="table table-hover table-bordered text-center">
+    <thead class="thead-light">
       <tr>
-        <td><%= group.id %></td>
-        <td><%= link_to group.name, admin_group_path(group.id) %></td>
-        <td><%= group.is_public? ? "公開中" : "非公開" %></td>
-        <td><%= group.is_deleted? ? "削除済み" : "有効" %></td>
-        <td><%= l(group.created_at, format: :short) %></td>
+        <th style="width: 10%;">ID</th>
+        <th style="width: 40%;">名前</th>
+        <th style="width: 15%;">公開状態</th>
+        <th style="width: 10%;">所属人数</th>
+        <th style="width: 10%;">投稿総数</th>
+        <th style="width: 15%;">作成日時</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @groups.each do |group| %>
+        <tr>
+          <td><%= group.id %></td>
+          <td><%= link_to group.name, admin_group_path(group.id) %></td>
+          <td><%= status_label(group) %></td>
+          <td><%= group.active_members.size %></td>
+          <td><%= group.group_posts.undeleted_only.unhidden_only.count %></td>
+          <td><%= l(group.created_at, format: :short) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @groups %>
+  </div>
+<% else %>
+  <div class="text-center my-5">
+    <p class="h5">まだグループはありません。</p>
+  </div>
+<% end %>
