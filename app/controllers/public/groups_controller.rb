@@ -5,7 +5,7 @@ class Public::GroupsController < ApplicationController
   helper_method :group_owner?, :group_member?
 
   # 読み込んだモジュールの自動アクションを除外
-  skip_before_action :set_group, only: [:index, :my_groups] 
+  skip_before_action :set_group, only: [:index, :new, :create, :my_groups] 
   
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authorize_group_moderator!,only: [:edit, :update]

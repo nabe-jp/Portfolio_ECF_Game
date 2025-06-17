@@ -4,14 +4,42 @@
 
       <h3 class="my-4 text-center">メンバー詳細</h3>
 
-      <p><strong>ニックネーム:</strong> <%= @membership.user.nickname %></p>
-      <p><strong>参加日時:</strong> <%= @membership.joined_at&.strftime("%Y年%m月%d日 %H:%M") %></p>
-      <p><strong>現在の役職:</strong> <%= @membership.role_i18n %></p>
+      <div class="row">
+      <%#-- 左カラム: プロフィール画像 --#%>
+      <div class="col-md-4 text-center">
+        <div class="profile-image mb-3">
+          <%= image_tag(@membership.user.profile_image, size: "200x200", class: "profile-box__image") %>
+        </div>
+      </div>
+    
+      <%#-- 右カラム: 情報と管理者メモ --#%>
+      <div class="col-md-8">
+        <%#-- 情報: タイトル左・内容右 --%>
+        <div class="row">
+          <div class="col-md-4"><strong>ニックネーム:</strong></div>
+          <div class="col-md-8"><%= @membership.user.nickname %></div>
+        </div>
+        <div class="row space-between-mini-top">
+          <div class="col-md-4"><strong>参加日時:</strong></div>
+          <div class="col-md-8"><%= @membership.joined_at&.strftime("%Y年%m月%d日 %H:%M") %></div>
+        </div>
+        <div class="row space-between-mini-top">
+          <div class="col-md-4"><strong>現在の役職:</strong></div>
+          <div class="col-md-8"><%= @membership.role_i18n %></div>
+        </div>
+    
+        <%#-- 管理者メモ: 情報カラム全体を使う --%>
+        <div class="row space-between-mini-top">
+          <div class="col-12">
+            <p><strong>管理者メモ:</strong></p>
+            <p><%= @membership.note.presence || "なし" %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
-      <p><strong>管理者メモ:</strong></p>
-      <p><%= @membership.note.presence || "なし" %></p>
-
-      <hr>
+      <hr class="row space-between-mini">
 
       <%# グループ管理者のみ表示 #%>
       <% if group_moderator? %>
@@ -63,7 +91,7 @@
         </div>
 
         <%# グループ管理者ではグループメンバーにのみ脱退リンクを表示 #%>
-        <% if !group_moderator? %>
+        <% if !group_moderator? && @membership.user == current_user %>
           <div class="col-3 offset-1 d-flex justify-content-center">
             <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
               data: { confirm: "本当にグループを脱退しますか？" }, class: "btn btn-sm btn-warning" %>

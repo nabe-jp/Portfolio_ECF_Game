@@ -54,7 +54,7 @@ ja:
         first_name: "名前の(名)"
         nickname: "ニックネーム"
         bio: "自己紹介"
-      post:
+      user_post:
         title: "投稿のタイトル"
         body: "投稿の内容"
       user_post_comment:
