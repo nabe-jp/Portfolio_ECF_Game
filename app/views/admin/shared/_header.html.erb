@@ -1,17 +1,16 @@
 <header class="container-fluid">
   <div class="row">
-    <div class="col-2 mt-2 d-flex justify-content-start offset-1 align-items-center">
-      <%= image_tag("logo.jpg", size: "120x80") %>
+    <div class="col-6 offset-4">
+      <% if admin_signed_in? %> 
+        <%= render 'admin/shared/header/global_search' %>                   <!-- 検索フォーム -->
+      <% end %>
     </div>
-    <div class="col-6 mt-1">
-      <%#= render 'admin/shared/header/global_search' %>                   <!-- 検索フォーム -->
-    </div>
-    <div class="col-3">
-        <div class="d-flex justify-content-end mt-1"> 
+    <div class="col-2">
+      <div class="header__nav-wrapper"> 
         <ul class="nav">
           <% if admin_signed_in? %>                                 <!-- 管理者がサインインした場合 -->
             <%= render 'admin/shared/header/admin_nav' %>
-          <% else %>                                                <!-- 誰もサインインしていない場合 -->
+          <% else %>                                                <!-- サインインしていない場合 -->
             <%= render 'admin/shared/header/no_user_nav' %>
           <% end %>
         </ul>

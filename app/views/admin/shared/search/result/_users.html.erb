@@ -6,12 +6,12 @@
     <div class="row">
       <% users.each do |user| %> 
         <div class="col-6">
-          <%= link_to show_user_path(user), class: 'search-user__link' do %>
+          <%= link_to admin_user_path(user), class: 'search-user__link' do %>
             
             <div class="search-user__card">
               <!-- 左側：プロフィール画像 -->
               <div class="search-user__image-box">
-                <%= image_tag(user.profile_image, size: "200x200", class: "search-user__image") %>
+                <%= image_tag(user.profile_image, size: "180x180", class: "img-fluid") %>
               </div>
 
               <!-- 右側：プロフィール情報 -->

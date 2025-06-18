@@ -1,7 +1,7 @@
 <% is_button = (local_assigns[:as] == :button) %>
 
 <% if defined?(check_dashboard_link) && check_dashboard_link %>
-  <%= link_to 'ホーム', admin_root_path, 
+  <%= link_to '管理者トップページ', admin_root_path, 
     class: (is_button ? 'btn btn-base' : nil) %>
 
 <% elsif defined?(check_back_link) && check_back_link %>

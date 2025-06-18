@@ -10,13 +10,13 @@
         <% @results.each do |result| %>
           <% case result[:category] %>
           <% when @decide_types[0] %>
-            <%= render 'public/shared/search/result/users', users: result[:records] %>
+            <%= render 'admin/shared/search/result/users', users: result[:records] %>
           <% when @decide_types[1] %>
-            <%= render 'public/shared/search/result/user_posts', user_posts: result[:records] %>
+            <%= render 'admin/shared/search/result/user_posts', user_posts: result[:records] %>
           <% when @decide_types[2] %>
-            <%= render 'public/shared/search/result/groups', groups: result[:records] %>
+            <%= render 'admin/shared/search/result/groups', groups: result[:records] %>
           <% when @decide_types[3] %>
-            <%= render 'public/shared/search/result/group_posts', group_posts: result[:records] %>
+            <%= render 'admin/shared/search/result/group_posts', group_posts: result[:records] %>
           <% end %>
         <% end %>
       
@@ -24,13 +24,13 @@
         <% matched_result = @results.first %>
         <% case @search_type %>
         <% when @decide_types[0] %>
-          <%= render 'public/shared/search/result/users', users: matched_result[:records] %>
+          <%= render 'admin/shared/search/result/users', users: matched_result[:records] %>
         <% when @decide_types[1] %>
-          <%= render 'public/shared/search/result/user_posts', user_posts: matched_result[:records] %>
+          <%= render 'admin/shared/search/result/user_posts', user_posts: matched_result[:records] %>
         <% when @decide_types[2] %>
-          <%= render 'public/shared/search/result/groups', groups: matched_result[:records] %>
+          <%= render 'admin/shared/search/result/groups', groups: matched_result[:records] %>
         <% when @decide_types[3] %>
-          <%= render 'public/shared/search/result/group_posts', group_posts: matched_result[:records] %>
+          <%= render 'admin/shared/search/result/group_posts', group_posts: matched_result[:records] %>
         <% else %>
           <p class="text-center">無効な検索タイプです。</p>
         <% end %>

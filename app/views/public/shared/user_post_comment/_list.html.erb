@@ -18,7 +18,7 @@
 
     <!-- 返信リンク -->
     <div class="col-1 pl-1">
-      <% unless comment.is_deleted %>
+      <% unless comment.is_deleted || !user_signed_in? %>
         <%#
           data-toggle="collapse"はBootstrapのCollapse機能、リンクのクリックによりフォームの表示・非表示制御
           href=～はどの返信フォームを開くか識別するためのID指定

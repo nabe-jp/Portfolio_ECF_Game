@@ -6,7 +6,7 @@
   color: inherit;                     // 親要素の色を継承
   flex-direction: row;                // 横並びに変更
   justify-content: flex-start;        // 左揃えにする
-  align-items: stretch;               // 高さを合わせる
+  align-items: center;                // 高さを合わせる
   max-width: 95%;
   height: 200px;                      // 高さ固定
   padding: 1rem;                      // 内側の余白
@@ -33,7 +33,7 @@
 
 // 左側：画像エリア
 .search-user__image-box {
-  width: 45%;
+  max-width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,8 +42,6 @@
 // 画像
 .search-user__image {
   max-width: 100%;
-  width: 150px;
-  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
@@ -101,7 +99,7 @@
   color: inherit;                     // 親要素の色を継承
   flex-direction: row;                // 横並びに変更
   justify-content: flex-start;        // 左揃えにする
-  align-items: stretch;               // 高さを合わせる
+  align-items: center;                // 高さを合わせる
   max-width: 95%;
   height: 200px;                      // 高さ固定
   padding: 1rem;                      // 内側の余白
@@ -128,7 +126,7 @@
 
 // 左側：画像エリア
 .search-group__image-box {
-  width: 45%;
+  max-width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -137,8 +135,6 @@
 // 画像
 .search-group__image {
   max-width: 100%;
-  width: 180px;
-  height: 150px;
   border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
   object-fit: cover;
   box-sizing: border-box;             // パディングやマージンも要素の大きさに含める

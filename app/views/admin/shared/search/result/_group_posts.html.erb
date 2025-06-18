@@ -1,0 +1,39 @@
+<h4 id="group-posts-results">グループ内投稿の検索結果</h4>
+<% if group_posts.any?  %>
+  <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(group_posts) %></p>
+
+  <div class="container">
+    <div class="row">
+      <% group_posts.each do |post| %> 
+        <div class="col-6">
+          <%= link_to admin_group_post_path(post.group.id, post.id), class: 'group-posts__link' do %>
+
+            <div class="group-posts__list">
+              <!-- 左側の画像 -->
+              <div class="group-posts__image-box">
+                <%= image_tag(post.group_post_image, size: "180x180", class: "img-fluid") %>
+              </div>
+
+              <!-- 右側の内容(名前、タイトル、内容) -->
+              <div class="group-posts__content-box">
+                <p class="group-posts__user"><%= post.member.user.nickname %></p>
+                <p class="group-posts__title"><%= post.title %></p>
+                <p class="group-posts__description"><%= truncate(post.body, length: 100) %></p>
+                <p class="group-posts__date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+      <%= paginate group_posts, param_name: :group_post_page, 
+        params: request.query_parameters.merge(scroll_to: 'group-posts-results') %>
+    </div>
+  </div>
+  
+<% else %>
+  <p class="text-center">検索結果は見つかりませんでした。</p>
+<% end %>

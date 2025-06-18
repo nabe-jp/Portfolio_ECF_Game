@@ -1,27 +1,29 @@
-<h5>投稿</h5>
-<ul class="list-unstyled">
-  <li><%= render "public/shared/link/links", all_posts_index: true %></li>
-
-  <li><%= render "public/shared/link/links", posts_index: true %></li>
-
-  <li><%= render "public/shared/link/links", check_poster_profile: true %></li>
-
-  <li><%= render "public/shared/link/links", new_post: true %></li>
-</ul>
-
-<% if @group&.id %>
-  <h5 class="mt-5">グループ</h5>
+<div class="sidebar-links">
+  <h5>投稿</h5>
   <ul class="list-unstyled">
-    <li><%= render "public/shared/link/links", dashboard_group: true %></li>
+    <li><%= render "public/shared/link/links", all_posts_index: true %></li>
 
-    <li><%= render "public/shared/link/links", group_member: true %></li>
+    <li><%= render "public/shared/link/links", posts_index: true %></li>
 
-    <li><%= render "public/shared/link/links", group_notices: true %></li>
+    <li><%= render "public/shared/link/links", check_poster_profile: true %></li>
 
-    <li><%= render "public/shared/link/links", group_events: true %></li>
-
-    <li><%= render "public/shared/link/links", group_posts: true %></li>
-
-    <li><%= render "public/shared/link/links", new_group_post: true %></li>
+    <li><%= render "public/shared/link/links", new_post: true %></li>
   </ul>
-<% end %>
+
+  <% if @group&.id %>
+    <h5 class="mt-5">グループ</h5>
+    <ul class="list-unstyled">
+      <li><%= render "public/shared/link/links", dashboard_group: true %></li>
+
+      <li><%= render "public/shared/link/links", group_member: true %></li>
+
+      <li><%= render "public/shared/link/links", group_notices: true %></li>
+
+      <li><%= render "public/shared/link/links", group_events: true %></li>
+
+      <li><%= render "public/shared/link/links", group_posts: true %></li>
+
+      <li><%= render "public/shared/link/links", new_group_post: true %></li>
+    </ul>
+  <% end %>
+</div>

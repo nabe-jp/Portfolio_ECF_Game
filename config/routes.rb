@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  namespace :public do
-    namespace :groups do
-      get 'group_memberships/index'
-    end
-  end
   # ネストによるヘルパー名やURLの冗長性を抑え、可読性を意識したルーティング設計
   # as:はURLヘルパー名として使われるのでシンボルに、path: は実際のルーティングURL文字列になるので文字列で記載
 
@@ -113,6 +108,9 @@ Rails.application.routes.draw do
   # 管理者用ルーティング
   namespace :admin do
     root to: 'dashboard#top'
+
+    # 検索機能
+    resources :searches, only: [:index]
   
     # 管理者への申し送りなどの記載に使用するために設置
     resources :admin_notes, only: [:index, :create, :edit, :update, :destroy], 

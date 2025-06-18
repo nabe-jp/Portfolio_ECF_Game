@@ -1,21 +1,19 @@
 <header class="container-fluid">
   <div class="row">
-    <div class="col-2 mt-2 d-flex justify-content-start offset-1 align-items-center">
-      <%= link_to image_tag("logo.jpg", size: "120x80"), about_path %>
+    <div class="col-2 d-flex justify-content-start offset-1 align-items-center">
+      <%= link_to image_tag("logo/logo.png", class: "site-logo"), about_path, class: "logo-link" %>
     </div>
-    <div class="col-6 mt-1">
+    <div class="col-6">
       <% if user_signed_in? %>
         <%= render 'public/shared/header/global_search' %>                 <!-- 検索フォーム -->
       <% end %>
     </div>
     <div class="col-3">
-        <div class="d-flex justify-content-end mt-1"> 
+      <div class="header__nav-wrapper"> 
         <ul class="nav">
-          <% if user_signed_in? %>                                  <!-- ユーザーがサインインした場合 -->
+          <% if user_signed_in? %>                                  <%#-- ユーザーがサインインした場合 --#%>
             <%= render 'public/shared/header/user_nav' %>
-          <% elsif user_signed_in? %>                               <!-- ゲストがサインインした場合 -->
-            <%= render 'public/shared/header/guest_nav' %>
-          <% else %>                                                <!-- 誰もサインインしていない場合 -->
+          <% else %>                                                <%#-- サインインしていない場合 --#%>
             <%= render 'public/shared/header/no_user_nav' %>
           <% end %>
         </ul>

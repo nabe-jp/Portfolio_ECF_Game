@@ -3,24 +3,24 @@
   <!-- ユーザー情報の表示 -->
   <% if result.is_a?(User) %>
 
-    <%= render  'shared/search/result/users' %>
+    <%= render 'admin/shared/search/result/users' %>
 
   <!-- 投稿情報の表示 -->
   <% elsif result.is_a?(Post) %>
 
-    <%= render  'shared/search/result/user_posts' %>
+    <%= render 'admin/shared/search/result/user_posts' %>
 
   <!-- グループ情報の表示 -->
   <% elsif result.is_a?(Group) %>
         
-    <%= render  'shared/search/result/groups' %>
+    <%= render 'admin/shared/search/result/groups' %>
 
   </div>
 
   <!-- グループ内投稿情報の表示 -->
   <% elsif result.is_a?(GroupPost) %>
 
-    <%= render  'shared/search/result/group_posts' %>
+    <%= render 'admin/shared/search/result/group_posts' %>
     
   </div>
   <% end %>

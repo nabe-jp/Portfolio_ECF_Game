@@ -1,7 +1,7 @@
 <% is_button = (local_assigns[:as] == :button) %>
 
 <% if defined?(home) && home %>
-  <%= link_to 'ホーム', root_path, class: (is_button ? 'btn btn-base home-btn' : nil) %>
+  <%= link_to 'トップページ', root_path, class: (is_button ? 'btn btn-base home-btn' : nil) %>
 
 <% elsif defined?(back) && back %>
   <%= link_to '戻る', 'javascript:history.back()', 

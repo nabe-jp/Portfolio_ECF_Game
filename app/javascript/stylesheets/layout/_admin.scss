@@ -25,14 +25,7 @@
   width: var(--sidebar-width);
   position: fixed;                   // 画面上の固定位置に要素を配置
   top: var(--header-height); 
-  bottom: var(--footer-height);
-  padding: 1rem 0.75rem 0;
   z-index: 998;                      // 前面に出す
-}
-
-// 左サイドバータグの設定
-.sidebar-left {
-  left: 0;
 }
 
 // Webkit系ブラウザ(Chrome、Safariなど)にスクロールバーを非表示にする

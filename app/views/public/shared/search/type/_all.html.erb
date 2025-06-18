@@ -1,0 +1,24 @@
+<% @results.each do |result| %>
+
+  <!-- ユーザー情報の表示 -->
+  <% if result.is_a?(User) %>
+
+    <%= render 'public/public/shared/search/result/users' %>
+
+  <!-- 投稿情報の表示 -->
+  <% elsif result.is_a?(Post) %>
+
+    <%= render 'public/shared/search/result/user_posts' %>
+
+  <!-- グループ情報の表示 -->
+  <% elsif result.is_a?(Group) %>
+        
+    <%= render 'public/shared/search/result/groups' %>
+
+  <!-- グループ内投稿情報の表示 -->
+  <% elsif result.is_a?(GroupPost) %>
+
+    <%= render 'public/shared/search/result/group_posts' %>
+
+  <% end %>
+<% end %>

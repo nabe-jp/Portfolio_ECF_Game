@@ -6,7 +6,7 @@
     <!-- すべての選択肢: params[:type] が空または "すべて" のときに checked -->
     <input type="radio" name="type" value="すべて" id="radio_all" 
     <%= 'checked' if params[:type].blank? || params[:type] == 'すべて' %> />
-    <label for="radio_all" class="search-form__category">すべて</label>
+    <label for="radio_all" class="search-form__category ">すべて</label>
   
     <% PostConstants::SEARCH_TYPES.each_with_index do |type, index| %>
       <input type="radio" name="type" value="<%= type %>" id="radio_<%= index %>"
@@ -18,12 +18,19 @@
 
   <div class="search-form__inputs">
 
-    <%= search_field_tag :words, params[:words], placeholder: "含めたいワード", 
-      class: "search-form__field" %>
+    <div class="search-form__field-group">
+      <%= search_field_tag :words, params[:words], placeholder: "含めたいワード", 
+        class: "search-form__field" %>
+    </div>
 
-    <%= search_field_tag :not_words, params[:not_words], placeholder: "除外したいワード", 
-      class: "search-form__exclude-field" %>
-    <%= submit_tag "検索", class: "btn btn-base search-form__button" %>
+    <div class="search-form__field-group">
+      <%= search_field_tag :not_words, params[:not_words], placeholder: "除外したいワード", 
+        class: "search-form__exclude-field" %>
+    </div>
+
+    <div class="search-form__button-wrapper">
+      <%= submit_tag "検索", class: "btn btn-base search-form__button" %>
+    </div>
 
   </div>
 <% end %>

@@ -3,22 +3,71 @@
 header {
   height: var(--header-height);
   background-color: #333333;
-  position: fixed;                   // 画面上の固定位置に要素を配置
-  padding-top: 5px;
+  position: fixed;                  // 画面上の固定位置に要素を配置
   top: 0;
   width: 100%;
-  z-index: 1000;                     // 前面に出す
+  z-index: 1000;                    // 前面に出す
+}
+
+// ロゴ画像のスタイル
+.site-logo {
+	display: block;                   // ブロック要素として表示(中央寄せが効きやすい)
+  width: 100%;
+  height: 100%;
+	object-fit: contain;              // 画像を縦横比を維持して収める(空白あり)
+	transition: transform 0.3s ease;  // ホバー時のアニメーションに滑らかさを追加(0.3秒かけて変化)
+}
+
+// リンク要素のスタイル(ひし形ロゴを囲う枠)
+.logo-link {
+	display: flex;                    // 子要素(画像)を中央に配置するためのFlexbox
+	align-items: center;              // 垂直方向に中央寄せ
+	justify-content: center;          // 水平方向に中央寄せ
+	width: var(--header-height);      // リンク全体の横幅
+	height: var(--header-height);     // リンク全体の高さ(正方形)
+	overflow: hidden;
+	position: relative;               // 必要に応じて子要素の絶対配置を可能に
+
+}
+
+// ホバー時の回転で遊び心を追加
+.logo-link:hover .site-logo {
+  transform: rotate(360deg) scale(1.05);  // 画像を360度回転させ、1.05倍に拡大して少し大きく見せる
+}
+
+// 各のボックスの設定
+.header__nav-wrapper,
+.search-form__categories,
+.search-form__inputs {
+  display: flex;
+  height: calc(var(--header-height) / 2);
+  width: 100%;
+  padding-top: 0.5rem;
+  overflow: hidden;                 // はみ出し防止
+  flex-wrap: nowrap;                // 折り返しなし
+  box-sizing: border-box;           // paddingを含めてwidth/heightを計算
+}
+
+// ナビゲーションアイテムのボックスとラジオボタンのボックスの設定
+.header__nav-wrapper,
+.search-form__categories {
+  align-items: center;              // 縦方向（交差軸）中央寄せ
+}
+
+// ナビゲーションアイテムのボックスの設定
+.header__nav-wrapper {
+  justify-content: flex-end;        // 右寄せ
 }
 
 // ナビゲーションアイテム
 .header__nav-item {
-  display: flex;                     // フレックスコンテナとして、子要素を柔軟に並べる
-  margin-right: 1rem;                // 右に10pxの余白を追加
+  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
+  margin-right: 1rem;               // 右に10pxの余白を追加
 }
 
 // 最後のナビゲーションアイテム
 .header__nav-item--last {
-  margin-right: 0;                   // 最後のボタンの右余白をなくす
+  margin-right: 0;                  // 最後のボタンの右余白をなくす
 }
 
 // 検索フォーム
@@ -27,21 +76,18 @@ header {
   flex-direction: column;
 }
 
-// 検索カテゴリボックスの設定
-.search-form__categories {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 0.5rem;
-  justify-content: center;
+// ラジオボタンのボックスと入力ボックスのボックスの設定
+.search-form__categories,
+.search-form__inputs {
+  justify-content: center;          // 横方向（主軸）中央寄せ
 }
 
-//ラジオボタンの設定
+// ラジオボタンの設定
 .search-form__category {
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin: 0;
   cursor: pointer;
   color: white;
   font-size: 1.2rem;
@@ -60,12 +106,27 @@ input[type="radio"]:checked + label {
   color: black;
 }
 
-// 検索フォームの入力フィールドのボックスの設定
+// 入力ボックスのボックスの設定
 .search-form__inputs {
-  display: flex;
+  align-items: flex-start;          // 垂直方向に上寄せ
+}
+
+// 入力フォームのボックスと検索ボタンのボックスの設定
+.search-form__field-group,
+.search-form__button-wrapper {
+  margin: 0 0.25rem;
+}
+
+// 入力フォームのボックスの設定
+.search-form__field-group {
+  width: 40%;
+}
+
+// 入力フィールドとボタンの共通
+.search-form__field,
+.search-form__exclude-field,
+.search-form__button {
   height: 30px;
-  width: 100%;
-  gap: 1rem;
 }
 
 // 入力フィールドの設定
@@ -79,27 +140,28 @@ input[type="radio"]:checked + label {
   box-sizing: border-box;
 }
 
-.search-form__field {
-  flex-grow: 1;
+// 検索ボタンのボックスの設定
+.search-form__button-wrapper {
+  flex-grow: 1;                     // 残りをすべて使う
 }
 
 /*    ボタンの設定   */
 // ヘッダーのリンクボタンの設定
 // 通常時
-.nav-item .btn-outline-secondary {
+.header__nav-button {
   color: #808080;
   border-color: #808080;
 }
 
 // ホバー時
-.nav-item .btn-outline-secondary:hover {
+.header__nav-button:hover {
   color: black;
   border-color: black;
   background-color: white;
 }
 
 // クリック時
-.nav-item .btn-outline-secondary:active {
+.header__nav-button:active {
   color: #FFFFFF;
   border-color: #388E3C;
   background-color: #388E3C;
@@ -110,7 +172,6 @@ input[type="radio"]:checked + label {
 .search-form__button {
   color: white;
   border-color: white;
-  height: 30px;
   margin: 0;
   line-height: 1;                   // テキストの余白によるズレを回避 
 }

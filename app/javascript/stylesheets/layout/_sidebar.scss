@@ -6,7 +6,6 @@
   width: var(--sidebar-width);
   position: fixed;                   // 画面上の固定位置に要素を配置
   top: var(--header-height); 
-  padding: 1rem 0.75rem 0;
   z-index: 998;                      // 前面に出す
 }
 
@@ -20,4 +19,21 @@
 .sidebar-right {
   color: #33AADD;
   right: 0;
+}
+
+.sidebar-links {
+  width: var(--sidebar-width);
+  padding: 0.75rem;
+  overflow: hidden;
+  box-sizing: border-box;           // paddingを含めてwidth/heightを計算
+}
+
+.sidebar-links h5,
+.sidebar-links h6,
+.sidebar-links a {
+  display: block;                   // 幅を指定しやすく、縦に積む
+  max-width: 100%;
+  white-space: nowrap;              // 折り返さず1行で表示 
+  overflow: hidden;                 // はみ出した部分は見せない
+  text-overflow: ellipsis;          // はみ出したら末尾に...を表示
 }

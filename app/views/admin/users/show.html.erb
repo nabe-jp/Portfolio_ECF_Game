@@ -28,6 +28,10 @@
       <td><%= @user.email %></td>
     </tr>
     <tr>
+      <th colspan="2">自己紹介</th>
+      <td><%= @user.bio %></td>
+    </tr>
+    <tr>
       <th colspan="2">ステータス</th>
       <td><%= enum_i18n(@user.user_status, :user_status) %></td>
     </tr>
