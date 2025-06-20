@@ -16,8 +16,11 @@
 
               <!-- 右側の内容(名前、タイトル、内容) -->
               <div class="post-list__content-box">
+                <p class="post-list__item-label">【ニックネーム】</p>
                 <p class="post-list__user"><%= post.user.nickname %></p>
+                <p class="post-list__item-label">【タイトル】</p>
                 <p class="post-list__title"><%= post.title %></p>
+                <p class="post-list__item-label">【内容】</p>
                 <p class="post-list__description"><%= truncate(post.body, length: 100) %></p>
                 <p class="post-list__date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
               </div>

@@ -94,6 +94,12 @@
   width: 95%;
 }
 
+// 左右のボックスの共通設定
+.post-list__image-box,
+.post-list__content-box {
+  height: 150px;
+}
+
 // 左側：画像エリア
 .post-list__image-box {
   max-width: 45%;
@@ -118,60 +124,79 @@
 .post-list__content-box {
   max-width: 50%;
   margin-left: 1rem;
+  position: relative;                 // 子要素の絶対位置基準
   display: flex;
   flex-direction: column;             // 縦並びにする
 }
 
-// 名前の設定(index用)
-.post-list__user {
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 1rem 0;
-  white-space: nowrap;                // 1行で表示
-  overflow: hidden;
-  text-overflow: ellipsis;            // 省略文字(...)
-  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める 
-}
-
-// 名前の設定(show用)
-.post-detai__user {
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 1rem 0;
-  white-space: nowrap;                // 1行で表示
-  overflow: hidden;
-  text-overflow: ellipsis;            // 省略文字(...)
-  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める 
-}
-
-// タイトルのスタイル
-.post-list__title {
-  font-size: 1rem;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+/* 右側情報エリアの共通部分をまとめる(.post-list__userはindex用、.post-detai__userはshow用) */
+// はみ出した部分を隠し...表示、大きさにパディングやマージンも含める
+.post-list__item-label, 
+.post-list__user, 
+.post-detai__user, 
+.post-list__title, 
+.post-list__description, 
+.post-list__date {
+  overflow: hidden;                   // はみ出した部分は非表示
+  text-overflow: ellipsis;            // 省略文字「...」を表示
   box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+  line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
+}
+
+// 左側の空白
+.post-list__user, 
+.post-list__title, 
+.post-list__description, 
+.post-list__date {
+  margin-left: 0.8rem;
+}
+
+// フォントサイズ
+.post-list__user, 
+.post-detai__user, 
+.post-list__title, 
+.post-list__description {
+  font-size: 1rem;
+}
+.post-list__item-label, 
+.post-list__date {
+  font-size: 0.8rem;
+}
+
+// フォントの太さ
+.post-list__user, 
+.post-detai__user, 
+.post-list__title {
+  font-weight: bold;
+}
+
+// 高さと折り返しのなし
+.post-list__item-label, 
+.post-list__user, 
+.post-list__title {
+  height: 15%;
+  white-space: nowrap;                // 1行で表示
+}
+.post-list__item-label, 
+.post-list__date {
+  height: 10%;
+}
+
+.post-detai__user {
+  white-space: nowrap;                // 1行で表示
 }
 
 // 内容のスタイル
 .post-list__description {
-  font-size: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;              // 最大2行まで表示
   -webkit-box-orient: vertical;
-  overflow: hidden;                   // はみ出した部分は非表示
-  text-overflow: ellipsis;            // 省略文字「...」を表示
   white-space: normal;                // 折り返しを許可
-  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
 }
 
 // 更新日のスタイル
 .post-list__date {
-  font-size: 0.9rem;
+  position: absolute;
+  bottom: 0;
   color: gray;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
 }

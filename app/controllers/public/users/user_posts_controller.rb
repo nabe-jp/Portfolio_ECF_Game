@@ -34,36 +34,36 @@ class Public::Users::UserPostsController < Public::ApplicationController
     @user_post = @user.user_posts.new(user_post_attributes_from_session)
   end
 
+  # AIのタグ付けAPIを使用しないバージョン
+  # def create
+  #   @user_post = current_user.user_posts.new(user_post_params)
+
+  #   if @user_post.save 
+
+  #     # 投稿成功 → 最終投稿日時を更新
+  #     @user.update(last_user_posted_at: Time.current)
+  #     session[:user_post_attributes] = nil
+  #     redirect_to user_post_path(@user, @user_post), notice: "投稿が作成されました。"
+  #   else
+  #     store_form_data(attributes: user_post_params, error_messages: 
+  #       @user_post.errors.full_messages, error_name: "投稿")
+  #     redirect_to new_user_post_path(current_user)
+  #   end
+  # end 
+
+  # AIのタグ付けAPIを使用するバージョン
   def create
     @user_post = current_user.user_posts.new(user_post_params)
-  
-    # # AI機能(API)実装のため一時的に追加
-    # tags = Vision.get_image_data(user_post_params[:user_post_image])
-    # # -------------------------------
+
+    image_file = user_post_params[:user_post_image]
+
+    if image_file.present?
+      # Vision.get_image_dataに画像の情報を渡す
+      tags = Vision.get_image_data(user_post_params[:user_post_image]) 
+      @user_post.tag_list.add(tags)
+    end
 
     if @user_post.save
-
-    #   # AI機能(API)実装のため一時的に追加
-      
-    #   # 現在非同期を切ることで対応中の為、下記コメントアウト
-    #   # # AIタグ付け処理 withリトライ対応
-    #   # retries = 0
-      
-    #   # begin
-    #     @user_post.tag_list.add(tags)
-    #     @user_post.save!
-    #   # rescue SQLite3::BusyException
-    #   #   retries += 1
-    #   #   if retries <= 3
-    #   #     sleep(0.2)  # 少し待ってから再試行(200ミリ秒)
-    #   #     retry
-    #   #   else
-    #   #     flash[:alert] = "データベースが一時的に使用中です。もう一度お試しください。"
-    #   #     return redirect_to new_user_post_path(@user)
-    #   #   end
-    #   # end
-
-    #   # -------------------------------
 
       # 投稿成功 → 最終投稿日時を更新
       @user.update(last_user_posted_at: Time.current)
@@ -74,7 +74,7 @@ class Public::Users::UserPostsController < Public::ApplicationController
         @user_post.errors.full_messages, error_name: "投稿")
       redirect_to new_user_post_path(current_user)
     end
-  end 
+  end
 
   def edit
     @url = user_post_path(@user.id)
