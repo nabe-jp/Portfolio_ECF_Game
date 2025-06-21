@@ -82,7 +82,7 @@
   </tr>
   <tr>
   <th>最終投稿日時</th>
-  <td><%= @group.last_posted_at.strftime('%Y-%m-%d %H:%M') || '-' %></td>
+  <td><%= @group.last_posted_at&.strftime('%Y-%m-%d %H:%M') || '-' %></td>
   </tr>
     <tr>
     <th>作成日時</th>

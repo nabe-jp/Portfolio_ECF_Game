@@ -13,6 +13,14 @@ module Restorer
         # 復元をするために一時的にアクティブにする
         @user.update!(user_status: :active, deleted_at: nil, deleted_by_id: nil, deleted_reason: nil)
 
+        @user.owned_groups.each do |group|
+          Restorer::GroupRestorer.new(group, restored_via_parent: true).call
+        end
+
+        @memberships.each do |membership|
+          Restorer::GroupMemberRestorer.new(membership, restored_via_parent: true).call
+        end
+        
         # 子要素の連鎖復元
         @user.user_posts.each do |post|
           Restorer::UserPostRestorer.new(post, restored_via_parent: true).call
@@ -21,14 +29,6 @@ module Restorer
         # ユーザー本人のコメント削除
         @user.user_post_comments.find_each do |comment|
           Restorer::UserPostCommentRestorer.new(comment, restored_via_parent: true).call
-        end
-
-        @user.owned_groups.each do |group|
-          Restorer::GroupRestorer.new(group, restored_via_parent: true).call
-        end
-
-        @memberships.each do |membership|
-          Restorer::GroupMemberRestorer.new(membership, restored_via_parent: true).call
         end
 
         # 復元が終わったので非公開状態に更新

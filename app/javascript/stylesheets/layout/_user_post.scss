@@ -68,15 +68,15 @@
   text-decoration: none;              // リンクの下線を消す
   color: inherit;                     // 親要素の色を継承
   flex-direction: row;                // 横並びに変更
-  justify-content: flex-start;        // 左揃えにする
+  justify-content: center;            // 中央揃えにする
   align-items: center;                // 高さを合わせる
-  max-width: 95%;
+  width: 95%;
   height: 200px;                      // 高さ固定
   padding: 1rem;                      // 内側の余白
   border-radius: 8px;                 // 角を丸める
   margin-bottom: 2rem;                // ボックス間のスペース
   overflow: hidden;                   // 内容がはみ出さないように制御
-  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
 }
 
 // マウスオーバー時のスタイル
@@ -90,7 +90,6 @@
 .post-list {
   display: flex;                      // 横並びにする
   flex-wrap: wrap;                    // 要素が画面幅を超えた場合に次の行に折り返す
-  gap: 0.5rem;
   width: 95%;
 }
 
@@ -102,7 +101,7 @@
 
 // 左側：画像エリア
 .post-list__image-box {
-  max-width: 45%;
+  width: 45%;
   display: flex;
   justify-content: center;            // 横方向に中央揃え
   align-items: center;                // 縦方向にも中央揃え
@@ -122,8 +121,7 @@
 
 // 右側：情報エリア
 .post-list__content-box {
-  max-width: 50%;
-  margin-left: 1rem;
+  width: 55%;
   position: relative;                 // 子要素の絶対位置基準
   display: flex;
   flex-direction: column;             // 縦並びにする
@@ -139,16 +137,15 @@
 .post-list__date {
   overflow: hidden;                   // はみ出した部分は非表示
   text-overflow: ellipsis;            // 省略文字「...」を表示
-  box-sizing: border-box;             // パディングやマージンも要素の大きさに含める
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
   line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
 }
 
 // 左側の空白
 .post-list__user, 
 .post-list__title, 
-.post-list__description, 
-.post-list__date {
-  margin-left: 0.8rem;
+.post-list__description {
+  padding-left: 0.8rem;
 }
 
 // フォントサイズ
@@ -199,4 +196,5 @@
   position: absolute;
   bottom: 0;
   color: gray;
+  padding-left: 0.4rem;
 }

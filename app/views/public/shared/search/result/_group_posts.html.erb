@@ -15,11 +15,15 @@
 
             <!-- 右側の内容(名前、タイトル、内容) -->
             <div class="group-posts__content-box">
+              <p class="group-posts__item-label">【ニックネーム】</p>
               <p class="group-posts__user"><%= post.member.user.nickname %></p>
+              <p class="group-posts__item-label">【タイトル】</p>
               <p class="group-posts__title"><%= post.title %></p>
+              <p class="group-posts__item-label">【内容】</p>
               <p class="group-posts__description"><%= truncate(post.body, length: 100) %></p>
-              <p class="group-posts__date"><%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+              <p class="group-posts__date">投稿日：<%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
             </div>
+
           </div>
           <% end %>
         </div>

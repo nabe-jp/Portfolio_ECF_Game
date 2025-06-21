@@ -17,9 +17,9 @@ class Public::GroupsController < ApplicationController
 
   def show
     if user_signed_in?
-      membership = @group.group_memberships.find_by(user_id: current_user.id)
+      membership = @group.active_group_memberships.find_by(user_id: current_user.id)
   
-      if membership&.member_status_active?
+      if membership.nil?
         redirect_to group_dashboard_path(@group) and return
       end
     end
