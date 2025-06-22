@@ -88,7 +88,7 @@ class Public::GroupsController < ApplicationController
   def redirect_if_member
     # .exists?はDBに確認をしている(.any?や.present?より高速)、見つかればそのままダッシュボードに遷移
     if user_signed_in? && @group.active_group_memberships.exists?(user_id: current_user.id)
-      redirect_to group_dashboard_path(@group)
+      redirect_to group_dashboard_path(@group), notice: "グループダッシュボードに移動しました"
     end
   end
   

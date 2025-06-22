@@ -6,9 +6,10 @@
   <table class="table table-hover table-bordered text-center">
     <thead class="thead-light">
       <tr>
-        <th style="width: 30%;">タイトル</th>
+        <th style="width: 10%;">投稿ID</th>
+        <th style="width: 25%;">タイトル</th>
         <th style="width: 15%;">投稿日</th>
-        <th style="width: 25%;">投稿者</th>
+        <th style="width: 20%;">投稿者</th>
         <th style="width: 10%;">公開</th>
         <th style="width: 12%;">外部公開</th>
         <th style="width: 8%;">詳細</th>
@@ -17,6 +18,7 @@
     <tbody>
       <% @group_posts.each do |post| %>
         <tr class="text-center <%= row_class(post) %>">
+          <td><%= post.id %></td>
           <td><%= link_to post.title, admin_group_post_path(@group.id, post) %></td>
           <td><%= post.created_at.strftime('%Y-%m-%d %H:%M') %></td>
           <td><%= link_to post.member.user.nickname, admin_user_path(post.member.user) %></td>

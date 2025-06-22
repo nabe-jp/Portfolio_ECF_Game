@@ -10,21 +10,23 @@ module Restorer
         restore_params = {member_status: :active, deleted_at: nil, deleted_by_id: nil,
           deleted_reason: nil, deleted_due_to_parent: false}
 
-        if @member.group.is_deleted || !@member.user.user_status_active?
-          raise 'グループまたはユーザーが削除されているため復元出来ませんでした'
-            
-        # 親の連鎖削除で削除されたものを復元
-        elsif @restored_via_parent && @member.deleted_due_to_parent
-          restore_params[:hidden_on_parent_restore] = true
-
         # 連鎖復元対象外(復元しない)
-        elsif @restored_via_parent && !@member.deleted_due_to_parent
+        if @restored_via_parent && !@member.deleted_due_to_parent
           Rails.logger.info("#{self.class.name}: 
             連鎖復元対象外のメンバー情報の復元をスキップしました (id: #{@member.id})")
           return
 
+        # 親の連鎖削除で削除されたものを復元
+        elsif @restored_via_parent && @member.deleted_due_to_parent
+          restore_params[:hidden_on_parent_restore] = true
+
         # 個別の復元
         elsif !@restored_via_parent && !@member.deleted_due_to_parent
+          # 親の状態を確認、親がアクティブな場合、復元を行う
+          if @member.group.is_deleted || !@member.user.user_status_active?
+            raise 'グループまたはユーザーが削除されているため復元出来ませんでした'
+          end
+
           restore_params[:is_public] = false
 
         # 想定していないエラー

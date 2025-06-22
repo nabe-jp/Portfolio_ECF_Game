@@ -10,21 +10,23 @@ module Restorer
         restore_params = {is_deleted: false, deleted_at: nil, deleted_by_id: nil, deleted_reason: nil,
           deleted_due_to_parent: false}
 
-        if !@user_post.user.user_status_active?
-          raise '投稿を行ったユーザーが削除されているため復元出来ませんでした'
+        # 連鎖復元対象外(復元しない)
+        if @restored_via_parent && !@user_post.deleted_due_to_parent
+          Rails.logger.info("#{self.class.name}: 
+            連鎖復元対象外のユーザー投稿の復元をスキップしました (id: #{@user_post.id})")
+          return
 
         # 親の連鎖削除で削除されたものを復元
         elsif @restored_via_parent && @user_post.deleted_due_to_parent
           restore_params[:hidden_on_parent_restore] = true
 
-        # 連鎖復元対象外(復元しない)
-        elsif @restored_via_parent && !@user_post.deleted_due_to_parent
-          Rails.logger.info("#{self.class.name}: 
-            連鎖復元対象外のユーザー投稿の復元をスキップしました (id: #{@user_post.id})")
-          return
-
         # 個別の復元
         elsif !@restored_via_parent && !@user_post.deleted_due_to_parent
+          # 親の状態を確認、親がアクティブな場合、復元を行う
+          if !@user_post.user.user_status_active?
+            raise '投稿を行ったユーザーが削除されているため復元出来ませんでした'
+          end
+
           restore_params[:is_public] = false
 
         # 想定していないエラー

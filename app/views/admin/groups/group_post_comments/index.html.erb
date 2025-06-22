@@ -6,17 +6,19 @@
   <table class="table table-hover table-bordered text-center">
     <thead class="thead-light">
       <tr>
+        <th style="width: 7%;">コメントID</th>
         <th style="width: 20%;">投稿タイトル</th>
         <th style="width: 25%;">コメント本文</th>
-        <th style="width: 20%;">投稿者</th>
+        <th style="width: 15%;">投稿者</th>
         <th style="width: 15%;">投稿日</th>
-        <th style="width: 12%;">公開ステータス</th>
+        <th style="width: 10%;">公開ステータス</th>
         <th style="width: 8%;">詳細</th>
       </tr>
     </thead>
     <tbody>
       <% @group_post_comments.each do |comment| %>
         <tr class="text-center <%= row_class(comment) %>">
+          <td><%= comment.id %></td>
           <td>
             <%= link_to truncate(comment.group_post.title, length: 15), 
               admin_group_post_path(@group.id, comment.group_post) %>

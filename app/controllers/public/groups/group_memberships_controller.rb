@@ -35,7 +35,8 @@ class Public::Groups::GroupMembershipsController < Public::ApplicationController
       # アクティブでもサイト管理者により非公開になっている場合(個別非公開や連鎖復元)がある
       elsif membership.member_status_active? && 
         (!membership.is_public? || membership.hidden_on_parent_restore?)
-        redirect_to group_path(@group), alert: 'あなたのステータスは非公開になっているため参加できません。'
+        redirect_to group_path(@group), 
+          alert: 'このグループに参加していますがあなたのステータスが制限されているため利用できません。'
 
       else
         redirect_to group_path(@group), alert: '参加できませんでした。'

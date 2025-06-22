@@ -8,8 +8,9 @@
   <table class="table table-hover table-bordered text-center">
     <thead class="thead-light">
       <tr>
-        <th style="width: 30%;">ユーザー名</th>
-        <th style="width: 15%;">役割</th>
+        <th style="width: 10%;">メンバーID</th>
+        <th style="width: 25%;">ニックネーム</th>
+        <th style="width: 10%;">役割</th>
         <th style="width: 15%;">加入日</th>
         <th style="width: 15%;">公開ステータス</th>
         <th style="width: 15%;">メンバーステータス</th>
@@ -19,6 +20,7 @@
     <tbody>
       <% @group_members.each do |member| %>
         <tr class="text-center <%= row_class(member) %>">
+          <td><%= member.id %></td>
           <td><%= link_to member.user.nickname, admin_user_path(member.user) %></td>
           <td><%= enum_i18n(member.role, :role) %></td>
           <td><%= member.joined_at&.strftime("%Y-%m-%d") %></td>

@@ -38,22 +38,22 @@
     <td><%= @group.slug %></td>
   </tr>
   <tr>
-    <th>所属人数</th>
+    <th>アクティブメンバー数</th>
     <td><%= @group.active_members.size %></td>
   </tr>
   <tr>
-    <th>投稿数（グループ内）</th>
+    <th>アクティブ投稿数（グループ内）</th>
     <td><%= @group.group_posts.undeleted_only.unhidden_only.count %></td>
   </tr>
   <tr>
-    <th>公開投稿数</th>
+    <th>アクティブ公開投稿数</th>
     <td>
       <%= @group.group_posts.undeleted_only.unhidden_only.
         where(visible_to_non_members: true).count %>
     </td>
   </tr>
   <tr>
-    <th>総コメント数</th>
+    <th>アクティブ総コメント数</th>
     <td>-</td>
   </tr>
   <tr>

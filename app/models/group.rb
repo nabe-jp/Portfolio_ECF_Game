@@ -17,7 +17,7 @@ class Group < ApplicationRecord
   # GroupMembershipをall_membersとして定義(削除されているデータも含むためadmin側にて使用)
   has_many :all_members, through: :group_memberships, source: :user
 
-  # membersにアクティブなユーザーのみを紐づける(membersにはアクティブなユーザーのみ紐づく)
+  # membersにアクティブなユーザーのみを紐づける(ユーザーとメンバー、どちらのステータスもアクティブな情報)
   has_many :active_members, -> { merge(User.active_users) }, 
     through: :active_group_memberships, source: :user
 

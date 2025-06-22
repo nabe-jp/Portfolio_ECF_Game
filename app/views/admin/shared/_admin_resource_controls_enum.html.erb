@@ -1,4 +1,4 @@
-<% is_deleted = resource.member_status == "suspended" %>
+<% is_deleted = resource.member_status != "active" %>
 <% is_public = resource.is_public %>
 <% hidden_on_parent_restore = resource.hidden_on_parent_restore %>
 
