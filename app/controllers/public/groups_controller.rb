@@ -10,22 +10,16 @@ class Public::GroupsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :authorize_group_moderator!,only: [:edit, :update]
   before_action :authorize_group_owner!,only: [:confirm_destroy, :destroy]
+  before_action :redirect_if_member, only: [:show]
 
   def index
     @groups = Group.active_groups_desc.page(params[:page])
   end
 
   def show
-    if user_signed_in?
-      membership = @group.active_group_memberships.find_by(user_id: current_user.id)
-  
-      if membership.nil?
-        redirect_to group_dashboard_path(@group) and return
-      end
-    end
-
     # 非メンバー用の公開投稿のみ取得 + ページネーション
     @public_posts = @group.group_posts.active_group_posts_for_all_desc.page(params[:page])
+    @membership = @group.group_memberships.find_by(user: current_user) if user_signed_in?
   end
 
   def new
@@ -89,6 +83,14 @@ class Public::GroupsController < ApplicationController
    def confirm_destroy; end
 
   private
+
+  # 無効ではないメンバーはそのままグループダッシュボードに遷移
+  def redirect_if_member
+    # .exists?はDBに確認をしている(.any?や.present?より高速)、見つかればそのままダッシュボードに遷移
+    if user_signed_in? && @group.active_group_memberships.exists?(user_id: current_user.id)
+      redirect_to group_dashboard_path(@group)
+    end
+  end
   
   def group_attributes_from_session
     session[:group_attributes] || {}

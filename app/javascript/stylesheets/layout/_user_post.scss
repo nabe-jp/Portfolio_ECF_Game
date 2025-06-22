@@ -88,9 +88,9 @@
 
 // 投稿ボックスの設定
 .post-list {
+  width: 95%;
   display: flex;                      // 横並びにする
   flex-wrap: wrap;                    // 要素が画面幅を超えた場合に次の行に折り返す
-  width: 95%;
 }
 
 // 左右のボックスの共通設定
@@ -107,13 +107,8 @@
   align-items: center;                // 縦方向にも中央揃え
 }
 
-// 投稿画像の設定(index用)
-.post-list__image {
-  border-radius: 8px;
-  max-width: 100%;                    // 親要素を超えないように最大幅を設定
-}
-
-// 投稿画像の設定(show用)
+// 投稿画像の設定(post-list -> index用、post-detail ->　show用)
+.post-list__image, 
 .post-detail__image {
   border-radius: 8px;
   max-width: 100%;                    // 親要素を超えないように最大幅を設定
@@ -127,8 +122,7 @@
   flex-direction: column;             // 縦並びにする
 }
 
-/* 右側情報エリアの共通部分をまとめる(.post-list__userはindex用、.post-detai__userはshow用) */
-// はみ出した部分を隠し...表示、大きさにパディングやマージンも含める
+// はみ出した部分を隠し...表示、大きさにpaddingとborderは幅に含める
 .post-list__item-label, 
 .post-list__user, 
 .post-detai__user, 

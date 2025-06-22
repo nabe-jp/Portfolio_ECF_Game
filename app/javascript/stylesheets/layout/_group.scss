@@ -66,38 +66,69 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  position: relative;                 // 子要素の絶対位置基準
 }
 
-.group-card__name {
-  flex: 0 0 33%;
+.group-posts__label,
+.group-card__name, 
+.group-card__description, 
+.group-card__date {
+  overflow: hidden;                   // はみ出した部分は非表示
+  text-overflow: ellipsis;            // 省略文字「...」を表示
+  box-sizing: border-box;
+}
+
+.group-posts__label,
+.group-card__name, 
+.group-card__date {
   display: flex;
+  white-space: nowrap;
+}
+
+.group-posts__label, 
+.group-card__date {
+  height: 15%;
+  font-size: 0.8rem;
+}
+
+.group-posts__label {
   align-items: flex-end;
 }
 
-.group-card__name h3 {
-  font-size: 1.25rem;
-  margin: 0;
+.group-card__name, 
+.group-card__description {
+  padding-left: 0.8rem;
+}
+
+.group-card__name, 
+.group-card__date {
+  align-items: center;                // 縦方向にも中央揃え
+}
+
+.group-card__name  {
+  height: 15%;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .group-card__description {
-  flex: 0 0 33%;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  margin-top: 0.25rem;
-}
-
-.group-card__description p {
-  margin: 0;
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal;
 }
 
 .group-card__meta {
-  flex: 0 0 33%;
+  position: absolute;
+  bottom: 10%;
   display: flex;
-  align-items: flex-start;
-  font-size: 0.9rem;
+  flex-direction: row;                // 子要素を横並び
+}
+
+.group-card__date {
+  color: gray;
+  padding-left: 0.4rem;
 }
 
 .group-card__meta span + span {
@@ -376,18 +407,18 @@
 /*  group_posts  */
 .group-posts__link {
   display: flex;
-  text-decoration: none;
-  color: inherit;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
+  text-decoration: none;              // リンクの下線を消す
+  color: inherit;                     // 親要素の色を継承
+  flex-direction: row;                // 横並びに変更
+  justify-content: center;            // 中央揃えにする
+  align-items: center;                // 高さを合わせる
   width: 95%;
-  height: 200px;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  overflow: hidden;
-  box-sizing: border-box;
+  height: 200px;                      // 高さ固定
+  padding: 1rem;                      // 内側の余白
+  border-radius: 8px;                 // 角を丸める
+  margin-bottom: 2rem;                // ボックス間のスペース
+  overflow: hidden;                   // 内容がはみ出さないように制御
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
 }
 
 .group-posts__link:hover {
@@ -400,6 +431,11 @@
   display: flex;
   flex-wrap: wrap;
   width: 95%;
+}
+
+.group-posts__image-box,
+.group-posts__content-box {
+  height: 150px;
 }
 
 .group-posts__image-box {
@@ -455,7 +491,6 @@
 
 // フォントの太さ
 .group-posts__user, 
-.post-detai__user, 
 .group-posts__title {
   font-weight: bold;
 }
@@ -470,10 +505,6 @@
 .group-posts__item-label, 
 .group-posts__date {
   height: 10%;
-}
-
-.post-detai__user {
-  white-space: nowrap;                // 1行で表示
 }
 
 // 内容のスタイル

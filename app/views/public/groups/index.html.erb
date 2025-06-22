@@ -7,17 +7,17 @@
           <%= image_tag(group.group_image, class: "group-card__image-img img-fluid") %>
         </div>
         <div class="group-card__content">
-          <div class="group-card__name">
-            <h3><%= group.name %></h3>
-          </div>
-          <div class="group-card__description">
-            <p><%= group.description %></p>
-          </div>
+          <p class="group-posts__label">【グループ名】</p>
+          <p class="group-card__name"><%= group.name %></p>
+          <p class="group-posts__label">【説明】</p>
+          <p class="group-card__description"><%= group.description %></p>
+
           <div class="group-card__meta">
-            <span>メンバー数: <%= group.group_memberships.active_members.count %>人</span>
-            <span>最終投稿: <%= group.last_posted_at ? 
-              l(group.last_posted_at, format: :short) : "なし" %></span>
+            <p class="group-card__date">メンバー数: <%= group.active_group_memberships.count %>人</p>
+            <p class="group-card__date">最終投稿: <%= group.last_posted_at ? 
+              l(group.last_posted_at, format: :short) : "なし" %></p>
           </div>
+
         </div>
       <% end %>
     <% end %>

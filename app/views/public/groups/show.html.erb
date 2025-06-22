@@ -5,12 +5,10 @@
 <h3 class="my-3"><%= @group.name %></h3>
 
 <p><%= @group.description %></p>
-<p>参加メンバー数: <%= @group.group_memberships.active_members.count %>人</p>
+<p>参加メンバー数: <%= @group.active_group_memberships.count %>人</p>
 
 <% if user_signed_in? %>
-  <% membership = @group.group_memberships.find_by(user: current_user) %>
-
-  <% if membership.present? && membership.member_status == 'pending' %>
+  <% if @membership&.member_status_pending? %>
     <p>参加申請中です。承認までお待ちください。</p>
     <%= button_to '申請をキャンセルする', cancel_group_membership_path(@group), 
           method: :delete, data: { confirm: '申請をキャンセルしてもよろしいですか？' }, class: "btn btn-danger" %>
