@@ -1,45 +1,38 @@
-<div>
-  <%= image_tag(@group.group_image, class: "group-show__image img-fluid") %>
+<h2 class="groups__title"><%= @group.name %></h2>
+
+<div class="group-show-box">
+  <!-- 左側: 画像 -->
+  <div class="group-show-box__image-wrapper mr-4">
+    <%= image_tag(@group.group_image, class: "group-show__image img-fluid") %>
+  </div>
+
+  <!-- 右側: 説明や参加メンバー数 -->
+  <div class="group-show-box__info">
+    <p class="group-show-box__label">【説明】</p>
+    <p class="group-show-box__bio"><%= @group.description %></p>
+    <p class="group-show-box__member-count">
+      参加メンバー数: <%= @group.active_group_memberships.count %>人
+    </p>
+  </div>
 </div>
 
-<h3 class="my-3"><%= @group.name %></h3>
+<div class="text-center my-4">
+  <% if user_signed_in? %>
+    <% if @membership&.member_status_pending? %>
+      <p>参加申請中です。承認までお待ちください。</p>
+      <%= button_to '申請をキャンセルする', cancel_group_membership_path(@group), 
+            method: :delete, data: { confirm: '申請をキャンセルしてもよろしいですか？' }, class: "btn btn-danger" %>
+    <% else %>
+      <%= button_to 'グループに参加申請する', join_group_membership_path(@group), 
+            method: :post, class: "btn btn-success" %>
+    <% end %>
 
-<p><%= @group.description %></p>
-<p>参加メンバー数: <%= @group.active_group_memberships.count %>人</p>
-
-<% if user_signed_in? %>
-  <% if @membership&.member_status_pending? %>
-    <p>参加申請中です。承認までお待ちください。</p>
-    <%= button_to '申請をキャンセルする', cancel_group_membership_path(@group), 
-          method: :delete, data: { confirm: '申請をキャンセルしてもよろしいですか？' }, class: "btn btn-danger" %>
   <% else %>
-    <%= button_to 'グループに参加申請する', join_group_membership_path(@group), 
-          method: :post, class: "btn btn-success" %>
+    <p><%= link_to 'ログインして参加申請する', new_user_session_path %></p>
   <% end %>
-
-<% else %>
-  <p><%= link_to 'ログインして参加申請する', new_user_session_path %></p>
-<% end %>
+</div>
 
 <hr>
 
-<% if @public_posts.any? %>
-  <h3>公開中の投稿</h3>
-  <% @public_posts.each do |post| %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title"><%= post.title %></h5>
-        <p class="card-text"><%= truncate(post.body, length: 100) %></p>
-        <p class="text-muted">投稿者: <%= post.member.user.nickname %> / 投稿日: <%= l(post.created_at, format: :short) %></p>
-        <%= link_to '詳細を見る', group_post_path(@group, post), class: "btn btn-outline-primary btn-sm" %>
-      </div>
-    </div>
-  <% end %>
-
-  <div class="d-flex justify-content-center mt-4">
-    <%= paginate @public_posts %>
-  </div>
-  
-<% else %>
-  <p>このグループには現在、公開されている投稿はありません。</p>
-<% end %>
+<h3 class="group-posts__page-title"><%= @group.name %>の公開投稿一覧</h3>
+<%= render 'public/shared/group/post/index' %>

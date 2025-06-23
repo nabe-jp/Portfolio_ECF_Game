@@ -1,20 +1,27 @@
-<!-- 自分のプロフィールを表示する部分(userとusersはこの部分テンプレートを表示する) -->
 <div class="container mt-3">
   <h2 class="text-center mb-4"><%= @user.nickname %>さんのプロフィール</h2>
-  
-  <!-- プロフィール表示部分 -->
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <%= render "public/shared/user/public_profile" %>
-    </div>
-  </div>
 
-  <!-- 編集ボタン -->
-  <div class="row justify-content-center mt-4">
-    <div class="col-md-8 text-center">
-      <% if @user == current_user %>
-        <%= render "public/shared/link/links", profile_edit: true, as: :button %>
-      <% end %>
+  <ul class="nav nav-tabs mb-3" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#profile">プロフィール</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#posts">投稿</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#groups">グループ</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="profile">
+      <%= render 'public/shared/user/public_profile' %>
+    </div>
+    <div class="tab-pane fade" id="posts">
+      <%= render 'public/shared/user_post/post_index' %>
+    </div>
+    <div class="tab-pane fade" id="groups">
+      <%= render 'public/shared/group/index' %>
     </div>
   </div>
 </div>

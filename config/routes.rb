@@ -40,16 +40,15 @@ Rails.application.routes.draw do
     # resource_usersにasを使用するとネストにも影響を与えるため、only: []、memberに配置しasを使用しpathを設定
     # リソースフルにするために投稿はresource_userにネストせずresources_usersにネスト
     resources :users, only: [] do
-      member do
-        get :show, as: :show
-      end
+      get :show, as: :show, on: :member
+
       resources :user_posts, path: 'posts', as: :posts, module: :users do
         resources :user_post_comments, only: [:create, :destroy], path: 'comments', 
           as: :comments
       end
     end
     
-    # 自分が所属しているグループ一覧 を表示する機能(責務を混ぜず、IDも必要ないので独立ルート)
+    # 自分が所属しているグループ一覧を表示する機能(責務を混ぜず、IDも必要ないので独立ルート)
     get 'my_groups', to: 'groups#my_groups'
 
     # スラッグを使用

@@ -108,6 +108,6 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
   end
   
   def group_post_params
-    params.require(:group_post).permit(:group_post_image, :title, :body)
+    params.require(:group_post).permit(:group_post_image, :title, :body, :visible_to_non_members)
   end
 end

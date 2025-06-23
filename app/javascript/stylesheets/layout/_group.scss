@@ -1,6 +1,6 @@
 .groups__title {
   text-align: center;
-  margin-bottom: 2rem;
+  margin: 0.5rem 0 1.5rem;
 }
 
 .groups {
@@ -42,19 +42,10 @@
   justify-content: center; 
 }
 
-.group-card__image-img, .group-show__image {
+.group-card__image-img {
   max-width: 100%;
   width: 180px;
   height: 150px;
-  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
-  object-fit: cover;
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-}
-
-.dashboard-group__image {
-  max-width: 100%;
-  width: 330px;
-  height: 275px;
   border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
   object-fit: cover;
   box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
@@ -133,6 +124,63 @@
 
 .group-card__meta span + span {
   margin-left: 1rem;
+}
+
+.group-show-box {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.group-show-box__image-wrapper {
+  height: 100%; 
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.group-show__image {
+  max-width: 100%;
+  width: 240px;
+  height: 200px;
+  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+  object-fit: cover;
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+}
+
+.group-show-box__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: auto 0;
+}
+
+.group-show-box__label, 
+.group-show-box__member-count,
+.group-show-box__bio {
+  white-space: normal;
+}
+
+.group-show-box__label, 
+.group-show-box__member-count {
+  font-size: 1rem;
+}
+
+.group-show-box__label {
+  font-weight: bold;
+}
+
+.group-show-box__bio {
+  font-size: 1.2rem;
+  padding-left: 1rem;
+}
+
+.group-show-box__member-count {
+  padding-left: 0.5rem;
 }
 
 .my-groups-list {
@@ -240,6 +288,15 @@
   }
 }
 
+.dashboard-group__image {
+  max-width: 100%;
+  width: 330px;
+  height: 275px;
+  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+  object-fit: cover;
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+}
+
 .dashboard__notice-list,
 .dashboard__event-list,
 .dashboard__post-list,
@@ -326,12 +383,25 @@
   overflow: hidden;
 }
 
+.group-members__page-title, 
+.group-memberships__page-title, 
+.group-notices__page-title,
+.group-events__page-title, 
+.group-posts__page-title {
+  margin: 0.5rem 0 1.5rem;
+}
+
+.group-memberships__page-title, 
+.group-posts__page-title{
+  text-align: center;
+}
+
 /*  group-members  */
 .group-members__section-divider {
-    height: 12px;
-    background-color: green;
-    border-radius: 4px;
-    margin: 1.5rem 0;
+  height: 12px;
+  background-color: green;
+  border-radius: 4px;
+  margin: 1.5rem 0;
 }
 
 .group-members__list {

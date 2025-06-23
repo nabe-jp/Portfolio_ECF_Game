@@ -1,6 +1,5 @@
 @use 'base/bootstrap';
 @use 'base/reset';
-@use 'base/typography';
 @use 'components/buttons';
 @use 'components/forms';
 @use 'layout/header';
@@ -17,5 +16,5 @@
 @use 'layout/group';
 @use 'layout/admin';
 @use 'utils/variables';
-@use 'utils/mixins';
 @use 'utils/spacing';
+@use 'utils/utilities';

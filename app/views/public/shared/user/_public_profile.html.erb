@@ -1,7 +1,10 @@
 <div class="profile-box">
-  <!-- プロフィール画像 -->
-  <div class="profile-image">
-    <%= image_tag(@user.profile_image, size: "200x200", class: "profile-box__image") %>
+
+  <div class="profile-box__image-wrapper">
+    <!-- プロフィール画像 -->
+    <div class="profile-image">
+      <%= image_tag(@user.profile_image, size: "200x200", class: "profile-box__image") %>
+    </div>
   </div>
 
   <div class="profile-box__info">

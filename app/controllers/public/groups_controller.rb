@@ -18,7 +18,7 @@ class Public::GroupsController < ApplicationController
 
   def show
     # 非メンバー用の公開投稿のみ取得 + ページネーション
-    @public_posts = @group.group_posts.active_group_posts_for_all_desc.page(params[:page])
+    @group_posts = @group.group_posts.active_group_posts_for_all_desc.page(params[:page])
     @membership = @group.group_memberships.find_by(user: current_user) if user_signed_in?
   end
 

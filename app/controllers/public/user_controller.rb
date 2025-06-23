@@ -1,7 +1,9 @@
 class Public::UserController < ApplicationController
   before_action :authenticate_user!
   before_action :set_current_user, only: [:show, :edit, :update, :mypage, :settings, :check, :withdraw]
-
+  before_action :set_user_posts, only: [:show]
+  before_action :set_groups, only: [:show]
+  
   def show; end
 
   def edit
@@ -54,6 +56,15 @@ class Public::UserController < ApplicationController
   # ユーザー情報を取得
   def set_current_user
     @user = current_user
+  end
+
+  def set_user_posts
+    @user_posts = @user.user_posts.active_posts_desc.page(params[:page])
+  end
+
+  def set_groups
+    @groups = @user.active_joined_groups
+      .merge(Group.active_groups_desc).page(params[:joined_page]).per(5)
   end
 
   # ユーザーパラメータの制御

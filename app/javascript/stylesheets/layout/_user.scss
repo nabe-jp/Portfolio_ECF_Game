@@ -1,16 +1,26 @@
-/*    ユーザーページ(一部マイページ)の設定    */
+/*    ユーザーページの設定    */
 // プロフィール表示ボックスの設定
 .profile-box {
   display: flex;
   align-items: center;               // 縦方向の中央揃え
   justify-content: center;           // 横方向の中央揃え
+  width: 100%;
   gap: 2rem;                         // 画像とテキストの間隔
   margin: 2rem 0;                    // 上下の余白
+  padding: 0 1rem;
+}
+
+// ボックスの設定
+.profile-box__image-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  min-width: 200px;
 }
 
 // 画像のサイズ調整
 .profile-box__image {
-  max-width: 200px;
+  width: 200px;
   border-radius: 50%
 }
 
@@ -20,10 +30,11 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;                          // ニックネームと自己紹介の間隔
-  width: 100%;
+  width: 70%;
+  min-width: 200px;
 }
 
-// ニックネーム、自己紹介、名前(マイページ)、メールアドレス(マイページ)の内容の設定
+// ニックネーム、自己紹介の内容の設定
 .profile-box__info-item {
   display: flex;
   flex-direction: column;
@@ -38,32 +49,19 @@
   font-size: 1.2rem;
 }
 
-// ニックネーム、名前(マイページ)の設定
-.profile-box__nickname, .private-name {
+// ニックネームの設定
+.profile-box__nickname {
   white-space: nowrap;                // 折り返しなし
   overflow: hidden;
   text-overflow: ellipsis;            // 省略記号を表示
   font-size: 1.2rem;
 }
 
-// 自己紹介、メールアドレス(マイページ)の設定
-.profile-box__bio, .private-email {
+// 自己紹介の設定
+.profile-box__bio {
   white-space: normal;                // 折り返しあり
   font-size: 1.2rem;
   line-height: 1.5;
-}
-
-// レスポンシブ調整
-@media (max-width: 768px) {
-  .profile-header {
-    flex-direction: column;           // 折り返しあり
-    align-items: center;
-  }
-  // 画像の調整
-  .profile-box__image {
-    max-width: 100px;
-    margin-bottom: 15px;              // 画像とテキストの間隔
-  }
 }
 
 /*    マイページの設定    */
@@ -81,7 +79,7 @@
 
 // 左右のタイトルの設定
 .mypage__container-left-column-title, .mypage__container-right-column-title {
-  text-align: left;                   // 左寄せ
+  text-align: center;                 // 中央寄せ
   font-size: 1.5rem;                  // タイトルの文字サイズ
   font-weight: bold;                  // 太字にして目立たせる
   margin-bottom: 1rem;                // 下に余白を追加
@@ -92,16 +90,50 @@
   margin-bottom: 3rem;                // 公開プロフィールの下に余白
 }
 
-// 名前(姓) と 名前(名) を横並びにするための新しいクラス
-.mypage__name-container {
-  display: flex;
-  gap: 2rem;                          // 名前の間に間隔
-}
-
 // ボタンを中央揃え
 .mypage__buttons, .mypage__settings-button-wrapper {
   display: flex;
   justify-content: center;            // 中央揃え
+}
+
+// プロフィール表示ボックスの設定
+.private-box {
+  display: flex;
+  align-items: center;               // 縦方向の中央揃え
+  justify-content: center;           // 横方向の中央揃え
+  width: 100%;
+  margin: 2rem 0;                    // 上下の余白
+  padding: 0 1rem;
+}
+
+// ボックスの設定
+.private-box__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1rem;
+  width: 100%;
+}
+
+// 名前、メールアドレスの内容の設定
+.private-box__info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;            // 左揃え
+  gap: 0.5rem;                        // タイトルと内容の間隔
+  width: 100%;                        // 横幅を100%にして、狭くなる領域にも対応
+}
+
+// 名前、メールアドレスのタイトルの設定
+.private-box__title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+// 名前、メールアドレスの設定
+.private-box__name, .private-box__email {
+  white-space: normal;                // 折り返しあり
+  font-size: 1.2rem;
 }
 
 // レスポンシブ対応: 画面が狭くなった場合、縦並びに変更
@@ -130,16 +162,6 @@
     flex-direction: column;           // 縦並びに変更
     gap: 10px;                        // ボックス間隔を調整
   }
-}
-
-// グループなどすべての箇所で共通で使用
-.nickname-truncate {
-  max-width: 100%;                    // 親幅内に収める
-  white-space: nowrap;                // 折り返さず1行で表示
-  overflow: hidden;                   // はみ出した部分を隠す
-  text-overflow: ellipsis;            // 省略記号「...」を表示
-  display: inline-block;              // 横幅指定に必要 
-  vertical-align: middle;             // アイコンと縦揃え
 }
 
 // 公開プロフィールの設定

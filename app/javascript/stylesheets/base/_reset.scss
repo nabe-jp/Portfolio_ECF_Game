@@ -45,3 +45,9 @@ label {
 p {
   margin-bottom: 0;
 }
+
+// メインコンテンツ内では上下にpaddingがある、hrを使った際に線の下に空白を再現
+hr {
+  padding-bottom: 1rem;
+  margin-bottom: 0;
+}

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <% if user_posts.any? %>
-      <% user_posts.each do |post| %> 
+    <% if @user_posts.any? %>
+      <% @user_posts.each do |post| %> 
         <!-- 投稿全体をリンクにする -->
         <div class="col-6">
           <%= link_to user_post_path(post.user.id, post.id), class: 'user-posts__link' do %>
@@ -33,6 +33,6 @@
   </div>
   
   <div class="d-flex justify-content-center mt-4">
-    <%= paginate user_posts %>
+    <%= paginate @user_posts %>
   </div>
 </div>

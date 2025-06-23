@@ -1,0 +1,9 @@
+// グループなどすべての箇所で共通で使用
+.truncate {
+  max-width: 100%;                    // 親幅内に収める
+  white-space: nowrap;                // 折り返さず1行で表示
+  overflow: hidden;                   // はみ出した部分を隠す
+  text-overflow: ellipsis;            // 省略記号「...」を表示
+  display: inline-block;              // 横幅指定に必要 
+  vertical-align: middle;             // アイコンと縦揃え
+}

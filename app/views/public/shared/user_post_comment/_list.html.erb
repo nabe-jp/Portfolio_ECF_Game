@@ -11,7 +11,7 @@
       <% unless comment.is_deleted %>
         <%= link_to show_user_path(comment.user), class: "comment__profile-link" do %>
           <%= image_tag(comment.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
-          <span class="nickname-truncate"><%= comment.user.nickname %></span>
+          <span class="truncate"><%= comment.user.nickname %></span>
         <% end %>
       <% end %>
     </div>
@@ -66,7 +66,7 @@
         <% unless reply.is_deleted %>
           <%= link_to show_user_path(reply.user), class: "comment__profile-link" do %>
             <%= image_tag(reply.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
-            <span class="nickname-truncate"><%= reply.user.nickname %></span>
+            <span class="truncate"><%= reply.user.nickname %></span>
           <% end %>
         <% end %>
       </div>

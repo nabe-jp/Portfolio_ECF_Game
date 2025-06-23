@@ -1,0 +1,31 @@
+<% if @groups.any? %>
+  <div class="groups">
+    <% @groups.each do |group| %>
+      <%= link_to group_path(group), class: "group-card" do %>
+        <div class="group-card__image">
+          <%= image_tag(group.group_image, class: "group-card__image-img img-fluid") %>
+        </div>
+        <div class="group-card__content">
+          <p class="group-posts__label">【グループ名】</p>
+          <p class="group-card__name"><%= group.name %></p>
+          <p class="group-posts__label">【説明】</p>
+          <p class="group-card__description"><%= group.description %></p>
+
+          <div class="group-card__meta">
+            <p class="group-card__date">メンバー数: <%= group.active_group_memberships.count %>人</p>
+            <p class="group-card__date">最終投稿: <%= group.last_posted_at ? 
+              l(group.last_posted_at, format: :short) : "なし" %></p>
+          </div>
+
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @groups %>
+  </div>
+
+<% else %>
+  <p style="text-align: center;">表示出来るグループはありません。</p>
+<% end %>
