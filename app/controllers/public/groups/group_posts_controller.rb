@@ -1,7 +1,10 @@
 class Public::Groups::GroupPostsController < Public::ApplicationController
   include Public::AuthorizeGroup
 
-  # 読み込んだモジュールのメソッドをviewで使用する為に必要
+  # 入力フォームに表示する表記の読み込み(バリデーションに使用する絶対値を用いて表示)
+  helper Public::PlaceholdersHelper
+
+  # 読み込んだモジュール(AuthorizeGroup)のメソッドをviewで使用する為に必要
   helper_method :group_post_editor?
   helper_method :group_post_comment_editor?
 

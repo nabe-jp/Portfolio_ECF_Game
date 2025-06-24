@@ -46,7 +46,7 @@
   max-width: 100%;
   width: 180px;
   height: 150px;
-  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径)
   object-fit: cover;
   box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
 }
@@ -518,6 +518,7 @@
 .group-posts__image {
   border-radius: 8px;
   max-width: 100%;
+  object-fit: cover;
 }
 
 // 右側：情報エリア

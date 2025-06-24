@@ -1,4 +1,8 @@
 class GroupPostComment < ApplicationRecord
+  # バリデーションに使用する絶対値の定義(文字数)
+  BODY_MIN_LENGTH = 1
+  BODY_MAX_LENGTH = 50
+
   include Scopes::Admin::Filters
   include Scopes::Public::Groups
   include Scopes::Shared::Ordering
@@ -11,8 +15,10 @@ class GroupPostComment < ApplicationRecord
   has_many :replies, class_name: 'GroupPostComment', foreign_key: :parent_comment_id, dependent: :destroy
 
   validates :body, presence: { message: "を入力してください" }
-  validates :body, length: { maximum: 50, 
-    message: "は1～50文字以内で入力してください" }, if: -> { body.present? }
+  validates :body, length: { 
+    minimum: BODY_MIN_LENGTH, maximum: BODY_MAX_LENGTH,
+    message: "は#{BODY_MIN_LENGTH}～#{BODY_MAX_LENGTH}文字以内で入力してください" 
+  }, if: -> { body.present? }
 
   after_create :update_post_timestamps
 

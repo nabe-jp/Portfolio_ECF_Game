@@ -3,7 +3,8 @@
 
     <div class="post-form__title-box">
       <%= f.label :title, "投稿のタイトル" %>
-      <%= f.text_field :title, class: "post-form__title-input", placeholder: "タイトルを入力してください" %>
+      <%= f.text_field :title, class: "post-form__title-input", 
+        placeholder: group_post_title_placeholder %>
     </div>
   
     <div class="post-form__image-box">
@@ -13,7 +14,8 @@
   
     <div class="post-form__body-box">
       <%= f.label :body, "投稿の内容" %>
-      <%= f.text_area :body, class: "post-form__body-input", placeholder: "内容を入力してください" %>
+      <%= f.text_area :body, class: "post-form__body-input", 
+        placeholder: group_post_body_placeholder %>
     </div>
 
     <div class="post-form__visible-box">

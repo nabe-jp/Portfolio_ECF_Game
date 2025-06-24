@@ -15,7 +15,7 @@
       <!-- タイトル入力と公開日 -->
       <div class="row mb-2">
         <div class="col-6 offset-1">
-          <%= f.text_field :title, class: 'form-control' %>
+          <%= f.text_field :title, class: 'form-control', placeholder: information_title_placeholder %>
         </div>
         <div class="col-4 mt-1">
           <%= f.datetime_select :published_at, class: 'form-control' %>
@@ -26,7 +26,7 @@
       <div class="row mb-2">
         <div class="col-6 offset-1">
           <%= f.label :body, '内容' %>
-          <%= f.text_area :body, class: 'form-control' %>
+          <%= f.text_area :body, class: 'form-control', placeholder: information_body_placeholder %>
         </div>
 
         <div class="col-2 mt-1">

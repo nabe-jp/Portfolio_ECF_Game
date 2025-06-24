@@ -1,7 +1,10 @@
 class Public::Groups::GroupNoticesController < Public::ApplicationController
   include Public::AuthorizeGroup
 
-  # 読み込んだモジュールのメソッドをviewで使用する為に必要
+  # 入力フォームに表示する表記の読み込み(バリデーションに使用する絶対値を用いて表示)
+  helper Public::PlaceholdersHelper
+
+  # 読み込んだモジュール(AuthorizeGroup)のメソッドをviewで使用する為に必要
   helper_method :group_moderator?
 
   before_action :authenticate_user!
@@ -48,7 +51,8 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
       session.delete(:group_notice_attributes)
       redirect_to group_notices_path(@group), notice: "お知らせを更新しました。"
     else
-      store_form_data(attributes: group_notice_params, error_messages: @group_notice.errors.full_messages)
+      store_form_data(attributes: group_notice_params, 
+        error_messages: @group_notice.errors.full_messages)
       redirect_to edit_group_notice_path(@group, @group_notice)
     end
   end

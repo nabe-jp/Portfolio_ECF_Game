@@ -3,7 +3,8 @@
   <div class="row mb-2 align-items-center">
     <div class="col-7 offset-1">
       <%= f.label :title, 'タイトル' %>
-      <%= f.text_field :title, class: 'form-control' %>
+      <%= f.text_field :title, class: 'form-control', 
+        placeholder: admin_note_title_placeholder %>
     </div>
     <div class="col-3 mt-3 d-flex align-items-center">
       <%= f.label :is_pinned, '固定表示' %>
@@ -15,7 +16,8 @@
   <div class="row mb-3">
     <div class="col-10 offset-1">
       <%= f.label :body, '内容' %>
-      <%= f.text_area :body, class: 'form-control', rows: 4 %>
+      <%= f.text_area :body, class: 'form-control', rows: 4, 
+        placeholder: admin_note_body_placeholder %>
     </div>
   </div>
 

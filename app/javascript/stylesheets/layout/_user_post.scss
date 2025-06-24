@@ -112,6 +112,7 @@
 .post-detail__image {
   border-radius: 8px;
   max-width: 100%;                    // 親要素を超えないように最大幅を設定
+  object-fit: cover;
 }
 
 // 右側：情報エリア

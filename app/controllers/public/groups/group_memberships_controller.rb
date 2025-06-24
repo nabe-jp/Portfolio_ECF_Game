@@ -23,7 +23,7 @@ class Public::Groups::GroupMembershipsController < Public::ApplicationController
         membership.assign_attributes(member_status: :active, deleted_at: nil, deleted_by_id: nil,
           deleted_reason: nil, joined_at: Time.current, role: :member)
         if membership.save
-          redirect_to group_path(@group), notice: 'グループに復帰しました。'
+          redirect_to group_dashboard_path(@group), notice: 'グループに復帰しました。'
         else
           redirect_to group_path(@group), alert: '復帰に失敗しました。'
         end

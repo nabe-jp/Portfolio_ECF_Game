@@ -22,6 +22,11 @@
       <p>参加申請中です。承認までお待ちください。</p>
       <%= button_to '申請をキャンセルする', cancel_group_membership_path(@group), 
             method: :delete, data: { confirm: '申請をキャンセルしてもよろしいですか？' }, class: "btn btn-danger" %>
+        
+    <% elsif @membership&.member_status_inactive? %>
+      <%= button_to 'グループに再加入する', join_group_membership_path(@group), 
+            method: :post, class: "btn btn-success" %>
+            
     <% else %>
       <%= button_to 'グループに参加申請する', join_group_membership_path(@group), 
             method: :post, class: "btn btn-success" %>

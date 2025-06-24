@@ -1,7 +1,7 @@
 class Public::Groups::GroupPostCommentsController < Public::ApplicationController
   include Public::AuthorizeGroup
 
-  # 読み込んだモジュールのメソッドをviewで使用する為に必要
+  # 読み込んだモジュール(AuthorizeGroup)のメソッドをviewで使用する為に必要
   helper_method :group_post_comment_editor!
 
   before_action :authenticate_user!

@@ -1,4 +1,7 @@
 class Admin::AdminNotesController < Admin::ApplicationController
+  # 入力フォームに表示する表記の読み込み(バリデーションに使用する絶対値を用いて表示)
+  helper Admin::PlaceholdersHelper
+
   before_action :set_admin_note, only: [:edit, :update, :destroy, :reactivate]
 
   def index

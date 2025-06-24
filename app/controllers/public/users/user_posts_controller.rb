@@ -1,4 +1,7 @@
 class Public::Users::UserPostsController < Public::ApplicationController
+  # 入力フォームに表示する表記の読み込み(バリデーションに使用する絶対値を用いて表示)
+  helper Public::PlaceholdersHelper
+
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_user, only: [:index, :show]
   before_action :set_current_user, only: [:new, :create, :edit, :update, :destroy]

@@ -1,7 +1,7 @@
 <%= form_with model: @group, local: true do |f| %>
   <div class="form-group">
     <%= f.label :name, "グループ名" %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: "form-control", placeholder: group_name_placeholder %>
   </div>
 
   <div class="form-group">
@@ -29,7 +29,8 @@
 
   <div class="form-group">
     <%= f.label :description, "説明" %>
-    <%= f.text_area :description, rows: 3, class: "form-control" %>
+    <%= f.text_area :description, rows: 3, class: "form-control", 
+      placeholder: group_description_placeholder %>
   </div>
 
   <div class="text-center mt-3">

@@ -1,9 +1,16 @@
 <% @parent_comments.each do |comment| %>
   <div class="row align-items-center no-gutters mb-2">
     <!-- コメント本文 -->
-    <div class="col-7 pr-2 comment-body">
+    <div class="col-6 pr-1 comment-body">
       <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
         simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
+    </div>
+
+    <!-- 投稿日 -->
+    <div class="col-2 pr-1 text-center">
+      <% unless comment.is_deleted? %>
+        <small><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></small>
+      <% end %>
     </div>
 
     <!-- プロフィール画像＋ニックネーム -->
@@ -33,7 +40,7 @@
     </div>
 
     <!-- 削除ボタン -->
-    <div class="col-2">
+    <div class="col-1 d-flex justify-content-center">
       <% if !comment.is_deleted && (comment.user == current_user || @user_post.user == current_user) %>
         <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
           method: :delete, data: { confirm: "本当に削除しますか？" },class: "btn btn-danger btn-sm" %>
@@ -56,9 +63,16 @@
   <% comment.replies.visible_replies.each do |reply| %>
     <div class="row align-items-center no-gutters mb-2">
       <!-- 子コメント本文 -->
-      <div class="col-7 pl-4  comment-body">
+      <div class="col-6 pl-4  comment-body">
         <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
           simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
+      </div>
+
+      <!-- 子コメント投稿日 -->
+      <div class="col-2 pl-4 text-center">
+        <% unless reply.is_deleted? %>
+          <small><%= reply.created_at.strftime('%Y-%m-%d %H:%M') %></small>
+        <% end %>
       </div>
 
       <!-- 子コメント画像＋ニックネーム -->
@@ -75,7 +89,7 @@
       <div class="col-1"></div>
 
       <!-- 削除ボタン -->
-      <div class="col-2">
+      <div class="col-1 d-flex justify-content-center">
         <% if !reply.is_deleted && (reply.user == current_user || @user_post.user == current_user) %>
           <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply),
             method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>

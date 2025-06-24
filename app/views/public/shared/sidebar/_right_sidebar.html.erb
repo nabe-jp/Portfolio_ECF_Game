@@ -10,7 +10,8 @@
     <li><%= render "public/shared/link/links", new_post: true %></li>
   </ul>
 
-  <% if @group&.id %>
+  <% if user_signed_in? && @group&.id && 
+    @group.active_group_memberships.exists?(user_id: current_user.id) %>
     <h5 class="mt-5">グループ</h5>
     <ul class="list-unstyled">
       <li><%= render "public/shared/link/links", dashboard_group: true %></li>

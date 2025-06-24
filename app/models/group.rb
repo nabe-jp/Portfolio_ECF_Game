@@ -1,4 +1,10 @@
 class Group < ApplicationRecord
+  # バリデーションに使用する絶対値の定義(文字数)
+  NAME_MIN_LENGTH = 1
+  NAME_MAX_LENGTH = 20
+  DESCRIPTION_MIN_LENGTH = 1
+  DESCRIPTION_MAX_LENGTH = 100
+
   include Scopes::Admin::Filters
   include Scopes::Public::Groups
   include Scopes::Shared::Ordering
@@ -37,12 +43,16 @@ class Group < ApplicationRecord
   has_one_attached :group_image
 
   validates :name, presence: { message: "を入力してください" }
-  validates :name, length: { maximum: 20,
-    message: "は1～20文字以内で入力してください" }, if: -> { name.present? }
+  validates :name, length: { 
+    minimum: NAME_MIN_LENGTH, maximum: NAME_MAX_LENGTH,
+    message: "は#{NAME_MIN_LENGTH}～#{NAME_MAX_LENGTH}文字以内で入力してください" 
+  }, if: -> { name.present? }
 
   validates :description, presence: { message: "を入力してください" }
-  validates :description, length: { maximum: 200,
-    message: "は1～200文字以内で入力してください" }, if: -> { description.present? }
+  validates :description, length: { 
+    minimum: DESCRIPTION_MIN_LENGTH, maximum: DESCRIPTION_MAX_LENGTH,
+    message: "は#{DESCRIPTION_MIN_LENGTH}～#{DESCRIPTION_MAX_LENGTH}文字以内で入力してください" 
+  }, if: -> { description.present? }
 
   # 作成時だけslugの内容検証を行う
   validate :slug_validation, on: :create

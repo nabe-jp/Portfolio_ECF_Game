@@ -5,12 +5,14 @@
     <div class="col-md-9">
       <div class="form-group">
         <%= f.label :title, "タイトル", class: "control-label" %>
-        <%= f.text_field :title, class: "form-control w-100" %>
+        <%= f.text_field :title, class: "form-control w-100", 
+          placeholder: group_notice_title_placeholder %>
       </div>
 
       <div class="form-group mt-3">
         <%= f.label :body, "内容", class: "control-label" %>
-        <%= f.text_area :body, class: "form-control w-100", rows: 5 %>
+        <%= f.text_area :body, class: "form-control w-100", rows: 5, 
+          placeholder: group_notice_body_placeholder %>
       </div>
     </div>
   </div>

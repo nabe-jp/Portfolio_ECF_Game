@@ -70,7 +70,8 @@
     <%= link_to "グループ作成", new_group_path, 
       class: (is_button ? 'btn btn-base' : nil) %>
 
-  <% elsif @group && @group.group_memberships.exists?(user_id: current_user.id) %>
+  <% elsif user_signed_in? && @group&.id && 
+    @group.active_group_memberships.exists?(user_id: current_user.id) %>
     <% if defined?(dashboard_group) && dashboard_group %>
       <%= link_to "グループTOP", group_dashboard_path(@group), 
         class: (is_button ? 'btn btn-base' : nil) %>

@@ -142,7 +142,6 @@
   display: flex;                    // フレックスで横並び
   align-items: center;              // 垂直方向に中央揃え
   padding: 1rem;
-  margin-bottom: 1rem;              // ヘッダー下の余白
 }
 
 // 継承
@@ -157,12 +156,14 @@
 .user-image {
   border-radius: 50%;               // 円形のユーザー画像
   margin-right: 1rem;               // 画像と名前の間に余白を追加
+  object-fit: cover;
 }
 
 // グループ画像のスタイル
 .group-image {
-  border-radius: 8px;               // 角を丸める
+  border-radius: 90% / 54%;         // 横方向の丸み(半径) / 縦方向の丸み(半径)
   margin-right: 1rem;               // 画像と名前の間に余白を追加
+  object-fit: cover;
 }
 
 // ユーザー名とグループ名のスタイル
@@ -190,6 +191,10 @@
   text-overflow: ellipsis;          // 長すぎる場合に省略記号
   max-width: 250px;                 // タイトルの最大幅を設定
   overflow: hidden;                 // ボックスを超えた部分を隠す
+  text-align: center;               // テキストを左右中央揃え
+  line-height: 1.5;                 // 行の高さを指定
+  padding: 0 1rem;
+  margin-bottom: 0;
 }
 
 // 投稿画像の設定
@@ -198,6 +203,7 @@
   margin: 1rem auto;                // 左右中央揃え、上下側に余白
   border-radius: 8px;
   max-width: 100%;                  // 親要素を超えないように最大幅を設定
+  object-fit: cover;
 }
 
 // 投稿日時に使用するタグの設定

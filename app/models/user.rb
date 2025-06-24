@@ -1,4 +1,12 @@
 class User < ApplicationRecord
+  # バリデーションに使用する絶対値の定義(文字数)
+  REAL_NAME_MIN_LENGTH = 1
+  REAL_NAME_MAX_LENGTH = 50
+  NICKNAME_MIN_LENGTH = 1
+  NICKNAME_MAX_LENGTH = 20
+  BIO_MIN_LENGTH = 1
+  BIO_MAX_LENGTH = 100
+
   # スコープの読み込み
   include Scopes::Admin::Filters
   include Scopes::Public::Users
@@ -36,33 +44,31 @@ class User < ApplicationRecord
 
   # 多くの実在英語名が20〜30文字未満ですがまれに非常に長い名前も存在し、複数名・複合姓(スペースなど)も考慮し50文字
   validates :last_name, presence: { message: "を入力してください" }
-  validates :last_name, length: { maximum: 50,
-    message: "は1～50文字以内で入力してください" }, if: -> { last_name.present? }
+  validates :last_name, length: { 
+    minimum: REAL_NAME_MIN_LENGTH, maximum: REAL_NAME_MAX_LENGTH,
+    message: "は#{REAL_NAME_MIN_LENGTH}～#{REAL_NAME_MAX_LENGTH}文字以内で入力してください" 
+    }, if: -> { last_name.present? }
 
   validates :first_name, presence: { message: "を入力してください" }
-  validates :last_name, length: { maximum: 50,
-    message: "は1～50文字以内で入力してください" }, if: -> { first_name.present? }
+  validates :last_name, length: { 
+    minimum: REAL_NAME_MIN_LENGTH, maximum: REAL_NAME_MAX_LENGTH,
+    message: "は#{REAL_NAME_MIN_LENGTH}～#{REAL_NAME_MAX_LENGTH}文字以内で入力してください" 
+    }, if: -> { first_name.present? }
 
   validates :nickname, presence: { message: "を入力してください" }
-  validates :nickname, length: { maximum: 20,
-    message: "は1～20文字以内で入力してください" }, if: -> { nickname.present? }
+  validates :nickname, length: { 
+    minimum: NICKNAME_MIN_LENGTH, maximum: NICKNAME_MAX_LENGTH,
+    message: "は#{NICKNAME_MIN_LENGTH}～#{NICKNAME_MAX_LENGTH}文字以内で入力してください" 
+    }, if: -> { nickname.present? }
   
   validates :bio, presence: { message: "を入力してください" }
-  validates :bio, length: { maximum: 100,
-    message: "は1～100文字以内で入力してください" }, if: -> { bio.present? }
+  validates :bio, length: { 
+    minimum: BIO_MIN_LENGTH, maximum: BIO_MAX_LENGTH,
+    message: "は#{BIO_MIN_LENGTH}～#{BIO_MAX_LENGTH}文字以内で入力してください" 
+    }, if: -> { bio.present? }
 
   # ユーザー作成時にデフォルト画像を設定(seed作成時は作動しないように設定)
   after_create :set_default_profile_image, unless: :seeding?
-
-  # ここにRansackableの設定(検索可能な属性)を追加(現在未使用のためコメント化)
-  # attributesがカラムなどの本体情報、associationsは関連
-  # def self.ransackable_attributes(auth_object = nil)
-  #   ["nickname", "bio", "user_tags"]
-  # end
-  
-  # def self.ransackable_associations(auth_object = nil)
-  #   []
-  # end
 
   private
 
