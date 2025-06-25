@@ -34,11 +34,11 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
     @group_event.member = @group_membership
 
     if @group_event.save
-      session[:group_event_attributes] = nil
       redirect_to group_events_path(@group), notice: 'イベントを作成しました。'
     else
-      store_form_data(attributes: group_event_params, 
-        error_messages: @group_event.errors.full_messages, error_name: "イベントの作成")
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_event_params, 
+        error_messages: @group_event.errors.full_messages, error_name: 'イベントの作成', 
+          key: :group_event_attributes)
       redirect_to new_group_event_path(@group)
     end
   end
@@ -47,16 +47,17 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
     @form_url = group_event_path(@group, @group_event)
     if session[:group_event_attributes]
       @group_event.assign_attributes(session[:group_event_attributes])
-      session.delete(:group_event_attributes)
+      clear_group_event_session
     end
   end
 
   def update
     if @group_event.update(group_event_params)
-      session.delete(:group_event_attributes)
       redirect_to group_events_path(@group), notice: 'イベントを更新しました'
     else
-      store_form_data(attributes: group_event_params, error_messages: @group_event.errors.full_messages)
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_event_params, 
+        error_messages: @group_event.errors.full_messages, error_name: 'イベントの更新', 
+          key: :group_event_attributes)
       redirect_to edit_group_event_path(@group, @group_event)
     end
   end
@@ -95,14 +96,13 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
   end
 
   def group_event_attributes_from_session
-    session[:group_event_attributes] || {}
+    data = session[:group_event_attributes]
+    clear_group_event_session if data.present?
+    data || {}
   end
 
-  def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "イベントの更新"
-    session[:group_event_attributes] = attributes
-    flash[:error_messages] = error_messages
-    flash[:error_name] = error_name
+  def clear_group_event_session
+    session.delete(:group_event_attributes)
   end
 
   def group_event_params

@@ -18,9 +18,9 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
   end
 
   def show
-    if session[:membership_attributes]
-      @membership.assign_attributes(session[:membership_attributes])
-      session.delete(:membership_attributes)
+    if session[:group_membership_attributes]
+      @membership.assign_attributes(session[:group_membership_attributes])
+      clear_group_membership_session
     end
   end
   
@@ -39,15 +39,22 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
     end
   end
 
-  def edit_note; end
+  def edit_note
+    @form_url = update_note_group_member_path(@group, @membership)
+    if session[:group_membership_attributes]
+      @membership.assign_attributes(session[:group_membership_attributes])
+      clear_group_membership_session
+    end
+  end
 
   def update_note
     if @membership.update(params.require(:group_membership).permit(:note))
       redirect_to group_member_path(@group, @membership), notice: "メモを更新しました"
     else
-      store_form_data(attributes: params[:group_membership], 
-        error_messages: @membership.errors.full_messages, error_name: "メモ更新")
-      redirect_to group_member_path(@group, @membership)
+      Form::DataStorageService.store(session: session, flash: flash, 
+        attributes: group_membership_params, error_messages: @membership.errors.full_messages, 
+          error_name: 'メモの更新', key: :group_membership_attributes)
+      redirect_to edit_note_group_member_path(@group, @membership)
     end
   end
 
@@ -84,9 +91,8 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
     if @membership.update(role: new_role)
       redirect_to group_member_path(@group, @membership), notice: "役職を変更しました"
     else
-      store_form_data(attributes: params[:group_membership], 
-        error_messages: @membership.errors.full_messages, error_name: "役職変更")
-      redirect_to group_member_path(@group, @membership)
+      redirect_to group_member_path(@group, @membership), 
+        alert: "役職の変更の変更が出来ませんでした"
     end
   end  
 
@@ -96,14 +102,11 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
     @membership = @group.group_memberships.active_members.find(params[:id])
   end
 
-  def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "更新"
-    session[:membership_attributes] = attributes
-    flash[:error_messages] = error_messages
-    flash[:error_name] = error_name
+  def clear_group_membership_session
+    session.delete(:group_membership_attributes)
   end
 
-  def role_params
+  def group_membership_params
     params.require(:group_membership).permit(:role, :note)
   end
 end

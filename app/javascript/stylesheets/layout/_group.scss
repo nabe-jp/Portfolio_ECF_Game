@@ -464,6 +464,11 @@
   text-overflow: ellipsis;
 }
 
+.group-member__note-wrap {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
 /*  group_notice,group_event   */
 .notice-index__body, .event-index__body {
   display: -webkit-box;

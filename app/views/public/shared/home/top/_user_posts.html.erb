@@ -24,7 +24,7 @@
 
   <!-- ダミー画像表示: 投稿が足りない場合 -->
   <% if @user_post_dummy_images.present? %>
-    <% @dummy_images.each do |dummy_image| %>
+    <% @user_post_dummy_images.each do |dummy_image| %>
       <div class="box-link box-link-cards">
         <div class="post-header post-header-cards">
           <strong><%= PostConstants::LATEST_POST_TITLE %>はありません</strong>

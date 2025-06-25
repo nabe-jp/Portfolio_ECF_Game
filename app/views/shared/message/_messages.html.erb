@@ -2,9 +2,8 @@
 <% if defined?(resource) && resource.errors.any? && flash[:error_name].present?%>
   <div id="error_explanation" data-turbo-cache="false">
     <h5>
-      <%= I18n.t("errors.messages.not_saved",
-                 count: resource.errors.count,
-                 resource: flash[:error_name].downcase) 
+      <%= I18n.t("errors.messages.not_saved", count: resource.errors.count,
+        resource: flash[:error_name].downcase) 
       %>
     </h5>
     <ul>
@@ -13,13 +12,13 @@
       <% end %>
     </ul>
   </div>
+
 <!-- PRGを使うパターンでエラーメッセージを表示する場合 -->
 <% elsif flash[:error_messages].present? && flash[:error_name].present? %>
   <div id="error_explanation" data-turbo-cache="false">
     <h5>
-      <%= I18n.t("errors.messages.not_saved",
-                 count: flash[:error_messages].count,
-                 resource: flash[:error_name].downcase) 
+      <%= I18n.t("errors.messages.not_saved", count: flash[:error_messages].count,
+        resource: flash[:error_name].downcase) 
       %>
     </h5>
     <ul>
@@ -28,6 +27,7 @@
       <% end %>
     </ul>
   </div>
+  
 <!-- コントローラー内で設定したメッセージを表示する場合 -->
 <% elsif flash[:notice].present? %>
   <div class="alert alert-success">

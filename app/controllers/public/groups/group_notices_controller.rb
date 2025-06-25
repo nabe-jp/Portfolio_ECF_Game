@@ -29,11 +29,11 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
     @group_notice.member = @group_membership
 
     if @group_notice.save
-      session[:group_notice_attributes] = nil
       redirect_to group_notices_path(@group), notice: "お知らせを作成しました。"
     else
-      store_form_data(attributes: group_notice_params, 
-        error_messages: @group_notice.errors.full_messages, error_name: "お知らせの作成")
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_notice_params, 
+        error_messages: @group_notice.errors.full_messages, error_name: 'お知らせの作成', 
+          key: :group_notice_attributes)
       redirect_to new_group_notice_path(@group)
     end
   end
@@ -42,17 +42,17 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
     @form_url = group_notice_path(@group, @group_notice)
     if session[:group_notice_attributes]
       @group_notice.assign_attributes(session[:group_notice_attributes])
-      session.delete(:group_notice_attributes)
+      clear_group_notice_session
     end
   end
 
   def update
     if @group_notice.update(group_notice_params)
-      session.delete(:group_notice_attributes)
       redirect_to group_notices_path(@group), notice: "お知らせを更新しました。"
     else
-      store_form_data(attributes: group_notice_params, 
-        error_messages: @group_notice.errors.full_messages)
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_notice_params, 
+        error_messages: @group_notice.errors.full_messages, error_name: 'お知らせの更新', 
+          key: :group_notice_attributes)
       redirect_to edit_group_notice_path(@group, @group_notice)
     end
   end
@@ -79,14 +79,13 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
   end
 
   def group_notice_attributes_from_session
-    session[:group_notice_attributes] || {}
+    data = session[:group_notice_attributes]
+    clear_group_notice_session if data.present?
+    data || {}
   end
 
-  def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "お知らせの更新"
-    session[:group_notice_attributes] = attributes
-    flash[:error_messages] = error_messages
-    flash[:error_name] = error_name
+  def clear_group_notice_session
+    session.delete(:group_notice_attributes)
   end
 
   def group_notice_params

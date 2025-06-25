@@ -26,6 +26,11 @@ module Public::PlaceholdersHelper
     "説明を#{Group::DESCRIPTION_MIN_LENGTH}〜#{Group::DESCRIPTION_MAX_LENGTH}文字で入力してください"
   end
 
+  # --- 管理者メモ ---
+  def group_member_note_placeholder
+    "メモを#{GroupMembership::NOTE_MAX_LENGTH}文字以内で入力してください"
+  end
+
   # --- グループ内お知らせ ---
   def group_notice_title_placeholder
     "タイトルを#{GroupPost::TITLE_MIN_LENGTH}〜#{GroupPost::TITLE_MAX_LENGTH}文字で入力してください"

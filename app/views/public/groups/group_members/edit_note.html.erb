@@ -2,19 +2,10 @@
   <div class="row justify-content-center">
     <div class="col-8">
       <h3 class="my-4 text-center">管理者メモ編集</h3>
-
       <p><strong>ニックネーム:</strong> <%= @membership.user.nickname %></p>
 
-      <%= form_with url: update_note_group_member_path(@group, @membership), 
-        method: :patch, scope: :group_membership, local: true do |f| %>
-        <div class="form-group">
-          <%= f.label :note, "管理者メモ" %>
-          <%= f.text_area :note, rows: 5, 
-            class: "form-control", value: flash[:form_data]&.dig("note") || @membership.note %>
-        </div>
-        <%= f.submit "メモを更新", class: "btn btn-sm btn-outline-primary" %>
-      <% end %>
-
+      <%= render 'public/shared/group/member/form' %>
+      
       <%= link_to "戻る", group_member_path(@group, @membership), 
         class: "btn btn-sm btn-outline-secondary mt-3" %>
     </div>

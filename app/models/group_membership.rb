@@ -1,4 +1,7 @@
 class GroupMembership < ApplicationRecord
+  # バリデーションに使用する絶対値の定義(文字数)
+  NOTE_MAX_LENGTH = 100
+
   include Scopes::Admin::Filters
   include Scopes::Public::Groups
   include Scopes::Shared::Ordering
@@ -26,7 +29,8 @@ class GroupMembership < ApplicationRecord
   # 重複参加防止
   validates :user_id, uniqueness: { scope: :group_id }
 
-  validates :note, length: { maximum: 100, message: "は100文字以内で入力してください" }
+  validates :note, length: { 
+    maximum: NOTE_MAX_LENGTH, message: "は#{NOTE_MAX_LENGTH}文字以内で入力してください" }
 
   # 参加日時の自動設定
   before_create :set_joined_at
