@@ -7,7 +7,7 @@
   <div class="form-group mt-5">
     <%= f.label :description, "説明" %>
     <%= f.text_area :description, rows: 3, class: "form-control", 
-      placeholder: group_description_placeholder %>
+      placeholder: group_description_placeholder, maxlength: Group::DESCRIPTION_MAX_LENGTH %>
   </div>
 
   <div class="text-center my-5">

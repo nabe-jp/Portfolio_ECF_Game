@@ -4,6 +4,9 @@ class Public::RegistrationsController < Devise::RegistrationsController
   include UserPasswordUpdaterHelper
   include UserRegistrationHelper
 
+  # 入力フォームに表示する表記の読み込み(バリデーションに使用する絶対値を用いて表示)
+  helper Public::PlaceholdersHelper
+  
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
@@ -23,13 +26,13 @@ class Public::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     if resource.save
       sign_up(resource_name, resource)
-      redirect_to after_sign_up_path_for(resource), notice: "アカウント登録が完了しました"
+      redirect_to after_sign_up_path_for(resource), notice: 'アカウント登録が完了しました'
     else
       # パスワードのクリーンアップ
       clean_up_passwords resource
       # フラッシュにデータとエラーを保持して再表示
       store_form_data(attributes: sign_up_params, 
-        error_keys: [:email, :password], form_type: :sign_up, error_name: "新規会員登録")
+        error_keys: [:email, :password], form_type: :sign_up, error_name: '新規会員登録')
       redirect_to new_user_registration_path and return
     end
   end
@@ -91,7 +94,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
     # ヘルパーメソッドを使ってパスワード更新ロジックを実行
     errors = check_password_errors(resource, new_password, password_confirmation, current_password)
     if errors.any?
-      flash[:error_name] = "パスワード更新"
+      flash[:error_name] = 'パスワード更新'
       errors.each { |error| resource.errors.add(:base, error) }
       flash[:error_messages] = resource.errors.full_messages
       redirect_to edit_user_registration_path(password: true) and return
@@ -100,14 +103,14 @@ class Public::RegistrationsController < Devise::RegistrationsController
     # ここに到達している時点で、すべてのバリデーションに合格しているので、パスワード変更し、セッション再ログイン
     resource.update(password: new_password, password_confirmation: password_confirmation)
     bypass_sign_in(resource)
-    redirect_to after_update_path_for(resource), notice: "パスワードを更新しました"
+    redirect_to after_update_path_for(resource), notice: 'パスワードを更新しました'
   end
 
   # 非公開プロフィールのエラー、更新処理
   def handle_profile_update
     if resource.update_without_password(
         account_update_params.except(:current_password, :password, :password_confirmation))
-      redirect_to after_update_path_for(resource), notice: "プロフィールを更新しました"
+      redirect_to after_update_path_for(resource), notice: 'プロフィールを更新しました'
     else
       store_form_data(attributes: account_update_params, 
         error_keys: [:last_name, :first_name, :email], form_type: :profile)

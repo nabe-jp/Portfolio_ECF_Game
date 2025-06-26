@@ -2,7 +2,7 @@
   <div class="form-group">
     <%= f.label :note, "管理者メモ" %>
     <%= f.text_area :note, rows: 5, class: "form-control", 
-      placeholder: group_member_note_placeholder %>
+      placeholder: group_member_note_placeholder, maxlength: GroupMembership::NOTE_MAX_LENGTH %>
   </div>
   <%= f.submit "メモを更新", class: "btn btn-sm btn-outline-primary" %>
 <% end %>

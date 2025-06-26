@@ -6,7 +6,7 @@ module Form
 
     # session、flashはコントローラー内部でのみアクセス可能な特殊オブジェクトなので引数で設定している
     # これによりsession[]、flash[]をサービス内で使用できるようになる
-    def self.store(session:, flash:, attributes:, error_messages:, error_name:, key: :form_attributes)      
+    def self.store(session:, flash:, attributes:, error_messages:, error_name:, key: :form_attributes)
       
       # Railsがsessionの値をCookieに書き出すときにエラーが発生するのでコントローラーなどでキャッチ出来ない
       json_data = attributes.to_json
@@ -14,7 +14,7 @@ module Form
       existing_session_size = session.to_json.bytesize
     
       total = json_data.bytesize + error_data.bytesize + existing_session_size
-
+      Rails.logger.warn("セッション保存前 データサイズ(#{total}バイト)")
       if total > MAX_SESSION_BYTES
         Rails.logger.warn("セッション保存に失敗: データサイズ過大(#{total}バイト)")
         flash[:alert] = "入力内容が大きすぎたため、入力内容を保持できませんでした。入力内容を短くして再度お試しください"

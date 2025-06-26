@@ -1,4 +1,27 @@
 module Public::PlaceholdersHelper
+
+  # --- アドミン、ユーザー共通 ---
+  def email_placeholder
+    "sample@example.com"
+  end
+
+    # --- ユーザー ---
+  def user_last_name_placeholder
+    "姓を#{User::REAL_NAME_MIN_LENGTH}〜#{User::REAL_NAME_MAX_LENGTH}文字で入力してください"
+  end
+
+  def user_first_name_placeholder
+    "名を#{User::REAL_NAME_MIN_LENGTH}〜#{User::REAL_NAME_MAX_LENGTH}文字で入力してください"
+  end
+
+  def user_nickname_placeholder
+    "ニックネームを#{User::NICKNAME_MIN_LENGTH}〜#{User::NICKNAME_MAX_LENGTH}文字で入力してください"
+  end
+
+  def user_bio_placeholder
+    "自己紹介を#{User::BIO_MIN_LENGTH}〜#{User::BIO_MAX_LENGTH}文字で入力してください"
+  end
+
   # --- ユーザー投稿 ---
   def user_post_title_placeholder
     "タイトルを#{UserPost::TITLE_MIN_LENGTH}〜#{UserPost::TITLE_MAX_LENGTH}文字で入力してください"
@@ -24,6 +47,10 @@ module Public::PlaceholdersHelper
 
   def group_description_placeholder
     "説明を#{Group::DESCRIPTION_MIN_LENGTH}〜#{Group::DESCRIPTION_MAX_LENGTH}文字で入力してください"
+  end
+
+  def group_slug_placeholder
+    "スラッグはを#{Group::SLUG_MIN_LENGTH}〜#{Group::SLUG_MAX_LENGTH }文字、英数字とハイフンのみで入力してください"
   end
 
   # --- 管理者メモ ---

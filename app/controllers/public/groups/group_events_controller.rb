@@ -73,7 +73,7 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
     begin
       Deleter::GroupEventDeleter.new(@group_event, deleted_by: current_user, 
         deleted_reason: deleted_reason).call
-      redirect_to group_events_path(@group), notice: "イベントを削除しました"
+      redirect_to group_events_path(@group), notice: 'イベントを削除しました'
     rescue => e
       Rails.logger.error("GroupEvent削除エラー: #{e.message}")
       redirect_to group_events_path(@group), alert: '予期せぬエラーにより、イベントの削除が行えませんでした。'

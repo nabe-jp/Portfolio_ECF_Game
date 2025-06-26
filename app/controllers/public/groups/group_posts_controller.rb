@@ -11,7 +11,7 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
   before_action :authenticate_user!
   before_action :authorize_group_member!, except: [:show]
   before_action :set_group_post, only: [:show, :edit, :update, :destroy]
-  before_action :set_current_user, only: [:create]
+  before_action :set_group_membership, only: [:create]
   before_action :authorize_group_post_editor!, only: [:edit, :update, :destroy]
   
   def index
@@ -24,49 +24,54 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
    
     if session[:group_post_comment_attributes]
       @group_post_comment = @group_post.group_post_comments.new(session[:group_post_comment_attributes])
-      session[:group_post_comment_attributes] = nil
+      clear_group_post_comment_session
     else
       @group_post_comment = @group_post.group_post_comments.new
     end
   end
 
   def new
-    @url = group_posts_path(@group)
-    @verd = :post
+    @form_action_url = group_posts_path(@group)
+    @form_method = :post
     @group_post = @group.group_posts.new(group_post_attributes_from_session)
   end
 
   def create
-    @group_post = GroupPost.new(group_post_params)
+    @group_post = @group.group_posts.new(group_post_params)
     @group_post.member = @group_membership
-    @group_post.group = @group
+
+    if @group_membership.nil?
+      redirect_to group_path(@group), alert: '有効なメンバーシップが確認できなかったため、投稿できません。'
+      return
+    end
 
     if @group_post.save
       @group.update_column(:last_posted_at, Time.current)
-      session[:group_post_attributes] = nil
-      redirect_to group_post_path(@group, @group_post), notice: '投稿を作成しました。'
+      redirect_to group_post_path(@group, @group_post), notice: '投稿を作成しました'
     else
-      store_form_data(attributes: group_post_params, 
-        error_messages: @group_post.errors.full_messages, error_name: "投稿")
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_post_params, 
+        error_messages: @group_post.errors.full_messages, error_name: '投稿', 
+          key: :group_post_attributes)
       redirect_to new_group_post_path(@group)
     end
   end
 
   def edit
-    @url = group_post_path(@group.slug)
-    @verd = :patch
+    @form_action_url = group_post_path(@group, @group_post)
+    @form_method = :patch
     if session[:group_post_attributes]
       @group_post.assign_attributes(session[:group_post_attributes])
-      session.delete(:group_post_attributes)
+      clear_group_post_session
     end
   end
 
   def update
     if @group_post.update(group_post_params)
-      session.delete(:group_post_attributes)
       redirect_to group_post_path(@group, @group_post), notice: '投稿が更新されました。'
     else
-      store_form_data(attributes: group_post_params, error_messages: @group_post.errors.full_messages)
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_post_params, 
+        error_messages: @group_post.errors.full_messages, error_name: '投稿の更新', 
+          key: :group_post_attributes)
       redirect_to edit_group_post_path(@group, @group_post)
     end
   end
@@ -92,22 +97,25 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
   private
 
   def set_group_post
-    @group_post = @group.group_posts.active_group_posts_for_members_desc.find(params[:id])
+    @group_post = @group.group_posts.active_group_post_for_members.find(params[:id])
   end
 
-  def set_current_user
+  def set_group_membership
     @group_membership = @group.group_memberships.active_members.find_by(user_id: current_user.id)
   end
 
   def group_post_attributes_from_session
-    session[:group_post_attributes] || {}
+    data = session[:group_post_attributes]
+    clear_group_post_session if data.present?
+    data || {}
   end
 
-  def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "更新"
-    session[:group_post_attributes] = attributes.except("group_post_image")
-    flash[:error_messages] = error_messages
-    flash[:error_name] = error_name
+  def clear_group_post_session
+    session.delete(:group_post_attributes)
+  end
+    
+  def clear_group_post_comment_session
+    session.delete(:group_post_comment_attributes)
   end
   
   def group_post_params

@@ -30,15 +30,14 @@ class Public::GroupsController < ApplicationController
   end
   
   def create
-    session[:group_attributes] = nil
     # オーナーに現在のログインユーザーを設定
     @group = current_user.owned_groups.build(group_params)
 
     if @group.save
-      redirect_to group_path(@group), notice: "グループを作成しました"
+      redirect_to group_path(@group), notice: 'グループを作成しました'
     else
-      store_form_data(attributes: group_params, 
-        error_messages: @group.errors.full_messages, error_name: "グループ作成")
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_params, 
+        error_messages: @group.errors.full_messages, error_name: 'グループの作成', key: :group_attributes)
       redirect_to new_group_path
     end
   end
@@ -46,17 +45,17 @@ class Public::GroupsController < ApplicationController
   def edit
     if session[:group_attributes]
       @group.assign_attributes(session[:group_attributes])
-      session.delete(:group_attributes)
+      clear_group_session
     end
   end
 
   def update
     if @group.update(group_params)
-      session[:group_attributes] = nil
-      redirect_to group_path(@group), notice: "グループを更新しました"
+      clear_group_session
+      redirect_to group_path(@group), notice: 'グループを更新しました'
     else
-      store_form_data(attributes: group_params, 
-        error_messages: @group.errors.full_messages, error_name: "グループ更新")
+      Form::DataStorageService.store(session: session, flash: flash, attributes: group_params, 
+        error_messages: @group.errors.full_messages, error_name: 'グループの更新', key: :group_attributes)
       redirect_to edit_group_path(@group)
     end
   end
@@ -66,7 +65,7 @@ class Public::GroupsController < ApplicationController
       # サービスオブジェクトをにてグループとグループに紐づくものを論理削除
       Deleter::GroupDeleter.new(@group, deleted_by: current_user, 
         deleted_reason: :removed_by_group_authority).call
-      redirect_to my_groups_path, notice: "グループを削除しました"
+      redirect_to my_groups_path, notice: 'グループを削除しました'
     rescue => e
       Rails.logger.error("Group削除エラー: #{e.message}")
       redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、グループの削除が行えませんでした。'
@@ -91,19 +90,18 @@ class Public::GroupsController < ApplicationController
   def redirect_if_member
     # .exists?はDBに確認をしている(.any?や.present?より高速)、見つかればそのままダッシュボードに遷移
     if user_signed_in? && @group.active_group_memberships.exists?(user_id: current_user.id)
-      redirect_to group_dashboard_path(@group), notice: "グループダッシュボードに移動しました"
+      redirect_to group_dashboard_path(@group), notice: 'グループダッシュボードに移動しました'
     end
   end
   
   def group_attributes_from_session
-    session[:group_attributes] || {}
+    data = session[:group_attributes]
+    clear_group_session if data.present?
+    data || {}
   end
-  
-  def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "更新"
-    session[:group_attributes] = attributes.except("group_image")
-    flash[:error_messages] = error_messages
-    flash[:error_name] = error_name
+
+  def clear_group_session
+    session.delete(:group_attributes)
   end
 
   def group_params

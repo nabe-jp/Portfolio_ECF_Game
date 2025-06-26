@@ -1,28 +1,25 @@
 class Public::Groups::GroupPostCommentsController < Public::ApplicationController
   include Public::AuthorizeGroup
 
-  # 読み込んだモジュール(AuthorizeGroup)のメソッドをviewで使用する為に必要
-  helper_method :group_post_comment_editor!
-
   before_action :authenticate_user!
   before_action :set_group_post
   before_action :authorize_group_member!
-  before_action :set_current_user, only: [:create]
+  before_action :set_group_membership, only: [:create]
   before_action :set_comment, only: [:destroy] 
   before_action :authorize_group_post_comment_editor!, only: [:destroy]
 
   def create
-    @group_post = GroupPost.find(params[:group_post_id]) unless defined?(@group_post)
-    @group_post_comment = @group_post.group_post_comments.build(comment_params)
+    @group_post_comment = @group_post.group_post_comments.build(group_post_comment_params)
     @group_post_comment.member = @group_membership
 
     if @group_post_comment.save
-      session[:group_post_comment_attributes] = nil
       flash[:notice] = "コメントを投稿しました"
       redirect_to group_post_path(@group, @group_post)
     else
-      store_form_data(attributes: comment_params, 
-        error_messages: @group_post_comment.errors.full_messages)
+      Form::DataStorageService.store(session: session, flash: flash, 
+        attributes: group_post_comment_params, 
+          error_messages: @group_post_comment.errors.full_messages, 
+            error_name: 'コメントの投稿', key: :group_post_comment_attributes)
       redirect_to group_post_path(@group, @group_post, anchor: 'comment_form')
     end
   end
@@ -52,24 +49,18 @@ class Public::Groups::GroupPostCommentsController < Public::ApplicationControlle
   private
 
   def set_group_post
-    @group_post = @group.group_posts.active_group_posts_for_all_desc.find(params[:post_id])
+    @group_post = @group.group_posts.active_group_post_for_members.find(params[:post_id])
   end
 
-  def set_current_user
+  def set_group_membership
     @group_membership = @group.group_memberships.active_members.find_by(user_id: current_user.id)
   end
 
   def set_comment
-    @comment = @group_post.group_post_comments.find(params[:id])
+    @comment = @group_post.group_post_comments.active_group_post_comment.find(params[:id])
   end
   
-  def store_form_data(attributes:, error_messages:)
-    session[:user_post_comment_attributes] = attributes
-    flash[:error_messages] = error_messages
-    flash[:error_name] = "コメントの投稿"
-  end
-  
-  def comment_params
+  def group_post_comment_params
     params.require(:group_post_comment).permit(:body, :parent_comment_id)
   end
 end

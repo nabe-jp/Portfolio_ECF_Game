@@ -1,4 +1,7 @@
 class Public::SessionsController < Devise::SessionsController
+  # 入力フォームに表示する表記の読み込み(バリデーションに使用する絶対値を用いて表示)
+  helper Public::PlaceholdersHelper
+  
   # ログイン失敗時にエラーメッセージをflash[:error_messages]し新規会員登録側と表示を合わせる為に作成
   # オーバライドしたので退会ユーザーかのチェックも行う
   def create
@@ -11,13 +14,13 @@ class Public::SessionsController < Devise::SessionsController
       if resource.user_status_active?
         super
       else
-        flash[:error_name] = "ログイン"
+        flash[:error_name] = 'ログイン'
         flash[:error_messages] = ['退会済みアカウントの為、使用できません']
         redirect_to new_user_session_path
       end
     else
       # エラーメッセージがある場合にflash[:error_messages]にセット
-      flash[:error_name] = "ログイン"
+      flash[:error_name] = 'ログイン'
       flash[:error_messages] = ['メールアドレスかパスワードが正しくありません']
       redirect_to new_user_session_path
     end

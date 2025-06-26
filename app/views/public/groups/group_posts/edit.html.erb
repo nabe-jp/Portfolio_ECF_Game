@@ -1,4 +1,5 @@
 <h2 class="text-center">投稿を編集</h2>
 <div class="post-form__container">
-  <%= render "public/shared/group//post/form", url: @url, verd: @verd %>
+  <%= render "public/shared/group//post/form", 
+    form_action_url: @form_action_url, form_method: @form_method %>
 </div>

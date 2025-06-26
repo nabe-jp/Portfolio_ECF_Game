@@ -8,7 +8,7 @@ class Public::ApplicationController < ApplicationController
 
   # RecordNotFoundが発生後の処理
   def render_not_found
-    flash[:alert] = "ページが見つかりません"
+    flash[:alert] = 'ページが見つかりません'
     redirect_to root_path and return
   end
 
@@ -16,7 +16,7 @@ class Public::ApplicationController < ApplicationController
   def active_check
     if user_signed_in? && !current_user.user_status_active?
       sign_out(current_user)
-      flash[:alert] = "退会済みアカウントの為、使用できません"
+      flash[:alert] = '退会済みアカウントの為、使用できません'
       redirect_to root_path and return    # returnを使い処理を確実に終え、安定性を高める
     end
   end

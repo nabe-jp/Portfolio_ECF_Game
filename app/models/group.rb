@@ -4,6 +4,8 @@ class Group < ApplicationRecord
   NAME_MAX_LENGTH = 20
   DESCRIPTION_MIN_LENGTH = 1
   DESCRIPTION_MAX_LENGTH = 100
+  SLUG_MIN_LENGTH = 3
+  SLUG_MAX_LENGTH = 30
 
   include Scopes::Admin::Filters
   include Scopes::Public::Groups
@@ -91,7 +93,7 @@ class Group < ApplicationRecord
     if slug.blank?
       errors.add(:slug, "を入力してください")
     elsif slug.length < 3 || slug.length > 30
-      errors.add(:slug, "は3～30文字以内で入力してください")
+      errors.add(:slug, "は#{SLUG_MIN_LENGTH}～#{SLUG_MAX_LENGTH}文字で入力してください")
     elsif slug !~ /\A[a-zA-Z0-9\-]+\z/
       errors.add(:slug, "は英数字とハイフン(-)のみ使用できます")
     elsif Group.exists?(slug: slug)

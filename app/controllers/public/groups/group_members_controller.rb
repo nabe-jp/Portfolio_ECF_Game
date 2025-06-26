@@ -1,6 +1,9 @@
 class Public::Groups::GroupMembersController < Public::ApplicationController
   include Public::AuthorizeGroup
 
+  # 入力フォームに表示する表記の読み込み(バリデーションに使用する絶対値を用いて表示)
+  helper Public::PlaceholdersHelper
+
   # 読み込んだモジュール(AuthorizeGroup)のメソッドをviewで使用する為に必要
   helper_method :group_owner?, :group_moderator?
 
@@ -32,7 +35,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
       # サービスオブジェクトをにてグループとグループに紐づくものを論理削除
       Deleter::GroupMemberDeleter.new(@membership, 
         deleted_by: current_user, deleted_reason: :kicked_by_group_moderator).call
-      redirect_to group_members_path(@group), notice: "メンバーを追放しました"
+      redirect_to group_members_path(@group), notice: 'メンバーを追放しました'
     rescue => e
       Rails.logger.error("GroupMember追放エラー: #{e.message}")
       redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、メンバーの追放が行えませんでした。'
@@ -49,7 +52,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
 
   def update_note
     if @membership.update(params.require(:group_membership).permit(:note))
-      redirect_to group_member_path(@group, @membership), notice: "メモを更新しました"
+      redirect_to group_member_path(@group, @membership), notice: 'メモを更新しました'
     else
       Form::DataStorageService.store(session: session, flash: flash, 
         attributes: group_membership_params, error_messages: @membership.errors.full_messages, 
@@ -66,7 +69,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
     if new_role == "owner"
       unless group_owner?
         return redirect_to group_member_path(@group, @membership), 
-          alert: "オーナーの指名はオーナー本人のみ可能です。"
+          alert: 'オーナーの指名はオーナー本人のみ可能です。'
       end
   
       ActiveRecord::Base.transaction do
@@ -79,7 +82,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
         @group.reload 
       end
   
-      return redirect_to group_member_path(@group, @membership), notice: "オーナーを移譲しました"
+      return redirect_to group_member_path(@group, @membership), notice: 'オーナーを移譲しました'
     end
   
     # 自分より上または同等の権限の人には変更不可
@@ -89,10 +92,10 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
     return if prohibit_assigning_higher_role!(new_role)
   
     if @membership.update(role: new_role)
-      redirect_to group_member_path(@group, @membership), notice: "役職を変更しました"
+      redirect_to group_member_path(@group, @membership), notice: '役職を変更しました'
     else
       redirect_to group_member_path(@group, @membership), 
-        alert: "役職の変更の変更が出来ませんでした"
+        alert: '役職の変更の変更が出来ませんでした'
     end
   end  
 

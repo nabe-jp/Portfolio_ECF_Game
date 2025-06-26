@@ -18,7 +18,11 @@ module Scopes::Public::Users
         .order(created_at: :desc)
     }
 
-    # 投稿に使用
+    # 投稿に使用(単体・複数昇順・複数降順)
+    scope :active_post, -> {
+      where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)
+    }
+
     scope :active_posts_asc, -> {
       where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :asc)
@@ -29,13 +33,16 @@ module Scopes::Public::Users
         .order(created_at: :desc)
     }
 
-    # 親コメントに使用(コメントは削除されたコメントは削除されていると表示する)
+    # コメントに使用、コメントはview内で削除されていると表示するので削除の有無を問わない(単体・親・子)
+    scope :active_post_comment, -> {
+      where(is_public: true, hidden_on_parent_restore: false)
+    }
+
     scope :visible_top_level, -> {
       where(parent_comment_id: nil, is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :desc)
     }
 
-    # 子コメントに使用
     scope :visible_replies, -> {
       where.not(parent_comment_id: nil).where(is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :asc)

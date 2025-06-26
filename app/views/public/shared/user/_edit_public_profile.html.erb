@@ -2,7 +2,8 @@
   <div class="user-profile-edit__row">
     <%= f.label :nickname, "ニックネーム", class: "user-profile-edit__label" %>
     <div class="user-profile-edit__input-wrapper">
-      <%= f.text_field :nickname, class: "user-profile-edit__input", placeholder: "ニックネームを入力" %>
+      <%= f.text_field :nickname, class: "user-profile-edit__input", 
+        placeholder: user_nickname_placeholder, maxlength: User::NICKNAME_MAX_LENGTH %>
     </div>
   </div>
 
@@ -16,7 +17,8 @@
   <div class="user-profile-edit__bio-section">
     <div class="user-profile-edit__bio-label">自己紹介</div>
     <div class="user-profile-edit__input-wrapper mx-auto" style="width: 100%;">
-      <%= f.text_area :bio, class: "user-profile-edit__textarea", placeholder: "自己紹介を入力してください" %>
+      <%= f.text_area :bio, class: "user-profile-edit__textarea", 
+        placeholder: user_bio_placeholder, maxlength: User::BIO_MAX_LENGTH %>
     </div>
   </div>
 

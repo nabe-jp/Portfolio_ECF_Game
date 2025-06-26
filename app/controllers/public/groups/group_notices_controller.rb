@@ -29,7 +29,7 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
     @group_notice.member = @group_membership
 
     if @group_notice.save
-      redirect_to group_notices_path(@group), notice: "お知らせを作成しました。"
+      redirect_to group_notices_path(@group), notice: 'お知らせを作成しました。'
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: group_notice_params, 
         error_messages: @group_notice.errors.full_messages, error_name: 'お知らせの作成', 
@@ -48,7 +48,7 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
 
   def update
     if @group_notice.update(group_notice_params)
-      redirect_to group_notices_path(@group), notice: "お知らせを更新しました。"
+      redirect_to group_notices_path(@group), notice: 'お知らせを更新しました。'
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: group_notice_params, 
         error_messages: @group_notice.errors.full_messages, error_name: 'お知らせの更新', 
@@ -61,7 +61,7 @@ class Public::Groups::GroupNoticesController < Public::ApplicationController
     begin
       Deleter::GroupNoticeDeleter.new(@group_notice, deleted_by: current_user, 
         deleted_reason: :removed_by_group_authority).call
-      redirect_to group_notices_path(@group), notice: "お知らせを削除しました"
+      redirect_to group_notices_path(@group), notice: 'お知らせを削除しました'
     rescue => e
       Rails.logger.error("GroupNotice削除エラー: #{e.message}")
       redirect_to group_notices_path(@group), alert: '予期せぬエラーにより、お知らせの削除が行えませんでした。'

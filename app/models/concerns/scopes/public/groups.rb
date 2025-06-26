@@ -40,7 +40,11 @@ module Scopes::Public::Groups
           .order(:start_time) 
     }
     
-    # グループ内投稿、グループ内での表示に使用
+    # グループ内投稿、グループ内での表示に使用(単体・複数昇順・複数降順)
+    scope :active_group_post_for_members, -> {
+      where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)
+    }
+
     scope :active_group_posts_for_members_asc, -> {
       where(is_deleted: false, is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :asc)
@@ -51,7 +55,12 @@ module Scopes::Public::Groups
         .order(created_at: :desc)
     }
 
-    # グループ内投稿、グループ外(グループメンバー以外が投稿を見れる箇所)での表示に使用
+    # グループ内投稿、グループ外(グループメンバー以外が投稿を見れる箇所)での表示に使用(単体・複数昇順・複数降順)
+    scope :active_group_post_for_all, -> {
+      where(is_deleted: false, is_public: true, hidden_on_parent_restore: false, 
+        visible_to_non_members: true)
+    }
+
     scope :active_group_posts_for_all_asc, -> {
       where(is_deleted: false, is_public: true, hidden_on_parent_restore: false, 
         visible_to_non_members: true)
@@ -64,13 +73,16 @@ module Scopes::Public::Groups
           .order(created_at: :desc)
     }
 
-    # 親コメントに使用(コメントは削除されたコメントは削除されていると表示する)
+    # コメントに使用、コメントはview内で削除されていると表示するので削除の有無を問わない(単体・親・子)
+    scope :active_group_post_comment, -> {
+      where(is_public: true, hidden_on_parent_restore: false)
+    }
+
     scope :visible_top_level, -> {
       where(parent_comment_id: nil, is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :desc)
     }
 
-    # 子コメントに使用
     scope :visible_replies, -> {
       where.not(parent_comment_id: nil).where(is_public: true, hidden_on_parent_restore: false)
         .order(created_at: :asc)

@@ -1,10 +1,10 @@
 <% if @group.present? && @group_post.present? %>
-  <%= form_with model: @group_post, url: url, method: verd, local: true do |f| %>
+  <%= form_with model: @group_post, url: form_action_url, method: form_method, local: true do |f| %>
 
     <div class="post-form__title-box">
       <%= f.label :title, "投稿のタイトル" %>
       <%= f.text_field :title, class: "post-form__title-input", 
-        placeholder: group_post_title_placeholder %>
+        placeholder: group_post_title_placeholder, maxlength: GroupPost::TITLE_MAX_LENGTH %>
     </div>
   
     <div class="post-form__image-box">
@@ -15,7 +15,7 @@
     <div class="post-form__body-box">
       <%= f.label :body, "投稿の内容" %>
       <%= f.text_area :body, class: "post-form__body-input", 
-        placeholder: group_post_body_placeholder %>
+        placeholder: group_post_body_placeholder, maxlength: GroupPost::BODY_MAX_LENGTH %>
     </div>
 
     <div class="post-form__visible-box">

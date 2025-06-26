@@ -39,33 +39,39 @@ class User < ApplicationRecord
   has_one_attached :profile_image
 
   # 利用中・退会済み・復元後非アクティブ・利用禁止・サイトによる凍結
-  enum user_status: { active: 0, deactivated: 1, restored_pending: 2, banned: 3, suspended: 4 },
-   _prefix: true
+  enum user_status: { 
+    active: 0, deactivated: 1, restored_pending: 2, banned: 3, suspended: 4 
+  }, _prefix: true
 
   # 多くの実在英語名が20〜30文字未満ですがまれに非常に長い名前も存在し、複数名・複合姓(スペースなど)も考慮し50文字
   validates :last_name, presence: { message: "を入力してください" }
   validates :last_name, length: { 
     minimum: REAL_NAME_MIN_LENGTH, maximum: REAL_NAME_MAX_LENGTH,
     message: "は#{REAL_NAME_MIN_LENGTH}～#{REAL_NAME_MAX_LENGTH}文字以内で入力してください" 
-    }, if: -> { last_name.present? }
+  }, if: -> { last_name.present? }
 
   validates :first_name, presence: { message: "を入力してください" }
-  validates :last_name, length: { 
+  validates :first_name, length: { 
     minimum: REAL_NAME_MIN_LENGTH, maximum: REAL_NAME_MAX_LENGTH,
     message: "は#{REAL_NAME_MIN_LENGTH}～#{REAL_NAME_MAX_LENGTH}文字以内で入力してください" 
-    }, if: -> { first_name.present? }
+  }, if: -> { first_name.present? }
 
   validates :nickname, presence: { message: "を入力してください" }
   validates :nickname, length: { 
     minimum: NICKNAME_MIN_LENGTH, maximum: NICKNAME_MAX_LENGTH,
     message: "は#{NICKNAME_MIN_LENGTH}～#{NICKNAME_MAX_LENGTH}文字以内で入力してください" 
-    }, if: -> { nickname.present? }
+  }, if: -> { nickname.present? }
   
   validates :bio, presence: { message: "を入力してください" }
   validates :bio, length: { 
     minimum: BIO_MIN_LENGTH, maximum: BIO_MAX_LENGTH,
     message: "は#{BIO_MIN_LENGTH}～#{BIO_MAX_LENGTH}文字以内で入力してください" 
-    }, if: -> { bio.present? }
+  }, if: -> { bio.present? }
+
+  # deviseには文字数制限がない為、安全のために設定(上書きなどではなく別々のルールとして動作するみたい)
+ validates :email, length: { maximum: EmailConstraints::MAX_LENGTH,
+    message: "は#{EmailConstraints::MAX_LENGTH}文字以内で入力してください"  
+  }
 
   # ユーザー作成時にデフォルト画像を設定(seed作成時は作動しないように設定)
   after_create :set_default_profile_image, unless: :seeding?

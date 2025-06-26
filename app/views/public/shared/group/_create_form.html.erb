@@ -1,13 +1,14 @@
 <%= form_with model: @group, local: true do |f| %>
   <div class="form-group">
     <%= f.label :name, "グループ名" %>
-    <%= f.text_field :name, class: "form-control", placeholder: group_name_placeholder %>
+    <%= f.text_field :name, class: "form-control", placeholder: group_name_placeholder, 
+      maxlength: Group::NAME_MAX_LENGTH  %>
   </div>
 
   <div class="form-group">
     <%= f.label :slug, "スラッグURL" %>
-    <%= f.text_field :slug, class: "form-control", 
-      placeholder: "英数字とハイフンのみ（例: example-group）" %>
+    <%= f.text_field :slug, class: "form-control", placeholder: group_slug_placeholder, 
+      maxlength: Group::SLUG_MAX_LENGTH %>
     <small class="form-text text-muted">
       ※ URLに使われます。例: https://yourdomain.com/groups/<strong>example-group</strong>
     </small>
@@ -30,7 +31,7 @@
   <div class="form-group">
     <%= f.label :description, "説明" %>
     <%= f.text_area :description, rows: 3, class: "form-control", 
-      placeholder: group_description_placeholder %>
+      placeholder: group_description_placeholder, maxlength: Group::DESCRIPTION_MAX_LENGTH  %>
   </div>
 
   <div class="text-center mt-3">

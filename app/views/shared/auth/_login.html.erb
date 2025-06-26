@@ -1,14 +1,26 @@
 <%= form_with scope: scope, url: url, local: true do |f| %>
-  <div class="form-label-and-input">
-    <label><%= f.label :email, "メールアドレス" %></label>
-    <%= f.email_field :email, placeholder: "sample@example.com" %>
+  <!-- メールアドレス -->
+  <div class="form-row align-items-center mb-3">
+    <div class="col-4 text-left">
+      <%= f.label :email, "メールアドレス", class: "mb-0" %>
+    </div>
+    <div class="offset-1 col-7">
+      <%= f.email_field :email, class: "form-control", 
+        placeholder: email_placeholder, maxlength: EmailConstraints::MAX_LENGTH %>
+    </div>
   </div>
 
-  <div class="form-label-and-input">
-    <label><%= f.label :password, "パスワード" %></label>
-    <%= f.password_field :password %>
+  <!-- パスワード -->
+  <div class="form-row align-items-center mb-3">
+    <div class="col-4 text-left">
+      <%= f.label :password, "パスワード", class: "mb-0" %>
+    </div>
+    <div class="offset-1 col-7">
+      <%= f.password_field :password, class: "form-control" %>
+    </div>
   </div>
-  
+
+  <!-- ログインボタン -->
   <div class="form-submit">
     <%= f.submit "ログイン", class: "btn btn-base login-btn" %>
   </div>
