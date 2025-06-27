@@ -56,10 +56,18 @@
 }
 
 /*    ユーザー投稿一覧の設定    */
-// ページタイトルの設定
+// ページタイトルのボックスの設定
 .user-posts__title {
   text-align: center;
   margin-bottom: 4rem;                // タイトル下に余白を追加
+  color: #000;
+}
+// ページタイトルのテキストの設定
+.user-posts__title-text {
+  display: inline;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 0.25rem 1rem;
 }
 
 // 投稿のリンクの設定
@@ -77,6 +85,7 @@
   margin-bottom: 2rem;                // ボックス間のスペース
   overflow: hidden;                   // 内容がはみ出さないように制御
   box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 // マウスオーバー時のスタイル

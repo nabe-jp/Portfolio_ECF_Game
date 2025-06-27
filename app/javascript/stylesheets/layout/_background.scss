@@ -1,15 +1,22 @@
 body.homes.top header,
-body.homes.about header {
-  background-color: rgba(51, 51, 51, 0.3);
+body.homes.about header,
+body.user_posts.index header,
+body.groups.index header, 
+body.groups.my_groups header {
+  background-color: rgba(51, 51, 51, 0.8);
 }
 
 body.homes.top .sidebar,
-body.homes.about .sidebar {
-  background-color: rgba(79, 79, 79, 0.3);
+body.homes.about .sidebar,
+body.all_user_posts.index .sidebar,
+body.user_posts.index .sidebar,
+body.groups.index .sidebar, 
+body.groups.my_groups .sidebar {
+  background-color: rgba(79, 79, 79, 0.8);
 }
 
 body.homes.top {
-  background-image: url('../images/home_top_background');
+  background-image: url('../images/home_top_background.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -21,5 +28,23 @@ body.homes.about {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-position: center;
+}
+
+body.all_user_posts.index,
+body.user_posts.index {
+  background-image: url('../images/user_post_index_background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center;
+}
+
+body.groups.index, 
+body.groups.my_groups {
+  background-image: url('../images/group_index_background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   background-position: center;
 }

@@ -1,6 +1,14 @@
 .groups__title {
   text-align: center;
   margin: 0.5rem 0 1.5rem;
+  color: #000;
+}
+
+.groups__title-text {
+  display: inline;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 0.25rem 1rem;
 }
 
 .groups {
@@ -12,8 +20,9 @@
   display: flex;
   align-items: center;
   padding: 1rem;
+  margin: 1rem;
   text-decoration: none;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
   color: inherit;
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -198,7 +207,7 @@
   flex-direction: column;
   justify-content: flex-start;
   height: 180px;
-  background-color: #f8f9fa;
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 8px;
   padding: 1rem;
   transition: background-color 0.3s;

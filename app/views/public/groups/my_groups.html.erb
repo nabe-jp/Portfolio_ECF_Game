@@ -1,4 +1,6 @@
-<h2 class="groups__title">オーナーのグループ</h2>
+<h2 class="groups__title">
+  <span class="groups__title-text">オーナーのグループ</span>
+</h2>
 <% if @owned_groups.any? %>
   <div class="my-groups-list">
     <% @owned_groups.each do |group| %>
@@ -28,7 +30,9 @@
 
 <hr>
 
-<h2 class="groups__title">参加中のグループ</h2>
+<h2 class="groups__title">
+  <span class="groups__title-text">参加中のグループ</span>
+</h2>
 <% if @joined_groups.any? %>
   <div class="my-groups-list">
     <% @joined_groups.each do |group| %>
