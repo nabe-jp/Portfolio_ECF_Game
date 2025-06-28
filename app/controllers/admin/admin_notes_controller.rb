@@ -5,8 +5,8 @@ class Admin::AdminNotesController < Admin::ApplicationController
   before_action :set_admin_note, only: [:edit, :update, :destroy, :reactivate]
 
   def index
-    @admin_note = AdminNote.new(session.delete(:admin_note_attributes) || {})
-  
+    @admin_note = AdminNote.new(admin_note_attributes_from_session)
+
     # 並び順(初期表示は 'desc'＝新しい順)
     sort_direction = %w[asc desc].include?(params[:direction]) ? params[:direction] : 'desc'
   
@@ -31,8 +31,9 @@ class Admin::AdminNotesController < Admin::ApplicationController
     if @admin_note.save
       redirect_to admin_notes_path, notice: "申し送りを作成しました。"
     else
-      store_form_data(
-        attributes: admin_note_params, error_messages: @admin_note.errors.full_messages, error_name: "作成")
+      Form::DataStorageService.store(session: session, flash: flash, attributes: admin_note_params, 
+        error_messages: @admin_note.errors.full_messages, error_name: '申し送りの作成', 
+          key: :admin_note_attributes)
       redirect_to admin_notes_path
     end
   end
@@ -40,7 +41,7 @@ class Admin::AdminNotesController < Admin::ApplicationController
   def edit
     if session[:admin_note_attributes]
       @admin_note.assign_attributes(session[:admin_note_attributes])
-      session.delete(:admin_note_attributes)
+      clear_admin_note_session
     end
   end
 
@@ -48,7 +49,9 @@ class Admin::AdminNotesController < Admin::ApplicationController
     if @admin_note.update(admin_note_params)
       redirect_to admin_notes_path, notice: "申し送りを更新しました。"
     else
-      store_form_data(attributes: admin_note_params, error_messages: @admin_note.errors.full_messages)
+      Form::DataStorageService.store(session: session, flash: flash, attributes: admin_note_params, 
+        error_messages: @admin_note.errors.full_messages, error_name: '申し送りの更新', 
+          key: :admin_note_attributes)
       redirect_to edit_admin_note_path(@admin_note)
     end
   end
@@ -60,20 +63,23 @@ class Admin::AdminNotesController < Admin::ApplicationController
 
   def reactivate
     @admin_note.update(deleted_at: nil)
-    redirect_to admin_notes_path, notice: 'お知らせを復元しました'
+    redirect_to admin_notes_path, notice: '申し送りを復元しました'
   end
 
   private
 
-  def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "更新"
-    session[:admin_note_attributes] = attributes
-    flash[:error_messages] = error_messages
-    flash[:error_name] = error_name
-  end
-
   def set_admin_note
     @admin_note = AdminNote.find(params[:id])
+  end
+  
+  def admin_note_attributes_from_session
+    data = session[:admin_note_attributes]
+    clear_admin_note_session if data.present?
+    data || {}
+  end
+
+  def clear_admin_note_session
+    session.delete(:admin_note_attributes)
   end
 
   def admin_note_params

@@ -1,27 +1,32 @@
-<h4 id="user-posts-results">ユーザー投稿の検索結果</h4>
-<% if user_posts.any?  %>
-  <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(user_posts) %></p>
+<h4 id="user-posts-results">
+  <span class="search-user-post__result-title ml-4">ユーザー投稿の検索結果</span>
+</h4>
+<% if user_posts.any? %>
+  <p class="search-user-post__result-count">
+    <%= @search_type %>内でのヒット数<%= number_of_items_displayed(user_posts) %>
+  </p>
 
   <div class="container">
     <div class="row">
       <% user_posts.each do |post| %> 
-        <div class="col-6">
-          <%= link_to user_post_path(post.user.id, post.id), class: 'user-posts__link' do %>
-            <div class="post-list">
+        <div class="col-6 d-flex justify-content-center">
+          <%= link_to user_post_path(post.user.id, post.id), class: "search-user-post__link" do %>
+            <div class="search-user-post__card">
               <!-- 左側の画像 -->
-              <div class="post-list__image-box">
-                <%= image_tag(post.user_post_image, size: "150x150", class: "post-list__image") %>
+              <div class="search-user-post__image-box">
+                <%= image_tag(post.user_post_image, 
+                  size: "150x150", class: "search-user-post__image") %>
               </div>
 
               <!-- 右側の内容(名前、タイトル、内容) -->
-              <div class="post-list__content-box">
-                <p class="post-list__item-label">【ニックネーム】</p>
-                <p class="post-list__user"><%= post.user.nickname %></p>
-                <p class="post-list__item-label">【タイトル】</p>
-                <p class="post-list__title"><%= post.title %></p>
-                <p class="post-list__item-label">【内容】</p>
-                <p class="post-list__description"><%= truncate(post.body, length: 100) %></p>
-                <p class="post-list__date">投稿日：<%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+              <div class="search-user-post__info-box">
+                <p class="search-user-post__label">【ニックネーム】</p>
+                <p class="search-user-post__nickname"><%= post.user.nickname %></p>
+                <p class="search-user-post__label">【タイトル】</p>
+                <p class="search-user-post__title"><%= post.title %></p>
+                <p class="search-user-post__label">【内容】</p>
+                <p class="search-user-post__body"><%= truncate(post.body, length: 100) %></p>
+                <p class="search-user-post__date">投稿日：<%= post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
               </div>
 
             </div>
@@ -32,7 +37,7 @@
     
     <div class="d-flex justify-content-center mt-4">
       <%= paginate user_posts, param_name: :user_post_page, 
-        params: request.query_parameters.merge(scroll_to: 'user-posts-results') %>
+        params: request.query_parameters.merge(scroll_to: "user-posts-results") %>
     </div>
   </div>
 

@@ -59,13 +59,13 @@
 // ページタイトルのボックスの設定
 .user-posts__title {
   text-align: center;
-  margin-bottom: 4rem;                // タイトル下に余白を追加
+  margin-bottom: 1.5rem;                // タイトル下に余白を追加
   color: #000;
 }
 // ページタイトルのテキストの設定
 .user-posts__title-text {
   display: inline;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(108, 136, 160, 0.8);
   border-radius: 8px;
   padding: 0.25rem 1rem;
 }
@@ -73,26 +73,34 @@
 // 投稿のリンクの設定
 .user-posts__link {
   display: flex;
-  text-decoration: none;              // リンクの下線を消す
-  color: inherit;                     // 親要素の色を継承
   flex-direction: row;                // 横並びに変更
   justify-content: center;            // 中央揃えにする
   align-items: center;                // 高さを合わせる
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
   width: 95%;
   height: 200px;                      // 高さ固定
   padding: 1rem;                      // 内側の余白
+  margin: 1rem;                       // ボックス間のスペース
+  text-decoration: none;              // リンクの下線を消す
+  color: inherit;                     // 親要素の色を継承
+  background-color: rgba(240, 250, 255, 0.7);
+  border: 1px solid #000;           // ボックスの枠線
   border-radius: 8px;                 // 角を丸める
-  margin-bottom: 2rem;                // ボックス間のスペース
   overflow: hidden;                   // 内容がはみ出さないように制御
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-  background-color: rgba(255, 255, 255, 0.6);
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 // マウスオーバー時のスタイル
 .user-posts__link:hover {
-  color: #007bff;                   // 文字色を青色に変更
-  background-color: #8aaaf0;        // 背景色を変更
+  color: #f8f9fa;                   // 文字色を青色に変更
+  background-color: #a5c663;        // 背景色を変更
   text-decoration: none;              // ホバー時の下線を消す 
+  transform: scale(1.05);             // 大きさを1.05倍にする
+}
+
+// post-list__dateは文字色を直接指定しているため上記の記載では変更されないので直接設定
+.user-posts__link:hover .post-list__date {
+  color: #f8f9fa;
 }
 
 // 投稿ボックスの設定
@@ -172,7 +180,6 @@
 }
 
 // 高さと折り返しのなし
-.post-list__item-label, 
 .post-list__user, 
 .post-list__title {
   height: 15%;
@@ -181,6 +188,7 @@
 .post-list__item-label, 
 .post-list__date {
   height: 10%;
+  white-space: nowrap;                // 1行で表示
 }
 
 .post-detai__user {

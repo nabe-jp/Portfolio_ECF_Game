@@ -5,7 +5,7 @@ class Admin::InformationsController < Admin::ApplicationController
   before_action :set_information, only: [:edit, :update, :destroy, :reactivate]
 
   def index
-    @information = Information.new(session.delete(:information_attributes) || {})
+    @information = Information.new(information_attributes_from_session)
 
     # 並び替えの対象（デフォルト: published_at）
     sort_key = %w(published_at).include?(params[:sort_by]) ? params[:sort_by] : "created_at"
@@ -28,15 +28,17 @@ class Admin::InformationsController < Admin::ApplicationController
     if @information.save
       redirect_to admin_informations_path, notice: "お知らせを作成しました。"
     else
-      store_form_data(attributes: information_params, 
-        error_messages: @information.errors.full_messages, error_name: "作成")
+      Form::DataStorageService.store(session: session, flash: flash, attributes: information_params, 
+        error_messages: @information.errors.full_messages, error_name: 'お知らせの作成', 
+          key: :information_attributes)
       redirect_to admin_informations_path
     end
   end
 
   def edit
-    if (attrs = session.delete(:information_attributes))
-      @information.assign_attributes(attrs)
+    if session[:information_attributes]
+      @information.assign_attributes(session[:information_attributes])
+      clear_information_session
     end
   end
 
@@ -44,8 +46,9 @@ class Admin::InformationsController < Admin::ApplicationController
     if @information.update(information_params)
       redirect_to admin_informations_path, notice: "お知らせを更新しました。"
     else
-      store_form_data(attributes: information_params,
-        error_messages: @information.errors.full_messages)
+      Form::DataStorageService.store(session: session, flash: flash, attributes: information_params, 
+        error_messages: @information.errors.full_messages, error_name: 'お知らせの更新', 
+          key: :information_attributes)
       redirect_to edit_admin_information_path(@information)
     end
   end 
@@ -86,17 +89,20 @@ class Admin::InformationsController < Admin::ApplicationController
     Kaminari.paginate_array(pinned + non_pinned)
   end
 
-  def store_form_data(attributes:, error_messages:, error_name: nil)
-    error_name ||= "更新"
-    session[:information_attributes] = attributes
-    flash[:error_messages] = error_messages
-    flash[:error_name] = error_name
-  end
-
   def set_information
     @information = Information.find(params[:id])
   end
+  
+  def information_attributes_from_session
+    data = session[:information_attributes]
+    clear_information_session if data.present?
+    data || {}
+  end
 
+  def clear_information_session
+    session.delete(:information_attributes)
+  end
+  
   def information_params
     params.require(:information).permit(
       :title, :body, :published_at, :is_public, :is_pinned, :sort_order, :enable_sort_order)

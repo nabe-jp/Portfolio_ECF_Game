@@ -4,9 +4,10 @@
   color: #000;
 }
 
-.groups__title-text {
+.groups__title-text, 
+.group_posts__title-text {
   display: inline;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(108, 136, 160, 0.8);
   border-radius: 8px;
   padding: 0.25rem 1rem;
 }
@@ -22,17 +23,19 @@
   padding: 1rem;
   margin: 1rem;
   text-decoration: none;
-  background-color: rgba(255, 255, 255, 0.6);
   color: inherit;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #000;
   border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow: hidden;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .group-card:hover {
-  background-color: #007bff;
   color: white !important;
+  background-color: #007bff;
   text-decoration: none;
-  cursor: pointer;
+  transform: scale(1.03);
 }
 
 .group-card:hover h3,
@@ -127,6 +130,7 @@
 }
 
 .group-card__date {
+  font-weight: bold;
   color: gray;
   padding-left: 0.4rem;
 }
@@ -195,7 +199,6 @@
 .my-groups-list {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 1rem;
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
@@ -207,16 +210,24 @@
   flex-direction: column;
   justify-content: flex-start;
   height: 180px;
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
   padding: 1rem;
-  transition: background-color 0.3s;
-  text-decoration: none !important;
+  margin: 1rem;
+  text-decoration: none;
+  background-color: rgba(240, 250, 255, 0.7);
+  border: 1px solid #000;
+  border-radius: 8px;
   overflow: hidden;
+  transition: background-color 0.3s, transform 0.3s;
 
   &:hover {
-    background-color: #e9ecef;
+    background-color: #007bff;
     text-decoration: none !important;
+    transform: scale(1.03);
+
+    .my-groups-card__description,
+    .my-groups-card__name {
+      color: #ffffff;
+    }
   }
 
   &__center {
@@ -423,7 +434,7 @@
 .group-members__item {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  width: 50%; /* col-md-6 相当 */
+  width: 50%;
   margin-bottom: 1rem;
 }
 
@@ -491,24 +502,33 @@
 /*  group_posts  */
 .group-posts__link {
   display: flex;
-  text-decoration: none;              // リンクの下線を消す
-  color: inherit;                     // 親要素の色を継承
   flex-direction: row;                // 横並びに変更
   justify-content: center;            // 中央揃えにする
   align-items: center;                // 高さを合わせる
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
   width: 95%;
   height: 200px;                      // 高さ固定
   padding: 1rem;                      // 内側の余白
+  margin: 1rem;                       // ボックス間のスペース
+  text-decoration: none;              // リンクの下線を消す
+  color: inherit;                     // 親要素の色を継承
+  background-color: rgba(240, 250, 255, 0.7);
+  border: 1px solid #000;           // ボックスの枠線
   border-radius: 8px;                 // 角を丸める
-  margin-bottom: 2rem;                // ボックス間のスペース
   overflow: hidden;                   // 内容がはみ出さないように制御
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .group-posts__link:hover {
-  color: #007bff;
-  background-color: #8aaaf0;
-  text-decoration: none;
+  color: #f8f9fa;                   // 文字色を青色に変更
+  background-color: #8c9fad;        // 背景色を変更
+  text-decoration: none;              // ホバー時の下線を消す 
+  transform: scale(1.05);             // 大きさを1.05倍にする
+}
+
+// group-posts__dateは文字色を直接指定しているため上記の記載では変更されないので直接設定
+.group-posts__link:hover .group-posts__date {
+  color: #f8f9fa;
 }
 
 .group-posts__list {
@@ -576,7 +596,8 @@
 
 // フォントの太さ
 .group-posts__user, 
-.group-posts__title {
+.group-posts__title, 
+.group-posts__date {
   font-weight: bold;
 }
 

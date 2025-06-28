@@ -1,44 +1,121 @@
-.search-user__link,
-.search-group__link {
+.search-result__page-title {
+  display: inline;
+  background-color: rgba(108, 136, 160, 0.8);
+  border-radius: 8px;
+  padding: 0.25rem 1rem;
+}
+
+.search-user__result-title, 
+.search-user__result-count, 
+.search-user-post__result-title, 
+.search-user-post__result-count, 
+.search-group__result-title, 
+.search-group__result-count, 
+.search-group-post__result-title, 
+.search-group-post__result-count {
+  display: inline;
+  border-radius: 8px;
+  margin-left: 1.5rem;
+  padding: 0.25rem 1rem;
+}
+
+.search-user__result-count,
+.search-user-post__result-count,
+.search-group__result-count,
+.search-group-post__result-count {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.search-user__result-title, 
+.search-user-post__result-title, 
+.search-group__result-title, 
+.search-group-post__result-title{
+  background-color: rgba(209, 236, 241, 0.8);
+}
+
+.search-user__result-count,
+.search-user-post__result-count,
+.search-group__result-count,
+.search-group-post__result-count {
+  background-color: rgba(209, 236, 241, 0.6);
+}
+
+.search-user__link, 
+.search-user-post__link, 
+.search-group__link, 
+.search-group-post__link {
   display: flex;
-  text-decoration: none;              // リンクの下線を消す
-  color: inherit;                     // 親要素の色を継承
   flex-direction: row;                // 横並びに変更
   justify-content: center;            // 中央揃えにする
   align-items: center;                // 高さを合わせる
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
   width: 95%;
   height: 200px;                      // 高さ固定
   padding: 1rem;                      // 内側の余白
+  margin: 1rem;                       // ボックス間のスペース
+  text-decoration: none;              // リンクの下線を消す
+  color: inherit;                     // 親要素の色を継承
+  background-color: rgba(240, 250, 255, 0.7);
+  border: 1px solid #000;           // ボックスの枠線
   border-radius: 8px;                 // 角を丸める
-  margin-bottom: 2rem;                // ボックス間のスペース
   overflow: hidden;                   // 内容がはみ出さないように制御
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.search-user__link:hover,
-.search-group__link:hover {
+.search-user__link:hover, 
+.search-user-post__link:hover, 
+.search-group__link:hover, 
+.search-group-post__link:hover {
   color: #ffffff;
-  background-color: #93b80e;
   text-decoration: none;
+  transform: scale(1.05);             // 大きさを1.05倍にする
 }
 
-.search-user__card,
-.search-group__card {
+.search-user__link:hover {
+  background-color: #28a745;
+}
+
+.search-user-post__link:hover {
+  background-color: #a5c663;
+}
+
+.search-group__link:hover {
+  background-color: #007bff;
+}
+
+.search-group-post__link:hover {
+  background-color: #8c9fad;
+}
+
+.search-user-post__link:hover .search-user-post__date, 
+.search-group-post__link:hover .search-group-post__date {
+  color: #f8f9fa;
+}
+
+.search-user__card, 
+.search-user-post__card, 
+.search-group__card, 
+.search-group-post__card {
   width: 95%;
   display: flex;
   flex-wrap: wrap;
 }
 
-.search-user__image-box,
-.search-group__image-box {
+.search-user__image-box, 
+.search-user-post__image-box, 
+.search-group__image-box, 
+.search-group-post__image-box {
   width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.search-user__image,
-.search-group__image {
+.search-user__image, 
+.search-user-post__image, 
+.search-group__image, 
+.search-group-post__image {
   max-width: 100%;
   object-fit: cover;
   box-sizing: border-box;
@@ -48,24 +125,50 @@
   border-radius: 50%;
 }
 
+.search-user-post__image, 
+.search-group-post__image {
+  border-radius: 8px;
+}
+
 .search-group__image {
   border-radius: 90% / 54%;
 }
 
-.search-user__info-box,
-.search-group__info-box {
+.search-user__info-box, 
+.search-user-post__info-box, 
+.search-group__info-box, 
+.search-group-post__info-box {
   width: 55%;
   display: flex;
   flex-direction: column;
+}
+
+.search-user__info-box, 
+.search-group__info-box {
   padding-top: 8px;
 }
 
-.search-user__label,
-.search-group__label,
-.search-user__nickname,
-.search-user__bio,
-.search-group__name,
-.search-group__bio {
+.search-user-post__info-box, 
+.search-group-post__info-box {
+  position: relative;
+}
+
+.search-user__label, 
+.search-user__nickname, 
+.search-user__bio, 
+.search-user-post__label, 
+.search-user-post__nickname, 
+.search-user-post__title, 
+.search-user-post__body, 
+.search-user-post__date, 
+.search-group__label, 
+.search-group__name, 
+.search-group__bio, 
+.search-group-post__label, 
+.search-group-post__nickname, 
+.search-group-post__title, 
+.search-group-post__body, 
+.search-group-post__date {
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -73,42 +176,109 @@
   line-height: 1.1;
 }
 
-.search-user__label,
-.search-group__label,
-.search-user__nickname,
-.search-group__name {
-  white-space: nowrap;
+.search-user-post__nickname, 
+.search-user-post__title, 
+.search-user-post__body, 
+.search-group-post__nickname, 
+.search-group-post__title, 
+.search-group-post__body {
+  font-size: 1rem;
 }
 
-.search-user__label,
-.search-group__label {
-  height: 15%;
-  display: flex;
-  align-items: flex-end; 
+.search-user__label, 
+.search-user-post__label, 
+.search-user-post__date, 
+.search-group__label, 
+.search-group-post__label, 
+.search-group-post__date {
   font-size: 0.8rem;
 }
 
-.search-user__nickname,
-.search-user__bio,
-.search-group__name,
-.search-group__bio {
+.search-user__nickname, 
+.search-user-post__nickname, 
+.search-user-post__title, 
+.search-user-post__date, 
+.search-group__name, 
+.search-group-post__nickname, 
+.search-group-post__title, 
+.search-group-post__date {
+  font-weight: bold;
+}
+
+.search-user__label, 
+.search-user__nickname, 
+.search-user-post__label, 
+.search-user-post__nickname, 
+.search-user-post__title, 
+.search-user-post__date, 
+.search-group__label, 
+.search-group__name, 
+.search-group-post__label, 
+.search-group-post__nickname, 
+.search-group-post__title, 
+.search-group-post__date {
+  white-space: nowrap;
+}
+
+.search-user__label, 
+.search-group__label {
+  height: 15%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.search-user-post__label, 
+.search-user-post__nickname, 
+.search-user-post__title, 
+.search-group-post__label, 
+.search-group-post__nickname, 
+.search-group-post__title {
+  height: 15%;
+}
+
+.search-user-post__label, 
+.search-user-post__date, 
+.search-group-post__label, 
+.search-group-post__date {
+  height: 10%;
+}
+
+.search-user__nickname, 
+.search-user__bio, 
+.search-user-post__nickname, 
+.search-user-post__title, 
+.search-user-post__body, 
+.search-group__name, 
+.search-group__bio, 
+.search-group-post__nickname, 
+.search-group-post__title, 
+.search-group-post__body {
   padding-left: 0.8rem;
 }
 
-.search-user__nickname,
+.search-user__nickname, 
 .search-group__name {
   font-size: 1.2rem;
-  font-weight: bold;
   height: 20%;
 }
 
-.search-user__bio,
-.search-group__bio {
+.search-user__bio, 
+.search-user-post__body, 
+.search-group__bio, 
+.search-group-post__body {
   font-size: 1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   white-space: normal;
+}
+
+.search-user-post__date, 
+.search-group-post__date {
+  position: absolute;
+  bottom: 0;
+  color: gray;
+  padding-left: 0.4rem;
 }
 
 /* レスポンシブ対応（userのみに記載されていたものをgroupにも適用） */

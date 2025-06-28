@@ -1,12 +1,16 @@
-<h4 id="users-results">ユーザーの検索結果</h4>
-<% if users.any?  %>
-  <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(users) %></p>
+<h4 id="users-results">
+  <span class="search-user__result-title">ユーザーの検索結果</span>
+</h4>
+<% if users.any? %>
+  <p class="search-user__result-count">
+    <%= @search_type %>内でのヒット数<%= number_of_items_displayed(users) %>
+  </p>
 
   <div class="container">
     <div class="row">
       <% users.each do |user| %> 
-        <div class="col-6">
-          <%= link_to show_user_path(user), class: 'search-user__link' do %>
+        <div class="col-6 d-flex justify-content-center">
+          <%= link_to show_user_path(user), class: "search-user__link" do %>
             
             <div class="search-user__card">
               <!-- 左側：プロフィール画像 -->
@@ -30,7 +34,7 @@
 
     <div class="d-flex justify-content-center mt-4">
       <%= paginate users, param_name: :user_page, 
-        params: request.query_parameters.merge(scroll_to: 'users-results') %>
+        params: request.query_parameters.merge(scroll_to: "users-results") %>
     </div>
   </div>
 

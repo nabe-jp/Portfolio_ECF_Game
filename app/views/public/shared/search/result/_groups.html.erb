@@ -1,12 +1,16 @@
-<h4 id="groups-results">グループの検索結果</h4>
-<% if groups.any?  %>
-  <p><%= @search_type %>内でのヒット数<%= number_of_items_displayed(groups) %></p>
+<h4 id="groups-results">
+  <span class="search-group__result-title">グループの検索結果</span>
+</h4>
+<% if groups.any? %>
+  <p class="search-group__result-count">
+    <%= @search_type %>内でのヒット数<%= number_of_items_displayed(groups) %>
+  </p>
 
   <div class="container">
     <div class="row">
       <% groups.each do |group| %> 
-        <div class="col-6">
-          <%= link_to group_path(group.slug), class: 'search-group__link' do %>
+        <div class="col-6 d-flex justify-content-center">
+          <%= link_to group_path(group.slug), class: "search-group__link" do %>
             <div class="search-group__card">
               <!-- 左側：プロフィール画像 -->
               <div class="search-group__image-box">
@@ -29,7 +33,7 @@
 
     <div class="d-flex justify-content-center mt-4">
       <%= paginate groups, param_name: :group_page, 
-        params: request.query_parameters.merge(scroll_to: 'groups-results') %>
+        params: request.query_parameters.merge(scroll_to: "groups-results") %>
     </div>
   </div>
 
