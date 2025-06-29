@@ -1,0 +1,70 @@
+// ページネーション
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  margin: 1.5rem 0;
+}
+
+// 通常ページリンク（共通）
+.pagination span.page,
+.pagination span.first,
+.pagination span.prev,
+.pagination span.next,
+.pagination span.last {
+  display: inline-block;
+  background-color: #ffffff;
+  border: 1px solid #28b379;
+  border-radius: 6px;
+  margin: 0 0.3rem;
+  padding: 0.4rem 0.75rem;
+  color: #000000;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+// 現在ページ
+.pagination span.page.current {
+  background-color: #28b379;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: default;
+  pointer-events: none;
+}
+
+// ホバー時（.currentを除くすべて）
+.pagination span.page:hover:not(.current),
+.pagination span.first:hover,
+.pagination span.prev:hover,
+.pagination span.next:hover,
+.pagination span.last:hover {
+  background-color: #5a9bd4;
+  border-color: #5a9bd4;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+// aタグの共通設定
+.pagination span.page a,
+.pagination span.first a,
+.pagination span.prev a,
+.pagination span.next a,
+.pagination span.last a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+}
+
+// aタグホバー時
+.pagination span.page a:hover,
+.pagination span.first a:hover,
+.pagination span.prev a:hover,
+.pagination span.next a:hover,
+.pagination span.last a:hover {
+  text-decoration: none;
+}

@@ -614,7 +614,7 @@ ActiveRecord::Base.transaction do
         name: '初心者ボードゲーム部',
         slug: 'beginner-boardclub',
         description: 'ボードゲーム初心者歓迎。ルールの質問やおすすめも共有しましょう。',
-        joining_policy: :open,
+        joining_policy: :closed,
         image: 'group_8'
       },
       {
@@ -624,7 +624,7 @@ ActiveRecord::Base.transaction do
         name: 'The Quiet Grind',
         slug: 'quiet-grind',
         description: 'A group for those who enjoy peaceful farming, crafting, and slow progression games.',
-        joining_policy: :closed,
+        joining_policy: :invitation_only,
         image: 'group_9'
       },
       {

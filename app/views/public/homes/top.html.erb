@@ -6,30 +6,24 @@
     </div>
 
     <!-- 最新の投稿 -->
-    <div class="col-12 space-between">
-      <div class="title-container latest-post-title">
-        <%= render 'public/shared/home/top/title', title: PostConstants::LATEST_POST_TITLE %>
-      </div>
+    <div class="col-12">
+      <%= render 'public/shared/home/top/title', title: PostConstants::LATEST_POST_TITLE %>
     </div>
     <div class="col-12 space-between-bottom">
       <%= render 'public/shared/home/top/user_posts' %>
     </div>
     
     <!-- 最新のグループ投稿 -->
-    <div class="col-12 space-between">
-      <div class="title-container latest-group-post-title">
-        <%= render 'public/shared/home/top/title', title: PostConstants::LATEST_GROUP_POST_TITLE %>
-      </div>
+    <div class="col-12">
+      <%= render 'public/shared/home/top/title', title: PostConstants::LATEST_GROUP_POST_TITLE %>
     </div>
     <div class="col-12 space-between-bottom">
       <%= render 'public/shared/home/top/group_posts' %>
     </div>
     
     <!-- 本日のいいね -->
-    <div class="col-12 space-between">
-      <div class="title-container today-top-likes-title">
-        <%= render 'public/shared/home/top/title', title: PostConstants::TODAY_TOP_LIKES_TITLE %>
-      </div>
+    <div class="col-12">
+      <%= render 'public/shared/home/top/title', title: PostConstants::TODAY_TOP_LIKES_TITLE %>
     </div>
     
     <div class="col-12">

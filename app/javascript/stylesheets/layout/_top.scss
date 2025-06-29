@@ -1,100 +1,148 @@
 /*    トップページの設定    */
-// 各タイトルの設定
-// タイトルの設定
-.title-container {
-  text-align: center;
+// 背景画像のボックス設定
+.image-container {
+  position: relative;                 // 子要素のabsolute配置の基準にする
+  margin: 0 auto;                     // 左右のマージンを自動にして中央寄せ
+  display: flex;
+  flex-direction: column;             // 縦並びにする
+  justify-content: center;            // 縦方向の中央揃え
+  align-items: center;                // 横方向の中央揃え
+  background-size: contain;           // 画像は縦横比を維持して全体が収まる
+  background-position: center;        // 背景画像の表示位置を中央に配置
+  background-repeat: no-repeat;       // 繰り返さず1枚だけ表示
+  overflow: hidden;                   // 画像がはみ出さないように設定
+}
+
+// 背景画像の設定(notice)
+.image-container-notice {
+  background-image: url('../images/notice_board.png');
+  width: 100%;                        // 画面幅に対して100%の横幅
+  max-width: 700px;                   // 最大幅を700pxに制限(大画面対応)
+  height: 700px;                      // 高さを固定で700pxに設定
+}
+
+// 背景画像の設定(notice以外)、背景を透過
+.image-container-title {
+  position: relative;
+  width: 100%;                        // 画面幅に対して100%の横幅
+  max-width: 400px;                   // 最大幅を制限してバランス良く
+  aspect-ratio: 4 / 3;                // 縦横比を明示的に指定
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/title_label.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8;                     // 透過度
+    z-index: 0; 
+  }
+
+  .title-display-box {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// お知らせ以外のボックスの設定
+.title-display-box {
+  position: absolute;
+  top: 1%;                            // 背景画像に合わせて縦位置を調整
+  width: 83%;                         // 横幅はimage-container-titleの画像の中身と同一
+  height: 41%;                        // 高さはimage-container-titleの画像の中身と同一
+  display: flex;
+  justify-content: center;            // 縦方向の中央揃え
+  align-items: center;                // 横方向の中央揃え
+  overflow: hidden;                   // 画像がはみ出さないように設定
+  padding: 0 10px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+// 各タイトルの共通の設定
+.notice-title, 
+.title-display-box.user-post, 
+.title-display-box.group-post, 
+.title-display-box.likes {
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 1)
 }
 
 // お知らせタイトルのスタイル
 .notice-title {
   position: absolute;
-  top: 85px;                          // 背景画像に応じて位置を調整
+  top: 12%;                          // 背景画像に応じて位置を調整
   color: #99CC99;
-  font-size: 2rem;
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5); // 輪郭のにじみ
 }
 
-// 最新の投稿タイトルのスタイル
-.latest-post-title {
-  font-size: 2rem;
+// 各タイトルのスタイル(notice-title以外)
+.title-display-box.user-post {
   color: #9b59b6;
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
 }
-
-// 最新のグループ投稿タイトルのスタイル
-.latest-group-post-title {
-  font-size: 2rem;
+.title-display-box.group-post {
   color: #2ecc71;
-  text-shadow: 0px 0px px rgba(0, 0, 0, 0.5);
 }
-
-// 本日のいいねタイトルのスタイル
-.today-top-likes-title {
-  font-size: 2rem;
+.title-display-box.likes {
   color: #f39c12;
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
-}
-
-// お知らせ箇所の設定
-// 背景画像の設定
-.image-container {
-  background-size: cover;             // 画像がボックスを埋める
-  background-position: center center; // 画像を中央に配置 
-  display: flex;
-  flex-direction: column;             // 縦並びにする
-  justify-content: center;            // 縦方向の中央揃え
-  align-items: center;                // 横方向の中央揃え
-  position: relative;
-  overflow: hidden;                   // 画像がはみ出さないように設定
-  margin: 0 auto;                     // 左右中央揃え
-}
-
-.image-container-notice {
-  background-image: url('../images/notice_board.png'); // 背景画像
-  width: 60%;
-  height: 700px;
-  position: relative;                 // 相対位置を指定して、子の絶対配置を基準にする
-}
-
-.image-container-title {
-  background-image: url('../images/title_labelt'); // 背景画像
-  width: 40%;
-  height: 300px;
-}
-
-// お知らせのボックスの設定
-.notice-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 // スクロールとテキストの設定
 .scrollable-box {
   position: absolute;
-  top: 175px;                         // 背景画像に応じて位置を調整
-  left: 5.8rem;                         // 背景画像に応じて位置を調整
-  color: white;
-  font-size: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); // 文字に影をつける
-  text-align: left;                   // 文字を左揃え
-  width: 62%;
-  height: 45%;
+  top: 25%;                           // 背景画像に応じて位置を調整
+  left: 15%;                          // 背景画像に応じて位置を調整
+  width: 64%;
+  height: 39%;
+  display: flex;
+  flex-wrap: wrap;                    // 要素がはみ出さないように折り返し
   overflow-y: scroll;                 // 下にスクロール可能にする
-  padding: 10px;                      // 内側の余白を追加(文字がボックスに接触しないようにするため)
-  box-sizing: border-box;             // paddingを要素のサイズに含める
   -ms-overflow-style: none;           // Internet Explorer 10+ 対応
   scrollbar-width: none;              // スクロールバーを非表示、Firefox 64+ 対応
+  padding: 10px;                      // 内側の余白を追加(文字がボックスに接触しないようにするため)
+  box-sizing: border-box;             // paddingを要素のサイズに含める
+  color: white;
+  text-align: left;                   // 文字を左揃え
 }
 
+// スクロールバーの設定
 .scrollable-box::-webkit-scrollbar {
   display: none;
   width: 0px;
   height: 0px;
 }
 
+// スクロールボックス内テキストスタイルの共通設定
+.scrollable-box-title, 
 .scrollable-box-text {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.scrollable-box-date, 
+.scrollable-box-text {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+// スクロールボックス内テキストスタイルの各設定
+.scrollable-box-date {
+  font-size: 1rem;
+}
+
+.scrollable-box-title {
+  margin-left: 1rem;
+  font-size: 1.2rem;
   color: rgb(26, 26, 26);
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+}
+
+.scrollable-box-text {
+  font-size: 1.1rem;
 }
 
 // 投稿についての設定
@@ -114,7 +162,7 @@
   text-align: left;                 // テキストを左揃え
   text-align: left;                 // テキストを左揃え
   border: 1px solid #ddd;         // ボーダー
-  border-radius: 16px;               // 角を丸く
+  border-radius: 16px;              // 角を丸く
   overflow: hidden;                 // 内容がはみ出さないようにする
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #8FA3B8;

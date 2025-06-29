@@ -35,10 +35,9 @@
       <% end %>
     </div>
     
-    <div class="d-flex justify-content-center mt-4">
-      <%= paginate user_posts, param_name: :user_post_page, 
-        params: request.query_parameters.merge(scroll_to: "user-posts-results") %>
-    </div>
+    <%= paginate user_posts, param_name: :user_post_page, 
+      params: request.query_parameters.merge(scroll_to: "user-posts-results") %>
+
   </div>
 
 <% else %>

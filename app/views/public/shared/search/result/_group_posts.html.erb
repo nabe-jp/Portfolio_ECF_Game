@@ -35,10 +35,9 @@
       <% end %>
     </div>
 
-    <div class="d-flex justify-content-center mt-4">
-      <%= paginate group_posts, param_name: :group_post_page, 
-        params: request.query_parameters.merge(scroll_to: "search-group-post-results") %>
-    </div>
+    <%= paginate group_posts, param_name: :group_post_page, 
+      params: request.query_parameters.merge(scroll_to: "search-group-post-results") %>
+      
   </div>
   
 <% else %>

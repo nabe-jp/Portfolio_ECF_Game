@@ -20,9 +20,7 @@
     <% end %>
   </div>
 
-  <div class="d-flex justify-content-center mt-4">
-    <%= paginate @owned_groups, param_name: :owned_page %>
-  </div>
+  <%= paginate @owned_groups, param_name: :owned_page %>
   
 <% else %>
   <div class="text-center">
@@ -54,9 +52,7 @@
     <% end %>
   </div>
 
-  <div class="d-flex justify-content-center mt-4">
-    <%= paginate @joined_groups, param_name: :joined_page %>
-  </div>
+  <%= paginate @joined_groups, param_name: :joined_page %>
 
 <% else %>
   <div class="text-center">
