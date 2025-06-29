@@ -25,7 +25,9 @@
   </div>
   
 <% else %>
-  <p style="text-align: center;">作成したグループはありません。</p>
+  <div class="text-center">
+    <p class="my-groups-list__empty-message">作成したグループはありません</p>
+  </div>
 <% end %>
 
 <hr>
@@ -57,5 +59,7 @@
   </div>
 
 <% else %>
-  <p style="text-align: center;">他のグループに参加していません。</p>
+  <div class="text-center">
+    <p class="my-groups-list__empty-message">他のグループに参加していません</p>
+  </div>
 <% end %>

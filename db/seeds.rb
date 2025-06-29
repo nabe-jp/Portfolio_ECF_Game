@@ -544,6 +544,7 @@ ActiveRecord::Base.transaction do
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ\
           ＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸＸ
         TEXT
+        joining_policy: :open,
         image: 'group_1'
       },
       {
@@ -553,6 +554,7 @@ ActiveRecord::Base.transaction do
         name: 'Low HP, High Vibes',
         slug: 'low-hp-high-vibes',
         description: 'We may not play to win, but we play to feel good. A chill corner for good mood gamers.',
+        joining_policy: :approval_required,
         image: 'group_2'
       },
       {
@@ -562,6 +564,7 @@ ActiveRecord::Base.transaction do
         name: 'Campfire Lounge',
         slug: 'campfire-lounge',
         description: '焚き火を囲むような気持ちで、まったりとゲームの話を楽しみましょう。攻略というより、楽しみ方を共有する場所です。',
+        joining_policy: :approval_required,
         image: 'group_3'
       },
       {
@@ -571,6 +574,7 @@ ActiveRecord::Base.transaction do
         name: 'Melody Quest',
         slug: 'melody-quest',
         description: 'A casual place for rhythm gamers and music lovers to talk scores, games, and groove.',
+        joining_policy: :approval_required,
         image: 'group_4'
       },
       {
@@ -580,6 +584,7 @@ ActiveRecord::Base.transaction do
         name: 'ドラゴンの巣調査隊',
         slug: 'dragon-nest',
         description: 'ドラゴンの巣の地図・敵配置・素材集めなどを語る場所です。情報提供歓迎。',
+        joining_policy: :approval_required,
         image: 'group_5'
       },
       {
@@ -589,6 +594,7 @@ ActiveRecord::Base.transaction do
         name: 'Dog Lovers',
         slug: 'dog-lovers',
         description: 'A chill place for people who love dogs. Share stories, pics, and just say "woof!"',
+        joining_policy: :open,
         image: 'group_6'
       },
       {
@@ -598,6 +604,7 @@ ActiveRecord::Base.transaction do
         name: 'EchoStage',
         slug: 'echostage',
         description: 'A virtual stage to talk about rhythm games, game OSTs, and musical adventures.',
+        joining_policy: :approval_required,
         image: 'group_7'
       },
       {
@@ -607,6 +614,7 @@ ActiveRecord::Base.transaction do
         name: '初心者ボードゲーム部',
         slug: 'beginner-boardclub',
         description: 'ボードゲーム初心者歓迎。ルールの質問やおすすめも共有しましょう。',
+        joining_policy: :open,
         image: 'group_8'
       },
       {
@@ -616,6 +624,7 @@ ActiveRecord::Base.transaction do
         name: 'The Quiet Grind',
         slug: 'quiet-grind',
         description: 'A group for those who enjoy peaceful farming, crafting, and slow progression games.',
+        joining_policy: :closed,
         image: 'group_9'
       },
       {
@@ -625,6 +634,7 @@ ActiveRecord::Base.transaction do
         name: '夜空カフェ',
         slug: 'yozora-cafe',
         description: '夜の静かな時間、ふと開きたくなるようなゲームの話をここで。ジャンル不問、ほっとする作品の話題歓迎です。',
+        joining_policy: :approval_required,
         image: 'group_10'
       },
       {
@@ -634,6 +644,7 @@ ActiveRecord::Base.transaction do
         name: 'Tavern of Tales',
         slug: 'tavern-of-tales',
         description: 'A cozy guild for sharing fantasy stories, RPG screenshots, and questing tips.',
+        joining_policy: :open,
         image: 'group_11'
       }
     ]
@@ -644,6 +655,7 @@ ActiveRecord::Base.transaction do
         name: attrs[:name],
         slug: attrs[:slug],
         description: attrs[:description],
+        joining_policy: attrs[:joining_policy],
         created_at: Time.current
       )
     

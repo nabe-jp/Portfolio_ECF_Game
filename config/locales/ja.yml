@@ -6,6 +6,11 @@ ja:
       restored_pending: "復元後非アクティブ"
       banned: "利用禁止"
       suspended: "一時停止中"
+    joining_policy:
+      open: "自由参加"
+      approval_required: "承認制"
+      invitation_only: "招待制"
+      closed: "募集停止中"
     member_status:
       active: "有効"
       pending: "承認待ち"

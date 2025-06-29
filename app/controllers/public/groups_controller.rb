@@ -105,6 +105,6 @@ class Public::GroupsController < ApplicationController
   end
 
   def group_params
-    params.require(:group).permit(:group_image, :name, :description, :slug, tag_list: [])
+    params.require(:group).permit(:group_image, :name, :description, :slug, :joining_policy)
   end
 end

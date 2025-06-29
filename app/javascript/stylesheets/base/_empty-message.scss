@@ -1,0 +1,20 @@
+// 表示できるものがないときの文章のスタイル
+.search-group-post__empty-message, 
+.user-posts__empty-message, 
+.dashboard-notice__empty-message, 
+.dashboard-event__empty-message, 
+.dashboard-posts__empty-message, 
+.groups__empty-message, 
+.group-posts__empty-message, 
+.group-members___empty-message, 
+.my-groups-list__empty-message {
+  display: inline-block;              // 幅を文字列に合わせる
+  padding: 0.25rem 1rem;
+  color: #6c757d;
+  background-color: rgba(209, 236, 241, 0.6);
+  border-radius: 8px;
+}
+
+.group-members___empty-message {
+  margin: 1rem 0.25rem;
+}

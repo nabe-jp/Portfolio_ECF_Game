@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.integer "post_count", default: 0, null: false
     t.datetime "last_posted_at"
     t.boolean "is_owner_visible", default: true, null: false
+    t.integer "joining_policy", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

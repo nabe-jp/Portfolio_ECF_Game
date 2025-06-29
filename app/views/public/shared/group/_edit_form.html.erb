@@ -10,6 +10,12 @@
       placeholder: group_description_placeholder, maxlength: Group::DESCRIPTION_MAX_LENGTH %>
   </div>
 
+  <div class="form-group mt-5">
+    <%= f.label :joining_policy, "参加方法" %>
+    <%= f.select :joining_policy, Group.joining_policies.keys.map { |k| [I18n.t("enums.joining_policy.#{k}"), k] }, 
+          {}, class: "form-control w-auto" %>
+  </div>
+
   <div class="text-center my-5">
     <%= f.submit "更新する", class: "btn btn-primary px-5" %>
   </div>

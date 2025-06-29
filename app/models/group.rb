@@ -3,7 +3,7 @@ class Group < ApplicationRecord
   NAME_MIN_LENGTH = 1
   NAME_MAX_LENGTH = 20
   DESCRIPTION_MIN_LENGTH = 1
-  DESCRIPTION_MAX_LENGTH = 100
+  DESCRIPTION_MAX_LENGTH = 200
   SLUG_MIN_LENGTH = 3
   SLUG_MAX_LENGTH = 30
 
@@ -43,6 +43,9 @@ class Group < ApplicationRecord
 
   # アイコン画像
   has_one_attached :group_image
+
+  # グループのメンバー募集の状態(誰でも・承認制・招待制・募集停止中)
+  enum joining_policy: { open: 0, approval_required: 1, invitation_only: 2, closed: 3 }, _prefix: true
 
   validates :name, presence: { message: "を入力してください" }
   validates :name, length: { 

@@ -25,7 +25,8 @@ class CreateGroups < ActiveRecord::Migration[6.1]
 
       # 公開制御
       t.boolean :is_owner_visible, default: true, null: false           # グループオーナが決める公開/非公開
-
+      t.integer :joining_policy, default: 0, null: false                # グループのメンバー募集の状態
+      
       t.timestamps
     end
   end

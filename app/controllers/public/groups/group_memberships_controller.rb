@@ -14,6 +14,15 @@ class Public::Groups::GroupMembershipsController < Public::ApplicationController
   def join
     membership = GroupMembership.find_by(user: current_user, group: @group)
   
+    # 念の為、セキュリティ面でのガード
+    if @group.joining_policy_closed?
+      redirect_to group_path(@group), alert: 'このグループは現在、募集を行っていません。'
+      return
+    elsif @group.joining_policy_invitation_only?
+      redirect_to group_path(@group), alert: 'このグループは招待制のため、申請できません。'
+      return
+    end
+
     if membership&.id
       if membership.member_status_rejected?
         redirect_to group_path(@group), alert: '参加申請が却下されているため、再度申請することはできません。'
@@ -42,12 +51,19 @@ class Public::Groups::GroupMembershipsController < Public::ApplicationController
         redirect_to group_path(@group), alert: '参加できませんでした。'
       end
     else
+      # 新規申請or即時参加の処理
       membership = GroupMembership.new(user: current_user, group: @group, role: :member, 
-        member_status: :pending)
+        member_status: @group.joining_policy_open? ? :active : :pending,
+          joined_at: @group.joining_policy_open? ? Time.current : nil)
+
       if membership.save
-        redirect_to group_path(@group), notice: 'グループに参加申請を送りました。'
+        if membership.member_status_active?
+          redirect_to group_dashboard_path(@group), notice: 'グループに参加しました。'
+        else
+          redirect_to group_path(@group), notice: 'グループに参加申請を送りました。'
+        end
       else
-        redirect_to group_path(@group), alert: '参加申請を送ることに失敗しました。'
+        redirect_to group_path(@group), alert: '参加処理に失敗しました。'
       end
     end
   end
