@@ -25,11 +25,11 @@
   <!-- ダミー画像表示: 投稿が足りない場合 -->
   <% if @user_post_dummy_images.present? %>
     <% @user_post_dummy_images.each do |dummy_image| %>
-      <div class="box-link box-link-cards">
-        <div class="post-header post-header-cards">
-          <strong><%= PostConstants::LATEST_POST_TITLE %>はありません</strong>
+      <div class="box-link box-link-dummy-cards">
+        <div class="dummy-header">
+          <strong>投稿はありません</strong>
          </div>
-        <%= image_tag("card/#{dummy_image}.png", size: "150x230", class: "post-image") %>
+        <%= image_tag("card/#{dummy_image}.png", size: "120x180", class: "post-image") %>
       </div>
     <% end %>
   <% end %>

@@ -1,4 +1,15 @@
 /*    トップページの設定    */
+:root {
+  --homes-top-font-title-notice: 2rem;
+  --homes-top-font-title: 2rem;
+  --homes-top-font-scrollable-title: 1.2rem;
+  --homes-top-font-scrollable-text: 1.1rem;
+  --homes-top-font-scrollable-date: 1rem;
+  --homes-top-font-post-title: 1.2rem;
+  --homes-top-font-base: 1rem;
+  --homes-top-font-post-date: 0.8rem;
+}
+
 // 背景画像のボックス設定
 .image-container {
   position: relative;                 // 子要素のabsolute配置の基準にする
@@ -19,6 +30,66 @@
   width: 100%;                        // 画面幅に対して100%の横幅
   max-width: 700px;                   // 最大幅を700pxに制限(大画面対応)
   height: 700px;                      // 高さを固定で700pxに設定
+
+  // お知らせタイトルのスタイル
+  .notice-title {
+    position: absolute;
+    top: 12%;                          // 背景画像に応じて位置を調整
+    font-size: var(--homes-top-font-title-notice);
+    font-weight: bold;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 1);
+    color: #99CC99;
+  }
+
+  // スクロールとテキストの設定
+  .scrollable-box {
+    position: absolute;
+    top: 25%;                           // 背景画像に応じて位置を調整
+    left: 15%;                          // 背景画像に応じて位置を調整
+    width: 64%;
+    height: 39%;
+    display: flex;
+    flex-wrap: wrap;                    // 要素がはみ出さないように折り返し
+    overflow-y: scroll;                 // 下にスクロール可能にする
+    -ms-overflow-style: none;           // Internet Explorer 10+ 対応
+    scrollbar-width: none;              // スクロールバーを非表示、Firefox 64+ 対応
+    padding: 10px;                      // 内側の余白を追加(文字がボックスに接触しないようにするため)
+    box-sizing: border-box;             // paddingを要素のサイズに含める
+    color: white;
+    text-align: left;                   // 文字を左揃え
+  }
+
+  // スクロールバーの設定
+  .scrollable-box::-webkit-scrollbar {
+    display: none;
+    width: 0px;
+    height: 0px;
+  }
+
+  // スクロールボックス内テキストスタイルの共通設定
+  .scrollable-box-title, 
+  .scrollable-box-text {
+    font-weight: bold;
+    color: #ffffff;
+  }
+  .scrollable-box-date, 
+  .scrollable-box-text {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  }
+
+  // スクロールボックス内テキストスタイルの各設定
+  .scrollable-box-date {
+    font-size:  var(--homes-top-font-scrollable-date);
+  }
+  .scrollable-box-title {
+    margin-left: 1rem;
+    font-size: var(--homes-top-font-scrollable-title);
+    color: rgb(26, 26, 26);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+  }
+  .scrollable-box-text {
+    font-size: var(--homes-top-font-scrollable-text);
+  }
 }
 
 // 背景画像の設定(notice以外)、背景を透過
@@ -43,242 +114,256 @@
     z-index: 0; 
   }
 
+  // お知らせ以外のボックスの設定
   .title-display-box {
-    position: relative;
+    position: absolute;
+    top: 30%;                         // 背景画像に合わせて縦位置を調整
+    width: 83%;                       // 横幅はimage-container-titleの画像の中身と同一
+    height: 41%;                      // 高さはimage-container-titleの画像の中身と同一
+    display: flex;
+    justify-content: center;          // 縦方向の中央揃え
+    align-items: center;              // 横方向の中央揃え
+    overflow: hidden;                 // 画像がはみ出さないように設定
+    padding: 0 10px;
+    box-sizing: border-box;
+    white-space: nowrap;
     z-index: 1;
   }
-}
 
-// お知らせ以外のボックスの設定
-.title-display-box {
-  position: absolute;
-  top: 1%;                            // 背景画像に合わせて縦位置を調整
-  width: 83%;                         // 横幅はimage-container-titleの画像の中身と同一
-  height: 41%;                        // 高さはimage-container-titleの画像の中身と同一
-  display: flex;
-  justify-content: center;            // 縦方向の中央揃え
-  align-items: center;                // 横方向の中央揃え
-  overflow: hidden;                   // 画像がはみ出さないように設定
-  padding: 0 10px;
-  box-sizing: border-box;
-  white-space: nowrap;
-}
-
-// 各タイトルの共通の設定
-.notice-title, 
-.title-display-box.user-post, 
-.title-display-box.group-post, 
-.title-display-box.likes {
-  font-size: 2rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 1)
-}
-
-// お知らせタイトルのスタイル
-.notice-title {
-  position: absolute;
-  top: 12%;                          // 背景画像に応じて位置を調整
-  color: #99CC99;
-}
-
-// 各タイトルのスタイル(notice-title以外)
-.title-display-box.user-post {
-  color: #9b59b6;
-}
-.title-display-box.group-post {
-  color: #2ecc71;
-}
-.title-display-box.likes {
-  color: #f39c12;
-}
-
-// スクロールとテキストの設定
-.scrollable-box {
-  position: absolute;
-  top: 25%;                           // 背景画像に応じて位置を調整
-  left: 15%;                          // 背景画像に応じて位置を調整
-  width: 64%;
-  height: 39%;
-  display: flex;
-  flex-wrap: wrap;                    // 要素がはみ出さないように折り返し
-  overflow-y: scroll;                 // 下にスクロール可能にする
-  -ms-overflow-style: none;           // Internet Explorer 10+ 対応
-  scrollbar-width: none;              // スクロールバーを非表示、Firefox 64+ 対応
-  padding: 10px;                      // 内側の余白を追加(文字がボックスに接触しないようにするため)
-  box-sizing: border-box;             // paddingを要素のサイズに含める
-  color: white;
-  text-align: left;                   // 文字を左揃え
-}
-
-// スクロールバーの設定
-.scrollable-box::-webkit-scrollbar {
-  display: none;
-  width: 0px;
-  height: 0px;
-}
-
-// スクロールボックス内テキストスタイルの共通設定
-.scrollable-box-title, 
-.scrollable-box-text {
-  font-weight: bold;
-  color: #ffffff;
-}
-
-.scrollable-box-date, 
-.scrollable-box-text {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
-
-// スクロールボックス内テキストスタイルの各設定
-.scrollable-box-date {
-  font-size: 1rem;
-}
-
-.scrollable-box-title {
-  margin-left: 1rem;
-  font-size: 1.2rem;
-  color: rgb(26, 26, 26);
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
-}
-
-.scrollable-box-text {
-  font-size: 1.1rem;
+  // 各タイトルのスタイル(notice-title以外)
+  .title-display-box.user-post, 
+  .title-display-box.group-post, 
+  .title-display-box.likes {
+    font-size: var(--homes-top-font-title);
+    font-weight: bold;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 1)
+  }
+  .title-display-box.user-post {
+    color: #9b59b6;
+  }
+  .title-display-box.group-post {
+    color: #2ecc71;
+  }
+  .title-display-box.likes {
+    color: #f39c12;
+  }
 }
 
 // 投稿についての設定
 // 投稿コンテナのレイアウト設定
 .posts-container {
-  display: flex;                    // フレックスボックスを使用
-  flex-wrap: wrap;                  // 要素がはみ出さないように折り返し
-  gap: 0.75rem;                     // 投稿間の隙間（間隔）
-  justify-content: space-between;   // 横方向に均等に配置
-  margin: 0.75rem;
+  display: flex;                      // フレックスボックスを使用
+  flex-wrap: wrap;                    // 要素がはみ出さないように折り返し
+  justify-content: space-between;     // 横方向に均等に配置
+  width: 100%;
+  gap: 0.75rem;                       // 投稿間の隙間(間隔)
+  padding: 0.75rem;
+  box-sizing: border-box;             // paddingを要素のサイズに含める
 }
 
 // リンクボックスの設定
 .box-link {
-  display: block;                   // ボックス全体をリンクとして表示
-  width: calc(20% - 1rem);          // ボックス幅を縮小して5つ並べる
-  text-align: left;                 // テキストを左揃え
-  text-align: left;                 // テキストを左揃え
-  border: 1px solid #ddd;         // ボーダー
-  border-radius: 16px;              // 角を丸く
-  overflow: hidden;                 // 内容がはみ出さないようにする
+  display: flex;                      // ボックス全体をリンクとして表示
+  flex-direction: column;             // 子要素を縦に並べる
+  align-items: center;                // 横方向中央揃え
+  justify-content: center;            // 縦方向中央揃え
+  width: calc(20% - 1rem);            // ボックス幅を縮小して5つ並べる
+  border: 1px solid #ddd;           // ボーダー
+  border-radius: 16px;                // 角を丸く
+  overflow: hidden;                   // 内容がはみ出さないようにする
+  margin-bottom: 1rem;
+  box-sizing: border-box;             // paddingを要素のサイズに含める
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #8FA3B8;
-  color: inherit;                   // 親要素の色を引き継ぐ
-  text-decoration: none;            // リンクの下線を消す
-  margin-bottom: 4rem;              // ボックス間の余白
+  color: inherit;                     // 親要素の色を引き継ぐ
+  text-decoration: none;              // リンクの下線を消す
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-// 継承
-.box-link-cards {
+// 継承(ダミー画像のみバックグランド変更)
+.box-link-dummy-cards {
   background-color: #28b379;
 }
 
 // ホバー時
 .box-link:hover {
-  background-color: #28b379;      // ボックスのホバー時に緑色
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  text-decoration: none;            // リンクの下線を消す
-  transform: scale(1.1);            // ボックスを少し拡大
-  color: #ffffff;                 // ホバー時に文字色を白に
+  background-color: #28b379;        // ボックスのホバー時に緑色
+  text-decoration: none;              // リンクの下線を消す
+  transform: scale(1.1);              // ボックスを少し拡大
+  color: #ffffff;                   // ホバー時に文字色を白に
 }
 
-// ユーザー画像とニックネームが使用するタグの設定
-.post-header {
-  display: flex;                    // フレックスで横並び
-  align-items: center;              // 垂直方向に中央揃え
+// 共通設定
+.post-header, 
+.dummy-header {
+  width: 100%;
   padding: 1rem;
+  box-sizing: border-box;             // paddingを要素のサイズに含める
 }
 
-// 継承
-.post-header-cards {
+// 投稿のヘッダーに使用するタグの設定
+.post-header {
+  display: flex;                      // フレックスで横並び
+  align-items: center;                // 横方向中央揃え
+  justify-content: center;            // 縦方向中央揃え
+}
+
+// ダミー画像で使用するタグの設定
+.dummy-header {
   text-align: center;
-  font-size: 12px;
+  font-size: var(--homes-top-font-base);
   color: #ffffff;
   background-color: #28b379;
 }
 
+// ユーザー画像、グループ画像の共通設定
+.user-image, 
+.group-image {
+  flex: 0 0 30%;                      // flex-grow:0(広がらない),flex-shrink:0(縮まない).flex-basis:30%(幅)
+  object-fit: cover;
+  flex: none;                         // flexの影響を受けないようにする(これを入れないと画像の形が変わる)
+}
+
 // ユーザー画像のスタイル
 .user-image {
-  border-radius: 50%;               // 円形のユーザー画像
-  margin-right: 1rem;               // 画像と名前の間に余白を追加
-  object-fit: cover;
+  border-radius: 50%;                 // 円形のユーザー画像
 }
 
 // グループ画像のスタイル
 .group-image {
-  border-radius: 90% / 54%;         // 横方向の丸み(半径) / 縦方向の丸み(半径)
-  margin-right: 1rem;               // 画像と名前の間に余白を追加
-  object-fit: cover;
+  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径)
 }
 
 // ユーザー名とグループ名のスタイル
 .post-user-name, .post-group-name {
+  flex: 0 0 70%;                      // flex-grow:0(広がらない),flex-shrink:0(縮まない).flex-basis:60%(幅)
   font-weight: bold;
-  font-size: 1rem;
-  white-space: nowrap;              // 折り返しなし
-  overflow: hidden;                 // はみ出した部分を非表示
-  text-overflow: ellipsis;          // 省略記号(...)を表示
+  font-size: var(--homes-top-font-base);
+  text-align: left;
+  white-space: nowrap;                // 折り返しなし
+  overflow: hidden;                   // はみ出した部分を非表示
+  text-overflow: ellipsis;            // 省略記号(...)を表示
+  padding-left: 1rem;
+  box-sizing: border-box;             // paddingを要素のサイズに含める;
 }
 
 // 投稿タイトルに使用するタグの設定
 .post-body {
-  max-width: 250px;                 // タイトルの最大幅を設定
-  white-space: nowrap;              // 折り返しなし
-  overflow: hidden;                 // はみ出した部分を非表示
-  text-overflow: ellipsis;          // 省略記号(...)を表示
+  max-width: 100%;                    // タイトルの最大幅を設定
+  white-space: nowrap;                // 折り返しなし
+  overflow: hidden;                   // はみ出した部分を非表示
+  text-overflow: ellipsis;            // 省略記号(...)を表示
 }
 
 // 投稿タイトルタグの設定
 .post-title {
-  font-size: 1.25rem;
+  font-size: var(--homes-top-font-post-title);
   font-weight: bold;
-  white-space: nowrap;              // タイトルが長い場合に折り返さない
-  text-overflow: ellipsis;          // 長すぎる場合に省略記号
-  max-width: 250px;                 // タイトルの最大幅を設定
-  overflow: hidden;                 // ボックスを超えた部分を隠す
-  text-align: center;               // テキストを左右中央揃え
-  line-height: 1.5;                 // 行の高さを指定
+  white-space: nowrap;                // タイトルが長い場合に折り返さない
+  text-overflow: ellipsis;            // 長すぎる場合に省略記号
+  width: 100%;
+  overflow: hidden;                   // ボックスを超えた部分を隠す
+  text-align: center;                 // テキストを左右中央揃え
+  line-height: 1.5;                   // 行の高さを指定
   padding: 0 1rem;
   margin-bottom: 0;
+  box-sizing: border-box;             // paddingを要素のサイズに含める
 }
 
 // 投稿画像の設定
 .post-image {
   display: block;
-  margin: 1rem auto;                // 左右中央揃え、上下側に余白
+  margin: 1rem auto;                  // 左右中央揃え、上下側に余白
   border-radius: 8px;
-  max-width: 100%;                  // 親要素を超えないように最大幅を設定
+  max-width: 100%;                    // 親要素を超えないように最大幅を設定
   object-fit: cover;
 }
 
 // 投稿日時に使用するタグの設定
 .post-footer {
   padding: 1rem;
-  font-size: 0.875rem;
+  font-size: var(--homes-top-font-post-date);
   text-align: center;
 }
 // レスポンシブ調整
 @media (min-width: 1024px) {
   .box-link {
-    width: calc(20% - 2rem);        // 5つ並べる
+    width: calc(20% - 2rem);          // 5つ並べる
   }
 }
 
 @media (max-width: 1024px) {
   .box-link {
-    width: calc(33.33% - 2rem);     // 3つ並べる
+    width: calc(33.33% - 2rem);       // 3つ並べる
   }
 }
 @media (max-width: 768px) {
+  :root {
+    --homes-top-font-title-notice: 1.8rem;
+    --homes-top-font-title: 1.8rem;
+    --homes-top-font-scrollable-title: 1.1rem;
+    --homes-top-font-scrollable-text: 1.0rem;
+    --homes-top-font-scrollable-date: 0.9rem;
+    --homes-top-font-post-title: 1.1rem;
+    --homes-top-font-base: 0.9rem;
+    --homes-top-font-post-date: 0.7rem;
+  }
+  
   .box-link {
     width: calc(50% - 2rem);        // 2つ並べる
   }
+
+  .image-container-notice .notice-title {
+    position: absolute;
+    top: 20%;
+  }
+    
+  .image-container-notice .scrollable-box {
+    position: absolute;
+    top: 30%;
+    height: 32%;
+  }
 }
 @media (max-width: 480px) {
+  :root {
+    --homes-top-font-title-notice: 0.7rem;
+    --homes-top-font-title: 0.9rem;
+    --homes-top-font-scrollable-title: 0.5rem;
+    --homes-top-font-scrollable-text: 0.4rem;
+    --homes-top-font-scrollable-date: 0.4rem;
+    --homes-top-font-post-title: 0.8rem;
+    --homes-top-font-base: 0.7rem;
+    --homes-top-font-post-date: 0.6rem;
+  }
+    
+  .image-container-notice {
+      height: 200px;
+
+    .notice-title {
+      position: absolute;
+      top: 12%;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+    }
+    .scrollable-box {
+      position: absolute;
+      top: 24%;
+      left: 10%;
+      width: 74%;
+    }
+    .scrollable-box-title {
+      margin-left: 0.5rem;
+    }
+  }
+
+  .image-container-title{
+    .title-display-box.user-post, 
+    .title-display-box.group-post, 
+    .title-display-box.likes {
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+    }
+  }
+
   .box-link {
-    width: 100%;                    // 1つ並べる
+    width: 100%;        // 1つのみ
   }
 }

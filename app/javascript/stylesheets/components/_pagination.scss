@@ -8,7 +8,7 @@
   margin: 1.5rem 0;
 }
 
-// 通常ページリンク（共通）
+// 通常ページリンク(共通)
 .pagination span.page,
 .pagination span.first,
 .pagination span.prev,
@@ -37,7 +37,7 @@
   pointer-events: none;
 }
 
-// ホバー時（.currentを除くすべて）
+// ホバー時(.currentを除くすべて)
 .pagination span.page:hover:not(.current),
 .pagination span.first:hover,
 .pagination span.prev:hover,
