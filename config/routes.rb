@@ -153,11 +153,5 @@ Rails.application.routes.draw do
           path: 'post_comments', as: :post_comments, concerns: [:admin_reactivatable, :admin_publishable]
       end
     end
-
-    # DM機能(フレンド同士)
-    resources :dm_rooms, only: [:index, :show, :destroy] do
-      resources :messages, only: [:destroy]
-    end
-
   end
 end  
