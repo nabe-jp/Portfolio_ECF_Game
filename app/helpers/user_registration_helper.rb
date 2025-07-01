@@ -1,4 +1,3 @@
-# app/helpers/user_registration_helper.rb
 module UserRegistrationHelper
   def set_edit_form_type(params)
     if params[:profile]
