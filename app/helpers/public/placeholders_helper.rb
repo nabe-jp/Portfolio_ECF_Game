@@ -1,5 +1,4 @@
 module Public::PlaceholdersHelper
-
   # --- アドミン、ユーザー共通 ---
   def email_placeholder
     "sample@example.com"

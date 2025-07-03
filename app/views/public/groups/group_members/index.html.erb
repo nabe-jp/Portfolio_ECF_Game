@@ -1,12 +1,13 @@
 <div class="d-flex align-items-center justify-content-between mb-2">
-  <div class="d-flex align-items-center">
+  <div class="group-members__title-wrapper">
     <h2 class="group-members__page-title">メンバー一覧</h2>
-    <h4 class="mb-0 ml-3">
-      <span class="badge badge-secondary"><%= @group.active_members.size %>人</span>
-    </h4>
+    <span class="badge badge-secondary badge-wrapper"><%= @group.active_members.size %>人</span>
   </div>
   <% if group_moderator? %>
-    <%= link_to '参加申請一覧', group_memberships_path(@group), class: 'btn btn-primary' %>
+    <div class="group-members__title-wrapper">
+      <%= link_to '参加申請一覧', group_memberships_path(@group), 
+        class: 'btn btn-primary btn-sm btn-wrapper' %>
+    </div>
   <% end %>
 </div>
 

@@ -417,6 +417,23 @@
 }
 
 /*  group-members  */
+.group-members__title-wrapper {
+  display: flex;
+  align-items: center;
+
+  .badge-wrapper,
+  .btn-wrapper {
+    display: inline-flex;
+    align-items: center;
+    margin: 0.5rem 0 1.5rem;          // group-members__page-titleと合わせる為のマージン  
+  }
+
+  .badge-wrapper {
+    font-size: 1.25rem;               // このページで使っているほかのバッジと同じ大きさ(h4相当)
+    margin-left: 0.75rem;
+  }
+}
+
 .group-members__section-divider {
   height: 12px;
   background-color: green;

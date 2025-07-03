@@ -1,5 +1,4 @@
 module Public::SessionsHelper
-  
   # パスワードの最小文字数を表示するためのヘルパーメソッド
   def minimum_password_length_message(minimum_length)
     if minimum_length.nil? || minimum_length.to_s.strip.empty?    # 空、nilの場合は初期値を設定し管理者に通知
