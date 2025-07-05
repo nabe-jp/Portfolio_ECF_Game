@@ -327,13 +327,17 @@
 @media (max-width: 480px) {
   :root {
     --homes-top-font-title-notice: 0.7rem;
-    --homes-top-font-title: 0.9rem;
+    --homes-top-font-title: 1.1rem;
     --homes-top-font-scrollable-title: 0.5rem;
     --homes-top-font-scrollable-text: 0.4rem;
     --homes-top-font-scrollable-date: 0.4rem;
     --homes-top-font-post-title: 0.8rem;
     --homes-top-font-base: 0.7rem;
     --homes-top-font-post-date: 0.6rem;
+  }
+
+  .space-between-bottom {
+    margin-bottom: 2rem;
   }
     
   .image-container-notice {
@@ -346,9 +350,11 @@
     }
     .scrollable-box {
       position: absolute;
-      top: 24%;
-      left: 10%;
-      width: 74%;
+      top: 25%;
+      left: 22%;
+      width: 52%;
+      height: 42%;
+      padding-top: 0;
     }
     .scrollable-box-title {
       margin-left: 0.5rem;
@@ -362,8 +368,40 @@
       text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
     }
   }
-
+  
   .box-link {
     width: 100%;        // 1つのみ
+  }
+}
+// max-width: 375pxでは管理者ツールで375にしても適応しないため376に設定
+@media (max-width: 376px) {
+  :root {
+    --homes-top-font-scrollable-title: 0.4rem;
+    --homes-top-font-scrollable-text: 0.375rem;
+    --homes-top-font-scrollable-date: 0.375rem;
+  }
+
+  .image-container-notice {
+    .scrollable-box {
+      position: absolute;
+      top: 26%;
+      left: 18%;
+      width: 61%;
+      height: 40%;
+    }
+  }
+}
+@media (max-width: 320px) {
+  :root {
+    --homes-top-font-title: 0.9rem;
+  }
+    
+  .image-container-notice {
+    .scrollable-box {
+      position: absolute;
+      top: 27%;
+      left: 10%;
+      width: 72%;
+    }
   }
 }
