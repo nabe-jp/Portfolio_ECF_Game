@@ -3,7 +3,7 @@
     <%= link_to group_post_path(post.group, post.id), class: "box-link" do %>
       <!-- 投稿ヘッダー: グループ画像とグループ名 -->
       <div class="post-header">
-        <%= image_tag(post.group.group_image, size: "40x33", class: "group-image") %>
+        <%= image_tag(post.group.group_image, class: "group-image") %>
         <strong class="post-group-name"><%= post.group.name %></strong>
       </div>
 
@@ -12,7 +12,7 @@
         <h5 class="post-title">
           <%= post.title %>
         </h5>
-        <%= image_tag(post.group_post_image, size: "100x100", class: "post-image") %>
+        <%= image_tag(post.group_post_image, class: "post-image") %>
       </div>
 
       <!-- 投稿日時 -->
@@ -29,7 +29,7 @@
         <div class="dummy-header">
           <strong>投稿はありません</strong>
          </div>
-        <%= image_tag("card/#{dummy_image}.png", size: "120x180", class: "post-image") %>
+        <%= image_tag("card/#{dummy_image}.png", class: "dummy-image") %>
       </div>
     <% end %>
   <% end %>

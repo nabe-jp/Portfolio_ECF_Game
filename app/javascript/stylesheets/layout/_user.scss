@@ -141,7 +141,7 @@
 @media (max-width: 768px) {
   .mypage__container {
     flex-direction: column;           // 縦並びに変更
-    align-items: center;              // 中央揃え
+    align-items: center;              // 縦方向の中央揃え
   }
   // 左右のボックスの設定
   .mypage__container-left-column, .mypage__container-right-column {

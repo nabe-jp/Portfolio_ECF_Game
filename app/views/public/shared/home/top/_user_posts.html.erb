@@ -3,7 +3,7 @@
     <%= link_to user_post_path(post.user.id, post), class: "box-link" do %>
       <!-- 投稿ヘッダー: ユーザー画像とニックネーム -->
       <div class="post-header">
-        <%= image_tag(post.user.profile_image, size: "40x40", class: "user-image") %>
+        <%= image_tag(post.user.profile_image, class: "user-image") %>
         <strong class="post-user-name"><%= post.user.nickname %></strong>
       </div>
 
@@ -12,7 +12,7 @@
         <h5 class="post-title">
           <%= post.title %>
         </h5>
-        <%= image_tag(post.user_post_image, size: "100x100", class: "post-image") %>
+        <%= image_tag(post.user_post_image, class: "post-image") %>
       </div>
 
       <!-- 投稿日時 -->
@@ -29,7 +29,7 @@
         <div class="dummy-header">
           <strong>投稿はありません</strong>
          </div>
-        <%= image_tag("card/#{dummy_image}.png", size: "120x180", class: "post-image") %>
+        <%= image_tag("card/#{dummy_image}.png", class: "dummy-image") %>
       </div>
     <% end %>
   <% end %>

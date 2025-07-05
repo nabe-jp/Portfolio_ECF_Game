@@ -16,8 +16,8 @@
   margin: 0 auto;                     // 左右のマージンを自動にして中央寄せ
   display: flex;
   flex-direction: column;             // 縦並びにする
-  justify-content: center;            // 縦方向の中央揃え
-  align-items: center;                // 横方向の中央揃え
+  justify-content: center;            // 横方向の中央揃え
+  align-items: center;                // 縦方向の中央揃え
   background-size: contain;           // 画像は縦横比を維持して全体が収まる
   background-position: center;        // 背景画像の表示位置を中央に配置
   background-repeat: no-repeat;       // 繰り返さず1枚だけ表示
@@ -64,6 +64,14 @@
     display: none;
     width: 0px;
     height: 0px;
+  }
+
+  // お知らせ内容のボックス(お知らせごとに余白、最後のみ余白なし)
+  .scrollable-box-info-item {
+    margin-bottom: 1.5rem;
+  }
+  .scrollable-box-info-item:last-child {
+    margin-bottom: 0;
   }
 
   // スクロールボックス内テキストスタイルの共通設定
@@ -121,8 +129,8 @@
     width: 83%;                       // 横幅はimage-container-titleの画像の中身と同一
     height: 41%;                      // 高さはimage-container-titleの画像の中身と同一
     display: flex;
-    justify-content: center;          // 縦方向の中央揃え
-    align-items: center;              // 横方向の中央揃え
+    justify-content: center;          // 横方向の中央揃え
+    align-items: center;              // 縦方向の中央揃え
     overflow: hidden;                 // 画像がはみ出さないように設定
     padding: 0 10px;
     box-sizing: border-box;
@@ -156,7 +164,6 @@
   flex-wrap: wrap;                    // 要素がはみ出さないように折り返し
   justify-content: space-between;     // 横方向に均等に配置
   width: 100%;
-  gap: 0.75rem;                       // 投稿間の隙間(間隔)
   padding: 0.75rem;
   box-sizing: border-box;             // paddingを要素のサイズに含める
 }
@@ -165,13 +172,12 @@
 .box-link {
   display: flex;                      // ボックス全体をリンクとして表示
   flex-direction: column;             // 子要素を縦に並べる
-  align-items: center;                // 横方向中央揃え
-  justify-content: center;            // 縦方向中央揃え
-  width: calc(20% - 1rem);            // ボックス幅を縮小して5つ並べる
+  align-items: center;                // 縦方向中央揃え
+  justify-content: center;            // 横方向中央揃え
+  width: calc(20% - 2rem);            // ボックス幅を縮小して5つ並べる
   border: 1px solid #ddd;           // ボーダー
   border-radius: 16px;                // 角を丸く
   overflow: hidden;                   // 内容がはみ出さないようにする
-  margin-bottom: 1rem;
   box-sizing: border-box;             // paddingを要素のサイズに含める
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #8FA3B8;
@@ -204,13 +210,14 @@
 // 投稿のヘッダーに使用するタグの設定
 .post-header {
   display: flex;                      // フレックスで横並び
-  align-items: center;                // 横方向中央揃え
-  justify-content: center;            // 縦方向中央揃え
+  align-items: center;                // 縦方向中央揃え
+  justify-content: center;            // 横方向中央揃え
 }
 
 // ダミー画像で使用するタグの設定
 .dummy-header {
   text-align: center;
+  padding: 0 0.5rem 2rem;
   font-size: var(--homes-top-font-base);
   color: #ffffff;
   background-color: #28b379;
@@ -226,11 +233,15 @@
 
 // ユーザー画像のスタイル
 .user-image {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;                 // 円形のユーザー画像
 }
 
 // グループ画像のスタイル
 .group-image {
+  width: 40px;
+  height: 33.33px;
   border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径)
 }
 
@@ -265,18 +276,29 @@
   overflow: hidden;                   // ボックスを超えた部分を隠す
   text-align: center;                 // テキストを左右中央揃え
   line-height: 1.5;                   // 行の高さを指定
-  padding: 0 1rem;
-  margin-bottom: 0;
+  padding: 0 1rem 1rem;
   box-sizing: border-box;             // paddingを要素のサイズに含める
+}
+
+// 投稿画像とダミー画像の共通設定
+.post-image, 
+.dummy-image {
+  display: block;
+  max-width: 100%;                    // 親要素を超えないように最大幅を設定
+  width: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 1rem auto;                  // 左右中央揃え、上下側に余白
 }
 
 // 投稿画像の設定
 .post-image {
-  display: block;
-  margin: 1rem auto;                  // 左右中央揃え、上下側に余白
-  border-radius: 8px;
-  max-width: 100%;                    // 親要素を超えないように最大幅を設定
-  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+// ダミー画像の設定
+.dummy-image {
+  aspect-ratio: 1 / 1.4;
 }
 
 // 投稿日時に使用するタグの設定
@@ -285,55 +307,180 @@
   font-size: var(--homes-top-font-post-date);
   text-align: center;
 }
-// レスポンシブ調整
-@media (min-width: 1024px) {
-  .box-link {
-    width: calc(20% - 2rem);          // 5つ並べる
-  }
-}
 
+// レスポンシブ調整
 @media (max-width: 1024px) {
-  .box-link {
-    width: calc(33.33% - 2rem);       // 3つ並べる
-  }
-}
-@media (max-width: 768px) {
   :root {
-    --homes-top-font-title-notice: 1.8rem;
-    --homes-top-font-title: 1.8rem;
-    --homes-top-font-scrollable-title: 1.1rem;
-    --homes-top-font-scrollable-text: 1.0rem;
-    --homes-top-font-scrollable-date: 0.9rem;
-    --homes-top-font-post-title: 1.1rem;
-    --homes-top-font-base: 0.9rem;
-    --homes-top-font-post-date: 0.7rem;
+    --homes-top-font-title-notice: 1.4rem;
+    --homes-top-font-title: 1.2rem;
+    --homes-top-font-scrollable-title: 1rem;
+    --homes-top-font-scrollable-text: 0.9rem;
+    --homes-top-font-scrollable-date: 0.8rem;
+    --homes-top-font-post-title: 0.8rem;
+    --homes-top-font-base: 0.6rem;
+    --homes-top-font-post-date: 0.5rem;
+  }
+
+  .image-container-notice {
+    height: 550px;
+    max-width: 550px;
+
+    .notice-title {
+      text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 1);
+    }
+  }
+
+  .image-container-title{
+    max-width: 250px;
+
+    .title-display-box.user-post, 
+    .title-display-box.group-post, 
+    .title-display-box.likes {
+      text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 1);
+    }
+  }
+
+  .box-link {
+    width: calc(20% - 1rem);
+    border-radius: 13px;
+  }
+
+  .post-header, 
+  .post-footer {
+    padding: 0.5rem;
+  }
+
+  .dummy-header {
+    padding-bottom: 1rem;
+  }
+
+  .user-image {
+    width: 28.44px;
+    height: 28.44px;
+  }
+
+  .group-image {
+    width: 28.44px;
+    height: 23.71px;
   }
   
-  .box-link {
-    width: calc(50% - 2rem);        // 2つ並べる
+  .post-user-name, 
+  .post-group-name {
+    padding-left: 0.5rem;
   }
 
-  .image-container-notice .notice-title {
-    position: absolute;
-    top: 20%;
+  .post-title {
+    padding: 0 0.5rem 0.5rem;
   }
-    
-  .image-container-notice .scrollable-box {
-    position: absolute;
-    top: 30%;
-    height: 32%;
+
+  .post-image, 
+  .dummy-image {
+    margin: 0.5rem auto;
+    border-radius: 7px;
+  }
+
+  .post-image {
+    width: 71.11px;
+  }
+
+  .dummy-image {
+    width: 71.11px;
   }
 }
+
+@media (max-width: 768px) {
+  :root {
+    --homes-top-font-title-notice: 1.1rem;
+    --homes-top-font-title: 1rem;
+    --homes-top-font-scrollable-title: 0.8rem;
+    --homes-top-font-scrollable-text: 0.7rem;
+    --homes-top-font-scrollable-date: 0.6rem;
+    --homes-top-font-post-title: 0.7rem;
+    --homes-top-font-base: 0.5rem;
+    --homes-top-font-post-date: 0.4rem;
+  }
+
+  .image-container-notice {
+    height: 400px;
+    max-width: 400px;
+
+    .notice-title {
+      position: absolute;
+      top: 12%;
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+    }
+    
+    .scrollable-box-info-item {
+      margin-bottom: 1rem;
+    }
+
+    .scrollable-box {
+      position: absolute;
+      top: 26%;
+      left: 16%;
+      width: 65%;
+      height: 38%;
+      padding-top: 0;
+    }
+  }
+
+  .image-container-title{
+    max-width: 200px;
+
+    .title-display-box.user-post, 
+    .title-display-box.group-post, 
+    .title-display-box.likes {
+      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+    }
+  }
+
+  .posts-container {
+    padding: 0;
+  }
+
+  .box-link {
+    width: calc(20% - 0.5rem);
+    border-radius: 8px;
+  }
+
+  .user-image {
+    width: 21.33px;
+    height: 21.33px;
+  }
+
+  .group-image {
+    width: 21.33px;
+    height: 17.78px;
+  }
+
+  .post-image, 
+  .dummy-image {
+    border-radius: 6px;
+  }
+
+  .post-image {
+    width: 53.33px;
+  }
+
+  .dummy-image {
+    width: 53.33px;
+  }
+}
+
 @media (max-width: 480px) {
   :root {
-    --homes-top-font-title-notice: 0.7rem;
-    --homes-top-font-title: 1.1rem;
-    --homes-top-font-scrollable-title: 0.5rem;
-    --homes-top-font-scrollable-text: 0.4rem;
-    --homes-top-font-scrollable-date: 0.4rem;
-    --homes-top-font-post-title: 0.8rem;
-    --homes-top-font-base: 0.7rem;
-    --homes-top-font-post-date: 0.6rem;
+    --homes-top-font-title-notice: 0.6rem;
+    --homes-top-font-title: 0.5rem;
+    --homes-top-font-scrollable-title: 0.4rem;
+    --homes-top-font-scrollable-text: 0.3rem;
+    --homes-top-font-scrollable-date: 0.3rem;
+    --homes-top-font-post-title: 0.4rem;
+    --homes-top-font-base: 0.3rem;
+    --homes-top-font-post-date: 0.2rem;
+  }
+
+  .col-12 {
+    padding: 0;
   }
 
   .space-between-bottom {
@@ -342,19 +489,22 @@
     
   .image-container-notice {
       height: 200px;
+      max-width: 200px;
 
     .notice-title {
       position: absolute;
-      top: 12%;
-      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+      text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 1);
     }
+
+    .scrollable-box-info-item {
+      margin-bottom: 0.5rem;
+    }
+
     .scrollable-box {
       position: absolute;
-      top: 25%;
-      left: 22%;
-      width: 52%;
-      height: 42%;
-      padding-top: 0;
+      top: 26%;
+      left: 14%;
+      width: 67%;
     }
     .scrollable-box-title {
       margin-left: 0.5rem;
@@ -362,46 +512,159 @@
   }
 
   .image-container-title{
+    max-width: 100px;
+
     .title-display-box.user-post, 
     .title-display-box.group-post, 
     .title-display-box.likes {
-      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+      text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 1);
     }
   }
   
   .box-link {
-    width: 100%;        // 1つのみ
+    width: calc(20% - 0.25rem);
+    border-radius: 5px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  }
+
+  .post-header, 
+  .post-footer {
+    padding: 0.25rem;
+  }
+
+  .dummy-header {
+    padding: 0 0.25rem 0.5rem;
+  }
+
+  .user-image {
+    width: 13.33px;
+    height: 13.33px;
+  }
+
+  .group-image {
+    width: 13.33px;
+    height: 11.11px;
+  }
+
+  .post-user-name, 
+  .post-group-name {
+    padding-left: 0.25rem;
+    line-height: 1; 
+  }
+  
+  h5 {
+    margin-bottom: 0;
+  }
+
+  .post-title {
+    padding: 0 0.25rem 0.25rem;
+  }
+
+  .post-image, 
+  .dummy-image {
+    margin: 0.25rem auto;
+    border-radius: 4px;
+  }
+    
+  .post-image {
+    width: 33.33px;
+  }
+
+  .dummy-image {
+    width: 33.33px;
   }
 }
-// max-width: 375pxでは管理者ツールで375にしても適応しないため376に設定
+
 @media (max-width: 376px) {
   :root {
-    --homes-top-font-scrollable-title: 0.4rem;
-    --homes-top-font-scrollable-text: 0.375rem;
-    --homes-top-font-scrollable-date: 0.375rem;
+    --homes-top-font-title-notice: 0.5rem;
+    --homes-top-font-title: 0.5rem;
+    --homes-top-font-scrollable-title: 0.35rem;
+    --homes-top-font-post-title: 0.375rem;
+  }
+
+  .user-image {
+    width: 10.42px;
+    height: 10.42px;
+  }
+
+  .group-image {
+    width: 10.42px;
+    height: 8.68px;
+  }
+
+  .dummy-header {
+    padding: 0 0.1rem 0.5rem;
+  }
+    
+  .post-image {
+    width: 26.04px;
+  }
+
+  .dummy-image {
+    width: 26.04px;
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --homes-top-font-title-notice: 0.5rem;
+    --homes-top-font-title: 0.375rem;
+    --homes-top-font-post-title: 0.275rem;
+    --homes-top-font-base: 0.25rem;
+    --homes-top-font-post-date: 0.175rem;
+  }
+  
+  .space-between-bottom {
+    margin-bottom: 1rem;
   }
 
   .image-container-notice {
-    .scrollable-box {
-      position: absolute;
-      top: 26%;
-      left: 18%;
-      width: 61%;
-      height: 40%;
+    .scrollable-box-info-item {
+      margin-bottom: 0.25rem;
     }
   }
-}
-@media (max-width: 320px) {
-  :root {
-    --homes-top-font-title: 0.9rem;
+
+  .image-container-title{
+    max-width: 80px;
+  }
+
+  .post-header {
+    padding-bottom: 0.1rem;
+  }
+
+  .user-image {
+    width: 8.89px; 
+    height: 8.89px; 
+  }
+
+  .group-image {
+    width: 8.89px;
+    height: 7.41px;
+  }
+  
+  .post-user-name, 
+  .post-group-name {
+    padding-left: 0.1rem;
+  }
+
+  .post-title {
+    padding-bottom: 0.1rem;
+  }
+
+  .dummy-header {
+    padding-bottom: 0.1rem;
   }
     
-  .image-container-notice {
-    .scrollable-box {
-      position: absolute;
-      top: 27%;
-      left: 10%;
-      width: 72%;
-    }
+  .post-image {
+    width: 22.22px;
+  }
+
+  .dummy-image {
+    width: 22.22px;
+  }
+
+  .post-footer {
+    padding-top: 0.1rem;
   }
 }

@@ -1,6 +1,9 @@
 @use 'base/bootstrap';
 @use 'base/reset';
 @use 'base/empty-message';
+@use 'utils/variables';
+@use 'utils/spacing';
+@use 'utils/utilities';
 @use 'components/buttons';
 @use 'components/forms';
 @use 'components/pagination';
@@ -17,6 +20,3 @@
 @use 'layout/search';
 @use 'layout/group';
 @use 'layout/admin';
-@use 'utils/variables';
-@use 'utils/spacing';
-@use 'utils/utilities';
