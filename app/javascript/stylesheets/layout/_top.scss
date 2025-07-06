@@ -575,6 +575,7 @@
   }
 }
 
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
   :root {
     --homes-top-font-title-notice: 0.5rem;

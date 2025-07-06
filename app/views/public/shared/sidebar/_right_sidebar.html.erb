@@ -1,6 +1,6 @@
-<div class="sidebar-links">
-  <h5>投稿</h5>
-  <ul class="list-unstyled">
+<div class="sidebar__section">
+  <div class="sidebar__title">投稿</div>
+  <ul class="sidebar__links">
     <li><%= render "public/shared/link/links", all_posts_index: true %></li>
 
     <li><%= render "public/shared/link/links", posts_index: true %></li>
@@ -12,8 +12,8 @@
 
   <% if user_signed_in? && @group&.id && 
     @group.active_group_memberships.exists?(user_id: current_user.id) %>
-    <h5 class="mt-5">グループ</h5>
-    <ul class="list-unstyled">
+    <div class="sidebar__title">グループ</div>
+    <ul class="sidebar__links">
       <li><%= render "public/shared/link/links", dashboard_group: true %></li>
 
       <li><%= render "public/shared/link/links", group_member: true %></li>

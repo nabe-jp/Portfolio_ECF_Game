@@ -1,39 +1,200 @@
 /*    サイドバーの設定    */
-// サイドバーの共通設定 
-.sidebar {
-  background-color: #4f4f4f;
-  height: 100vh;
-  width: var(--sidebar-width);
-  position: fixed;                   // 画面上の固定位置に要素を配置
-  top: var(--header-height); 
-  z-index: 998;                      // 前面に出す
+:root {
+  --sidebar-left-font-title: 1.2rem;
+  --sidebar-left-font-link: 0.9rem;
 }
 
-// 左サイドバータグの設定
-.sidebar-left {
+// サイドバーの共通設定 
+.sidebar {
+  position: fixed;                      // 画面上の固定位置に要素を配置
+  top: var(--header-height); 
+  width: var(--sidebar-width);
+  height: 100vh;
+  background-color: #4f4f4f;
+  z-index: 998;                         // 前面に出す
+}
+
+// 左右共通の設定
+.sidebar-left, 
+.sidebar-right {
   color: #33AADD;
+}
+
+// 左サイドバーの設定(.sidebarと同じdiv内で定義、.sidebarにpositionがあるためここでは不要)
+.sidebar-left {
   left: 0;
 }
 
-// 右サイドバータグの設定
+// 右サイドバーの設定(.sidebarと同じdiv内で定義、.sidebarにpositionがあるためここでは不要)
 .sidebar-right {
-  color: #33AADD;
   right: 0;
 }
 
-.sidebar-links {
-  width: var(--sidebar-width);
-  padding: 0.75rem;
+// サイドバーの大枠の設定
+.sidebar__section {
+  width: 100%;
+  padding: 0.5rem;
+  box-sizing: border-box;             // paddingやボーダーを要素のサイズに含める
   overflow: hidden;
-  box-sizing: border-box;           // paddingを含めてwidth/heightを計算
 }
 
-.sidebar-links h5,
-.sidebar-links h6,
-.sidebar-links a {
-  display: block;                   // 幅を指定しやすく、縦に積む
+// サイドバー内の文字の共通設定
+.sidebar__title, 
+.sidebar__links a {
+  display: block;                     // 幅を指定しやすく、縦に積む
   max-width: 100%;
-  white-space: nowrap;              // 折り返さず1行で表示 
-  overflow: hidden;                 // はみ出した部分は見せない
-  text-overflow: ellipsis;          // はみ出したら末尾に...を表示
+  white-space: nowrap;                // 折り返さず1行で表示 
+  overflow: hidden;                   // はみ出した部分は見せない
+  text-overflow: ellipsis;            // はみ出したら末尾に...を表示
+}
+
+// サイドバー内のタイトルの設定
+.sidebar__title {
+  font-size: var(--sidebar-left-font-title);
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+// サイドバー内のリンクボックスの設定
+.sidebar__links {
+  width: 100%;
+  list-style: none;                   // デザイン調整のためマーカーを消す
+
+  li {
+    width: 100%;
+    padding-left: 0.5rem;
+    box-sizing: border-box;           // paddingやボーダーを要素のサイズに含める
+    border-radius: 4px;
+    
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.4);
+      
+      a {
+        color: #66ff66;
+        text-decoration: underline;   // ボックスをホバーした時にも文字に下線を表示
+        text-decoration-color: #9933cc;// 下線の色
+        text-underline-offset: 2px;   // 文字と下線の距離(余白)
+      }
+    }
+  }
+
+  a {
+    font-size: var(--sidebar-left-font-link);
+    text-decoration: none;            // li:hover 時に下線を制御するため、デフォルトの下線を削除
+  }
+}
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-left-font-title: 0.85rem;
+    --sidebar-left-font-link: 0.7rem;
+  }
+
+  .sidebar__title {
+    margin-bottom: 0.15rem;
+  }
+
+  .sidebar__section ul {
+    margin-bottom: 0.75rem;
+  }
+
+  .sidebar__links li {
+    padding-left: 0.2rem;
+    border-radius: 3px;
+  }
+
+  .sidebar__links li:hover a,
+  .sidebar__links li:focus a {
+    text-underline-offset: 1.75px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --sidebar-left-font-title: 0.65rem;
+    --sidebar-left-font-link: 0.5rem;
+  }
+
+  .sidebar__section {
+    padding: 0.25rem;
+  }
+
+  .sidebar__section ul {
+    margin-bottom: 0.5rem;
+  }
+
+  .sidebar__title {
+    margin-bottom: 0.1rem;
+  }
+
+  .sidebar__links li {
+    padding-left: 0.15rem;
+    border-radius: 2px;
+  }
+
+  .sidebar__links li:hover a,
+  .sidebar__links li:focus a {
+    text-underline-offset: 1.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --sidebar-left-font-title: 0.4rem;
+    --sidebar-left-font-link: 0.275rem;
+  }
+
+  .sidebar__section {
+    padding: 0.15rem;
+  }
+
+  .sidebar__section ul {
+    margin-bottom: 0.25rem;
+  }
+
+  .sidebar__links li {
+    padding-left: 0.1rem;
+    border-radius: 1px;
+  }
+
+  .sidebar__links li:hover a,
+  .sidebar__links li:focus a {
+    text-underline-offset: 0.5px;
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  :root {
+    --sidebar-left-font-title: 0.3rem;
+    --sidebar-left-font-link: 0.25rem;
+  }
+
+  .sidebar__title {
+    margin-bottom: 0.05rem;
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --sidebar-left-font-link: 0.225rem;
+  }
+
+  .sidebar__section {
+    padding: 0.1rem;
+  }
+
+  .sidebar__section ul {
+    margin-bottom: 0.15rem;
+  }
+
+  .sidebar__title {
+    margin-bottom: 0.01rem;
+  }
+
+  .sidebar__links li {
+    padding-left: 0.05rem;
+  }
 }

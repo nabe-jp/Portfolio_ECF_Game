@@ -46,16 +46,16 @@
     <% end %>
 
   <% elsif defined?(new_post) && new_post %>
-    <%= link_to '投稿の作成', new_user_post_path(current_user), 
+    <%= link_to '投稿作成', new_user_post_path(current_user), 
       class: (is_button ? 'btn btn-base new-post-btn' : nil) %>
 
   <% elsif defined?(check_poster_profile) && check_poster_profile && 
     @user&.id && (@user_post&.id || !@user_posts.nil?) %>
-    <%= link_to '投稿者のプロフィール', show_user_path(@user), 
+    <%= link_to '投稿者プロフィール', show_user_path(@user), 
       class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
 
   <% elsif defined?(check_poster_profile) && check_poster_profile && @group_post&.id %>
-    <%= link_to '投稿者のプロフィール', show_user_path(@group_post.member.user), 
+    <%= link_to '投稿者プロフィール', show_user_path(@group_post.member.user), 
       class: (is_button ? 'btn btn-base check-profile-btn' : nil) %>
 
   <% elsif defined?(group_hosting_post) && group_hosting_post && @group_post&.id %>
@@ -93,7 +93,7 @@
         class: (is_button ? 'btn btn-base' : nil) %>
 
     <% elsif defined?(new_group_post) && new_group_post %>
-      <%= link_to "グループ内投稿の作成", new_group_post_path(@group), 
+      <%= link_to "グループ内投稿作成", new_group_post_path(@group), 
         class: (is_button ? 'btn btn-base' : nil) %>
     <% end %>
   <% end %>

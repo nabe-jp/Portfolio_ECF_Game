@@ -1,14 +1,14 @@
-<div class="sidebar-links">
-  <h5>ナビゲーション</h5>
-  <ul class="list-unstyled">
+<div class="sidebar__section">
+  <div class="sidebar__title">ナビゲーション</div>
+  <ul class="sidebar__links">
     <li><%= render "public/shared/link/links", home: true %></li>
     
     <li><%= render "public/shared/link/links", back: true %></li>
   </ul>
 
   <% if user_signed_in? %>
-    <h5 class="mt-5">マイメニュー</h5>
-    <ul class="list-unstyled">
+    <div class="sidebar__title">マイメニュー</div>
+    <ul class="sidebar__links">
       <li><%= render "public/shared/link/links", profile_page: true %></li>
 
       <li><%= render "public/shared/link/links", profile_edit: true %></li>
@@ -19,8 +19,8 @@
     </ul>
   <% end %>
 
-  <h5 class="mt-5">コミュニティ</h5>
-  <ul class="list-unstyled">
+  <div class="sidebar__title">コミュニティ</div>
+  <ul class="sidebar__links">
     <li><%= render "public/shared/link/links", groups_index: true %></li>
 
     <li><%= render "public/shared/link/links", my_groups: true %></li>
