@@ -66,9 +66,14 @@ header {
   justify-content: flex-end;        // 右寄せ
 }
 
+// ナビゲーションアイテムの共通設定
+.header__nav-item, 
+.header__nav-item--last {
+  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
+}
+
 // ナビゲーションアイテム
 .header__nav-item {
-  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
   margin-right: 1rem;               // 右に10pxの余白を追加
 }
 
@@ -156,6 +161,7 @@ input[type="radio"]:checked + label {
 // ヘッダーのリンクボタンの設定
 // 通常時
 .header__nav-button {
+  display: inline-block;
   font-size: var(--nav-button-font);
   color: #808080;
   border-color: #808080;
