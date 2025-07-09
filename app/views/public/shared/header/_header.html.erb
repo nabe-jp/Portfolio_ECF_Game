@@ -1,23 +1,23 @@
 <header class="container-fluid">
   <div class="row">
-    <div class="col-2 d-flex justify-content-start offset-1 align-items-center">
+    <div class="col-2 d-flex justify-content-start align-items-center">
       <%= link_to image_tag("logo/logo.png", class: "site-logo"), about_path, class: "logo-link" %>
     </div>
-    <div class="col-6">
-      <% if user_signed_in? %>
-        <%= render 'public/shared/header/global_search' %>                 <!-- 検索フォーム -->
-      <% end %>
-    </div>
-    <div class="col-3">
-      <div class="header__nav-wrapper"> 
+    <% if user_signed_in? %>
+      <div class="col-8">
+        <%= render 'public/shared/header/global_search' %>
+      </div>
+      <div class="col-2 header__nav-wrapper">
         <ul class="nav">
-          <% if user_signed_in? %>                                  <%#-- ユーザーがサインインした場合 --#%>
-            <%= render 'public/shared/header/user_nav' %>
-          <% else %>                                                <%#-- サインインしていない場合 --#%>
-            <%= render 'public/shared/header/no_user_nav' %>
-          <% end %>
+          <%= render 'public/shared/header/user_nav' %>
         </ul>
       </div>
-    </div>
+    <% else %>
+      <div class="col-10 header__nav-wrapper">
+        <ul class="nav">
+          <%= render 'public/shared/header/no_user_nav' %>
+        </ul>
+      </div>
+    <% end %>
   </div>
 </header>

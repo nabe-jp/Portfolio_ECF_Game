@@ -175,6 +175,7 @@
   align-items: center;                // 縦方向中央揃え
   justify-content: center;            // 横方向中央揃え
   width: calc(20% - 2rem);            // ボックス幅を縮小して5つ並べる
+  aspect-ratio: 3 / 5;                // 縦横比を明示的に指定
   border: 1px solid #ddd;           // ボーダー
   border-radius: 16px;                // 角を丸く
   overflow: hidden;                   // 内容がはみ出さないようにする
@@ -217,7 +218,7 @@
 // ダミー画像で使用するタグの設定
 .dummy-header {
   text-align: center;
-  padding: 0 0.5rem 2rem;
+  padding: 1.25rem 0.5rem 2rem;
   font-size: var(--homes-top-font-base);
   color: #ffffff;
   background-color: #28b379;
@@ -351,7 +352,7 @@
   }
 
   .dummy-header {
-    padding-bottom: 1rem;
+    padding: 1rem 0.5rem 1.75rem;
   }
 
   .user-image {
@@ -441,6 +442,10 @@
   .box-link {
     width: calc(20% - 0.5rem);
     border-radius: 8px;
+  }
+
+  .dummy-header {
+    padding: 0.75rem 0.4rem 1.25rem;
   }
 
   .user-image {
@@ -533,7 +538,7 @@
   }
 
   .dummy-header {
-    padding: 0 0.25rem 0.5rem;
+    padding: 0.5rem 0.2rem 0.5rem;
   }
 
   .user-image {
@@ -549,7 +554,7 @@
   .post-user-name, 
   .post-group-name {
     padding-left: 0.25rem;
-    line-height: 1; 
+    line-height: 1.1; 
   }
   
   h5 {
@@ -595,7 +600,7 @@
   }
 
   .dummy-header {
-    padding: 0 0.1rem 0.5rem;
+    padding: 0.2rem 0.1rem 0.3rem;
   }
     
   .post-image {
@@ -634,6 +639,10 @@
     padding-bottom: 0.1rem;
   }
 
+  .dummy-header {
+    padding: 0.05rem 0.05rem 0.05rem;
+  }
+
   .user-image {
     width: 8.89px; 
     height: 8.89px; 
@@ -650,10 +659,6 @@
   }
 
   .post-title {
-    padding-bottom: 0.1rem;
-  }
-
-  .dummy-header {
     padding-bottom: 0.1rem;
   }
     

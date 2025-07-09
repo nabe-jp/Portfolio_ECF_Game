@@ -1,4 +1,11 @@
 /*    ヘッダーの設定    */
+:root {
+  --search-type-font: 1.2rem;
+  --nav-button-font: 1.1rem;
+  --search-word-font: 1rem;
+  --search-button-font: 0.9rem;
+}
+
 // ヘッダーブロックの設定
 header {
   height: var(--header-height);
@@ -79,7 +86,7 @@ header {
 // ラジオボタンのボックスと入力ボックスのボックスの設定
 .search-form__categories,
 .search-form__inputs {
-  justify-content: center;          // 横方向（主軸）中央寄せ
+  justify-content: center;          // 横方向(主軸)中央寄せ
 }
 
 // ラジオボタンの設定
@@ -90,7 +97,7 @@ header {
   margin: 0;
   cursor: pointer;
   color: white;
-  font-size: 1.2rem;
+  font-size: var(--search-type-font);
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
@@ -108,18 +115,23 @@ input[type="radio"]:checked + label {
 
 // 入力ボックスのボックスの設定
 .search-form__inputs {
-  align-items: flex-start;          // 垂直方向に上寄せ
+  align-items: stretch;              // 子要素が同じ高さで上下揃う
 }
 
 // 入力フォームのボックスと検索ボタンのボックスの設定
 .search-form__field-group,
 .search-form__button-wrapper {
-  margin: 0 0.25rem;
+  margin: 0 1.5%;
 }
 
 // 入力フォームのボックスの設定
 .search-form__field-group {
   width: 40%;
+}
+
+// 検索ボタンのボックスの設定
+.search-form__button-wrapper {
+  width: 10%;
 }
 
 // 入力フィールドとボタンの共通
@@ -133,22 +145,18 @@ input[type="radio"]:checked + label {
 .search-form__field,
 .search-form__exclude-field {
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: var(--search-word-font);
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 100%;
   box-sizing: border-box;
 }
 
-// 検索ボタンのボックスの設定
-.search-form__button-wrapper {
-  flex-grow: 1;                     // 残りをすべて使う
-}
-
 /*    ボタンの設定   */
 // ヘッダーのリンクボタンの設定
 // 通常時
 .header__nav-button {
+  font-size: var(--nav-button-font);
   color: #808080;
   border-color: #808080;
 }
@@ -170,6 +178,8 @@ input[type="radio"]:checked + label {
 // 検索ボタン 
 // 通常時
 .search-form__button {
+  width: 100%;
+  font-size: var(--search-button-font);
   color: white;
   border-color: white;
   margin: 0;
@@ -193,4 +203,162 @@ input[type="radio"]:checked + label {
 // フォーカス時
 .search-form__button:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.5);
+}
+
+/* レスポンシブ調整*/
+@media (max-width: 1024px) {
+  .search-form__category {
+    padding: 0.2rem 0.4rem;
+    border-radius: 5px;
+  }
+
+  .search-form__field-group, 
+  .search-form__button-wrapper {
+    margin: 0 1%;
+  }
+
+  .search-form__field-group {
+    width: 40%;
+  }
+
+  .search-form__button-wrapper {
+    width: 14%;
+  }
+
+  // フォーム送信ボタンの設定
+  .btn-base {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --search-type-font: 0.9rem;
+    --nav-button-font: 0.8rem;
+    --search-word-font: 0.7rem;
+    --search-button-font: 0.6rem;
+  }
+
+  .search-form__category {
+    padding: 0.2rem 0.3rem;
+    border-radius: 4px;
+  }
+
+  // ログインボタンの設定
+  .btn {
+    padding: 0.3rem 0.6rem;
+  }
+
+  .search-form__inputs {
+    padding-top: 0.4rem;
+  }
+
+  .search-form__field-group, 
+  .search-form__button-wrapper {
+    margin: 0 1%;
+  }
+
+  .search-form__field-group {
+    width: 40%;
+  }
+
+  .search-form__button-wrapper {
+    width: 10%;
+  }
+
+  .search-form__field, 
+  .search-form__exclude-field, 
+  .search-form__button {
+    height: 22.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --header-height: 10vh;
+    --search-type-font: 0.5rem;
+    --nav-button-font: 0.35rem;
+    --search-word-font: 0.4rem;
+    --search-button-font: 0.4rem;
+  }
+
+  .col-2, 
+  .col-8 {
+    padding: 0;
+  }
+
+  .search-form__category {
+    padding: 0.1rem 0.15rem;
+    border-radius: 2.5px;
+  }
+
+  // ログインボタンの設定
+  .btn {
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.15rem;
+  }
+
+  // .search-form__inputsをpadding-top: 0;しても余白が残るため直接指定
+  .search-form__field-group, 
+  .search-form__button-wrapper {
+    display: flex;
+    align-self: flex-start;
+  }
+
+  .search-form__field-group {
+    width: 38%;
+  }
+
+  .search-form__field, 
+  .search-form__exclude-field, 
+  .search-form__button {
+    height: 15px;
+  }
+
+  .search-form__field, 
+  .search-form__exclude-field {
+    padding: 0.2rem;
+    border: 0.5px solid #ccc;
+    border-radius: 3px;
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  :root {
+    --search-type-font: 0.4rem;
+    --nav-button-font: 0.3rem;
+    --search-word-font: 0.3rem;
+    --search-button-font: 0.3rem;
+  }
+
+  .search-form__inputs {
+    padding-top: 0.2rem;
+  }
+
+  .btn {
+    padding: 0.1rem 0.2rem;
+    border-radius: 0.15rem;
+  }
+
+  .search-form__field, 
+  .search-form__exclude-field, 
+  .search-form__button {
+    height: 10px;
+  }
+
+  .search-form__button-wrapper {
+    width: 12%;
+  }
+
+  .search-form__field, 
+  .search-form__exclude-field {
+    border-radius: 2px;
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --sidebar-left-font-link: 0.225rem;
+  }
 }
