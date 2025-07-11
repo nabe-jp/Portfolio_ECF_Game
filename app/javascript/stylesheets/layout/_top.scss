@@ -484,6 +484,11 @@
     --homes-top-font-post-date: 0.2rem;
   }
 
+  .sidebar-left,
+  .sidebar-right {
+    display: none;
+  }
+
   .col-12 {
     padding: 0;
   }
