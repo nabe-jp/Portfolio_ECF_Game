@@ -1,4 +1,4 @@
-<div class="posts-container">
+<div class="posts-container posts-scroll-container-mobile">
   <% @recent_group_posts.each_with_index do |post, index| %>
     <%= link_to group_post_path(post.group, post.id), class: "box-link" do %>
       <!-- 投稿ヘッダー: グループ画像とグループ名 -->

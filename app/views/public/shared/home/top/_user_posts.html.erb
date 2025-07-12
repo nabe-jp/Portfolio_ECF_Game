@@ -1,4 +1,4 @@
-<div class="posts-container">
+<div class="posts-container posts-scroll-container-mobile">
   <% @recent_user_posts.each_with_index do |post, index| %>
     <%= link_to user_post_path(post.user.id, post), class: "box-link" do %>
       <!-- 投稿ヘッダー: ユーザー画像とニックネーム -->

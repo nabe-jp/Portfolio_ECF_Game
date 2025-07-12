@@ -18,3 +18,23 @@
   width: 0;
   height: 0;
 }
+
+// レスポンシブ調整
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0.75rem;
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  .main-content {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .main-content {
+    padding: 0.25rem;
+  }
+}

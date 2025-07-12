@@ -224,16 +224,11 @@ input[type="radio"]:checked + label {
   }
 
   .search-form__field-group {
-    width: 40%;
+    width: 42%;
   }
 
   .search-form__button-wrapper {
-    width: 14%;
-  }
-
-  // フォーム送信ボタンの設定
-  .btn-base {
-    padding: 0;
+    width: 12%;
   }
 }
 
@@ -250,22 +245,16 @@ input[type="radio"]:checked + label {
     border-radius: 4px;
   }
 
-  // ログインボタンの設定
   .btn {
     padding: 0.3rem 0.6rem;
   }
 
   .search-form__inputs {
-    padding-top: 0.4rem;
-  }
-
-  .search-form__field-group, 
-  .search-form__button-wrapper {
-    margin: 0 1%;
+    padding-top: 0.25rem;
   }
 
   .search-form__field-group {
-    width: 40%;
+    width: 43%;
   }
 
   .search-form__button-wrapper {
@@ -282,10 +271,18 @@ input[type="radio"]:checked + label {
 @media (max-width: 480px) {
   :root {
     --header-height: 10vh;
-    --search-type-font: 0.5rem;
-    --nav-button-font: 0.35rem;
-    --search-word-font: 0.4rem;
-    --search-button-font: 0.4rem;
+    --search-type-font: 0.7rem;
+    --nav-button-font: 0.5rem;
+    --search-word-font: 0.55rem;
+    --search-button-font: 0.45rem;
+  }
+
+  .container-fluid {
+    padding: 0 0.5rem;
+  }
+
+  .search-form__categories {
+    padding-top: 0;
   }
 
   .col-2, 
@@ -293,15 +290,23 @@ input[type="radio"]:checked + label {
     padding: 0;
   }
 
-  .search-form__category {
-    padding: 0.1rem 0.15rem;
-    border-radius: 2.5px;
+  .search-form__category, 
+  .search-form__field, 
+  .search-form__exclude-field {
+    border-radius: 3px;
   }
 
-  // ログインボタンの設定
+  .search-form__category {
+    padding: 0 0.15rem 0.1rem;
+  }
+
   .btn {
     padding: 0.2rem 0.4rem;
     border-radius: 0.15rem;
+  }
+
+  .search-form__inputs {
+    padding-top: 0;
   }
 
   // .search-form__inputsをpadding-top: 0;しても余白が残るため直接指定
@@ -311,60 +316,66 @@ input[type="radio"]:checked + label {
     align-self: flex-start;
   }
 
+  .search-form__field-group, 
+  .search-form__button-wrapper {
+    margin: 0 0.5%;
+  }
+
   .search-form__field-group {
-    width: 38%;
+    width: 43%;
+  }
+
+  .search-form__button-wrapper {
+    width: 11%;
   }
 
   .search-form__field, 
   .search-form__exclude-field, 
   .search-form__button {
-    height: 15px;
+    height: 17.5px;
   }
 
   .search-form__field, 
   .search-form__exclude-field {
     padding: 0.2rem;
-    border: 0.5px solid #ccc;
-    border-radius: 3px;
   }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
   :root {
-    --search-type-font: 0.4rem;
-    --nav-button-font: 0.3rem;
-    --search-word-font: 0.3rem;
-    --search-button-font: 0.3rem;
+    --search-type-font: 0.6rem;
+    --search-word-font: 0.5rem;
   }
 
-  .search-form__inputs {
-    padding-top: 0.2rem;
+  .container-fluid {
+    padding: 0 0.25rem;
   }
 
   .btn {
-    padding: 0.1rem 0.2rem;
-    border-radius: 0.15rem;
-  }
-
-  .search-form__field, 
-  .search-form__exclude-field, 
-  .search-form__button {
-    height: 10px;
-  }
-
-  .search-form__button-wrapper {
-    width: 12%;
-  }
-
-  .search-form__field, 
-  .search-form__exclude-field {
-    border-radius: 2px;
+    padding: 0.2rem;
   }
 }
 
 @media (max-width: 320px) {
   :root {
-    --sidebar-left-font-link: 0.225rem;
+    --search-type-font: 0.55rem;
+    --nav-button-font: 0.4rem;
+    --search-word-font: 0.45rem;
+  }
+
+  .search-form__category {
+    padding: 0.1rem 0.1rem 0;
+  }
+
+  .search-form__field, 
+  .search-form__exclude-field, 
+  .search-form__button {
+    height: 16px;
+  }
+
+  .search-form__field, 
+  .search-form__exclude-field {
+    padding: 0.1rem;
   }
 }
