@@ -512,7 +512,7 @@
 
     .notice-title {
       position: absolute;
-      text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 1);
+      text-shadow: 0.75px 0.75px 0 rgba(0, 0, 0, 1);
     }
 
     .scrollable-box-info-item {
@@ -536,7 +536,7 @@
     .title-display-box.user-post, 
     .title-display-box.group-post, 
     .title-display-box.likes {
-      text-shadow: 0.5px 0.5px 0 rgba(0, 0, 0, 1);
+      text-shadow: 0.75px 0.75px 0 rgba(0, 0, 0, 1);
     }
   }
 
@@ -618,7 +618,7 @@
 
 @media (max-width: 320px) {
   :root {
-    --homes-top-font-title-notice: 0.7rem;
+    --homes-top-font-title-notice: 0.725rem;
     --homes-top-font-title: 0.6rem;
     --homes-top-font-scrollable-title: 0.525rem;
     --homes-top-font-scrollable-text: 0.475rem;
