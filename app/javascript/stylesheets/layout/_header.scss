@@ -163,6 +163,13 @@ input[type="radio"]:checked + label {
   box-sizing: border-box;
 }
 
+/* ハンバーガーメニューの設定 */
+// モバイル対応の為、サイドバーがなくなるのでリンク集をハンバーガーメニューに集約(通常時は非表示設定)
+.mobile-menu-toggle {
+  display: none;
+}
+
+
 /*    ボタンの設定   */
 // ヘッダーのリンクボタンの設定
 // 通常時
@@ -256,10 +263,6 @@ input[type="radio"]:checked + label {
     border-radius: 4px;
   }
 
-  .btn {
-    padding: 0.3rem 0.6rem;
-  }
-
   .search-form__inputs {
     padding-top: 0.25rem;
   }
@@ -276,6 +279,10 @@ input[type="radio"]:checked + label {
   .search-form__exclude-field, 
   .search-form__button {
     height: 22.5px;
+  }
+
+  .btn {
+    padding: 0.3rem 0.6rem;
   }
 }
 
@@ -312,11 +319,6 @@ input[type="radio"]:checked + label {
     padding: 0.15rem 0.3rem;
   }
 
-  .btn {
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.15rem;
-  }
-
   .search-form__inputs {
     padding-top: 0;
   }
@@ -350,6 +352,17 @@ input[type="radio"]:checked + label {
   .search-form__field, 
   .search-form__exclude-field {
     padding: 0.2rem;
+  }
+
+  .btn {
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.15rem;
+  }
+
+  // ハンバーガーメニューを表示
+  .mobile-menu-toggle {
+    display: block;
+    margin-top: 0.5rem;
   }
 }
 

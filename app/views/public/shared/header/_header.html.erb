@@ -12,6 +12,9 @@
           <%= render 'public/shared/header/user_nav' %>
         </ul>
       </div>
+      <div class="col-2 d-block d-md-none mobile-menu-wrapper">
+        <%= render 'public/shared/header/hamburger_menu' %>
+      </div>
     <% else %>
       <div class="col-10 header__nav-wrapper">
         <ul class="nav">
@@ -20,4 +23,5 @@
       </div>
     <% end %>
   </div>
+  
 </header>
