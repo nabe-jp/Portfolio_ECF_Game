@@ -7,19 +7,28 @@
       <div class="col-8">
         <%= render 'public/shared/header/global_search' %>
       </div>
-      <div class="col-2 header__nav-wrapper">
-        <ul class="nav">
-          <%= render 'public/shared/header/user_nav' %>
-        </ul>
-      </div>
-      <div class="col-2 d-block d-md-none mobile-menu-wrapper">
-        <%= render 'public/shared/header/hamburger_menu' %>
+      <div class="col-2">
+        <div class="header__nav-wrapper">
+          <ul class="nav">
+            <%= render 'public/shared/header/user_nav' %>
+          </ul>
+        </div>
+      
+        <div class="mobile-menu-wrapper">
+          <%= render 'public/shared/header/hamburger_menu' %>
+        </div>
       </div>
     <% else %>
-      <div class="col-10 header__nav-wrapper">
-        <ul class="nav">
-          <%= render 'public/shared/header/no_user_nav' %>
-        </ul>
+      <div class="col-10">
+        <div class="header__nav-wrapper">
+          <ul class="nav">
+            <%= render 'public/shared/header/no_user_nav' %>
+          </ul>
+        </div>
+      
+        <div class="mobile-menu-wrapper">
+          <%= render 'public/shared/header/hamburger_menu' %>
+        </div>
       </div>
     <% end %>
   </div>

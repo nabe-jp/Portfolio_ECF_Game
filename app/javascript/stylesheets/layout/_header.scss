@@ -1,9 +1,9 @@
 /*    ヘッダーの設定    */
 :root {
   --search-type-font: 1.2rem;
-  --nav-button-font: 1.1rem;
   --search-word-font: 1rem;
   --search-button-font: 0.9rem;
+  --nav-button-font: 1.2rem;
 }
 
 // ヘッダーブロックの設定
@@ -43,49 +43,28 @@ header {
 }
 
 // 各のボックスの設定
-.header__nav-wrapper,
 .search-form__categories,
-.search-form__inputs {
-  display: flex;
+.search-form__inputs, 
+.header__nav-wrapper,
+.mobile-menu-wrapper {
+  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
   height: calc(var(--header-height) / 2);
   width: 100%;
-  padding-top: 0.5rem;
   overflow: hidden;                 // はみ出し防止
   flex-wrap: nowrap;                // 折り返しなし
   box-sizing: border-box;           // paddingを含めてwidth/heightを計算
 }
 
-// ナビゲーションアイテムのボックスとラジオボタンのボックスの設定
-.header__nav-wrapper,
-.search-form__categories {
-  align-items: center;
-}
-
-// ナビゲーションアイテムのボックスの設定
+// ラジオボタンのボックスとナビゲーションアイテムのボックスの設定
+.search-form__categories, 
 .header__nav-wrapper {
-  justify-content: flex-end;        // 右寄せ
-}
-
-// ナビゲーションアイテムの共通設定
-.header__nav-item, 
-.header__nav-item--last {
-  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
-}
-
-// ナビゲーションアイテム
-.header__nav-item {
-  margin-right: 1rem;               // 右に10pxの余白を追加
-}
-
-// 最後のナビゲーションアイテム
-.header__nav-item--last {
-  margin-right: 0;                  // 最後のボタンの右余白をなくす
+  align-items: center;              // 縦方向(主軸)中央寄せ
 }
 
 // 検索フォーム
 .search-form {
-  display: flex;
-  flex-direction: column;
+  display: flex;                    // フレックスコンテナとして、子要素を柔軟に並べる
+  flex-direction: column;           // 子要素を縦並び
 }
 
 // ラジオボタンのボックスと入力ボックスのボックスの設定
@@ -100,17 +79,22 @@ header {
   gap: 0.75rem;
 }
 
-// ラジオボタンの設定
-.search-form__category {
+// ラジオボタンとナビゲーションボタン共通設定
+.search-form__category, 
+.header__nav-button {
   display: flex;
   align-items: center;
   padding: 0.25rem 0.5rem;
-  margin: 0;                        // labelに入っているmarginを上書き
-  cursor: pointer;
-  color: white;
-  font-size: var(--search-type-font);
   border-radius: 5px;
   transition: background-color 0.3s ease;
+}
+
+// ラジオボタンの設定
+.search-form__category {
+  cursor: pointer;                  // カーソルをホバーした際にアイコンを変化
+  margin: 0;                        // labelに入っているmarginを上書き
+  color: white;
+  font-size: var(--search-type-font);
 }
 
 // ラジオボタンは非表示せず
@@ -149,7 +133,13 @@ input[type="radio"]:checked + label {
 .search-form__field,
 .search-form__exclude-field,
 .search-form__button {
-  height: 30px;
+  display: flex;
+  align-items: flex-start;            // 明示的に上揃え
+  justify-content: center;            // 横方向中央
+  padding: 0.2rem;
+  height: 2rem;
+  font-size: inherit;
+  box-sizing: border-box;
 }
 
 // 入力フィールドの設定
@@ -163,35 +153,31 @@ input[type="radio"]:checked + label {
   box-sizing: border-box;
 }
 
+// ナビゲーションアイテムのボックスの設定
+.header__nav-wrapper {
+  justify-content: flex-end;        // 右寄せ
+}
+
+// ナビゲーションアイテムの共通設定
+.header__nav-item, 
+.header__nav-item--last {
+  display: flex;
+}
+
+// ナビゲーションアイテム
+.header__nav-item {
+  margin-right: 1rem;               // 右に10pxの余白を追加
+}
+
+// 最後のナビゲーションアイテム
+.header__nav-item--last {
+  margin-right: 0;                  // 最後のボタンの右余白をなくす
+}
+
 /* ハンバーガーメニューの設定 */
 // モバイル対応の為、サイドバーがなくなるのでリンク集をハンバーガーメニューに集約(通常時は非表示設定)
 .mobile-menu-toggle {
   display: none;
-}
-
-
-/*    ボタンの設定   */
-// ヘッダーのリンクボタンの設定
-// 通常時
-.header__nav-button {
-  display: inline-block;
-  font-size: var(--nav-button-font);
-  color: #808080;
-  border-color: #808080;
-}
-
-// ホバー時
-.header__nav-button:hover {
-  color: black;
-  border-color: black;
-  background-color: white;
-}
-
-// クリック時
-.header__nav-button:active {
-  color: #FFFFFF;
-  border-color: #388E3C;
-  background-color: #388E3C;
 }
 
 // 検索ボタン 
@@ -202,7 +188,7 @@ input[type="radio"]:checked + label {
   color: white;
   border-color: white;
   margin: 0;
-  line-height: 1;                   // テキストの余白によるズレを回避 
+  line-height: 1;                   // テキストの余白によるズレを回避
 }
 
 // ホバー時
@@ -224,6 +210,29 @@ input[type="radio"]:checked + label {
   box-shadow: 0 0 0 0.2rem rgba(0, 86, 179, 0.5);
 }
 
+/*    ボタンの設定   */
+// ヘッダーのリンクボタンの設定
+// 通常時
+.header__nav-button {
+  font-size: var(--nav-button-font);
+  color: #808080;
+  border-color: #808080;
+}
+
+// ホバー時
+.header__nav-button:hover {
+  color: black;
+  border-color: black;
+  background-color: white;
+}
+
+// クリック時
+.header__nav-button:active {
+  color: #FFFFFF;
+  border-color: #388E3C;
+  background-color: #388E3C;
+}
+
 /* レスポンシブ調整*/
 @media (max-width: 1024px) {
   .search-form__categories {
@@ -231,9 +240,10 @@ input[type="radio"]:checked + label {
     gap: 0.5rem;
   }
 
-  .search-form__category {
+  .search-form__category, 
+  .header__nav-button {
     padding: 0.2rem 0.4rem;
-    border-radius: 5px;
+    border-radius: 4.5px;
   }
 
   .search-form__field-group, 
@@ -253,12 +263,13 @@ input[type="radio"]:checked + label {
 @media (max-width: 768px) {
   :root {
     --search-type-font: 0.9rem;
-    --nav-button-font: 0.8rem;
     --search-word-font: 0.7rem;
     --search-button-font: 0.6rem;
+    --nav-button-font: 0.9rem;
   }
 
-  .search-form__category {
+  .search-form__category, 
+  .header__nav-button {
     padding: 0.2rem 0.3rem;
     border-radius: 4px;
   }
@@ -278,10 +289,10 @@ input[type="radio"]:checked + label {
   .search-form__field, 
   .search-form__exclude-field, 
   .search-form__button {
-    height: 22.5px;
+    height: 1.5rem;
   }
 
-  .btn {
+  .search-form__button {
     padding: 0.3rem 0.6rem;
   }
 }
@@ -289,10 +300,11 @@ input[type="radio"]:checked + label {
 @media (max-width: 480px) {
   :root {
     --header-height: 10vh;
-    --search-type-font: 0.65rem;
-    --nav-button-font: 0.5rem;
+    --search-type-font: 0.6rem;
     --search-word-font: 0.55rem;
     --search-button-font: 0.45rem;
+    --nav-button-font: 0.6rem;
+    --mobile-menu-top-margin: 0.25rem;
   }
 
   .container-fluid {
@@ -311,23 +323,18 @@ input[type="radio"]:checked + label {
 
   .search-form__category, 
   .search-form__field, 
-  .search-form__exclude-field {
+  .search-form__exclude-field, 
+  .header__nav-button {
     border-radius: 3px;
   }
 
-  .search-form__category {
+  .search-form__category, 
+  .header__nav-button {
     padding: 0.15rem 0.3rem;
   }
 
   .search-form__inputs {
-    padding-top: 0;
-  }
-
-  // .search-form__inputsをpadding-top: 0;しても余白が残るため直接指定
-  .search-form__field-group, 
-  .search-form__button-wrapper {
-    display: flex;
-    align-self: flex-start;
+    padding-top: 0.125rem;
   }
 
   .search-form__field-group, 
@@ -346,7 +353,7 @@ input[type="radio"]:checked + label {
   .search-form__field, 
   .search-form__exclude-field, 
   .search-form__button {
-    height: 17.5px;
+    height: 1.1rem;
   }
 
   .search-form__field, 
@@ -354,15 +361,48 @@ input[type="radio"]:checked + label {
     padding: 0.2rem;
   }
 
-  .btn {
+  .search-form__button {
     padding: 0.2rem 0.4rem;
     border-radius: 0.15rem;
   }
 
+  /* ハンバーガーメニューの設定 */
   // ハンバーガーメニューを表示
   .mobile-menu-toggle {
     display: block;
+  }
+
+  // ハンバーガーメニューのボックスの設定
+  .mobile-menu-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  // ハンバーガーメニューの表示部分の設定
+  #mobileMenu {
+    position: absolute;             // 絶対配置(親要素で指定していないのでビューポートになる)
+    top: var(--header-height);      // ヘッダー高さ分下に配置
+    right: 0;                       // 右寄せ
+    z-index: 1100;                  // ヘッダーより前面表示
     margin-top: 0.5rem;
+    padding: var(--mobile-menu-top-margin);
+    max-width: 40vw;
+    border-radius: 4px;
+    overflow: hidden;               // はみ出し防止
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: scaleY(0);           // 縦方向に0倍縮小して折りたたみ非表示
+    transform-origin: top;          // 縮小の基準は上端に設定
+    opacity: 0;                     // 透明にして見えなくする
+    pointer-events: none;           // クリックなどの操作を無効化
+    transition: transform 0.5s ease, opacity 0.5s ease;  // アニメーション指定(動きと透明度)
+  }
+  
+  #mobileMenu.show {
+    transform: scaleY(1);           // 縦方向の縮小解除して表示
+    opacity: 1;                     // 透明度を元に戻し表示
+    pointer-events: auto;           // 操作を有効化
+    max-height: calc(100vh - var(--header-height) + var(--mobile-menu-top-margin));
+    max-width: 40vw;
   }
 }
 
@@ -371,13 +411,18 @@ input[type="radio"]:checked + label {
   :root {
     --search-type-font: 0.55rem;
     --search-word-font: 0.5rem;
+    --nav-button-font: 0.55rem;
   }
 
   .container-fluid {
     padding: 0 0.25rem;
   }
 
-  .btn {
+  .search-form__inputs {
+    padding-top: 0.1rem;
+  }
+
+  .search-form__button {
     padding: 0.2rem;
   }
 }
@@ -385,22 +430,27 @@ input[type="radio"]:checked + label {
 @media (max-width: 320px) {
   :root {
     --search-type-font: 0.5rem;
-    --nav-button-font: 0.4rem;
     --search-word-font: 0.45rem;
+    --nav-button-font: 0.5rem;
   }
   .search-form__categories {
     padding: 0.1rem;
     gap: 0.1rem;
   }
 
-  .search-form__category {
+  .search-form__inputs {
+    padding-top: 0;
+  }
+
+  .search-form__category, 
+  .header__nav-button {
     padding: 0.1rem 0.2rem;
   }
 
   .search-form__field, 
   .search-form__exclude-field, 
   .search-form__button {
-    height: 16px;
+    height: 1rem;
   }
 
   .search-form__field, 

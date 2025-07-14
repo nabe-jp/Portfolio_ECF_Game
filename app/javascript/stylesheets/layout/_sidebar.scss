@@ -143,8 +143,8 @@
 
 @media (max-width: 480px) {
   :root {
-    --sidebar-left-font-title: 0.4rem;
-    --sidebar-left-font-link: 0.275rem;
+    --sidebar-left-font-title: 0.6rem;
+    --sidebar-left-font-link: 0.55rem;
   }
 
   .sidebar__section {
@@ -169,8 +169,8 @@
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
   :root {
-    --sidebar-left-font-title: 0.3rem;
-    --sidebar-left-font-link: 0.25rem;
+    --sidebar-left-font-title: 0.6rem;
+    --sidebar-left-font-link: 0.5rem;
   }
 
   .sidebar__title {
@@ -180,7 +180,7 @@
 
 @media (max-width: 320px) {
   :root {
-    --sidebar-left-font-link: 0.225rem;
+    --sidebar-left-font-link: 0.45rem;
   }
 
   .sidebar__section {
