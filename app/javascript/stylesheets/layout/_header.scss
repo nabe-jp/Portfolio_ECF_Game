@@ -305,6 +305,8 @@ input[type="radio"]:checked + label {
     --search-button-font: 0.45rem;
     --nav-button-font: 0.6rem;
     --mobile-menu-top-margin: 0.25rem;
+    --mobile-menu-font-title: 0.6rem;
+    --mobile-menu-font-link: 0.55rem;
   }
 
   .container-fluid {
@@ -404,6 +406,66 @@ input[type="radio"]:checked + label {
     max-height: calc(100vh - var(--header-height) + var(--mobile-menu-top-margin));
     max-width: 40vw;
   }
+
+  // モバイルメニューの大枠の設定
+  .mobile-menu-section {
+    width: 100%;
+    padding: 0.15rem;
+    box-sizing: border-box;             // paddingやボーダーを要素のサイズに含める
+    overflow: hidden;
+
+    .mobile-menu-section ul {
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  // モバイルメニュー内の文字の共通設定
+  .mobile-menu-title, 
+  .mobile-menu-links a {
+    display: block;                     // 幅を指定しやすく、縦に積む
+    max-width: 100%;
+    white-space: nowrap;                // 折り返さず1行で表示 
+    overflow: hidden;                   // はみ出した部分は見せない
+    text-overflow: ellipsis;            // はみ出したら末尾に...を表示
+  }
+
+  // モバイルメニュー内のタイトルの設定
+  .mobile-menu-title {
+    font-size: var(--mobile-menu-font-title);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  // モバイルメニュー内のリンクボックスの設定
+  .mobile-menu-links {
+    width: 100%;
+    list-style: none;                   // デザイン調整のためマーカーを消す
+
+    li {
+      width: 100%;
+      padding-left: 0.1rem;
+      box-sizing: border-box;           // paddingやボーダーを要素のサイズに含める
+      border-radius: 1px;
+      
+      &:hover,
+      &:focus {
+        background-color: rgba(255, 255, 255, 0.4);
+        
+        a {
+          color: #66ff66;
+          text-decoration: underline;   // ボックスをホバーした時にも文字に下線を表示
+          text-decoration-color: #9933cc;// 下線の色
+          text-underline-offset: 0.5px;;   // 文字と下線の距離(余白)
+        }
+      }
+    }
+
+    a {
+      color: #66ccff; 
+      font-size: var(--mobile-menu-font-link);
+      text-decoration: none;            // li:hover 時に下線を制御するため、デフォルトの下線を削除
+    }
+  }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
@@ -412,6 +474,8 @@ input[type="radio"]:checked + label {
     --search-type-font: 0.55rem;
     --search-word-font: 0.5rem;
     --nav-button-font: 0.55rem;
+    --mobile-menu-font-title: 0.6rem;
+    --mobile-menu-font-link: 0.5rem;
   }
 
   .container-fluid {
@@ -425,6 +489,10 @@ input[type="radio"]:checked + label {
   .search-form__button {
     padding: 0.2rem;
   }
+
+  .mobile-menu-title {
+    margin-bottom: 0.05rem;
+  }
 }
 
 @media (max-width: 320px) {
@@ -432,6 +500,7 @@ input[type="radio"]:checked + label {
     --search-type-font: 0.5rem;
     --search-word-font: 0.45rem;
     --nav-button-font: 0.5rem;
+    --mobile-menu-font-link: 0.45rem;
   }
   .search-form__categories {
     padding: 0.1rem;
@@ -456,5 +525,21 @@ input[type="radio"]:checked + label {
   .search-form__field, 
   .search-form__exclude-field {
     padding: 0.1rem;
+  }
+
+  .mobile-menu-section {
+    padding: 0.1rem;
+
+    .mobile-menu-section ul {
+      margin-bottom: 0.15rem;
+    }
+  }
+
+  .mobile-menu-title {
+    margin-bottom: 0.01rem;
+  }
+
+  .mobile-menu-links li {
+    padding-left: 0.05rem;
   }
 }

@@ -36,6 +36,11 @@
   padding: 0.5rem;
   box-sizing: border-box;             // paddingやボーダーを要素のサイズに含める
   overflow: hidden;
+
+  // 各セクションの境目に空白を設定
+  .sidebar__section ul {
+    margin-bottom: 1rem;
+  }
 }
 
 // サイドバー内の文字の共通設定
@@ -93,12 +98,16 @@
     --sidebar-left-font-link: 0.7rem;
   }
 
-  .sidebar__title {
-    margin-bottom: 0.15rem;
+  .sidebar__section {
+    padding: 0.25rem;
+
+    .sidebar__section ul {
+      margin-bottom: 0.75rem;
+    }
   }
 
-  .sidebar__section ul {
-    margin-bottom: 0.75rem;
+  .sidebar__title {
+    margin-bottom: 0.15rem;
   }
 
   .sidebar__links li {
@@ -120,10 +129,10 @@
 
   .sidebar__section {
     padding: 0.25rem;
-  }
 
-  .sidebar__section ul {
-    margin-bottom: 0.5rem;
+    .sidebar__section ul {
+      margin-bottom: 0.5rem;
+    }
   }
 
   .sidebar__title {
@@ -142,60 +151,8 @@
 }
 
 @media (max-width: 480px) {
-  :root {
-    --sidebar-left-font-title: 0.6rem;
-    --sidebar-left-font-link: 0.55rem;
-  }
-
-  .sidebar__section {
-    padding: 0.15rem;
-  }
-
-  .sidebar__section ul {
-    margin-bottom: 0.25rem;
-  }
-
-  .sidebar__links li {
-    padding-left: 0.1rem;
-    border-radius: 1px;
-  }
-
-  .sidebar__links li:hover a,
-  .sidebar__links li:focus a {
-    text-underline-offset: 0.5px;
-  }
-}
-
-// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
-@media (max-width: 376px) {
-  :root {
-    --sidebar-left-font-title: 0.6rem;
-    --sidebar-left-font-link: 0.5rem;
-  }
-
-  .sidebar__title {
-    margin-bottom: 0.05rem;
-  }
-}
-
-@media (max-width: 320px) {
-  :root {
-    --sidebar-left-font-link: 0.45rem;
-  }
-
-  .sidebar__section {
-    padding: 0.1rem;
-  }
-
-  .sidebar__section ul {
-    margin-bottom: 0.15rem;
-  }
-
-  .sidebar__title {
-    margin-bottom: 0.01rem;
-  }
-
-  .sidebar__links li {
-    padding-left: 0.05rem;
+  .sidebar-left,
+  .sidebar-right {
+    display: none;
   }
 }

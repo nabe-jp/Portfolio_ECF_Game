@@ -22,7 +22,13 @@
 // レスポンシブ調整
 @media (max-width: 480px) {
   .main-content {
+    left: 0;
+    width: 100vw;
     padding: 0.75rem;
+  }
+
+  .col-12 {
+    padding: 0;
   }
 }
 

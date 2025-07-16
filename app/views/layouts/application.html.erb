@@ -15,42 +15,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <style>
     /* テスト用 */
-    
 
-:root {
-  --mobile-menu-top-margin: 0.25rem;
-}
-
-.mobile-menu-wrapper {
-  overflow: visible;
-}
-
-#mobileMenu {
-  transform: scaleY(0);
-  transform-origin: top;
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-
-  position: absolute;
-  right: 0;
-  top: var(--header-height);
-  background-color: rgba(255, 255, 255, 0.9);
-  z-index: 1100;
-  margin-top: 0.5rem;
-  padding: var(--mobile-menu-top-margin);
-  border-radius: 4px;
-  max-width: 40vw;
-  overflow: hidden;
-}
-
-#mobileMenu.show {
-  transform: scaleY(1);
-  opacity: 1;
-  pointer-events: auto;
-  max-height: calc(100vh - var(--header-height) + var(--mobile-menu-top-margin));
-  max-width: 40vw;
-}
 
   </style>
   </head>
