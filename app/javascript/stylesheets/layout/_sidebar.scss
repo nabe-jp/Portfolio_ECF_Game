@@ -38,56 +38,55 @@
   overflow: hidden;
 
   // 各セクションの境目に空白を設定
-  .sidebar__section ul {
-    margin-bottom: 1rem;
+  // ulに定義してある初期設定をリセット(sidebar__titleで余白を付けるため)
+  ul {
+    margin-bottom: 0;
   }
-}
 
-// サイドバー内の文字の共通設定
-.sidebar__title, 
-.sidebar__links a {
-  display: block;                     // 幅を指定しやすく、縦に積む
-  max-width: 100%;
-  white-space: nowrap;                // 折り返さず1行で表示 
-  overflow: hidden;                   // はみ出した部分は見せない
-  text-overflow: ellipsis;            // はみ出したら末尾に...を表示
-}
+  // sidebar__section内でulの次にsidebar__titleが来る場合、sidebar__titleの上に余白を追加
+  > ul + .sidebar__title {
+    margin-top: 1rem;
+  }
 
-// サイドバー内のタイトルの設定
-.sidebar__title {
-  font-size: var(--sidebar-left-font-title);
-  font-weight: 500;
-  margin-bottom: 0.2rem;
-}
-
-// サイドバー内のリンクボックスの設定
-.sidebar__links {
-  width: 100%;
-  list-style: none;                   // デザイン調整のためマーカーを消す
-
-  li {
+  // サイドバー内の文字の共通設定
+  .sidebar__title, 
+  .sidebar__links a {
+    display: block;                   // 縦に積み、aタグはli全体に広げ、文字列の長さで変わらないようにする
     width: 100%;
-    padding-left: 0.5rem;
-    box-sizing: border-box;           // paddingやボーダーを要素のサイズに含める
-    border-radius: 4px;
-    
-    &:hover,
-    &:focus {
-      background-color: rgba(255, 255, 255, 0.4);
-      
-      a {
+    white-space: nowrap;              // 折り返さず1行で表示 
+    overflow: hidden;                 // はみ出した部分は見せない
+    text-overflow: ellipsis;          // はみ出したら末尾に...を表示
+  }
+
+  // サイドバー内のタイトルの設定
+  .sidebar__title {
+    font-size: var(--sidebar-left-font-title);
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  // サイドバー内のリンクボックスの設定
+  .sidebar__links {
+    width: 100%;
+    list-style: none;                 // デザイン調整のためマーカーを消す
+
+    a {
+      padding-left: 0.5rem;
+      box-sizing: border-box;         // paddingやボーダーを要素のサイズに含める
+      font-size: var(--sidebar-left-font-link);
+      color: #66ccff; 
+      text-decoration: none;          // デフォルトの下線を削除
+      border-radius: 4px;             // 背景の角を丸める
+
+      &:hover,
+      &:focus {
         color: #66ff66;
-        text-decoration: underline;   // ボックスをホバーした時にも文字に下線を表示
+        background-color: rgba(255, 255, 255, 0.4);
+        text-decoration: underline;   // 文字に下線を表示
         text-decoration-color: #9933cc;// 下線の色
         text-underline-offset: 2px;   // 文字と下線の距離(余白)
       }
     }
-  }
-
-  a {
-    color: #66ccff; 
-    font-size: var(--sidebar-left-font-link);
-    text-decoration: none;            // li:hover 時に下線を制御するため、デフォルトの下線を削除
   }
 }
 
@@ -101,23 +100,23 @@
   .sidebar__section {
     padding: 0.25rem;
 
-    .sidebar__section ul {
-      margin-bottom: 0.75rem;
+    > ul + .sidebar__title {
+      margin-top: 0.75rem;
     }
-  }
 
-  .sidebar__title {
-    margin-bottom: 0.15rem;
-  }
+    .sidebar__title {
+      margin-bottom: 0.15rem;
+    }
 
-  .sidebar__links li {
-    padding-left: 0.2rem;
-    border-radius: 3px;
-  }
-
-  .sidebar__links li:hover a,
-  .sidebar__links li:focus a {
-    text-underline-offset: 1.75px;
+    .sidebar__links a {
+      padding-left: 0.2rem;
+      border-radius: 3px;
+      
+      &:hover,
+      &:focus {
+        text-underline-offset: 1.75px;
+      }
+    }
   }
 }
 
@@ -130,23 +129,23 @@
   .sidebar__section {
     padding: 0.25rem;
 
-    .sidebar__section ul {
-      margin-bottom: 0.5rem;
+    > ul + .sidebar__title {
+      margin-top: 0.5rem;
     }
-  }
 
-  .sidebar__title {
-    margin-bottom: 0.1rem;
-  }
+    .sidebar__title {
+      margin-bottom: 0.1rem;
+    }
 
-  .sidebar__links li {
-    padding-left: 0.15rem;
-    border-radius: 2px;
-  }
-
-  .sidebar__links li:hover a,
-  .sidebar__links li:focus a {
-    text-underline-offset: 1.5px;
+    .sidebar__links a {
+      padding-left: 0.15rem;
+      border-radius: 2px;
+      
+      &:hover,
+      &:focus {
+        text-underline-offset: 1.5px;
+      }
+    }
   }
 }
 

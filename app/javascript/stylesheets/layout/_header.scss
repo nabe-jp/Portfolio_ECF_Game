@@ -223,7 +223,7 @@ input[type="radio"]:checked + label {
 .header__nav-button:hover {
   color: black;
   border-color: black;
-  background-color: white;
+  background-color: rgba(239, 246, 255, 0.8);
 }
 
 // クリック時
@@ -305,12 +305,13 @@ input[type="radio"]:checked + label {
     --search-button-font: 0.45rem;
     --nav-button-font: 0.6rem;
     --mobile-menu-top-margin: 0.25rem;
-    --mobile-menu-font-title: 0.6rem;
-    --mobile-menu-font-link: 0.55rem;
+    --mobile-menu-font-title: 0.65rem;
+    --mobile-menu-font-link: 0.6rem;
   }
 
+  // ヘッダーの表示部分を広げる(広げた分、スクロールバーと重なるので少し左に寄せ、右に余白を多めに割り振る)
   .container-fluid {
-    padding: 0 0.5rem;
+    padding: 0 0.5rem 0 0.25rem;
   }
 
   .search-form__categories {
@@ -391,7 +392,7 @@ input[type="radio"]:checked + label {
     max-width: 40vw;
     border-radius: 4px;
     overflow: hidden;               // はみ出し防止
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(239, 246, 255, 0.8);
     transform: scaleY(0);           // 縦方向に0倍縮小して折りたたみ非表示
     transform-origin: top;          // 縮小の基準は上端に設定
     opacity: 0;                     // 透明にして見えなくする
@@ -414,56 +415,55 @@ input[type="radio"]:checked + label {
     box-sizing: border-box;             // paddingやボーダーを要素のサイズに含める
     overflow: hidden;
 
-    .mobile-menu-section ul {
-      margin-bottom: 0.25rem;
+    // 各セクションの境目に空白を設定
+    // ulに定義してある初期設定をリセット(mobile-menu-titleで余白を付けるため)
+    ul {
+      margin-bottom: 0;
     }
-  }
 
-  // モバイルメニュー内の文字の共通設定
-  .mobile-menu-title, 
-  .mobile-menu-links a {
-    display: block;                     // 幅を指定しやすく、縦に積む
-    max-width: 100%;
-    white-space: nowrap;                // 折り返さず1行で表示 
-    overflow: hidden;                   // はみ出した部分は見せない
-    text-overflow: ellipsis;            // はみ出したら末尾に...を表示
-  }
+    // mobile-menu-section内でulの次にmobile-menu-titleが来る場合、mobile-menu-titleの上に余白を追加
+    > ul + .mobile-menu-title {
+      margin-top: 0.3rem;
+    }
 
-  // モバイルメニュー内のタイトルの設定
-  .mobile-menu-title {
-    font-size: var(--mobile-menu-font-title);
-    font-weight: 500;
-    margin-bottom: 0.2rem;
-  }
+    // モバイルメニュー内の文字の共通設定
+    .mobile-menu-title, 
+    .mobile-menu-links a {
+      display: block;                     // 縦に積み、aタグはli全体に広げ、文字列の長さで変わらないようにする
+      max-width: 100%;
+      white-space: nowrap;                // 折り返さず1行で表示 
+      overflow: hidden;                   // はみ出した部分は見せない
+      text-overflow: ellipsis;            // はみ出したら末尾に...を表示
+    }
 
-  // モバイルメニュー内のリンクボックスの設定
-  .mobile-menu-links {
-    width: 100%;
-    list-style: none;                   // デザイン調整のためマーカーを消す
+    // モバイルメニュー内のタイトルの設定
+    .mobile-menu-title {
+      font-size: var(--mobile-menu-font-title);
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+    }
 
-    li {
+    // モバイルメニュー内のリンクボックスの設定
+    .mobile-menu-links {
       width: 100%;
-      padding-left: 0.1rem;
-      box-sizing: border-box;           // paddingやボーダーを要素のサイズに含める
-      border-radius: 1px;
-      
-      &:hover,
-      &:focus {
-        background-color: rgba(255, 255, 255, 0.4);
-        
-        a {
+      list-style: none;                   // デザイン調整のためマーカーを消す
+
+      a {
+        padding: 0 0.15rem;
+        box-sizing: border-box;           // paddingやボーダーを要素のサイズに含める
+        font-size: var(--mobile-menu-font-link);
+        color: #1a73ff;
+        text-decoration: none;            // 下線を制御するため、デフォルトの下線を削除
+        border-radius: 2px;
+
+        &:focus {
           color: #66ff66;
-          text-decoration: underline;   // ボックスをホバーした時にも文字に下線を表示
+          background-color: rgba(30, 30, 30, 0.2);
+          text-decoration: underline;     // 文字に下線を表示
           text-decoration-color: #9933cc;// 下線の色
-          text-underline-offset: 0.5px;;   // 文字と下線の距離(余白)
+          text-underline-offset: 0.5px;;  // 文字と下線の距離(余白)
         }
       }
-    }
-
-    a {
-      color: #66ccff; 
-      font-size: var(--mobile-menu-font-link);
-      text-decoration: none;            // li:hover 時に下線を制御するため、デフォルトの下線を削除
     }
   }
 }
@@ -475,11 +475,7 @@ input[type="radio"]:checked + label {
     --search-word-font: 0.5rem;
     --nav-button-font: 0.55rem;
     --mobile-menu-font-title: 0.6rem;
-    --mobile-menu-font-link: 0.5rem;
-  }
-
-  .container-fluid {
-    padding: 0 0.25rem;
+    --mobile-menu-font-link: 0.55rem;
   }
 
   .search-form__inputs {
@@ -489,19 +485,20 @@ input[type="radio"]:checked + label {
   .search-form__button {
     padding: 0.2rem;
   }
-
-  .mobile-menu-title {
-    margin-bottom: 0.05rem;
-  }
 }
 
 @media (max-width: 320px) {
   :root {
     --search-type-font: 0.5rem;
     --search-word-font: 0.45rem;
-    --nav-button-font: 0.5rem;
-    --mobile-menu-font-link: 0.45rem;
+    --nav-button-font: 0.55rem;
+    --mobile-menu-font-link: 0.5rem;
   }
+
+  .container-fluid {
+    padding: 0 0.3rem 0 0.15rem;
+  }
+
   .search-form__categories {
     padding: 0.1rem;
     gap: 0.1rem;
@@ -528,18 +525,18 @@ input[type="radio"]:checked + label {
   }
 
   .mobile-menu-section {
-    padding: 0.1rem;
+    padding: 0.125rem;
 
-    .mobile-menu-section ul {
-      margin-bottom: 0.15rem;
+    > ul + .mobile-menu-title {
+      margin-top: 0.25rem;
     }
-  }
 
-  .mobile-menu-title {
-    margin-bottom: 0.01rem;
-  }
+    .mobile-menu-title {
+      margin-bottom: 0.125rem;
+    }
 
-  .mobile-menu-links li {
-    padding-left: 0.05rem;
+    .mobile-menu-links a {
+      padding: 0 0.125rem;
+    }
   }
 }
