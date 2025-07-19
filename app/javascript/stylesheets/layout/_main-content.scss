@@ -28,6 +28,7 @@
     margin: var(--header-height) 0 0 0;
     width: 100vw;
     padding: 0.75rem;
+    padding-right: 1rem;            // モバイルの場合、右側にスクロールバーが表示されるので右に多めに余白
   }
 
   .col-12 {
@@ -39,11 +40,13 @@
 @media (max-width: 376px) {
   .main-content {
     padding: 0.5rem;
+    padding-right: 0.75rem;
   }
 }
 
 @media (max-width: 320px) {
   .main-content {
     padding: 0.25rem;
+    padding-right: 0.5rem;
   }
 }

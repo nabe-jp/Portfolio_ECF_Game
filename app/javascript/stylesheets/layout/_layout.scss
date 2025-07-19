@@ -1,7 +1,7 @@
 /*   ページのタイトルの設定   */
 // rowの中で使用
 .page-title-col {
-  margin-bottom: 3rem;              // my-5 相当
+  margin-bottom: 2rem;              // my-5 相当
   background-color:#f8f9fa;       // 背景色
 }
 // <h4>の見出しタグに使用
@@ -11,4 +11,52 @@
   justify-content: center;          // 水平方向に中央揃え
   height: 100%;                     // 高さを指定して中央揃えができるようにする
   font-size: 1.4rem;                // 文字サイズを調整(h4より少し小さめ)
+}
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  .page-title-col {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title-col {
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title-col {
+    margin-bottom: 0.75rem;
+  }
+
+  .page-title {
+    font-size: 0.9rem;
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  .page-title-col {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-title {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .page-title-col {
+    margin-bottom: 0.8rem;
+  }
+
+  .page-title {
+    font-size: 0.75rem;
+  }
 }

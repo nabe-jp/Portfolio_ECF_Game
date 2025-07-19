@@ -330,3 +330,48 @@
 .back-btn:focus {
   box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); // 灰色の影が少し広がる
 }
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  .form-submit {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-submit {
+    margin-top: 1rem;
+  }
+
+  .new-user-btn, 
+  .login-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-submit {
+    margin-top: 0.75rem;
+  }
+
+  .new-user-btn, 
+  .login-btn {
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  .form-submit {
+    margin-top: 0.5rem;
+  }
+
+  .new-user-btn, 
+  .login-btn {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 320px) {
+}

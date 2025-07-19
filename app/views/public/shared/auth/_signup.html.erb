@@ -2,25 +2,25 @@
   <!-- 名前 -->
   <div class="form-group">
     <!-- 名前ラベル -->
-    <div class="form-row align-items-center mb-1">
-      <div class="col-4 text-left">
-        <%= f.label :last_name, "名前", class: "mb-0" %>
+    <div class="form-row align-items-center mb-1 md-mb-2">
+      <div class="col-3 col-md-4 d-flex align-items-center">
+        <%= f.label :last_name, "名前" %>
       </div>
-      <div class="col-1 text-right">
-        <%= f.label :last_name, "(姓)", class: "mb-0" %>
+      <div class="col-1 d-flex justify-content-end align-items-center">
+        <%= f.label :last_name, "(姓)" %>
       </div>
-      <div class="col-7">
+      <div class="col-8 col-md-7">
         <%= f.text_field :last_name, class: "form-control", 
           placeholder: user_last_name_placeholder, maxlength: User::REAL_NAME_MAX_LENGTH %>
       </div>
     </div>
 
     <!-- 右：名 -->
-    <div class="form-row align-items-center mb-3">
-      <div class="offset-4 col-1 text-right">
-        <%= f.label :first_name, "(名)", class: "mb-0" %>
+    <div class="form-row align-items-center mb-2 md-mb-3">
+      <div class="offset-3 offset-md-4 col-1 d-flex justify-content-end align-items-center">
+        <%= f.label :first_name, "(名)" %>
       </div>
-      <div class="col-7">
+      <div class="col-8 col-md-7">
         <%= f.text_field :first_name, class: "form-control", 
           placeholder: user_first_name_placeholder, maxlength: User::REAL_NAME_MAX_LENGTH %>
       </div>
@@ -28,55 +28,55 @@
   </div>
 
   <!-- ニックネーム -->
-  <div class="form-row align-items-center mb-3">
-    <div class="col-4 text-left">
-      <%= f.label :nickname, "ニックネーム", class: "mb-0" %>
+  <div class="form-row align-items-center mb-2 md-mb-3">
+    <div class="col-4 col-md-5 d-flex align-items-center">
+      <%= f.label :nickname, "ニックネーム" %>
     </div>
-    <div class="offset-1 col-7">
+    <div class="col-8 col-md-7">
       <%= f.text_field :nickname, autofocus: true, class: "form-control", 
         placeholder: user_nickname_placeholder, maxlength: User::NICKNAME_MAX_LENGTH %>
     </div>
   </div>
 
   <!-- 自己紹介 -->
-  <div class="form-row align-items-center mb-3">
-    <div class="col-4 text-left">
-      <%= f.label :bio, "自己紹介", class: "mb-0" %>
+  <div class="form-row align-items-center mb-2 md-mb-3">
+    <div class="col-4 col-md-5 d-flex align-items-center">
+      <%= f.label :bio, "自己紹介" %>
     </div>
-    <div class="offset-1 col-7">
+    <div class="col-8 col-md-7">
       <%= f.text_field :bio, autofocus: true, class: "form-control", 
         placeholder: user_bio_placeholder, maxlength: User::BIO_MAX_LENGTH %>
     </div>
   </div>
 
   <!-- メールアドレス -->
-  <div class="form-row align-items-center mb-3">
-    <div class="col-4 text-left">
-      <%= f.label :email, "メールアドレス", class: "mb-0" %>
+  <div class="form-row align-items-center mb-2 md-mb-3">
+    <div class="col-4 col-md-5 d-flex align-items-center">
+      <%= f.label :email, "メールアドレス" %>
     </div>
-    <div class="offset-1 col-7">
+    <div class="col-8 col-md-7">
       <%= f.email_field :email, autofocus: true, class: "form-control", 
         placeholder: email_placeholder, maxlength: EmailConstraints::MAX_LENGTH %>
     </div>
   </div>
 
   <!-- パスワード -->
-  <div class="form-row align-items-center mb-3">
-    <div class="col-4 text-left">
+  <div class="form-row align-items-center mb-2 md-mb-3">
+    <div class="col-4 col-md-5 d-flex align-items-center">
       <!-- 必要なパスワードの文字数を動的に表示、表示できない場合は致命的な問題なので管理者に通知される -->
-      <%= f.label :password, "パスワード(#{minimum_password_length_message(@minimum_password_length)})", class: "mb-0" %>
+      <%= f.label :password, "パスワード(#{minimum_password_length_message(@minimum_password_length)})" %>
     </div>
-    <div class="offset-1 col-7">
+    <div class="col-8 col-md-7">
       <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
     </div>
   </div>
 
   <!-- パスワード確認 -->
-  <div class="form-row align-items-center mb-3">
-    <div class="col-4 text-left">
-      <%= f.label :password_confirmation, "パスワード(確認用)", class: "mb-0" %>
+  <div class="form-row align-items-center">
+    <div class="col-4 col-md-5 d-flex align-items-center">
+      <%= f.label :password_confirmation, "パスワード(確認用)" %>
     </div>
-    <div class="offset-1 col-7">
+    <div class="col-8 col-md-7">
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
     </div>
   </div>
