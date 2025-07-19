@@ -1,18 +1,15 @@
 /*    メインコンテンツの設定    */
 :root {
-  --main-content-top-space: 1rem;     // ヘッダーとの空白
-  --main-content-top-margin: calc(var(--header-height) + var(--main-content-top-space));
-  --main-content-view: calc(100vh - var(--main-content-top-margin));
-  --main-content-bottom-margin: 1rem;
+  --main-content-view: calc(100vh - var(--header-height) - var(--footer-height));
 }
 
 // メインコンテンツタグの設定
 .main-content {
-  margin: var(--main-content-top-margin) var(--sidebar-width) var(--main-content-bottom-margin) var(--sidebar-width);
+  margin: var(--header-height) var(--sidebar-width) var(--footer-height) var(--sidebar-width);
   overflow-y: auto;
   height: var(--main-content-view);
   width: 100%;
-  padding: 0 1rem;
+  padding: 1rem;
   box-sizing: border-box;             // paddingを加えた大きさにする
   -ms-overflow-style: none;           // スクロールバーを非表示、Internet Explorer 10+ 対応
   scrollbar-width: none;              // スクロールバーを非表示、Firefox 64+ 対応
@@ -27,15 +24,10 @@
 
 // レスポンシブ調整
 @media (max-width: 480px) {
-  :root {
-    --main-content-top-space: 0.75rem;
-    --main-content-top-bottom: 0.75rem;
-  }
-
   .main-content {
     margin: var(--header-height) 0 0 0;
     width: 100vw;
-    padding: 0 0.75rem;
+    padding: 0.75rem;
   }
 
   .col-12 {
@@ -45,23 +37,13 @@
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  :root {
-    --main-content-top-space: 0.5rem;
-    --main-content-top-bottom: 0.5rem;
-  }
-
   .main-content {
-    padding: 0 0.5rem;
+    padding: 0.5rem;
   }
 }
 
 @media (max-width: 320px) {
-  :root {
-    --main-content-top-space: 0.25rem;
-    --main-content-top-bottom: 0.25rem;
-  }
-
   .main-content {
-    padding: 0 0.25rem;
+    padding: 0.25rem;
   }
 }
