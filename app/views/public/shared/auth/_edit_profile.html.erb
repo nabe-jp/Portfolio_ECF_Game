@@ -1,6 +1,7 @@
-<h3 class="text-center mb-4">メールアドレスと名前の変更</h3>
+<div class="auth-page-title">メールアドレスと名前の変更</div>
 
-<%= form_with(model: resource, url: registration_path(user), method: :put, local: true) do |f| %>
+<%= form_with model: resource, url: registration_path(user), method: :put, local: true, 
+  html: { class: "auth-form" } do |f| %>
   <div class="form-group">
     <!-- 名前ラベル -->
     <div class="form-row align-items-center mb-1">
