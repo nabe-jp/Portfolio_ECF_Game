@@ -41,7 +41,7 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
     @group_post.member = @group_membership
 
     if @group_membership.nil?
-      redirect_to group_path(@group), alert: '有効なメンバーシップが確認できなかったため、投稿できません。'
+      redirect_to group_path(@group), alert: '有効なメンバーシップが確認できなかったため、投稿できません'
       return
     end
 
@@ -67,7 +67,7 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
 
   def update
     if @group_post.update(group_post_params)
-      redirect_to group_post_path(@group, @group_post), notice: '投稿が更新されました。'
+      redirect_to group_post_path(@group, @group_post), notice: '投稿が更新されました'
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: group_post_params, 
         error_messages: @group_post.errors.full_messages, error_name: '投稿の更新', 
@@ -87,10 +87,10 @@ class Public::Groups::GroupPostsController < Public::ApplicationController
     begin
       Deleter::GroupPostDeleter.new(@group_post, deleted_by: current_user, 
         deleted_reason: deleted_reason).call
-      redirect_to group_dashboard_path(@group), notice: '投稿を削除しました。'
+      redirect_to group_dashboard_path(@group), notice: '投稿を削除しました'
     rescue => e
       Rails.logger.error("GroupPost削除エラー: #{e.message}")
-      redirect_to root_path, alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
+      redirect_to root_path, alert: '予期せぬエラーにより、投稿の削除が行えませんでした'
     end
   end
 

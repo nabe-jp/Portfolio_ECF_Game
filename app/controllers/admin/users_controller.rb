@@ -36,7 +36,7 @@ class Admin::UsersController < Admin::ApplicationController
     rescue => e
       Rails.logger.error("User削除エラー: #{e.message}")
       redirect_to admin_user_path(@user), 
-        alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、ユーザーと関連データの削除が行えませんでした'
     end
   end
 
@@ -47,7 +47,7 @@ class Admin::UsersController < Admin::ApplicationController
     rescue => e
       Rails.logger.error("User復元エラー: #{e.message}")
       redirect_to admin_user_path(@user), 
-        alert: '予期せぬエラーにより、ユーザーと関連データの復元が行えませんでした。'
+        alert: '予期せぬエラーにより、ユーザーと関連データの復元が行えませんでした'
     end
   end
 

@@ -74,7 +74,7 @@ module Public::AuthorizeGroup
 
     if target_level >= current_level
       redirect_to group_member_path(@group, target_membership),
-        alert: "自身より上または同等の権限を持つユーザーには操作できません。" and return true
+        alert: "自身より上または同等の権限を持つユーザーには操作できません" and return true
     end
   end
 
@@ -85,7 +85,7 @@ module Public::AuthorizeGroup
   
     if new_role_level > current_level
       redirect_to group_member_path(@group, @membership),
-        alert: "自身より上の権限を付与することはできません。" and return true
+        alert: "自身より上の権限を付与することはできません" and return true
     end
   end
 
@@ -93,42 +93,42 @@ module Public::AuthorizeGroup
   # メンバーであるかの判定
   def authorize_group_member!
     unless group_member?
-      redirect_to group_path(@group), alert: "このグループのメンバーのみアクセスできます。"
+      redirect_to group_path(@group), alert: "このグループのメンバーのみアクセスできます"
     end
   end
 
   # オーナーであるかの判定
   def authorize_group_owner!
     unless group_owner?
-      redirect_to group_path(@group), alert: "グループのオーナーのみアクセスできます。"
+      redirect_to group_path(@group), alert: "グループのオーナーのみアクセスできます"
     end
   end
 
   # 管理者であるかの判定
   def authorize_group_moderator!
     unless group_moderator?
-      redirect_to group_path(@group), alert: "管理者権限が必要です。"
+      redirect_to group_path(@group), alert: "管理者権限が必要です"
     end
   end
 
   # イベントの編集・削除権限の判定
    def authorize_group_event_editor!
     unless group_event_editor?
-      redirect_to group_event_path(@group, @group_event), alert: "イベントの編集・削除権限がありません。"
+      redirect_to group_event_path(@group, @group_event), alert: "イベントの編集・削除権限がありません"
     end
   end
 
   # 投稿の編集・削除権限判定
   def authorize_group_post_editor!
     unless group_post_editor?
-      redirect_to group_post_path(@group, @group_post), alert: "投稿の編集・削除権限がありません。"
+      redirect_to group_post_path(@group, @group_post), alert: "投稿の編集・削除権限がありません"
     end
   end
 
   # コメントの編集・削除権限判定
   def authorize_group_post_comment_editor!
     unless group_post_comment_editor?(@comment)
-      redirect_to group_post_path(@group, @group_post), alert: "コメントの編集・削除権限がありません。"
+      redirect_to group_post_path(@group, @group_post), alert: "コメントの編集・削除権限がありません"
     end
   end
 end

@@ -34,7 +34,7 @@ module Deleter
         @comment.update!(delete_params)
       end
 
-      # ※子コメントは残す。hidden_by_parentなども設定しない。
+      # ※子コメントは残し、hidden_by_parentなども設定しない
     end
   end
 end

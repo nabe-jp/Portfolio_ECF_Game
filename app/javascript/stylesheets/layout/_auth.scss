@@ -15,13 +15,21 @@
 }
 
 // レスポンシブ調整
+@media (max-width: 1024px) {
+  .auth-page-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
 @media (max-width: 768px) {
   .auth-page-title {
     font-size: 1.25rem;
+    margin-bottom: 1rem;
   }
 
   .auth-form {
-    .form-row label {
+    label {
       font-size: 0.85rem;
     }
 
@@ -29,16 +37,17 @@
       font-size: 0.8rem;
       padding: 0.4rem 0.5rem;
     }
-
-    .auth-link-message {
-      font-size: 1rem;
-    }
+  }
+  
+  .auth-link-message {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .auth-page-title {
     font-size: 1rem;
+    margin-bottom: 0.75rem;
   }
 
   .auth-form {
@@ -50,7 +59,7 @@
       padding: 0;
     }
 
-    .form-row label {
+    label {
       margin: 0;
       padding-left: 0.5rem;
       font-size: 0.7rem;
@@ -60,18 +69,15 @@
       font-size: 0.7rem;
       padding: 0.2rem 0.25rem;
     }
-
-    .auth-link-message {
-      font-size: 0.85rem;
-    }
+  }
+  
+  .auth-link-message {
+    font-size: 0.85rem;
   }
 }
+
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  .auth-page-title {
-    font-size: 1.25rem;
-  }
-
   .auth-form {
     .form-row label {
       padding-left: 0.2rem;
@@ -81,16 +87,17 @@
     .form-control {
       font-size: 0.6rem;
     }
+  }
 
-    .auth-link-message {
-      font-size: 0.8rem;
-    }
+  .auth-link-message {
+    font-size: 0.8rem;
   }
 }
 
  @media (max-width: 320px) {
   .auth-page-title {
     font-size: 0.75rem;
+    margin-bottom: 0.5rem;
   }
 
   .auth-form {
@@ -98,7 +105,7 @@
       margin-top: 0.5rem;
     }
 
-    .form-row label {
+    label {
       padding-left: 0.1rem;
       font-size: 0.575rem;
     }
@@ -106,9 +113,9 @@
     .form-control {
       font-size: 0.575rem;
     }
+  }
 
-    .auth-link-message {
-      font-size: 0.7rem;
-    }
+  .auth-link-message {
+    font-size: 0.7rem;
   }
 }

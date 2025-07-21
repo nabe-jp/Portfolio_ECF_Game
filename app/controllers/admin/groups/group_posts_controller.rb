@@ -16,11 +16,11 @@ class Admin::Groups::GroupPostsController < Admin::ApplicationController
       # サービスオブジェクトをにてグループ内投稿とグループ内投稿に紐づくものを論理削除
       Deleter::GroupPostDeleter.new(@group_post, deleted_by: current_admin, 
         deleted_reason: :removed_by_admin).call
-      redirect_to admin_group_post_path(@group.id, @group_post), notice: "投稿を削除しました。"
+      redirect_to admin_group_post_path(@group.id, @group_post), notice: "投稿を削除しました"
     rescue => e
       Rails.logger.error("GroupPost削除エラー: #{e.message}")
       redirect_to admin_group_post_path(@group.id, @group_post), 
-        alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
+        alert: '予期せぬエラーにより、投稿の削除が行えませんでした'
     end
   end
 
@@ -30,7 +30,7 @@ class Admin::Groups::GroupPostsController < Admin::ApplicationController
       redirect_to admin_group_post_path(@group.id, @group_post), notice: '投稿を復元しました'
     rescue => e
       Rails.logger.error("GroupPost復元エラー: #{e.message}")
-      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした'
       redirect_to admin_group_post_path(@group.id, @group_post)
     end
   end

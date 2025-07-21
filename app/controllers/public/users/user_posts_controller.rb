@@ -37,7 +37,7 @@ class Public::Users::UserPostsController < Public::ApplicationController
   #   if @user_post.save 
   #     # 投稿成功 → 最終投稿日時を更新
   #     @user.update(last_user_posted_at: Time.current)
-  #     redirect_to user_post_path(@user, @user_post), notice: '投稿が作成されました。'
+  #     redirect_to user_post_path(@user, @user_post), notice: '投稿が作成されました'
   #   else
   #     Form::DataStorageService.store(session: session, flash: flash, attributes: user_post_params, 
   #       error_messages: @user_post.errors.full_messages, error_name: '投稿', 
@@ -81,7 +81,7 @@ class Public::Users::UserPostsController < Public::ApplicationController
   
   def update
     if @user_post.update(user_post_params)
-      redirect_to user_post_path(@user, @user_post), notice: '投稿を更新しました。'
+      redirect_to user_post_path(@user, @user_post), notice: '投稿を更新しました'
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: user_post_params, 
         error_messages: @user_post.errors.full_messages, error_name: '投稿の更新', 
@@ -94,10 +94,10 @@ class Public::Users::UserPostsController < Public::ApplicationController
     begin
       Deleter::UserPostDeleter.new(@user_post, deleted_by: current_user, 
         deleted_reason: :self_deleted).call
-      redirect_to user_posts_path(@user), notice: '投稿を削除しました。'
+      redirect_to user_posts_path(@user), notice: '投稿を削除しました'
     rescue => e
       Rails.logger.error("UserPost削除エラー: #{e.message}")
-      redirect_to user_posts_path(@user), alert: '予期せぬエラーにより、投稿の削除が行えませんでした。'
+      redirect_to user_posts_path(@user), alert: '予期せぬエラーにより、投稿の削除が行えませんでした'
     end
   end
 

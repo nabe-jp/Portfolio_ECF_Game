@@ -16,11 +16,11 @@ class Admin::Groups::GroupEventsController < Admin::ApplicationController
       # サービスオブジェクトを呼び出しイベントの論理削除を行う
       Deleter::GroupEventDeleter.new(@group_event, deleted_by: current_admin, 
         deleted_reason: :removed_by_admin).call
-      redirect_to admin_group_event_path(@group.id, @group_event), notice: "イベントを削除しました。"
+      redirect_to admin_group_event_path(@group.id, @group_event), notice: "イベントを削除しました"
     rescue => e
       Rails.logger.error("GroupEvent削除エラー: #{e.message}")
       redirect_to admin_group_event_path(@group.id, @group_event), 
-        alert: '予期せぬエラーにより、イベントの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、イベントの削除が行えませんでした'
     end
   end
 
@@ -30,7 +30,7 @@ class Admin::Groups::GroupEventsController < Admin::ApplicationController
       redirect_to admin_group_event_path(@group.id, @group_event), notice: 'イベントを復元しました'
     rescue => e
       Rails.logger.error("GroupEvent復元エラー: #{e.message}")
-      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした'
       redirect_to admin_group_event_path(@group.id, @group_event)
     end
   end

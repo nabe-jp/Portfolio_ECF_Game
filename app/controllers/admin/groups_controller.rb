@@ -18,7 +18,7 @@ class Admin::GroupsController < Admin::ApplicationController
     rescue => e
       Rails.logger.error("Group削除エラー: #{e.message}")
       redirect_to admin_group_path(@group.id), 
-        alert: '予期せぬエラーにより、グループの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、グループの削除が行えませんでした'
     end
   end
 
@@ -28,7 +28,7 @@ class Admin::GroupsController < Admin::ApplicationController
       redirect_to admin_group_path(@group.id), notice: 'グループを復元しました'
     rescue => e
       Rails.logger.error("Group復元エラー: #{e.message}")
-      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした'
       redirect_to admin_group_path(@group.id)
     end
   end

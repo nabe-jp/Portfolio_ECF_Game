@@ -19,7 +19,7 @@ class Admin::UserPostCommentsController < Admin::ApplicationController
     rescue => e
       Rails.logger.error("UserPostCmment削除エラー: #{e.message}")
       redirect_to admin_user_post_comment_path(@user_post_comment), 
-        alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、コメントの削除が行えませんでした'
     end
   end
 
@@ -29,7 +29,7 @@ class Admin::UserPostCommentsController < Admin::ApplicationController
       redirect_to admin_user_post_comment_path(@user_post_comment), notice: 'コメントを復元しました'
     rescue => e
       Rails.logger.error("UserPostComment復元エラー: #{e.message}")
-      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした'
       redirect_to admin_user_post_comment_path(@user_post_comment)
     end
   end

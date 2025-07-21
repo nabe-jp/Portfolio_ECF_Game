@@ -19,7 +19,7 @@ class Public::UserController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to mypage_user_path, notice: 'ユーザー情報を更新しました。'
+      redirect_to mypage_user_path, notice: 'ユーザー情報を更新しました'
     else
       # 機密性もなく、長文を取り扱う可能性もあるためセッションに保存
       Form::DataStorageService.store(session: session, flash: flash, 
@@ -47,10 +47,10 @@ class Public::UserController < ApplicationController
       Deleter::UserDeleter.new(current_user, deleted_by: current_user, 
         deleted_reason: :self_deleted, deleted_by_type: :user).call
       reset_session
-      redirect_to root_path, notice: '退会処理を完了しました。'
+      redirect_to root_path, notice: '退会処理を完了しました'
     rescue => e
       Rails.logger.error("User削除エラー: #{e.message}")
-      redirect_to root_path, alert: '予期せぬエラーにより、退会処理が行えませんでした。'
+      redirect_to root_path, alert: '予期せぬエラーにより、退会処理が行えませんでした'
     end
   end
 

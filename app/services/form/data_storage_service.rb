@@ -17,7 +17,7 @@ module Form
       Rails.logger.warn("セッション保存前 データサイズ(#{total}バイト)")
       if total > MAX_SESSION_BYTES
         Rails.logger.warn("セッション保存に失敗: データサイズ過大(#{total}バイト)")
-        flash[:alert] = "入力内容が大きすぎたため、入力内容を保持できませんでした。入力内容を短くして再度お試しください"
+        flash[:alert] = "入力内容が大きすぎた為、入力内容を保持できませんでした 入力内容を短くして再度お試しください"
         return
       end
       

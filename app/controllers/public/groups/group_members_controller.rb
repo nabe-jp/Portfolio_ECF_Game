@@ -38,7 +38,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
       redirect_to group_members_path(@group), notice: 'メンバーを追放しました'
     rescue => e
       Rails.logger.error("GroupMember追放エラー: #{e.message}")
-      redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、メンバーの追放が行えませんでした。'
+      redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、メンバーの追放が行えませんでした'
     end
   end
 
@@ -69,7 +69,7 @@ class Public::Groups::GroupMembersController < Public::ApplicationController
     if new_role == "owner"
       unless group_owner?
         return redirect_to group_member_path(@group, @membership), 
-          alert: 'オーナーの指名はオーナー本人のみ可能です。'
+          alert: 'オーナーの指名はオーナー本人のみ可能です'
       end
   
       ActiveRecord::Base.transaction do

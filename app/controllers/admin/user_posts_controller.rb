@@ -21,7 +21,7 @@ class Admin::UserPostsController < Admin::ApplicationController
     rescue => e
       Rails.logger.error("UserPost削除エラー: #{e.message}")
       redirect_to admin_user_post_path(@user_post), 
-        alert: '予期せぬエラーにより、投稿と関連データの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、投稿と関連データの削除が行えませんでした'
     end
   end
   
@@ -31,7 +31,7 @@ class Admin::UserPostsController < Admin::ApplicationController
       redirect_to admin_user_post_path(@user_post), notice: '投稿と関連データを復元しました'
     rescue => e
       Rails.logger.error("UserPost復元エラー: #{e.message}")
-      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした'
       redirect_to admin_user_post_path(@user_post)
     end
   end

@@ -24,7 +24,7 @@ class Public::Users::UserPostCommentsController < Public::ApplicationController
     # 削除権限の確認
     unless @comment.user == current_user || @comment.user_post.user == current_user
       redirect_to user_post_path(@comment.user_post.user, @comment.user_post), 
-        alert: 'コメントの削除権限がありません。' and return
+        alert: 'コメントの削除権限がありません' and return
     end
 
     # コメントを行ったユーザー自身か投稿を作成したユーザーかの判定
@@ -38,11 +38,11 @@ class Public::Users::UserPostCommentsController < Public::ApplicationController
       Deleter::UserPostCommentDeleter.new(@comment, deleted_by: current_user, 
         deleted_reason: deleted_reason).call
       redirect_to user_post_path(@comment.user_post.user, @comment.user_post), 
-        notice: 'コメントを削除しました。'
+        notice: 'コメントを削除しました'
     rescue => e
       Rails.logger.error("UserPostComment削除エラー: #{e.message}")
       redirect_to user_post_path(@comment.user_post.user, @comment.user_post), 
-        alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、コメントの削除が行えませんでした'
     end
   end
 

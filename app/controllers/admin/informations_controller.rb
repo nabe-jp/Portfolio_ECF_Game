@@ -26,7 +26,7 @@ class Admin::InformationsController < Admin::ApplicationController
     @information.admin_id = current_admin.id
 
     if @information.save
-      redirect_to admin_informations_path, notice: "お知らせを作成しました。"
+      redirect_to admin_informations_path, notice: "お知らせを作成しました"
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: information_params, 
         error_messages: @information.errors.full_messages, error_name: 'お知らせの作成', 
@@ -44,7 +44,7 @@ class Admin::InformationsController < Admin::ApplicationController
 
   def update
     if @information.update(information_params)
-      redirect_to admin_informations_path, notice: "お知らせを更新しました。"
+      redirect_to admin_informations_path, notice: "お知らせを更新しました"
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: information_params, 
         error_messages: @information.errors.full_messages, error_name: 'お知らせの更新', 
@@ -55,7 +55,7 @@ class Admin::InformationsController < Admin::ApplicationController
 
   def destroy
     @information.update(deleted_at: Time.current)
-    redirect_to admin_informations_path, notice: "お知らせを削除しました。"
+    redirect_to admin_informations_path, notice: "お知らせを削除しました"
   end
 
   def reactivate

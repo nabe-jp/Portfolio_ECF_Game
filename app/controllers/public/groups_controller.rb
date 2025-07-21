@@ -68,7 +68,7 @@ class Public::GroupsController < ApplicationController
       redirect_to my_groups_path, notice: 'グループを削除しました'
     rescue => e
       Rails.logger.error("Group削除エラー: #{e.message}")
-      redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、グループの削除が行えませんでした。'
+      redirect_to group_dashboard_path(@group), alert: '予期せぬエラーにより、グループの削除が行えませんでした'
     end
   end
 

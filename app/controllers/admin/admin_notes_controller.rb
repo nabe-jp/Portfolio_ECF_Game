@@ -29,7 +29,7 @@ class Admin::AdminNotesController < Admin::ApplicationController
     @admin_note.admin_id = current_admin.id
 
     if @admin_note.save
-      redirect_to admin_notes_path, notice: "申し送りを作成しました。"
+      redirect_to admin_notes_path, notice: "申し送りを作成しました"
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: admin_note_params, 
         error_messages: @admin_note.errors.full_messages, error_name: '申し送りの作成', 
@@ -47,7 +47,7 @@ class Admin::AdminNotesController < Admin::ApplicationController
 
   def update
     if @admin_note.update(admin_note_params)
-      redirect_to admin_notes_path, notice: "申し送りを更新しました。"
+      redirect_to admin_notes_path, notice: "申し送りを更新しました"
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: admin_note_params, 
         error_messages: @admin_note.errors.full_messages, error_name: '申し送りの更新', 
@@ -58,7 +58,7 @@ class Admin::AdminNotesController < Admin::ApplicationController
 
   def destroy
     @admin_note.update(deleted_at: Time.current)
-    redirect_to admin_notes_path, notice: "申し送りを削除しました。"
+    redirect_to admin_notes_path, notice: "申し送りを削除しました"
   end
 
   def reactivate

@@ -20,11 +20,11 @@ class Admin::Groups::GroupPostCommentsController < Admin::ApplicationController
       Deleter::GroupPostCommentDeleter.new(@group_post_comment, deleted_by: current_admin, 
         deleted_reason: :removed_by_admin).call
       redirect_to admin_group_post_comment_path(@group.id, @group_post_comment), 
-        notice: 'コメントを削除しました。'
+        notice: 'コメントを削除しました'
     rescue => e
       Rails.logger.error("GroupPostComment削除エラー: #{e.message}")
       redirect_to admin_group_post_comment_pathh(@group.id, @group_post_comment), 
-        alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、コメントの削除が行えませんでした'
     end
   end
 
@@ -35,7 +35,7 @@ class Admin::Groups::GroupPostCommentsController < Admin::ApplicationController
         notice: 'コメントを復元しました'
     rescue => e
       Rails.logger.error("GroupPostComment復元エラー: #{e.message}")
-      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした。'
+      flash[:alert] = e.message.presence || '予期せぬエラーにより、コメントの削除が行えませんでした'
       redirect_to admin_group_post_comment_path(@group.id, @group_post_comment)
     end
   end

@@ -113,8 +113,8 @@ ja:
       already_signed_out: 既にログアウト済みです。
       new:
         sign_in: ログイン
-      signed_in: ログインしました。
-      signed_out: ログアウトしました。
+      signed_in: ログインしました
+      signed_out: ログアウトしました
     shared:
       links:
         back: 戻る
@@ -139,6 +139,6 @@ ja:
       not_found: は見つかりませんでした。
       not_locked: はロックされていません。
       not_saved:
-        one: エラーが発生したため %{resource} は出来ませんでした。
-        other: "%{count} 件のエラーが発生したため %{resource} は出来ませんでした。"
+        one: "エラーが発生したため %{resource} は出来ませんでした"
+        other: "%{count} 件のエラーが発生したため %{resource} は出来ませんでした"
       new_password_blank: "新しいパスワードは必須です"

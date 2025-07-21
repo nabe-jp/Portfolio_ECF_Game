@@ -1,0 +1,117 @@
+/*    メッセージの設定    */
+.message-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  h5 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    padding-left: 1.3rem;
+    
+    li {
+      font-size: 1.2rem;
+      line-height: 1.5;
+    }
+  }
+
+  .alert {
+    font-size: 1.3rem;
+    padding: 0.75rem 1.25rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+  }
+
+  // レスポンシブ調整
+  @media (max-width: 1024px) {
+    h5 {
+      font-size: 1.1rem;
+    }
+
+    ul {
+      padding-left: 1.1rem;
+
+      li {
+        font-size: 1rem;
+      }
+    }
+
+    .alert {
+      font-size: 1.1rem;
+      padding: 0.6rem 1.1rem;
+      margin: 0.8rem 0;
+      border-radius: 4px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    h5 {
+      font-size: 0.9rem;
+    }
+
+    ul {
+      padding-left: 0.9rem;
+
+      li {
+        font-size: 0.8rem;
+      }
+    }
+
+    .alert {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
+      margin: 0.7rem 0;
+      border-radius: 3px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h5 {
+      font-size: 0.8rem;
+    }
+
+    ul {
+      padding-left: 0.8rem;
+
+      li {
+        font-size: 0.7rem;
+      }
+    }
+
+    .alert {
+      font-size: 0.8rem;
+      padding: 0.5rem 1rem;
+      margin: 0.6rem 0;
+      border-radius: 2.5px;
+    }
+  }
+
+  // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+  @media (max-width: 376px) {
+  }
+
+  @media (max-width: 320px) {
+    h5 {
+      font-size: 0.7rem;
+    }
+
+    ul {
+      padding-left: 0.7rem;
+
+      li {
+        font-size: 0.65rem;
+      }
+    }
+
+    .alert {
+      font-size: 0.7rem;
+      padding: 0.4rem 0.8rem;
+      margin: 0.5rem 0;
+      border-radius: 2px;
+    }
+  }
+}

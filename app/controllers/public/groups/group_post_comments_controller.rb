@@ -42,7 +42,7 @@ class Public::Groups::GroupPostCommentsController < Public::ApplicationControlle
     rescue => e
       Rails.logger.error("GroupPostComment削除エラー: #{e.message}")
       redirect_to group_post_path(@group, @group_post), 
-        alert: '予期せぬエラーにより、コメントの削除が行えませんでした。'
+        alert: '予期せぬエラーにより、コメントの削除が行えませんでした'
     end
   end
 

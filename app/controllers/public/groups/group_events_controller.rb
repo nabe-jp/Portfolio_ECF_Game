@@ -34,7 +34,7 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
     @group_event.member = @group_membership
 
     if @group_event.save
-      redirect_to group_events_path(@group), notice: 'イベントを作成しました。'
+      redirect_to group_events_path(@group), notice: 'イベントを作成しました'
     else
       Form::DataStorageService.store(session: session, flash: flash, attributes: group_event_params, 
         error_messages: @group_event.errors.full_messages, error_name: 'イベントの作成', 
@@ -76,7 +76,7 @@ class Public::Groups::GroupEventsController < Public::ApplicationController
       redirect_to group_events_path(@group), notice: 'イベントを削除しました'
     rescue => e
       Rails.logger.error("GroupEvent削除エラー: #{e.message}")
-      redirect_to group_events_path(@group), alert: '予期せぬエラーにより、イベントの削除が行えませんでした。'
+      redirect_to group_events_path(@group), alert: '予期せぬエラーにより、イベントの削除が行えませんでした'
     end
   end
 
