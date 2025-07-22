@@ -1,68 +1,91 @@
 /*    ユーザーページの設定    */
-// プロフィール表示ボックスの設定
-.profile-box {
-  display: flex;
-  align-items: center;               // 縦方向の中央揃え
-  justify-content: center;           // 横方向の中央揃え
-  width: 100%;
-  gap: 2rem;                         // 画像とテキストの間隔
-  margin: 2rem 0;                    // 上下の余白
-  padding: 0 1rem;
+:root {
+  --profile-page-font-title: 2rem;
+  --profile-page-font-nav: 1.4rem;
+  --profile-box-font-title: 1.4rem;
+  --profile-box-font-nickname: 1.3rem;
+  --profile-box-font-bio: 1.3rem;
 }
 
-// ボックスの設定
-.profile-box__image-wrapper{
-  display: flex;
-  justify-content: flex-end;
-  width: 30%;
-  min-width: 200px;
-}
+// プロフィールページの設定
+.profile-page {
+  margin-top: 2rem;
 
-// 画像のサイズ調整
-.profile-box__image {
-  width: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-}
+  .text-center {
+    font-size: var(--profile-page-font-title);
+    margin-bottom: 2rem;
+  }
 
-// ボックスの設定
-.profile-box__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 1rem;                          // ニックネームと自己紹介の間隔
-  width: 70%;
-  min-width: 200px;
-}
+  .nav-tabs {
+    font-size: var(--profile-page-font-nav);
+    margin-bottom: 1rem;
+  }
 
-// ニックネーム、自己紹介の内容の設定
-.profile-box__info-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;            // 左揃え
-  gap: 0.5rem;                        // タイトルと内容の間隔
-  width: 100%;                        // 横幅を100%にして、狭くなる領域にも対応
-}
+  // プロフィール表示ボックスの設定
+  .profile-box {
+    display: flex;
+    align-items: center;                // 縦方向の中央揃え
+    justify-content: center;            // 横方向の中央揃え
+    width: 100%;
+    gap: 2rem;                          // 画像とテキストの間隔
+    padding: 2rem 1rem;
+    box-sizing: border-box;             // paddingを要素のサイズに含める
+  }
 
-// ニックネーム、自己紹介のタイトルの設定
-.profile-box__title {
-  font-weight: bold;
-  font-size: 1.2rem;
-}
+  // ボックスの設定
+  .profile-box__image-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    width: 30%;
+    min-width: 200px;
+  }
 
-// ニックネームの設定
-.profile-box__nickname {
-  white-space: nowrap;                // 折り返しなし
-  overflow: hidden;
-  text-overflow: ellipsis;            // 省略記号を表示
-  font-size: 1.2rem;
-}
+  // 画像のサイズ調整
+  .profile-box__image {
+    width: 200px;
+    aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
-// 自己紹介の設定
-.profile-box__bio {
-  white-space: normal;                // 折り返しあり
-  font-size: 1.2rem;
-  line-height: 1.5;
+  // ボックスの設定
+  .profile-box__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;                          // ニックネームと自己紹介の間隔
+    width: 70%;
+    min-width: 200px;
+  }
+
+  // ニックネーム、自己紹介の内容の設定
+  .profile-box__info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;            // 左揃え
+    gap: 0.5rem;                        // タイトルと内容の間隔
+    width: 100%;                        // 横幅を100%にして、狭くなる領域にも対応
+  }
+
+  // ニックネーム、自己紹介のタイトルの設定
+  .profile-box__title {
+    font-weight: bold;
+    font-size: var(--profile-box-font-title);
+  }
+
+  // ニックネームの設定
+  .profile-box__nickname {
+    white-space: nowrap;                // 折り返しなし
+    overflow: hidden;
+    text-overflow: ellipsis;            // 省略記号を表示
+    font-size: var(--profile-box-font-nickname);
+  }
+
+  // 自己紹介の設定
+  .profile-box__bio {
+    white-space: normal;                // 折り返しあり
+    font-size: var(--profile-box-font-bio);
+  }
 }
 
 /*    マイページの設定    */
@@ -215,5 +238,131 @@
   &__bio-label {
     font-weight: bold;
     margin-bottom: 0.5rem;
+  }
+}
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  :root {
+    --profile-page-font-title: 1.8rem;
+    --profile-page-font-nav: 1.3rem;
+    --profile-box-font-title: 1.3rem;
+    --profile-box-font-nickname: 1.2rem;
+    --profile-box-font-bio: 1.2rem;
+  }
+
+  .profile-page {
+    margin-top: 1.5rem;
+
+    .text-center {
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-box {
+      padding: 1.8rem 0.9rem;
+    }
+
+    .profile-box__image {
+      width: 140px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --profile-page-font-title: 1.5rem;
+    --profile-page-font-nav: 1rem;
+    --profile-box-font-title: 1rem;
+    --profile-box-font-nickname: 0.9rem;
+    --profile-box-font-bio: 0.9rem;
+  }
+
+  .profile-page {
+    margin-top: 1rem;
+
+    .text-center {
+      margin-bottom: 1rem;
+    }
+
+    .nav-link {
+      padding: 0.4rem 0.8rem;
+    }
+
+    .profile-box {
+      padding: 1.5rem 0.75rem;
+    }
+
+    .profile-box__image {
+      width: 105px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --profile-page-font-title: 1.2rem;
+    --profile-page-font-nav: 0.8rem;
+    --profile-box-font-title: 0.8rem;
+    --profile-box-font-nickname: 0.75rem;
+    --profile-box-font-bio: 0.75rem;
+  }
+
+  .profile-page {
+    margin-top: 0.8rem;
+
+    .text-center {
+      margin-bottom: 0.8rem;
+    }
+
+    .nav-link {
+      padding: 0.3rem 0.6rem;
+    }
+
+    .profile-box {
+      padding: 1rem 0.5rem;
+    }
+
+    .profile-box__image {
+      width: 65px;
+    }
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  .profile-page {
+    .profile-box__image {
+      width: 50px;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --profile-page-font-title: 1.0rem;
+    --profile-page-font-nav: 0.7rem;
+    --profile-box-font-title: 0.7rem;
+    --profile-box-font-nickname: 0.7rem;
+    --profile-box-font-bio: 0.7rem;
+  }
+
+  .profile-page {
+    margin-top: 0.6rem;
+
+    .text-center {
+      margin-bottom: 0.6rem;
+    }
+
+    .nav-link {
+      padding: 0.25rem 0.5rem;
+    }
+
+    .profile-box {
+      padding: 0.8rem 0.4rem;
+    }
+
+    .profile-box__image {
+      width: 40px;
+    }
   }
 }
