@@ -20,3 +20,120 @@
 .space-between-mini-bottom {
   margin-bottom: 2rem;
 }
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  .space-between {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  .space-between-top {
+    margin-top: 3rem;
+  }
+  .space-between-bottom {
+    margin-bottom: 3rem;
+  }
+  .space-between-mini {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .space-between-mini-top {
+    margin-top: 1.5rem;
+  }
+  .space-between-mini-bottom {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .space-between {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  .space-between-top {
+    margin-top: 2rem;
+  }
+  .space-between-bottom {
+    margin-bottom: 2rem;
+  }
+  .space-between-mini {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .space-between-mini-top {
+    margin-top: 1rem;
+  }
+  .space-between-mini-bottom {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .space-between {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .space-between-top {
+    margin-top: 1.5rem;
+  }
+  .space-between-bottom {
+    margin-bottom: 1.5rem;
+  }
+  .space-between-mini {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .space-between-mini-top {
+    margin-top: 0.75rem;
+  }
+  .space-between-mini-bottom {
+    margin-bottom: 0.75rem;
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  .space-between {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .space-between-top {
+    margin-top: 1rem;
+  }
+  .space-between-bottom {
+    margin-bottom: 1rem;
+  }
+  .space-between-mini {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .space-between-mini-top {
+    margin-top: 0.5rem;
+  }
+  .space-between-mini-bottom {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .space-between {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .space-between-top {
+    margin-top: 0.5rem;
+  }
+  .space-between-bottom {
+    margin-bottom: 0.5rem;
+  }
+  .space-between-mini {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+  }
+  .space-between-mini-top {
+    margin-top: 0.25rem;
+  }
+  .space-between-mini-bottom {
+    margin-bottom: 0.25rem;
+  }
+}

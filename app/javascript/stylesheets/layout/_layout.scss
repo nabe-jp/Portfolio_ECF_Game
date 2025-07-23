@@ -45,18 +45,10 @@
   .page-title-col {
     margin-bottom: 0.5rem;
   }
-
-  .page-title {
-    font-size: 0.8rem;
-  }
 }
 
 @media (max-width: 320px) {
-  .page-title-col {
-    margin-bottom: 0.8rem;
-  }
-
   .page-title {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 }

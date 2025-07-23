@@ -15,8 +15,8 @@
   </div>
 
   <div class="user-profile-edit__bio-section">
-    <div class="user-profile-edit__bio-label">自己紹介</div>
-    <div class="user-profile-edit__input-wrapper mx-auto" style="width: 100%;">
+    <%= f.label :bio, "自己紹介", class: "user-profile-edit__bio-label" %>
+    <div class="user-profile-edit__bio-input-wrapper">
       <%= f.text_area :bio, class: "user-profile-edit__textarea", 
         placeholder: user_bio_placeholder, maxlength: User::BIO_MAX_LENGTH %>
     </div>
