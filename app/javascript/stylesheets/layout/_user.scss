@@ -5,7 +5,6 @@
   --box-font-title: 1.3rem;
   --box-font-nickname: 1.2rem;
   --box-font-bio: 1.2rem;
-  --box-font-title: 1.3rem;
   --box-font-name: 1.2rem;
   --box-font-email: 1.2rem;
 }
@@ -39,7 +38,7 @@
   .profile-box__image-wrapper{
     display: flex;
     justify-content: flex-end;
-    width: 30%;
+    flex: 0 0 30%;                      // 30%の幅を取る
   }
 
   // 画像のサイズ調整
@@ -57,7 +56,6 @@
     justify-content: flex-start;
     gap: 1rem;                          // ニックネームと自己紹介の間隔
     flex: 1;                            // 残りの要素すべて
-    min-width: 200px;
   }
 
   // ニックネーム、自己紹介の内容の設定
@@ -93,25 +91,25 @@
 /*    公開プロフィールの編集ページの設定    */
 // マイページ全体のレイアウト
 .user-profile-edit-title {
-  --font-title: 1.3rem;
+  --edit-font-title: 1.3rem;
 
-  font-size: var(--font-title);
+  font-size: var(--edit-font-title);
   text-align: center;
 }
 
 // 公開プロフィールのフォーム内の設定
 .user-profile-edit {
-  --font-label: 1.1rem;
-  --font-input: 1rem;
-  --font-file-input: 1rem;
-  --font-textarea: 1rem;
+  --edit-font-label: 1.1rem;
+  --edit-font-input: 1rem;
+  --edit-font-file-input: 1rem;
+  --edit-font-textarea: 1rem;
 
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 
   label {
-    font-size: var(--font-label);
+    font-size: var(--edit-font-label);
     font-weight: bold;
     margin: 0;                        // 初期設定のマージンをリセット
   }
@@ -145,11 +143,11 @@
   }
 
   &__input {
-    font-size: var(--font-input);
+    font-size: var(--edit-font-input);
   }
 
   &__file-input {
-    font-size: var(--font-file-input);
+    font-size: var(--edit-font-file-input);
     border: none;
     padding-left: 0;
   }
@@ -157,7 +155,7 @@
   &__textarea {
     height: 90px;
     resize: vertical;                 // ユーザーがtextareaの高さだけを変更でき、横幅は固定
-    font-size: var(--font-textarea);
+    font-size: var(--edit-font-textarea);
   }
 
   &__bio-section {
@@ -177,85 +175,52 @@
 .mypage__container {
   display: flex;
   justify-content: space-between;     // 左右に分ける
-  gap: 2rem; // セクション間のスペース
-  
-  // 公開プロフィール部分
-  .mypage__public-profile, .mypage__private-profile {
-    margin-bottom: 3rem;              // 公開プロフィールの下に余白
-  }
-
-  // ボタンを中央揃え
-  .mypage__buttons, .mypage__settings-button-wrapper {
-    display: flex;
-    justify-content: center;          // 中央揃え
-  }
+  gap: 2rem;
 
   // 左右のボックスの設定
-  .mypage__container-left-column-title, .mypage__container-right-column-title {
-    text-align: center;                 // 中央寄せ
+  .mypage__container-left-column-title, 
+  .mypage__container-right-column-title {
+    text-align: center;               // 中央寄せ
     font-size: var(--page-font-title);
-    font-weight: bold;                  // 太字にして目立たせる
-    margin-bottom: 1rem;                // 下に余白を追加
+    font-weight: bold;                // 太字にして目立たせる
   }
 
+  // 左(公開プロフィール)のボックスの設定
   .mypage__container-left-column {
-    width: 60%;
+    flex: 0 0 60%;                    // 60%の幅を取る
 
+    // マイページ用に変更(親要素の幅が小さくなるのでマイページではボックス幅を広くする、相方はflex: 1;)
     .profile-box__image-wrapper{
-      width: 50%;
+      flex: 0 0 50%;
     }
   }
 
+  // 右(個人情報)のボックスの設定
   .mypage__container-right-column {
-    flex: 1;
-
-    // プロフィール表示ボックスの設定
-    .private-box {
-      display: flex;
-      align-items: center;            // 縦方向の中央揃え
-      justify-content: center;        // 横方向の中央揃え
-      width: 100%;
-      padding: 2rem 1rem;
-    }
-
-    // ボックスの設定
-    .private-box__info {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 1rem;
-      width: 100%;
-    }
-
-    // 名前、メールアドレスの内容の設定
-    .private-box__info-item {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;        // 左揃え
-      gap: 0.5rem;                    // タイトルと内容の間隔
-      width: 100%;                    // 横幅を100%にして、狭くなる領域にも対応
-    }
-    
-    .private-box__title {
-      font-weight: bold;
-      font-size: var(--box-font-title);
-    }
+    flex: 1;                          // 残りの要素すべて
   
-
     // 名前、メールアドレスの設定
-    .private-box__name, .private-box__email {
-      white-space: normal;                // 折り返しあり
+    .profile-box__name, .profile-box__email {
+      white-space: normal;            // 折り返しあり
     }
 
     // 名前の設定
-    .private-box__name {
+    .profile-box__name {
       font-size: var(--box-font-name);
     }
     
     // メールアドレスの設定
-    .private-box__email {
+    .profile-box__email {
       font-size: var(--box-font-email);
     }
+  }
+
+  // 左右のボタンを中央揃え
+  .mypage__left-button-wrapper, 
+  .mypage__right-button-wrapper {
+    display: flex;
+    justify-content: center;          // 左右中央揃え
+    align-items: center;              // 縦中央揃え
   }
 }
 
@@ -297,16 +262,20 @@
   }
 
   .user-profile-edit {
-    --font-label: 1rem;
-    --font-input: 0.9rem;
-    --font-file-input: 0.9rem;
-    --font-textarea: 0.9rem;
+    --edit-font-label: 1rem;
+    --edit-font-input: 0.9rem;
+    --edit-font-file-input: 0.9rem;
+    --edit-font-textarea: 0.9rem;
 
     gap: 1.25rem;
 
     &__row {
       gap: 1.5rem;
     }
+  }
+
+  .mypage__container {
+    gap: 1.5rem;
   }
 }
 
@@ -355,14 +324,14 @@
   }
 
   .user-profile-edit-title {
-    --font-title: 1.1rem
+    --edit-font-title: 1.1rem
   }
 
   .user-profile-edit {
-    --font-label: 0.9rem;
-    --font-input: 0.8rem;
-    --font-file-input: 0.8rem;
-    --font-textarea: 0.8rem;
+    --edit-font-label: 0.9rem;
+    --edit-font-input: 0.8rem;
+    --edit-font-file-input: 0.8rem;
+    --edit-font-textarea: 0.8rem;
 
     gap: 1rem;
 
@@ -379,6 +348,10 @@
     &__bio-section {
       gap: 0.75rem;
     }
+  }
+
+  .mypage__container {
+    gap: 1.25rem;
   }
 }
 
@@ -423,14 +396,14 @@
   }
 
   .user-profile-edit-title {
-    --font-title: 0.8rem
+    --edit-font-title: 0.8rem
   }
 
   .user-profile-edit {
-    --font-label: 0.75rem;
-    --font-input: 0.7rem;
-    --font-file-input: 0.7rem;
-    --font-textarea: 0.7rem;
+    --edit-font-label: 0.75rem;
+    --edit-font-input: 0.7rem;
+    --edit-font-file-input: 0.7rem;
+    --edit-font-textarea: 0.7rem;
 
     gap: 0.75rem;
 
@@ -457,41 +430,58 @@
   .mypage__container {
     flex-direction: column;         // 縦並びに変更
     align-items: center;            // 縦方向の中央揃え
-  }
+    gap: 1rem;
 
-  // 左右のボックスの設定
-  .mypage__container-left-column, .mypage__container-right-column {
-    flex: none;                     // 縦並びになるため、各セクションの幅を調整
-    width: 100%;                    // 各セクションを100%の幅に
-    margin-bottom: 1rem;            // 各セクション間に余白
-  }
-
-  .mypage__container-left-column {
-    .profile-box__image-wrapper{
-      width: 30%;
+    // 縦並びになるので各ボックス幅をすべて使用に変更
+    .mypage__container-left-column, 
+    .mypage__container-right-column, 
+    .mypage__left-button-wrapper, 
+    .mypage__right-button-wrapper {
+      width: 100%;
     }
-  }
 
-  // プロフィールボタンを縦並びに変更
-  .mypage__buttons {
-    flex-direction: column;         // 縦並び
-    gap: 1rem;                      // ボタン間隔を縮める
-  }
+    .mypage__container-left-column {
+      // 公開プロフィールと同じ表示に戻す
+      .profile-box__image-wrapper {
+        flex: 0 0 30%;
+      }
+    }
 
-  // 設定ボタンの位置調整
-  .mypage__settings-button-wrapper {
-    margin-top: 2rem;               // 上部にスペース
-  }
+    // 公開プロフィールの左余白と合わせる
+    .mypage__container-right-column {
+      .user-profile-page {
+        padding: 0 1.5rem;
+        box-sizing: border-box;
+      }
+    }
 
-  // 名前(姓)と名前(名)の縦並び表示
-  .mypage__name-container {
-    flex-direction: column;         // 縦並びに変更
-    gap: 1rem;                      // ボックス間隔を調整
+    // 左右のボタンのボックスの設定
+    .mypage__left-button-wrapper, 
+    .mypage__right-button-wrapper {
+      flex-direction: column;       // 縦並び
+      gap: 1rem;                    // 左右ボタンのつなぎ目を自然にする為、mypage__containerのgapと同じ値
+
+      // ボタンを中央で同じ大きさで表示するため幅を指定し、align-selfを解除
+      .btn-base {
+        width: 50%;
+        align-self: auto;
+      }
+    }
+
+    // ボタン群は左右対象にする為、mypage__containerを分けているのでつなぎ目を自然にする為、gapと同じ値を取る
+    .mypage__left-button-wrapper {
+      margin-top: 1rem;
+    }
   }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
+  .mypage__container-right-column {
+    .user-profile-page {
+      padding: 0 1rem;
+    }
+  }
 }
 
 @media (max-width: 320px) {
@@ -524,14 +514,14 @@
   }
 
   .user-profile-edit-title {
-    --font-title: 0.75rem
+    --edit-font-title: 0.75rem
   }
 
   .user-profile-edit {
-    --font-label: 0.725rem;
-    --font-input: 0.7rem;
-    --font-file-input: 0.65rem;
-    --font-textarea: 0.7rem;
+    --edit-font-label: 0.725rem;
+    --edit-font-input: 0.7rem;
+    --edit-font-file-input: 0.65rem;
+    --edit-font-textarea: 0.7rem;
 
     gap: 0.5rem;
 
@@ -547,6 +537,19 @@
 
     &__bio-section {
       gap: 0.25rem;
+    }
+  }
+
+  .mypage__container {
+    gap: 0.75rem;
+
+    .mypage__left-button-wrapper, 
+    .mypage__right-button-wrapper {
+      gap: 0.75rem;
+    }
+
+    .mypage__left-button-wrapper {
+      margin-top: 0.75rem;
     }
   }
 }

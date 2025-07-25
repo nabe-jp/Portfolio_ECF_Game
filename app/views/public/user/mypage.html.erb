@@ -11,16 +11,17 @@
   <div class="mypage__container-right-column">
     <!-- 個人情報 -->
     <div class="mypage__container-right-column-title">個人情報 </div>
-    <div class="mypage__private-profile">
+    <div class="user-profile-page">
       <%= render "public/shared/user/private_profile" %>
     </div>
   </div>
 </div>
 
+<%# ボタンの位置を左右対称にするためにmypage__containerを分ける #%>
 <div class="mypage__container">
   <div class="mypage__container-left-column">
     <!-- プロフィールページとプロフィール編集ボタンを中央揃え -->
-    <div class="mypage__buttons">
+    <div class="mypage__left-button-wrapper">
       <%= render "public/shared/link/links", profile_page: true, as: :button %>
       <%= render "public/shared/link/links", profile_edit: true, as: :button %>
     </div>
@@ -28,7 +29,7 @@
 
   <div class="mypage__container-right-column">
     <!-- 設定ボタンを中央揃え -->
-    <div class="mypage__settings-button-wrapper">
+    <div class="mypage__right-button-wrapper">
       <%= render "public/shared/link/links", settings: true, as: :button %>
     </div>
   </div>
