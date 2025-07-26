@@ -1,26 +1,27 @@
-<h2 class="text-center  mb-5">設定</h2>
+<h2 class="user-setting-page text-center">設定</h2>
 
 <div class="container">
-  <!-- 設定メニューを横並びにする -->
-  <div class="row d-flex justify-content-center">
-    <div class="col-md-3 mb-3 text-center">
+
+  <div class="row d-flex justify-content-center user-setting-btn">
+    <div class="col-12 col-md-6 col-xl-3 mb-3 mb-xl-0 text-center">
       <%= render "public/shared/link/links", profile_edit: true, as: :button %>
     </div>
 
-    <div class="col-md-3 mb-3 text-center">
+    <div class="col-12 col-md-6 col-xl-3 mb-3 mb-xl-0 text-center">
       <%= render 'public/shared/auth/auth_links', private: true, as: :button %>
     </div>
 
-    <div class="col-md-3 mb-3 text-center">
+    <div class="col-12 col-md-6 col-xl-3 mb-3 mb-xl-0 text-center">
       <%= render 'public/shared/auth/auth_links', password: true, as: :button %>
     </div>
 
-    <div class="col-md-3 mb-3 text-center">
+    <div class="col-12 col-md-6 col-xl-3 text-center">
       <%= render "public/shared/link/links", withdraw: true, as: :button %>
     </div>
   </div>
-  <div class="row d-flex justify-content-center mt-5">
-    <div class="col-md-3 mb-3 text-center">
+
+  <div class="row d-flex justify-content-center mt-3 mt-xl-5">
+    <div class="col-12 text-center">
       <%= render "public/shared/link/links", back: true, as: :button %>
     </div>
   </div>

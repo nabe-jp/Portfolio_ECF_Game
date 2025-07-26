@@ -224,6 +224,22 @@
   }
 }
 
+/*    ユーザーの設定ページの設定    */
+// ページタイトル
+.user-setting-page {
+  .text-center {
+    font-size: var(--page-font-title);
+    margin-bottom: 2rem;
+  }
+}
+
+// 戻る以外のボタンの設定
+.user-setting-btn {
+  .btn-base {
+    width: calc(100% - 2rem);           // btn-baseに設定されているマージン分を引いた大きさのボタン
+  }
+}
+
 // レスポンシブ調整
 @media (max-width: 1024px) {
   :root {
@@ -236,13 +252,16 @@
     --box-font-email: 1rem;
   }
 
-  .user-profile-page {
+  .user-profile-page, 
+  .user-setting-page {
     margin-top: 0.75rem;
 
     .text-center {
       margin-bottom: 1.5rem;
     }
+  }
 
+  .user-profile-page {
     .profile-box {
       padding: 1.5rem 0.75rem;
       gap: 2rem;
@@ -277,6 +296,12 @@
   .mypage__container {
     gap: 1.5rem;
   }
+
+  .user-setting-btn {
+    .btn-base {
+      width: calc(90% - 2rem);        // ボタンを少し小さくする(初期設定は100％-2rem)
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -290,13 +315,16 @@
     --box-font-email: 0.9rem;
   }
 
-  .user-profile-page {
+  .user-profile-page, 
+  .user-setting-page {
     margin-top: 0.6rem;
 
     .text-center {
       margin-bottom: 1.2rem;
     }
-
+  }
+  
+  .user-profile-page{
     .nav-tabs {
       margin-bottom: 0.75rem;
     }
@@ -353,6 +381,12 @@
   .mypage__container {
     gap: 1.25rem;
   }
+
+  .user-setting-btn {
+    .btn-base {
+      width: calc(100% - 2rem);       // 初期設定に戻す
+    }
+  }
 }
 
 @media (max-width: 480px) {
@@ -366,13 +400,16 @@
     --box-font-email: 0.75rem;
   }
 
-  .user-profile-page {
+  .user-profile-page, 
+  .user-setting-page {
     margin-top: 0.25rem;
 
     .text-center {
       margin-bottom: 1rem;
     }
+  }
 
+  .user-profile-page {
     .nav-tabs {
       margin-bottom: 0.5rem;
     }
@@ -428,8 +465,8 @@
   }
 
   .mypage__container {
-    flex-direction: column;         // 縦並びに変更
-    align-items: center;            // 縦方向の中央揃え
+    flex-direction: column;           // 縦並びに変更
+    align-items: center;              // 縦方向の中央揃え
     gap: 1rem;
 
     // 縦並びになるので各ボックス幅をすべて使用に変更
@@ -471,6 +508,12 @@
     // ボタン群は左右対象にする為、mypage__containerを分けているのでつなぎ目を自然にする為、gapと同じ値を取る
     .mypage__left-button-wrapper {
       margin-top: 1rem;
+    }
+  }
+
+  .user-setting-btn {
+    .btn-base {
+      width: 45%;
     }
   }
 }
@@ -550,6 +593,12 @@
 
     .mypage__left-button-wrapper {
       margin-top: 0.75rem;
+    }
+  }
+
+  .user-setting-btn {
+    .btn-base {
+      width: 50%;
     }
   }
 }
