@@ -1,8 +1,9 @@
-<h2 class="user-setting-page text-center">設定</h2>
+<h1 class="user-page-title text-center">設定</h1>
 
-<div class="container">
+<div class="container user-setting-page">
 
-  <div class="row d-flex justify-content-center user-setting-btn">
+  <%# 画面幅に合わせて縦1列、2列、4列に並ぶ為、対応するようにボトムマージンを入れています #%>
+  <div class="row justify-content-center user-setting-btn">
     <div class="col-12 col-md-6 col-xl-3 mb-3 mb-xl-0 text-center">
       <%= render "public/shared/link/links", profile_edit: true, as: :button %>
     </div>
@@ -15,14 +16,9 @@
       <%= render 'public/shared/auth/auth_links', password: true, as: :button %>
     </div>
 
-    <div class="col-12 col-md-6 col-xl-3 text-center">
+    <div class="col-12 col-md-6 col-xl-3 mb-0 text-center">
       <%= render "public/shared/link/links", withdraw: true, as: :button %>
     </div>
   </div>
 
-  <div class="row d-flex justify-content-center mt-3 mt-xl-5">
-    <div class="col-12 text-center">
-      <%= render "public/shared/link/links", back: true, as: :button %>
-    </div>
-  </div>
 </div>

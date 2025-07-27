@@ -1,8 +1,10 @@
 <!-- 自分のプロフィールや個人情報を表示する部分 -->
+<h1 class="user-page-title text-center">マイページ</h1>
+
 <div class="mypage__container">
   <div class="mypage__container-left-column">
     <!-- 公開プロフィール -->
-    <div class="mypage__container-left-column-title">公開プロフィール</div>
+    <h2 class="mypage__container-left-column-title">公開プロフィール</h2>
     <div class="user-profile-page">
       <%= render "public/shared/user/public_profile" %>
     </div>
@@ -10,7 +12,7 @@
 
   <div class="mypage__container-right-column">
     <!-- 個人情報 -->
-    <div class="mypage__container-right-column-title">個人情報 </div>
+    <h2 class="mypage__container-right-column-title">個人情報</h2>
     <div class="user-profile-page">
       <%= render "public/shared/user/private_profile" %>
     </div>

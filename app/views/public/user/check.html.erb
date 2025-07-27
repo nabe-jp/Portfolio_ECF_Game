@@ -1,13 +1,20 @@
-<h2 class="text-center mb-5">退会確認</h2>
-<p class="text-center mb-5">本当にアカウントを削除しますか？</p>
+<h1 class="user-page-title text-center">退会確認</h1>
 
-<%= form_with url: withdraw_user_path, method: :patch do |f| %>
-  <div class="d-flex justify-content-center">
-    <!-- アカウント削除ボタン -->
-    <%= f.submit 'アカウントを削除する', class: "btn btn-base withdraw-btn",
-      data: { confirm: '本当にアカウントを削除してもよろしいですか？' } %>
-    
-    <!-- 部分テンプレート（リンク） -->
-    <%= render "public/shared/link/links", back: true, as: :button %>
-  </div>
-<% end %>
+<div class="container user-check-page">
+
+  <p class="confirm-message text-center">本当にアカウントを削除しますか？</p>
+
+  <%= form_with url: withdraw_user_path, method: :patch do |f| %>
+    <div class="row justify-content-center user-check-btn">
+      <%# 縦に2列並ぶときのみ上の列にボトムマージンを入れています #%>
+      <div class="col-12 col-md-6 mb-3 mb-md-0 text-center">
+        <%= f.submit 'アカウントを削除する', class: "btn btn-base withdraw-btn",
+          data: { confirm: '本当にアカウントを削除してもよろしいですか？' } %>
+      </div>
+      
+      <div class="col-12 col-md-6 text-center">
+        <%= render "public/shared/link/links", back: true, as: :button %>
+      </div>
+    </div>
+  <% end %>
+</div>

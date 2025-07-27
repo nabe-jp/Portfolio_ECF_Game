@@ -1,7 +1,9 @@
 /*    ユーザーページの設定    */
 :root {
-  --page-font-title: 2rem;
+  --page-font-title-h1: 2rem;
+  --page-font-title-h2: 1.6rem;
   --page-font-nav: 1.3rem;
+  --page-font-confirm-message: 1.4rem;
   --box-font-title: 1.3rem;
   --box-font-nickname: 1.2rem;
   --box-font-bio: 1.2rem;
@@ -9,15 +11,17 @@
   --box-font-email: 1.2rem;
 }
 
-// プロフィールページの設定
-.user-profile-page {
+/*    共通設定    */
+// タイトル設定
+h1.user-page-title {
+  font-size: var(--page-font-title-h1);
   margin-top: 1rem;
+  margin-bottom: 2rem;
+}
 
-  .text-center {
-    font-size: var(--page-font-title);
-    margin-bottom: 2rem;
-  }
-
+/*    プロフィールページの設定    */
+// プロフィールページの各種設定
+.user-profile-page {
   .nav-tabs {
     font-size: var(--page-font-nav);
     margin-bottom: 1rem;
@@ -90,11 +94,8 @@
 
 /*    公開プロフィールの編集ページの設定    */
 // マイページ全体のレイアウト
-.user-profile-edit-title {
-  --edit-font-title: 1.3rem;
-
-  font-size: var(--edit-font-title);
-  text-align: center;
+h2.user-profile-edit-title {
+  font-size: var(--page-font-title-h2);
 }
 
 // 公開プロフィールのフォーム内の設定
@@ -178,11 +179,15 @@
   gap: 2rem;
 
   // 左右のボックスの設定
-  .mypage__container-left-column-title, 
-  .mypage__container-right-column-title {
-    text-align: center;               // 中央寄せ
-    font-size: var(--page-font-title);
+  h2.mypage__container-left-column-title, 
+  h2.mypage__container-right-column-title {
+    font-size: var(--page-font-title-h2);
     font-weight: bold;                // 太字にして目立たせる
+  }
+
+  // 左のボックスの設定(画像が右寄せの為、タイトルの開始位置を右より大きく右に移動)
+  h2.mypage__container-left-column-title {
+    padding-left: 4rem;
   }
 
   // 左(公開プロフィール)のボックスの設定
@@ -191,7 +196,7 @@
 
     // マイページ用に変更(親要素の幅が小さくなるのでマイページではボックス幅を広くする、相方はflex: 1;)
     .profile-box__image-wrapper{
-      flex: 0 0 50%;
+      flex: 0 0 40%;
     }
   }
 
@@ -224,27 +229,36 @@
   }
 }
 
-/*    ユーザーの設定ページの設定    */
-// ページタイトル
-.user-setting-page {
-  .text-center {
-    font-size: var(--page-font-title);
+/*    ユーザーセッティングページの設定    */
+// ボタンの設定
+.user-setting-btn {
+  .btn-base {
+    width: calc(100% - 2rem);         // btn-baseに設定されているマージン分を引いた大きさのボタン
+  }
+}
+
+/*    ユーザー退会確認ページの設定    */
+.user-check-page {
+  p.confirm-message {
+    font-size: var(--page-font-confirm-message);
     margin-bottom: 2rem;
   }
 }
 
-// 戻る以外のボタンの設定
-.user-setting-btn {
+// ボタンの設定
+.user-check-btn {
   .btn-base {
-    width: calc(100% - 2rem);           // btn-baseに設定されているマージン分を引いた大きさのボタン
+    width: calc(70% - 2rem)          // btn-baseに設定されているマージン分を引いた大きさのボタン
   }
 }
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
   :root {
-    --page-font-title: 1.6rem;
+    --page-font-title-h1: 1.6rem;
+    --page-font-title-h2: 1.3rem;
     --page-font-nav: 1.1rem;
+    --page-font-confirm-message: 1.2rem;
     --box-font-title: 1.1rem;
     --box-font-nickname: 1rem;
     --box-font-bio: 1rem;
@@ -252,13 +266,10 @@
     --box-font-email: 1rem;
   }
 
-  .user-profile-page, 
-  .user-setting-page {
-    margin-top: 0.75rem;
 
-    .text-center {
-      margin-bottom: 1.5rem;
-    }
+  h1.user-page-title {
+    margin-top: 0.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .user-profile-page {
@@ -295,6 +306,10 @@
 
   .mypage__container {
     gap: 1.5rem;
+
+    h2.mypage__container-left-column-title {
+      padding-left: 2rem;
+    }
   }
 
   .user-setting-btn {
@@ -302,12 +317,26 @@
       width: calc(90% - 2rem);        // ボタンを少し小さくする(初期設定は100％-2rem)
     }
   }
+
+  .user-check-page {
+    p.confirm-message {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .user-check-btn {
+    .btn-base {
+      width: calc(80% - 2rem);        // ボタンを少し大きくする(初期設定は70％-2rem)
+    }
+  }
 }
 
 @media (max-width: 768px) {
   :root {
-    --page-font-title: 1.4rem;
+    --page-font-title-h1: 1.4rem;
+    --page-font-title-h2: 1.1rem;
     --page-font-nav: 1rem;
+    --page-font-confirm-message: 1.05rem;
     --box-font-title: 1rem;
     --box-font-nickname: 0.9rem;
     --box-font-bio: 0.9rem;
@@ -315,13 +344,9 @@
     --box-font-email: 0.9rem;
   }
 
-  .user-profile-page, 
-  .user-setting-page {
+  h1.user-page-title {
     margin-top: 0.6rem;
-
-    .text-center {
-      margin-bottom: 1.2rem;
-    }
+    margin-bottom: 1.2rem;
   }
   
   .user-profile-page{
@@ -351,10 +376,6 @@
     }
   }
 
-  .user-profile-edit-title {
-    --edit-font-title: 1.1rem
-  }
-
   .user-profile-edit {
     --edit-font-label: 0.9rem;
     --edit-font-input: 0.8rem;
@@ -380,6 +401,10 @@
 
   .mypage__container {
     gap: 1.25rem;
+
+    h2.mypage__container-left-column-title {
+      padding-left: 0.5rem;
+    }
   }
 
   .user-setting-btn {
@@ -387,12 +412,20 @@
       width: calc(100% - 2rem);       // 初期設定に戻す
     }
   }
+
+  .user-check-page {
+    p.confirm-message {
+      margin-bottom: 1.2rem;
+    }
+  }
 }
 
 @media (max-width: 480px) {
   :root {
-    --page-font-title: 1.2rem;
+    --page-font-title-h1: 1.2rem;
+    --page-font-title-h2: 1rem;
     --page-font-nav: 0.8rem;
+    --page-font-confirm-message: 0.9rem;
     --box-font-title: 0.8rem;
     --box-font-nickname: 0.75rem;
     --box-font-bio: 0.75rem;
@@ -400,13 +433,9 @@
     --box-font-email: 0.75rem;
   }
 
-  .user-profile-page, 
-  .user-setting-page {
+  h1.user-page-title {
     margin-top: 0.25rem;
-
-    .text-center {
-      margin-bottom: 1rem;
-    }
+    margin-bottom: 1rem;
   }
 
   .user-profile-page {
@@ -430,10 +459,6 @@
     .profile-box__info-item {
       gap: 0;
     }
-  }
-
-  .user-profile-edit-title {
-    --edit-font-title: 0.8rem
   }
 
   .user-profile-edit {
@@ -492,6 +517,11 @@
       }
     }
 
+    h2.mypage__container-left-column-title, 
+    h2.mypage__container-right-column-title {
+      padding-left: 1rem;
+    }
+
     // 左右のボタンのボックスの設定
     .mypage__left-button-wrapper, 
     .mypage__right-button-wrapper {
@@ -511,26 +541,42 @@
     }
   }
 
-  .user-setting-btn {
+  .user-setting-btn, 
+  .user-check-btn {
     .btn-base {
       width: 45%;
+    }
+  }
+
+  .user-check-page {
+    p.confirm-message {
+      margin-bottom: 1rem;
     }
   }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  .mypage__container-right-column {
-    .user-profile-page {
-      padding: 0 1rem;
+  .mypage__container {
+    .mypage__container-right-column {
+      .user-profile-page {
+        padding: 0 1rem;
+      }
+    }
+
+    h2.mypage__container-left-column-title, 
+    h2.mypage__container-right-column-title {
+      padding-left: 0.5rem;
     }
   }
 }
 
 @media (max-width: 320px) {
   :root {
-    --page-font-title: 1.0rem;
+    --page-font-title-h1: 1rem;
+    --page-font-title-h2: 0.8rem;
     --page-font-nav: 0.65rem;
+    --page-font-confirm-message: 0.7rem;
     --box-font-title: 0.65rem;
     --box-font-nickname: 0.625rem;
     --box-font-bio: 0.625rem;
@@ -554,10 +600,6 @@
     .profile-box__info {
       gap: 0.25rem;
     }
-  }
-
-  .user-profile-edit-title {
-    --edit-font-title: 0.75rem
   }
 
   .user-profile-edit {
@@ -586,6 +628,11 @@
   .mypage__container {
     gap: 0.75rem;
 
+    h2.mypage__container-left-column-title, 
+    h2.mypage__container-right-column-title {
+      padding-left: 0;
+    }
+
     .mypage__left-button-wrapper, 
     .mypage__right-button-wrapper {
       gap: 0.75rem;
@@ -596,7 +643,8 @@
     }
   }
 
-  .user-setting-btn {
+  .user-setting-btn, 
+  .user-check-btn {
     .btn-base {
       width: 50%;
     }
