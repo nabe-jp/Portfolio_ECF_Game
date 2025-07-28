@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container user-posts__item">
   <div class="row">
     <% if @user_posts.any? %>
       <% @user_posts.each do |post| %> 
@@ -8,7 +8,7 @@
             <div class="post-list">
               <!-- 左側の画像 -->
               <div class="post-list__image-box">
-                <%= image_tag(post.user_post_image, size: "150x150", class: "post-list__image") %>
+                <%= image_tag(post.user_post_image, class: "post-list__image") %>
               </div>
 
               <!-- 右側の内容(名前、タイトル、内容) -->

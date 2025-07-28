@@ -1,4 +1,9 @@
 /*    投稿の設定    */
+:root {
+  --user-post-font-main: 1rem;
+  --user-post-font-sub: 0.8rem;
+}
+
 // 投稿フォームのボックスの設定
 .post-form__container {
   max-width: 600px;
@@ -71,142 +76,217 @@
 }
 
 // 投稿のリンクの設定
-.user-posts__link {
-  display: flex;
-  flex-direction: row;                // 横並びに変更
-  justify-content: center;            // 中央揃えにする
-  align-items: center;                // 縦方向の中央揃え
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-  width: 95%;
-  height: 200px;                      // 高さ固定
-  padding: 1rem;                      // 内側の余白
-  margin: 1rem;                       // ボックス間のスペース
-  text-decoration: none;              // リンクの下線を消す
-  color: inherit;                     // 親要素の色を継承
-  background-color: rgba(240, 250, 255, 0.7);
-  border: 1px solid #000;           // ボックスの枠線
-  border-radius: 8px;                 // 角を丸める
-  overflow: hidden;                   // 内容がはみ出さないように制御
-  transition: background-color 0.3s, transform 0.3s;
+.user-posts__item {
+  .user-posts__link {
+    display: flex;
+    flex-direction: row;                // 横並びに変更
+    justify-content: center;            // 中央揃えにする
+    align-items: center;                // 縦方向の中央揃え
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    width: 95%;
+    height: 200px;                      // 高さ固定
+    padding: 1rem;                      // 内側の余白
+    margin: 1rem;                       // ボックス間のスペース
+    text-decoration: none;              // リンクの下線を消す
+    color: inherit;                     // 親要素の色を継承
+    background-color: rgba(240, 250, 255, 0.7);
+    border: 1px solid #000;           // ボックスの枠線
+    border-radius: 8px;                 // 角を丸める
+    overflow: hidden;                   // 内容がはみ出さないように制御
+    transition: background-color 0.3s, transform 0.3s;
+  }
+
+  // マウスオーバー時のスタイル
+  .user-posts__link:hover {
+    color: #f8f9fa;                   // 文字色を青色に変更
+    background-color: #a5c663;        // 背景色を変更
+    text-decoration: none;              // ホバー時の下線を消す 
+    transform: scale(1.05);             // 大きさを1.05倍にする
+  }
+
+  // post-list__dateは文字色を直接指定しているため上記の記載では変更されないので直接設定
+  .user-posts__link:hover .post-list__date {
+    color: #f8f9fa;
+  }
+
+  // 投稿ボックスの設定
+  .post-list {
+    width: 95%;
+    display: flex;                      // 横並びにする
+    flex-wrap: wrap;                    // 要素が画面幅を超えた場合に次の行に折り返す
+  }
+
+  // 左右のボックスの共通設定
+  .post-list__image-box,
+  .post-list__content-box {
+    height: 150px;
+  }
+
+  // 左側：画像エリア
+  .post-list__image-box {
+    width: 45%;
+    display: flex;
+    justify-content: center;            // 横方向の中央揃え
+    align-items: center;                // 縦方向の中央揃え
+  }
+
+  // 投稿画像の設定(post-list -> index用、post-detail ->　show用)
+  .post-list__image, 
+  .post-detail__image {
+    width: 150px;
+    aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
+    border-radius: 8px;
+    max-width: 100%;                    // 親要素を超えないように最大幅を設定
+    object-fit: cover;
+  }
+
+  // 右側：情報エリア
+  .post-list__content-box {
+    width: 55%;
+    position: relative;                 // 子要素の絶対位置基準
+    display: flex;
+    flex-direction: column;             // 縦並びにする
+  }
+
+  // はみ出した部分を隠し...表示、大きさにpaddingとborderは幅に含める
+  .post-list__item-label, 
+  .post-list__user, 
+  .post-detai__user, 
+  .post-list__title, 
+  .post-list__description, 
+  .post-list__date {
+    overflow: hidden;                   // はみ出した部分は非表示
+    text-overflow: ellipsis;            // 省略文字「...」を表示
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
+  }
+
+  // 左側の空白
+  .post-list__user, 
+  .post-list__title, 
+  .post-list__description {
+    padding-left: 0.8rem;
+  }
+
+  // フォントサイズ
+  .post-list__user, 
+  .post-detai__user, 
+  .post-list__title, 
+  .post-list__description {
+    font-size: var(--user-post-font-main);
+  }
+  .post-list__item-label, 
+  .post-list__date {
+    font-size: var(--user-post-font-sub);
+  }
+
+  // フォントの太さ
+  .post-list__user, 
+  .post-detai__user, 
+  .post-list__title {
+    font-weight: bold;
+  }
+
+  // 高さと折り返しのなし
+  .post-list__user, 
+  .post-list__title {
+    height: 15%;
+    white-space: nowrap;                // 1行で表示
+  }
+  .post-list__item-label, 
+  .post-list__date {
+    height: 10%;
+    white-space: nowrap;                // 1行で表示
+  }
+
+  .post-detai__user {
+    white-space: nowrap;                // 1行で表示
+  }
+
+  // 内容のスタイル
+  .post-list__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;              // 最大2行まで表示
+    -webkit-box-orient: vertical;
+    white-space: normal;                // 折り返しを許可
+  }
+
+  // 更新日のスタイル
+  .post-list__date {
+    position: absolute;
+    bottom: 0;
+    color: gray;
+    padding-left: 0.4rem;
+  }
 }
 
-// マウスオーバー時のスタイル
-.user-posts__link:hover {
-  color: #f8f9fa;                   // 文字色を青色に変更
-  background-color: #a5c663;        // 背景色を変更
-  text-decoration: none;              // ホバー時の下線を消す 
-  transform: scale(1.05);             // 大きさを1.05倍にする
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  :root {
+    --user-post-font-main: 0.9rem;
+    --user-post-font-sub: 0.75rem;
+  }
+
+  .user-posts__item {
+    .col-6 {
+      padding: 0;
+    }
+
+    .user-posts__link {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .post-list__image, 
+    .post-detail__image {
+      width: 120px;
+    }
+  }
 }
 
-// post-list__dateは文字色を直接指定しているため上記の記載では変更されないので直接設定
-.user-posts__link:hover .post-list__date {
-  color: #f8f9fa;
+@media (max-width: 768px) {
+  :root {
+    --user-post-font-main: 0.85rem;
+    --user-post-font-sub: 0.7rem;
+  }
+
+  .user-posts__item {
+    .col-6 {
+      padding: 0;
+    }
+
+    .user-posts__link {
+      height: 170px;
+      padding: 0.25rem;
+    }
+
+    .post-list__image-box {
+      width: 40%;
+    }
+      
+    .user-posts__item .post-list__content-box {
+      width: 55%;
+    }
+
+    .post-list__image, 
+    .post-detail__image {
+      width: 95px;
+    }
+  }
 }
 
-// 投稿ボックスの設定
-.post-list {
-  width: 95%;
-  display: flex;                      // 横並びにする
-  flex-wrap: wrap;                    // 要素が画面幅を超えた場合に次の行に折り返す
+@media (max-width: 480px) {
+
 }
 
-// 左右のボックスの共通設定
-.post-list__image-box,
-.post-list__content-box {
-  height: 150px;
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+
 }
 
-// 左側：画像エリア
-.post-list__image-box {
-  width: 45%;
-  display: flex;
-  justify-content: center;            // 横方向の中央揃え
-  align-items: center;                // 縦方向の中央揃え
-}
-
-// 投稿画像の設定(post-list -> index用、post-detail ->　show用)
-.post-list__image, 
-.post-detail__image {
-  border-radius: 8px;
-  max-width: 100%;                    // 親要素を超えないように最大幅を設定
-  object-fit: cover;
-}
-
-// 右側：情報エリア
-.post-list__content-box {
-  width: 55%;
-  position: relative;                 // 子要素の絶対位置基準
-  display: flex;
-  flex-direction: column;             // 縦並びにする
-}
-
-// はみ出した部分を隠し...表示、大きさにpaddingとborderは幅に含める
-.post-list__item-label, 
-.post-list__user, 
-.post-detai__user, 
-.post-list__title, 
-.post-list__description, 
-.post-list__date {
-  overflow: hidden;                   // はみ出した部分は非表示
-  text-overflow: ellipsis;            // 省略文字「...」を表示
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-  line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
-}
-
-// 左側の空白
-.post-list__user, 
-.post-list__title, 
-.post-list__description {
-  padding-left: 0.8rem;
-}
-
-// フォントサイズ
-.post-list__user, 
-.post-detai__user, 
-.post-list__title, 
-.post-list__description {
-  font-size: 1rem;
-}
-.post-list__item-label, 
-.post-list__date {
-  font-size: 0.8rem;
-}
-
-// フォントの太さ
-.post-list__user, 
-.post-detai__user, 
-.post-list__title {
-  font-weight: bold;
-}
-
-// 高さと折り返しのなし
-.post-list__user, 
-.post-list__title {
-  height: 15%;
-  white-space: nowrap;                // 1行で表示
-}
-.post-list__item-label, 
-.post-list__date {
-  height: 10%;
-  white-space: nowrap;                // 1行で表示
-}
-
-.post-detai__user {
-  white-space: nowrap;                // 1行で表示
-}
-
-// 内容のスタイル
-.post-list__description {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;              // 最大2行まで表示
-  -webkit-box-orient: vertical;
-  white-space: normal;                // 折り返しを許可
-}
-
-// 更新日のスタイル
-.post-list__date {
-  position: absolute;
-  bottom: 0;
-  color: gray;
-  padding-left: 0.4rem;
+@media (max-width: 320px) {
+  :root {
+    --user-post-font-main: 0.8rem;
+    --user-post-font-sub: 0.675rem;
+  }
 }
