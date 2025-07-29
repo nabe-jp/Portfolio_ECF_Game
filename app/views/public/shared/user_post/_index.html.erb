@@ -3,7 +3,7 @@
     <% if @user_posts.any? %>
       <% @user_posts.each do |post| %> 
         <!-- 投稿全体をリンクにする -->
-        <div class="col-6 d-flex justify-content-center">
+        <div class="col-12 col-sm-6 d-flex justify-content-center">
           <%= link_to user_post_path(post.user.id, post.id), class: 'user-posts__link' do %>
             <div class="post-list">
               <!-- 左側の画像 -->

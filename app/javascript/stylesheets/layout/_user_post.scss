@@ -22,8 +22,8 @@
 .post-form__title-box label,
 .post-form__image-box label,
 .post-form__body-box label {
-  font-weight: bold;                  // ラベルを太字に
   display: block;                     // ラベルをブロック要素にして、上の内容と改行を確保
+  font-weight: bold;                  // ラベルを太字に
   margin-bottom: 0.5rem;              // ラベルと入力フィールドの間隔
 }
 
@@ -40,12 +40,12 @@
 // 画像の入力フィールド
 .post-form__image-input {
   width: 100%;
-  border: none;                       // 枠線を消す
-  background: none;                   // 背景を消す
-  box-shadow: none;                   // ボックスシャドウを消す
   padding: 0;                         // 内側の余白をなくす
   font-size: 1rem;                    // フォントサイズの調整
   color: #333;
+  border: none;                       // 枠線を消す
+  background: none;                   // 背景を消す
+  box-shadow: none;                   // ボックスシャドウを消す
 }
 
 // 投稿内容の設定
@@ -55,24 +55,24 @@
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box;
   height: 80px;
   margin-bottom: 1rem;
+  box-sizing: border-box;
 }
 
 /*    ユーザー投稿一覧の設定    */
 // ページタイトルのボックスの設定
 .user-posts__title {
   text-align: center;
-  margin-bottom: 1.5rem;                // タイトル下に余白を追加
   color: #000;
+  margin-bottom: 1.5rem;                // タイトル下に余白を追加
 }
 // ページタイトルのテキストの設定
 .user-posts__title-text {
   display: inline;
+  padding: 0.25rem 1rem;
   background-color: rgba(108, 136, 160, 0.8);
   border-radius: 8px;
-  padding: 0.25rem 1rem;
 }
 
 // 投稿のリンクの設定
@@ -111,9 +111,9 @@
 
   // 投稿ボックスの設定
   .post-list {
-    width: 95%;
     display: flex;                      // 横並びにする
-    flex-wrap: wrap;                    // 要素が画面幅を超えた場合に次の行に折り返す
+    flex-wrap: nowrap;                  // 折り返し防止
+    width: 95%;
   }
 
   // 左右のボックスの共通設定
@@ -124,28 +124,29 @@
 
   // 左側：画像エリア
   .post-list__image-box {
-    width: 45%;
     display: flex;
+    flex: 0 0 45%;                      // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
     justify-content: center;            // 横方向の中央揃え
     align-items: center;                // 縦方向の中央揃え
   }
 
-  // 投稿画像の設定(post-list -> index用、post-detail ->　show用)
+  // 投稿画像の設定(post-list -> index用、post-detail -> show用)
   .post-list__image, 
   .post-detail__image {
+    max-width: 100%;                    // 親要素を超えないように最大幅を設定
     width: 150px;
     aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
     border-radius: 8px;
-    max-width: 100%;                    // 親要素を超えないように最大幅を設定
     object-fit: cover;
   }
 
   // 右側：情報エリア
   .post-list__content-box {
-    width: 55%;
-    position: relative;                 // 子要素の絶対位置基準
+    flex: 1;                            // 左のボックスで使用しなかった幅を常に使用
+    min-width: 0;                       // flex: 1を使うとデフォルトでmin-width: auto;になるので解除
     display: flex;
     flex-direction: column;             // 縦並びにする
+    position: relative;                 // 子要素の絶対位置基準
   }
 
   // はみ出した部分を隠し...表示、大きさにpaddingとborderは幅に含める
@@ -155,9 +156,10 @@
   .post-list__title, 
   .post-list__description, 
   .post-list__date {
+    max-width: 100%;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
     overflow: hidden;                   // はみ出した部分は非表示
     text-overflow: ellipsis;            // 省略文字「...」を表示
-    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
     line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
   }
 
@@ -215,8 +217,8 @@
   .post-list__date {
     position: absolute;
     bottom: 0;
-    color: gray;
     padding-left: 0.4rem;
+    color: gray;
   }
 }
 
@@ -228,7 +230,7 @@
   }
 
   .user-posts__item {
-    .col-6 {
+    .col-sm-6 {
       padding: 0;
     }
 
@@ -246,31 +248,47 @@
 
 @media (max-width: 768px) {
   :root {
-    --user-post-font-main: 0.85rem;
-    --user-post-font-sub: 0.7rem;
+    --user-post-font-main: 0.75rem;
+    --user-post-font-sub: 0.675rem;
   }
 
   .user-posts__item {
-    .col-6 {
-      padding: 0;
-    }
-
     .user-posts__link {
-      height: 170px;
+      height: 150px;
       padding: 0.25rem;
     }
 
     .post-list__image-box {
-      width: 40%;
+      flex: 0 0 40%;
     }
-      
-    .user-posts__item .post-list__content-box {
-      width: 55%;
+
+    .post-list__image-box,
+    .post-list__content-box {
+      height: 120px;
     }
 
     .post-list__image, 
     .post-detail__image {
       width: 95px;
+    }
+  }
+}
+
+// viewでsmでのブレイクポイントを設定し、1列に2個表示から1個表示に変更しているため、対応するSCSSを追加
+@media (max-width: 576px) {
+  :root {
+    --user-post-font-main: 0.8rem;
+    --user-post-font-sub: 0.7rem;
+  }
+
+  .user-posts__item {
+    .post-list__image-box {
+      flex: 0 0 45%;                    // メディアクエリ(768px)で変更した箇所の初期化
+    }
+
+    .post-list__image, 
+    .post-detail__image {
+      width: 120px;
     }
   }
 }
@@ -281,12 +299,12 @@
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-
+  :root {
+    --user-post-font-main: 0.75rem;
+    --user-post-font-sub: 0.675rem;
+  }
 }
 
 @media (max-width: 320px) {
-  :root {
-    --user-post-font-main: 0.8rem;
-    --user-post-font-sub: 0.675rem;
-  }
+
 }

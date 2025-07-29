@@ -1,3 +1,8 @@
+:root {
+  --empty-message-font: 1.1rem;
+}
+
+
 // 表示できるものがないときの文章のスタイル
 .search-group-post__empty-message, 
 .user-posts__empty-message, 
@@ -10,6 +15,7 @@
 .my-groups-list__empty-message {
   display: inline-block;              // 幅を文字列に合わせる
   padding: 0.25rem 1rem;
+  font-size: var(--empty-message-font);
   color: #6c757d;
   background-color: rgba(209, 236, 241, 0.6);
   border-radius: 8px;
@@ -17,4 +23,36 @@
 
 .group-members___empty-message {
   margin: 1rem 0.25rem;
+}
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  :root {
+    --empty-message-font: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --empty-message-font: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --empty-message-font: 0.8rem;
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  :root {
+    --empty-message-font: 0.75rem;
+  }
+}
+
+@media (max-width: 320px) {
+  :root {
+    --empty-message-font: 0.7rem;
+  }
 }
