@@ -1,3 +1,4 @@
+/*    グループに関する設定    */
 .groups__title {
   text-align: center;
   margin: 0.5rem 0 1.5rem;
@@ -18,6 +19,11 @@
 }
 
 .group-card {
+  --group-card-font-label: 1rem;
+  --group-card-font-name: 1.2rem;
+  --group-card-font-description: 1.1rem;
+  --group-card-font-date: 1rem;
+
   display: flex;
   align-items: center;                // 縦方向に中央揃え
   padding: 1rem;
@@ -29,6 +35,97 @@
   border-radius: 8px;
   overflow: hidden;
   transition: background-color 0.3s, transform 0.3s;
+  gap: 2rem;
+
+  .group-card__image {
+    flex: 0 0 30%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+  }
+  
+  .group-card__image-img {
+    max-width: 100%;
+    width: 200px;
+    aspect-ratio: 6 / 5;                // 横/縦の比率
+    border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径)
+    object-fit: cover;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  }
+  
+  .group-card__content {
+    flex: 1;                            // 左のボックスで使用しなかった幅を常に使用
+    min-width: 0;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    position: relative;                 // 子要素の絶対位置基準
+  }
+  
+  .group-posts__label,
+  .group-card__name, 
+  .group-card__description, 
+  .group-card__date {
+    overflow: hidden;                   // はみ出した部分は非表示
+    text-overflow: ellipsis;            // 省略文字「...」を表示
+    box-sizing: border-box;
+  }
+  
+  .group-posts__label,
+  .group-card__name, 
+  .group-card__date {
+    display: flex;
+    white-space: nowrap;
+  }
+  
+  .group-posts__label, 
+  .group-card__date {
+    height: 15%;
+  }
+  
+  .group-posts__label {
+    align-items: flex-end;
+    font-size: var(--group-card-font-label);
+  }
+  
+  .group-card__name, 
+  .group-card__description {
+    padding-left: 0.8rem;
+  }
+  
+  .group-card__name, 
+  .group-card__date {
+    align-items: center;
+  }
+  
+  .group-card__name  {
+    height: 15%;
+    font-weight: bold;
+    font-size: var(--group-card-font-name);
+  }
+  
+  .group-card__description {
+    font-size: var(--group-card-font-description);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+  }
+  
+  .group-card__meta {
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    flex-direction: row;                // 子要素を横並び
+  }
+  
+  .group-card__date {
+    font-weight: bold;
+    font-size: var(--group-card-font-date);
+    color: gray;
+    padding-left: 0.4rem;
+  }
 }
 
 .group-card:hover {
@@ -43,100 +140,6 @@
 .group-card:hover span {
   color: white !important;
   text-decoration: none;
-}
-
-.group-card__image {
-  flex-shrink: 0;
-  width: 200px;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center; 
-}
-
-.group-card__image-img {
-  max-width: 100%;
-  width: 180px;
-  height: 150px;
-  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径)
-  object-fit: cover;
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-}
-
-.group-card__content {
-  margin-left: 2rem;
-  height: 200px;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;                 // 子要素の絶対位置基準
-}
-
-.group-posts__label,
-.group-card__name, 
-.group-card__description, 
-.group-card__date {
-  overflow: hidden;                   // はみ出した部分は非表示
-  text-overflow: ellipsis;            // 省略文字「...」を表示
-  box-sizing: border-box;
-}
-
-.group-posts__label,
-.group-card__name, 
-.group-card__date {
-  display: flex;
-  white-space: nowrap;
-}
-
-.group-posts__label, 
-.group-card__date {
-  height: 15%;
-  font-size: 0.8rem;
-}
-
-.group-posts__label {
-  align-items: flex-end;
-}
-
-.group-card__name, 
-.group-card__description {
-  padding-left: 0.8rem;
-}
-
-.group-card__name, 
-.group-card__date {
-  align-items: center;
-}
-
-.group-card__name  {
-  height: 15%;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
-
-.group-card__description {
-  font-size: 1rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  white-space: normal;
-}
-
-.group-card__meta {
-  position: absolute;
-  bottom: 10%;
-  display: flex;
-  flex-direction: row;                // 子要素を横並び
-}
-
-.group-card__date {
-  font-weight: bold;
-  color: gray;
-  padding-left: 0.4rem;
-}
-
-.group-card__meta span + span {
-  margin-left: 1rem;
 }
 
 .group-show-box {
@@ -644,4 +647,110 @@
   bottom: 0;
   color: gray;
   padding-left: 0.4rem;
+}
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+  .group-card {
+    --group-card-font-label: 0.9rem;
+    --group-card-font-name: 1.1rem;
+    --group-card-font-description: 1rem;
+    --group-card-font-date: 0.9rem;
+
+    gap: 1.5rem;
+
+    .group-card__image {
+      height: 200px;
+    }
+    
+    .group-card__image-img {
+      width: 180px;
+    }
+
+    .group-card__content {
+      height: 200px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .group-card {
+    --group-card-font-label: 0.7rem;
+    --group-card-font-name: 0.9rem;
+    --group-card-font-description: 0.8rem;
+    --group-card-font-date: 0.7rem;
+
+    gap: 1rem;
+
+    .group-card__image {
+      height: 140px;
+    }
+    
+    .group-card__image-img {
+      width: 130px;
+    }
+
+    .group-card__content {
+      height: 140px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .group-card {
+    --group-card-font-label: 0.725rem;
+    --group-card-font-name: 0.85rem;
+    --group-card-font-description: 0.8rem;
+    --group-card-font-date: 0.725rem;
+
+    margin: 0.5rem;
+    padding: 0.5rem;
+    gap: 0.5rem;
+
+    .group-card__image {
+      height: 150px;
+    }
+    
+    .group-card__image-img {
+      width: 140px;
+    }
+
+    .group-card__content {
+      height: 150px;
+    }
+
+    .group-card .group-card__meta {
+      bottom: 0%;
+    }
+  }
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  .group-card {
+    --group-card-font-label: 0.7rem;
+    --group-card-font-name: 0.9rem;
+    --group-card-font-description: 0.8rem;
+    --group-card-font-date: 0.7rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .group-card {
+    margin: 0.25rem;
+    padding: 0.25rem;
+    gap: 0.25rem;
+
+    .group-card__image {
+      height: 120px;
+    }
+    
+    .group-card__image-img {
+      width: 100px;
+    }
+
+    .group-card__content {
+      height: 120px;
+    }
+  }
 }
