@@ -75,7 +75,8 @@
   .group-posts__label,
   .group-card__name, 
   .group-card__date {
-    display: flex;
+    display: block;
+    max-width : 100%;
     white-space: nowrap;
   }
   
@@ -116,6 +117,7 @@
   .group-card__meta {
     position: absolute;
     bottom: 10%;
+    max-width: 100%;
     display: flex;
     flex-direction: row;                // 子要素を横並び
   }
@@ -699,8 +701,8 @@
 @media (max-width: 480px) {
   .group-card {
     --group-card-font-label: 0.725rem;
-    --group-card-font-name: 0.85rem;
-    --group-card-font-description: 0.8rem;
+    --group-card-font-name: 0.825rem;
+    --group-card-font-description: 0.775rem;
     --group-card-font-date: 0.725rem;
 
     margin: 0.5rem;
@@ -708,19 +710,19 @@
     gap: 0.5rem;
 
     .group-card__image {
-      height: 150px;
+      height: 120px;
     }
     
     .group-card__image-img {
-      width: 140px;
+      width: 110px;
     }
 
     .group-card__content {
-      height: 150px;
+      height: 120px;
     }
 
-    .group-card .group-card__meta {
-      bottom: 0%;
+    .group-card__meta {
+      bottom: 0;
     }
   }
 }
@@ -729,28 +731,37 @@
 @media (max-width: 376px) {
   .group-card {
     --group-card-font-label: 0.7rem;
-    --group-card-font-name: 0.9rem;
-    --group-card-font-description: 0.8rem;
+    --group-card-font-name: 0.8rem;
+    --group-card-font-description: 0.75rem;
     --group-card-font-date: 0.7rem;
+
+    .group-card__date {
+      padding-left: 0.2rem;
+    }
   }
 }
 
 @media (max-width: 320px) {
   .group-card {
-    margin: 0.25rem;
+    --group-card-font-label: 0.65rem;
+    --group-card-font-name: 0.75rem;
+    --group-card-font-description: 0.7rem;
+    --group-card-font-date: 0.65rem;
+
+    margin: 0.5rem 0.25rem;
     padding: 0.25rem;
     gap: 0.25rem;
 
     .group-card__image {
-      height: 120px;
+      height: 100px;
     }
     
     .group-card__image-img {
-      width: 100px;
+      width: 90px;
     }
 
     .group-card__content {
-      height: 120px;
+      height: 100px;
     }
   }
 }
