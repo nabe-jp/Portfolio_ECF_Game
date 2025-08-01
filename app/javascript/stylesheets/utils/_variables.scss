@@ -5,3 +5,11 @@
   --sidebar-width: 12vw;            // サイドバーの幅
   --footer-height: 0vh;            // フッターの高さ(フッターがないので0)
 }
+
+// レスポンシブ調整(モバイル対応)
+@media (max-width: 768px) {
+  :root {
+    --header-height: 15dvh;
+    --footer-height: 0dvh;
+  }
+}

@@ -52,3 +52,11 @@ hr {
   padding-bottom: 1rem;
   margin-bottom: 0;
 }
+
+// レスポンシブ調整(モバイル対応)
+@media (max-width: 768px) {
+  html, body {
+    height: 100dvh;                 // iOS Safari の下のバーに対応
+    min-height: 100dvh;
+  }
+}

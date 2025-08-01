@@ -22,14 +22,24 @@
   height: 0;
 }
 
-// レスポンシブ調整
+// レスポンシブ調整(モバイル対応)
+@media (max-width: 768px) {
+  .main-content {
+    padding-bottom: env(safe-area-inset-bottom);  // iOSなどでナビゲーションバーに被らないようするに設定
+  }
+}
+
 @media (max-width: 480px) {
+  :root {
+    --main-content-view: calc(100dvh - var(--header-height) - var(--footer-height));
+  }
+
   .main-content {
     margin: var(--header-height) 0 0 0;
     width: 100vw;
     padding: 0.75rem;
     padding-right: 1rem;            // モバイルの場合、右側にスクロールバーが表示されるので右に多めに余白
-    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));  // iOSなどでナビゲーションに被らないよう
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));  // padding分も足す
   }
 
   .col-12 {
