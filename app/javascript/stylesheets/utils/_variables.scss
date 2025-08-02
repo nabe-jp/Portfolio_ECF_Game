@@ -1,14 +1,18 @@
 /*    ルートで変数を設定    */
 // ヘッダー、サイドバー、フッターの設定
+// dvh = 表示されているビューポートの高さを常に追従する単位(100dvhはツールバーなどを除いた今見えている高さ100%)
+// dvhは古いブラウザ(2022年以前)だと対応していないためvhも記載
 :root {
+  --full-height: 100vh;             // 基本ビューポート高(vhとdvhで可変できるように定義)
   --header-height: 15vh;            // ヘッダーの高さ
   --sidebar-width: 12vw;            // サイドバーの幅
-  --footer-height: 0vh;            // フッターの高さ(フッターがないので0)
+  --footer-height: 0vh;             // フッターの高さ(フッターがないので0)
 }
 
-// レスポンシブ調整(モバイル対応)
-@media (max-width: 768px) {
+// @supports (height: 100dvh → このブラウザがheight: 100dvhに対応していれば中のルールを適用する
+@supports (height: 100dvh) {
   :root {
+    --full-height: 100dvh;
     --header-height: 15dvh;
     --footer-height: 0dvh;
   }

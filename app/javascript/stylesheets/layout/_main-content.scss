@@ -1,6 +1,6 @@
 /*    メインコンテンツの設定    */
 :root {
-  --main-content-view: calc(100vh - var(--header-height) - var(--footer-height));
+  --main-content-view: calc(var(--full-height) - var(--header-height) - var(--footer-height));
 }
 
 // メインコンテンツタグの設定
