@@ -66,13 +66,13 @@
   text-align: center;
   color: #000;
   margin-bottom: 1.5rem;                // タイトル下に余白を追加
-}
-// ページタイトルのテキストの設定
-.user-posts__title-text {
-  display: inline;
-  padding: 0.25rem 1rem;
-  background-color: rgba(108, 136, 160, 0.8);
-  border-radius: 8px;
+
+  // ページタイトルのテキストの設定
+  .user-posts__title-text {
+    padding: 0.25rem 1rem;
+    background-color: rgba(108, 136, 160, 0.8);
+    border-radius: 8px;
+  }
 }
 
 // 投稿のリンクの設定

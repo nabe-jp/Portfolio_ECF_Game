@@ -1,7 +1,5 @@
 /*    ユーザーページの設定    */
 :root {
-  --page-font-title-h1: 2rem;
-  --page-font-title-h2: 1.6rem;
   --page-font-nav: 1.3rem;
   --page-font-confirm-message: 1.4rem;
   --box-font-title: 1.3rem;
@@ -13,8 +11,7 @@
 
 /*    共通設定    */
 // タイトル設定
-h1.user-page-title {
-  font-size: var(--page-font-title-h1);
+.user-page-title {
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
@@ -93,11 +90,6 @@ h1.user-page-title {
 }
 
 /*    公開プロフィールの編集ページの設定    */
-// マイページ全体のレイアウト
-h2.user-profile-edit-title {
-  font-size: var(--page-font-title-h2);
-}
-
 // 公開プロフィールのフォーム内の設定
 .user-profile-edit {
   --edit-font-label: 1.1rem;
@@ -179,14 +171,13 @@ h2.user-profile-edit-title {
   gap: 2rem;
 
   // 左右のボックスの設定
-  h2.mypage__container-left-column-title, 
-  h2.mypage__container-right-column-title {
-    font-size: var(--page-font-title-h2);
+  .mypage__container-left-column-title, 
+  .mypage__container-right-column-title {
     font-weight: bold;                // 太字にして目立たせる
   }
 
   // 左のボックスの設定(画像が右寄せの為、タイトルの開始位置を右より大きく右に移動)
-  h2.mypage__container-left-column-title {
+  .mypage__container-left-column-title {
     padding-left: 4rem;
   }
 
@@ -255,8 +246,6 @@ h2.user-profile-edit-title {
 // レスポンシブ調整
 @media (max-width: 1024px) {
   :root {
-    --page-font-title-h1: 1.6rem;
-    --page-font-title-h2: 1.3rem;
     --page-font-nav: 1.1rem;
     --page-font-confirm-message: 1.2rem;
     --box-font-title: 1.1rem;
@@ -267,7 +256,7 @@ h2.user-profile-edit-title {
   }
 
 
-  h1.user-page-title {
+  .user-page-title {
     margin-top: 0.75rem;
     margin-bottom: 1.5rem;
   }
@@ -307,7 +296,7 @@ h2.user-profile-edit-title {
   .mypage__container {
     gap: 1.5rem;
 
-    h2.mypage__container-left-column-title {
+    .mypage__container-left-column-title {
       padding-left: 2rem;
     }
   }
@@ -333,8 +322,6 @@ h2.user-profile-edit-title {
 
 @media (max-width: 768px) {
   :root {
-    --page-font-title-h1: 1.4rem;
-    --page-font-title-h2: 1.1rem;
     --page-font-nav: 1rem;
     --page-font-confirm-message: 1.05rem;
     --box-font-title: 1rem;
@@ -344,7 +331,7 @@ h2.user-profile-edit-title {
     --box-font-email: 0.9rem;
   }
 
-  h1.user-page-title {
+  .user-page-title {
     margin-top: 0.6rem;
     margin-bottom: 1.2rem;
   }
@@ -402,7 +389,7 @@ h2.user-profile-edit-title {
   .mypage__container {
     gap: 1.25rem;
 
-    h2.mypage__container-left-column-title {
+    .mypage__container-left-column-title {
       padding-left: 0.5rem;
     }
   }
@@ -422,8 +409,6 @@ h2.user-profile-edit-title {
 
 @media (max-width: 480px) {
   :root {
-    --page-font-title-h1: 1.2rem;
-    --page-font-title-h2: 1rem;
     --page-font-nav: 0.8rem;
     --page-font-confirm-message: 0.9rem;
     --box-font-title: 0.8rem;
@@ -433,7 +418,7 @@ h2.user-profile-edit-title {
     --box-font-email: 0.75rem;
   }
 
-  h1.user-page-title {
+  .user-page-title {
     margin-top: 0.25rem;
     margin-bottom: 1rem;
   }
@@ -517,8 +502,8 @@ h2.user-profile-edit-title {
       }
     }
 
-    h2.mypage__container-left-column-title, 
-    h2.mypage__container-right-column-title {
+    .mypage__container-left-column-title, 
+    .mypage__container-right-column-title {
       padding-left: 1rem;
     }
 
@@ -564,8 +549,8 @@ h2.user-profile-edit-title {
       }
     }
 
-    h2.mypage__container-left-column-title, 
-    h2.mypage__container-right-column-title {
+    .mypage__container-left-column-title, 
+    .mypage__container-right-column-title {
       padding-left: 0.5rem;
     }
   }
@@ -573,8 +558,6 @@ h2.user-profile-edit-title {
 
 @media (max-width: 320px) {
   :root {
-    --page-font-title-h1: 1rem;
-    --page-font-title-h2: 0.8rem;
     --page-font-nav: 0.65rem;
     --page-font-confirm-message: 0.7rem;
     --box-font-title: 0.65rem;
@@ -628,8 +611,8 @@ h2.user-profile-edit-title {
   .mypage__container {
     gap: 0.75rem;
 
-    h2.mypage__container-left-column-title, 
-    h2.mypage__container-right-column-title {
+    .mypage__container-left-column-title, 
+    .mypage__container-right-column-title {
       padding-left: 0;
     }
 

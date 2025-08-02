@@ -1,54 +1,77 @@
 /*   ページのタイトルの設定   */
-// rowの中で使用
-.page-title-col {
+:root {
+  --page-font-title-h1: 2rem;
+  --page-font-title-h2: 1.6rem;
+}
+
+// h1の共通設定
+h1 {
+  font-size: var(--page-font-title-h1);
+  margin: 0;                        // 初期設定のマージンをリセット
+}
+
+// h2の共通設定
+h2 {
+  font-size: var(--page-font-title-h2);
+  margin: 0;                        // 初期設定のマージンをリセット
+}
+
+// 背景色を付きのタイトル
+.page-title-box-bg {
   margin-bottom: 2rem;              // my-5 相当
   background-color:#f8f9fa;       // 背景色
-}
-// <h4>の見出しタグに使用
-.page-title {
+  padding: 0.5rem 1rem;
   display: flex;
-  align-items: center;              // 垂直方向に中央揃え
-  justify-content: center;          // 水平方向に中央揃え
-  height: 100%;                     // 高さを指定して中央揃えができるようにする
-  font-size: 1.4rem;                // 文字サイズを調整(h4より少し小さめ)
+  align-items: center;
+  justify-content: center;
 }
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  .page-title-col {
+  :root {
+    --page-font-title-h1: 1.6rem;
+    --page-font-title-h2: 1.3rem;
+  }
+
+  .page-title-box-bg {
     margin-bottom: 1.5rem;
+    padding: 0.4rem 0.8rem;
   }
 }
 
 @media (max-width: 768px) {
-  .page-title-col {
-    margin-bottom: 1rem;
+  :root {
+    --page-font-title-h1: 1.4rem;
+    --page-font-title-h2: 1.1rem;
   }
 
-  .page-title {
-    font-size: 1.2rem;
+  .page-title-box-bg {
+    margin-bottom: 1rem;
+    padding: 0.25rem 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .page-title-col {
-    margin-bottom: 0.75rem;
+  :root {
+    --page-font-title-h1: 1.2rem;
+    --page-font-title-h2: 1rem;
   }
-
-  .page-title {
-    font-size: 0.9rem;
+  
+  .page-title-box-bg {
+    margin-bottom: 0.75rem;
   }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  .page-title-col {
+  .page-title-box-bg {
     margin-bottom: 0.5rem;
   }
 }
 
 @media (max-width: 320px) {
-  .page-title {
-    font-size: 0.8rem;
+  :root {
+    --page-font-title-h1: 1rem;
+    --page-font-title-h2: 0.8rem;
   }
 }
