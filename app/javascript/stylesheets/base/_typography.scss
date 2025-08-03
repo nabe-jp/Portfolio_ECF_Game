@@ -16,26 +16,11 @@ h2 {
   margin: 0;                        // 初期設定のマージンをリセット
 }
 
-// 背景色を付きのタイトル
-.page-title-box-bg {
-  margin-bottom: 2rem;              // my-5 相当
-  background-color:#f8f9fa;       // 背景色
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 // レスポンシブ調整
 @media (max-width: 1024px) {
   :root {
     --page-font-title-h1: 1.6rem;
     --page-font-title-h2: 1.3rem;
-  }
-
-  .page-title-box-bg {
-    margin-bottom: 1.5rem;
-    padding: 0.4rem 0.8rem;
   }
 }
 
@@ -44,28 +29,12 @@ h2 {
     --page-font-title-h1: 1.4rem;
     --page-font-title-h2: 1.1rem;
   }
-
-  .page-title-box-bg {
-    margin-bottom: 1rem;
-    padding: 0.25rem 0.5rem;
-  }
 }
 
 @media (max-width: 480px) {
   :root {
     --page-font-title-h1: 1.2rem;
     --page-font-title-h2: 1rem;
-  }
-  
-  .page-title-box-bg {
-    margin-bottom: 0.75rem;
-  }
-}
-
-// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
-@media (max-width: 376px) {
-  .page-title-box-bg {
-    margin-bottom: 0.5rem;
   }
 }
 

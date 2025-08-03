@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
+    <div class="user-posts__title-box col-auto">
+      <h1><%= @user.nickname %>さんの投稿一覧</h1>
+    </div>
     <div class="col-12">
-      <h1 class="user-posts__title">
-        <span class="user-posts__title-text"><%= @user.nickname %>さんの投稿一覧</span>
-      </h1>
       <%= render 'public/shared/user_post/index' %>
     </div>
   </div>

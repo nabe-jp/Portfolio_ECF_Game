@@ -62,17 +62,14 @@
 
 /*    ユーザー投稿一覧の設定    */
 // ページタイトルのボックスの設定
-.user-posts__title {
-  text-align: center;
-  color: #000;
+.user-posts__title-box {
   margin-bottom: 1.5rem;                // タイトル下に余白を追加
-
-  // ページタイトルのテキストの設定
-  .user-posts__title-text {
-    padding: 0.25rem 1rem;
-    background-color: rgba(108, 136, 160, 0.8);
-    border-radius: 8px;
-  }
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(108, 136, 160, 0.8);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 // 投稿のリンクの設定
@@ -229,6 +226,12 @@
     --user-post-font-sub: 0.75rem;
   }
 
+  .user-posts__title-box {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6.5px;
+  }
+
   .user-posts__item {
     .col-sm-6 {
       padding: 0;
@@ -250,6 +253,12 @@
   :root {
     --user-post-font-main: 0.75rem;
     --user-post-font-sub: 0.675rem;
+  }
+
+  .user-posts__title-box {
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
   }
 
   .user-posts__item {
@@ -281,6 +290,12 @@
     --user-post-font-sub: 0.7rem;
   }
 
+  .user-posts__title-box {
+    margin-bottom: 0.65rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 4.5px;
+  }
+
   .user-posts__item {
     .post-list__image-box {
       flex: 0 0 45%;                    // メディアクエリ(768px)で変更した箇所の初期化
@@ -294,7 +309,11 @@
 }
 
 @media (max-width: 480px) {
-
+  .user-posts__title-box {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義

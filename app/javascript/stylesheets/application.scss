@@ -1,6 +1,7 @@
 @use 'base/bootstrap';
 @use 'base/reset';
 @use 'base/empty-message';
+@use 'base/typography';
 @use 'utils/variables';
 @use 'utils/spacing';
 @use 'utils/utilities';
@@ -11,7 +12,6 @@
 @use 'layout/sidebar';
 @use 'layout/main-content';
 @use 'layout/message';
-@use 'layout/layout';
 @use 'layout/auth';
 @use 'layout/background';
 @use 'layout/about';
