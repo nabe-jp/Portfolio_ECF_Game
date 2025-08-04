@@ -1,16 +1,39 @@
 /*    グループに関する設定    */
-.groups__title {
-  text-align: center;
-  margin: 0.5rem 0 1.5rem;
-  color: #000;
+// そのまま使うと幅100％、title-box-wrapper内で使うと文字の長さに応じて可変(背景色の長さに応じて使い分ける)
+.groups__title-box, 
+.groups__sub-title-box {
+  margin-bottom: 1.5rem;                // タイトル下に余白を追加
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.groups__title-text, 
-.group_posts__title-text {
-  display: inline;
+.groups__title-box {
+  padding: 0.75rem 1.5rem;
   background-color: rgba(108, 136, 160, 0.8);
   border-radius: 8px;
-  padding: 0.25rem 1rem;
+}
+
+.groups__sub-title-box {
+  padding: 0.5rem 1rem;
+  color: green;
+  background-color: rgba(240, 240, 240, 0.7);
+  border-radius: 6px;
+}
+
+// wrapper配下で使用する場合、wrapperがマージンボトムを管理するのでboxはマージンボトムを0にする
+.groups__title-box-wrapper {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+
+  .groups__title-box, 
+  .groups__sub-title-box {
+    display: inline-flex;
+    margin-bottom: 0;
+  }
 }
 
 .groups {
@@ -653,6 +676,26 @@
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
+  .groups__title-box, 
+  .groups__sub-title-box,
+  .groups__title-box-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .groups__title-box {
+    padding: 0.5rem 1rem;
+    border-radius: 6.5px;
+  }
+
+  .groups__sub-title-box {
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+  }
+
+  .groups__title-box-wrapper {
+    gap: 0.75rem;
+  }
+
   .group-card {
     --group-card-font-label: 0.9rem;
     --group-card-font-name: 1.1rem;
@@ -676,6 +719,26 @@
 }
 
 @media (max-width: 768px) {
+  .groups__title-box, 
+  .groups__sub-title-box,
+  .groups__title-box-wrapper {
+    margin-bottom: 0.75rem;
+  }
+
+  .groups__title-box {
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+  }
+
+  .groups__sub-title-box {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .groups__title-box-wrapper {
+    gap: 0.5rem;
+  }
+
   .group-card {
     --group-card-font-label: 0.7rem;
     --group-card-font-name: 0.9rem;
@@ -699,6 +762,26 @@
 }
 
 @media (max-width: 480px) {
+  .groups__title-box, 
+  .groups__sub-title-box,
+  .groups__title-box-wrapper {
+    margin-bottom: 0.5rem;
+  }
+
+  .groups__title-box {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .groups__sub-title-box {
+    padding: 0.15rem 0.3rem;
+    border-radius: 3.5px;
+  }
+
+  .groups__title-box-wrapper {
+    gap: 0.25rem;
+  }
+
   .group-card {
     --group-card-font-label: 0.725rem;
     --group-card-font-name: 0.825rem;

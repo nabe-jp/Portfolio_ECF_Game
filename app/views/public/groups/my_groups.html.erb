@@ -1,6 +1,13 @@
-<h2 class="groups__title">
-  <span class="groups__title-text">オーナーのグループ</span>
-</h2>
+<div class="groups__title-box-wrapper">
+  <div class="groups__title-box">
+    <h1>参加グループ一覧</h1>
+  </div>
+
+  <div class="groups__sub-title-box">
+    <h2>オーナーのグループ</h2>
+  </div>
+</div>
+
 <% if @owned_groups.any? %>
   <div class="my-groups-list">
     <% @owned_groups.each do |group| %>
@@ -28,11 +35,12 @@
   </div>
 <% end %>
 
-<hr>
+<div class="groups__title-box-wrapper mt-3 mt-md-5">
+  <div class="groups__sub-title-box">
+    <h2>参加中のグループ</h2>
+  </div>
+</div>
 
-<h2 class="groups__title">
-  <span class="groups__title-text">参加中のグループ</span>
-</h2>
 <% if @joined_groups.any? %>
   <div class="my-groups-list">
     <% @joined_groups.each do |group| %>

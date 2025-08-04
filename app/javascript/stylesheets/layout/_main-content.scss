@@ -27,6 +27,14 @@
   .main-content {
     padding-bottom: env(safe-area-inset-bottom);  // iOSなどでナビゲーションバーに被らないようするに設定
   }
+
+  // デフォルトで左右に15pxの余白があるので、すべてのcolを対象に余白を変更する
+  // ^=は指定した文字列で始まる属性値、*=は指定した文字列を含む属性値(" col"はスペース＋colを対象)
+  [class^="col"],
+  [class*=" col"] {
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -42,7 +50,8 @@
     padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));  // padding分も足す
   }
 
-  .col-12 {
+  [class^="col"],
+  [class*=" col"] {
     padding: 0;
   }
 }
