@@ -11,8 +11,7 @@
 .dashboard-posts__empty-message, 
 .groups__empty-message, 
 .group-posts__empty-message, 
-.group-members___empty-message, 
-.my-groups-list__empty-message {
+.group-members___empty-message {
   display: inline-block;              // 幅を文字列に合わせる
   padding: 0.25rem 1rem;
   font-size: var(--empty-message-font);

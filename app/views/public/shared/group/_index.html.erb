@@ -1,14 +1,14 @@
-<% if @groups.any? %>
+<% if groups.any? %>
   <div class="groups">
-    <% @groups.each do |group| %>
+    <% groups.each do |group| %>
       <%= link_to group_path(group), class: "group-card" do %>
         <div class="group-card__image">
           <%= image_tag(group.group_image, class: "group-card__image-img img-fluid") %>
         </div>
         <div class="group-card__content">
-          <p class="group-posts__label">【グループ名】</p>
+          <p class="group-card__labe">【グループ名】</p>
           <p class="group-card__name"><%= group.name %></p>
-          <p class="group-posts__label">【説明】</p>
+          <p class="group-card__labe">【説明】</p>
           <p class="group-card__description"><%= group.description %></p>
 
           <div class="group-card__meta">
@@ -22,10 +22,10 @@
     <% end %>
   </div>
 
-    <%= paginate @groups %>
+  <%= paginate groups, param_name: pagination_param %>
 
 <% else %>
   <div class="text-center">
-    <p class="groups__empty-message">表示出来るグループはありません</p>
+    <p class="groups__empty-message"><%= empty_message %></p>
   </div>
 <% end %>

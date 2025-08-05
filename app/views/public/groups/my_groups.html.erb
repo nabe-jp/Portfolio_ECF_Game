@@ -2,68 +2,26 @@
   <div class="groups__title-box">
     <h1>参加グループ一覧</h1>
   </div>
-
-  <div class="groups__sub-title-box">
-    <h2>オーナーのグループ</h2>
-  </div>
 </div>
 
-<% if @owned_groups.any? %>
-  <div class="my-groups-list">
-    <% @owned_groups.each do |group| %>
-      <%= link_to group_dashboard_path(group), class: "my-groups-card" do %>
-        <div class="my-groups-card__center">
-          <div class="my-groups-card__image-wrapper">
-            <%= image_tag(group.group_image, class: "my-groups-card__image") %>
-          </div>
-          <div class="my-groups-card__info">
-            <h3 class="my-groups-card__name"><%= group.name %></h3>
-          </div>
-        </div>
-        <div class="my-groups-card__description">
-          <%= truncate(group.description, length: 100) %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <%= paginate @owned_groups, param_name: :owned_page %>
+<div class="container my-groups-page">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#owner_groups">オーナーのグループ</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#member_groups">メンバーとして参加中のグループ</a>
+    </li>
+  </ul>
   
-<% else %>
-  <div class="text-center">
-    <p class="my-groups-list__empty-message">作成したグループはありません</p>
-  </div>
-<% end %>
-
-<div class="groups__title-box-wrapper mt-3 mt-md-5">
-  <div class="groups__sub-title-box">
-    <h2>参加中のグループ</h2>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" id="owner_groups">
+      <%= render 'public/shared/group/index', groups: @owned_groups,
+          empty_message: "作成したグループはありません", pagination_param: :owned_page %>
+    </div>
+    <div class="tab-pane fade" id="member_groups">
+      <%= render 'public/shared/group/index', groups: @joined_groups, 
+        empty_message: "メンバーとして参加しているグループはありません", pagination_param: :joined_page %>
+    </div>
   </div>
 </div>
-
-<% if @joined_groups.any? %>
-  <div class="my-groups-list">
-    <% @joined_groups.each do |group| %>
-      <%= link_to group_dashboard_path(group), class: "my-groups-card" do %>
-        <div class="my-groups-card__center">
-          <div class="my-groups-card__image-wrapper">
-            <%= image_tag(group.group_image, class: "my-groups-card__image") %>
-          </div>
-          <div class="my-groups-card__info">
-            <h3 class="my-groups-card__name"><%= group.name %></h3>
-          </div>
-        </div>
-        <div class="my-groups-card__description">
-          <%= truncate(group.description, length: 100) %>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <%= paginate @joined_groups, param_name: :joined_page %>
-
-<% else %>
-  <div class="text-center">
-    <p class="my-groups-list__empty-message">他のグループに参加していません</p>
-  </div>
-<% end %>

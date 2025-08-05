@@ -4,7 +4,8 @@
       <h1>グループ一覧</h1>
     </div>
     <div class="col-12">
-      <%= render 'public/shared/group/index' %>
+      <%= render 'public/shared/group/index', groups: @groups,
+        empty_message: "表示出来るグループはありません", pagination_param: :group_page %>
     </div>
   </div>
 </div>

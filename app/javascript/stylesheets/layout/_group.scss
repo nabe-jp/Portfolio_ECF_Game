@@ -86,7 +86,7 @@
     position: relative;                 // 子要素の絶対位置基準
   }
   
-  .group-posts__label,
+  .group-card__labe,
   .group-card__name, 
   .group-card__description, 
   .group-card__date {
@@ -95,7 +95,7 @@
     box-sizing: border-box;
   }
   
-  .group-posts__label,
+  .group-card__labe,
   .group-card__name, 
   .group-card__date {
     display: block;
@@ -103,28 +103,22 @@
     white-space: nowrap;
   }
   
-  .group-posts__label, 
+  .group-card__labe, 
   .group-card__date {
-    height: 15%;
+    height: 12%;
   }
-  
-  .group-posts__label {
-    align-items: flex-end;
-    font-size: var(--group-card-font-label);
-  }
-  
+
   .group-card__name, 
   .group-card__description {
     padding-left: 0.8rem;
   }
-  
-  .group-card__name, 
-  .group-card__date {
-    align-items: center;
+
+  .group-card__labe {
+    font-size: var(--group-card-font-label);
   }
   
   .group-card__name  {
-    height: 15%;
+    height: 22%;
     font-weight: bold;
     font-size: var(--group-card-font-name);
   }
@@ -224,88 +218,12 @@
   padding-left: 0.5rem;
 }
 
-.my-groups-list {
-  display: grid;
-  grid-template-columns: 1fr;
-
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.my-groups-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: 180px;
-  padding: 1rem;
-  margin: 1rem;
-  text-decoration: none;
-  background-color: rgba(240, 250, 255, 0.7);
-  border: 1px solid #000;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: background-color 0.3s, transform 0.3s;
-
-  &:hover {
-    background-color: #007bff;
-    text-decoration: none !important;
-    transform: scale(1.03);
-
-    .my-groups-card__description,
-    .my-groups-card__name {
-      color: #ffffff;
-    }
-  }
-
-  &__center {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  }
-
-  &__image-wrapper {
-    width: 60px;
-    height: 50px;
-    margin-right: 1rem;
-    flex-shrink: 0;
-
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
-      object-fit: cover;
-      display: block;
-    }
-  }
-
-  &__info {
-    flex: 1;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-  }
-
-  &__name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #343a40;
-    margin: 0;
-    line-height: 1.2;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &__description {
-    font-size: 0.9rem;
-    color: #495057;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    margin-top: 1rem;
+.my-groups-page {
+  --my-groups-page-font-nav: 1.3rem;
+  
+  .nav-tabs {
+    font-size: var(--my-groups-page-font-nav);
+    margin-bottom: 1rem;
   }
 }
 
@@ -609,7 +527,7 @@
 }
 
 // はみ出した部分を隠し...表示、大きさにパディングやマージンも含める
-.group-posts__item-label, 
+.group-posts__labe, 
 .group-posts__user, 
 .group-posts__title, 
 .group-posts__description, 
@@ -634,7 +552,7 @@
 .group-posts__description {
   font-size: 1rem;
 }
-.group-posts__item-label, 
+.group-posts__labe, 
 .group-posts__date {
   font-size: 0.8rem;
 }
@@ -647,13 +565,13 @@
 }
 
 // 高さと折り返しのなし
-.group-posts__item-label, 
+.group-posts__labe, 
 .group-posts__user, 
 .group-posts__title {
   height: 15%;
   white-space: nowrap;                // 1行で表示
 }
-.group-posts__item-label, 
+.group-posts__labe, 
 .group-posts__date {
   height: 10%;
 }
@@ -716,6 +634,10 @@
       height: 200px;
     }
   }
+
+  .my-groups-page {
+    --my-groups-page-font-nav: 1.1rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -757,6 +679,18 @@
 
     .group-card__content {
       height: 140px;
+    }
+  }
+
+  .my-groups-page {
+    --my-groups-page-font-nav: 1rem;
+
+    .nav-tabs {
+      margin-bottom: 0.75rem;
+    }
+
+    .nav-link {
+      padding: 0.4rem 0.8rem;
     }
   }
 }
@@ -808,6 +742,18 @@
       bottom: 0;
     }
   }
+
+  .my-groups-page {
+    --my-groups-page-font-nav: 0.8rem;
+
+    .nav-tabs {
+      margin-bottom: 0.5rem;
+    }
+
+    .nav-link {
+      padding: 0.3rem 0.6rem;
+    }
+  }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
@@ -845,6 +791,14 @@
 
     .group-card__content {
       height: 100px;
+    }
+  }
+
+  .my-groups-page {
+    --my-groups-page-font-nav: 0.65rem;
+
+    .nav-link {
+      padding: 0.25rem 0.5rem;
     }
   }
 }

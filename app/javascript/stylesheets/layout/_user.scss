@@ -1,7 +1,7 @@
 /*    ユーザーページの設定    */
 :root {
-  --page-font-nav: 1.3rem;
-  --page-font-confirm-message: 1.4rem;
+  --user-profile-user-profile-page-font-nav: 1.3rem;
+  --user-check-page-font-confirm-message: 1.4rem;
   --box-font-title: 1.3rem;
   --box-font-nickname: 1.2rem;
   --box-font-bio: 1.2rem;
@@ -20,7 +20,7 @@
 // プロフィールページの各種設定
 .user-profile-page {
   .nav-tabs {
-    font-size: var(--page-font-nav);
+    font-size: var(--user-profile-user-profile-page-font-nav);
     margin-bottom: 1rem;
   }
 
@@ -231,7 +231,7 @@
 /*    ユーザー退会確認ページの設定    */
 .user-check-page {
   p.confirm-message {
-    font-size: var(--page-font-confirm-message);
+    font-size: var(--user-check-page-font-confirm-message);
     margin-bottom: 2rem;
   }
 }
@@ -246,8 +246,8 @@
 // レスポンシブ調整
 @media (max-width: 1024px) {
   :root {
-    --page-font-nav: 1.1rem;
-    --page-font-confirm-message: 1.2rem;
+    --user-profile-user-profile-page-font-nav: 1.1rem;
+    --user-check-page-font-confirm-message: 1.2rem;
     --box-font-title: 1.1rem;
     --box-font-nickname: 1rem;
     --box-font-bio: 1rem;
@@ -322,8 +322,8 @@
 
 @media (max-width: 768px) {
   :root {
-    --page-font-nav: 1rem;
-    --page-font-confirm-message: 1.05rem;
+    --user-profile-user-profile-page-font-nav: 1rem;
+    --user-check-page-font-confirm-message: 1.05rem;
     --box-font-title: 1rem;
     --box-font-nickname: 0.9rem;
     --box-font-bio: 0.9rem;
@@ -336,7 +336,7 @@
     margin-bottom: 1.2rem;
   }
   
-  .user-profile-page{
+  .user-profile-page {
     .nav-tabs {
       margin-bottom: 0.75rem;
     }
@@ -409,8 +409,8 @@
 
 @media (max-width: 480px) {
   :root {
-    --page-font-nav: 0.8rem;
-    --page-font-confirm-message: 0.9rem;
+    --user-profile-user-profile-page-font-nav: 0.8rem;
+    --user-check-page-font-confirm-message: 0.9rem;
     --box-font-title: 0.8rem;
     --box-font-nickname: 0.75rem;
     --box-font-bio: 0.75rem;
@@ -558,8 +558,8 @@
 
 @media (max-width: 320px) {
   :root {
-    --page-font-nav: 0.65rem;
-    --page-font-confirm-message: 0.7rem;
+    --user-profile-user-profile-page-font-nav: 0.65rem;
+    --user-check-page-font-confirm-message: 0.7rem;
     --box-font-title: 0.65rem;
     --box-font-nickname: 0.625rem;
     --box-font-bio: 0.625rem;
