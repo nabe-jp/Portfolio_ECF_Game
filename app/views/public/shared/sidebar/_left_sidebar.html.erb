@@ -16,17 +16,8 @@
       <li><%= render "public/shared/link/links", mypage: true %></li>
       
       <li><%= render "public/shared/link/links", settings: true %></li> 
+
+      <li><%= render "public/shared/link/links", my_groups: true %></li>
     </ul>
   <% end %>
-
-  <div class="sidebar__title">コミュニティ</div>
-  <ul class="sidebar__links">
-    <li><%= render "public/shared/link/links", groups_index: true %></li>
-
-    <li><%= render "public/shared/link/links", my_groups: true %></li>
-
-    <li><%= render "public/shared/link/links", group_hosting_post: true %></li>
-
-    <li><%= render "public/shared/link/links", new_group: true %></li>
-  </ul>
 </div>
