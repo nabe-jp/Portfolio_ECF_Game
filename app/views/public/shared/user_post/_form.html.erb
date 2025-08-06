@@ -1,20 +1,21 @@
 <% if @user_post.present? && @user_post.user.present? %>
-  <%= form_with model: @user_post, url: form_action_url, method: form_method, local: true do |f| %>
+  <%= form_with model: @user_post, url: form_action_url, method: form_method, local: true, 
+    html: { class: "user-post-form" } do |f| %>
 
-    <div class="post-form__title-box">
+    <div class="user-post-form__title-box">
       <%= f.label :title, "投稿のタイトル" %>
-      <%= f.text_field :title, class: "post-form__title-input", 
+      <%= f.text_field :title, class: "user-post-form__title-input", 
         placeholder: user_post_title_placeholder, maxlength: UserPost::TITLE_MAX_LENGTH %>
     </div>
   
-    <div class="post-form__image-box">
+    <div class="user-post-form__image-box">
       <%= f.label :user_post_image, "投稿画像" %>
-      <%= f.file_field :user_post_image, class: "post-form__image-input" %>
+      <%= f.file_field :user_post_image, class: "user-post-form__image-input" %>
     </div>
   
-    <div class="post-form__body-box">
+    <div class="user-post-form__body-box">
       <%= f.label :body, "投稿の内容" %>
-      <%= f.text_area :body, class: "post-form__body-input", 
+      <%= f.text_area :body, class: "user-post-form__body-input", 
         placeholder: user_post_body_placeholder, maxlength: UserPost::BODY_MAX_LENGTH %>
     </div>
 

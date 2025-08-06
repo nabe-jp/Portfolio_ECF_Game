@@ -5,59 +5,61 @@
 }
 
 // 投稿フォームのボックスの設定
-.post-form__container {
+.user-post-form {
+  --user-post-form-font-main: 1rem;
+  --user-post-form-font-sub: 0.9rem;
+
   max-width: 600px;
   margin: 0 auto;                     // 上下左右中央揃え
   padding: 2rem;                      // 内側の余白
-}
 
-// 各ボックスの設定
-.post-form__title-box,
-.post-form__image-box,
-.post-form__body-box {
-  margin-bottom: 1.5rem;              // 各項目間の余白
-}
+  // 各ボックスの設定
+  &__title-box,
+  &__image-box,
+  &__body-box {
+    margin-bottom: 1.5rem;              // 各項目間の余白
+  }
 
-// 各ラベルの設定
-.post-form__title-box label,
-.post-form__image-box label,
-.post-form__body-box label {
-  display: block;                     // ラベルをブロック要素にして、上の内容と改行を確保
-  font-weight: bold;                  // ラベルを太字に
-  margin-bottom: 0.5rem;              // ラベルと入力フィールドの間隔
-}
+  // 各ラベルの設定
+  &__title-box label,
+  &__image-box label,
+  &__body-box label {
+    width: 100%;
+    display: block;                     // ラベルをブロック要素にして、上の内容と改行を確保
+    font-weight: bold;                  // ラベルを太字
+    font-size: var(--user-post-form-font-main);
+    margin-bottom: 0.5rem;              // ラベルと入力フィールドの間隔
+    box-sizing: border-box;
+  }
 
-// 投稿タイトルの設定
-.post-form__title-input {
-  width: 100%;
-  padding: 5px 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
+  // 入力フォーム内の共通設定
+  &__title-input, 
+  &__image-input, 
+  &__body-input {
+    width: 100%;
+    font-size: var(--user-post-form-font-sub);
+  }
 
-// 画像の入力フィールド
-.post-form__image-input {
-  width: 100%;
-  padding: 0;                         // 内側の余白をなくす
-  font-size: 1rem;                    // フォントサイズの調整
-  color: #333;
-  border: none;                       // 枠線を消す
-  background: none;                   // 背景を消す
-  box-shadow: none;                   // ボックスシャドウを消す
-}
+  &__title-input, 
+  &__body-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
 
-// 投稿内容の設定
-.post-form__body-input {
-  width: 100%;
-  padding: 5px 10px;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  height: 80px;
-  margin-bottom: 1rem;
-  box-sizing: border-box;
+  // 画像の入力フィールド
+  &__image-input {
+    padding: 0;                         // 内側の余白をなくす
+    color: #333;
+    border: none;                       // 枠線を消す
+    background: none;                   // 背景を消す
+    box-shadow: none;                   // ボックスシャドウを消す
+  }
+
+  // 投稿内容の設定
+  &__body-input {
+    height: 80px;
+  }
 }
 
 /*    ユーザー投稿一覧の設定    */
@@ -226,6 +228,11 @@
     --user-post-font-sub: 0.75rem;
   }
 
+  .user-post-form {
+    --user-post-form-font-main: 0.9rem;
+    --user-post-form-font-sub: 0.8rem;
+  }
+
   .user-posts__title-box {
     margin-bottom: 1rem;
     padding: 0.5rem 1rem;
@@ -253,6 +260,11 @@
   :root {
     --user-post-font-main: 0.75rem;
     --user-post-font-sub: 0.675rem;
+  }
+
+  .user-post-form {
+    --user-post-form-font-main: 0.8rem;
+    --user-post-form-font-sub: 0.7rem;
   }
 
   .user-posts__title-box {
@@ -325,5 +337,8 @@
 }
 
 @media (max-width: 320px) {
-
+  .user-post-form {
+    --user-post-form-font-main: 0.75rem;
+    --user-post-form-font-sub: 0.7rem;
+  }
 }

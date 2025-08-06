@@ -16,7 +16,7 @@ class Public::GroupsController < ApplicationController
   before_action :redirect_if_member, only: [:show]
 
   def index
-    @groups = Group.active_groups_desc.page(params[:page])
+    @groups = Group.active_groups_desc.page(params[:group_page])
   end
 
   def show
@@ -81,8 +81,8 @@ class Public::GroupsController < ApplicationController
         .merge(Group.active_groups_desc).page(params[:joined_page]).per(6)
   end
 
-   # 削除確認画面
-   def confirm_destroy; end
+  # 削除確認画面
+  def confirm_destroy; end
 
   private
 
