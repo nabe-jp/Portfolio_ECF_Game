@@ -1,9 +1,4 @@
 /*    投稿の設定    */
-:root {
-  --user-post-font-main: 1rem;
-  --user-post-font-sub: 0.8rem;
-}
-
 // 投稿フォームのボックスの設定
 .user-post-form {
   --user-post-form-font-main: 1rem;
@@ -76,6 +71,9 @@
 
 // 投稿のリンクの設定
 .user-posts__item {
+  --user-post-font-main: 1rem;
+  --user-post-font-sub: 0.8rem;
+
   .user-posts__link {
     display: flex;
     flex-direction: row;                // 横並びに変更
@@ -223,11 +221,6 @@
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  :root {
-    --user-post-font-main: 0.9rem;
-    --user-post-font-sub: 0.75rem;
-  }
-
   .user-post-form {
     --user-post-form-font-main: 0.9rem;
     --user-post-form-font-sub: 0.8rem;
@@ -240,6 +233,9 @@
   }
 
   .user-posts__item {
+    --user-post-font-main: 0.9rem;
+    --user-post-font-sub: 0.75rem;
+
     .col-sm-6 {
       padding: 0;
     }
@@ -257,11 +253,6 @@
 }
 
 @media (max-width: 768px) {
-  :root {
-    --user-post-font-main: 0.75rem;
-    --user-post-font-sub: 0.675rem;
-  }
-
   .user-post-form {
     --user-post-form-font-main: 0.8rem;
     --user-post-form-font-sub: 0.7rem;
@@ -274,6 +265,9 @@
   }
 
   .user-posts__item {
+    --user-post-font-main: 0.75rem;
+    --user-post-font-sub: 0.675rem;
+
     .user-posts__link {
       height: 150px;
       padding: 0.25rem;
@@ -297,11 +291,6 @@
 
 // viewでsmでのブレイクポイントを設定し、1列に2個表示から1個表示に変更しているため、対応するSCSSを追加
 @media (max-width: 576px) {
-  :root {
-    --user-post-font-main: 0.8rem;
-    --user-post-font-sub: 0.7rem;
-  }
-
   .user-posts__title-box {
     margin-bottom: 0.65rem;
     padding: 0.35rem 0.7rem;
@@ -309,6 +298,9 @@
   }
 
   .user-posts__item {
+    --user-post-font-main: 0.8rem;
+    --user-post-font-sub: 0.7rem;
+
     .post-list__image-box {
       flex: 0 0 45%;                    // メディアクエリ(768px)で変更した箇所の初期化
     }
@@ -330,7 +322,7 @@
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  :root {
+  .user-posts__item {
     --user-post-font-main: 0.75rem;
     --user-post-font-sub: 0.675rem;
   }

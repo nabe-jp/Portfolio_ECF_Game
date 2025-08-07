@@ -1,14 +1,4 @@
 /*    ユーザーページの設定    */
-:root {
-  --user-profile-user-profile-page-font-nav: 1.3rem;
-  --user-check-page-font-confirm-message: 1.4rem;
-  --box-font-title: 1.3rem;
-  --box-font-nickname: 1.2rem;
-  --box-font-bio: 1.2rem;
-  --box-font-name: 1.2rem;
-  --box-font-email: 1.2rem;
-}
-
 /*    共通設定    */
 // タイトル設定
 .user-page-title {
@@ -19,8 +9,13 @@
 /*    プロフィールページの設定    */
 // プロフィールページの各種設定
 .user-profile-page {
+  --user-profile-page-font-nav: 1.3rem;
+  --user-profile-box-font-title: 1.3rem;
+  --user-profile-box-font-nickname: 1.2rem;
+  --user-profile-box-font-bio: 1.2rem;
+
   .nav-tabs {
-    font-size: var(--user-profile-user-profile-page-font-nav);
+    font-size: var(--user-profile-page-font-nav);
     margin-bottom: 1rem;
   }
 
@@ -71,7 +66,7 @@
   // ニックネーム、自己紹介のタイトルの設定
   .profile-box__title {
     font-weight: bold;
-    font-size: var(--box-font-title);
+    font-size: var(--user-profile-box-font-title);
   }
 
   // ニックネームの設定
@@ -79,30 +74,30 @@
     white-space: nowrap;                // 折り返しなし
     overflow: hidden;
     text-overflow: ellipsis;            // 省略記号を表示
-    font-size: var(--box-font-nickname);
+    font-size: var(--user-profile-box-font-nickname);
   }
 
   // 自己紹介の設定
   .profile-box__bio {
     white-space: normal;                // 折り返しあり
-    font-size: var(--box-font-bio);
+    font-size: var(--user-profile-box-font-bio);
   }
 }
 
 /*    公開プロフィールの編集ページの設定    */
 // 公開プロフィールのフォーム内の設定
 .user-profile-edit {
-  --edit-font-label: 1.1rem;
-  --edit-font-input: 1rem;
-  --edit-font-file-input: 1rem;
-  --edit-font-textarea: 1rem;
+  --user-profile-edit-font-label: 1.1rem;
+  --user-profile-edit-font-input: 1rem;
+  --user-profile-edit-font-file-input: 1rem;
+  --user-profile-edit-font-textarea: 1rem;
 
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 
   label {
-    font-size: var(--edit-font-label);
+    font-size: var(--user-profile-edit-font-label);
     font-weight: bold;
     margin: 0;                        // 初期設定のマージンをリセット
   }
@@ -136,11 +131,11 @@
   }
 
   &__input {
-    font-size: var(--edit-font-input);
+    font-size: var(--user-profile-edit-font-input);
   }
 
   &__file-input {
-    font-size: var(--edit-font-file-input);
+    font-size: var(--user-profile-edit-font-file-input);
     border: none;
     padding-left: 0;
   }
@@ -148,7 +143,7 @@
   &__textarea {
     height: 90px;
     resize: vertical;                 // ユーザーがtextareaの高さだけを変更でき、横幅は固定
-    font-size: var(--edit-font-textarea);
+    font-size: var(--user-profile-edit-font-textarea);
   }
 
   &__bio-section {
@@ -166,6 +161,9 @@
 /*    マイページの設定    */
 // マイページ全体のレイアウト
 .mypage__container {
+  --user-profile-box-font-name: 1.2rem;
+  --user-profile-box-font-email: 1.2rem;
+  
   display: flex;
   justify-content: space-between;     // 左右に分ける
   gap: 2rem;
@@ -202,12 +200,12 @@
 
     // 名前の設定
     .profile-box__name {
-      font-size: var(--box-font-name);
+      font-size: var(--user-profile-box-font-name);
     }
     
     // メールアドレスの設定
     .profile-box__email {
-      font-size: var(--box-font-email);
+      font-size: var(--user-profile-box-font-email);
     }
   }
 
@@ -230,6 +228,8 @@
 
 /*    ユーザー退会確認ページの設定    */
 .user-check-page {
+  --user-check-page-font-confirm-message: 1.4rem;
+
   p.confirm-message {
     font-size: var(--user-check-page-font-confirm-message);
     margin-bottom: 2rem;
@@ -245,23 +245,17 @@
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  :root {
-    --user-profile-user-profile-page-font-nav: 1.1rem;
-    --user-check-page-font-confirm-message: 1.2rem;
-    --box-font-title: 1.1rem;
-    --box-font-nickname: 1rem;
-    --box-font-bio: 1rem;
-    --box-font-name: 1rem;
-    --box-font-email: 1rem;
-  }
-
-
   .user-page-title {
     margin-top: 0.75rem;
     margin-bottom: 1.5rem;
   }
 
   .user-profile-page {
+    --user-profile-page-font-nav: 1.1rem;
+    --user-profile-box-font-title: 1.1rem;
+    --user-profile-box-font-nickname: 1rem;
+    --user-profile-box-font-bio: 1rem;
+
     .profile-box {
       padding: 1.5rem 0.75rem;
       gap: 2rem;
@@ -281,10 +275,10 @@
   }
 
   .user-profile-edit {
-    --edit-font-label: 1rem;
-    --edit-font-input: 0.9rem;
-    --edit-font-file-input: 0.9rem;
-    --edit-font-textarea: 0.9rem;
+    --user-profile-edit-font-label: 1rem;
+    --user-profile-edit-font-input: 0.9rem;
+    --user-profile-edit-font-file-input: 0.9rem;
+    --user-profile-edit-font-textarea: 0.9rem;
 
     gap: 1.25rem;
 
@@ -294,6 +288,9 @@
   }
 
   .mypage__container {
+    --user-profile-box-font-name: 1rem;
+    --user-profile-box-font-email: 1rem;
+
     gap: 1.5rem;
 
     .mypage__container-left-column-title {
@@ -308,6 +305,8 @@
   }
 
   .user-check-page {
+    --user-check-page-font-confirm-message: 1.2rem;
+
     p.confirm-message {
       margin-bottom: 1.5rem;
     }
@@ -321,22 +320,17 @@
 }
 
 @media (max-width: 768px) {
-  :root {
-    --user-profile-user-profile-page-font-nav: 1rem;
-    --user-check-page-font-confirm-message: 1.05rem;
-    --box-font-title: 1rem;
-    --box-font-nickname: 0.9rem;
-    --box-font-bio: 0.9rem;
-    --box-font-name: 0.9rem;
-    --box-font-email: 0.9rem;
-  }
-
   .user-page-title {
     margin-top: 0.6rem;
     margin-bottom: 1.2rem;
   }
   
   .user-profile-page {
+    --user-profile-page-font-nav: 1rem;
+    --user-profile-box-font-title: 1rem;
+    --user-profile-box-font-nickname: 0.9rem;
+    --user-profile-box-font-bio: 0.9rem;
+
     .nav-tabs {
       margin-bottom: 0.75rem;
     }
@@ -364,10 +358,10 @@
   }
 
   .user-profile-edit {
-    --edit-font-label: 0.9rem;
-    --edit-font-input: 0.8rem;
-    --edit-font-file-input: 0.8rem;
-    --edit-font-textarea: 0.8rem;
+    --user-profile-edit-font-label: 0.9rem;
+    --user-profile-edit-font-input: 0.8rem;
+    --user-profile-edit-font-file-input: 0.8rem;
+    --user-profile-edit-font-textarea: 0.8rem;
 
     gap: 1rem;
 
@@ -387,6 +381,9 @@
   }
 
   .mypage__container {
+    --user-profile-box-font-name: 0.9rem;
+    --user-profile-box-font-email: 0.9rem;
+
     gap: 1.25rem;
 
     .mypage__container-left-column-title {
@@ -401,6 +398,8 @@
   }
 
   .user-check-page {
+    --user-check-page-font-confirm-message: 1.05rem;
+
     p.confirm-message {
       margin-bottom: 1.2rem;
     }
@@ -408,22 +407,17 @@
 }
 
 @media (max-width: 480px) {
-  :root {
-    --user-profile-user-profile-page-font-nav: 0.8rem;
-    --user-check-page-font-confirm-message: 0.9rem;
-    --box-font-title: 0.8rem;
-    --box-font-nickname: 0.75rem;
-    --box-font-bio: 0.75rem;
-    --box-font-name: 0.75rem;
-    --box-font-email: 0.75rem;
-  }
-
   .user-page-title {
     margin-top: 0.25rem;
     margin-bottom: 1rem;
   }
 
   .user-profile-page {
+    --user-profile-page-font-nav: 0.8rem;
+    --user-profile-box-font-title: 0.8rem;
+    --user-profile-box-font-nickname: 0.75rem;
+    --user-profile-box-font-bio: 0.75rem;
+
     .nav-tabs {
       margin-bottom: 0.5rem;
     }
@@ -447,10 +441,10 @@
   }
 
   .user-profile-edit {
-    --edit-font-label: 0.75rem;
-    --edit-font-input: 0.7rem;
-    --edit-font-file-input: 0.7rem;
-    --edit-font-textarea: 0.7rem;
+    --user-profile-edit-font-label: 0.75rem;
+    --user-profile-edit-font-input: 0.7rem;
+    --user-profile-edit-font-file-input: 0.7rem;
+    --user-profile-edit-font-textarea: 0.7rem;
 
     gap: 0.75rem;
 
@@ -475,6 +469,9 @@
   }
 
   .mypage__container {
+    --user-profile-box-font-name: 0.75rem;
+    --user-profile-box-font-email: 0.75rem;
+
     flex-direction: column;           // 縦並びに変更
     align-items: center;              // 縦方向の中央揃え
     gap: 1rem;
@@ -534,6 +531,8 @@
   }
 
   .user-check-page {
+    --user-check-page-font-confirm-message: 0.9rem;
+
     p.confirm-message {
       margin-bottom: 1rem;
     }
@@ -557,17 +556,12 @@
 }
 
 @media (max-width: 320px) {
-  :root {
-    --user-profile-user-profile-page-font-nav: 0.65rem;
-    --user-check-page-font-confirm-message: 0.7rem;
-    --box-font-title: 0.65rem;
-    --box-font-nickname: 0.625rem;
-    --box-font-bio: 0.625rem;
-    --box-font-name: 0.625rem;
-    --box-font-email: 0.625rem;
-  }
-
   .user-profile-page {
+    --user-profile-page-font-nav: 0.65rem;
+    --user-profile-box-font-title: 0.65rem;
+    --user-profile-box-font-nickname: 0.625rem;
+    --user-profile-box-font-bio: 0.625rem;
+    
     .nav-link {
       padding: 0.25rem 0.5rem;
     }
@@ -586,10 +580,10 @@
   }
 
   .user-profile-edit {
-    --edit-font-label: 0.725rem;
-    --edit-font-input: 0.7rem;
-    --edit-font-file-input: 0.65rem;
-    --edit-font-textarea: 0.7rem;
+    --user-profile-edit-font-label: 0.725rem;
+    --user-profile-edit-font-input: 0.7rem;
+    --user-profile-edit-font-file-input: 0.65rem;
+    --user-profile-edit-font-textarea: 0.7rem;
 
     gap: 0.5rem;
 
@@ -609,6 +603,9 @@
   }
 
   .mypage__container {
+    --user-profile-box-font-name: 0.625rem;
+    --user-profile-box-font-email: 0.625rem;
+
     gap: 0.75rem;
 
     .mypage__container-left-column-title, 
@@ -631,5 +628,9 @@
     .btn-base {
       width: 50%;
     }
+  }
+
+  .user-check-page {
+    --user-check-page-font-confirm-message: 0.7rem;
   }
 }
