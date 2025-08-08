@@ -9,7 +9,7 @@
   --footer-height: 0vh;             // フッターの高さ(フッターがないので0)
 }
 
-// @supports (height: 100dvh → このブラウザがheight: 100dvhに対応していれば中のルールを適用する
+// @supports (height: 100dvh) → このブラウザがheight: 100dvhに対応していれば中のルールを適用する
 @supports (height: 100dvh) {
   :root {
     --full-height: 100dvh;

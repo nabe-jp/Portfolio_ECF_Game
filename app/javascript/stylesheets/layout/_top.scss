@@ -1,571 +1,571 @@
 /*    トップページの設定    */
-:root {
-  --homes-top-font-title-notice: 2rem;
-  --homes-top-font-title: 2rem;
-  --homes-top-font-scrollable-title: 1.2rem;
-  --homes-top-font-scrollable-text: 1.1rem;
-  --homes-top-font-scrollable-date: 1rem;
-  --homes-top-font-post-title: 1.2rem;
-  --homes-top-font-base: 0.9rem;
-  --homes-top-font-post-date: 0.8rem;
-}
+.homes-top-page-font {
+  --title-notice: 2rem;
+  --title: 2rem;
+  --scrollable-title: 1.2rem;
+  --scrollable-text: 1.1rem;
+  --scrollable-date: 1rem;
+  --post-title: 1.2rem;
+  --post-base: 0.9rem;
+  --post-date: 0.8rem;
 
-// 背景画像のボックス設定
-.image-container {
-  position: relative;                 // 子要素のabsolute配置の基準にする
-  margin: 0 auto;                     // 左右のマージンを自動にして中央寄せ
-  display: flex;
-  flex-direction: column;             // 縦並びにする
-  justify-content: center;            // 横方向の中央揃え
-  align-items: center;                // 縦方向の中央揃え
-  background-size: contain;           // 画像は縦横比を維持して全体が収まる
-  background-position: center;        // 背景画像の表示位置を中央に配置
-  background-repeat: no-repeat;       // 繰り返さず1枚だけ表示
-  overflow: hidden;                   // 画像がはみ出さないように設定
-}
-
-// 背景画像の設定(notice)
-.image-container-notice {
-  background-image: url('../images/notice_board.png');
-  width: 100%;                        // 画面幅に対して100%の横幅
-  max-width: 700px;                   // 最大幅を700pxに制限(大画面対応)
-  height: 700px;                      // 高さを固定で700pxに設定
-
-  // お知らせタイトルのスタイル
-  .notice-title {
-    position: absolute;
-    top: 12%;                          // 背景画像に応じて位置を調整
-    font-size: var(--homes-top-font-title-notice);
-    font-weight: bold;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 1);
-    color: #99CC99;
+  // 背景画像のボックス設定
+  .image-container {
+    position: relative;                 // 子要素のabsolute配置の基準にする
+    margin: 0 auto;                     // 左右のマージンを自動にして中央寄せ
+    display: flex;
+    flex-direction: column;             // 縦並びにする
+    justify-content: center;            // 横方向の中央揃え
+    align-items: center;                // 縦方向の中央揃え
+    background-size: contain;           // 画像は縦横比を維持して全体が収まる
+    background-position: center;        // 背景画像の表示位置を中央に配置
+    background-repeat: no-repeat;       // 繰り返さず1枚だけ表示
+    overflow: hidden;                   // 画像がはみ出さないように設定
   }
 
-  // スクロールとテキストの設定
-  .scrollable-box {
-    position: absolute;
-    top: 25%;                           // 背景画像に応じて位置を調整
-    left: 15%;                          // 背景画像に応じて位置を調整
-    width: 64%;
-    height: 39%;
-    display: flex;
+  // 背景画像の設定(notice)
+  .image-container-notice {
+    background-image: url('../images/notice_board.png');
+    width: 100%;                        // 画面幅に対して100%の横幅
+    max-width: 700px;                   // 最大幅を700pxに制限(大画面対応)
+    height: 700px;                      // 高さを固定で700pxに設定
+
+    // お知らせタイトルのスタイル
+    .notice-title {
+      position: absolute;
+      top: 12%;                         // 背景画像に応じて位置を調整
+      font-size: var(--title-notice);
+      font-weight: bold;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 1);
+      color: #99CC99;
+    }
+
+    // スクロールとテキストの設定
+    .scrollable-box {
+      position: absolute;
+      top: 25%;                         // 背景画像に応じて位置を調整
+      left: 15%;                        // 背景画像に応じて位置を調整
+      width: 64%;
+      height: 39%;
+      display: flex;
+      flex-wrap: wrap;                  // 要素がはみ出さないように折り返し
+      overflow-y: scroll;               // 下にスクロール可能にする
+      -ms-overflow-style: none;         // Internet Explorer 10+ 対応
+      scrollbar-width: none;            // スクロールバーを非表示、Firefox 64+ 対応
+      padding: 10px;                    // 内側の余白を追加(文字がボックスに接触しないようにするため)
+      box-sizing: border-box;           // paddingを要素のサイズに含める
+      color: white;
+      text-align: left;                 // 文字を左揃え
+    }
+
+    // スクロールバーの設定(上の設定だけで出来ない非表示の追加設定)
+    .scrollable-box::-webkit-scrollbar {
+      display: none;
+      width: 0px;                       // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
+      height: 0px;                      // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
+    }
+
+    // お知らせ内容のボックス(お知らせごとに余白、最後のみ余白なし)
+    .scrollable-box-info-item {
+      margin-bottom: 1.5rem;
+    }
+    .scrollable-box-info-item:last-child {
+      margin-bottom: 0;
+    }
+
+    // スクロールボックス内テキストスタイルの共通設定
+    .scrollable-box-title, 
+    .scrollable-box-text {
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .scrollable-box-date, 
+    .scrollable-box-text {
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    }
+
+    // スクロールボックス内テキストスタイルの各設定
+    .scrollable-box-date {
+      font-size:  var(--scrollable-date);
+    }
+    .scrollable-box-title {
+      margin-left: 1rem;
+      font-size: var(--scrollable-title);
+      color: rgb(26, 26, 26);
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
+    }
+    .scrollable-box-text {
+      font-size: var(--scrollable-text);
+    }
+  }
+
+  // 背景画像の設定(notice以外)、背景を透過
+  .image-container-title {
+    position: relative;
+    width: 100%;                        // 画面幅に対して100%の横幅
+    max-width: 400px;                   // 最大幅を制限してバランス良く
+    aspect-ratio: 4 / 3;                // 縦横比を明示的に指定
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('../images/title_label.png');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.8;                     // 透過度
+      z-index: 0; 
+    }
+
+    // お知らせ以外のボックスの設定
+    .title-display-box {
+      position: absolute;
+      top: 30%;                         // 背景画像に合わせて縦位置を調整
+      width: 83%;                       // 横幅はimage-container-titleの画像の中身と同一
+      height: 41%;                      // 高さはimage-container-titleの画像の中身と同一
+      display: flex;
+      justify-content: center;          // 横方向の中央揃え
+      align-items: center;              // 縦方向の中央揃え
+      overflow: hidden;                 // 画像がはみ出さないように設定
+      padding: 0 10px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      z-index: 1;
+    }
+
+    // 各タイトルのスタイル(notice-title以外)
+    .title-display-box.user-post, 
+    .title-display-box.group-post, 
+    .title-display-box.likes {
+      font-size: var(--title);
+      font-weight: bold;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 1)
+    }
+    .title-display-box.user-post {
+      color: #9b59b6;
+    }
+    .title-display-box.group-post {
+      color: #2ecc71;
+    }
+    .title-display-box.likes {
+      color: #f39c12;
+    }
+  }
+
+  // 投稿についての設定
+  // 投稿コンテナのレイアウト設定
+  .posts-container {
+    display: flex;                      // フレックスボックスを使用
     flex-wrap: wrap;                    // 要素がはみ出さないように折り返し
-    overflow-y: scroll;                 // 下にスクロール可能にする
-    -ms-overflow-style: none;           // Internet Explorer 10+ 対応
-    scrollbar-width: none;              // スクロールバーを非表示、Firefox 64+ 対応
-    padding: 10px;                      // 内側の余白を追加(文字がボックスに接触しないようにするため)
-    box-sizing: border-box;             // paddingを要素のサイズに含める
-    color: white;
-    text-align: left;                   // 文字を左揃え
-  }
-
-  // スクロールバーの設定(上の設定だけで出来ない非表示の追加設定)
-  .scrollable-box::-webkit-scrollbar {
-    display: none;
-    width: 0px;                         // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
-    height: 0px;                        // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
-  }
-
-  // お知らせ内容のボックス(お知らせごとに余白、最後のみ余白なし)
-  .scrollable-box-info-item {
-    margin-bottom: 1.5rem;
-  }
-  .scrollable-box-info-item:last-child {
-    margin-bottom: 0;
-  }
-
-  // スクロールボックス内テキストスタイルの共通設定
-  .scrollable-box-title, 
-  .scrollable-box-text {
-    font-weight: bold;
-    color: #ffffff;
-  }
-  .scrollable-box-date, 
-  .scrollable-box-text {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-  }
-
-  // スクロールボックス内テキストスタイルの各設定
-  .scrollable-box-date {
-    font-size:  var(--homes-top-font-scrollable-date);
-  }
-  .scrollable-box-title {
-    margin-left: 1rem;
-    font-size: var(--homes-top-font-scrollable-title);
-    color: rgb(26, 26, 26);
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7);
-  }
-  .scrollable-box-text {
-    font-size: var(--homes-top-font-scrollable-text);
-  }
-}
-
-// 背景画像の設定(notice以外)、背景を透過
-.image-container-title {
-  position: relative;
-  width: 100%;                        // 画面幅に対して100%の横幅
-  max-width: 400px;                   // 最大幅を制限してバランス良く
-  aspect-ratio: 4 / 3;                // 縦横比を明示的に指定
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
+    justify-content: space-between;     // 横方向に均等に配置
     width: 100%;
-    height: 100%;
-    background-image: url('../images/title_label.png');
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.8;                     // 透過度
-    z-index: 0; 
+    padding: 1rem;
+    box-sizing: border-box;             // paddingを要素のサイズに含める
   }
 
-  // お知らせ以外のボックスの設定
-  .title-display-box {
-    position: absolute;
-    top: 30%;                         // 背景画像に合わせて縦位置を調整
-    width: 83%;                       // 横幅はimage-container-titleの画像の中身と同一
-    height: 41%;                      // 高さはimage-container-titleの画像の中身と同一
-    display: flex;
-    justify-content: center;          // 横方向の中央揃え
-    align-items: center;              // 縦方向の中央揃え
-    overflow: hidden;                 // 画像がはみ出さないように設定
-    padding: 0 10px;
-    box-sizing: border-box;
-    white-space: nowrap;
-    z-index: 1;
+  // リンクボックスの設定
+  .box-link {
+    display: flex;                      // ボックス全体をリンクとして表示
+    flex-direction: column;             // 子要素を縦に並べる
+    align-items: center;                // 縦方向中央揃え
+    justify-content: center;            // 横方向中央揃え
+    width: calc(20% - 2rem);            // ボックス幅を縮小して5つ並べる
+    aspect-ratio: 3 / 5;                // 縦横比を明示的に指定
+    border: 1px solid #ddd;           // ボーダー
+    border-radius: 16px;                // 角を丸く
+    overflow: hidden;                   // 内容がはみ出さないようにする
+    box-sizing: border-box;             // paddingを要素のサイズに含める
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #8FA3B8;
+    color: inherit;                     // 親要素の色を引き継ぐ
+    text-decoration: none;              // リンクの下線を消す
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
-  // 各タイトルのスタイル(notice-title以外)
-  .title-display-box.user-post, 
-  .title-display-box.group-post, 
-  .title-display-box.likes {
-    font-size: var(--homes-top-font-title);
+  // 継承(ダミー画像のみバックグランド変更)
+  .box-link-dummy-cards {
+    background-color: #28b379;
+  }
+
+  // ホバー時
+  .box-link:hover {
+    background-color: #28b379;        // ボックスのホバー時に緑色
+    text-decoration: none;              // リンクの下線を消す
+    transform: scale(1.1);              // ボックスを少し拡大
+    color: #ffffff;                   // ホバー時に文字色を白に
+  }
+
+  // 共通設定
+  .post-header, 
+  .dummy-header {
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;             // paddingを要素のサイズに含める
+  }
+
+  // 投稿のヘッダーに使用するタグの設定
+  .post-header {
+    display: flex;                      // フレックスで横並び
+    align-items: center;                // 縦方向中央揃え
+    justify-content: center;            // 横方向中央揃え
+  }
+
+  // ダミー画像で使用するタグの設定
+  .dummy-header {
+    text-align: center;
+    padding: 1.25rem 0.5rem 2rem;
+    font-size: var(--post-base);
+    color: #ffffff;
+    background-color: #28b379;
+  }
+
+  // ユーザー画像、グループ画像の共通設定
+  .user-image, 
+  .group-image {
+    flex: 0 0 30%;                      // flex-grow:0(広がらない),flex-shrink:0(縮まない).flex-basis:30%(幅)
+    object-fit: cover;
+    flex: none;                         // flexの影響を受けないようにする(これを入れないと画像の形が変わる)
+  }
+
+  // ユーザー画像のスタイル
+  .user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;                 // 円形のユーザー画像
+  }
+
+  // グループ画像のスタイル
+  .group-image {
+    width: 40px;
+    height: 33.33px;
+    border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径)
+  }
+
+  // ユーザー名とグループ名のスタイル
+  .post-user-name, .post-group-name {
+    flex: 0 0 70%;                      // flex-grow:0(広がらない),flex-shrink:0(縮まない).flex-basis:60%(幅)
     font-weight: bold;
-    text-shadow: 2px 2px 0 rgba(0, 0, 0, 1)
+    font-size: var(--post-base);
+    text-align: left;
+    white-space: nowrap;                // 折り返しなし
+    overflow: hidden;                   // はみ出した部分を非表示
+    text-overflow: ellipsis;            // 省略記号(...)を表示
+    padding-left: 1rem;
+    box-sizing: border-box;             // paddingを要素のサイズに含める;
   }
-  .title-display-box.user-post {
-    color: #9b59b6;
+
+  // 投稿タイトルに使用するタグの設定
+  .post-body {
+    max-width: 100%;                    // タイトルの最大幅を設定
+    white-space: nowrap;                // 折り返しなし
+    overflow: hidden;                   // はみ出した部分を非表示
+    text-overflow: ellipsis;            // 省略記号(...)を表示
   }
-  .title-display-box.group-post {
-    color: #2ecc71;
+
+  // 投稿タイトルタグの設定
+  .post-title {
+    font-size: var(--post-title);
+    font-weight: bold;
+    white-space: nowrap;                // タイトルが長い場合に折り返さない
+    text-overflow: ellipsis;            // 長すぎる場合に省略記号
+    width: 100%;
+    overflow: hidden;                   // ボックスを超えた部分を隠す
+    text-align: center;                 // テキストを左右中央揃え
+    line-height: 1.5;                   // 行の高さを指定
+    padding: 0 1rem 1rem;
+    box-sizing: border-box;             // paddingを要素のサイズに含める
   }
-  .title-display-box.likes {
-    color: #f39c12;
+
+  // 投稿画像とダミー画像の共通設定
+  .post-image, 
+  .dummy-image {
+    display: block;
+    max-width: 100%;                    // 親要素を超えないように最大幅を設定
+    width: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 1rem auto;                  // 左右中央揃え、上下側に余白
   }
-}
 
-// 投稿についての設定
-// 投稿コンテナのレイアウト設定
-.posts-container {
-  display: flex;                      // フレックスボックスを使用
-  flex-wrap: wrap;                    // 要素がはみ出さないように折り返し
-  justify-content: space-between;     // 横方向に均等に配置
-  width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;             // paddingを要素のサイズに含める
-}
+  // 投稿画像の設定
+  .post-image {
+    aspect-ratio: 1 / 1;
+  }
 
-// リンクボックスの設定
-.box-link {
-  display: flex;                      // ボックス全体をリンクとして表示
-  flex-direction: column;             // 子要素を縦に並べる
-  align-items: center;                // 縦方向中央揃え
-  justify-content: center;            // 横方向中央揃え
-  width: calc(20% - 2rem);            // ボックス幅を縮小して5つ並べる
-  aspect-ratio: 3 / 5;                // 縦横比を明示的に指定
-  border: 1px solid #ddd;           // ボーダー
-  border-radius: 16px;                // 角を丸く
-  overflow: hidden;                   // 内容がはみ出さないようにする
-  box-sizing: border-box;             // paddingを要素のサイズに含める
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #8FA3B8;
-  color: inherit;                     // 親要素の色を引き継ぐ
-  text-decoration: none;              // リンクの下線を消す
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
+  // ダミー画像の設定
+  .dummy-image {
+    aspect-ratio: 1 / 1.4;
+  }
 
-// 継承(ダミー画像のみバックグランド変更)
-.box-link-dummy-cards {
-  background-color: #28b379;
-}
-
-// ホバー時
-.box-link:hover {
-  background-color: #28b379;        // ボックスのホバー時に緑色
-  text-decoration: none;              // リンクの下線を消す
-  transform: scale(1.1);              // ボックスを少し拡大
-  color: #ffffff;                   // ホバー時に文字色を白に
-}
-
-// 共通設定
-.post-header, 
-.dummy-header {
-  width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;             // paddingを要素のサイズに含める
-}
-
-// 投稿のヘッダーに使用するタグの設定
-.post-header {
-  display: flex;                      // フレックスで横並び
-  align-items: center;                // 縦方向中央揃え
-  justify-content: center;            // 横方向中央揃え
-}
-
-// ダミー画像で使用するタグの設定
-.dummy-header {
-  text-align: center;
-  padding: 1.25rem 0.5rem 2rem;
-  font-size: var(--homes-top-font-base);
-  color: #ffffff;
-  background-color: #28b379;
-}
-
-// ユーザー画像、グループ画像の共通設定
-.user-image, 
-.group-image {
-  flex: 0 0 30%;                      // flex-grow:0(広がらない),flex-shrink:0(縮まない).flex-basis:30%(幅)
-  object-fit: cover;
-  flex: none;                         // flexの影響を受けないようにする(これを入れないと画像の形が変わる)
-}
-
-// ユーザー画像のスタイル
-.user-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;                 // 円形のユーザー画像
-}
-
-// グループ画像のスタイル
-.group-image {
-  width: 40px;
-  height: 33.33px;
-  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径)
-}
-
-// ユーザー名とグループ名のスタイル
-.post-user-name, .post-group-name {
-  flex: 0 0 70%;                      // flex-grow:0(広がらない),flex-shrink:0(縮まない).flex-basis:60%(幅)
-  font-weight: bold;
-  font-size: var(--homes-top-font-base);
-  text-align: left;
-  white-space: nowrap;                // 折り返しなし
-  overflow: hidden;                   // はみ出した部分を非表示
-  text-overflow: ellipsis;            // 省略記号(...)を表示
-  padding-left: 1rem;
-  box-sizing: border-box;             // paddingを要素のサイズに含める;
-}
-
-// 投稿タイトルに使用するタグの設定
-.post-body {
-  max-width: 100%;                    // タイトルの最大幅を設定
-  white-space: nowrap;                // 折り返しなし
-  overflow: hidden;                   // はみ出した部分を非表示
-  text-overflow: ellipsis;            // 省略記号(...)を表示
-}
-
-// 投稿タイトルタグの設定
-.post-title {
-  font-size: var(--homes-top-font-post-title);
-  font-weight: bold;
-  white-space: nowrap;                // タイトルが長い場合に折り返さない
-  text-overflow: ellipsis;            // 長すぎる場合に省略記号
-  width: 100%;
-  overflow: hidden;                   // ボックスを超えた部分を隠す
-  text-align: center;                 // テキストを左右中央揃え
-  line-height: 1.5;                   // 行の高さを指定
-  padding: 0 1rem 1rem;
-  box-sizing: border-box;             // paddingを要素のサイズに含める
-}
-
-// 投稿画像とダミー画像の共通設定
-.post-image, 
-.dummy-image {
-  display: block;
-  max-width: 100%;                    // 親要素を超えないように最大幅を設定
-  width: 100px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin: 1rem auto;                  // 左右中央揃え、上下側に余白
-}
-
-// 投稿画像の設定
-.post-image {
-  aspect-ratio: 1 / 1;
-}
-
-// ダミー画像の設定
-.dummy-image {
-  aspect-ratio: 1 / 1.4;
-}
-
-// 投稿日時に使用するタグの設定
-.post-footer {
-  padding: 1rem;
-  font-size: var(--homes-top-font-post-date);
-  text-align: center;
+  // 投稿日時に使用するタグの設定
+  .post-footer {
+    padding: 1rem;
+    font-size: var(--post-date);
+    text-align: center;
+  }
 }
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  :root {
-    --homes-top-font-title-notice: 1.4rem;
-    --homes-top-font-title: 1.2rem;
-    --homes-top-font-scrollable-title: 1rem;
-    --homes-top-font-scrollable-text: 0.9rem;
-    --homes-top-font-scrollable-date: 0.8rem;
-    --homes-top-font-post-title: 0.8rem;
-    --homes-top-font-base: 0.6rem;
-    --homes-top-font-post-date: 0.5rem;
-  }
+  .homes-top-page-font {
+    --title-notice: 1.4rem;
+    --title: 1.2rem;
+    --scrollable-title: 1rem;
+    --scrollable-text: 0.9rem;
+    --scrollable-date: 0.8rem;
+    --post-title: 0.8rem;
+    --post-base: 0.6rem;
+    --post-date: 0.5rem;
 
-  .image-container-notice {
-    height: 550px;
-    max-width: 550px;
+    .image-container-notice {
+      height: 550px;
+      max-width: 550px;
 
-    .notice-title {
-      text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 1);
+      .notice-title {
+        text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 1);
+      }
     }
-  }
 
-  .image-container-title{
-    max-width: 250px;
+    .image-container-title{
+      max-width: 250px;
 
-    .title-display-box.user-post, 
-    .title-display-box.group-post, 
-    .title-display-box.likes {
-      text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 1);
+      .title-display-box.user-post, 
+      .title-display-box.group-post, 
+      .title-display-box.likes {
+        text-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 1);
+      }
     }
-  }
 
-  .box-link {
-    width: calc(20% - 1rem);
-    border-radius: 13px;
-  }
+    .box-link {
+      width: calc(20% - 1rem);
+      border-radius: 13px;
+    }
 
-  .post-header, 
-  .post-footer {
-    padding: 0.5rem;
-  }
+    .post-header, 
+    .post-footer {
+      padding: 0.5rem;
+    }
 
-  .dummy-header {
-    padding: 1rem 0.5rem 1.75rem;
-  }
+    .dummy-header {
+      padding: 1rem 0.5rem 1.75rem;
+    }
 
-  .user-image {
-    width: 28.44px;
-    height: 28.44px;
-  }
+    .user-image {
+      width: 28.44px;
+      height: 28.44px;
+    }
 
-  .group-image {
-    width: 28.44px;
-    height: 23.71px;
-  }
-  
-  .post-user-name, 
-  .post-group-name {
-    padding-left: 0.5rem;
-  }
+    .group-image {
+      width: 28.44px;
+      height: 23.71px;
+    }
+    
+    .post-user-name, 
+    .post-group-name {
+      padding-left: 0.5rem;
+    }
 
-  .post-title {
-    padding: 0 0.5rem 0.5rem;
-  }
+    .post-title {
+      padding: 0 0.5rem 0.5rem;
+    }
 
-  .post-image, 
-  .dummy-image {
-    margin: 0.5rem auto;
-    border-radius: 7px;
-  }
+    .post-image, 
+    .dummy-image {
+      margin: 0.5rem auto;
+      border-radius: 7px;
+    }
 
-  .post-image {
-    width: 71.11px;
-  }
+    .post-image {
+      width: 71.11px;
+    }
 
-  .dummy-image {
-    width: 71.11px;
+    .dummy-image {
+      width: 71.11px;
+    }
   }
 }
 
 @media (max-width: 768px) {
-  :root {
-    --homes-top-font-title-notice: 1.1rem;
-    --homes-top-font-title: 1rem;
-    --homes-top-font-scrollable-title: 0.8rem;
-    --homes-top-font-scrollable-text: 0.7rem;
-    --homes-top-font-scrollable-date: 0.6rem;
-    --homes-top-font-post-title: 0.7rem;
-    --homes-top-font-base: 0.5rem;
-    --homes-top-font-post-date: 0.4rem;
-  }
+  .homes-top-page-font {
+    --title-notice: 1.1rem;
+    --title: 1rem;
+    --scrollable-title: 0.8rem;
+    --scrollable-text: 0.7rem;
+    --scrollable-date: 0.6rem;
+    --post-title: 0.7rem;
+    --post-base: 0.5rem;
+    --post-date: 0.4rem;
 
-  .image-container-notice {
-    height: 400px;
-    max-width: 400px;
+    .image-container-notice {
+      height: 400px;
+      max-width: 400px;
 
-    .notice-title {
-      position: absolute;
-      top: 12%;
-      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+      .notice-title {
+        position: absolute;
+        top: 12%;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+      }
+      
+      .scrollable-box-info-item {
+        margin-bottom: 1rem;
+      }
+
+      .scrollable-box {
+        position: absolute;
+        top: 26%;
+        left: 16%;
+        width: 65%;
+        height: 38%;
+        padding-top: 0;
+      }
     }
-    
-    .scrollable-box-info-item {
-      margin-bottom: 1rem;
+
+    .image-container-title{
+      max-width: 200px;
+
+      .title-display-box.user-post, 
+      .title-display-box.group-post, 
+      .title-display-box.likes {
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+      }
     }
 
-    .scrollable-box {
-      position: absolute;
-      top: 26%;
-      left: 16%;
-      width: 65%;
-      height: 38%;
-      padding-top: 0;
+    .posts-container {
+      padding: 0;
     }
-  }
 
-  .image-container-title{
-    max-width: 200px;
-
-    .title-display-box.user-post, 
-    .title-display-box.group-post, 
-    .title-display-box.likes {
-      text-shadow: 1px 1px 0 rgba(0, 0, 0, 1);
+    .box-link {
+      width: calc(20% - 0.5rem);
+      border-radius: 8px;
     }
-  }
 
-  .posts-container {
-    padding: 0;
-  }
+    .dummy-header {
+      padding: 0.75rem 0.4rem 1.25rem;
+    }
 
-  .box-link {
-    width: calc(20% - 0.5rem);
-    border-radius: 8px;
-  }
+    .user-image {
+      width: 21.33px;
+      height: 21.33px;
+    }
 
-  .dummy-header {
-    padding: 0.75rem 0.4rem 1.25rem;
-  }
+    .group-image {
+      width: 21.33px;
+      height: 17.78px;
+    }
 
-  .user-image {
-    width: 21.33px;
-    height: 21.33px;
-  }
+    .post-image, 
+    .dummy-image {
+      border-radius: 6px;
+    }
 
-  .group-image {
-    width: 21.33px;
-    height: 17.78px;
-  }
+    .post-image {
+      width: 53.33px;
+    }
 
-  .post-image, 
-  .dummy-image {
-    border-radius: 6px;
-  }
-
-  .post-image {
-    width: 53.33px;
-  }
-
-  .dummy-image {
-    width: 53.33px;
+    .dummy-image {
+      width: 53.33px;
+    }
   }
 }
 
 @media (max-width: 480px) {
-  :root {
-    --homes-top-font-title-notice: 0.75rem;
-    --homes-top-font-title: 0.65rem;
-    --homes-top-font-scrollable-title: 0.65rem;
-    --homes-top-font-scrollable-text: 0.55rem;
-    --homes-top-font-scrollable-date: 0.55rem;
-    --homes-top-font-post-title: 0.65rem;
-    --homes-top-font-base: 0.55rem;
-    --homes-top-font-post-date: 0.5rem;
-  }
+  .homes-top-page-font {
+    --title-notice: 0.75rem;
+    --title: 0.65rem;
+    --scrollable-title: 0.65rem;
+    --scrollable-text: 0.55rem;
+    --scrollable-date: 0.55rem;
+    --post-title: 0.65rem;
+    --post-base: 0.55rem;
+    --post-date: 0.5rem;
 
-  h5 {
-    margin-bottom: 0;
-  }
+    h5 {
+      margin-bottom: 0;
+    }
 
-  .space-between-bottom {
-    margin-bottom: 2rem;
-  }
+    .space-between-bottom {
+      margin-bottom: 2rem;
+    }
+      
+    .image-container-notice {
+      height: 300px;
+      max-width: 300px;
+
+      .notice-title {
+        position: absolute;
+        text-shadow: 0.75px 0.75px 0 rgba(0, 0, 0, 1);
+      }
+
+      .scrollable-box-info-item {
+        margin-bottom: 0.5rem;
+      }
+
+      .scrollable-box {
+        position: absolute;
+        top: 26%;
+        left: 14%;
+        width: 67%;
+      }
+      .scrollable-box-title {
+        margin-left: 0.5rem;
+      }
+    }
+
+    .image-container-title{
+      max-width: 125px;
+
+      .title-display-box.user-post, 
+      .title-display-box.group-post, 
+      .title-display-box.likes {
+        text-shadow: 0.75px 0.75px 0 rgba(0, 0, 0, 1);
+      }
+    }
+
+    // モバイルのみスクロールする
+    .posts-scroll-container-mobile {
+      flex-wrap: nowrap;                // 改行させずに横並びにする
+      overflow-x: auto;                 // 内容がはみ出した際、横方向にスクロールが可能
+      overflow-y: hidden;               // 縦方向へのスクロールを行わないことを明示的に定義
+      -webkit-overflow-scrolling: touch;// モバイル(Safari)で慣性スクロール(スムーズスクロール)を有効にする
+      -ms-overflow-style: none;         // Internet Explorer 10+ 対応
+      scrollbar-width: none;            // スクロールバーを非表示、Firefox 64+ 対応
+      padding: 1rem;
+      gap: 0.75rem;
+    }
     
-  .image-container-notice {
-    height: 300px;
-    max-width: 300px;
-
-    .notice-title {
-      position: absolute;
-      text-shadow: 0.75px 0.75px 0 rgba(0, 0, 0, 1);
+    // スクロールバーの設定(上の設定だけで出来ない非表示の追加設定)
+    .posts-scroll-container-mobile::-webkit-scrollbar {
+      display: none;
+      width: 0px;                       // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
+      height: 0px;                      // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
     }
 
-    .scrollable-box-info-item {
-      margin-bottom: 0.5rem;
+    .box-link {
+      flex-shrink: 0;                   // 親要素を超えても縮まない
+      width: 30%;
     }
 
-    .scrollable-box {
-      position: absolute;
-      top: 26%;
-      left: 14%;
-      width: 67%;
+    .user-image {
+      width: 30px;
+      height: 30px;
     }
-    .scrollable-box-title {
-      margin-left: 0.5rem;
+
+    .group-image {
+      width: 30px;
+      height: 25px;
     }
-  }
 
-  .image-container-title{
-    max-width: 125px;
-
-    .title-display-box.user-post, 
-    .title-display-box.group-post, 
-    .title-display-box.likes {
-      text-shadow: 0.75px 0.75px 0 rgba(0, 0, 0, 1);
+    .post-image {
+      width: 75px;
     }
-  }
 
-  // モバイルのみスクロールする
-  .posts-scroll-container-mobile {
-    flex-wrap: nowrap;                // 改行させずに横並びにする
-    overflow-x: auto;                 // 内容がはみ出した際、横方向にスクロールが可能
-    overflow-y: hidden;               // 縦方向へのスクロールを行わないことを明示的に定義
-    -webkit-overflow-scrolling: touch;// モバイル(Safari)で慣性スクロール(スムーズスクロール)を有効にする
-    -ms-overflow-style: none;         // Internet Explorer 10+ 対応
-    scrollbar-width: none;            // スクロールバーを非表示、Firefox 64+ 対応
-    padding: 1rem;
-    gap: 0.75rem;
-  }
-  
-  // スクロールバーの設定(上の設定だけで出来ない非表示の追加設定)
-  .posts-scroll-container-mobile::-webkit-scrollbar {
-    display: none;
-    width: 0px;                       // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
-    height: 0px;                      // ブラウザにより、スクロールバー領域のスペースが残るので確実に消す
-  }
-
-  .box-link {
-    flex-shrink: 0;                   // 親要素を超えても縮まない
-    width: 30%;
-  }
-
-  .user-image {
-    width: 30px;
-    height: 30px;
-  }
-
-  .group-image {
-    width: 30px;
-    height: 25px;
-  }
-
-  .post-image {
-    width: 75px;
-  }
-
-  .dummy-image {
-    width: 75px;
+    .dummy-image {
+      width: 75px;
+    }
   }
 }
 
@@ -603,68 +603,68 @@
 }
 
 @media (max-width: 320px) {
-  :root {
-    --homes-top-font-title-notice: 0.725rem;
-    --homes-top-font-title: 0.6rem;
-    --homes-top-font-scrollable-title: 0.525rem;
-    --homes-top-font-scrollable-text: 0.475rem;
-    --homes-top-font-scrollable-date: 0.475rem;
-    --homes-top-font-post-title: 0.55rem;
-    --homes-top-font-base: 0.5rem;
-    --homes-top-font-post-date: 0.5rem;
-  }
+  .homes-top-page-font {
+    --title-notice: 0.725rem;
+    --title: 0.6rem;
+    --scrollable-title: 0.525rem;
+    --scrollable-text: 0.475rem;
+    --scrollable-date: 0.475rem;
+    --post-title: 0.55rem;
+    --post-base: 0.5rem;
+    --post-date: 0.5rem;
 
-  .space-between-bottom {
-    margin-bottom: 1rem;
-  }
-
-  .image-container-notice {
-    height: 250px;
-    max-width: 250px;
-  }
-
-  .image-container-notice {
-    .scrollable-box-info-item {
-      margin-bottom: 0.25rem;
+    .space-between-bottom {
+      margin-bottom: 1rem;
     }
-  }
 
-  .image-container-title{
-    max-width: 125px;
-  }
+    .image-container-notice {
+      height: 250px;
+      max-width: 250px;
+    }
 
-  .posts-scroll-container-mobile {
-    padding: 0.5rem;
-    gap: 0.5rem;
-  }
+    .image-container-notice {
+      .scrollable-box-info-item {
+        margin-bottom: 0.25rem;
+      }
+    }
 
-  .user-image {
-    width: 20px;
-    height: 20px;
-  }
+    .image-container-title{
+      max-width: 125px;
+    }
 
-  .group-image {
-    width: 20px;
-    height: 16.67px;
-  }
+    .posts-scroll-container-mobile {
+      padding: 0.5rem;
+      gap: 0.5rem;
+    }
 
-  .post-user-name, .post-group-name {
-    padding-left: 0.25rem;
-  }
+    .user-image {
+      width: 20px;
+      height: 20px;
+    }
 
-  .dummy-header {
-    padding: 0.3rem 0.3rem 0.5rem;
-  }
+    .group-image {
+      width: 20px;
+      height: 16.67px;
+    }
 
-  .post-title {
-    padding-bottom: 0;
-  }
+    .post-user-name, .post-group-name {
+      padding-left: 0.25rem;
+    }
 
-  .post-image {
-    width: 50px;
-  }
+    .dummy-header {
+      padding: 0.3rem 0.3rem 0.5rem;
+    }
 
-  .dummy-image {
-    width: 50px;
+    .post-title {
+      padding-bottom: 0;
+    }
+
+    .post-image {
+      width: 50px;
+    }
+
+    .dummy-image {
+      width: 50px;
+    }
   }
 }

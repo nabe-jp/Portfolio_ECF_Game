@@ -1,9 +1,4 @@
 /*    サイドバーの設定    */
-:root {
-  --sidebar-left-font-title: 1.2rem;
-  --sidebar-left-font-link: 0.9rem;
-}
-
 // サイドバーの共通設定 
 .sidebar {
   position: fixed;                      // 画面上の固定位置に要素を配置
@@ -32,6 +27,9 @@
 
 // サイドバーの大枠の設定
 .sidebar__section {
+  --sidebar-font-title: 1.2rem;
+  --sidebar-font-link: 0.9rem;
+
   width: 100%;
   padding: 0.5rem;
   box-sizing: border-box;             // paddingやボーダーを要素のサイズに含める
@@ -60,7 +58,7 @@
 
   // サイドバー内のタイトルの設定
   .sidebar__title {
-    font-size: var(--sidebar-left-font-title);
+    font-size: var(--sidebar-font-title);
     font-weight: 500;
     margin-bottom: 0.2rem;
   }
@@ -73,7 +71,7 @@
     a {
       padding-left: 0.5rem;
       box-sizing: border-box;         // paddingやボーダーを要素のサイズに含める
-      font-size: var(--sidebar-left-font-link);
+      font-size: var(--sidebar-font-link);
       color: #66ccff; 
       text-decoration: none;          // デフォルトの下線を削除
       border-radius: 4px;             // 背景の角を丸める
@@ -92,12 +90,10 @@
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  :root {
-    --sidebar-left-font-title: 0.85rem;
-    --sidebar-left-font-link: 0.7rem;
-  }
-
   .sidebar__section {
+    --sidebar-font-title: 0.85rem;
+    --sidebar-font-link: 0.7rem;
+
     padding: 0.25rem;
 
     > ul + .sidebar__title {
@@ -121,12 +117,10 @@
 }
 
 @media (max-width: 768px) {
-  :root {
-    --sidebar-left-font-title: 0.65rem;
-    --sidebar-left-font-link: 0.5rem;
-  }
-
   .sidebar__section {
+    --sidebar-font-title: 0.65rem;
+    --sidebar-font-link: 0.5rem;
+
     padding: 0.25rem;
 
     > ul + .sidebar__title {

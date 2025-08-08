@@ -1,46 +1,53 @@
 /*   ページのタイトルの設定   */
-:root {
-  --page-font-title-h1: 2rem;
-  --page-font-title-h2: 1.6rem;
-}
-
 // h1の共通設定
 h1 {
-  font-size: var(--page-font-title-h1);
+  font-size: 2rem;
   margin: 0;                        // 初期設定のマージンをリセット
 }
 
 // h2の共通設定
 h2 {
-  font-size: var(--page-font-title-h2);
+  font-size: 1.6rem;
   margin: 0;                        // 初期設定のマージンをリセット
 }
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  :root {
-    --page-font-title-h1: 1.6rem;
-    --page-font-title-h2: 1.3rem;
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 768px) {
-  :root {
-    --page-font-title-h1: 1.4rem;
-    --page-font-title-h2: 1.1rem;
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 480px) {
-  :root {
-    --page-font-title-h1: 1.2rem;
-    --page-font-title-h2: 1rem;
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 320px) {
-  :root {
-    --page-font-title-h1: 1rem;
-    --page-font-title-h2: 0.8rem;
+  h1 {
+    font-size: 1rem;
+  }
+
+  h2 {
+    font-size: 0.8rem;
   }
 }

@@ -1,13 +1,9 @@
 /*    メインコンテンツの設定    */
-:root {
-  --main-content-view: calc(var(--full-height) - var(--header-height) - var(--footer-height));
-}
-
 // メインコンテンツタグの設定
 .main-content {
   margin: var(--header-height) var(--sidebar-width) var(--footer-height) var(--sidebar-width);
   overflow-y: auto;
-  height: var(--main-content-view);
+  height: calc(var(--full-height) - var(--header-height) - var(--footer-height));
   width: 100%;
   padding: 1rem;
   box-sizing: border-box;             // paddingを加えた大きさにする
@@ -30,7 +26,7 @@
 
   // デフォルトで左右に15pxの余白があるので、すべてのcolを対象に余白を変更する
   // ^=は指定した文字列で始まる属性値、*=は指定した文字列を含む属性値(" col"はスペース＋colを対象)
-  [class^="col"],
+  [class^="col"], 
   [class*=" col"] {
     padding-left: 7.5px;
     padding-right: 7.5px;
@@ -38,15 +34,11 @@
 }
 
 @media (max-width: 480px) {
-  :root {
-    --main-content-view: calc(100dvh - var(--header-height) - var(--footer-height));
-  }
-
   .main-content {
     margin: var(--header-height) 0 0 0;
     width: 100vw;
     padding: 0.75rem;
-    padding-right: 1rem;            // モバイルの場合、右側にスクロールバーが表示されるので右に多めに余白
+    padding-right: 1rem;              // モバイルの場合、右側にスクロールバーが表示されるので右に多めに余白
     padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));  // padding分も足す
   }
 
