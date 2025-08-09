@@ -515,7 +515,7 @@
       }
     }
 
-    .image-container-title{
+    .image-container-title {
       max-width: 125px;
 
       .title-display-box.user-post, 
@@ -571,34 +571,36 @@
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  .posts-scroll-container-mobile {
-    padding: 0.75rem;
-  }
-  
-  .user-image {
-    width: 25px;
-    height: 25px;
-  }
-  
-  .group-image {
-    width: 25px;
-    height: 20.83px;
-  }
+  .homes-top-page-font {
+    .posts-scroll-container-mobile {
+      padding: 0.75rem;
+    }
+    
+    .user-image {
+      width: 25px;
+      height: 25px;
+    }
+    
+    .group-image {
+      width: 25px;
+      height: 20.83px;
+    }
 
-  .post-title {
-    padding-bottom: 0.5rem;
-  }
+    .post-title {
+      padding-bottom: 0.5rem;
+    }
 
-  .dummy-header {
-    padding-bottom: 0.75rem;
-  }
+    .dummy-header {
+      padding-bottom: 0.75rem;
+    }
 
-  .post-image {
-    width: 62.5px;
-  }
-  
-  .dummy-image {
-    width: 62.5px;
+    .post-image {
+      width: 62.5px;
+    }
+    
+    .dummy-image {
+      width: 62.5px;
+    }
   }
 }
 

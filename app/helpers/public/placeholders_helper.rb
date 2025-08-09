@@ -49,7 +49,7 @@ module Public::PlaceholdersHelper
   end
 
   def group_slug_placeholder
-    "スラッグはを#{Group::SLUG_MIN_LENGTH}〜#{Group::SLUG_MAX_LENGTH }文字、英数字とハイフンのみで入力してください"
+    "スラッグを#{Group::SLUG_MIN_LENGTH}〜#{Group::SLUG_MAX_LENGTH }文字、英数字とハイフンのみで入力してください"
   end
 
   # --- 管理者メモ ---
