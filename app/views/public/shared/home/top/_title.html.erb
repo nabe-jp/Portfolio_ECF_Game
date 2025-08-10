@@ -1,19 +1,19 @@
 <% if title == PostConstants::NOTIFICATION_TITLE %>
-  <div class="notice-title"><%= title %></div>
+  <h2 class="notice-title"><%= title %></h2>
 
 <% else %>
   <% if title == PostConstants::LATEST_POST_TITLE %>
     <div class="image-container image-container-title latest-post-title">
-      <div class="title-display-box user-post"><%= title %></div>
+      <h2 class="title-display-box user-post"><%= title %></h2>
     </div>
 
   <% elsif title == PostConstants::LATEST_GROUP_POST_TITLE %>
     <div class="image-container image-container-title latest-group-post-title">
-      <div class="title-display-box group-post"><%= title %></div>
+      <h2 class="title-display-box group-post"><%= title %></h2>
     </div>
     
   <% elsif title == PostConstants::TODAY_TOP_LIKES_TITLE %>
     <div class="image-container image-container-title today-top-likes-title">
-      <div class="title-display-box likes"><%= title %></div>
+      <h2 class="title-display-box likes"><%= title %></h2>
   <% end %>
 <% end %>

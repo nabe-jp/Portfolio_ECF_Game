@@ -1,5 +1,5 @@
 <div class="sidebar__section">
-  <div class="sidebar__title">ナビゲーション</div>
+  <h2 class="sidebar__title">ナビゲーション</h2>
   <ul class="sidebar__links">
     <li><%= render "public/shared/link/links", home: true %></li>
     
@@ -7,7 +7,7 @@
   </ul>
 
   <% if user_signed_in? %>
-    <div class="sidebar__title">マイメニュー</div>
+    <h2 class="sidebar__title">マイメニュー</h2>
     <ul class="sidebar__links">
       <li><%= render "public/shared/link/links", profile_page: true %></li>
 

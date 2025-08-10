@@ -1,8 +1,7 @@
-<h4 id="user-posts-results">
-  <span class="search-user-post__result-title ml-4">ユーザー投稿の検索結果</span>
-</h4>
+<h2 class="search__result-title" id="user-posts-results">ユーザー投稿の検索結果</h2>
+
 <% if user_posts.any? %>
-  <p class="search-user-post__result-count">
+  <p class="search__result-count">
     <%= @search_type %>内でのヒット数<%= number_of_items_displayed(user_posts) %>
   </p>
 

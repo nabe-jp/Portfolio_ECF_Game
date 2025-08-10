@@ -1,8 +1,7 @@
-<h4 id="group-post-results">
-  <span class="search-group-post__result-title">グループ内投稿の検索結果</span>
-</h4>
+<h2 class="search__result-title" id="group-post-results">グループ内投稿の検索結果</h2>
+
 <% if group_posts.any? %>
-  <p class="search-group-post__result-count">
+  <p class="search__result-count">
     <%= @search_type %>内でのヒット数<%= number_of_items_displayed(group_posts) %>
   </p>
 

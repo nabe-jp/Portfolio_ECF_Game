@@ -6,14 +6,14 @@
 
   <div id="mobileMenu" class="mobile-menu-items">
     <div class="mobile-menu-section">
-      <div class="mobile-menu-title">ナビゲーション</div>
+      <h2 class="mobile-menu-title">ナビゲーション</h2>
       <ul class="mobile-menu-links">
         <li><%= render "public/shared/link/links", home: true %></li>
         <li><%= render "public/shared/link/links", back: true %></li>
       </ul>
 
       <% if user_signed_in? %>
-        <div class="mobile-menu-title">マイメニュー</div>
+        <h2 class="mobile-menu-title">マイメニュー</h2>
         <ul class="mobile-menu-links">
           <li><%= render "public/shared/link/links", profile_page: true %></li>
           <li><%= render "public/shared/link/links", profile_edit: true %></li>
@@ -23,7 +23,7 @@
         </ul>
       <% end %>
 
-      <div class="mobile-menu-title">投稿</div>
+      <h2 class="mobile-menu-title">投稿</h2>
       <ul class="mobile-menu-links">
         <li><%= render "public/shared/link/links", all_posts_index: true %></li>
         <li><%= render "public/shared/link/links", posts_index: true %></li>
@@ -31,7 +31,7 @@
         <li><%= render "public/shared/link/links", new_post: true %></li>
       </ul>
 
-      <div class="mobile-menu-title">グループ</div>
+      <h2 class="mobile-menu-title">グループ</h2>
       <ul class="mobile-menu-links">
         <li><%= render "public/shared/link/links", groups_index: true %></li>
         <li><%= render "public/shared/link/links", group_hosting_post: true %></li>
@@ -39,7 +39,7 @@
       </ul>
 
       <% if user_signed_in? && @group&.id && @group.active_group_memberships.exists?(user_id: current_user.id) %>
-        <div class="mobile-menu-title">グループ内操作</div>
+        <h2 class="mobile-menu-title">グループ内操作</h2>
         <ul class="mobile-menu-links">
           <li><%= render "public/shared/link/links", dashboard_group: true %></li>
           <li><%= render "public/shared/link/links", group_member: true %></li>

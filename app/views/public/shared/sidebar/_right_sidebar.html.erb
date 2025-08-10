@@ -1,5 +1,5 @@
 <div class="sidebar__section">
-  <div class="sidebar__title">投稿</div>
+  <h2 class="sidebar__title">投稿</h2>
   <ul class="sidebar__links">
     <li><%= render "public/shared/link/links", all_posts_index: true %></li>
 
@@ -10,7 +10,7 @@
     <li><%= render "public/shared/link/links", new_post: true %></li>
   </ul>
 
-  <div class="sidebar__title">グループ</div>
+  <h2 class="sidebar__title">グループ</h2>
   <ul class="sidebar__links">
     <li><%= render "public/shared/link/links", groups_index: true %></li>
 
@@ -21,7 +21,7 @@
 
   <% if user_signed_in? && @group&.id && 
     @group.active_group_memberships.exists?(user_id: current_user.id) %>
-    <div class="sidebar__title">グループ内操作</div>
+    <h2 class="sidebar__title">グループ内操作</h2>
     <ul class="sidebar__links">
       <li><%= render "public/shared/link/links", dashboard_group: true %></li>
 

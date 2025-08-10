@@ -1,8 +1,7 @@
-<h4 id="groups-results">
-  <span class="search-group__result-title">グループの検索結果</span>
-</h4>
+<h2 class="search__result-title" id="groups-results">グループの検索結果</h2>
+
 <% if groups.any? %>
-  <p class="search-group__result-count">
+  <p class="search__result-count">
     <%= @search_type %>内でのヒット数<%= number_of_items_displayed(groups) %>
   </p>
 

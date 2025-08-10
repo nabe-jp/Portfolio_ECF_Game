@@ -1,8 +1,7 @@
-<h4 id="users-results">
-  <span class="search-user__result-title">ユーザーの検索結果</span>
-</h4>
+<h2 class="search__result-title" id="users-results">ユーザーの検索結果</h2>
+
 <% if users.any? %>
-  <p class="search-user__result-count">
+  <p class="search__result-count">
     <%= @search_type %>内でのヒット数<%= number_of_items_displayed(users) %>
   </p>
 

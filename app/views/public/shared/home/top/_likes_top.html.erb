@@ -13,9 +13,7 @@
 
       <!-- 投稿内容: 画像とタイトル -->
       <div class="post-body">
-        <h5 class="post-title">
-          <%= post.title %> <!-- タイトルそのものはリンク内にあります -->
-        </h5>
+        <strong class="post-title"><%= post.title %></strong>
         <%= image_tag(post.post_image, size: "100x100", class: "post-image") %>
       </div>
 

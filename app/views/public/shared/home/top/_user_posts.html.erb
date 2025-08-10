@@ -9,9 +9,7 @@
 
       <!-- 投稿内容: 画像とタイトル -->
       <div class="post-body">
-        <h5 class="post-title">
-          <%= post.title %>
-        </h5>
+        <strong class="post-title"><%= post.title %></strong>
         <%= image_tag(post.user_post_image, class: "post-image") %>
       </div>
 

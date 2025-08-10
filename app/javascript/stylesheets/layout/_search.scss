@@ -1,43 +1,30 @@
+.search-result__page-title, 
+.search__result-title, 
+.search__result-count {
+  display: block;                     // ブロック要素
+  width: 100%;
+  max-width: fit-content;             // 横幅はテキスト幅に制限(ブラウザ対応注意)
+  padding: 0.25rem 1rem;
+  border-radius: 8px;
+  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+}
+
 .search-result__page-title {
-  display: inline;
+  margin: 0 auto;                     // 左右中央揃え
   background-color: rgba(108, 136, 160, 0.8);
-  border-radius: 8px;
-  padding: 0.25rem 1rem;
 }
 
-.search-user__result-title, 
-.search-user__result-count, 
-.search-user-post__result-title, 
-.search-user-post__result-count, 
-.search-group__result-title, 
-.search-group__result-count, 
-.search-group-post__result-title, 
-.search-group-post__result-count {
-  display: inline;
-  border-radius: 8px;
-  margin-left: 1.5rem;
-  padding: 0.25rem 1rem;
-}
-
-.search-user__result-count,
-.search-user-post__result-count,
-.search-group__result-count,
-.search-group-post__result-count {
-  display: inline-block;
+.search__result-title, 
+.search__result-count {
   margin-top: 1rem;
+  margin-left: 1.5rem;
 }
 
-.search-user__result-title, 
-.search-user-post__result-title, 
-.search-group__result-title, 
-.search-group-post__result-title{
+.search__result-title {
   background-color: rgba(209, 236, 241, 0.8);
 }
 
-.search-user__result-count,
-.search-user-post__result-count,
-.search-group__result-count,
-.search-group-post__result-count {
+.search__result-count {
   background-color: rgba(209, 236, 241, 0.6);
 }
 
