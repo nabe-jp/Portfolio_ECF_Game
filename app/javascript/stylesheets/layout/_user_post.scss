@@ -127,9 +127,8 @@
     align-items: center;                // 縦方向の中央揃え
   }
 
-  // 投稿画像の設定(post-list -> index用、post-detail -> show用)
-  .post-list__image, 
-  .post-detail__image {
+  // 投稿画像の設定
+  .post-list__image {
     max-width: 100%;                    // 親要素を超えないように最大幅を設定
     width: 150px;
     aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
@@ -149,7 +148,6 @@
   // はみ出した部分を隠し...表示、大きさにpaddingとborderは幅に含める
   .post-list__item-label, 
   .post-list__user, 
-  .post-detai__user, 
   .post-list__title, 
   .post-list__description, 
   .post-list__date {
@@ -169,7 +167,6 @@
 
   // フォントサイズ
   .post-list__user, 
-  .post-detai__user, 
   .post-list__title, 
   .post-list__description {
     font-size: var(--user-post-font-main);
@@ -181,7 +178,6 @@
 
   // フォントの太さ
   .post-list__user, 
-  .post-detai__user, 
   .post-list__title {
     font-weight: bold;
   }
@@ -195,10 +191,6 @@
   .post-list__item-label, 
   .post-list__date {
     height: 10%;
-    white-space: nowrap;                // 1行で表示
-  }
-
-  .post-detai__user {
     white-space: nowrap;                // 1行で表示
   }
 
@@ -216,6 +208,55 @@
     bottom: 0;
     padding-left: 0.4rem;
     color: gray;
+  }
+}
+
+.user-post-show {
+  --user-post-show-font-user-nickname: 1rem;
+  --user-post-show-font-post-title: 1.1rem;
+  --user-post-show-font-post-body: 0.9rem;
+
+  &__item {
+    width: 100%;
+  }
+
+  // 投稿画像の設定
+  &__post-image {
+    max-width: 100%;                    // 親要素を超えないように最大幅を設定
+    width: 400px;
+    aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  &__user-image {
+    width: 40px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__user-nickname, 
+  &__post-title {
+    max-width: 100%;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
+    font-weight: bold;
+    white-space: nowrap;                // 1行で表示
+    overflow: hidden;                   // はみ出した部分は非表示
+    text-overflow: ellipsis;            // 省略文字「...」を表示
+  }
+
+  &__user-nickname {
+    font-size: var(--user-post-show-font-user-nickname);
+  }
+
+  &__post-title {
+    font-size: var(--user-post-show-font-post-title);
+  }
+
+  &__post-body {
+    font-size: var(--user-post-show-font-post-body);
   }
 }
 

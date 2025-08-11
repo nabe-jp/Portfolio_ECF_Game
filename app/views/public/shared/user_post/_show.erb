@@ -1,22 +1,21 @@
-<!-- 左側に投稿画像 -->
+ <!-- 左側に投稿画像 -->
 <div class="col-12 col-md-6 d-flex justify-content-center">
-  <%= image_tag(@user_post.user_post_image, size: "400x400", class: "post-detail__image") %>
+  <%= image_tag(@user_post.user_post_image, class: "user-post-show__post-image") %>
 </div>
 
 <!-- 右側にプロフィール画像と名前、投稿タイトル、投稿内容 -->
 <div class="col-12 col-md-6 d-flex flex-column justify-content-center pr-5">
   <!-- プロフィール画像と名前 -->
   <div class="d-flex align-items-center">
-    <%= image_tag(@user_post.user.profile_image, size: "40x40", 
-        class: "post__user-profile-image rounded-circle") %>
-    <span class="ml-2 post-detai__user"><%= @user_post.user.nickname %></span>
+    <%= image_tag(@user_post.user.profile_image, class: "user-post-show__user-image") %>
+    <span class="ml-2 user-post-show__user-nickname"><%= @user_post.user.nickname %></span>
   </div>
 
   <!-- 投稿タイトル -->
-  <div class="my-3 post__title"><%= @user_post.title %></div>
+  <div class="my-3 user-post-show__post-title"><%= @user_post.title %></div>
 
   <!-- 投稿内容 -->
-  <p class="text-left my-2 post__body" style="word-wrap: break-word;">
+  <p class="text-left my-2 user-post-show__post-body" style="word-wrap: break-word;">
     <%= @user_post.body %>
   </p>
 
@@ -24,9 +23,10 @@
   <div class="tag-box">
     <% @user_post.tag_list.each do |tag| %>
       <span class="tag-box__label"><%= tag %></span>
-  <% end %>
+    <% end %>
 
-  <div class="row justify-content-center mt-3">
-    <%= render "public/shared/link/links", check_poster_profile: true, as: :button %>
+    <div class="row justify-content-center mt-3">
+      <%= render "public/shared/link/links", check_poster_profile: true, as: :button %>
+    </div>
   </div>
 </div>
