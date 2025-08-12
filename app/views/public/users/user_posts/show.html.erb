@@ -1,42 +1,18 @@
-<div class="container mt-4">
-  <div class="row justify-content-center">
-    <!-- 右側に日時と編集・削除ボタン -->
-    <div class="col-10 text-right mr-3">
-      <!-- 投稿日時を1列分左に移動 -->
-      <p class="post__date">
-        <%= @user_post.created_at.strftime("%Y-%m-%d %H:%M") %>
-      </p>
-    </div>
+<div class="container user-post-show">
 
-    <div class="col-11 text-right">
-      <!-- 編集・削除ボタン -->
-      <% if current_user == @user_post.user %>
-        <div>
-          <%= link_to '編集', edit_user_post_path(current_user, @user_post), class: 'btn btn-base' %>
-          <%= link_to '削除', user_post_path(current_user, @user_post), method: :delete, 
-            data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
-        </div>
-      <% end %>
-    </div>
-  </div>
+  <%= render 'public/shared/user_post/show' %>
+
+  <h2 class="text-center" id="comment_form">コメント</h2>
+
+  <hr>
+
+  <% if user_signed_in? %>
+    <%= render 'public/shared/user_post_comment/post_form', user_post: @user_post %>
+  <% else %>
+    <p class="text-center">コメントするにはログインが必要です。</p>
+  <% end %>
+
+  <hr>
+
+  <%= render 'public/shared/user_post_comment/list', user_post: @user_post %>
 </div>
-
-<div class="container mt-5">
-  <div class="row my-5">
-    <%= render 'public/shared/user_post/show' %>
-  </div>
-</div>
-
-<h2 id="comment_form", class="text-center">コメント</h2>
-
-<hr>
-
-<% if user_signed_in? %>
-  <%= render 'public/shared/user_post_comment/post_form', user_post: @user_post %>
-<% else %>
-  <p class="text-center">コメントするにはログインが必要です。</p>
-<% end %>
-
-<hr>
-
-<%= render 'public/shared/user_post_comment/list', user_post: @user_post %>

@@ -211,13 +211,48 @@
   }
 }
 
+/*    ユーザー投稿詳細の設定    */
 .user-post-show {
-  --user-post-show-font-user-nickname: 1rem;
-  --user-post-show-font-post-title: 1.1rem;
-  --user-post-show-font-post-body: 0.9rem;
+  --user-post-show-font-user-nickname: 1.4rem;
+  --user-post-show-font-post-title: 2rem;
+  --user-post-show-font-post-body: 1.1rem;
+  --user-post-show-font-post-date: 1rem;
 
-  &__item {
-    width: 100%;
+  // 投稿詳細のボックスの設定
+  &__post-detail {
+    padding-bottom: 1rem;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  }
+
+  // 共通設定
+  &__post-title, 
+  &__user-nickname {
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    font-weight: bold;
+  }
+
+  //　投稿タイトル(ページタイトル)の設定
+  &__post-title {
+    font-size: var(--user-post-show-font-post-title);
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  //　左のボックスの設定
+  &__left-box {
+    display: flex;
+    flex: 0 0 50%;                      // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
+    justify-content: center;            // 横方向の中央揃え
+    align-items: center;                // 縦方向の中央揃え
+  }
+
+  //　右のボックスの設定
+  &__right-box {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;            // 縦中央
+    gap: 1rem;
   }
 
   // 投稿画像の設定
@@ -229,34 +264,44 @@
     object-fit: cover;
   }
 
+  // ユーザー画像の設定
   &__user-image {
-    width: 40px;
+    width: 60px;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
     object-fit: cover;
   }
 
-  &__user-nickname, 
-  &__post-title {
-    max-width: 100%;
-    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-    line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
-    font-weight: bold;
-    white-space: nowrap;                // 1行で表示
-    overflow: hidden;                   // はみ出した部分は非表示
-    text-overflow: ellipsis;            // 省略文字「...」を表示
-  }
-
+  // ニックネームの設定
   &__user-nickname {
     font-size: var(--user-post-show-font-user-nickname);
   }
 
-  &__post-title {
-    font-size: var(--user-post-show-font-post-title);
-  }
-
+  // 投稿内容の設定
   &__post-body {
     font-size: var(--user-post-show-font-post-body);
+  }
+
+  // 投稿日時と編集・削除ボタンのボックスの設定
+  &__post-meta {
+    display: flex;
+  }
+  
+  // 投稿日時の設定
+  &__post-date {
+    flex: 0 0 50%;
+    display: flex;
+    align-items: center;                // 縦中央
+    font-size: var(--user-post-show-font-post-date);
+  }
+  
+  // 編集・削除ボタンのボックスの設定
+  &__post-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;     // ボタンを左右に均等配置
+    align-items: center;                // 縦中央
+    gap: 1rem;
   }
 }
 

@@ -1,31 +1,53 @@
- <!-- 左側に投稿画像 -->
-<div class="col-12 col-md-6 d-flex justify-content-center">
-  <%= image_tag(@user_post.user_post_image, class: "user-post-show__post-image") %>
-</div>
-
-<!-- 右側にプロフィール画像と名前、投稿タイトル、投稿内容 -->
-<div class="col-12 col-md-6 d-flex flex-column justify-content-center pr-5">
-  <!-- プロフィール画像と名前 -->
-  <div class="d-flex align-items-center">
-    <%= image_tag(@user_post.user.profile_image, class: "user-post-show__user-image") %>
-    <span class="ml-2 user-post-show__user-nickname"><%= @user_post.user.nickname %></span>
+<div class="row user-post-show__post-detail">
+  <div class="col-12">
+    <h1 class="user-post-show__post-title"><%= @user_post.title %></h1>
   </div>
 
-  <!-- 投稿タイトル -->
-  <div class="my-3 user-post-show__post-title"><%= @user_post.title %></div>
+  <!-- 左側に投稿画像 -->
+  <div class="col-12 col-md-6 user-post-show__left-box">
+    <%= image_tag(@user_post.user_post_image, class: "user-post-show__post-image") %>
+  </div>
 
-  <!-- 投稿内容 -->
-  <p class="text-left my-2 user-post-show__post-body" style="word-wrap: break-word;">
-    <%= @user_post.body %>
-  </p>
+  <!-- 右側に投稿詳細 -->
+  <div class="col-12 col-md-6 user-post-show__right-box">
+    <!-- プロフィール画像と名前 -->
+    <div class="d-flex align-items-center">
+      <%= image_tag(@user_post.user.profile_image, class: "user-post-show__user-image") %>
+      <span class="ml-2 user-post-show__user-nickname"><%= @user_post.user.nickname %></span>
+    </div>
 
-  <!-- タグの表示 -->
-  <div class="tag-box">
-    <% @user_post.tag_list.each do |tag| %>
-      <span class="tag-box__label"><%= tag %></span>
+    <!-- 投稿内容 -->
+    <p class="text-left my-2 user-post-show__post-body">
+      <%= @user_post.body %>
+    </p>
+
+    <!-- タグ -->
+    <% if @user_post.tag_list.present? %>
+      <div class="tag-box">
+        <% @user_post.tag_list.each do |tag| %>
+          <span class="tag-box__label"><%= tag %></span>
+        <% end %>
+      </div>
     <% end %>
 
-    <div class="row justify-content-center mt-3">
+    <!-- 投稿日時と編集・削除ボタン -->
+    <div class="user-post-show__post-meta">
+      <div class="user-post-show__post-date">
+        投稿日時：<%= @user_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+      </div>
+
+      <!-- 編集・削除ボタン -->
+      <div class="user-post-show__post-buttons">
+        <% if current_user == @user_post.user %>
+          <%= link_to '編集', edit_user_post_path(current_user, @user_post), class: 'btn btn-base' %>
+          <%= link_to '削除', user_post_path(current_user, @user_post), method: :delete, 
+            data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- 投稿者プロフィールへのリンクボタン -->
+    <div class="row justify-content-center">
       <%= render "public/shared/link/links", check_poster_profile: true, as: :button %>
     </div>
   </div>
