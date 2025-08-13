@@ -4,20 +4,20 @@
   </div>
 
   <!-- 左側に投稿画像 -->
-  <div class="col-12 col-md-6 user-post-show__left-box">
+  <div class="user-post-show__left-box">
     <%= image_tag(@user_post.user_post_image, class: "user-post-show__post-image") %>
   </div>
 
   <!-- 右側に投稿詳細 -->
-  <div class="col-12 col-md-6 user-post-show__right-box">
+  <div class="user-post-show__right-box">
     <!-- プロフィール画像と名前 -->
-    <div class="d-flex align-items-center">
+    <div class="user-post-show__user-info">
       <%= image_tag(@user_post.user.profile_image, class: "user-post-show__user-image") %>
-      <span class="ml-2 user-post-show__user-nickname"><%= @user_post.user.nickname %></span>
+      <span class="user-post-show__user-nickname"><%= @user_post.user.nickname %></span>
     </div>
 
     <!-- 投稿内容 -->
-    <p class="text-left my-2 user-post-show__post-body">
+    <p class="user-post-show__post-body">
       <%= @user_post.body %>
     </p>
 
@@ -47,7 +47,7 @@
     </div>
 
     <!-- 投稿者プロフィールへのリンクボタン -->
-    <div class="row justify-content-center">
+    <div class="d-flex justify-content-center">
       <%= render "public/shared/link/links", check_poster_profile: true, as: :button %>
     </div>
   </div>
