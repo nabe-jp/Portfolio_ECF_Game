@@ -1,16 +1,14 @@
-<div  class="user-comments__form-wrapper">
-  <%= form_with(model: [@user_post, @user_post_comment],
-    url: user_post_comments_path(@user_post.user, @user_post), local: true) do |f| %>
+<%= form_with(model: [@user_post, @user_post_comment],
+  url: user_post_comments_path(@user_post.user, @user_post), local: true, 
+    class: "user-comments") do |f| %>
 
-    <div class="user-comments__form-row">
-      <%= f.text_area :body, rows: 2, class: "user-comments__textarea", 
-        placeholder: user_post_comment_body_placeholder, 
-          maxlength: UserPostComment::BODY_MAX_LENGTH %>
+  <div class="user-comments__form-row">
+    <%= f.text_area :body, class: "user-comments__textarea", 
+      placeholder: user_post_comment_body_placeholder, maxlength: UserPostComment::BODY_MAX_LENGTH %>
 
-      <div class="comment-form__submit">
-        <%= f.submit "コメントする" %>
-      </div>
+    <div class="user-comments__submit">
+      <%= f.submit "コメントする" %>
     </div>
+  </div>
 
-  <% end %>
-</div>
+<% end %>

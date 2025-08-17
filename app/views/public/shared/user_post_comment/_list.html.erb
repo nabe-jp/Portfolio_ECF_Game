@@ -1,5 +1,5 @@
 <% @parent_comments.each do |comment| %>
-  <div class="row align-items-center no-gutters mb-2">
+  <div class="row align-items-center no-gutters comment-row">
     <!-- コメント本文 -->
     <div class="col-6 pr-1 comment-body">
       <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 

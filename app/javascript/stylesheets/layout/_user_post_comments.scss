@@ -1,30 +1,36 @@
-.user-comments__form-wrapper {
+/*    コメントの設定    */
+.user-comments {
   margin-bottom: 1rem;
-}
 
-.user-comments__form-row {
-  display: flex;
-  width: 100%;
-  gap: 1rem;
-  margin-left: 0.5rem;
-}
+  &__form-row {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    margin-left: 0.5rem;
+  }
 
-.user-comments__textarea {
-  flex: 1;
-  resize: vertical;
-}
+  &__textarea {
+    flex: 1;
+    resize: vertical;
 
-.comment-form__submit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 30%;
-}
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 0.25rem 0.5rem;
+    min-height: calc(1.5rem * 1 + 0.25rem*2);
+  }
 
-.comment-form__submit input[type="submit"] {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  white-space: nowrap;
+  &__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+  }
+
+  &__submit input[type="submit"] {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
 }
 
 .comment-body {
@@ -33,7 +39,7 @@
 }
 
 .comment-body p {
-  margin-bottom: 0;
+   margin-bottom: 0;
 }
 
 .reply-form-wrapper {
@@ -73,4 +79,25 @@
   width: 35px;
   height: 35px;
   object-fit: cover;
+}
+
+
+// レスポンシブ調整
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
+
+}
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+}
+
+@media (max-width: 320px) {
 }
