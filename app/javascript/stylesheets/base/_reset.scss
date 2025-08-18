@@ -60,3 +60,18 @@ hr {
     min-height: 100dvh;
   }
 }
+
+// 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
+@media (max-width: 376px) {
+  hr {
+    margin-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}  
+
+@media (max-width: 320px) {
+  hr {
+    margin-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}  

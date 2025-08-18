@@ -1,35 +1,40 @@
 /*    コメントの設定    */
 .user-comments {
-  margin-bottom: 1rem;
+  --user-post-comment-font-input-text: 1rem;
+  --user-post-comment-font-input-button-text: 0.9rem;
+  --user-post-comment-font-login-required-text: 1.1rem;
 
   &__form-row {
     display: flex;
     width: 100%;
     gap: 1rem;
-    margin-left: 0.5rem;
   }
 
   &__textarea {
     flex: 1;
-    resize: vertical;
-
-    font-size: 1rem;
+    height: calc(1.5em + 0.5em * 2); // line-height + 上下padding(表示は1行分)
+    padding: 0.5em 1em;             // emで文字サイズに比例(文字サイズ1rem → 上下0.5rem, 左右1rem)
+    box-sizing: border-box;
+    font-size: var(--user-post-comment-font-input-text);
     line-height: 1.5;
-    padding: 0.25rem 0.5rem;
-    min-height: calc(1.5rem * 1 + 0.25rem*2);
   }
 
   &__submit {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30%;
+    width: 20%;
+
+    &-btn {
+      padding: 0.5em 1em;
+      font-size: var(--user-post-comment-font-input-button-text);
+      white-space: nowrap;
+    }
   }
 
-  &__submit input[type="submit"] {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    white-space: nowrap;
+  &__login-required {
+    text-align: center;
+    font-size: var(--user-post-comment-font-login-required-text);
   }
 }
 
@@ -81,23 +86,83 @@
   object-fit: cover;
 }
 
-
 // レスポンシブ調整
 @media (max-width: 1024px) {
-
+  .user-comments {
+    --user-post-comment-font-input-text: 0.9rem;
+    --user-post-comment-font-input-button-text: 0.8rem;
+    --user-post-comment-font-login-required-text: 0.95rem;
+  
+    &__textarea {
+      height: calc(1.5em * 2 + 0.5em * 2);  // 表示を2行分に変更
+    }
+  }
 }
 
 @media (max-width: 768px) {
-
+  .user-comments {
+    --user-post-comment-font-input-button-text: 0.7rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .user-comments {
+    --user-post-comment-font-input-text: 0.85rem;
+    --user-post-comment-font-login-required-text: 0.9rem;
+  
+    &__form-row {
+      gap: 0.5rem;
+    }
 
+    &__textarea {
+      height: calc(1.5em * 3 + 0.5em * 2);  // 表示を3行分に変更
+    }
+
+    &__submit {
+      width: 25%;
+    }
+  }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
+  .user-comments {
+    --user-post-comment-font-input-text: 0.8rem;
+    --user-post-comment-font-login-required-text: 0.8rem;
+  
+    &__form-row {
+      gap: 0.5rem;
+    }
+
+    &__textarea {
+      padding: 0.25em 0.5em;
+    }
+
+    &__submit {
+      width: 30%;
+
+      &-btn {
+        padding: 0.25em 0.5em;
+      }
+    }
+  }
 }
 
 @media (max-width: 320px) {
+  .user-comments {
+    --user-post-comment-font-input-text: 0.75rem;
+    --user-post-comment-font-login-required-text: 0.75rem;
+  
+    &__form-row {
+      gap: 0.25rem;
+    }
+
+    &__textarea {
+      height: calc(1.5em * 4 + 0.5em * 2);  // 表示を4行分に変更
+    }
+
+    &__submit {
+      width: 30%;
+    }
+  }
 }

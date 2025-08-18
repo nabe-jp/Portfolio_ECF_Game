@@ -1,14 +1,20 @@
-<%= form_with(model: [@user_post, @user_post_comment],
-  url: user_post_comments_path(@user_post.user, @user_post), local: true, 
-    class: "user-comments") do |f| %>
+<div class="user-comments">
+  <% if user_signed_in? %>
+    <%= form_with(model: [@user_post, @user_post_comment],
+      url: user_post_comments_path(@user_post.user, @user_post), local: true) do |f| %>
 
-  <div class="user-comments__form-row">
-    <%= f.text_area :body, class: "user-comments__textarea", 
-      placeholder: user_post_comment_body_placeholder, maxlength: UserPostComment::BODY_MAX_LENGTH %>
+      <div class="user-comments__form-row">
+        <%= f.text_area :body, class: "user-comments__textarea", 
+          placeholder: user_post_comment_body_placeholder, maxlength: UserPostComment::BODY_MAX_LENGTH %>
 
-    <div class="user-comments__submit">
-      <%= f.submit "コメントする" %>
-    </div>
-  </div>
+        <div class="user-comments__submit">
+          <%= f.submit "コメントする", class: "user-comments__submit-btn"  %>
+        </div>
+      </div>
 
-<% end %>
+    <% end %>
+
+  <% else %>
+    <p class="user-comments__login-required">コメントするにはログインが必要です。</p>
+  <% end %>
+</div>

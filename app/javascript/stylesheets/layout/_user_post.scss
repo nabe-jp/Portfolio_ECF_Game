@@ -477,6 +477,10 @@
     --user-post-show-font-post-body: 0.9rem;
     --user-post-show-font-post-date: 0.85rem;
 
+    &__post-detail {
+      padding-bottom: 1rem;
+    }
+
     &__post-image {
       width: 360px;
     }
@@ -499,6 +503,10 @@
     --user-post-show-font-user-nickname: 0.9rem;
     --user-post-show-font-post-body: 0.8rem;
     --user-post-show-font-post-date: 0.8rem;
+
+    &__post-detail {
+      padding-bottom: 0.75rem;
+    }
 
     &__post-image {
       width: 300px;
