@@ -1,50 +1,57 @@
 <% @parent_comments.each do |comment| %>
   <div class="row align-items-center no-gutters comment-row">
     <!-- コメント本文 -->
-    <div class="col-6 pr-1 comment-body">
+    <div class="col-7 pr-1 comment-body">
       <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
         simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
     </div>
 
-    <!-- 投稿日 -->
-    <div class="col-2 pr-1 text-center">
-      <% unless comment.is_deleted? %>
-        <small><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></small>
-      <% end %>
-    </div>
+    <!-- 投稿者、投稿日＋ボタン -->
+    <div class="col-5 pl-1">
+      <div class="row">
+        <!-- 上段：投稿者 -->
+        <div class="col-12 d-flex align-items-center mb-1">
+          <% unless comment.is_deleted %>
+            <%= link_to show_user_path(comment.user), class: "comment__profile-link" do %>
+              <%= image_tag(comment.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
+              <span class="truncate"><%= comment.user.nickname %></span>
+            <% end %>
+          <% end %>
+        </div>
 
-    <!-- プロフィール画像＋ニックネーム -->
-    <div class="col-2 d-flex align-items-center">
-      <% unless comment.is_deleted %>
-        <%= link_to show_user_path(comment.user), class: "comment__profile-link" do %>
-          <%= image_tag(comment.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
-          <span class="truncate"><%= comment.user.nickname %></span>
-        <% end %>
-      <% end %>
-    </div>
+        <!-- 下段：投稿日 + ボタン -->
+         <!-- 投稿日 -->
+        <div class="col-4 text-center">
+          <% unless comment.is_deleted? %>
+            <small><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></small>
+          <% end %>
+        </div>
 
-    <!-- 返信リンク -->
-    <div class="col-1 pl-1">
-      <% unless comment.is_deleted || !user_signed_in? %>
-        <%#
-          data-toggle="collapse"はBootstrapのCollapse機能、リンクのクリックによりフォームの表示・非表示制御
-          href=～はどの返信フォームを開くか識別するためのID指定
-          aria-expanded="false"とaria-controlsはアクセシビリティ関連の属性
-          aria-expandedはフォームの開閉すを示し、aria-controlsはどの要素を開閉するかを明示
-        #%>
-        <a data-toggle="collapse" href="#reply-form-<%= comment.id %>" role="button"
-          aria-expanded="false" aria-controls="reply-form-<%= comment.id %>">
-          返信する
-        </a>
-      <% end %>
-    </div>
+        <!-- 返信リンク -->
+        <div class="col-4 text-center">
+          <% unless comment.is_deleted || !user_signed_in? %>
+            <%#
+              data-toggle="collapse"はBootstrapのCollapse機能、
+              リンクのクリックによりフォームの表示・非表示制御
+              href=～はどの返信フォームを開くか識別するためのID指定
+              aria-expanded="false"とaria-controlsはアクセシビリティ関連の属性
+              aria-expandedはフォームの開閉すを示し、aria-controlsはどの要素を開閉するかを明示
+            #%>
+            <a data-toggle="collapse" href="#reply-form-<%= comment.id %>" role="button"
+              aria-expanded="false" aria-controls="reply-form-<%= comment.id %>">
+              返信する
+            </a>
+          <% end %>
+        </div>
 
-    <!-- 削除ボタン -->
-    <div class="col-1 d-flex justify-content-center">
-      <% if !comment.is_deleted && (comment.user == current_user || @user_post.user == current_user) %>
-        <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
-          method: :delete, data: { confirm: "本当に削除しますか？" },class: "btn btn-danger btn-sm" %>
-      <% end %>
+        <!-- 削除ボタン -->
+        <div class="col-4 text-center">
+          <% if !comment.is_deleted && (comment.user == current_user || @user_post.user == current_user) %>
+            <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
+              method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -61,39 +68,42 @@
 
   <!-- 子コメント -->
   <% comment.replies.visible_replies.each do |reply| %>
-    <div class="row align-items-center no-gutters mb-2">
+    <div class="row align-items-center no-gutters mt-4 mb-1 comment-row">
       <!-- 子コメント本文 -->
-      <div class="col-6 pl-4  comment-body">
+      <div class="col-7 pl-4 comment-body">
         <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
           simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
       </div>
 
-      <!-- 子コメント投稿日 -->
-      <div class="col-2 pl-4 text-center">
-        <% unless reply.is_deleted? %>
-          <small><%= reply.created_at.strftime('%Y-%m-%d %H:%M') %></small>
-        <% end %>
-      </div>
+      <!-- 投稿者、投稿日＋ボタン -->
+      <div class="col-5 pl-4">
+        <div class="row">
+          <!-- 上段：投稿者 -->
+          <div class="col-12 d-flex align-items-center mb-1">
+            <% unless reply.is_deleted %>
+              <%= link_to show_user_path(reply.user), class: "comment__profile-link" do %>
+                <%= image_tag(reply.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
+                <span class="truncate"><%= reply.user.nickname %></span>
+              <% end %>
+            <% end %>
+          </div>
 
-      <!-- 子コメント画像＋ニックネーム -->
-      <div class="col-2 pl-4 d-flex align-items-center">
-        <% unless reply.is_deleted %>
-          <%= link_to show_user_path(reply.user), class: "comment__profile-link" do %>
-            <%= image_tag(reply.user.profile_image, size: "35x35", class: "rounded-circle mr-2") %>
-            <span class="truncate"><%= reply.user.nickname %></span>
-          <% end %>
-        <% end %>
-      </div>
+          <!-- 下段：投稿日 + ボタン -->
+          <!-- 投稿日 -->
+          <div class="col-4 text-center">
+            <% unless reply.is_deleted? %>
+              <small><%= reply.created_at.strftime('%Y-%m-%d %H:%M') %></small>
+            <% end %>
+          </div>
 
-      <!-- 返信リンク -->
-      <div class="col-1"></div>
-
-      <!-- 削除ボタン -->
-      <div class="col-1 d-flex justify-content-center">
-        <% if !reply.is_deleted && (reply.user == current_user || @user_post.user == current_user) %>
-          <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply),
-            method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
-        <% end %>
+          <!-- 削除ボタン -->
+          <div class="col-4 offset-4 text-center">
+            <% if !reply.is_deleted && (reply.user == current_user || @user_post.user == current_user) %>
+              <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply),
+                method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>

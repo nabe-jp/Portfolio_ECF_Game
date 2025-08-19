@@ -13,12 +13,12 @@
           maxlength: UserPostComment::BODY_MAX_LENGTH %>
     </div>
 
-    <%# 空欄(画像+ニックネーム用のスペース) #%>
-    <div class="col-2"></div>
-
-    <!-- 送信ボタン -->
-    <div>
-      <%= f.submit "返信する", class: "btn btn-primary btn-sm btn-block" %>
+    <div class="col-5">
+      <!-- 送信ボタン -->
+      <%# オフセットで空欄(画像+ニックネーム用のスペース)を作成 #%>
+      <div class="col-4 offset-4 text-cente">
+        <%= f.submit "返信する", class: "btn btn-primary btn-sm btn-block" %>
+      </div>
     </div>
   </div>
 <% end %>
