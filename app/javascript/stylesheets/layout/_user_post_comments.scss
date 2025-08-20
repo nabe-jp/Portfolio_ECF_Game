@@ -1,8 +1,13 @@
 /*    コメントの設定    */
-.user-comments {
-  --user-post-comment-font-input-text: 1rem;
-  --user-post-comment-font-input-button-text: 0.9rem;
-  --user-post-comment-font-login-required-text: 1.1rem;
+.comment {
+  --comment-font-input-text: 1rem;
+  --comment-font-input-button-text: 0.9rem;
+  --comment-font-login-required-text: 1.1rem;
+  --comment-font-body: 1rem;
+  --comment-font-user-nickname: 0.9rem;
+  --comment-font-date: 0.75rem;
+  --comment-font-reply-button-text: 0.9rem;
+  --comment-font-delete-button-text: 0.8rem;
 
   &__form-row {
     display: flex;
@@ -15,7 +20,7 @@
     height: calc(1.5em + 0.5em * 2); // line-height + 上下padding(表示は1行分)
     padding: 0.5em 1em;             // emで文字サイズに比例(文字サイズ1rem → 上下0.5rem, 左右1rem)
     box-sizing: border-box;
-    font-size: var(--user-post-comment-font-input-text);
+    font-size: var(--comment-font-input-text);
     line-height: 1.5;
   }
 
@@ -27,24 +32,72 @@
 
     &-btn {
       padding: 0.5em 1em;
-      font-size: var(--user-post-comment-font-input-button-text);
+      font-size: var(--comment-font-input-button-text);
       white-space: nowrap;
     }
   }
 
   &__login-required {
     text-align: center;
-    font-size: var(--user-post-comment-font-login-required-text);
+    font-size: var(--comment-font-login-required-text);
   }
-}
 
-.comment-body {
-  word-break: break-word;
-  max-width: 100%;
-}
+  &__body {
+    word-break: break-word;
+    max-width: 100%;
+  }
+  
+  &__body p {
+     margin-bottom: 0;
+     font-size: var(--comment-font-body);
+  }
 
-.comment-body p {
-   margin-bottom: 0;
+  &__profile-link {
+    display: flex;
+    align-items: center;
+    color: #212529;
+    text-decoration: none;
+    min-width: 0;
+  }
+  
+  &__profile-link:hover {
+    text-decoration: underline;
+  }
+
+  &__user-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+  }
+
+  &__user-nickname {
+    font-size: var(--comment-font-user-nickname);
+    white-space: nowrap;        // 折り返し禁止
+    overflow: hidden;           // はみ出しを隠す
+    text-overflow: ellipsis;    // 省略「...」
+    flex: 1;                    // 画像以外の残り幅を全部使う
+    min-width: 0;
+  }
+
+  &__date {
+    flex: 1;
+    font-size: var(--comment-font-date);
+    white-space: nowrap;        // 折り返し禁止
+    overflow: hidden;           // はみ出しを隠す
+    text-overflow: ellipsis;    // 省略「...」
+  }
+
+  &__reply-button {
+    font-size: var(--comment-font-reply-button-text);
+    color: #007bff;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .reply-form-wrapper {
@@ -67,31 +120,16 @@
   font-size: 0.9rem;
 }
 
-.comment__profile-link {
-  display: flex;
-  align-items: center;
-  color: #212529;
-  text-decoration: none;
-}
-
-.comment__profile-link:hover {
-  text-decoration: underline;
-}
-
-.comment__profile-image {
-  border-radius: 50%;
-  margin-right: 0.5rem;
-  width: 35px;
-  height: 35px;
-  object-fit: cover;
-}
-
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  .user-comments {
-    --user-post-comment-font-input-text: 0.9rem;
-    --user-post-comment-font-input-button-text: 0.8rem;
-    --user-post-comment-font-login-required-text: 0.95rem;
+  .comment {
+    --comment-font-input-text: 0.9rem;
+    --comment-font-input-button-text: 0.8rem;
+    --comment-font-login-required-text: 0.95rem;
+    --comment-font-body: 0.9rem;
+    --comment-font-user-nickname: 0.75rem;
+    --comment-font-date: 0.675rem;
+    --comment-font-reply-button-text: 0.75rem;
   
     &__textarea {
       height: calc(1.5em * 2 + 0.5em * 2);  // 表示を2行分に変更
@@ -100,15 +138,22 @@
 }
 
 @media (max-width: 768px) {
-  .user-comments {
-    --user-post-comment-font-input-button-text: 0.7rem;
+  .comment {
+    --comment-font-input-button-text: 0.7rem;
+    --comment-font-body: 0.85rem;
+    --comment-font-user-nickname: 0.7rem;
+    --comment-font-date: 0.7rem;
+    --comment-font-reply-button-text: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .user-comments {
-    --user-post-comment-font-input-text: 0.85rem;
-    --user-post-comment-font-login-required-text: 0.9rem;
+  .comment {
+    --comment-font-input-text: 0.85rem;
+    --comment-font-login-required-text: 0.9rem;
+    --comment-font-body: 0.8rem;
+    --comment-font-user-nickname: 0.8rem;
+    --comment-font-date: 0.75rem;
   
     &__form-row {
       gap: 0.5rem;
@@ -126,9 +171,12 @@
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  .user-comments {
-    --user-post-comment-font-input-text: 0.8rem;
-    --user-post-comment-font-login-required-text: 0.8rem;
+  .comment {
+    --comment-font-input-text: 0.8rem;
+    --comment-font-login-required-text: 0.8rem;
+    --comment-font-user-nickname: 0.7rem;
+    --comment-font-date: 0.7rem;
+    --comment-font-reply-button-text: 0.75rem;
   
     &__form-row {
       gap: 0.5rem;
@@ -149,9 +197,9 @@
 }
 
 @media (max-width: 320px) {
-  .user-comments {
-    --user-post-comment-font-input-text: 0.75rem;
-    --user-post-comment-font-login-required-text: 0.75rem;
+  .comment {
+    --comment-font-input-text: 0.75rem;
+    --comment-font-login-required-text: 0.75rem;
   
     &__form-row {
       gap: 0.25rem;
