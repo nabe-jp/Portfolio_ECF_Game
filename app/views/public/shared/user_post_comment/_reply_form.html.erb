@@ -1,23 +1,26 @@
 <%= form_with(model: [user_post, user_post_comment],
-  url: user_post_comments_path(user_post.user, user_post), local: true) do |f| %>
+  url: user_post_comments_path(user_post.user, user_post), 
+    local: true, html: { class: "comment" }) do |f| %>
 
   <%# "コメントへの返信に使用" %>
   <%= f.hidden_field :parent_comment_id, value: user_post_comment.parent_comment_id %>
 
-  <div class="row align-items-center no-gutters mb-2">
+  <div class="row align-items-center mb-2">
 
     <!-- 入力エリア -->
-    <div class="col-7 pl-3">
-      <%= f.text_area :body, rows: 1, class: "form-control", 
+    <div class="col-12 col-md-7 mt-2 mb-2 mb-md-0 comment__form-row">
+      <%= f.text_area :body, class: "comment__textarea", 
         placeholder: user_post_comment_reply_body_placeholder, style: "resize: none;", 
           maxlength: UserPostComment::BODY_MAX_LENGTH %>
     </div>
 
-    <div class="col-5">
-      <!-- 送信ボタン -->
-      <%# オフセットで空欄(画像+ニックネーム用のスペース)を作成 #%>
-      <div class="col-4 offset-4 text-cente">
-        <%= f.submit "返信する", class: "btn btn-primary btn-sm btn-block" %>
+    <!-- 送信ボタン -->
+    <div class="col-12 col-md-5 pl-1">
+      <div class="row">
+        <%# オフセットで空欄(画像+ニックネーム用のスペース)を作成 #%>
+        <div class="col-5 offset-4 offset-md-5 text-center">
+          <%= f.submit "送信する", class: "comment__reply-button" %>
+        </div>
       </div>
     </div>
   </div>

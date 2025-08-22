@@ -29,7 +29,7 @@
         </div>
 
         <!-- 返信リンク -->
-        <div class="col-4 text-center">
+        <div class="col-5 text-center">
           <% unless comment.is_deleted || !user_signed_in? %>
             <%#
               data-toggle="collapse"はBootstrapのCollapse機能、
@@ -38,7 +38,8 @@
               aria-expanded="false"とaria-controlsはアクセシビリティ関連の属性
               aria-expandedはフォームの開閉すを示し、aria-controlsはどの要素を開閉するかを明示
             #%>
-            <a class="comment__reply-button" data-toggle="collapse" href="#reply-form-<%= comment.id %>" 
+            <a class="comment__action-button comment__reply-toggle-button" 
+              data-toggle="collapse" href="#reply-form-<%= comment.id %>" 
               role="button" aria-expanded="false" aria-controls="reply-form-<%= comment.id %>">
               返信する
             </a>
@@ -46,10 +47,11 @@
         </div>
 
         <!-- 削除ボタン -->
-        <div class="col-4 col-md-3 text-center">
+        <div class="col-3 col-md-2 text-center">
           <% if !comment.is_deleted && (comment.user == current_user || @user_post.user == current_user) %>
             <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
-              method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+              method: :delete, data: { confirm: "本当に削除しますか？" }, 
+                class: "comment__delete-button" %>
           <% end %>
         </div>
       </div>
@@ -98,10 +100,11 @@
           </div>
 
           <!-- 削除ボタン -->
-          <div class="col-4 col-md-3 offset-4 offset-mb-5 text-center">
+          <div class="col-3 col-md-2 offset-5 text-center">
             <% if !reply.is_deleted && (reply.user == current_user || @user_post.user == current_user) %>
               <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply),
-                method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger btn-sm" %>
+                method: :delete, data: { confirm: "本当に削除しますか？" }, 
+                  class: "comment__delete-button" %>
             <% end %>
           </div>
         </div>

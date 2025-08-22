@@ -6,7 +6,7 @@
   --comment-font-body: 1rem;
   --comment-font-user-nickname: 0.9rem;
   --comment-font-date: 0.75rem;
-  --comment-font-reply-button-text: 0.9rem;
+  --comment-font-reply-action-button-text: 0.9rem;
   --comment-font-delete-button-text: 0.8rem;
 
   &__form-row {
@@ -89,35 +89,51 @@
     text-overflow: ellipsis;    // 省略「...」
   }
 
-  &__reply-button {
-    font-size: var(--comment-font-reply-button-text);
-    color: #007bff;
+  // 枠が小さいので専用のボタンを定義
+  &__action-button {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border: none;               // 全体の枠はいらない
+    border-radius: 0.25rem;
+    border-bottom: 2px solid transparent;
+    font-size: var(--comment-font-reply-action-button-text);
+    color: #fff;
     text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
 
     &:hover {
-      text-decoration: underline;
+      color: #fff;
+      text-decoration: underline; // ホバー時にアンダーライン
     }
   }
-}
 
-.reply-form-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-}
-
-.reply-form-wrapper textarea {
-  width: 80%;
-  height: 2.5rem;
-  resize: none;
-  font-size: 0.9rem;
-}
-
-.reply-form-wrapper input[type="submit"] {
-  width: 15%;
-  height: 2.5rem;
-  font-size: 0.9rem;
+  &__reply-toggle-button {
+    @extend .comment__action-button;
+    background-color: #007bff;
+  
+    &:hover {
+      background-color: darken(#007bff, 7%);
+    }
+  }
+  
+  &__delete-button {
+    @extend .comment__action-button;
+    background-color: #dc3545;
+  
+    &:hover {
+      background-color: darken(#dc3545, 7%);
+    }
+  }
+  
+  &__reply-button {
+    @extend .comment__action-button;
+    background-color: #28a745;
+  
+    &:hover {
+      background-color: darken(#28a745, 7%);
+    }
+  }
 }
 
 // レスポンシブ調整
@@ -129,10 +145,16 @@
     --comment-font-body: 0.9rem;
     --comment-font-user-nickname: 0.75rem;
     --comment-font-date: 0.675rem;
-    --comment-font-reply-button-text: 0.75rem;
+    --comment-font-reply-action-button-text: 0.7rem;
   
     &__textarea {
       height: calc(1.5em * 2 + 0.5em * 2);  // 表示を2行分に変更
+    }
+
+    &__action-button {
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.15rem;
+      border-bottom: 1.5px solid transparent;
     }
   }
 }
@@ -143,7 +165,7 @@
     --comment-font-body: 0.85rem;
     --comment-font-user-nickname: 0.7rem;
     --comment-font-date: 0.7rem;
-    --comment-font-reply-button-text: 0.8rem;
+    --comment-font-reply-action-button-text: 0.8rem;
   }
 }
 
@@ -176,7 +198,7 @@
     --comment-font-login-required-text: 0.8rem;
     --comment-font-user-nickname: 0.7rem;
     --comment-font-date: 0.7rem;
-    --comment-font-reply-button-text: 0.75rem;
+    --comment-font-reply-action-button-text: 0.75rem;
   
     &__form-row {
       gap: 0.5rem;
