@@ -1,44 +1,16 @@
 <h1 class="sr-only">投稿詳細</h1>
 
-<div class="container">
-  <div class="row  text-center">
-    <!-- 右側に日時と編集・削除ボタン・公開ステータス -->
-    <div class="col-4 offset-8 mr-3 d-flex flex-column">
-      <p class="post__date">
-        公開ステータス：<strong><%= @group_post.visible_to_non_members ? '公開中' : '非公開中' %></strong>
-      </p>
-      <p class="post__date"><%= @group_post.created_at.strftime("%Y-%m-%d %H:%M") %></p>
-    </div>
+<div class="container group-post-show">
 
-    <div class="col-4 offset-8">
-      <!-- 編集・削除ボタン -->
-      <% if group_post_editor? %>
-        <div>
-          <%= link_to '編集', edit_group_post_path(@group, @group_post), class: 'btn btn-base' %>
-          <%= link_to '削除', group_post_path(@group, @group_post), method: :delete, 
-            data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
-        </div>
-      <% end %>
-    </div>
-  </div>
-</div>
+  <%= render 'public/shared/group/post/show' %>
 
-<div class="container mt-5">
-  <div class="row my-5">
-    <%= render 'public/shared/group/post/show' %>
-  </div>
-</div>
+  <h2 class="text-center" id="comment_form">コメント</h2>
 
-<h2 id="comment_form", class="text-center">コメント</h2>
+  <hr>
 
-<hr>
-
-<% if user_signed_in? %>
   <%= render 'public/shared/group/post_comment/post_form', group_post: @group_post %>
-<% else %>
-  <p class="text-center">コメントするにはログインが必要です。</p>
-<% end %>
 
-<hr>
+  <hr>
 
-<%= render 'public/shared/group/post_comment/list', group_post: @group_post %>
+  <%= render 'public/shared/group/post_comment/list', group_post: @group_post %>
+</div>

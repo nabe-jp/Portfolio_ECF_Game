@@ -592,6 +592,120 @@
   padding-left: 0.4rem;
 }
 
+/*  group_posts.show  */
+.group-post-show {
+  --group-post-show-font-post-status-text: 1rem;
+  --group-post-show-font-post-title: 2rem;
+  --group-post-show-font-user-nickname: 1.4rem;
+  --group-post-show-font-post-body: 1.1rem;
+  --group-post-show-font-post-date: 1rem;
+
+  // 投稿詳細のボックスの設定
+  &__post-detail {
+    padding-bottom: 2rem;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  }
+
+  &__post-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: var(--group-post-show-font-post-status-text);
+  }
+
+  // 共通設定
+  &__post-title, 
+  &__user-nickname {
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    font-weight: bold;
+  }
+
+  //　投稿タイトル(ページタイトル)の設定
+  &__post-title {
+    font-size: var(--group-post-show-font-post-title);
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+
+  //　左のボックスの設定
+  &__left-box {
+    display: flex;
+    flex: 0 0 45%;                      // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
+    justify-content: center;            // 横方向の中央揃え
+    align-items: center;                // 縦方向の中央揃え
+  }
+
+  //　右のボックスの設定
+  &__right-box {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;            // 縦中央
+    gap: 1rem;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    padding-left: 1rem;
+  }
+
+  // 投稿画像の設定
+  &__post-image {
+    max-width: 100%;                    // 親要素を超えないように最大幅を設定
+    width: 400px;
+    aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  
+  // ユーザー画像とニックネームのボックスの設定
+  .group-post-show__user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  // ユーザー画像の設定
+  &__user-image {
+    width: 60px;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  // ニックネームの設定
+  &__user-nickname {
+    font-size: var(--group-post-show-font-user-nickname);
+  }
+
+  // 投稿内容の設定
+  &__post-body {
+    font-size: var(--group-post-show-font-post-body);
+  }
+
+  // 投稿日時と編集・削除ボタンのボックスの設定
+  &__post-meta {
+    display: flex;
+  }
+  
+  // 投稿日時の設定
+  &__post-date {
+    flex: 0 0 60%;
+    display: flex;
+    align-items: center;                // 縦中央
+    font-size: var(--group-post-show-font-post-date);
+  }
+  
+  // 編集・削除ボタンのボックスの設定
+  &__post-buttons {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;     // ボタンを左右に均等配置
+    align-items: center;                // 縦中央
+
+    .btn-base {
+      margin: 0;
+    }
+  }
+}
 // レスポンシブ調整
 @media (max-width: 1024px) {
   .groups__title-box, 

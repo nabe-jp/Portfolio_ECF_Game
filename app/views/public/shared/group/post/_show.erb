@@ -1,30 +1,64 @@
-<!-- 左側に投稿画像 -->
-<div class="col-12 col-md-6 d-flex justify-content-center">
-  <%= image_tag(@group_post.group_post_image, size: "400x400", class: "post-detail__image") %>
-</div>
-
-<!-- 右側にプロフィール画像と名前、投稿タイトル、投稿内容 -->
-<div class="col-12 col-md-6 d-flex flex-column justify-content-center pr-5">
-  <!-- プロフィール画像と名前 -->
-  <div class="d-flex align-items-center">
-    <%= image_tag(@group_post.member.user.profile_image, size: "40x40", 
-        class: "post__user-profile-image rounded-circle") %>
-    <span class="ml-2 post-detai__user"><%= @group_post.member.user.nickname %></span>
+<div class="row group-post-show__post-detail">
+  <div class="col-4 col-md-3 offset-8 offset-md-9 group-post-show__post-status">
+    公開ステータス：<strong><%= @group_post.visible_to_non_members ? '公開中' : '非公開中' %></strong>
   </div>
 
-  <!-- 投稿タイトル -->
-  <h2 class="my-3 post__title"><%= @group_post.title %></h2>
-
-  <!-- 投稿内容 -->
-  <p class="text-left my-2 post__body" style="word-wrap: break-word;">
-    <%= @group_post.body %>
-  </p>
-  <div class="row justify-content-center mt-3">
-    <%= render "public/shared/link/links", check_poster_profile: true, as: :button %>
+  <div class="col-12">
+    <h1 class="group-post-show__post-title"><%= @group_post.title %></h1>
   </div>
 
-  <div class="row justify-content-center mt-3">
-    <%= render "public/shared/link/links", group_hosting_post: true, as: :button %>
+  <!-- 左側に投稿画像 -->
+  <div class="group-post-show__left-box">
+    <%= image_tag(@group_post.group_post_image, class: "group-post-show__post-image") %>
   </div>
 
+  <!-- 右側に投稿詳細 -->
+  <div class="group-post-show__right-box">
+    <!-- プロフィール画像と名前 -->
+    <div class="group-post-show__user-info">
+      <%= image_tag(@group_post.member.user.profile_image, class: "group-post-show__user-image") %>
+      <span class="group-post-show__user-nickname"><%= @group_post.member.user.nickname %></span>
+    </div>
+
+    <!-- 投稿内容 -->
+    <p class="group-post-show__post-body">
+      <%= @group_post.body %>
+    </p>
+
+    <!-- タグ -->
+    <%#-- 現在グループポストにタグ機能は未実装の為コメント化 -->
+    <%# if @group_post.tag_list.present? %>
+      <%# <div class="tag-box"> %>
+        <%# @group_post.tag_list.each do |tag| %>
+          <%# <span class="tag-box__label"><%= tag %></span>
+        <%# end %>
+      <%# </div> %>
+    <%# end %>
+
+    <!-- 投稿日時と編集・削除ボタン -->
+    <div class="group-post-show__post-meta">
+      <div class="group-post-show__post-date">
+        投稿日時：<%= @group_post.created_at.strftime("%Y-%m-%d %H:%M") %>
+      </div>
+
+      <!-- 編集・削除ボタン -->
+      <div class="group-post-show__post-buttons">
+        <% if group_post_editor? %>
+          <%= link_to '編集', edit_group_post_path(@group, @group_post), class: 'btn btn-base' %>
+          <%= link_to '削除', group_post_path(@group, @group_post), method: :delete, 
+            data: { confirm: '本当に削除しますか？' }, class: 'btn btn-base' %>
+      <% end %>
+      </div>
+    </div>
+
+    <!-- 投稿者プロフィールへのリンクボタン -->
+    <div class="d-flex justify-content-center">
+      <%= render "public/shared/link/links", check_poster_profile: true, as: :button %>
+    </div>
+
+    <!-- 投稿掲載グループへのリンクボタン -->
+    <div class="d-flex justify-content-center">
+      <%= render "public/shared/link/links", group_hosting_post: true, as: :button %>
+    </div>
+  </div>
 </div>
