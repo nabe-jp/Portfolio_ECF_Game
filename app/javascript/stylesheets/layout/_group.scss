@@ -594,7 +594,7 @@
 
 /*  group_posts.show  */
 .group-post-show {
-  --group-post-show-font-post-status-text: 1rem;
+  --group-post-show-font-post-status-text: 1.1rem;
   --group-post-show-font-post-title: 2rem;
   --group-post-show-font-user-nickname: 1.4rem;
   --group-post-show-font-post-body: 1.1rem;
@@ -603,21 +603,31 @@
   // 投稿詳細のボックスの設定
   &__post-detail {
     padding-bottom: 2rem;
-    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
   }
-
+  
   &__post-status {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
+    justify-content: flex-end; 
+    margin-bottom: 0.5rem;
     font-size: var(--group-post-show-font-post-status-text);
+  }
+
+  &__post-status--public {
+    font-weight: bold;
+    color: #28a745;
+  }
+
+  &__post-status--private {
+    font-weight: bold;
+    color: #dc3545;
   }
 
   // 共通設定
   &__post-title, 
   &__user-nickname {
-    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
     font-weight: bold;
   }
 
@@ -631,9 +641,9 @@
   //　左のボックスの設定
   &__left-box {
     display: flex;
-    flex: 0 0 45%;                      // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
-    justify-content: center;            // 横方向の中央揃え
-    align-items: center;                // 縦方向の中央揃え
+    flex: 0 0 45%;                    // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
+    justify-content: center;          // 横方向の中央揃え
+    align-items: center;              // 縦方向の中央揃え
   }
 
   //　右のボックスの設定
@@ -641,17 +651,17 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: center;            // 縦中央
+    justify-content: center;          // 縦中央
     gap: 1rem;
-    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
     padding-left: 1rem;
   }
 
   // 投稿画像の設定
   &__post-image {
-    max-width: 100%;                    // 親要素を超えないように最大幅を設定
+    max-width: 100%;                  // 親要素を超えないように最大幅を設定
     width: 400px;
-    aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
+    aspect-ratio: 1 / 1;              // 幅に応じて高さを自動で決定(正方形)
     border-radius: 8px;
     object-fit: cover;
   }
@@ -690,7 +700,7 @@
   &__post-date {
     flex: 0 0 60%;
     display: flex;
-    align-items: center;                // 縦中央
+    align-items: center;            // 縦中央
     font-size: var(--group-post-show-font-post-date);
   }
   
@@ -698,8 +708,8 @@
   &__post-buttons {
     flex: 1;
     display: flex;
-    justify-content: space-between;     // ボタンを左右に均等配置
-    align-items: center;                // 縦中央
+    justify-content: space-between; // ボタンを左右に均等配置
+    align-items: center;            // 縦中央
 
     .btn-base {
       margin: 0;
@@ -751,6 +761,29 @@
 
   .my-groups-page {
     --my-groups-page-font-nav: 1.1rem;
+  }
+
+  
+  .group-post-show {
+    --group-post-show-font-post-status-text: 1rem;
+    --group-post-show-font-post-title: 1.6rem;
+    --group-post-show-font-user-nickname: 1.2rem;
+    --group-post-show-font-post-body: 0.9rem;
+    --group-post-show-font-post-date: 0.8rem;
+
+    &__post-image {
+      width: 360px;
+    }
+
+    &__user-image {
+      width: 50px;
+    }
+
+    &__post-buttons {
+      .btn-base {
+        padding: 0.25rem 0.75rem;
+      }
+    }
   }
 }
 
@@ -805,6 +838,44 @@
 
     .nav-link {
       padding: 0.4rem 0.8rem;
+    }
+  }
+
+  .group-post-show {
+    --group-post-show-font-post-status-text: 0.9rem;
+    --group-post-show-font-post-body: 0.95rem;
+    --group-post-show-font-post-date: 0.85rem;
+
+    &__post-status {
+      margin-bottom: 0;
+    }
+
+    // 縦並びになるのでgapに切り替える
+    &__post-detail {
+      gap: 1rem;
+    }
+
+    // gapに切り替えたのでタイトルと右のボックスのパディングをリセット
+    &__post-title, 
+    &__right-box {
+      padding: 0;
+    }
+
+    // 左右のボックスを縦に並べる
+    &__left-box {
+      flex: 0 0 100%;
+    }
+
+    &__right-box {
+      flex: 0 0 100%;
+    }
+
+    &__post-image {
+      width: 400px;
+    }
+
+    &__user-image {
+      width: 60px;
     }
   }
 }
@@ -868,6 +939,26 @@
       padding: 0.3rem 0.6rem;
     }
   }
+  
+  .group-post-show {
+    --group-post-show-font-post-status-text: 0.8rem;
+    --group-post-show-font-post-title: 1.5rem;
+    --group-post-show-font-user-nickname: 1.1rem;
+    --group-post-show-font-post-body: 0.9rem;
+    --group-post-show-font-post-date: 0.85rem;
+
+    &__post-detail {
+      padding-bottom: 1rem;
+    }
+
+    &__post-image {
+      width: 360px;
+    }
+
+    &__user-image {
+      width: 50px;
+    }
+  }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
@@ -880,6 +971,26 @@
 
     .group-card__date {
       padding-left: 0.2rem;
+    }
+  }
+
+  .group-post-show {
+    --group-post-show-font-post-status-text: 0.75rem;
+    --group-post-show-font-post-title: 1.2rem;
+    --group-post-show-font-user-nickname: 0.9rem;
+    --group-post-show-font-post-body: 0.8rem;
+    --group-post-show-font-post-date: 0.8rem;
+
+    &__post-detail {
+      padding-bottom: 0.75rem;
+    }
+
+    &__post-image {
+      width: 300px;
+    }
+
+    &__user-image {
+      width: 40px;
     }
   }
 }

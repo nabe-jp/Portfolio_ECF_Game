@@ -1,6 +1,6 @@
 <div class="row group-post-show__post-detail">
-  <div class="col-4 col-md-3 offset-8 offset-md-9 group-post-show__post-status">
-    公開ステータス：<strong><%= @group_post.visible_to_non_members ? '公開中' : '非公開中' %></strong>
+  <div class="col-12">
+    <%= group_post_status_badge(@group_post) %>
   </div>
 
   <div class="col-12">
