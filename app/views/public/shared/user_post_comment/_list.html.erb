@@ -1,92 +1,21 @@
 <div class="comment">
-<% @parent_comments.each do |comment| %>
-  <div class="row align-items-center">
-    <!-- コメント本文 -->
-    <div class="col-12 col-md-7 comment__body mb-2 mb-md-0">
-      <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
-        simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
-    </div>
-
-    <!-- 投稿者、投稿日＋ボタン -->
-    <div class="col-12 col-md-5 pl-1">
-      <div class="row">
-        <!-- 上段：投稿者 -->
-        <div class="col-12 d-flex align-items-center mb-1">
-          <% unless comment.is_deleted %>
-            <%= link_to show_user_path(comment.user), class: "comment__profile-link" do %>
-              <%= image_tag(comment.user.profile_image, class: "comment__user-image") %>
-              <div class="comment__user-nickname"><%= comment.user.nickname %></div>
-            <% end %>
-          <% end %>
-        </div>
-
-        <!-- 下段：投稿日 + ボタン -->
-         <!-- 投稿日 -->
-        <div class="col-4 col-md-5 d-flex align-items-center">
-          <% unless comment.is_deleted? %>
-            <div class="comment__date"><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></div>
-          <% end %>
-        </div>
-
-        <!-- 返信リンク -->
-        <div class="col-5 text-center">
-          <% unless comment.is_deleted || !user_signed_in? %>
-            <%#
-              data-toggle="collapse"はBootstrapのCollapse機能、
-              リンクのクリックによりフォームの表示・非表示制御
-              href=～はどの返信フォームを開くか識別するためのID指定
-              aria-expanded="false"とaria-controlsはアクセシビリティ関連の属性
-              aria-expandedはフォームの開閉すを示し、aria-controlsはどの要素を開閉するかを明示
-            #%>
-            <a class="comment__action-button comment__reply-toggle-button" 
-              data-toggle="collapse" href="#reply-form-<%= comment.id %>" 
-              role="button" aria-expanded="false" aria-controls="reply-form-<%= comment.id %>">
-              返信する
-            </a>
-          <% end %>
-        </div>
-
-        <!-- 削除ボタン -->
-        <div class="col-3 col-md-2 text-center">
-          <% if !comment.is_deleted && (comment.user == current_user || @user_post.user == current_user) %>
-            <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
-              method: :delete, data: { confirm: "本当に削除しますか？" }, 
-                class: "comment__delete-button" %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 返信フォーム -->
-  <% reply_form_comment = UserPostComment.new(parent_comment_id: comment.id) %>
-  <div class="collapse mb-2" id="reply-form-<%= comment.id %>">
-    <%= render partial: 'public/shared/user_post_comment/reply_form', 
-      locals: {
-        user_post: @user_post, 
-        user_post_comment: UserPostComment.new(parent_comment_id: comment.id), 
-        submit_label: "返信する"
-      } %>
-  </div>
-
-  <!-- 子コメント -->
-  <% comment.replies.visible_replies.each do |reply| %>
-    <div class="row align-items-center pl-4 mt-4 mb-1">
-      <!-- 子コメント本文 -->
+  <% @parent_comments.each do |comment| %>
+    <div class="row align-items-center">
+      <!-- コメント本文 -->
       <div class="col-12 col-md-7 comment__body mb-2 mb-md-0">
-        <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
-          simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
+        <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
+          simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
       </div>
 
       <!-- 投稿者、投稿日＋ボタン -->
-      <div class="col-12 col-md-5 pl-0 pl-md-4">
+      <div class="col-12 col-md-5 pl-1">
         <div class="row">
           <!-- 上段：投稿者 -->
           <div class="col-12 d-flex align-items-center mb-1">
-            <% unless reply.is_deleted %>
-              <%= link_to show_user_path(reply.user), class: "comment__profile-link" do %>
-                <%= image_tag(reply.user.profile_image, class: "comment__user-image") %>
-                <div class="comment__user-nickname"><%= reply.user.nickname %></div>
+            <% unless comment.is_deleted %>
+              <%= link_to show_user_path(comment.user), class: "comment__profile-link" do %>
+                <%= image_tag(comment.user.profile_image, class: "comment__user-image") %>
+                <div class="comment__user-nickname"><%= comment.user.nickname %></div>
               <% end %>
             <% end %>
           </div>
@@ -94,15 +23,35 @@
           <!-- 下段：投稿日 + ボタン -->
           <!-- 投稿日 -->
           <div class="col-4 col-md-5 d-flex align-items-center">
-            <% unless reply.is_deleted? %>
-              <div class="comment__date"><%= reply.created_at.strftime('%Y-%m-%d %H:%M') %></div>
+            <% unless comment.is_deleted? %>
+              <div class="comment__date"><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></div>
+            <% end %>
+          </div>
+
+          <!-- ボタン -->
+          <!-- 返信リンク -->
+          <div class="col-5 text-center">
+            <% unless comment.is_deleted || !user_signed_in? %>
+              <%#
+                data-toggle="collapse"はBootstrapのCollapse機能、
+                リンクのクリックによりフォームの表示・非表示制御
+                href=～はどの返信フォームを開くか識別するためのID指定
+                aria-expanded="false"とaria-controlsはアクセシビリティ関連の属性
+                aria-expandedはフォームの開閉すを示し、aria-controlsはどの要素を開閉するかを明示
+              #%>
+              <a class="comment__action-button comment__reply-toggle-button" 
+                data-toggle="collapse" href="#reply-form-<%= comment.id %>" 
+                role="button" aria-expanded="false" aria-controls="reply-form-<%= comment.id %>">
+                返信する
+              </a>
             <% end %>
           </div>
 
           <!-- 削除ボタン -->
-          <div class="col-3 col-md-2 offset-5 text-center">
-            <% if !reply.is_deleted && (reply.user == current_user || @user_post.user == current_user) %>
-              <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply),
+          <div class="col-3 col-md-2 text-center">
+            <% if !comment.is_deleted && 
+              (comment.user == current_user || @user_post.user == current_user) %>
+              <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, comment),
                 method: :delete, data: { confirm: "本当に削除しますか？" }, 
                   class: "comment__delete-button" %>
             <% end %>
@@ -110,12 +59,66 @@
         </div>
       </div>
     </div>
+
+    <!-- 返信フォーム -->
+    <% reply_form_comment = UserPostComment.new(parent_comment_id: comment.id) %>
+    <div class="collapse mb-2" id="reply-form-<%= comment.id %>">
+      <%= render partial: 'public/shared/user_post_comment/reply_form', 
+        locals: {
+          user_post: @user_post, 
+          user_post_comment: UserPostComment.new(parent_comment_id: comment.id), 
+          submit_label: "返信する"
+        } %>
+    </div>
+
+    <!-- 子コメント -->
+    <% comment.replies.visible_replies.each do |reply| %>
+      <div class="row align-items-center pl-4 mt-4 mb-1">
+        <!-- 子コメント本文 -->
+        <div class="col-12 col-md-7 comment__body mb-2 mb-md-0">
+          <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
+            simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
+        </div>
+
+        <!-- 投稿者、投稿日＋ボタン -->
+        <div class="col-12 col-md-5 pl-0 pl-md-4">
+          <div class="row">
+            <!-- 上段：投稿者 -->
+            <div class="col-12 d-flex align-items-center mb-1">
+              <% unless reply.is_deleted %>
+                <%= link_to show_user_path(reply.user), class: "comment__profile-link" do %>
+                  <%= image_tag(reply.user.profile_image, class: "comment__user-image") %>
+                  <div class="comment__user-nickname"><%= reply.user.nickname %></div>
+                <% end %>
+              <% end %>
+            </div>
+
+            <!-- 下段：投稿日 + ボタン -->
+            <!-- 投稿日 -->
+            <div class="col-4 col-md-5 d-flex align-items-center">
+              <% unless reply.is_deleted? %>
+                <div class="comment__date"><%= reply.created_at.strftime('%Y-%m-%d %H:%M') %></div>
+              <% end %>
+            </div>
+
+            <!-- 削除ボタン -->
+            <div class="col-3 col-md-2 offset-5 text-center">
+              <% if !reply.is_deleted && 
+                (reply.user == current_user || @user_post.user == current_user) %>
+                <%= button_to "削除", user_post_comment_path(@user_post.user, @user_post, reply), 
+                  method: :delete, data: { confirm: "本当に削除しますか？" }, 
+                    class: "comment__delete-button" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <hr>
+    
   <% end %>
 
-  <hr>
-  
-<% end %>
-
-<%= paginate @parent_comments %>
+  <%= paginate @parent_comments %>
 
 </div>

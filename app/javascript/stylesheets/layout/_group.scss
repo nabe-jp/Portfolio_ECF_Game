@@ -592,7 +592,7 @@
   padding-left: 0.4rem;
 }
 
-/*  group_posts.show  */
+/*  group_posts-show  */
 .group-post-show {
   --group-post-show-font-post-status-text: 1.1rem;
   --group-post-show-font-post-title: 2rem;
@@ -716,6 +716,145 @@
     }
   }
 }
+
+/*  group_posts_comment  */
+.group-post-comment {
+  --comment-font-input-text: 1rem;
+  --comment-font-input-button-text: 0.9rem;
+  --comment-font-login-required-text: 1.1rem;
+  --comment-font-body: 1rem;
+  --comment-font-user-nickname: 0.9rem;
+  --comment-font-date: 0.75rem;
+  --comment-font-reply-action-button-text: 0.9rem;
+  --comment-font-delete-button-text: 0.8rem;
+
+  &__form-row {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  &__textarea {
+    flex: 1;
+    height: calc(1.5em + 0.5em * 2); // line-height + 上下padding(表示は1行分)
+    padding: 0.5em 1em;             // emで文字サイズに比例(文字サイズ1rem → 上下0.5rem, 左右1rem)
+    box-sizing: border-box;
+    font-size: var(--comment-font-input-text);
+    line-height: 1.5;
+  }
+
+  &__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20%;
+
+    &-btn {
+      padding: 0.5em 1em;
+      font-size: var(--comment-font-input-button-text);
+      white-space: nowrap;
+    }
+  }
+
+  &__login-required {
+    text-align: center;
+    font-size: var(--comment-font-login-required-text);
+  }
+
+  &__body {
+    word-break: break-word;
+    max-width: 100%;
+  }
+  
+  &__body p {
+     margin-bottom: 0;
+     font-size: var(--comment-font-body);
+  }
+
+  &__profile-link {
+    display: flex;
+    align-items: center;
+    color: #212529;
+    text-decoration: none;
+    min-width: 0;
+  }
+  
+  &__profile-link:hover {
+    text-decoration: underline;
+  }
+
+  &__user-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5rem;
+  }
+
+  &__user-nickname {
+    font-size: var(--comment-font-user-nickname);
+    white-space: nowrap;        // 折り返し禁止
+    overflow: hidden;           // はみ出しを隠す
+    text-overflow: ellipsis;    // 省略「...」
+    flex: 1;                    // 画像以外の残り幅を全部使う
+    min-width: 0;
+  }
+
+  &__date {
+    flex: 1;
+    font-size: var(--comment-font-date);
+    white-space: nowrap;        // 折り返し禁止
+    overflow: hidden;           // はみ出しを隠す
+    text-overflow: ellipsis;    // 省略「...」
+  }
+
+  // 枠が小さいので専用のボタンを定義
+  &__action-button {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border: none;               // 全体の枠はいらない
+    border-radius: 0.25rem;
+    border-bottom: 2px solid transparent;
+    font-size: var(--comment-font-reply-action-button-text);
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      color: #fff;
+      text-decoration: underline; // ホバー時にアンダーライン
+    }
+  }
+
+  &__reply-toggle-button {
+    @extend .group-post-comment__action-button;
+    background-color: #007bff;
+  
+    &:hover {
+      background-color: darken(#007bff, 7%);
+    }
+  }
+  
+  &__delete-button {
+    @extend .group-post-comment__action-button;
+    background-color: #dc3545;
+  
+    &:hover {
+      background-color: darken(#dc3545, 7%);
+    }
+  }
+  
+  &__reply-button {
+    @extend .group-post-comment__action-button;
+    background-color: #28a745;
+  
+    &:hover {
+      background-color: darken(#28a745, 7%);
+    }
+  }
+}
+
 // レスポンシブ調整
 @media (max-width: 1024px) {
   .groups__title-box, 

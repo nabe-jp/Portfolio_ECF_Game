@@ -1,24 +1,27 @@
 <%= form_with(model: [group_post, group_post_comment],
-  url: group_post_comments_path(group_post.group, group_post), local: true) do |f| %>
+  url: group_post_comments_path(group_post.group, group_post), local: true, 
+    html: { class: "group-post-comment" }) do |f| %>
 
   <%# "コメントへの返信に使用" %>
   <%= f.hidden_field :parent_comment_id, value: group_post_comment.parent_comment_id %>
 
-  <div class="row align-items-center no-gutters mb-2">
+  <div class="row align-items-center mb-2">
 
     <!-- 入力エリア -->
-    <div class="col-7 pl-3">
-      <%= f.text_area :body, rows: 1, class: "form-control", 
+    <div class="col-12 col-md-7 mt-2 mb-2 mb-md-0 comment__form-row">
+    <%= f.text_area :body, class: "group-post-comment__textarea", 
         placeholder: group_post_comment_reply_body_placeholder, style: "resize: none;", 
           maxlength: GroupPostComment::BODY_MAX_LENGTH %>
     </div>
 
-    <%# 空欄(画像+ニックネーム用のスペース) #%>
-    <div class="col-2"></div>
-
     <!-- 送信ボタン -->
-    <div>
-      <%= f.submit "返信する", class: "btn btn-primary btn-sm btn-block" %>
+    <div class="col-12 col-md-5 pl-1">
+    <div class="row">
+      <%# オフセットで空欄(画像+ニックネーム用のスペース)を作成 #%>
+        <div class="col-5 offset-4 offset-md-5 text-center">
+          <%= f.submit "送信する", class: "comment__reply-button" %>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

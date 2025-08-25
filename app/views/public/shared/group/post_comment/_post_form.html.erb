@@ -1,16 +1,14 @@
-<div  class="user-comments__form-wrapper">
-  <%= form_with(model: [@group_post, @group_post_comment],
-    url: group_post_comments_path(@group, @group_post), local: true) do |f| %>
+<%= form_with(model: [@group_post, @group_post_comment],
+  url: group_post_comments_path(@group, @group_post), local: true, 
+    html: { class: "group-post-comment" }) do |f| %>
 
-    <div class="user-comments__form-row">
-      <%= f.text_area :body, rows: 2, class: "user-comments__textarea", 
-        placeholder: group_post_comment_body_placeholder, 
-          maxlength: GroupPostComment::BODY_MAX_LENGTH %>
+  <div class="group-post-comment__form-row">
+    <%= f.text_area :body, class: "group-post-comment__textarea", 
+      placeholder: group_post_comment_body_placeholder, maxlength: GroupPostComment::BODY_MAX_LENGTH %>
 
-      <div class="comment-form__submit">
-        <%= f.submit "コメントする" %>
-      </div>
+    <div class="group-post-comment__submit">
+      <%= f.submit "コメントする", class: "group-post-comment__submit-btn"  %>
     </div>
+  </div>
 
-  <% end %>
-</div>
+<% end %>
