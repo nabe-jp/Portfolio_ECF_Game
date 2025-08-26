@@ -2,7 +2,7 @@
   <% @group_post_comments.each do |comment| %>
     <div class="row align-items-center">
       <!-- コメント本文 -->
-      <div class="col-12 col-md-7 comment__body mb-2 mb-md-0">
+      <div class="col-12 col-md-7 group-post-comment__body mb-2 mb-md-0">
         <%= comment.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
           simple_format(comment.body, {}, wrapper_tag: "p", sanitize: true) %>
       </div>
@@ -13,18 +13,21 @@
           <!-- 上段：投稿者 -->
           <div class="col-12 d-flex align-items-center mb-1">
             <% unless comment.is_deleted %>
-              <%= link_to show_user_path(comment.member.user), class: "comment__profile-link" do %>
-                <%= image_tag(comment.member.user.profile_image, class: "comment__user-image") %>
-                <div class="comment__user-nickname"><%= comment.member.user.nickname %></div>
+              <%= link_to show_user_path(comment.member.user), 
+                class: "group-post-comment__profile-link" do %>
+                <%= image_tag(comment.member.user.profile_image, class: "group-post-comment__user-image") %>
+                <div class="group-post-comment__user-nickname"><%= comment.member.user.nickname %></div>
               <% end %>
             <% end %>
           </div>
 
           <!-- 下段：投稿日 + ボタン -->
           <!-- 投稿日 -->
-          <div class="col-4 col-md-5 d-flex align-items-center">
+          <div class="col-4 col-md-5 group-post-comment__date-wrapper">
             <% unless comment.is_deleted? %>
-              <div class="comment__date"><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></div>
+              <div class="group-post-comment__date">
+                <%= comment.created_at.strftime('%Y-%m-%d %H:%M') %>
+              </div>
             <% end %>
           </div>
 
@@ -45,7 +48,7 @@
             <% if !comment.is_deleted && group_post_comment_editor?(comment) %>
               <%= button_to "削除", group_post_comment_path(@group, @group_post, comment), 
                 method: :delete, data: { confirm: "本当に削除しますか？" }, 
-                  class: "comment__delete-button" %>
+                  class: "group-post-comment__delete-button" %>
             <% end %>
           </div>
         </div>
@@ -67,38 +70,43 @@
     <% comment.replies.visible_replies.each do |reply| %>
       <div class="row align-items-center pl-4 mt-4 mb-1">
         <!-- 子コメント本文 -->
-        <div class="col-12 col-md-7 comment__body mb-2 mb-md-0">
+        <div class="col-12 col-md-7 group-post-comment__body mb-2 mb-md-0">
           <%= reply.is_deleted ? content_tag(:p, "このコメントは削除されました。", class: "text-muted") : 
             simple_format(reply.body, {}, wrapper_tag: "p", sanitize: true) %>
         </div>
 
         <!-- 投稿者、投稿日＋ボタン -->
-        <div class="col-12 col-md-5 pl-0 pl-md-4">
+        <div class="col-12 col-md-5 pl-1">
           <div class="row">
             <!-- 上段：投稿者 -->
             <div class="col-12 d-flex align-items-center mb-1">
               <% unless reply.is_deleted? %>
-                <%= link_to show_user_path(reply.member.user), class: "comment__profile-link" do %>
-                  <%= image_tag(reply.member.user.profile_image, class: "comment__user-image") %>
-                  <div class="comment__user-nickname"><%= reply.member.user.nickname %></div>
+                <%= link_to show_user_path(reply.member.user), 
+                  class: "group-post-comment__profile-link" do %>
+                  <%= image_tag(reply.member.user.profile_image, class: "group-post-comment__user-image") %>
+                  <div class="group-post-comment__user-nickname">
+                    <%= reply.member.user.nickname %>
+                  </div>
                 <% end %>
               <% end %>
             </div>
 
             <!-- 下段：投稿日 + ボタン -->
             <!-- 投稿日 -->
-            <div class="col-4 col-md-5 d-flex align-items-center">
+            <div class="col-6 group-post-comment__date-wrapper">
               <% unless reply.is_deleted? %>
-                <div class="comment__date"><%= reply.created_at.strftime('%Y-%m-%d %H:%M') %></div>
+                <div class="group-post-comment__date">
+                  <%= reply.created_at.strftime('%Y-%m-%d %H:%M') %>
+                </div>
               <% end %>
             </div>
 
             <!-- 削除ボタン -->
-            <div class="col-3 col-md-2 offset-5 text-center">
+            <div class="col-3 col-md-2 offset-3 offset-md-4 text-center">
              <% if !reply.is_deleted && group_post_comment_editor?(reply) %>
                 <%= button_to "削除", group_post_comment_path(@group, @group_post, reply), 
                   method: :delete, data: { confirm: "本当に削除しますか？" }, 
-                    class: "comment__delete-button" %>
+                    class: "group-post-comment__delete-button" %>
               <% end %>
             </div>
           </div>

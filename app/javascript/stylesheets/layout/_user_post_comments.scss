@@ -1,12 +1,12 @@
 /*    コメントの設定    */
-.comment {
+.user-post-comment {
   --comment-font-input-text: 1rem;
   --comment-font-input-button-text: 0.9rem;
   --comment-font-login-required-text: 1.1rem;
   --comment-font-body: 1rem;
   --comment-font-user-nickname: 0.9rem;
   --comment-font-date: 0.75rem;
-  --comment-font-reply-action-button-text: 0.9rem;
+  --comment-font-action-button-text: 0.9rem;
   --comment-font-delete-button-text: 0.8rem;
 
   &__form-row {
@@ -81,6 +81,11 @@
     min-width: 0;
   }
 
+  &__date-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
   &__date {
     flex: 1;
     font-size: var(--comment-font-date);
@@ -96,7 +101,7 @@
     border: none;               // 全体の枠はいらない
     border-radius: 0.25rem;
     border-bottom: 2px solid transparent;
-    font-size: var(--comment-font-reply-action-button-text);
+    font-size: var(--comment-font-action-button-text);
     color: #fff;
     text-decoration: none;
     cursor: pointer;
@@ -109,7 +114,7 @@
   }
 
   &__reply-toggle-button {
-    @extend .comment__action-button;
+    @extend .user-post-comment__action-button;
     background-color: #007bff;
   
     &:hover {
@@ -118,7 +123,7 @@
   }
   
   &__delete-button {
-    @extend .comment__action-button;
+    @extend .user-post-comment__action-button;
     background-color: #dc3545;
   
     &:hover {
@@ -127,7 +132,7 @@
   }
   
   &__reply-button {
-    @extend .comment__action-button;
+    @extend .user-post-comment__action-button;
     background-color: #28a745;
   
     &:hover {
@@ -138,17 +143,22 @@
 
 // レスポンシブ調整
 @media (max-width: 1024px) {
-  .comment {
+  .user-post-comment {
     --comment-font-input-text: 0.9rem;
     --comment-font-input-button-text: 0.8rem;
     --comment-font-login-required-text: 0.95rem;
     --comment-font-body: 0.9rem;
     --comment-font-user-nickname: 0.75rem;
     --comment-font-date: 0.675rem;
-    --comment-font-reply-action-button-text: 0.7rem;
+    --comment-font-action-button-text: 0.65rem;
   
     &__textarea {
       height: calc(1.5em * 2 + 0.5em * 2);  // 表示を2行分に変更
+    }
+
+    &__date-wrapper {
+      padding-left: 0;
+      padding-right: 0;
     }
 
     &__action-button {
@@ -160,17 +170,17 @@
 }
 
 @media (max-width: 768px) {
-  .comment {
+  .user-post-comment {
     --comment-font-input-button-text: 0.7rem;
     --comment-font-body: 0.85rem;
     --comment-font-user-nickname: 0.7rem;
     --comment-font-date: 0.7rem;
-    --comment-font-reply-action-button-text: 0.8rem;
+    --comment-font-action-button-text: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
-  .comment {
+  .user-post-comment {
     --comment-font-input-text: 0.85rem;
     --comment-font-login-required-text: 0.9rem;
     --comment-font-body: 0.8rem;
@@ -193,12 +203,12 @@
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
 @media (max-width: 376px) {
-  .comment {
+  .user-post-comment {
     --comment-font-input-text: 0.8rem;
     --comment-font-login-required-text: 0.8rem;
     --comment-font-user-nickname: 0.7rem;
     --comment-font-date: 0.7rem;
-    --comment-font-reply-action-button-text: 0.75rem;
+    --comment-font-action-button-text: 0.75rem;
   
     &__form-row {
       gap: 0.5rem;
@@ -219,7 +229,7 @@
 }
 
 @media (max-width: 320px) {
-  .comment {
+  .user-post-comment {
     --comment-font-input-text: 0.75rem;
     --comment-font-login-required-text: 0.75rem;
   

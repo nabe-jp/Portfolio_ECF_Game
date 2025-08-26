@@ -725,7 +725,7 @@
   --comment-font-body: 1rem;
   --comment-font-user-nickname: 0.9rem;
   --comment-font-date: 0.75rem;
-  --comment-font-reply-action-button-text: 0.9rem;
+  --comment-font-action-button-text: 0.9rem;
   --comment-font-delete-button-text: 0.8rem;
 
   &__form-row {
@@ -800,6 +800,11 @@
     min-width: 0;
   }
 
+  &__date-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
   &__date {
     flex: 1;
     font-size: var(--comment-font-date);
@@ -815,7 +820,7 @@
     border: none;               // 全体の枠はいらない
     border-radius: 0.25rem;
     border-bottom: 2px solid transparent;
-    font-size: var(--comment-font-reply-action-button-text);
+    font-size: var(--comment-font-action-button-text);
     color: #fff;
     text-decoration: none;
     cursor: pointer;
@@ -924,6 +929,31 @@
       }
     }
   }
+
+  .group-post-comment {
+    --comment-font-input-text: 0.9rem;
+    --comment-font-input-button-text: 0.8rem;
+    --comment-font-login-required-text: 0.95rem;
+    --comment-font-body: 0.9rem;
+    --comment-font-user-nickname: 0.75rem;
+    --comment-font-date: 0.675rem;
+    --comment-font-action-button-text: 0.65rem;
+  
+    &__textarea {
+      height: calc(1.5em * 2 + 0.5em * 2);  // 表示を2行分に変更
+    }
+
+    &__date-wrapper {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    &__action-button {
+      padding: 0.2rem 0.6rem;
+      border-radius: 0.15rem;
+      border-bottom: 1.5px solid transparent;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -1017,6 +1047,14 @@
       width: 60px;
     }
   }
+
+  .group-post-comment {
+    --comment-font-input-button-text: 0.7rem;
+    --comment-font-body: 0.85rem;
+    --comment-font-user-nickname: 0.7rem;
+    --comment-font-date: 0.7rem;
+    --comment-font-action-button-text: 0.8rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1098,6 +1136,26 @@
       width: 50px;
     }
   }
+
+  .group-post-comment {
+    --comment-font-input-text: 0.85rem;
+    --comment-font-login-required-text: 0.9rem;
+    --comment-font-body: 0.8rem;
+    --comment-font-user-nickname: 0.8rem;
+    --comment-font-date: 0.75rem;
+  
+    &__form-row {
+      gap: 0.5rem;
+    }
+
+    &__textarea {
+      height: calc(1.5em * 3 + 0.5em * 2);  // 表示を3行分に変更
+    }
+
+    &__submit {
+      width: 25%;
+    }
+  }
 }
 
 // 管理ツールを使用して確認を行った際に@media (max-width: 375px)では機能しなかったため376pxと定義
@@ -1132,6 +1190,30 @@
       width: 40px;
     }
   }
+
+  .group-post-comment {
+    --comment-font-input-text: 0.8rem;
+    --comment-font-login-required-text: 0.8rem;
+    --comment-font-user-nickname: 0.7rem;
+    --comment-font-date: 0.7rem;
+    --comment-font-action-button-text: 0.75rem;
+  
+    &__form-row {
+      gap: 0.5rem;
+    }
+
+    &__textarea {
+      padding: 0.25em 0.5em;
+    }
+
+    &__submit {
+      width: 30%;
+
+      &-btn {
+        padding: 0.25em 0.5em;
+      }
+    }
+  }
 }
 
 @media (max-width: 320px) {
@@ -1163,6 +1245,23 @@
 
     .nav-link {
       padding: 0.25rem 0.5rem;
+    }
+  }
+
+  .group-post-comment {
+    --comment-font-input-text: 0.75rem;
+    --comment-font-login-required-text: 0.75rem;
+  
+    &__form-row {
+      gap: 0.25rem;
+    }
+
+    &__textarea {
+      height: calc(1.5em * 4 + 0.5em * 2);  // 表示を4行分に変更
+    }
+
+    &__submit {
+      width: 30%;
     }
   }
 }

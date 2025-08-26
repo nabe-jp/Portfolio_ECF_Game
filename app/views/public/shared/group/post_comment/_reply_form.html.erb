@@ -8,7 +8,7 @@
   <div class="row align-items-center mb-2">
 
     <!-- 入力エリア -->
-    <div class="col-12 col-md-7 mt-2 mb-2 mb-md-0 comment__form-row">
+    <div class="col-12 col-md-7 mt-2 mb-2 mb-md-0 group-post-comment__form-row">
     <%= f.text_area :body, class: "group-post-comment__textarea", 
         placeholder: group_post_comment_reply_body_placeholder, style: "resize: none;", 
           maxlength: GroupPostComment::BODY_MAX_LENGTH %>
@@ -19,7 +19,7 @@
     <div class="row">
       <%# オフセットで空欄(画像+ニックネーム用のスペース)を作成 #%>
         <div class="col-5 offset-4 offset-md-5 text-center">
-          <%= f.submit "送信する", class: "comment__reply-button" %>
+          <%= f.submit "送信する", class: "group-post-comment__reply-button" %>
         </div>
       </div>
     </div>
