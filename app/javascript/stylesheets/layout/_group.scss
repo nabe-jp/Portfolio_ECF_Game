@@ -462,7 +462,84 @@
   white-space: pre-wrap;
 }
 
-/*  group_posts  */
+/*  group_post  */
+.group-post-form {
+  --group-post-form-font-main: 1rem;
+  --group-post-form-font-sub: 0.9rem;
+
+  max-width: 600px;
+  margin: 0 auto;                     // 上下左右中央揃え
+  padding: 2rem;                      // 内側の余白
+
+  // 各ボックスの設定
+  &__title-box,
+  &__image-box,
+  &__body-box, 
+  &__visible-box {
+    margin-bottom: 1.5rem;            // 各項目間の余白
+  }
+
+  &__visible-box {
+    display: flex;
+    flex-direction: column;           // 下にnoteを配置するため縦並び
+  }
+
+  &__checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;                      // チェックボックスとラベルの間隔
+  }
+
+  // 各ラベルの設定
+  &__title-box label,
+  &__image-box label,
+  &__body-box label, 
+  &__checkbox-row label {
+    font-weight: bold;
+    font-size: var(--group-post-form-font-main);
+    box-sizing: border-box;
+  }
+
+  &__title-box label,
+  &__image-box label,
+  &__body-box label {
+    width: 100%;
+    display: block;                   // ラベルをブロック要素にして、上の内容と改行を確保
+    margin-bottom: 0.5rem;            // ラベルと入力フィールドの間隔
+  }
+
+  // 入力フォーム内の設定と投稿の公開設定説明文の共通設定
+  &__title-input, 
+  &__image-input, 
+  &__body-input, 
+  &__note {
+    width: 100%;
+    font-size: var(--group-post-form-font-sub);
+  }
+
+  &__title-input, 
+  &__body-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  // 画像の入力フィールド
+  &__image-input {
+    padding: 0;                         // 内側の余白をなくす
+    color: #333;
+    border: none;                       // 枠線を消す
+    background: none;                   // 背景を消す
+    box-shadow: none;                   // ボックスシャドウを消す
+  }
+
+  // 投稿内容の設定
+  &__body-input {
+    height: 80px;
+  }
+}
+
+/*  group_post-index  */
 .group-posts__link {
   display: flex;
   flex-direction: row;                // 横並びに変更
@@ -592,7 +669,7 @@
   padding-left: 0.4rem;
 }
 
-/*  group_posts-show  */
+/*  group_post-show  */
 .group-post-show {
   --group-post-show-font-post-status-text: 1.1rem;
   --group-post-show-font-post-title: 2rem;
@@ -717,7 +794,7 @@
   }
 }
 
-/*  group_posts_comment  */
+/*  group_post_comment  */
 .group-post-comment {
   --comment-font-input-text: 1rem;
   --comment-font-input-button-text: 0.9rem;
@@ -907,7 +984,11 @@
     --my-groups-page-font-nav: 1.1rem;
   }
 
-  
+  .group-post-form {
+    --group-post-form-font-main: 0.9rem;
+    --group-post-form-font-sub: 0.8rem;
+  }
+
   .group-post-show {
     --group-post-show-font-post-status-text: 1rem;
     --group-post-show-font-post-title: 1.6rem;
@@ -1008,6 +1089,11 @@
     .nav-link {
       padding: 0.4rem 0.8rem;
     }
+  }
+
+  .group-post-form {
+    --group-post-form-font-main: 0.8rem;
+    --group-post-form-font-sub: 0.7rem;
   }
 
   .group-post-show {
@@ -1246,6 +1332,11 @@
     .nav-link {
       padding: 0.25rem 0.5rem;
     }
+  }
+
+  .group-post-form {
+    --group-post-form-font-main: 0.75rem;
+    --group-post-form-font-sub: 0.7rem;
   }
 
   .group-post-comment {
