@@ -48,7 +48,7 @@
   --group-card-font-date: 1rem;
 
   display: flex;
-  align-items: center;                // 縦方向に中央揃え
+  align-items: center;                  // 縦方向に中央揃え
   padding: 1rem;
   margin: 1rem;
   text-decoration: none;
@@ -76,7 +76,7 @@
     object-fit: cover;
     box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
   }
-  
+
   .group-card__content {
     flex: 1;                            // 左のボックスで使用しなかった幅を常に使用
     min-width: 0;
@@ -138,7 +138,7 @@
     display: flex;
     flex-direction: row;                // 子要素を横並び
   }
-  
+
   .group-card__date {
     font-weight: bold;
     font-size: var(--group-card-font-date);
@@ -181,9 +181,9 @@
   max-width: 100%;
   width: 240px;
   height: 200px;
-  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+  border-radius: 90% / 54%;             // 横方向の丸み(半径) / 縦方向の丸み(半径) 
   object-fit: cover;
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  box-sizing: border-box;               // paddingとborderは幅に含める(marginは含まれない)
 }
 
 .group-show-box__info {
@@ -258,9 +258,9 @@
   max-width: 100%;
   width: 330px;
   height: 275px;
-  border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+  border-radius: 90% / 54%;             // 横方向の丸み(半径) / 縦方向の丸み(半径) 
   object-fit: cover;
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  box-sizing: border-box;               // paddingとborderは幅に含める(marginは含まれない)
 }
 
 .dashboard__notice-list,
@@ -352,13 +352,11 @@
 .group-members__page-title, 
 .group-memberships__page-title, 
 .group-notices__page-title,
-.group-events__page-title, 
-.group-posts__page-title {
+.group-events__page-title {
   margin: 0.5rem 0 1.5rem;
 }
 
-.group-memberships__page-title, 
-.group-posts__page-title{
+.group-memberships__page-title {
   text-align: center;
 }
 
@@ -371,11 +369,11 @@
   .btn-wrapper {
     display: inline-flex;
     align-items: center;
-    margin: 0.5rem 0 1.5rem;          // group-members__page-titleと合わせる為のマージン  
+    margin: 0.5rem 0 1.5rem;            // group-members__page-titleと合わせる為のマージン  
   }
-
+  
   .badge-wrapper {
-    font-size: 1.25rem;               // このページで使っているほかのバッジと同じ大きさ(h4相当)
+    font-size: 1.25rem;                 // このページで使っているほかのバッジと同じ大きさ(h4相当)
     margin-left: 0.75rem;
   }
 }
@@ -468,26 +466,26 @@
   --group-post-form-font-sub: 0.9rem;
 
   max-width: 600px;
-  margin: 0 auto;                     // 上下左右中央揃え
-  padding: 2rem;                      // 内側の余白
-
+  margin: 0 auto;                       // 上下左右中央揃え
+  padding: 2rem;                        // 内側の余白
+  
   // 各ボックスの設定
   &__title-box,
   &__image-box,
   &__body-box, 
   &__visible-box {
-    margin-bottom: 1.5rem;            // 各項目間の余白
+    margin-bottom: 1.5rem;              // 各項目間の余白
   }
 
   &__visible-box {
     display: flex;
-    flex-direction: column;           // 下にnoteを配置するため縦並び
+    flex-direction: column;             // 下にnoteを配置するため縦並び
   }
 
   &__checkbox-row {
     display: flex;
     align-items: center;
-    gap: 0.5rem;                      // チェックボックスとラベルの間隔
+    gap: 0.5rem;                        // チェックボックスとラベルの間隔
   }
 
   // 各ラベルの設定
@@ -504,8 +502,8 @@
   &__image-box label,
   &__body-box label {
     width: 100%;
-    display: block;                   // ラベルをブロック要素にして、上の内容と改行を確保
-    margin-bottom: 0.5rem;            // ラベルと入力フィールドの間隔
+    display: block;                     // ラベルをブロック要素にして、上の内容と改行を確保
+    margin-bottom: 0.5rem;              // ラベルと入力フィールドの間隔
   }
 
   // 入力フォーム内の設定と投稿の公開設定説明文の共通設定
@@ -540,133 +538,151 @@
 }
 
 /*  group_post-index  */
-.group-posts__link {
-  display: flex;
-  flex-direction: row;                // 横並びに変更
-  justify-content: center;            // 中央揃えにする
-  align-items: center;                // 高さを合わせる
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-  width: 95%;
-  height: 200px;                      // 高さ固定
-  padding: 1rem;                      // 内側の余白
-  margin: 1rem;                       // ボックス間のスペース
-  text-decoration: none;              // リンクの下線を消す
-  color: inherit;                     // 親要素の色を継承
-  background-color: rgba(240, 250, 255, 0.7);
-  border: 1px solid #000;           // ボックスの枠線
-  border-radius: 8px;                 // 角を丸める
-  overflow: hidden;                   // 内容がはみ出さないように制御
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.group-posts__link:hover {
-  color: #f8f9fa;                   // 文字色を青色に変更
-  background-color: #8c9fad;        // 背景色を変更
-  text-decoration: none;              // ホバー時の下線を消す 
-  transform: scale(1.05);             // 大きさを1.05倍にする
-}
-
-// group-posts__dateは文字色を直接指定しているため上記の記載では変更されないので直接設定
-.group-posts__link:hover .group-posts__date {
-  color: #f8f9fa;
-}
-
-.group-posts__list {
-  display: flex;
-  flex-wrap: wrap;
-  width: 95%;
-}
-
-.group-posts__image-box,
-.group-posts__content-box {
-  height: 150px;
-}
-
-.group-posts__image-box {
-  width: 45%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.group-posts__image {
+.group-posts__title-box {
+  margin-bottom: 1.5rem;                // タイトル下に余白を追加
+  padding: 0.75rem 1.5rem;
+  background-color: rgba(108, 136, 160, 0.8);
   border-radius: 8px;
-  max-width: 100%;
-  object-fit: cover;
-}
-
-// 右側：情報エリア
-.group-posts__content-box {
-  width: 55%;
-  position: relative;                 // 子要素の絶対位置基準
   display: flex;
-  flex-direction: column;             // 縦並びにする
+  align-items: center;
+  justify-content: center;
 }
 
-// はみ出した部分を隠し...表示、大きさにパディングやマージンも含める
-.group-posts__labe, 
-.group-posts__user, 
-.group-posts__title, 
-.group-posts__description, 
-.group-posts__date {
-  overflow: hidden;                   // はみ出した部分は非表示
-  text-overflow: ellipsis;            // 省略文字「...」を表示
-  box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-  line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
-}
+.group-posts__item {
+  --group-post-font-main: 1rem;
+  --group-post-font-sub: 0.8rem;
 
-// 左側の空白
-.group-posts__user, 
-.group-posts__title, 
-.group-posts__description {
-  padding-left: 0.8rem;
-}
+  .group-posts__link {
+    display: flex;
+    flex-direction: row;                // 横並びに変更
+    justify-content: center;            // 中央揃えにする
+    align-items: center;                // 高さを合わせる
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    width: 95%;
+    height: 200px;                      // 高さ固定
+    padding: 1rem;                      // 内側の余白
+    margin: 1rem;                       // ボックス間のスペース
+    text-decoration: none;              // リンクの下線を消す
+    color: inherit;                     // 親要素の色を継承
+    background-color: rgba(240, 250, 255, 0.7);
+    border: 1px solid #000;           // ボックスの枠線
+    border-radius: 8px;                 // 角を丸める
+    overflow: hidden;                   // 内容がはみ出さないように制御
+    transition: background-color 0.3s, transform 0.3s;
+  }
 
-// フォントサイズ
-.group-posts__user, 
-.post-detai__user, 
-.group-posts__title, 
-.group-posts__description {
-  font-size: 1rem;
-}
-.group-posts__labe, 
-.group-posts__date {
-  font-size: 0.8rem;
-}
+  .group-posts__link:hover {
+    color: #f8f9fa;                   // 文字色を青色に変更
+    background-color: #8c9fad;        // 背景色を変更
+    text-decoration: none;              // ホバー時の下線を消す 
+    transform: scale(1.05);             // 大きさを1.05倍にする
+  }
 
-// フォントの太さ
-.group-posts__user, 
-.group-posts__title, 
-.group-posts__date {
-  font-weight: bold;
-}
+  // group-posts__dateは文字色を直接指定しているため上記の記載では変更されないので直接設定
+  .group-posts__link:hover .group-posts__date {
+    color: #f8f9fa;
+  }
 
-// 高さと折り返しのなし
-.group-posts__labe, 
-.group-posts__user, 
-.group-posts__title {
-  height: 15%;
-  white-space: nowrap;                // 1行で表示
-}
-.group-posts__labe, 
-.group-posts__date {
-  height: 10%;
-}
+  .group-posts__list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 95%;
+  }
 
-// 内容のスタイル
-.group-posts__description {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;              // 最大2行まで表示
-  -webkit-box-orient: vertical;
-  white-space: normal;                // 折り返しを許可
-}
+  .group-posts__image-box,
+  .group-posts__content-box {
+    height: 150px;
+  }
 
-// 更新日のスタイル
-.group-posts__date {
-  position: absolute;
-  bottom: 0;
-  color: gray;
-  padding-left: 0.4rem;
+  .group-posts__image-box {
+    display: flex;
+    flex: 0 0 45%;                      // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
+    justify-content: center;            // 横方向の中央揃え
+    align-items: center;                // 縦方向の中央揃え
+  }
+
+  .group-posts__image {
+    max-width: 100%;                    // 親要素を超えないように最大幅を設定
+    width: 150px;
+    aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  // 右側：情報エリア
+  .group-posts__content-box {
+    flex: 1;                            // 左のボックスで使用しなかった幅を常に使用
+    min-width: 0;                       // flex: 1を使うとデフォルトでmin-width: auto;になるので解除
+    display: flex;
+    flex-direction: column;             // 縦並びにする
+    position: relative;                 // 子要素の絶対位置基準
+  }
+
+  // はみ出した部分を隠し...表示、大きさにパディングやマージンも含める
+  .group-posts__labe, 
+  .group-posts__user, 
+  .group-posts__title, 
+  .group-posts__description, 
+  .group-posts__date {
+    max-width: 100%;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+    overflow: hidden;                   // はみ出した部分は非表示
+    text-overflow: ellipsis;            // 省略文字「...」を表示
+    line-height: 1.1;                   // 行の高さ(1はフォントサイズと同じ高さの行ボックスを使う)
+  }
+
+  // 左側の空白
+  .group-posts__user, 
+  .group-posts__title, 
+  .group-posts__description {
+    padding-left: 0.8rem;
+  }
+
+  // フォントサイズ
+  .group-posts__user, 
+  .group-posts__title, 
+  .group-posts__description {
+    font-size: var(--group-post-font-main);
+  }
+  .group-posts__item-label, 
+  .group-posts__date {
+    font-size: var(--group-post-font-sub);
+  }
+
+  // フォントの太さ
+  .group-posts__user, 
+  .group-posts__title {
+    font-weight: bold;
+  }
+
+  // 高さと折り返しのなし
+  .group-posts__user, 
+  .group-posts__title {
+    height: 15%;
+    white-space: nowrap;                // 1行で表示
+  }
+
+  .group-posts__item-label, 
+  .group-posts__date {
+    height: 10%;
+    white-space: nowrap;                // 1行で表示
+  }
+
+  // 内容のスタイル
+  .group-posts__description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;              // 最大2行まで表示
+    -webkit-box-orient: vertical;
+    white-space: normal;                // 折り返しを許可
+  }
+
+  // 更新日のスタイル
+  .group-posts__date {
+    position: absolute;
+    bottom: 0;
+    padding-left: 0.4rem;
+    color: gray;
+  }
 }
 
 /*  group_post-show  */
@@ -680,9 +696,9 @@
   // 投稿詳細のボックスの設定
   &__post-detail {
     padding-bottom: 2rem;
-    box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
   }
-  
+
   &__post-status {
     display: flex;
     align-items: center;
@@ -704,7 +720,7 @@
   // 共通設定
   &__post-title, 
   &__user-nickname {
-    box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
     font-weight: bold;
   }
 
@@ -718,9 +734,9 @@
   //　左のボックスの設定
   &__left-box {
     display: flex;
-    flex: 0 0 45%;                    // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
-    justify-content: center;          // 横方向の中央揃え
-    align-items: center;              // 縦方向の中央揃え
+    flex: 0 0 45%;                      // 左右でボックスを分ける(相方はflex 1で常に残りの要素を使用)
+    justify-content: center;            // 横方向の中央揃え
+    align-items: center;                // 縦方向の中央揃え
   }
 
   //　右のボックスの設定
@@ -728,17 +744,17 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    justify-content: center;          // 縦中央
+    justify-content: center;            // 縦中央
     gap: 1rem;
-    box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
     padding-left: 1rem;
   }
 
   // 投稿画像の設定
   &__post-image {
-    max-width: 100%;                  // 親要素を超えないように最大幅を設定
+    max-width: 100%;                    // 親要素を超えないように最大幅を設定
     width: 400px;
-    aspect-ratio: 1 / 1;              // 幅に応じて高さを自動で決定(正方形)
+    aspect-ratio: 1 / 1;                // 幅に応じて高さを自動で決定(正方形)
     border-radius: 8px;
     object-fit: cover;
   }
@@ -777,7 +793,7 @@
   &__post-date {
     flex: 0 0 60%;
     display: flex;
-    align-items: center;            // 縦中央
+    align-items: center;                // 縦中央
     font-size: var(--group-post-show-font-post-date);
   }
   
@@ -785,8 +801,8 @@
   &__post-buttons {
     flex: 1;
     display: flex;
-    justify-content: space-between; // ボタンを左右に均等配置
-    align-items: center;            // 縦中央
+    justify-content: space-between;     // ボタンを左右に均等配置
+    align-items: center;                // 縦中央
 
     .btn-base {
       margin: 0;
@@ -813,8 +829,8 @@
 
   &__textarea {
     flex: 1;
-    height: calc(1.5em + 0.5em * 2); // line-height + 上下padding(表示は1行分)
-    padding: 0.5em 1em;             // emで文字サイズに比例(文字サイズ1rem → 上下0.5rem, 左右1rem)
+    height: calc(1.5em + 0.5em * 2);    // line-height + 上下padding(表示は1行分)
+    padding: 0.5em 1em;                 // emで文字サイズに比例(文字サイズ1rem → 上下0.5rem, 左右1rem)
     box-sizing: border-box;
     font-size: var(--comment-font-input-text);
     line-height: 1.5;
@@ -870,10 +886,10 @@
 
   &__user-nickname {
     font-size: var(--comment-font-user-nickname);
-    white-space: nowrap;        // 折り返し禁止
-    overflow: hidden;           // はみ出しを隠す
-    text-overflow: ellipsis;    // 省略「...」
-    flex: 1;                    // 画像以外の残り幅を全部使う
+    white-space: nowrap;                // 折り返し禁止
+    overflow: hidden;                   // はみ出しを隠す
+    text-overflow: ellipsis;            // 省略「...」
+    flex: 1;                            // 画像以外の残り幅を全部使う
     min-width: 0;
   }
 
@@ -885,16 +901,16 @@
   &__date {
     flex: 1;
     font-size: var(--comment-font-date);
-    white-space: nowrap;        // 折り返し禁止
-    overflow: hidden;           // はみ出しを隠す
-    text-overflow: ellipsis;    // 省略「...」
+    white-space: nowrap;                // 折り返し禁止
+    overflow: hidden;                   // はみ出しを隠す
+    text-overflow: ellipsis;            // 省略「...」
   }
 
   // 枠が小さいので専用のボタンを定義
   &__action-button {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    border: none;               // 全体の枠はいらない
+    border: none;                       // 全体の枠はいらない
     border-radius: 0.25rem;
     border-bottom: 2px solid transparent;
     font-size: var(--comment-font-action-button-text);
@@ -905,7 +921,7 @@
 
     &:hover {
       color: #fff;
-      text-decoration: underline; // ホバー時にアンダーライン
+      text-decoration: underline;       // ホバー時にアンダーライン
     }
   }
 
@@ -987,6 +1003,31 @@
   .group-post-form {
     --group-post-form-font-main: 0.9rem;
     --group-post-form-font-sub: 0.8rem;
+  }
+
+  .group-posts__title-box {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6.5px;
+  }
+
+  .group-posts__item {
+    --group-post-font-main: 0.9rem;
+    --group-post-font-sub: 0.75rem;
+
+    .col-sm-6 {
+      padding: 0;
+    }
+
+    .group-posts__link {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .group-posts__image, 
+    .group-posts__image {
+      width: 120px;
+    }
   }
 
   .group-post-show {
@@ -1091,6 +1132,36 @@
     }
   }
 
+  .group-posts__title-box {
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+  }
+
+  .group-posts__item {
+    --group-post-font-main: 0.75rem;
+    --group-post-font-sub: 0.675rem;
+
+    .group-posts__link {
+      height: 150px;
+      padding: 0.25rem;
+    }
+
+    .group-posts__image-box {
+      flex: 0 0 40%;
+    }
+
+    .group-posts__image-box,
+    .group-posts__content-box {
+      height: 120px;
+    }
+
+    .group-posts__image, 
+    .group-posts__image {
+      width: 95px;
+    }
+  }
+  
   .group-post-form {
     --group-post-form-font-main: 0.8rem;
     --group-post-form-font-sub: 0.7rem;
@@ -1140,6 +1211,29 @@
     --comment-font-user-nickname: 0.7rem;
     --comment-font-date: 0.7rem;
     --comment-font-action-button-text: 0.8rem;
+  }
+}
+
+// viewでsmでのブレイクポイントを設定し、1列に2個表示から1個表示に変更しているため、対応するSCSSを追加
+@media (max-width: 576px) {
+  .group-posts__title-box {
+    margin-bottom: 0.65rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 4.5px;
+  }
+
+  .group-posts__item {
+    --group-post-font-main: 0.8rem;
+    --user-post-font-sub: 0.7rem;
+
+    .group-posts__image-box {
+      flex: 0 0 45%;                    // メディアクエリ(768px)で変更した箇所の初期化
+    }
+
+    .group-posts__image, 
+    .group-posts__image {
+      width: 120px;
+    }
   }
 }
 
@@ -1203,6 +1297,12 @@
     }
   }
   
+  .group-posts__title-box {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+
   .group-post-show {
     --group-post-show-font-post-status-text: 0.8rem;
     --group-post-show-font-post-title: 1.5rem;
@@ -1255,6 +1355,11 @@
     .group-card__date {
       padding-left: 0.2rem;
     }
+  }
+
+  .group-posts__item {
+    --group-post-font-main: 0.75rem;
+    --group-post-font-sub: 0.675rem;
   }
 
   .group-post-show {

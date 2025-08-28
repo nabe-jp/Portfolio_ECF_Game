@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="row">
+  <div class="row justify-content-center">
+    <div class="group-posts__title-box col-auto">
+      <h1><%= @group.name %>の投稿一覧</h1>
+    </div>
     <div class="col-12">
-      <h1 class="group-posts__page-title">
-        <span class="group_posts__title-text"><%= @group.name %>の投稿一覧</span>
-      </h1>
       <%= render 'public/shared/group/post/index' %>
     </div>
   </div>
