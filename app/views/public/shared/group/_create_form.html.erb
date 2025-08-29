@@ -9,21 +9,21 @@
     <%= f.label :slug, "スラッグURL" %>
     <%= f.text_field :slug, class: "form-control", placeholder: group_slug_placeholder, 
       maxlength: Group::SLUG_MAX_LENGTH %>
-    <small class="form-text text-muted">
+    <div class="group-form__note">
       ※ URLに使われます。例: https://yourdomain.com/groups/<strong>example-group</strong>
-    </small>
+    </div>
   </div>
 
   <div class="form-group">
     <%= f.label :group_image, "グループ画像" %>
     <div class="d-flex align-items-center">
-      <label class="btn btn-outline-secondary mb-0 mr-2">
+      <label class="btn btn-outline-secondary group-form__button mr-2">
         ファイルを選択
         <%= f.file_field :group_image, 
           style: "display: none;", onchange: "document.getElementById('file-name')
             .textContent = this.files[0]?.name || '未選択';" %>
       </label>
-      <span id="file-name" class="text-muted">未選択</span>
+      <span id="file-name" class="group-form__status">未選択</span>
     </div>
   </div>
 
@@ -35,6 +35,6 @@
   </div>
 
   <div class="text-center mt-3">
-    <%= f.submit "グループを作成", class: "btn btn-primary px-5" %>
+    <%= f.submit "グループを作成", class: "btn btn-primary group-form__button" %>
   </div>
 <% end %>

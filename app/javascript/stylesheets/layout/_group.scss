@@ -218,6 +218,40 @@
   padding-left: 0.5rem;
 }
 
+/*  group-new, group-edit  */
+.group-form {
+  --group-form-font-label: 1.2rem;
+  --group-form-font-input: 1rem;
+  --group-form-font-note: 0.9rem;
+  --group-form-font-button-text: 1.1rem;
+  --group-form-font-status: 1rem;
+
+  .form-group label {
+    font-size: var(--group-form-font-label);
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: var(--group-form-font-input);
+  }
+
+  &__note {
+    font-size: var(--group-form-font-note);
+    color: #6c757d;
+  }
+
+  &__button {
+    padding: 0.5rem 1.5rem;
+    font-size: var(--group-form-font-button-text);
+  }
+
+  &__status {
+    font-size: var(--group-form-font-status);
+    color: #6c757d;
+  }
+}
+
 .my-groups-page {
   --my-groups-page-font-nav: 1.3rem;
   
@@ -996,6 +1030,14 @@
     }
   }
 
+  .group-form {
+    --group-form-font-label: 1rem;
+    --group-form-font-input: 0.9rem;
+    --group-form-font-note: 0.85rem;
+    --group-form-font-button-text: 0.95rem;
+    --group-form-font-status: 0.9rem;
+  }
+
   .my-groups-page {
     --my-groups-page-font-nav: 1.1rem;
   }
@@ -1117,6 +1159,18 @@
 
     .group-card__content {
       height: 140px;
+    }
+  }
+
+  .group-form {
+    --group-form-font-label: 0.9rem;
+    --group-form-font-input: 0.8rem;
+    --group-form-font-note: 0.75rem;
+    --group-form-font-button-text: 0.85rem;
+    --group-form-font-status: 0.8rem;
+
+    &__button {
+      padding: 0.25rem 0.75rem;
     }
   }
 
@@ -1285,6 +1339,14 @@
     }
   }
 
+  .group-form {
+    --group-form-font-label: 0.85rem;
+    --group-form-font-input: 0.75rem;
+    --group-form-font-note: 0.7rem;
+    --group-form-font-button-text: 0.8rem;
+    --group-form-font-status: 0.75rem;
+  }
+
   .my-groups-page {
     --my-groups-page-font-nav: 0.8rem;
 
@@ -1380,6 +1442,14 @@
     &__user-image {
       width: 40px;
     }
+  }
+
+  .group-form {
+    --group-form-font-label: 0.8rem;
+    --group-form-font-input: 0.7rem;
+    --group-form-font-note: 0.675rem;
+    --group-form-font-button-text: 0.75rem;
+    --group-form-font-status: 0.7rem;
   }
 
   .group-post-comment {
