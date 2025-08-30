@@ -4,60 +4,62 @@
   </div>
 </div>
 
-<div class="group-show-box">
-  <!-- 左側: 画像 -->
-  <div class="group-show-box__image-wrapper mr-4">
-    <%= image_tag(@group.group_image, class: "group-show__image img-fluid") %>
-  </div>
+<div class="container group-show-box">
+  <div class="row">
+    <!-- 左側: 画像 -->
+    <div class="group-show-box__image-wrapper col-md-5">
+      <%= image_tag(@group.group_image, class: "group-show-box__image img-fluid") %>
+    </div>
 
-  <!-- 右側: 説明や参加メンバー数 -->
-  <div class="group-show-box__info">
-    <p class="group-show-box__label">【説明】</p>
-    <p class="group-show-box__bio"><%= @group.description %></p>
-    <p class="group-show-box__member-count">
-      参加メンバー数: <%= @group.active_group_memberships.count %>人
-    </p>
+    <!-- 右側: 説明や参加メンバー数 -->
+    <div class="group-show-box__info col-md-7">
+      <p class="group-show-box__label">【説明】</p>
+      <p class="group-show-box__bio"><%= @group.description %></p>
+      <p class="group-show-box__member-count">
+        参加メンバー数: <%= @group.active_group_memberships.count %>人
+      </p>
+    </div>
   </div>
 </div>
 
-<div class="text-center my-4">
+<div class="group-show-message">
   <% if user_signed_in? %>
     <% case @group.joining_policy %>
     <% when "closed" %>
-      <p>このグループは現在、新規メンバーの募集を停止しています。</p>
+      <p class="group-show-message__text">このグループは新規メンバーの募集を停止しています</p>
 
     <% when "invitation_only" %>
-      <p>このグループには招待されたメンバーのみが参加できます。</p>
+      <p class="group-show-message__text">このグループは招待されたメンバーのみが参加できます</p>
 
     <% else %>
       <% if @membership&.member_status_pending? %>
-        <p>参加申請中です。承認までお待ちください。</p>
+        <p class="group-show-message__text">参加申請中　承認までお待ちください</p>
         <%= button_to '申請をキャンセルする', cancel_group_membership_path(@group),
               method: :delete, data: { confirm: '申請をキャンセルしてもよろしいですか？' }, 
-                class: "btn btn-danger" %>
+                class: "btn btn-danger group-show-message__button" %>
 
       <% elsif @membership&.member_status_inactive? %>
         <%= button_to 'グループに再加入する', join_group_membership_path(@group),
-              method: :post, class: "btn btn-success" %>
+              method: :post, class: "btn btn-success group-show-message__button" %>
 
       <% else %>
         <% if @group.joining_policy_open? %>
           <%= button_to 'グループに参加する', join_group_membership_path(@group),
-                method: :post, class: "btn btn-success" %>
+                method: :post, class: "btn btn-success group-show-message__button" %>
         <% elsif @group.joining_policy_approval_required? %>
           <%= button_to 'グループに参加申請する', join_group_membership_path(@group),
-                method: :post, class: "btn btn-success" %>
+                method: :post, class: "btn btn-success group-show-message__button" %>
         <% end %>
       <% end %>
       
     <% end %>
 
   <% else %>
-    <p><%= link_to 'ログインして参加申請する', new_user_session_path %></p>
+    <p class="group-show-message__text"><%= link_to 'ログインして参加申請する', new_user_session_path %></p>
   <% end %>
 </div>
 
 <hr>
 
-<h3 class="group-posts__page-title"><%= @group.name %>の公開投稿一覧</h3>
+<h3 class="group-show__posts-title"><%= @group.name %>の公開投稿一覧</h3>
 <%= render 'public/shared/group/post/index' %>

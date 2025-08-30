@@ -169,7 +169,8 @@
   }
 }
 
-@media (max-width: 768px) {
+// 768pxだとmdスタイルとの誤差でブレイクポイントのズレが生じるので0.02px小さくしている
+@media (max-width: 767.98px) {
   .user-post-comment {
     --comment-font-input-button-text: 0.7rem;
     --comment-font-body: 0.85rem;

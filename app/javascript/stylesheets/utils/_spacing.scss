@@ -45,7 +45,8 @@
   }
 }
 
-@media (max-width: 768px) {
+// 768pxだとmdスタイルとの誤差でブレイクポイントのズレが生じるので0.02px小さくしている
+@media (max-width: 767.98px) {
   .space-between {
     margin-top: 2rem;
     margin-bottom: 2rem;

@@ -161,61 +161,83 @@
   text-decoration: none;
 }
 
+/*  group_show  */
 .group-show-box {
-  width: 95%;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+  --group-show-font-label: 1.2rem;
+  --group-show-font-bio: 1.1rem;
+  --group-show-font-member-count: 1rem;
+
   margin: 2rem 0;
+
+  &__image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__image {
+    max-width: 100%;
+    width: 300px;
+    aspect-ratio: 6 / 5;
+    border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+    object-fit: cover;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: auto 0;
+  }
+
+  &__label, 
+  &__member-count,
+  &__bio {
+    white-space: normal;
+  }
+
+  &__label {
+    font-size: var(--group-show-font-label);
+    font-weight: bold;
+  }
+
+  &__bio {
+    font-size: var(--group-show-font-bio);
+    padding-left: 1rem;
+  }
+
+  &__member-count {
+    font-size: var(--group-show-font-member-count);
+    padding-left: 0.5rem;
+  }
 }
 
-.group-show-box__image-wrapper {
-  height: 100%; 
-  width: 40%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.group-show-message {
+  --group-show-message-font-text: 1.1rem;
+  --group-show-message-font-button-text: 1.1rem;
+
+  text-align: center;
+  margin: 2rem 0;
+
+  &__text {
+    font-size: var(--group-show-message-font-text);
+    margin-bottom: 1rem;
+  }
+
+  &__button {
+    font-size: var(--group-show-message-font-button-text);
+    padding: 0.5rem 1.5rem;
+  }
 }
 
-.group-show__image {
-  max-width: 100%;
-  width: 240px;
-  height: 200px;
-  border-radius: 90% / 54%;             // 横方向の丸み(半径) / 縦方向の丸み(半径) 
-  object-fit: cover;
-  box-sizing: border-box;               // paddingとborderは幅に含める(marginは含まれない)
-}
+.group-show__posts-title {
+  --group-show-font-title: 1.6rem;
 
-.group-show-box__info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: auto 0;
-}
-
-.group-show-box__label, 
-.group-show-box__member-count,
-.group-show-box__bio {
-  white-space: normal;
-}
-
-.group-show-box__label, 
-.group-show-box__member-count {
-  font-size: 1rem;
-}
-
-.group-show-box__label {
+  font-size: var(--group-show-font-title);
   font-weight: bold;
-}
-
-.group-show-box__bio {
-  font-size: 1.2rem;
-  padding-left: 1rem;
-}
-
-.group-show-box__member-count {
-  padding-left: 0.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 /*  group-new, group-edit  */
@@ -242,8 +264,8 @@
   }
 
   &__button {
-    padding: 0.5rem 1.5rem;
     font-size: var(--group-form-font-button-text);
+    padding: 0.5rem 1.5rem;
   }
 
   &__status {
@@ -258,6 +280,34 @@
   .nav-tabs {
     font-size: var(--my-groups-page-font-nav);
     margin-bottom: 1rem;
+  }
+}
+
+/*  group-confirm-destroy  */
+.group-confirm-destroy {
+  --group-confirm-destroy-font-text: 1.4rem;
+  --group-confirm-destroy-font-button-text: 1.1rem;
+
+  &__text, 
+  &__text-danger { 
+    text-align: center;
+    font-size: var(--group-confirm-destroy-font-text);
+    margin: 2rem 0;
+  }
+
+  &__text-danger {
+    color: red;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+  }
+
+  &__button {
+    font-size: var(--group-confirm-destroy-font-button-text);
+    padding: 0.5rem 1.5rem;
   }
 }
 
@@ -1030,6 +1080,29 @@
     }
   }
 
+  .group-show-box {
+    --group-show-font-label: 1.1rem;
+    --group-show-font-bio: 1rem;
+    --group-show-font-member-count: 0.9rem;
+
+    margin: 1.5rem 0;
+
+    &__image {
+      width: 200px;
+    }
+  }
+
+  .group-show-message {
+    --group-show-message-font-text: 1rem;
+    --group-show-message-font-button-text: 0.95rem;
+    
+    margin: 1.5rem 0;
+  }
+
+  .group-show__posts-title {
+    --group-show-font-title: 1.4rem;
+  }
+
   .group-form {
     --group-form-font-label: 1rem;
     --group-form-font-input: 0.9rem;
@@ -1040,6 +1113,15 @@
 
   .my-groups-page {
     --my-groups-page-font-nav: 1.1rem;
+  }
+
+  .group-confirm-destroy {
+    --group-confirm-destroy-font-text: 1.2rem;
+    --group-confirm-destroy-font-button-text: 0.95rem;
+
+    &__buttons {
+      gap: 4rem;
+    }
   }
 
   .group-post-form {
@@ -1120,7 +1202,8 @@
   }
 }
 
-@media (max-width: 768px) {
+// 768pxだとmdスタイルとの誤差でブレイクポイントのズレが生じるので0.02px小さくしている
+@media (max-width: 767.98px) {
   .groups__title-box, 
   .groups__sub-title-box,
   .groups__title-box-wrapper {
@@ -1162,6 +1245,37 @@
     }
   }
 
+  .group-show-box {
+    --group-show-font-label: 1rem;
+    --group-show-font-bio: 0.9rem;
+    --group-show-font-member-count: 0.85rem;
+
+    margin: 1rem 0;
+
+    &__image-wrapper {
+      justify-content: center;
+    }
+
+    &__image {
+      width: 240px;
+    }
+  }
+
+  .group-show-message {
+    --group-show-message-font-text: 0.9rem;
+    --group-show-message-font-button-text: 0.85rem;
+
+    margin: 1rem 0;
+
+    &__button {
+      padding: 0.25rem 0.75rem;
+    }
+  }
+
+  .group-show__posts-title {
+    --group-show-font-title: 1.2rem;
+  }
+
   .group-form {
     --group-form-font-label: 0.9rem;
     --group-form-font-input: 0.8rem;
@@ -1183,6 +1297,19 @@
 
     .nav-link {
       padding: 0.4rem 0.8rem;
+    }
+  }
+
+  .group-confirm-destroy {
+    --group-confirm-destroy-font-text: 1rem;
+    --group-confirm-destroy-font-button-text: 0.85rem;
+
+    &__buttons {
+      gap: 2rem;
+    }
+
+    &__button {
+      padding: 0.25rem 0.75rem;
     }
   }
 
@@ -1339,6 +1466,31 @@
     }
   }
 
+  .group-show-box {
+    --group-show-font-label: 0.9rem;
+    --group-show-font-bio: 0.85rem;
+    --group-show-font-member-count: 0.8rem;
+
+    margin: 0.75rem 0;
+
+    &__image {
+      width: 200px;
+    }
+  }
+
+  .group-show-message {
+    --group-show-message-font-text: 0.85rem;
+    --group-show-message-font-button-text: 0.8rem;
+    
+    margin: 0.75rem 0;
+  }
+
+  .group-show__posts-title {
+    --group-show-font-title: 1rem;
+
+    margin-bottom: 0.75rem;
+  }
+
   .group-form {
     --group-form-font-label: 0.85rem;
     --group-form-font-input: 0.75rem;
@@ -1359,6 +1511,15 @@
     }
   }
   
+  .group-confirm-destroy {
+    --group-confirm-destroy-font-text: 0.85rem;
+    --group-confirm-destroy-font-button-text: 0.8rem;
+
+    &__buttons {
+      gap: 1rem;
+    }
+  }
+
   .group-posts__title-box {
     margin-bottom: 0.5rem;
     padding: 0.25rem 0.5rem;
@@ -1419,6 +1580,38 @@
     }
   }
 
+  .group-show-box {
+    --group-show-font-label: 0.85rem;
+    --group-show-font-bio: 0.8rem;
+    --group-show-font-member-count: 0.75rem;
+
+    margin: 0.5rem 0;
+
+    &__image {
+      width: 180px;
+    }
+  }
+
+  .group-show-message {
+    --group-show-message-font-text: 0.75rem;
+    --group-show-message-font-button-text: 0.75rem;
+    
+    margin: 0.5rem 0;
+  }
+
+  .group-confirm-destroy {
+    --group-confirm-destroy-font-text: 0.8rem;
+    --group-confirm-destroy-font-button-text: 0.75rem;
+  }
+
+  .group-form {
+    --group-form-font-label: 0.8rem;
+    --group-form-font-input: 0.7rem;
+    --group-form-font-note: 0.675rem;
+    --group-form-font-button-text: 0.75rem;
+    --group-form-font-status: 0.7rem;
+  }
+
   .group-posts__item {
     --group-post-font-main: 0.75rem;
     --group-post-font-sub: 0.675rem;
@@ -1442,14 +1635,6 @@
     &__user-image {
       width: 40px;
     }
-  }
-
-  .group-form {
-    --group-form-font-label: 0.8rem;
-    --group-form-font-input: 0.7rem;
-    --group-form-font-note: 0.675rem;
-    --group-form-font-button-text: 0.75rem;
-    --group-form-font-status: 0.7rem;
   }
 
   .group-post-comment {
@@ -1500,6 +1685,10 @@
       height: 100px;
     }
   }
+  
+  .group-show__posts-title {
+    --group-show-font-title: 0.9rem;
+  }
 
   .my-groups-page {
     --my-groups-page-font-nav: 0.65rem;
@@ -1507,6 +1696,10 @@
     .nav-link {
       padding: 0.25rem 0.5rem;
     }
+  }
+
+  .group-confirm-destroy {
+    --group-confirm-destroy-font-text: 0.75rem;
   }
 
   .group-post-form {

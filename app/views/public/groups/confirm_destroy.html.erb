@@ -1,20 +1,21 @@
-<div class="container my-4">
+<div class="container group-confirm-destroy">
   <h1 class="text-center">グループ削除の確認</h1>
 
-  <p class="text-center my-4">
+  <p class="group-confirm-destroy__text">
     本当にグループ「<%= @group.name %>」を削除しますか？
   </p>
-  <p class="text-center text-danger">
+  <p class="group-confirm-destroy__text-danger">
     削除するとこのグループに関するすべてのデータが失われます。<br>
     この操作は元に戻せません。
   </p>
 
-  <div class="d-flex justify-content-center my-4">
-    <%= form_with model: @group, url: group_path(@group), method: :delete do |form| %>
-      <div class="text-center my-4">
-        <%= form.submit "グループを削除する", data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
-        <%= link_to "キャンセル", group_dashboard_path(@group), class: "btn btn-secondary ml-5" %>
-      </div>
-    <% end %>
-  </div>
+  <%= form_with model: @group, url: group_path(@group), method: :delete do |form| %>
+    <div class="group-confirm-destroy__buttons">
+      <%= form.submit "グループを削除する", data: { confirm: "本当に削除しますか？" }, 
+        class: "btn btn-danger group-confirm-destroy__button" %>
+      <%= link_to "キャンセル", group_dashboard_path(@group), 
+        class: "btn btn-secondary group-confirm-destroy__button" %>
+    </div>
+  <% end %>
+
 </div>

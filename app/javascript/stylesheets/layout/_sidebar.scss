@@ -116,7 +116,8 @@
   }
 }
 
-@media (max-width: 768px) {
+// 768pxだとmdスタイルとの誤差でブレイクポイントのズレが生じるので0.02px小さくしている
+@media (max-width: 767.98px) {
   .sidebar__section {
     --sidebar-font-title: 0.65rem;
     --sidebar-font-link: 0.5rem;
