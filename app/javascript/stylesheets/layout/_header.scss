@@ -236,6 +236,13 @@ header {
 
 /* レスポンシブ調整*/
 @media (max-width: 1024px) {
+  header {
+    [class^="col"], 
+    [class*=" col"] {
+      padding: 0;
+    }
+  }
+
   .search-form {
     .search-form__categories {
       padding: 0.5rem;
@@ -314,11 +321,6 @@ header {
   // ヘッダーの表示部分を広げる(広げた分、スクロールバーと重なるので少し左に寄せ、右に余白を多めに割り振る)
   .container-fluid {
     padding: 0 0.5rem 0 0.25rem;
-  }
-
-  [class^="col"], 
-  [class*=" col"] {
-    padding: 0;
   }
 
   .search-form {

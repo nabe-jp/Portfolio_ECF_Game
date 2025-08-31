@@ -274,6 +274,7 @@
   }
 }
 
+/*  my_groups  */
 .my-groups-page {
   --my-groups-page-font-nav: 1.3rem;
   
@@ -311,111 +312,229 @@
   }
 }
 
-.dashboard__section {
-  padding: 24px;
-  margin-bottom: 40px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-}
+/*  group-dashboard  */
+.group-dashboard {
+  --group-dashboard-font-title: 2rem;
+  --group-dashboard-font-section-title: 1.4rem;
+  --group-dashboard-font-description: 1.1rem;
+  --group-dashboard-font-button-text: 1.1rem;
+  --group-dashboard-font-section-subtitle: 1.2rem;
+  --group-dashboard-font-member-nickname: 1.1rem;
+  --group-dashboard-font-link-text: 1.1rem;
+  --group-dashboard-font-list-title: 1.1rem;
+  --group-dashboard-font-list-body: 1rem;
+  --group-dashboard-font-list-member-nickname: 1rem;
+  --group-dashboard-font-list-date: 1rem;
 
-.dashboard__section-title {
-  font-size: 1.25rem;
-  margin-bottom: 16px;
-}
-
-.dashboard__section-footer {
-  margin-top: 16px;
-  text-align: right;
-}
-
-.dashboard__link {
-  text-decoration: none;
-  color: #007bff;
-  font-size: 0.9rem;
-
-  &:hover {
-    text-decoration: underline;
+  &__title {
+    text-align: center; 
+    font-size: var(--group-dashboard-font-title);
+    margin-bottom: 2rem;
   }
-}
 
-.dashboard-group__image {
-  max-width: 100%;
-  width: 330px;
-  height: 275px;
-  border-radius: 90% / 54%;             // 横方向の丸み(半径) / 縦方向の丸み(半径) 
-  object-fit: cover;
-  box-sizing: border-box;               // paddingとborderは幅に含める(marginは含まれない)
-}
-
-.dashboard__notice-list,
-.dashboard__event-list,
-.dashboard__post-list,
-.dashboard__member-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-}
-
-.dashboard__notice-item,
-.dashboard__event-item,
-.dashboard__post-item,
-.dashboard__member-item {
-  margin-bottom: 12px;
-}
-
-.dashboard__notice-body,
-.dashboard__event-description,
-.dashboard__post-meta {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.dashboard__group-description {
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dashboard__notice-body {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dashboard__event-datetime {
-  font-size: 0.85rem;
-  color: #888;
-}
-
-.dashboard__post-link {
-  font-weight: bold;
-  color: #007bff;
-  text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
+  &__image {
+    max-width: 100%;
+    width: 330px;
+    aspect-ratio: 6 / 5;
+    border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+    object-fit: cover;
+    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
   }
-}
 
-.dashboard__pin {
-  color: gold;
-  margin-left: 8px;
-}
+  &__section-title {
+    font-size: var(--group-dashboard-font-section-title);
+    margin-bottom: 0;
+  }
 
-.dashboard-group__link-right {
-  text-align: right;
-  margin-top: 0.5rem;
-}
+  &__description {
+    font-size: var(--group-dashboard-font-description);
+  }
 
-.dashboard-group__more-link {
-  font-size: 0.9rem;
-  color: #007bff;
-  text-decoration: none;
+  &__edit-button {
+    font-size: var(--group-dashboard-font-button-text);
+  }
 
-  &:hover {
-    text-decoration: underline;
+  &__section-subtitle {
+    font-size: var(--group-dashboard-font-section-subtitle);
+    margin-bottom: 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  &__member-nickname {
+    font-size: var(--group-dashboard-font-member-nickname);
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  &__more-link {
+    text-decoration: none;
+    color: #007bff;
+    font-size: var(--group-dashboard-font-link-text);
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__notices {
+    &-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    &-list-item {
+      margin-bottom: 1rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.25rem;
+      padding: 1rem;
+
+      &:hover {
+        background-color: #f0f8ff;
+        transition: background-color 0.3s ease;
+      }
+    }
+
+    &-list-title, 
+    &-list-body, 
+    &-list-member-nickname, 
+    &-list-date {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-list-title {
+      font-size: var(--group-dashboard-font-list-title);
+      font-weight: bold;
+    }
+
+    &-list-body {
+      font-size: var(--group-dashboard-font-list-body);
+    }
+
+    &-list-member-nickname {
+      font-size: var(--group-dashboard-font-list-member-nickname);
+    }
+
+    &-list-date {
+      font-size: var(--group-dashboard-font-list-date);
+      color: #6c757d;
+    }
+  }
+
+  &__event {
+    &-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    &-list-item {
+      margin-bottom: 1rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.25rem;
+      padding: 1rem;
+
+      &:hover {
+        background-color: #f0f8ff;
+        transition: background-color 0.3s ease;
+      }
+    }
+
+    &-list-title, 
+    &-list-time-label, 
+    &-list-time-value, 
+    &-list-member-nickname, 
+    &-list-date {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-list-title, 
+    &-list-time-label, 
+    &-list-time-separator {
+      font-weight: bold;
+    }
+
+    &-list-time-label, 
+    &-list-time-value, 
+    &-list-time-separator {
+      font-size: var(--group-dashboard-font-list-body);
+    }
+
+    &-list-title  {
+      font-size: var(--group-dashboard-font-list-title);
+    }
+
+    &-list-member-nickname {
+      font-size: var(--group-dashboard-font-list-member-nickname);
+    }
+
+    &-list-date {
+      font-size: var(--group-dashboard-font-list-date);
+      color: #6c757d;
+    }
+  }
+
+  &__post {
+    &-list {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+
+    &-list-item {
+      margin-bottom: 1rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.25rem;
+      padding: 1rem;
+
+      &:hover {
+        background-color: #f0f8ff;
+        transition: background-color 0.3s ease;
+      }
+    }
+
+    &-list-title, 
+    &-list-body, 
+    &-list-member-nickname, 
+    &-list-date {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &-list-title {
+      font-size: var(--group-dashboard-font-list-title);
+      font-weight: bold;
+    }
+
+    &-list-body {
+      font-size: var(--group-dashboard-font-list-body);
+    }
+
+    &-list-member-nickname {
+      font-size: var(--group-dashboard-font-list-member-nickname);
+    }
+
+    &-list-date {
+      font-size: var(--group-dashboard-font-list-date);
+      color: #6c757d;
+    }
+  }
+  
+  &__link-right {
+    text-align: right;
+    margin-top: 0.5rem;
   }
 }
 
