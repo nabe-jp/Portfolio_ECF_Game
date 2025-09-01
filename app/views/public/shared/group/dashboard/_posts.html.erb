@@ -1,19 +1,19 @@
-<div class="group-dashboard__post mb-5">
+<div class="group-dashboard__posts">
   <h2 class="group-dashboard__section-title mb-3">投稿一覧</h2>
   <% if @group_posts.any? %>
-    <ul class="group-dashboard__post-list">
+    <ul class="group-dashboard__posts-list">
       <% @group_posts.first(5).each do |post| %>
-        <li class="group-dashboard__post-list-item">
+        <li class="group-dashboard__posts-list-item">
           <%= link_to group_post_path(@group, post), 
             class: "text-dark d-block", style: "text-decoration: none;" do %>
             <div class="row">
 
-              <div class="col-9 group-dashboard__post-list-title">
+              <div class="col-9 group-dashboard__posts-list-title">
                 <%= post.title %>
               </div>
 
               <div class="col-3 text-right text-muted">
-                <div class="group-dashboard__post-list-member-nickname">
+                <div class="group-dashboard__posts-list-member-nickname">
                   <%= post.member.user.nickname %>
                 </div>
               </div>
@@ -21,13 +21,13 @@
 
             <div class="row mt-2">
               <div class="col-9">
-                <div class="group-dashboard__post-list-body">
+                <div class="group-dashboard__posts-list-body">
                   <%= truncate(post.body, length: 50) %>
                 </div>
               </div>
 
               <div class="col-3 text-right text-muted">
-                <div class="group-dashboard__post-list-date">
+                <div class="group-dashboard__posts-list-date">
                   投稿日: <%= l(post.posted_at || post.created_at, format: :short) %></small>
                 </div>
               </div>

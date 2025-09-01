@@ -10,7 +10,7 @@
 <% if @group_events.any? %>
   <ul class="pl-0" style="list-style-type: none;">
     <% @group_events.each do |event| %>
-      <li class="dashboard-group__event-item mb-4">
+      <li class="group-events__list-item mb-4">
         <%= link_to group_event_path(@group, event), 
           class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
           <h3 class="h5 font-weight-bold mb-3">イベント名：<%= event.title %></h3>

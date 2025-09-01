@@ -12,7 +12,7 @@
 <% if @group_notices.any? %>
   <ul class="pl-0" style="list-style-type: none;">
     <% @group_notices.each do |notice| %>
-      <li class="dashboard-group__notice-item mb-4">
+      <li class="group-notices__list-item mb-4">
         <%= link_to group_notice_path(@group, notice), 
           class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
           <h3 class="text-lg font-semibold mb-3"><%= notice.title %></h3>

@@ -315,16 +315,20 @@
 /*  group-dashboard  */
 .group-dashboard {
   --group-dashboard-font-title: 2rem;
-  --group-dashboard-font-section-title: 1.4rem;
-  --group-dashboard-font-description: 1.1rem;
-  --group-dashboard-font-button-text: 1.1rem;
-  --group-dashboard-font-section-subtitle: 1.2rem;
-  --group-dashboard-font-member-nickname: 1.1rem;
+  --group-dashboard-font-section-title: 1.6rem;
   --group-dashboard-font-link-text: 1.1rem;
+  --group-dashboard-overview-font-section-title: 1.4rem;
+  --group-dashboard-overview-font-section-subtitle: 1.2rem;
+  --group-dashboard-overview-font-description: 1rem;
+  --group-dashboard-overview-font-button-text: 1.1rem;
   --group-dashboard-font-list-title: 1.1rem;
   --group-dashboard-font-list-body: 1rem;
   --group-dashboard-font-list-member-nickname: 1rem;
   --group-dashboard-font-list-date: 1rem;
+
+  --group-dashboard-hover-notices: #f0f8ff;
+  --group-dashboard-hover-events:  #e6f7e6;
+  --group-dashboard-hover-posts:   #fff0f5;
 
   &__title {
     text-align: center; 
@@ -332,45 +336,9 @@
     margin-bottom: 2rem;
   }
 
-  &__image {
-    max-width: 100%;
-    width: 330px;
-    aspect-ratio: 6 / 5;
-    border-radius: 90% / 54%;           // 横方向の丸み(半径) / 縦方向の丸み(半径) 
-    object-fit: cover;
-    box-sizing: border-box;             // paddingとborderは幅に含める(marginは含まれない)
-  }
-
   &__section-title {
     font-size: var(--group-dashboard-font-section-title);
     margin-bottom: 0;
-  }
-
-  &__description {
-    font-size: var(--group-dashboard-font-description);
-  }
-
-  &__edit-button {
-    font-size: var(--group-dashboard-font-button-text);
-  }
-
-  &__section-subtitle {
-    font-size: var(--group-dashboard-font-section-subtitle);
-    margin-bottom: 0;
-  }
-
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding-left: 0;
-    list-style: none;
-  }
-
-  &__member-nickname {
-    font-size: var(--group-dashboard-font-member-nickname);
-    display: inline-block;
-    margin-right: 1rem;
   }
 
   &__more-link {
@@ -380,6 +348,49 @@
   
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  &__overview {
+    &-group-image {
+      max-width: 100%;
+      width: 330px;
+      aspect-ratio: 6 / 5;
+      border-radius: 90% / 54%;         // 横方向の丸み(半径) / 縦方向の丸み(半径) 
+      object-fit: cover;
+      box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
+    }
+
+    &-section-title {
+      font-size: var(--group-dashboard-overview-font-section-title);
+      margin-bottom: 0;
+    }
+
+    &-description {
+      font-size: var(--group-dashboard-overview-font-description);
+    }
+  
+    &-edit-button {
+      font-size: var(--group-dashboard-overview-font-button-text);
+    }
+  
+    &-section-subtitle {
+      font-size: var(--group-dashboard-overview-font-section-subtitle);
+      margin-bottom: 0;
+    }
+  
+    &-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-left: 0;
+      list-style: none;
+    }
+  
+    &-list-member-nickname {
+      font-size: var(--group-dashboard-font-list-member-nickname);
+      display: inline-block;
+      margin-right: 1rem;
     }
   }
 
@@ -395,10 +406,11 @@
       border: 1px solid #dee2e6;
       border-radius: 0.25rem;
       padding: 1rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
 
       &:hover {
-        background-color: #f0f8ff;
-        transition: background-color 0.3s ease;
+        background-color: var(--group-dashboard-hover-notices);
+        transform: scale(1.01);
       }
     }
 
@@ -430,7 +442,7 @@
     }
   }
 
-  &__event {
+  &__events {
     &-list {
       list-style: none;
       padding-left: 0;
@@ -442,10 +454,11 @@
       border: 1px solid #dee2e6;
       border-radius: 0.25rem;
       padding: 1rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
 
       &:hover {
-        background-color: #f0f8ff;
-        transition: background-color 0.3s ease;
+        background-color: var(--group-dashboard-hover-events);
+        transform: scale(1.01);
       }
     }
 
@@ -485,7 +498,7 @@
     }
   }
 
-  &__post {
+  &__posts {
     &-list {
       list-style: none;
       padding-left: 0;
@@ -497,10 +510,11 @@
       border: 1px solid #dee2e6;
       border-radius: 0.25rem;
       padding: 1rem;
+      transition: transform 0.3s ease, background-color 0.3s ease;
 
       &:hover {
-        background-color: #f0f8ff;
-        transition: background-color 0.3s ease;
+        background-color: var(--group-dashboard-hover-posts);
+        transform: scale(1.01);
       }
     }
 
@@ -538,20 +552,7 @@
   }
 }
 
-.dashboard-group__list-item:hover,
-.dashboard-group__notice-item:hover,
-.dashboard-group__event-item:hover {
-  background-color: #f0f8ff;
-  transition: background-color 0.3s ease;
-}
-
-.dashboard-group__list {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-}
-
+/*  group-members, group_notices, group_events  */
 .group-members__page-title, 
 .group-memberships__page-title, 
 .group-notices__page-title,
@@ -653,8 +654,15 @@
   overflow-wrap: break-word;
 }
 
-/*  group_notice,group_event   */
-.notice-index__body, .event-index__body {
+/*  group_notices, group_events   */
+.group-notices__list-item:hover,
+.group-events__list-item:hover {
+  background-color: #f0f8ff;
+  transition: background-color 0.3s ease;
+}
+
+.notice-index__body, 
+.event-index__body {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
