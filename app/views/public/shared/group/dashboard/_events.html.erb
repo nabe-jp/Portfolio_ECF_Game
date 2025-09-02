@@ -1,45 +1,87 @@
 <div class="group-dashboard__events">
-  <h2 class="group-dashboard__section-title mb-3">イベントボード</h2>
+  <h2 class="group-dashboard__section-title">イベントボード</h2>
   <% if @group_events.any? %>
     <ul class="group-dashboard__events-list">
       <% @group_events.first(3).each do |event| %>
         <li class="group-dashboard__events-list-item">
           <%= link_to group_event_path(@group, event), 
-            class: "text-dark d-block", style: "text-decoration: none;" do %>
-            <div class="row">
+            class: "text-dark", style: "text-decoration: none;" do %>
 
-              <div class="col-12 group-dashboard__events-list-title">
-                <%= event.title %>
+            <%#-- 横並び(md以上) --#%>
+            <div class="d-none d-md-block">
+              <div class="row">
+                <div class="col-12 group-dashboard__events-list-title">
+                  <%= event.title %>
+                </div>
+
+                <div class="col-4 text-center">
+                  <div class="group-dashboard__events-list-time-label">開始予定日時</div>
+                  <div  class="group-dashboard__events-list-time-value">
+                    <%= l(event.start_time, format: :short) %>
+                  </div>
+                </div>
+
+                <div class="col-1 d-flex align-items-center justify-content-center">
+                  <span class="group-dashboard__events-list-time-separator">～</span>
+                </div>
+
+                <div class="col-4 text-center">
+                  <div class="group-dashboard__events-list-time-label">終了予定日時</div>
+                  <div class="group-dashboard__events-list-time-value">
+                    <%= l(event.end_time, format: :short) %>
+                  </div>
+                </div>
+
+                <div class="col-3 text-right text-muted">
+                  <div class="group-dashboard__events-list-member-nickname">
+                    <%= event.member.user.nickname %>
+                  </div>
+                  <div class="group-dashboard__events-list-date">
+                    投稿日: <%= l(event.created_at, format: :short) %>
+                  </div>
+                </div>
               </div>
-
-              <div class="col-4 text-center">
-                <span class="group-dashboard__events-list-time-label">開始予定日時</span><br>
-                <span class="group-dashboard__events-list-time-value">
-                  <%= l(event.start_time, format: :short) %>
-                </span>
-              </div>
-
-              <div class="col-1 d-flex align-items-center justify-content-center">
-                <span class="group-dashboard__events-list-time-separator">～</span>
-              </div>
-
-              <div class="col-4 text-center">
-                <span class="group-dashboard__events-list-time-label">終了予定日時</span><br>
-                <span class="group-dashboard__events-list-time-value">
-                  <%= l(event.end_time, format: :short) %>
-                </span>
-              </div>
-
-              <div class="col-3 text-right text-muted">
-                <span class="group-dashboard__events-list-member-nickname">
-                  <%= event.member.user.nickname %>
-                </span><br>
-                <span class="group-dashboard__events-list-date">
-                  投稿日: <%= l(event.created_at, format: :short) %>
-                </span>
-              </div>
-
             </div>
+
+            <%#-- 縦並び (md未満) --#%>
+            <div class="d-md-none">
+              <div class="row">
+                <div class="col-12 group-dashboard__events-list-title">
+                  <%= event.title %>
+                </div>
+
+                <div class="col-5 text-center">
+                  <div class="group-dashboard__events-list-time-label">開始予定日時</div>
+                  <div  class="group-dashboard__events-list-time-value">
+                    <%= l(event.start_time, format: :short) %>
+                  </div>
+                </div>
+
+                <div class="col-2 d-flex align-items-center justify-content-center">
+                  <span class="group-dashboard__events-list-time-separator">～</span>
+                </div>
+
+                <div class="col-5 text-center">
+                  <div class="group-dashboard__events-list-time-label">終了予定日時</div>
+                  <div class="group-dashboard__events-list-time-value">
+                    <%= l(event.end_time, format: :short) %>
+                  </div>
+                </div>
+
+                <div class="col-5 mt-1 text-center">
+                  <div class="group-dashboard__events-list-member-nickname">
+                    投稿者:<%= event.member.user.nickname %>
+                  </div>
+                </div>
+
+                <div class="col-5 offset-2 mt-1 text-center">
+                  <div class="group-dashboard__events-list-date">
+                    投稿日: <%= l(event.created_at, format: :short) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           <% end %>
         </li>
       <% end %>
@@ -49,6 +91,6 @@
   <% end %>
 </div>
 
-<div class="group-dashboard__link-right">
+<div class="col-12 group-dashboard__link-right">
   <%= link_to "▶︎ イベント一覧", group_events_path(@group), class: "group-dashboard__more-link" %>
 </div>

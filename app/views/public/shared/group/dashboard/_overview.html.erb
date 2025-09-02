@@ -1,11 +1,11 @@
 <div class="row group-dashboard__overview">
   <!-- 左側：グループ画像 -->
-  <div class="col-md-4 d-flex align-items-center justify-content-center">
+  <div class="col-md-4 d-flex align-items-center justify-content-center mb-2 mb-md-0">
     <%= image_tag @group.group_image, class: "group-dashboard__overview-group-image" %>
   </div>
 
   <!-- 右側：説明とメンバー一覧を上下に分割 -->
-  <div class="col-md-8 d-flex flex-column pr-0">
+  <div class="col-md-8 group-dashboard__overview-content">
     <!-- 説明 -->
     <div>
       <h2 class="group-dashboard__overview-section-title">グループ説明</h2>
@@ -24,9 +24,9 @@
     <!-- メンバー一覧 -->
     <div class="flex-fill position-relative">
       <h2 class="group-dashboard__overview-section-title">管理者一覧</h2>
-      <h3 class="group-dashboard__overview-section-subtitle">グループオーナー</strong></h3>
+      <h3 class="group-dashboard__overview-section-subtitle mt-0">グループオーナー</h3>
       <ul class="group-dashboard__overview-list">
-        <li class="group-dashboard__overview-member-nickname"><%= @group.owner.nickname %></li>
+        <li class="group-dashboard__overview-list-member-nickname"><%= @group.owner.nickname %></li>
       </ul>
 
       <% if @group.moderators.any? %>

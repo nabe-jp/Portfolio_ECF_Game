@@ -1,34 +1,64 @@
 <div class="group-dashboard__notices">
-  <h2 class="group-dashboard__section-title mb-3">お知らせボード</h2>
+  <h2 class="group-dashboard__section-title">お知らせボード</h2>
   <% if @group_notices.any? %>
     <ul class="group-dashboard__notices-list">
       <% @group_notices.first(3).each do |notice| %>
         <li class="group-dashboard__notices-list-item">
           <%= link_to group_notice_path(@group, notice), 
-            class: "text-dark d-block", style: "text-decoration: none;" do %>
-            <div class="row">
+            class: "text-dark", style: "text-decoration: none;" do %>
+            
+            <%#-- 横並び(md以上) --#%>
+            <div class="d-none d-md-block">
+              <div class="row">
+                <div class="col-9 group-dashboard__notices-list-title">
+                  <%= notice.title %>
+                </div>
 
-              <div class="col-9 group-dashboard__notices-list-title">
-                <%= notice.title %>
+                <div class="col-3 text-right text-muted">
+                  <div class="group-dashboard__notices-list-member-nickname">
+                    <%= notice.member.user.nickname %>
+                  </div>
+                </div>
               </div>
 
-              <div class="col-3 text-right text-muted">
-                <div class="group-dashboard__notices-list-member-nickname">
-                  <%= notice.member.user.nickname %>
+              <div class="row mt-2">
+                <div class="col-9">
+                  <div class="group-dashboard__notices-list-body">
+                    <%= truncate(notice.body, length: 50) %>
+                  </div>
+                </div>
+
+                <div class="col-3 text-right text-muted">
+                  <div class="group-dashboard__notices-list-date">
+                    投稿日: <%= l(notice.created_at, format: :short) %>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="row mt-2">
-              <div class="col-9">
-                <div class="group-dashboard__notices-list-body">
-                  <%= truncate(notice.body, length: 50) %>
+            <%#-- 縦並び (md未満) --#%>
+            <div class="d-md-none">
+              <div class="row">
+                <div class="col-12 group-dashboard__notices-list-title">
+                  <%= notice.title %>
                 </div>
-              </div>
 
-              <div class="col-3 text-right text-muted">
-                <div class="group-dashboard__notices-list-date">
-                  投稿日: <%= l(notice.created_at, format: :short) %>
+                <div class="col-12">
+                  <div class="group-dashboard__notices-list-body">
+                    <%= truncate(notice.body, length: 50) %>
+                  </div>
+                </div>
+
+                <div class="col-5 mt-1 text-center">
+                  <div class="group-dashboard__notices-list-member-nickname">
+                    投稿者:<%= notice.member.user.nickname %>
+                  </div>
+                </div>
+                
+                <div class="col-5 offset-2 mt-1 text-center">
+                  <div class="group-dashboard__notices-list-date">
+                    投稿日: <%= l(notice.created_at, format: :short) %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -41,7 +71,7 @@
     <p class="empty-message">お知らせはまだありません</p>
   <% end %>
 
-  <div class="group-dashboard__link-right">
+  <div class="col-12 group-dashboard__link-right">
     <%= link_to "▶︎ お知らせ一覧", group_notices_path(@group), class: "group-dashboard__more-link" %>
   </div>
 </div>

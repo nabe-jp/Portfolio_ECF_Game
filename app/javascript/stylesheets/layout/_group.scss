@@ -326,6 +326,8 @@
   --group-dashboard-font-list-member-nickname: 1rem;
   --group-dashboard-font-list-date: 1rem;
 
+  --group-dashboard-overview-content-gap: 0.5rem;
+
   --group-dashboard-hover-notices: #f0f8ff;
   --group-dashboard-hover-events:  #e6f7e6;
   --group-dashboard-hover-posts:   #fff0f5;
@@ -338,7 +340,7 @@
 
   &__section-title {
     font-size: var(--group-dashboard-font-section-title);
-    margin-bottom: 0;
+    margin-bottom: 1rem;
   }
 
   &__more-link {
@@ -361,6 +363,16 @@
       box-sizing: border-box;           // paddingとborderは幅に含める(marginは含まれない)
     }
 
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--group-dashboard-overview-content-gap);
+    }
+
+    &-content ul {
+      margin-bottom: 0;
+    }
+
     &-section-title {
       font-size: var(--group-dashboard-overview-font-section-title);
       margin-bottom: 0;
@@ -376,13 +388,13 @@
   
     &-section-subtitle {
       font-size: var(--group-dashboard-overview-font-section-subtitle);
+      margin-top: var(--group-dashboard-overview-content-gap);
       margin-bottom: 0;
     }
   
     &-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
       padding-left: 0;
       list-style: none;
     }
@@ -1251,6 +1263,30 @@
     }
   }
 
+  .group-dashboard {
+    --group-dashboard-font-title: 1.8rem;
+    --group-dashboard-font-section-title: 1.4rem;
+    --group-dashboard-font-link-text: 1rem;
+    --group-dashboard-overview-font-section-title: 1.2rem;
+    --group-dashboard-overview-font-section-subtitle: 1.1rem;
+    --group-dashboard-overview-font-description: 0.9rem;
+    --group-dashboard-overview-font-button-text: 1rem;
+    --group-dashboard-font-list-title: 1rem;
+    --group-dashboard-font-list-body: 0.9rem;
+    --group-dashboard-font-list-member-nickname: 0.9rem;
+    --group-dashboard-font-list-date: 0.9rem;
+
+    &__title {
+      margin-bottom: 1.5rem;
+    }
+
+    &__overview {
+      &-group-image {
+        width: 220px;
+      }
+    }
+  }
+
   .group-post-form {
     --group-post-form-font-main: 0.9rem;
     --group-post-form-font-sub: 0.8rem;
@@ -1325,6 +1361,51 @@
       padding: 0.2rem 0.6rem;
       border-radius: 0.15rem;
       border-bottom: 1.5px solid transparent;
+    }
+  }
+}
+
+// 細かく調整するために例外的に追加
+@media (max-width: 900px) {
+  .group-dashboard {
+    --group-dashboard-font-title: 1.5rem;
+    --group-dashboard-font-section-title: 1.3rem;
+    --group-dashboard-font-link-text: 0.9rem;
+    --group-dashboard-overview-font-section-title: 1.1rem;
+    --group-dashboard-overview-font-section-subtitle: 1rem;
+    --group-dashboard-overview-font-description: 0.85rem;
+    --group-dashboard-overview-font-button-text: 0.9rem;
+    --group-dashboard-font-list-title: 0.9rem;
+    --group-dashboard-font-list-body: 0.85rem;
+    --group-dashboard-font-list-member-nickname: 0.85rem;
+    --group-dashboard-font-list-date: 0.85rem;
+
+    [class^="col"],
+    [class*=" col"] {
+      padding-right: 7.5px;
+      padding-left: 7.5px;
+    }
+
+    &__title {
+      margin-bottom: 1rem;
+    }
+
+    &__overview {
+      &-group-image {
+        width: 200px;
+      }
+
+      &-list-member-nickname {
+        margin-right: 0.75rem;
+      }
+    }
+
+    &__notices, 
+    &__events, 
+    &__posts {
+      &-list-item {
+        padding: 0.5rem;
+      }
     }
   }
 }
@@ -1437,6 +1518,56 @@
 
     &__button {
       padding: 0.25rem 0.75rem;
+    }
+  }
+
+  .group-dashboard {
+    --group-dashboard-font-title: 1.2rem;
+    --group-dashboard-font-section-title: 1.1rem;
+    --group-dashboard-font-link-text: 0.8rem;
+    --group-dashboard-overview-font-section-title: 0.95rem;
+    --group-dashboard-overview-font-section-subtitle: 0.9rem;
+    --group-dashboard-overview-font-description: 0.8rem;
+    --group-dashboard-overview-font-button-text: 0.8rem;
+    --group-dashboard-font-list-title: 0.8rem;
+    --group-dashboard-font-list-body: 0.75rem;
+    --group-dashboard-font-list-member-nickname: 0.75rem;
+    --group-dashboard-font-list-date: 0.75rem;
+
+    &__title {
+      margin-bottom: 0.5rem;
+    }
+
+    &__overview {
+      &-group-image {
+        width: 280px;
+      }
+
+      &-edit-button {
+        padding: 0.1rem 0.2rem;
+      }
+
+      &-list-member-nickname {
+        margin-right: 0.5rem;
+      }
+    }
+
+    &__notices, 
+    &__events, 
+    &__posts {
+      [class^="col"],
+      [class*=" col"] {
+        padding-right: 3.75px;
+        padding-left: 3.75px;
+      }
+
+      &-list-item {
+        padding: 0.5rem 0.25rem;
+
+        &:hover {
+          transform: scale(1.03);
+        }
+      }
     }
   }
 
@@ -1647,6 +1778,10 @@
     }
   }
 
+  .group-dashboard {
+    --group-dashboard-overview-content-gap: 0.25rem;
+  }
+
   .group-posts__title-box {
     margin-bottom: 0.5rem;
     padding: 0.25rem 0.5rem;
@@ -1729,6 +1864,24 @@
   .group-confirm-destroy {
     --group-confirm-destroy-font-text: 0.8rem;
     --group-confirm-destroy-font-button-text: 0.75rem;
+  }
+
+  .group-dashboard {
+    --group-dashboard-font-title: 1rem;
+    --group-dashboard-font-section-title: 0.9rem;
+    --group-dashboard-font-link-text: 0.75rem;
+    --group-dashboard-overview-font-section-title: 0.8rem;
+    --group-dashboard-overview-font-section-subtitle: 0.75rem;
+    --group-dashboard-overview-font-description: 0.75rem;
+    --group-dashboard-overview-font-button-text: 0.75rem;
+    --group-dashboard-font-list-title: 0.75rem;
+    --group-dashboard-font-list-body: 0.725rem;
+    --group-dashboard-font-list-member-nickname: 0.725rem;
+    --group-dashboard-font-list-date: 0.725rem;
+
+    &__section-title {
+      margin-bottom: 0.75rem;
+    }
   }
 
   .group-form {
@@ -1827,6 +1980,20 @@
 
   .group-confirm-destroy {
     --group-confirm-destroy-font-text: 0.75rem;
+  }
+
+  .group-dashboard {
+    --group-dashboard-font-title: 0.925rem;
+
+    &__section-title {
+      margin-bottom: 0.5rem;
+    }
+
+    &-list-item {
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
   }
 
   .group-post-form {
