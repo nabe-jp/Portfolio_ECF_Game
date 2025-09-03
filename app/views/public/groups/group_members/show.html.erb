@@ -33,7 +33,7 @@
             <div class="mb-3">
               <% if group_moderator? %>
                 <p class="col-md-4 font-weight-bold">管理者メモ:</p>
-                <p class="col-md-12 group-member__note-wrap">
+                <p class="col-md-12 group-members__note-wrap">
                   <%= @membership.note.presence || "なし" %>
                 </p>
               <% end %>

@@ -565,7 +565,6 @@
 }
 
 /*  group-members, group_notices, group_events  */
-.group-members__page-title, 
 .group-memberships__page-title, 
 .group-notices__page-title,
 .group-events__page-title {
@@ -577,94 +576,113 @@
 }
 
 /*  group-members  */
-.group-members__title-wrapper {
+.group-members {
+  --group-members-font-title: 2rem;
+  --group-members-font-subtitle: 1.6rem;
+  --group-members-font-badge: 1.6rem;
+  --group-members-font-member: 1.4rem; 
+
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 
-  .badge-wrapper,
-  .btn-wrapper {
+  &__title-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &__page-title {
+    font-size: var(--group-members-font-title);
+    margin: 0.5rem 0 1.5rem;
+  }
+
+  &__count-badge {
     display: inline-flex;
     align-items: center;
-    margin: 0.5rem 0 1.5rem;            // group-members__page-titleと合わせる為のマージン  
+    font-size: var(--group-members-font-badge);
+    margin: 0.5rem 0 1.5rem 0.75rem;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    margin: 0.5rem 0 1.5rem;              // group-members__page-titleと合わせる為のマージン  
+  }
+
+  &__section {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 0.25rem;
+  }
+
+  &__section-title {
+    display: flex;
+    align-items: center;
+    font-size: var(--group-members-font-subtitle);
   }
   
-  .badge-wrapper {
-    font-size: 1.25rem;                 // このページで使っているほかのバッジと同じ大きさ(h4相当)
-    margin-left: 0.75rem;
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+  }
+  
+  &__list-item {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    width: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  &__list-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  &__list-link:hover {
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  &__list-link:hover &__name {
+    color: white;
+  }
+  
+  &__list-member-image {
+    display: block;
+    width: 35px;
+    margin-right: 1rem;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  &__list-member-nickname {
+    font-weight: 500;
+    font-size: var(-group-members-font-member);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .group-member__note-wrap {
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 }
 
-.group-members__section-divider {
-  height: 12px;
-  background-color: green;
-  border-radius: 4px;
-  margin: 1.5rem 0;
-}
-
-.group-members__list {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: -0.75rem;
-  margin-right: -0.75rem;
-}
-
-.group-members__item {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  width: 50%;
-  margin-bottom: 1rem;
-}
-
-.group-members__link {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1rem;
-  background-color: #fff;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  text-decoration: none;
-  color: inherit;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.group-members__link:hover {
-  background-color: #007bff;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.group-members__link:hover .group-members__name {
-  color: white;
-}
-
-.group-members__image-wrapper {
-  flex-shrink: 0;
-  width: 35px;
-  height: 35px;
-  margin-right: 1rem;
-}
-
-.group-members__image-wrapper img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-}
-
-.group-members__name {
-  font-weight: 500;
-  font-size: 1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.group-member__note-wrap {
-  white-space: normal;
-  overflow-wrap: break-word;
-}
 
 /*  group_notices, group_events   */
 .group-notices__list-item:hover,
