@@ -1,37 +1,51 @@
-<div class=" group-members">
+<div class="group-members">
   <div class="group-members__title-wrapper">
-    <h1 class="group-members__page-title">メンバー一覧</h1>
-    <span class="badge badge-secondary group-members__count-badge">
-      <%= @group.active_members.size %>人
-    </span>
+    <div class="d-flex align-items-center">
+      <h1 class="group-members__page-title">メンバー一覧
+        <span class="badge badge-secondary group-members__count-badge-title">
+          <%= @group.active_members.size %>人
+        </span>
+      </h1>
+    </div>
+
+    <% if group_moderator? %>
+      <%= link_to '参加申請一覧', group_memberships_path(@group), 
+        class: 'btn btn-primary btn-sm group-members__button' %>
+    <% end %>
   </div>
 
-  <% if group_moderator? %>
-    <%= link_to '参加申請一覧', group_memberships_path(@group), 
-      class: 'btn btn-primary btn-sm group-members__button' %>
-  <% end %>
-</div>
+  <div class="group-members__section">
+    <h2 class="group-members__section-title">オーナー
+      <%# 見えないバッジを追加し他の部分とレイアウトを同じにする #%>
+      <span class="badge badge-secondary group-members__count-badge-subtitle invisible">
+        1人
+      </span>
+    </h2>
+    <%= render partial: 'public/shared/group/member/membership_table', 
+      locals: { title: 'オーナー', memberships: @owner_memberships } %>
+  </div>
 
-<div class="group-members__section">
-  <h2 class="group-members__section-subtitle">オーナー</h2>
-  <%= render partial: 'public/shared/group/member/membership_table', 
-    locals: { title: 'オーナー', memberships: @owner_memberships } %>
-</div>
+  <div class="group-members__section">
+    <h2 class="group-members__section-title">
+      管理者一覧
+      <span class="badge badge-secondary group-members__count-badge-subtitle">
+        <%= @moderator_memberships.size %>人
+      </span>
+    </h2>
 
-<div class="group-members__section">
-  <h2 class="group-members__section-subtitle">
-    管理者一覧<span class="badge badge-secondary group-members__count-badge"><%= @moderator_memberships.size %>人</span>
-  </h2>
+    <%= render partial: 'public/shared/group/member/membership_table', 
+      locals: { title: '管理者', memberships: @moderator_memberships } %>
+  </div>
 
-  <%= render partial: 'public/shared/group/member/membership_table', 
-    locals: { title: '管理者', memberships: @moderator_memberships } %>
-</div>
+  <div class="group-members__section">
+    <h2 class="group-members__section-title">
+      メンバー一覧
+      <span class="badge badge-secondary group-members__count-badge-subtitle">
+        <%= @member_memberships.size %>人
+      </span>
+    </h2>
 
-<div class="group-members__section">
-  <h2 class="group-members__section-subtitle">
-    メンバー一覧<span class="badge badge-secondary group-members__count-badge"><%= @member_memberships.size %>人</span>
-  </h2>
-
-  <%= render partial: 'public/shared/group/member/membership_table', 
-    locals: { title: 'メンバー', memberships: @member_memberships } %>
+    <%= render partial: 'public/shared/group/member/membership_table', 
+      locals: { title: 'メンバー', memberships: @member_memberships } %>
+  </div>
 </div>

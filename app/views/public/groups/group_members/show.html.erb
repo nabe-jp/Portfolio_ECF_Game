@@ -1,113 +1,124 @@
-<div class="container">
+<div class="container group-members-show">
   <div class="row justify-content-center">
-    <div class="col-10">
+    <div class="col-12">
+      <h1 class="group-members-show__page-title">メンバー詳細</h1>
+    </div>
+  </div>
 
-      <h1 class="my-4 text-center">メンバー詳細</h1>
+  <div class="row">
+    <%#-- 左カラム: プロフィール画像 --#%>
+    <div class="col-md-4">
+      <%= image_tag(@membership.user.profile_image, class: "group-members-show__member-image") %>
+    </div>
+      
+    <%#-- 右カラム: 情報と管理者メモ --#%>
+    <div class="col-md-8">
+      <%#-- 情報: タイトル左・内容右 --#%>
+      <div class="group-members-show__details">
+        <div class="row group-members-show__section">
+          <div class="col-md-4 group-members-show__label">ニックネーム:</div>
+          <div class="col-md-8 group-members-show__member-nickname">
+            <%= @membership.user.nickname %>
+          </div>
+        </div>
 
-      <div class="row">
-        <%#-- 左カラム: プロフィール画像 --#%>
-        <div class="col-md-4 text-center">
-          <div class="profile-image mb-3">
-            <%= image_tag(@membership.user.profile_image, size: "200x200", class: "profile-box__image") %>
+        <div class="row group-members-show__section">
+          <div class="col-md-4 group-members-show__label">参加日時:</div>
+          <div class="col-md-8 group-members-show__member-date">
+            <%= @membership.joined_at&.strftime("%Y年%m月%d日 %H:%M") %>
+          </div>
+        </div>
+
+        <div class="row group-members-show__section">
+          <div class="col-md-4 group-members-show__label">現在の役職:</div>
+          <div class="col-md-8 group-members-show__member-role">
+            <%= @membership.role_i18n %>
           </div>
         </div>
       
-        <%#-- 右カラム: 情報と管理者メモ --#%>
-        <div class="col-md-8">
-          <%#-- 情報: タイトル左・内容右 --#%>
-          <div class="w-100 d-flex flex-column justify-content-between" style="height: 200px;">
-            <div class="d-flex mt-3">
-              <div class="col-md-4 font-weight-bold">ニックネーム:</div>
-              <div class="col-md-8"><%= @membership.user.nickname %></div>
-            </div>
-            <div class="d-flex">
-              <div class="col-md-4 font-weight-bold">参加日時:</div>
-              <div class="col-md-8"><%= @membership.joined_at&.strftime("%Y年%m月%d日 %H:%M") %></div>
-            </div>
-            <div class="d-flex">
-              <div class="col-md-4 font-weight-bold">現在の役職:</div>
-              <div class="col-md-8"><%= @membership.role_i18n %></div>
-            </div>
-      
-            <%#-- 管理者メモ: 情報カラム全体を使う --#%>
-            <div class="mb-3">
-              <% if group_moderator? %>
-                <p class="col-md-4 font-weight-bold">管理者メモ:</p>
-                <p class="col-md-12 group-members__note-wrap">
-                  <%= @membership.note.presence || "なし" %>
-                </p>
-              <% end %>
-            </div>
-          </div>
+        <%#-- 管理者メモ: 情報カラム全体を使う --#%>
+        <div class="row group-members-show__section group-members-show__section--stacked">
+          <% if group_moderator? %>
+            <div class="col-md-4 group-members-show__label">管理者メモ:</div>
+            <p class="col-md-12 group-members__note">
+              <%= @membership.note.presence || "なし" %>
+            </p>
+          <% end %>
         </div>
       </div>
+    </div>
+      
+  </div>
 
-      <hr class="row space-between-mini">
+  <hr class="row space-between-mini">
 
-      <%# グループ管理者のみ表示 #%>
-      <% if group_moderator? %>
-        <div class="row align-items-center">
-          <div class="col-2">
-            <%= link_to "メモを編集", edit_note_group_member_path(@group, @membership), 
-              class: "btn btn-sm btn-secondary" %>
-          </div>
+  <%# グループ管理者のみ表示 #%>
+  <% if group_moderator? %>
+    <div class="row align-items-center">
+      <div class="col-4">
+        <%= link_to "メモを編集", edit_note_group_member_path(@group, @membership), 
+          class: "btn btn-sm btn-secondary group-members-show__button" %>
+      </div>
 
-          <%# 自身の権限は表示せず、代わりに脱退リンクを表示、オーナーであれば脱退できない旨のメッセージを表示 #%>
-          <% if current_user != @membership.user %>
-            <div class="col-4 offset-1 d-flex justify-content-center">
-              <%= form_with url: update_role_group_member_path(@group, @membership), 
-                method: :patch, scope: :group_membership, local: true do |f| %>
-                <div class="form-inline">
-                  <% roles = GroupMembership.roles.keys %>
-                  <% roles -= ["owner"] unless group_owner? %>
-                  <%= f.select :role, roles.map { 
-                    |r| [I18n.t("activerecord.attributes.group_membership.role.#{r}"), r] }, 
-                      class: "form-control form-control-sm mr-2" %>
-                  <%= f.submit "権限を編集", class: "btn btn-sm btn-primary ml-3" %>
-                </div>
-              <% end %>
-            </div>
-
-            <div class="col-3 offset-1 d-flex justify-content-center">
-              <%= link_to "メンバーを追放", group_member_path(@group, @membership),
-                method: :delete, data: { confirm: "本当にこのメンバーを追放しますか？" },
-                  class: "btn btn-sm btn-danger" %>
-            </div>
-
-          <% elsif !group_owner? %>
-            <div class="col-8 offset-1 d-flex justify-content-center">
-              <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
-                data: { confirm: "本当にグループを脱退しますか？" }, class: "btn btn-sm btn-warning" %>
-            </div>
-          <% elsif %>
-            <div class="col-8 offset-1 d-flex justify-content-center">
-              <p class="text-danger mb-0">オーナーはグループを脱退できません。権限譲渡をお願いします。</p>
+      <%# 自身の場合は権限を表示せず、脱退リンクを表示、オーナーであれば脱退できない旨のメッセージを表示 #%>
+      <% if current_user != @membership.user %>
+        <div class="col-4 d-flex justify-content-center">
+          <%= form_with url: update_role_group_member_path(@group, @membership), 
+            method: :patch, scope: :group_membership, local: true do |f| %>
+            <div class="group-members-show__role-form">
+              <% roles = GroupMembership.roles.keys %>
+              <% roles -= ["owner"] unless group_owner? %>
+              <%= f.select :role, roles.map { 
+                |r| [I18n.t("activerecord.attributes.group_membership.role.#{r}"), r] }, 
+                  class: "form-control group-members-show__role-select" %>
+              <%= f.submit "権限を編集", class: "btn btn-sm btn-primary group-members-show__button" %>
             </div>
           <% end %>
         </div>
+
+        <div class="col-4 d-flex justify-content-center">
+          <%= link_to "メンバーを追放", group_member_path(@group, @membership),
+            method: :delete, data: { confirm: "本当にこのメンバーを追放しますか？" },
+              class: "btn btn-sm btn-danger group-members-show__button" %>
+        </div>
+
+      <% elsif !group_owner? %>
+        <div class="col-8 d-flex justify-content-center">
+          <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
+            data: { confirm: "本当にグループを脱退しますか？" }, 
+              class: "btn btn-sm btn-warning group-members-show__button" %>
+        </div>
+
+      <% else %>
+        <div class="col-8 d-flex justify-content-center">
+          <p class="group-members-show__owner-warning">
+            オーナーはグループを脱退できません。権限譲渡をお願いします。
+          </p>
+        </div>
       <% end %>
+    </div>
+  <% end %>
 
-      <div class="row align-items-center mt-4">
-        <div class="col-3">
-          <%= link_to "プロフィールを表示", show_user_path(@membership.user), 
-            class: "btn btn-sm btn-secondary" %>
+  <div class="row align-items-center mt-4">
+    <div class="col-4">
+      <%= link_to "プロフィールを表示", show_user_path(@membership.user), 
+        class: "btn btn-sm btn-secondary group-members-show__button" %>
+    </div>
+
+    <%# グループ管理者ではグループメンバーにのみ脱退リンクを表示 #%>
+    <% if !group_moderator? && @membership.user == current_user %>
+      <div class="col-3 offset-1 d-flex justify-content-center">
+        <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
+          data: { confirm: "本当にグループを脱退しますか？" }, 
+            class: "btn btn-sm btn-warning group-members-show__button" %>
         </div>
-
-        <%# グループ管理者ではグループメンバーにのみ脱退リンクを表示 #%>
-        <% if !group_moderator? && @membership.user == current_user %>
-          <div class="col-3 offset-1 d-flex justify-content-center">
-            <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
-              data: { confirm: "本当にグループを脱退しますか？" }, class: "btn btn-sm btn-warning" %>
-          </div>
-        <% end %>
-      </div>
+    <% end %>
+  </div>
   
-      <div class="row justify-content-start mt-4">
-        <div class="col-3">
-          <%= link_to "メンバー一覧に戻る", group_members_path(@group), 
-            class: "btn btn-sm btn-secondary" %>
-        </div>
-      </div>
+  <div class="row justify-content-start mt-4">
+    <div class="col-4">
+      <%= link_to "メンバー一覧に戻る", group_members_path(@group), 
+        class: "btn btn-sm btn-secondary group-members-show__button" %>
     </div>
   </div>
 </div>

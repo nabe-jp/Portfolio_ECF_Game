@@ -578,36 +578,45 @@
 /*  group-members  */
 .group-members {
   --group-members-font-title: 2rem;
+  --group-members-font-title-badge: 1.6rem;
+  --group-members-font-button-text: 1.1rem;
   --group-members-font-subtitle: 1.6rem;
-  --group-members-font-badge: 1.6rem;
-  --group-members-font-member: 1.4rem; 
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+  --group-members-font-subtitle-badge: 1.3rem;
+  --group-members-font-member: 1.2rem;
 
   &__title-wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 
   &__page-title {
+    display: flex;
+    align-items: center;
     font-size: var(--group-members-font-title);
     margin: 0.5rem 0 1.5rem;
   }
 
-  &__count-badge {
+  &__count-badge-title, 
+  &__count-badge-subtitle {
     display: inline-flex;
     align-items: center;
-    font-size: var(--group-members-font-badge);
-    margin: 0.5rem 0 1.5rem 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+  &__count-badge-title {
+    font-size: var(--group-members-font-title-badge);
+  }
+
+  &__count-badge-subtitle {
+    font-size: var(--group-members-font-subtitle-badge);
   }
 
   &__button {
     display: inline-flex;
     align-items: center;
-    margin: 0.5rem 0 1.5rem;              // group-members__page-titleと合わせる為のマージン  
+    font-size: var(--group-members-font-button-text);
+    margin: 0.5rem 0 1.5rem;            // group-members__page-titleと合わせる為のマージン  
   }
 
   &__section {
@@ -621,6 +630,7 @@
     display: flex;
     align-items: center;
     font-size: var(--group-members-font-subtitle);
+    margin-bottom: 1rem;
   }
   
   &__list {
@@ -662,7 +672,7 @@
   
   &__list-member-image {
     display: block;
-    width: 35px;
+    width: 50px;
     margin-right: 1rem;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
@@ -670,19 +680,104 @@
   }
   
   &__list-member-nickname {
-    font-weight: 500;
-    font-size: var(-group-members-font-member);
+    font-weight: bold;
+    font-size: var(--group-members-font-member);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  
-  .group-member__note-wrap {
-    white-space: normal;
-    overflow-wrap: break-word;
-  }
 }
 
+/*  group-members-show   */
+.group-members-show {
+  --group-members-show-font-title: 2rem;
+  --group-members-show-font-label: 1.2rem;
+  --group-members-show-font-nickname: 1.2rem;
+  --group-members-show-font-date: 1.2rem;
+  --group-members-show-font-role: 1.2rem;
+  --group-members-show-font-note: 1.2rem;
+  --group-members-show-font-button-text: 1.1rem;
+  --group-members-show-font-select-text: 1.2rem;
+  --group-members-show-font-owner-warning-text: 1.1rem;
+
+  &__page-title {
+    text-align: center;
+    font-size: var(--group-members-show-font-title);
+    margin: 1.5rem 0;
+  }
+
+  &__member-image {
+    display: block;
+    width: 200px;
+    margin-left: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__section {
+    display: flex;
+    align-items: center;
+  }
+
+  &__section--stacked {
+    display: block;
+  }
+  
+  &__label {
+    font-weight: bold;
+    font-size: var(--group-members-show-font-label);
+  }
+
+  &__member-nickname {
+    font-size: var(--group-members-show-font-nickname);
+  }
+
+  &__member-date {
+    font-size: var(--group-members-show-font-date);
+  }
+
+  &__member-role {
+    font-size: var(--group-members-show-font-role);
+  }
+
+  &__note {
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-size: var(--group-members-show-font-note);
+  }
+
+  &__button {
+    font-size: var(--group-members-show-font-button-text);
+    padding: 0.25rem 0.75rem;
+  }
+
+  &__role-form {
+    display: flex;
+    align-items: center;
+    font-size: var(--group-members-show-font-select-text);  // selectのテキストサイズを変更するために使用
+    gap: 0.5rem;
+  }
+
+  &__role-form select option {
+    font-size: var(--group-members-show-font-select-text); 
+  }
+  
+  &__owner-warning {
+    margin-bottom: 0;
+    color: #dc3545;
+    font-weight: bold;
+    font-size: var(--group-members-show-font-owner-warning-text);
+    text-align: center;
+  }
+}
 
 /*  group_notices, group_events   */
 .group-notices__list-item:hover,
