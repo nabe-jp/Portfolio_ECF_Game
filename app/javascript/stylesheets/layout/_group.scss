@@ -161,7 +161,7 @@
   text-decoration: none;
 }
 
-/*  group_show  */
+/*   group_show   */
 .group-show-box {
   --group-show-font-label: 1.2rem;
   --group-show-font-bio: 1.1rem;
@@ -240,7 +240,7 @@
   margin-bottom: 1rem;
 }
 
-/*  group-new, group-edit  */
+/*   group-new, group-edit   */
 .group-form {
   --group-form-font-label: 1.2rem;
   --group-form-font-input: 1rem;
@@ -274,7 +274,7 @@
   }
 }
 
-/*  my_groups  */
+/*   my_groups   */
 .my-groups-page {
   --my-groups-page-font-nav: 1.3rem;
   
@@ -284,7 +284,7 @@
   }
 }
 
-/*  group-confirm-destroy  */
+/*   group-confirm-destroy   */
 .group-confirm-destroy {
   --group-confirm-destroy-font-text: 1.4rem;
   --group-confirm-destroy-font-button-text: 1.1rem;
@@ -312,7 +312,7 @@
   }
 }
 
-/*  group-dashboard  */
+/*   group-dashboard   */
 .group-dashboard {
   --group-dashboard-font-title: 2rem;
   --group-dashboard-font-section-title: 1.6rem;
@@ -564,7 +564,7 @@
   }
 }
 
-/*  group-members, group_notices, group_events  */
+/*   group-members, group_notices, group_events   */
 .group-memberships__page-title, 
 .group-notices__page-title,
 .group-events__page-title {
@@ -575,7 +575,7 @@
   text-align: center;
 }
 
-/*  group-members  */
+/*   group-members   */
 .group-members {
   --group-members-font-title: 2rem;
   --group-members-font-title-badge: 1.6rem;
@@ -688,7 +688,7 @@
   }
 }
 
-/*  group-members-show   */
+/*   group-members-show   */
 .group-members-show {
   --group-members-show-font-title: 2rem;
   --group-members-show-font-label: 1.2rem;
@@ -779,7 +779,47 @@
   }
 }
 
-/*  group_notices, group_events   */
+/*   group-members-note   */
+.group-members-note {
+  --group-members-note-font-title: 2rem;
+  --group-members-note-font-label: 1.3rem;
+  --group-members-note-font-nickname: 1.2rem;
+  --group-members-note-font-input-text: 1.1rem;
+  --group-members-note-font-button-text: 1.1rem;
+
+  &__page-title {
+    text-align: center;
+    font-size: var(--group-members-note-font-title);
+    margin: 1.5rem 0;
+  }
+
+  &__label {
+    font-weight: bold;
+    font-size: var(--group-members-note-font-label);
+  }
+
+  &__member-nickname {
+    font-size: var(--group-members-note-font-nickname);
+    margin-bottom: 1rem;
+  }
+
+  &__input {
+    font-size: var(--group-members-note-font-input-text);
+  }
+
+  &__button-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &__button {
+    font-size: var(--group-members-note-font-button-text);
+    padding: 0.5rem 1.5rem;
+  }
+}
+
+/*   group_notices, group_events   */
 .group-notices__list-item:hover,
 .group-events__list-item:hover {
   background-color: #f0f8ff;
@@ -796,7 +836,7 @@
   white-space: pre-wrap;
 }
 
-/*  group_post  */
+/*   group_post   */
 .group-post-form {
   --group-post-form-font-main: 1rem;
   --group-post-form-font-sub: 0.9rem;
@@ -873,7 +913,7 @@
   }
 }
 
-/*  group_post-index  */
+/*   group_post-index   */
 .group-posts__title-box {
   margin-bottom: 1.5rem;                // タイトル下に余白を追加
   padding: 0.75rem 1.5rem;
@@ -1021,7 +1061,7 @@
   }
 }
 
-/*  group_post-show  */
+/*   group_post-show   */
 .group-post-show {
   --group-post-show-font-post-status-text: 1.1rem;
   --group-post-show-font-post-title: 2rem;
@@ -1146,7 +1186,7 @@
   }
 }
 
-/*  group_post_comment  */
+/*   group_post_comment   */
 .group-post-comment {
   --comment-font-input-text: 1rem;
   --comment-font-input-button-text: 0.9rem;
@@ -1397,6 +1437,22 @@
       &-group-image {
         width: 220px;
       }
+    }
+  }
+
+  .group-members-note {
+    --group-members-note-font-title: 1.8rem;
+    --group-members-note-font-label: 1.2rem;
+    --group-members-note-font-nickname: 1.1rem;
+    --group-members-note-font-input-text: 1rem;
+    --group-members-note-font-button-text: 1rem;
+
+    &__page-title {
+      margin: 1rem 0;
+    }
+
+    &__member-nickname {
+      margin-bottom: 0.75rem;
     }
   }
 
@@ -1684,6 +1740,18 @@
     }
   }
 
+  .group-members-note {
+    --group-members-note-font-title: 1.6rem;
+    --group-members-note-font-label: 1.1rem;
+    --group-members-note-font-nickname: 1rem;
+    --group-members-note-font-input-text: 0.9rem;
+    --group-members-note-font-button-text: 0.9rem;
+
+    &__button {
+      padding: 0.25rem 0.75rem;
+    }
+  }
+
   .group-posts__title-box {
     margin-bottom: 0.75rem;
     padding: 0.4rem 0.8rem;
@@ -1895,6 +1963,22 @@
     --group-dashboard-overview-content-gap: 0.25rem;
   }
 
+  .group-members-note {
+    --group-members-note-font-title: 1.4rem;
+    --group-members-note-font-label: 0.95rem;
+    --group-members-note-font-nickname: 0.9rem;
+    --group-members-note-font-input-text: 0.85rem;
+    --group-members-note-font-button-text: 0.85rem;
+
+    &__page-title {
+      margin: 0.75rem 0;
+    }
+
+    &__member-nickname {
+      margin-bottom: 0.5rem;
+    }
+  }
+
   .group-posts__title-box {
     margin-bottom: 0.5rem;
     padding: 0.25rem 0.5rem;
@@ -1995,6 +2079,14 @@
     &__section-title {
       margin-bottom: 0.75rem;
     }
+  }
+
+  .group-members-note {
+    --group-members-note-font-title: 1.2rem;
+    --group-members-note-font-label: 0.85rem;
+    --group-members-note-font-nickname: 0.8rem;
+    --group-members-note-font-input-text: 0.75rem;
+    --group-members-note-font-button-text: 0.75rem;
   }
 
   .group-form {

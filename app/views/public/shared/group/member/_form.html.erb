@@ -1,8 +1,13 @@
 <%= form_with model: @membership, url:  @form_url, local: true do |f| %>
   <div class="form-group">
-    <%= f.label :note, "管理者メモ" %>
-    <%= f.text_area :note, rows: 5, class: "form-control", 
+    <%= f.label :note, "管理者メモ", class: "group-members-note__label" %>
+    <%= f.text_area :note, rows: 5, class: "form-control group-members-note__input", 
       placeholder: group_member_note_placeholder, maxlength: GroupMembership::NOTE_MAX_LENGTH %>
   </div>
-  <%= f.submit "メモを更新", class: "btn btn-sm btn-outline-primary" %>
+
+  <div class="group-members-note__button-wrap">
+    <%= f.submit "メモを更新", class: "btn btn-sm btn-outline-primary group-members-note__button" %>
+    <%= link_to "戻る", group_member_path(@group, @membership), 
+      class: "btn btn-sm btn-outline-secondary group-members-note__button" %>
+  </div>
 <% end %>

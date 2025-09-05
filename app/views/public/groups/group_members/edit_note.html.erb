@@ -1,13 +1,12 @@
-<div class="container">
+<div class="container group-members-note">
   <div class="row justify-content-center">
-    <div class="col-8">
-      <h1 class="my-4 text-center">管理者メモ編集</h1>
-      <p><strong>ニックネーム:</strong> <%= @membership.user.nickname %></p>
-
-      <%= render 'public/shared/group/member/form' %>
+    <div class="col-md-10 col-xl-8">
+      <h1 class="group-members-note__page-title">管理者メモ編集</h1>
+      <div class="group-members-note__label">ニックネーム</div>
+      <div class="group-members-note__member-nickname"><%= @membership.user.nickname %></div>
       
-      <%= link_to "戻る", group_member_path(@group, @membership), 
-        class: "btn btn-sm btn-outline-secondary mt-3" %>
+      <%= render 'public/shared/group/member/form' %>
+
     </div>
   </div>
 </div>
