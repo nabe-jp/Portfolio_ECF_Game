@@ -40,9 +40,11 @@
         <div class="row group-members-show__section group-members-show__section--stacked">
           <% if group_moderator? %>
             <div class="col-md-4 group-members-show__label">管理者メモ:</div>
-            <p class="col-md-12 group-members__note">
-              <%= @membership.note.presence || "なし" %>
-            </p>
+            <div class="col-12">
+              <p class="group-members-show__note">
+                <%= @membership.note.presence || "なし" %>
+              </p>
+            </div>
           <% end %>
         </div>
       </div>
@@ -52,17 +54,18 @@
 
   <hr class="row space-between-mini">
 
+  
   <%# グループ管理者のみ表示 #%>
   <% if group_moderator? %>
     <div class="row align-items-center">
-      <div class="col-4">
+      <div class="col-6 col-md-4">
         <%= link_to "メモを編集", edit_note_group_member_path(@group, @membership), 
           class: "btn btn-sm btn-secondary group-members-show__button" %>
       </div>
 
       <%# 自身の場合は権限を表示せず、脱退リンクを表示、オーナーであれば脱退できない旨のメッセージを表示 #%>
       <% if current_user != @membership.user %>
-        <div class="col-4 d-flex justify-content-center">
+        <div class="col-6 col-md-4 d-flex justify-content-center">
           <%= form_with url: update_role_group_member_path(@group, @membership), 
             method: :patch, scope: :group_membership, local: true do |f| %>
             <div class="group-members-show__role-form">
@@ -76,21 +79,22 @@
           <% end %>
         </div>
 
-        <div class="col-4 d-flex justify-content-center">
+        <%# --- モバイル(md)ではない場合のレイアウト(メンバー追放ボタンの位置) --- #%>
+        <div class="col-4 d-none d-md-flex justify-content-center">
           <%= link_to "メンバーを追放", group_member_path(@group, @membership),
             method: :delete, data: { confirm: "本当にこのメンバーを追放しますか？" },
               class: "btn btn-sm btn-danger group-members-show__button" %>
         </div>
 
       <% elsif !group_owner? %>
-        <div class="col-8 d-flex justify-content-center">
-          <%= link_to "グループから脱退する", leave_group_membership_path(@group), method: :delete,
+        <div class="col-6 col-md-8 d-flex justify-content-center">
+          <%= link_to "グループを脱退", leave_group_membership_path(@group), method: :delete,
             data: { confirm: "本当にグループを脱退しますか？" }, 
               class: "btn btn-sm btn-warning group-members-show__button" %>
         </div>
 
       <% else %>
-        <div class="col-8 d-flex justify-content-center">
+        <div class="col-6 col-md-8 d-flex justify-content-center">
           <p class="group-members-show__owner-warning">
             オーナーはグループを脱退できません。権限譲渡をお願いします。
           </p>
@@ -100,7 +104,7 @@
   <% end %>
 
   <div class="row align-items-center mt-4">
-    <div class="col-4">
+    <div class="col-12">
       <%= link_to "プロフィールを表示", show_user_path(@membership.user), 
         class: "btn btn-sm btn-secondary group-members-show__button" %>
     </div>
@@ -116,9 +120,18 @@
   </div>
   
   <div class="row justify-content-start mt-4">
-    <div class="col-4">
+    <div class="col-6 col-md-12">
       <%= link_to "メンバー一覧に戻る", group_members_path(@group), 
         class: "btn btn-sm btn-secondary group-members-show__button" %>
     </div>
+
+    <%# --- モバイル用レイアウト(メンバー追放ボタンの位置) --- #%>
+    <% if current_user != @membership.user %>
+      <div class="col-6 d-flex d-md-none justify-content-center mb-5">
+        <%= link_to "メンバーを追放", group_member_path(@group, @membership),
+          method: :delete, data: { confirm: "本当にこのメンバーを追放しますか？" },
+            class: "btn btn-sm btn-danger group-members-show__button" %>
+      </div>
+    <% end %>
   </div>
 </div>

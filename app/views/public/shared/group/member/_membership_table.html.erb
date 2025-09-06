@@ -1,7 +1,7 @@
 <% if memberships.present? %>
-  <div class="group-members__list">
+  <div class="row group-members__list">
     <% memberships.each do |membership| %>
-      <div class="group-members__list-item">
+      <div class="col-12 col-md-6 group-members__list-item">
         <%= link_to group_member_path(membership.group, membership), 
           class: "group-members__list-link" do %>
           <%= image_tag(membership.user.profile_image, 

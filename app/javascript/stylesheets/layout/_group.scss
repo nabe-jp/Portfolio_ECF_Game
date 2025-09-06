@@ -564,7 +564,7 @@
   }
 }
 
-/*   group-members, group_notices, group_events   */
+/*   group_notices, group_events, group-memberships   */
 .group-memberships__page-title, 
 .group-notices__page-title,
 .group-events__page-title {
@@ -588,13 +588,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 1.5rem 0;
   }
 
   &__page-title {
     display: flex;
     align-items: center;
     font-size: var(--group-members-font-title);
-    margin: 0.5rem 0 1.5rem;
   }
 
   &__count-badge-title, 
@@ -616,7 +616,6 @@
     display: inline-flex;
     align-items: center;
     font-size: var(--group-members-font-button-text);
-    margin: 0.5rem 0 1.5rem;            // group-members__page-titleと合わせる為のマージン  
   }
 
   &__section {
@@ -634,16 +633,10 @@
   }
   
   &__list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-left: -0.75rem;
-    margin-right: -0.75rem;
+    // 現状はスタイルなし(親子関係が分かりやすくするためhtml上に記載があるので残している)
   }
   
   &__list-item {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    width: 50%;
     margin-bottom: 1rem;
   }
   
@@ -680,7 +673,6 @@
   }
   
   &__list-member-nickname {
-    font-weight: bold;
     font-size: var(--group-members-font-member);
     white-space: nowrap;
     overflow: hidden;
@@ -691,7 +683,7 @@
 /*   group-members-show   */
 .group-members-show {
   --group-members-show-font-title: 2rem;
-  --group-members-show-font-label: 1.2rem;
+  --group-members-show-font-label: 1.3rem;
   --group-members-show-font-nickname: 1.2rem;
   --group-members-show-font-date: 1.2rem;
   --group-members-show-font-role: 1.2rem;
@@ -1440,6 +1432,52 @@
     }
   }
 
+  .group-members {
+    --group-members-font-title: 1.8rem;
+    --group-members-font-title-badge: 1.4rem;
+    --group-members-font-button-text: 1rem;
+    --group-members-font-subtitle: 1.4rem;
+    --group-members-font-subtitle-badge: 1.1rem;
+    --group-members-font-member: 1rem;
+
+    &__title-wrapper {
+      margin: 1rem 0;
+    }
+
+    &__section-title, 
+    &__list-item {
+      margin-bottom: 0.75rem;
+    }
+
+    &__list-member-image {
+      width: 40px;
+    }
+  }
+
+  .group-members-show {
+    --group-members-show-font-title: 1.8rem;
+    --group-members-show-font-label: 1.2rem;
+    --group-members-show-font-nickname: 1.1rem;
+    --group-members-show-font-date: 1.1rem;
+    --group-members-show-font-role: 1.1rem;
+    --group-members-show-font-note: 1.1rem;
+    --group-members-show-font-button-text: 1rem;
+    --group-members-show-font-select-text: 1.1rem;
+    --group-members-show-font-owner-warning-text: 1rem;
+
+    &__page-title {
+      margin: 1rem 0;
+    }
+
+    &__member-image {
+      width: 160px;
+    }
+  
+    &__details {
+      gap: 0.75rem;
+    }
+  }
+
   .group-members-note {
     --group-members-note-font-title: 1.8rem;
     --group-members-note-font-label: 1.2rem;
@@ -1575,6 +1613,39 @@
       &-list-item {
         padding: 0.5rem;
       }
+    }
+  }
+
+  .group-members {
+    --group-members-font-title: 1.6rem;
+    --group-members-font-title-badge: 1.2rem;
+    --group-members-font-button-text: 0.9rem;
+    --group-members-font-subtitle: 1.2rem;
+    --group-members-font-subtitle-badge: 0.9rem;
+    --group-members-font-member: 0.9rem;
+
+    &__list-member-image {
+      width: 35px;
+    }
+  }
+
+  .group-members-show {
+    --group-members-show-font-title: 1.6rem;
+    --group-members-show-font-label: 0.9rem;
+    --group-members-show-font-nickname: 0.85rem;
+    --group-members-show-font-date: 0.85rem;
+    --group-members-show-font-role: 0.85rem;
+    --group-members-show-font-note: 0.85rem;
+    --group-members-show-font-select-text: 0.85rem;
+
+    [class^="col"],
+    [class*=" col"] {
+      padding-right: 7.5px;
+      padding-left: 7.5px;
+    }
+
+    &__member-image {
+      width: 140px;
     }
   }
 }
@@ -1737,6 +1808,30 @@
           transform: scale(1.03);
         }
       }
+    }
+  }
+
+  .group-members {
+    --group-members-font-member: 1rem;
+
+    &__list-member-image {
+      width: 50px;
+    }
+  }
+  
+  .group-members-show {
+    --group-members-show-font-label: 1.1rem;
+    --group-members-show-font-nickname: 1rem;
+    --group-members-show-font-date: 1rem;
+    --group-members-show-font-role: 1rem;
+    --group-members-show-font-note: 1rem;
+    --group-members-show-font-button-text: 0.9rem;
+    --group-members-show-font-select-text: 1rem;
+    --group-members-show-font-owner-warning-text: 0.9rem;
+
+    &__member-image {
+      width: 200px;
+      margin-right: auto;
     }
   }
 
@@ -1963,6 +2058,57 @@
     --group-dashboard-overview-content-gap: 0.25rem;
   }
 
+  .group-members {
+    --group-members-font-title: 1.4rem;
+    --group-members-font-title-badge: 1.1rem;
+    --group-members-font-button-text: 0.85rem;
+    --group-members-font-subtitle: 1rem;
+    --group-members-font-subtitle-badge: 0.8rem;
+    --group-members-font-member: 0.9rem;
+
+    &__title-wrapper {
+      margin: 0.75rem 0;
+    }
+
+    &__count-badge-title, 
+    &__count-badge-subtitle {
+      margin-left: 0.5rem;
+    }
+
+    &__section-title, 
+    &__list-item {
+      margin-bottom: 0.5rem;
+    }
+
+    &__list-member-image {
+      width: 40px;
+    }
+  }
+
+  .group-members-show {
+    --group-members-show-font-title: 1.4rem;
+    --group-members-show-font-label: 0.95rem;
+    --group-members-show-font-nickname: 0.9rem;
+    --group-members-show-font-date: 0.9rem;
+    --group-members-show-font-role: 0.9rem;
+    --group-members-show-font-note: 0.9rem;
+    --group-members-show-font-button-text: 0.85rem;
+    --group-members-show-font-select-text: 0.9rem;
+    --group-members-show-font-owner-warning-text: 0.85rem;
+
+    &__page-title {
+      margin: 0.75rem 0;
+    }
+
+    &__member-image {
+      width: 150px;
+    }
+  
+    &__details {
+      gap: 0.5rem;
+    }
+  }
+
   .group-members-note {
     --group-members-note-font-title: 1.4rem;
     --group-members-note-font-label: 0.95rem;
@@ -2078,6 +2224,35 @@
 
     &__section-title {
       margin-bottom: 0.75rem;
+    }
+  }
+
+  .group-members {
+    --group-members-font-title: 1.2rem;
+    --group-members-font-title-badge: 0.9rem;
+    --group-members-font-button-text: 0.75rem;
+    --group-members-font-subtitle: 0.95rem;
+    --group-members-font-subtitle-badge: 0.75rem;
+    --group-members-font-member: 0.85rem;
+
+    &__list-member-image {
+      width: 35px;
+    }
+  }
+
+  .group-members-show {
+    --group-members-show-font-title: 1.2rem;
+    --group-members-show-font-label: 0.85rem;
+    --group-members-show-font-nickname: 0.8rem;
+    --group-members-show-font-date: 0.8rem;
+    --group-members-show-font-role: 0.8rem;
+    --group-members-show-font-note: 0.8rem;
+    --group-members-show-font-button-text: 0.75rem;
+    --group-members-show-font-select-text: 0.8rem;
+    --group-members-show-font-owner-warning-text: 0.75rem;
+
+    &__member-image {
+      width: 130px;
     }
   }
 
