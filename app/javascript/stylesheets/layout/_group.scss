@@ -564,15 +564,10 @@
   }
 }
 
-/*   group_notices, group_events, group-memberships   */
-.group-memberships__page-title, 
+/*   group_notices, group_events   */
 .group-notices__page-title,
 .group-events__page-title {
   margin: 0.5rem 0 1.5rem;
-}
-
-.group-memberships__page-title {
-  text-align: center;
 }
 
 /*   group-members   */
@@ -808,6 +803,66 @@
   &__button {
     font-size: var(--group-members-note-font-button-text);
     padding: 0.5rem 1.5rem;
+  }
+}
+
+/*   group_memberships   */
+.group-memberships {
+  --group-memberships-font-title: 2rem;
+  --group-memberships-font-label: 1.3rem;
+  --group-memberships-font-nickname: 1.2rem;
+  --group-memberships-font-date: 1.1rem;
+  --group-memberships-font-button-text: 1.1rem;
+
+  &__page-title {
+    font-size: var(--group-memberships-font-title);
+    margin: 0.5rem 0 1.5rem;
+    text-align: center;
+  }
+
+  th {
+    font-weight: bold;
+    font-size: var(--group-memberships-font-label);
+    text-align: center;
+  }
+
+  th.group-memberships__user-nickname {
+    width: 55%; 
+  }
+
+  th.group-memberships__joined-at {
+    width: 20%;
+  }
+
+  th.group-memberships__actions {
+    width: 25%;
+  }
+
+  td.group-memberships__user-nickname,
+  td.group-memberships__joined-at, 
+  td.group-memberships__actions {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  td.group-memberships__user-nickname {
+    font-size: var(--group-memberships-font-nickname);
+  }
+
+  td.group-memberships__joined-at {
+    font-size: var(--group-memberships-font-date);
+  }
+
+  &__actions-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    gap: 1rem;
+  }
+
+  &__button {
+    font-size: var(--group-memberships-font-button-text);
+    padding: 0.25rem 0.75rem;
   }
 }
 
@@ -1494,6 +1549,31 @@
     }
   }
 
+  .group-memberships {
+    --group-memberships-font-title: 1.6rem;
+    --group-memberships-font-label: 1.1rem;
+    --group-memberships-font-nickname: 1rem;
+    --group-memberships-font-date: 0.9rem;
+    --group-memberships-font-button-text: 1rem;
+    
+    .table th, .table td {
+      padding: 0.5rem;
+    }
+
+    &__page-title {
+      margin: 1rem 0;
+    }
+
+    td.group-memberships__actions .group-memberships__actions-wrapper {
+      gap: 0.5rem;
+    }
+
+    &__button {
+      font-size: var(--group-memberships-font-button-text);
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
   .group-post-form {
     --group-post-form-font-main: 0.9rem;
     --group-post-form-font-sub: 0.8rem;
@@ -1876,6 +1956,44 @@
       width: 95px;
     }
   }
+
+  .group-memberships {
+    --group-memberships-font-title: 1.4rem;
+    --group-memberships-font-label: 1rem;
+    --group-memberships-font-nickname: 0.9rem;
+    --group-memberships-font-date: 0.85rem;
+    --group-memberships-font-button-text: 0.9rem;
+
+    &__user-nickname-table {
+      border-top: 2px solid #dee2e6;
+      border-left: 2px solid #dee2e6;
+      border-right: 2px solid #dee2e6;
+    }
+
+    &__pending-action {
+      border-left: 2px solid #dee2e6;
+      border-right: 2px solid #dee2e6;
+      border-bottom: 2px solid #dee2e6;
+    }
+
+    &__actions {
+      white-space: nowrap;
+    }
+
+    &__pending-action + &__user-nickname-table {
+      border-top: none;
+    }
+
+    &__actions-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &__joined-at {
+      font-size: var(--group-memberships-font-date);
+    }
+  }
   
   .group-post-form {
     --group-post-form-font-main: 0.8rem;
@@ -1931,6 +2049,11 @@
 
 // viewでsmでのブレイクポイントを設定し、1列に2個表示から1個表示に変更しているため、対応するSCSSを追加
 @media (max-width: 576px) {
+  // タイトルが長い為、追加
+  .group-memberships {
+    --group-memberships-font-title: 1.05rem;
+  }
+
   .group-posts__title-box {
     margin-bottom: 0.65rem;
     padding: 0.35rem 0.7rem;
@@ -2131,6 +2254,17 @@
     border-radius: 4px;
   }
 
+  .group-memberships {
+    --group-memberships-font-label: 0.95rem;
+    --group-memberships-font-nickname: 0.85rem;
+    --group-memberships-font-date: 0.8rem;
+    --group-memberships-font-button-text: 0.85rem;
+
+    &__page-title {
+      margin: 0.75rem 0;
+    }
+  }
+
   .group-post-show {
     --group-post-show-font-post-status-text: 0.8rem;
     --group-post-show-font-post-title: 1.5rem;
@@ -2264,6 +2398,14 @@
     --group-members-note-font-button-text: 0.75rem;
   }
 
+  .group-memberships {
+    --group-memberships-font-title: 0.9rem;
+    --group-memberships-font-label: 0.85rem;
+    --group-memberships-font-nickname: 0.8rem;
+    --group-memberships-font-date: 0.75rem;
+    --group-memberships-font-button-text: 0.75rem;
+  }
+  
   .group-form {
     --group-form-font-label: 0.8rem;
     --group-form-font-input: 0.7rem;
