@@ -1,34 +1,42 @@
-<div class="row align-items-center">
-  <div class="col-10">
-    <h1 class="group-notices__page-title"><%= @group.name %> のお知らせ一覧</h1>
+<div class="container group-notices">
+  <div class="row group-notices__title-wrapper">
+    <div class="col-9">
+      <h1 class="group-notices__page-title"><%= @group.name %> のお知らせ一覧</h1>
+    </div>
+    <div class="col-3 text-right">
+      <% if group_moderator? %>
+        <%= link_to 'お知らせを追加', new_group_notice_path(@group), 
+          class: 'btn btn-primary group-notices__button' %>
+      <% end %>
+    </div>
   </div>
-  <div class="col-2 text-right">
-    <% if group_moderator? %>
-      <%= link_to '＋新しいお知らせ', new_group_notice_path(@group), class: 'btn btn-primary btn-sm' %>
-    <% end %>
-  </div>
+
+  <% if @group_notices.any? %>
+    <ul class="group-notices__list">
+      <% @group_notices.each do |notice| %>
+        <li class="group-notices__list-item">
+          <%= link_to group_notice_path(@group, notice), 
+            class: "group-notices__list-link" do %>
+            <h2 class="group-notices__list-title"><%= notice.title %></h2>
+            <p class="group-notices__list-body"><%= notice.body %></p>
+            <div class="group-notices__meta">
+              <span class="group-notices__list-member-nickname">
+                投稿者: <%= notice.member.user.nickname %>
+              </span>
+              <span class="group-notices__list-date">
+                投稿日時: <%= l(notice.created_at, format: :short) %>
+              </span>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= paginate @group_notices %> 
+
+  <% else %>
+    <div class="text-center">
+      <p class="empty-message">まだお知らせはありません</p>
+    </div>
+  <% end %>
 </div>
-
-<% if @group_notices.any? %>
-  <ul class="pl-0" style="list-style-type: none;">
-    <% @group_notices.each do |notice| %>
-      <li class="group-notices__list-item mb-4">
-        <%= link_to group_notice_path(@group, notice), 
-          class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
-          <h3 class="text-lg font-semibold mb-3"><%= notice.title %></h3>
-          <p class="notice-index__body mb-2"><%= notice.body %></p>
-          <small>
-            投稿者: <%= notice.member.user.nickname %> / 投稿日時: <%= l(notice.created_at, format: :short) %>
-          </small>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-
-  <%= paginate @group_notices %> 
-
-<% else %>
-  <div class="text-center">
-    <p class="empty-message">まだお知らせはありません</p>
-  </div>
-<% end %>

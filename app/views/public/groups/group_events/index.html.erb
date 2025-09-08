@@ -1,37 +1,60 @@
-<div class="row align-items-center">
-  <div class="col-10">
-    <h1 class="group-events__page-title"><%= @group.name %> のイベント一覧</h1>
+<div class="container group-events">
+  <div class="row group-events__title-wrapper">
+    <div class="col-9">
+      <h1 class="group-events__page-title"><%= @group.name %> のイベント一覧</h1>
+    </div>
+    <div class="col-3 text-right">
+      <%= link_to 'イベントを作成', new_group_event_path(@group), 
+        class: 'btn btn-primary group-events__button' %>
+    </div>
   </div>
-  <div class="col-2 text-right">
-    <%= link_to '＋新しいイベント', new_group_event_path(@group), class: 'btn btn-primary btn-sm' %>
-  </div>
+
+  <% if @group_events.any? %>
+    <ul class="group-events__list">
+      <% @group_events.each do |event| %>
+        <li class="group-events__list-item">
+          <%= link_to group_event_path(@group, event), 
+            class: "group-events__list-link" do %>
+
+            <h2 class="group-events__list-title">イベント名：<%= event.title %></h2>
+
+            <div class="group-events__list-time-wrap mb-0">
+              <span class="group-events__list-time-label">開始予定日時:</span>
+              <span class="group-events__list-time-value">
+                <%= l(event.start_time, format: :long) %>
+              </span>
+            </div>
+
+            <div class="group-events__list-time-wrap">
+              <span class="group-events__list-time-label">終了予定日時:</span>
+              <span class="group-events__list-time-value">
+                <%= l(event.end_time, format: :long) %>
+              </span>
+            </div>
+
+            <div class="group-events__list-body-wrap">
+              <span class="group-events__list-body-label">イベント内容</span>
+              <span class="group-events__list-body-value"><%= event.description %></span>
+            </div>
+
+            <div class="group-events__meta">
+              <span class="group-events__list-member-nickname">
+                投稿者: <%= event.member.user.nickname %>
+              </span>
+              <span class="group-events__list-date">
+                投稿日時: <%= l(event.created_at, format: :short) %>
+              </span>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= paginate @group_events %> 
+
+  <% else %>
+    <div class="text-center">
+      <p class="empty-message">イベントはまだありません</p>
+    </div>
+  <% end %>
 </div>
-
-<% if @group_events.any? %>
-  <ul class="pl-0" style="list-style-type: none;">
-    <% @group_events.each do |event| %>
-      <li class="group-events__list-item mb-4">
-        <%= link_to group_event_path(@group, event), 
-          class: "d-block p-4 border rounded shadow text-dark", style: "text-decoration: none;" do %>
-          <h3 class="h5 font-weight-bold mb-3">イベント名：<%= event.title %></h3>
-          <p><strong>開始予定日時:</strong> <%= l(event.start_time, format: :long) %></p>
-          <p><strong>終了予定日時:</strong> <%= l(event.end_time, format: :long) %></p>
-          <p class="mt-2 text-secondary">
-            イベント内容<br>
-            <p class="event-index__body mb-2"><%= event.description %></p>
-          </p>
-          <small>
-            投稿者: <%= event.member.user.nickname %> / 投稿日時: <%= l(event.created_at, format: :short) %>
-          </small>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-
-  <%= paginate @group_events %> 
-
-<% else %>
-  <div class="text-center">
-    <p class="empty-message">イベントはまだありません</p>
-  </div>
-<% end %>
