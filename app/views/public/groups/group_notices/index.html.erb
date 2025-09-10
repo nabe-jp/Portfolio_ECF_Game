@@ -1,9 +1,13 @@
 <div class="container group-notices">
   <div class="row group-notices__title-wrapper">
-    <div class="col-9">
-      <h1 class="group-notices__page-title"><%= @group.name %> のお知らせ一覧</h1>
+    <div class="col-12 col-md-9">
+      <h1 class="group-notices__page-title">
+        <span><%= @group.name %></span>
+        <span>お知らせ一覧</span>
+      </h1>
     </div>
-    <div class="col-3 text-right">
+
+    <div class="col-12 col-md-3 mt-2 mt-md-0 group-notices__button-container">
       <% if group_moderator? %>
         <%= link_to 'お知らせを追加', new_group_notice_path(@group), 
           class: 'btn btn-primary group-notices__button' %>

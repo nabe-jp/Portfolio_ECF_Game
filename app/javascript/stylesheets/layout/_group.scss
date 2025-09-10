@@ -880,14 +880,22 @@
 
   &__page-title {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: center; 
     font-size: var(--group-notices-font-title);
   }
 
+  &__button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
   &__button {
     display: inline-flex;
     align-items: center;
     font-size: var(--group-notices-font-button-text);
+    padding: 0.25rem 0.75rem;
   }
   
   &__list {
@@ -1763,8 +1771,28 @@
     }
 
     &__button {
-      font-size: var(--group-memberships-font-button-text);
-      padding: 0.25rem 0.5rem;
+      padding: 0.15rem 0.45rem;
+    }
+  }
+
+  .group-notices {
+    --group-notices-font-title: 1.6rem;
+    --group-notices-font-button-text: 1rem;
+    --group-notices-font-list-title: 1.2rem;
+    --group-notices-font-list-body: 1rem;
+    --group-notices-font-list-member: 0.95rem;
+    --group-notices-font-list-date: 0.9rem;
+
+    &__title-wrapper {
+      margin: 1rem 0;
+    }
+
+    &__button {
+      padding: 0.15rem 0.45rem;
+    }
+
+    &__list-link {
+      padding: 0.75rem;
     }
   }
 
@@ -1921,6 +1949,14 @@
     &__member-image {
       width: 140px;
     }
+  }
+
+  .group-notices {
+    --group-notices-font-title: 1.2rem;
+    --group-notices-font-list-title: 1.1rem;
+    --group-notices-font-list-body: 0.9rem;
+    --group-notices-font-list-member: 0.9rem;
+    --group-notices-font-list-date: 0.85rem;
   }
 }
 
@@ -2121,36 +2157,6 @@
     }
   }
 
-  .group-posts__title-box {
-    margin-bottom: 0.75rem;
-    padding: 0.4rem 0.8rem;
-    border-radius: 5px;
-  }
-
-  .group-posts__item {
-    --group-post-font-main: 0.75rem;
-    --group-post-font-sub: 0.675rem;
-
-    .group-posts__link {
-      height: 150px;
-      padding: 0.25rem;
-    }
-
-    .group-posts__image-box {
-      flex: 0 0 40%;
-    }
-
-    .group-posts__image-box,
-    .group-posts__content-box {
-      height: 120px;
-    }
-
-    .group-posts__image, 
-    .group-posts__image {
-      width: 95px;
-    }
-  }
-
   .group-memberships {
     --group-memberships-font-title: 1.4rem;
     --group-memberships-font-label: 1rem;
@@ -2189,9 +2195,53 @@
     }
   }
   
+  .group-notices {
+    --group-notices-font-button-text: 0.9rem;
+  
+    --group-notices-list-gap: 0.75rem;
+
+    &__list-item {
+      margin-bottom: 1rem;
+    }
+
+    &__list-link {
+      padding: 0.5rem;
+    }
+  }
+
   .group-post-form {
     --group-post-form-font-main: 0.8rem;
     --group-post-form-font-sub: 0.7rem;
+  }
+  
+  .group-posts__title-box {
+    margin-bottom: 0.75rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+  }
+
+  .group-posts__item {
+    --group-post-font-main: 0.75rem;
+    --group-post-font-sub: 0.675rem;
+
+    .group-posts__link {
+      height: 150px;
+      padding: 0.25rem;
+    }
+
+    .group-posts__image-box {
+      flex: 0 0 40%;
+    }
+
+    .group-posts__image-box,
+    .group-posts__content-box {
+      height: 120px;
+    }
+
+    .group-posts__image, 
+    .group-posts__image {
+      width: 95px;
+    }
   }
 
   .group-post-show {
@@ -2266,6 +2316,11 @@
     .group-posts__image {
       width: 120px;
     }
+  }
+
+  .group-notices {
+    --group-notices-font-title: 1rem;
+    --group-notices-font-list-title: 0.95rem;
   }
 }
 
@@ -2442,12 +2497,6 @@
     }
   }
 
-  .group-posts__title-box {
-    margin-bottom: 0.5rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-  }
-
   .group-memberships {
     --group-memberships-font-label: 0.95rem;
     --group-memberships-font-nickname: 0.85rem;
@@ -2457,6 +2506,29 @@
     &__page-title {
       margin: 0.75rem 0;
     }
+  }
+
+  .group-notices {
+    --group-notices-font-button-text: 0.85rem;
+    --group-notices-font-list-body: 0.85rem;
+    --group-notices-font-list-member: 0.8rem;
+    --group-notices-font-list-date: 0.75rem;
+  
+    --group-notices-list-gap: 0.5rem;
+
+    &__title-wrapper {
+      margin: 0.75rem 0;
+    }
+
+    &__list-item {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  .group-posts__title-box {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
   }
 
   .group-post-show {
@@ -2600,6 +2672,15 @@
     --group-memberships-font-button-text: 0.75rem;
   }
   
+  .group-notices {
+    --group-notices-font-title: 1rem;
+    --group-notices-font-button-text: 0.75rem;
+    --group-notices-font-list-title: 0.9rem;
+    --group-notices-font-list-body: 0.8rem;
+    --group-notices-font-list-member: 0.75rem;
+    --group-notices-font-list-date: 0.7rem;
+  }
+
   .group-form {
     --group-form-font-label: 0.8rem;
     --group-form-font-input: 0.7rem;
@@ -2710,6 +2791,11 @@
         transform: scale(1.02);
       }
     }
+  }
+
+  .group-notices {
+    --group-notices-font-title: 0.95rem;
+    --group-notices-font-list-title: 0.85rem;
   }
 
   .group-post-form {
