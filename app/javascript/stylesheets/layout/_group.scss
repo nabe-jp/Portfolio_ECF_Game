@@ -963,14 +963,14 @@
   }
 }
 
-/*   group_notices   */
+/*   group_events   */
 .group-events {
   --group-events-font-title: 1.8rem;
   --group-events-font-button-text: 1.1rem;
   --group-events-font-list-title: 1.4rem;
   --group-events-font-list-time-label: 1.2rem;
   --group-events-font-list-time-value: 1.1rem;
-  --group-events-font-list-body-label: 1.15rem;
+  --group-events-font-list-body-label: 1.2rem;
   --group-events-font-list-body-value: 1.1rem;
   --group-events-font-list-member: 1.05rem;
   --group-events-font-list-date: 1rem;
@@ -986,14 +986,22 @@
 
   &__page-title {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: center; 
     font-size: var(--group-events-font-title);
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__button {
     display: inline-flex;
     align-items: center;
     font-size: var(--group-events-font-button-text);
+    padding: 0.25rem 0.75rem;
   }
   
   &__list {
@@ -1796,6 +1804,30 @@
     }
   }
 
+  .group-events {
+    --group-events-font-title: 1.6rem;
+    --group-events-font-button-text: 1rem;
+    --group-events-font-list-title: 1.2rem;
+    --group-events-font-list-time-label: 1.1rem;
+    --group-events-font-list-time-value: 1rem;
+    --group-events-font-list-body-label: 1.1rem;
+    --group-events-font-list-body-value: 1rem;
+    --group-events-font-list-member: 0.95rem;
+    --group-events-font-list-date: 0.9rem;
+  
+    &__title-wrapper {
+      margin: 1rem 0;
+    }
+
+    &__button {
+      padding: 0.15rem 0.45rem;
+    }
+
+    &__list-link {
+      padding: 0.75rem;
+    }
+  }
+
   .group-post-form {
     --group-post-form-font-main: 0.9rem;
     --group-post-form-font-sub: 0.8rem;
@@ -1957,6 +1989,17 @@
     --group-notices-font-list-body: 0.9rem;
     --group-notices-font-list-member: 0.9rem;
     --group-notices-font-list-date: 0.85rem;
+  }
+
+  .group-events {
+    --group-events-font-title: 1.2rem;
+    --group-events-font-list-title: 1.1rem;
+    --group-events-font-list-time-label: 1rem;
+    --group-events-font-list-time-value: 0.9rem;
+    --group-events-font-list-body-label: 1rem;
+    --group-events-font-list-body-value: 0.9rem;
+    --group-events-font-list-member: 0.9rem;
+    --group-events-font-list-date: 0.85rem;
   }
 }
 
@@ -2209,6 +2252,20 @@
     }
   }
 
+  .group-events {
+    --group-events-font-button-text: 0.9rem;
+
+    --group-events-list-gap: 0.75rem;
+
+    &__list-item {
+      margin-bottom: 1rem;
+    }
+
+    &__list-link {
+      padding: 0.5rem;
+    }
+  }
+
   .group-post-form {
     --group-post-form-font-main: 0.8rem;
     --group-post-form-font-sub: 0.7rem;
@@ -2321,6 +2378,17 @@
   .group-notices {
     --group-notices-font-title: 1rem;
     --group-notices-font-list-title: 0.95rem;
+  }
+
+  .group-events {
+    --group-events-font-title: 1rem;
+    --group-events-font-list-title: 0.95rem;
+    --group-events-font-list-time-label: 0.85rem;
+    --group-events-font-list-time-value: 0.8rem;
+    --group-events-font-list-body-label: 0.85rem;
+    --group-events-font-list-body-value: 0.8rem;
+    --group-events-font-list-member: 0.75rem;
+    --group-events-font-list-date: 0.7rem;
   }
 }
 
@@ -2525,6 +2593,20 @@
     }
   }
 
+  .group-events {
+    --group-events-font-button-text: 0.85rem;
+
+    --group-events-list-gap: 0.5rem;
+
+    &__title-wrapper {
+      margin: 0.75rem 0;
+    }
+
+    &__list-item {
+      margin-bottom: 0.75rem;
+    }
+  }
+
   .group-posts__title-box {
     margin-bottom: 0.5rem;
     padding: 0.25rem 0.5rem;
@@ -2673,12 +2755,18 @@
   }
   
   .group-notices {
-    --group-notices-font-title: 1rem;
     --group-notices-font-button-text: 0.75rem;
     --group-notices-font-list-title: 0.9rem;
     --group-notices-font-list-body: 0.8rem;
     --group-notices-font-list-member: 0.75rem;
     --group-notices-font-list-date: 0.7rem;
+  }
+
+  .group-events {
+    --group-events-font-button-text: 0.75rem;
+    --group-events-font-list-title: 0.9rem;
+    --group-events-font-list-time-label: 0.825rem;
+    --group-events-font-list-body-label: 0.825rem;
   }
 
   .group-form {
@@ -2796,6 +2884,11 @@
   .group-notices {
     --group-notices-font-title: 0.95rem;
     --group-notices-font-list-title: 0.85rem;
+  }
+
+  .group-events {
+    --group-events-font-title: 0.95rem;
+    --group-events-font-list-title: 0.875rem;
   }
 
   .group-post-form {

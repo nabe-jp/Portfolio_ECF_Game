@@ -1,9 +1,13 @@
 <div class="container group-events">
   <div class="row group-events__title-wrapper">
-    <div class="col-9">
-      <h1 class="group-events__page-title"><%= @group.name %> のイベント一覧</h1>
+    <div class="col-12 col-md-9">
+      <h1 class="group-events__page-title">
+        <span><%= @group.name %></span>
+        <span>イベント一覧</span>
+      </h1>
     </div>
-    <div class="col-3 text-right">
+
+    <div class="col-12 col-md-3 mt-2 mt-md-0 group-events__button-container">
       <%= link_to 'イベントを作成', new_group_event_path(@group), 
         class: 'btn btn-primary group-events__button' %>
     </div>
