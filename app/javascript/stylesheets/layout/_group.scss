@@ -161,7 +161,7 @@
   text-decoration: none;
 }
 
-/*   group_show   */
+/*   group-show   */
 .group-show-box {
   --group-show-font-label: 1.2rem;
   --group-show-font-bio: 1.1rem;
@@ -800,7 +800,7 @@
   }
 }
 
-/*   group_memberships   */
+/*   group-memberships   */
 .group-memberships {
   --group-memberships-font-title: 2rem;
   --group-memberships-font-label: 1.3rem;
@@ -860,7 +860,7 @@
   }
 }
 
-/*   group_notices   */
+/*   group-notices   */
 .group-notices {
   --group-notices-font-title: 1.8rem;
   --group-notices-font-button-text: 1.1rem;
@@ -963,7 +963,54 @@
   }
 }
 
-/*   group_events   */
+/*   group-notices-new, group-notices-edit   */
+.group-notices-editor {
+  --group-notices-editor-font-title: 1.8rem;
+  --group-notices-editor-font-label: 1.4rem;
+  --group-notices-editor-font-input: 1.1rem;
+  --group-notices-editor-font-button-text: 1.1rem;
+
+  --group-notices-editor-gap: 1rem;
+
+  &__page-title {
+    font-size: var(--group-notices-editor-font-title);
+    margin: 0.5rem 0 1.5rem;
+    text-align: center;
+  }
+
+  .group-notices-editor__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--group-notices-editor-gap);
+  }
+
+  .form-group label {
+    font-weight: bold;
+    font-size: var(--group-notices-editor-font-label);
+  }
+
+  .form-group input,
+  .form-group textarea {
+    font-size: var(--group-notices-editor-font-input);
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--group-notices-editor-font-button-text);
+    padding: 0.25rem 0.75rem;
+  }
+}
+
+/*   group-events   */
 .group-events {
   --group-events-font-title: 1.8rem;
   --group-events-font-button-text: 1.1rem;
@@ -1093,7 +1140,7 @@
   }
 }
 
-/*   group_post   */
+/*   group-post   */
 .group-post-form {
   --group-post-form-font-main: 1rem;
   --group-post-form-font-sub: 0.9rem;
@@ -1170,7 +1217,7 @@
   }
 }
 
-/*   group_post-index   */
+/*   group-post-index   */
 .group-posts__title-box {
   margin-bottom: 1.5rem;                // タイトル下に余白を追加
   padding: 0.75rem 1.5rem;
@@ -1318,7 +1365,7 @@
   }
 }
 
-/*   group_post-show   */
+/*   group-post-show   */
 .group-post-show {
   --group-post-show-font-post-status-text: 1.1rem;
   --group-post-show-font-post-title: 2rem;
@@ -1443,7 +1490,7 @@
   }
 }
 
-/*   group_post_comment   */
+/*   group-post-comment   */
 .group-post-comment {
   --comment-font-input-text: 1rem;
   --comment-font-input-button-text: 0.9rem;

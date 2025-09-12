@@ -2,28 +2,55 @@
 
 <div class="container user-profile-page">
 
+  <!-- タブ切り替え用ナビゲーション -->
   <ul class="nav nav-tabs" role="tablist">
+    <%# プロフィールタブ #%>
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#profile">プロフィール</a>
+      <%# params[:tab]が'profile'またはパラメータが存在しない場合(初期表示)にactiveクラスを付与 #%>
+      <a class="nav-link <%= params[:tab] == 'profile' || params[:tab].blank? ? 'active' : '' %>"
+        data-toggle="tab" href="#profile">プロフィール
+      </a>
     </li>
+
+    <%# 投稿タブ #%>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#posts">投稿</a>
+      <%# params[:tab]が'posts'の場合に'active'クラスを付与 #%>
+      <a class="nav-link <%= params[:tab] == 'posts' ? 'active' : '' %>"
+        data-toggle="tab" href="#posts">
+        投稿
+      </a>
     </li>
+
+    <%# グループタブ #%>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#groups">グループ</a>
+      <%# params[:tab]が'groups'の場合に'active'クラスを付与 #%>
+      <a class="nav-link <%= params[:tab] == 'groups' ? 'active' : '' %>"
+        data-toggle="tab" href="#groups">
+        グループ
+      </a>
     </li>
   </ul>
 
+  <!-- タブの内容 -->
   <div class="tab-content">
-    <div class="tab-pane fade show active" id="profile">
+    <%# プロフィールタブのコンテンツ #%>
+    <%# params[:tab]が'profile'またはパラメータが存在しない場合(初期表示)に'show active'クラスを付与 #%>
+    <div class="tab-pane fade
+      <%= params[:tab] == 'profile' || params[:tab].blank? ? 'show active' : '' %>" id="profile">
       <%= render 'public/shared/user/public_profile' %>
     </div>
-    <div class="tab-pane fade" id="posts">
+
+    <%# 投稿タブのコンテンツ #%>
+    <%# params[:tab]が'posts'の場合に'show active'クラスを付与 #%>
+    <div class="tab-pane fade <%= params[:tab] == 'posts' ? 'show active' : '' %>" id="posts">
       <%= render 'public/shared/user_post/index' %>
     </div>
-    <div class="tab-pane fade" id="groups">
+
+    <%# グループタブのコンテンツ #%>
+    <%# params[:tab]が'groups'の場合に'show active'クラスを付与 #%>
+    <div class="tab-pane fade <%= params[:tab] == 'groups' ? 'show active' : '' %>" id="groups">
       <%= render 'public/shared/group/index', groups: @groups,
-        empty_message: "表示出来るグループはありません", pagination_param: :group_page %>
+        empty_message: "表示出来るグループはありません", pagination_param: :joined_page %>
     </div>
   </div>
 </div>

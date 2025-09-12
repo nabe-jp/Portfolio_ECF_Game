@@ -22,7 +22,7 @@
     <% end %>
   </div>
 
-  <%= paginate groups, param_name: pagination_param %>
+  <%= paginate groups, param_name: pagination_param, params: { tab: 'groups' } %>
 
 <% else %>
   <div class="text-center">

@@ -33,6 +33,6 @@
     <% end %>
   </div>
 
-    <%= paginate @user_posts %>
-    
+    <%= paginate @user_posts, params: { tab: 'posts' } %>
+
 </div>
