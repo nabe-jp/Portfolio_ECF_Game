@@ -968,6 +968,7 @@
   --group-notices-editor-font-title: 1.8rem;
   --group-notices-editor-font-label: 1.4rem;
   --group-notices-editor-font-input: 1.1rem;
+  --group-notices-editor-check-box-size: 1.5rem;
   --group-notices-editor-font-button-text: 1.1rem;
 
   --group-notices-editor-gap: 1rem;
@@ -978,13 +979,14 @@
     text-align: center;
   }
 
-  .group-notices-editor__form {
+  &__form {
     display: flex;
     flex-direction: column;
     gap: var(--group-notices-editor-gap);
   }
 
-  .form-group label {
+  .form-group label, 
+  .form-check-label {
     font-weight: bold;
     font-size: var(--group-notices-editor-font-label);
   }
@@ -994,7 +996,7 @@
     font-size: var(--group-notices-editor-font-input);
   }
 
-  &__actions {
+  &__form-actions {
     display: flex;
     flex-direction: row; 
     justify-content: center;
@@ -1002,11 +1004,20 @@
     gap: 1rem;
   }
 
-  &__button {
+  .form-check-input {
+    width: var(--group-notices-editor-check-box-size);
+    aspect-ratio: 1 / 1;
+  }
+
+  .form-check-label {
+    margin-left: 1rem;
+  }
+
+  &__form-button {
     display: inline-flex;
     align-items: center;
     font-size: var(--group-notices-editor-font-button-text);
-    padding: 0.25rem 0.75rem;
+    padding: 0.5rem 1.5rem;
   }
 }
 
@@ -1137,6 +1148,64 @@
 
   &__list-date {
     font-size: var(--group-events-font-list-date);
+  }
+}
+
+/*   group-events-new, group-events-edit   */
+.group-events-editor {
+  --group-events-editor-font-title: 1.8rem;
+  --group-events-editor-font-label: 1.4rem;
+  --group-events-editor-font-input: 1.1rem;
+  --group-events-editor-font-button-text: 1.1rem;
+
+  --group-events-editor-gap: 1rem;
+
+  &__page-title {
+    font-size: var(--group-events-editor-font-title);
+    margin: 0.5rem 0 1.5rem;
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--group-events-editor-gap);
+  }
+
+  .group-events-editor__title-description-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--group-events-editor-gap);
+  }
+
+  .form-group label {
+    font-weight: bold;
+    font-size: var(--group-events-editor-font-label);
+  }
+
+  .form-group input,
+  .form-group textarea, 
+  .form-group select {
+    font-size: var(--group-events-editor-font-input);
+  }
+
+  &__datetime-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: var(--group-events-editor-gap);
+  }
+
+  &__datetime-select {
+    margin: 0 0.5rem;
+  }
+
+  &__form-button {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--group-events-editor-font-button-text);
+    margin-top: var(--group-events-editor-gap);
+    padding: 0.5rem 1.5rem;
   }
 }
 
