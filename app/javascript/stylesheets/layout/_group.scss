@@ -577,7 +577,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem;
   }
 
   &__page-title {
@@ -684,7 +684,7 @@
   &__page-title {
     text-align: center;
     font-size: var(--group-members-show-font-title);
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem;
   }
 
   &__member-image {
@@ -771,7 +771,7 @@
   &__page-title {
     text-align: center;
     font-size: var(--group-members-note-font-title);
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem;
   }
 
   &__label {
@@ -810,7 +810,7 @@
 
   &__page-title {
     font-size: var(--group-memberships-font-title);
-    margin: 0.5rem 0 1.5rem;
+    margin: 1rem 0 1.5rem;
     text-align: center;
   }
 
@@ -875,7 +875,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem;
   }
 
   &__page-title {
@@ -975,7 +975,7 @@
 
   &__page-title {
     font-size: var(--group-notices-editor-font-title);
-    margin: 0.5rem 0 1.5rem;
+    margin: 1rem 0 1.5rem;
     text-align: center;
   }
 
@@ -1001,7 +1001,7 @@
     flex-direction: row; 
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   .form-check-input {
@@ -1010,6 +1010,7 @@
   }
 
   .form-check-label {
+    margin: 0;
     margin-left: 1rem;
   }
 
@@ -1039,7 +1040,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 1.5rem 0;
+    margin: 1rem 0 1.5rem;
   }
 
   &__page-title {
@@ -1162,7 +1163,7 @@
 
   &__page-title {
     font-size: var(--group-events-editor-font-title);
-    margin: 0.5rem 0 1.5rem;
+    margin: 1rem 0 1.5rem;
     text-align: center;
   }
 
@@ -1822,7 +1823,7 @@
     --group-members-font-member: 1rem;
 
     &__title-wrapper {
-      margin: 1rem 0;
+      margin: 0.75rem 0 1.25rem;
     }
 
     &__section-title, 
@@ -1847,7 +1848,7 @@
     --group-members-show-font-owner-warning-text: 1rem;
 
     &__page-title {
-      margin: 1rem 0;
+      margin: 0.75rem 0 1.25rem;
     }
 
     &__member-image {
@@ -1867,7 +1868,7 @@
     --group-members-note-font-button-text: 1rem;
 
     &__page-title {
-      margin: 1rem 0;
+      margin: 0.75rem 0 1.25rem;
     }
 
     &__member-nickname {
@@ -1887,7 +1888,7 @@
     }
 
     &__page-title {
-      margin: 1rem 0;
+      margin: 0.75rem 0 1.25rem;
     }
 
     td.group-memberships__actions .group-memberships__actions-wrapper {
@@ -1908,7 +1909,7 @@
     --group-notices-font-list-date: 0.9rem;
 
     &__title-wrapper {
-      margin: 1rem 0;
+      margin: 0.75rem 0 1.25rem;
     }
 
     &__button {
@@ -1917,6 +1918,18 @@
 
     &__list-link {
       padding: 0.75rem;
+    }
+  }
+
+  .group-notices-editor {
+    --group-notices-editor-font-title: 1.6rem;
+    --group-notices-editor-font-label: 1.2rem;
+    --group-notices-editor-font-input: 1rem;
+    --group-notices-editor-check-box-size: 1.3rem;
+    --group-notices-editor-font-button-text: 1rem;
+  
+    &__page-title {
+      margin: 0.75rem 0 1.25rem;
     }
   }
 
@@ -1932,7 +1945,7 @@
     --group-events-font-list-date: 0.9rem;
   
     &__title-wrapper {
-      margin: 1rem 0;
+      margin: 0.75rem 0 1.25rem;
     }
 
     &__button {
@@ -2368,6 +2381,28 @@
     }
   }
 
+  .group-notices-editor {
+    --group-notices-editor-font-title: 1.4rem;
+    --group-notices-editor-font-label: 1rem;
+    --group-notices-editor-font-input: 0.9rem;
+    --group-notices-editor-check-box-size: 1.1rem;
+    --group-notices-editor-font-button-text: 0.9rem;
+  
+    --group-notices-editor-gap: 0.75rem;
+  
+    &__form-actions {
+      gap: 1rem;
+    }
+
+    .form-check-label {
+      margin-left: 0.5rem;
+    }
+  
+    &__form-button {
+      padding: 0.25rem 0.75rem;
+    }
+  }
+
   .group-events {
     --group-events-font-button-text: 0.9rem;
 
@@ -2623,7 +2658,7 @@
     --group-members-font-member: 0.9rem;
 
     &__title-wrapper {
-      margin: 0.75rem 0;
+      margin: 0.5rem 0 0.75rem;
     }
 
     &__count-badge-title, 
@@ -2653,7 +2688,7 @@
     --group-members-show-font-owner-warning-text: 0.85rem;
 
     &__page-title {
-      margin: 0.75rem 0;
+      margin: 0.5rem 0 0.75rem;
     }
 
     &__member-image {
@@ -2673,7 +2708,7 @@
     --group-members-note-font-button-text: 0.85rem;
 
     &__page-title {
-      margin: 0.75rem 0;
+      margin: 0.5rem 0 0.75rem;
     }
 
     &__member-nickname {
@@ -2688,7 +2723,7 @@
     --group-memberships-font-button-text: 0.85rem;
 
     &__page-title {
-      margin: 0.75rem 0;
+      margin: 0.5rem 0 0.75rem;
     }
   }
 
@@ -2701,11 +2736,33 @@
     --group-notices-list-gap: 0.5rem;
 
     &__title-wrapper {
-      margin: 0.75rem 0;
+      margin: 0.5rem 0 0.75rem;
     }
 
     &__list-item {
       margin-bottom: 0.75rem;
+    }
+  }
+
+  .group-notices-editor {
+    --group-notices-editor-font-title: 1.2rem;
+    --group-notices-editor-font-label: 0.9rem;
+    --group-notices-editor-font-input: 0.8rem;
+    --group-notices-editor-check-box-size: 1rem;
+    --group-notices-editor-font-button-text: 0.85rem;
+  
+    --group-notices-editor-gap: 0.5rem;
+  
+    &__page-title {
+      margin: 0.5rem 0 0.75rem;
+    }
+  
+    &__form-actions {
+      gap: 0.75rem;
+    }
+
+    .form-check-label {
+      margin-left: 0.1rem;
     }
   }
 
@@ -2715,7 +2772,7 @@
     --group-events-list-gap: 0.5rem;
 
     &__title-wrapper {
-      margin: 0.75rem 0;
+      margin: 0.5rem 0 0.75rem;
     }
 
     &__list-item {
