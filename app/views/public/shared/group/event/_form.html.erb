@@ -1,41 +1,36 @@
 <div class="container group-events-editor__form">
   <%= form_with(model: @group_event, url: @form_url, local: true, html: { class: "row" }) do |f| %>
 
-    <!-- 左カラム: タイトル・説明 -->
-    <div class="col-md-6 group-events-editor__title-description-column">
+    <!-- タイトル -->
+    <div class="col-xl-10 offset-xl-1 group-events-editor__title-column">
       <div class="form-group">
         <%= f.label :title, "タイトル", class: "control-label" %>
         <%= f.text_field :title, class: "form-control", 
           placeholder: group_event_title_placeholder, maxlength: GroupEvent::TITLE_MAX_LENGTH %>
       </div>
+    </div>
 
+    <!-- 日時 -->
+    <div class="col-xl-10 offset-xl-1 group-events-editor__datetime-column">
+      <div class="form-group">
+        <%= f.label :start_time, "開始日時", class: "control-label" %>
+        <%= datetime_select_with_units(f, :start_time) %>
+      </div>
+  
+      <div class="form-group">
+        <%= f.label :end_time, "終了日時", class: "control-label" %>
+        <%= datetime_select_with_units(f, :end_time) %>
+      </div>
+    </div>
+
+    <!-- 説明 -->
+    <div class="col-xl-10 offset-xl-1 group-events-editor__description-column">
       <div class="form-group">
         <%= f.label :description, "説明", class: "control-label" %>
         <%= f.text_area :description, class: "form-control", rows: 5, 
           placeholder: group_event_description_placeholder, 
             maxlength: GroupEvent::DESCRIPTION_MAX_LENGTH %>
       </div>
-    </div>
-
-    <!-- 右カラム: 開始・終了日時 -->
-    <div class="col-md-6 group-events-editor__datetime-column">
-
-      <div class="form-group">
-        <%= f.label :start_time, "開始日時", class: "control-label" %>
-        <div class="form-inline flex-wrap">
-          <%= f.datetime_select :start_time, {}, 
-            class: "form-control group-events-editor__datetime-select" %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :end_time, "終了日時", class: "control-label" %>
-        <div class="form-inline flex-wrap">
-          <%= f.datetime_select :end_time, {}, 
-            class: "form-control group-events-editor__datetime-select" %>
-        </div>
-      </div>
-
     </div>
 
     <!-- 登録ボタン -->

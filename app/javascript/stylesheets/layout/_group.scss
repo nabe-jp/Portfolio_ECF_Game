@@ -1173,10 +1173,11 @@
     gap: var(--group-events-editor-gap);
   }
 
-  .group-events-editor__title-description-column {
+  &__title-column, 
+  &__description-column {
     display: flex;
     flex-direction: column;
-    gap: var(--group-events-editor-gap);
+    margin-bottom: var(--group-events-editor-gap);
   }
 
   .form-group label {
@@ -1194,11 +1195,29 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    margin-bottom: var(--group-events-editor-gap);
     gap: var(--group-events-editor-gap);
   }
 
-  &__datetime-select {
-    margin: 0 0.5rem;
+  &__datetime-date, 
+  &__datetime-time {
+    display: flex;
+    gap: 0.75rem;
+
+    .form-control {
+      width: auto;                      // sm以下で幅100%になることを防止
+    }  
+  }
+
+  &__datetime-date {
+    flex: 0 0 60%;
+    max-width: 60%;
+  }
+
+  &__datetime-time {
+    flex: 1;
+    min-width: 0;
+    margin-left: 1rem;
   }
 
   &__form-button {
@@ -1957,6 +1976,17 @@
     }
   }
 
+  .group-events-editor {
+    --group-events-editor-font-title: 1.6rem;
+    --group-events-editor-font-label: 1.2rem;
+    --group-events-editor-font-input: 1rem;
+    --group-events-editor-font-button-text: 1rem;
+  
+    &__page-title {
+      margin: 0.75rem 0 1.25rem;
+    }
+  }
+
   .group-post-form {
     --group-post-form-font-main: 0.9rem;
     --group-post-form-font-sub: 0.8rem;
@@ -2417,6 +2447,33 @@
     }
   }
 
+  .group-events-editor {
+    --group-events-editor-font-title: 1.4rem;
+    --group-events-editor-font-label: 1rem;
+    --group-events-editor-font-input: 0.9rem;
+    --group-events-editor-font-button-text: 0.9rem;
+  
+    --group-events-editor-gap: 0.75rem;
+  
+    &__form-button {
+      padding: 0.25rem 0.75rem;
+    }
+
+    &__datetime-date, 
+    &__datetime-time {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    &__datetime-date  {
+      margin-bottom: 0.5rem;
+    }
+
+    &__datetime-time {
+      margin-left: 0;
+    }
+  }
+
   .group-post-form {
     --group-post-form-font-main: 0.8rem;
     --group-post-form-font-sub: 0.7rem;
@@ -2777,6 +2834,23 @@
 
     &__list-item {
       margin-bottom: 0.75rem;
+    }
+  }
+  
+  .group-events-editor {
+    --group-events-editor-font-title: 1.2rem;
+    --group-events-editor-font-label: 0.9rem;
+    --group-events-editor-font-input: 0.8rem;
+    --group-events-editor-font-button-text: 0.85rem;
+  
+    --group-events-editor-gap: 0.5rem;
+
+    &__page-title {
+      margin: 0.5rem 0 0.75rem;
+    }
+  
+    &__form-button {
+      padding: 0.25rem 0.75rem;
     }
   }
 
