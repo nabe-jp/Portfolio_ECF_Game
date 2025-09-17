@@ -941,7 +941,7 @@
     white-space: pre-wrap;
   }
 
-  &__meta {
+  &__list-meta {
     display: flex;
     align-items: baseline;
     gap: 0.5rem;
@@ -960,6 +960,57 @@
 
   &__list-date {
     font-size: var(--group-notices-font-list-date);
+  }
+}
+
+/*   group-notices-show   */
+.group-notices-show {
+  --group-notices-show-font-title: 1.8rem;
+  --group-notices-show-font-body: 1.4rem;
+  --group-notices-show-font-label: 1.2rem;
+  --group-notices-show-font-nickname: 1.2rem;
+  --group-notices-show-font-date: 1.2rem;
+  --group-notices-show-font-button-text: 1.1rem;
+
+  &__content-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__page-title {
+    font-size: var(--group-notices-show-font-title);
+  }
+
+  &__body {
+    font-size: var(--group-notices-show-font-body);
+  }
+
+  &__meta {
+    // &__member-nicknameと&__dateの間に&__content-wrapのgapを適応したくないため作成
+  }
+
+  &__meta-label {
+    font-weight: bolder;
+    font-size: var(--group-notices-show-font-label);
+  }
+
+  &__member-nickname {
+    font-size: var(--group-notices-show-font-nickname);
+  }
+
+  &__date {
+    font-size: var(--group-notices-show-font-date);
+  }
+
+  &__button-wrap {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__button {
+    font-size: var(--group-notices-show-font-button-text);
+    padding: 0.25rem 0.75rem;
   }
 }
 
@@ -1130,7 +1181,7 @@
     white-space: pre-wrap;
   }
 
-  &__meta {
+  &__list-meta {
     display: flex;
     align-items: baseline;
     gap: 0.5rem;

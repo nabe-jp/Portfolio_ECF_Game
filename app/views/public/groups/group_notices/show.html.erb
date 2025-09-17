@@ -1,29 +1,46 @@
-<div class="container">
+<div class="container group-notices-show">
   <div class="row justify-content-center">
-    <div class="col-8 space-between-mini">
+    <div class="col-12 col-md-8 group-notices-show__content-wrap">
 
-      <h1><%= @group_notice.title %></h1>
+      <h1 class="group-notices-show__page-title"><%= @group_notice.title %></h1>
 
-      <p class="space-between-mini"><%= simple_format(@group_notice.body) %></p>
+      <div class="group-notices-show__body">
+        <%= simple_format(@group_notice.body, {}, wrapper_tag: :div) %>
+      </div>
 
-      <p class="space-between-mini">
-        <small>作成者: <%= @group_notice.member.user.nickname %><br>
-        投稿日時: <%= l(@group_notice.created_at, format: :long) %></small>
-      </p>
+      <div class="group-notices-show__meta">
+        <p>
+          <span class="group-notices-show__meta-label">作成者:</span>
+          <span class="group-notices-show__member-nickname">
+            <%= @group_notice.member.user.nickname %>
+          </span>
+        </p>
+        <p>
+          <span class="group-notices-show__meta-label">投稿日時:</span>
+          <span class="group-notices-show__date">
+            <%= l(@group_notice.created_at, format: :long) %>
+          </span>
+        </p>
+      </div>
+
     </div>
 
-    <div class="col-12">
+    <div class="col-12 col-md-8 group-notices-show__content-wrap">
       <hr>
     </div>
 
-    <div class="col-8 space-between-mini">
+    <div class="col-12 col-md-8 group-notices-show__button-wrap">
       <% if group_moderator? %>
-        <%= link_to "編集", edit_group_notice_path(@group, @group_notice), class: "btn btn-secondary" %>
+        <%= link_to "編集", edit_group_notice_path(@group, @group_notice), 
+          class: "btn btn-secondary group-notices-show__button" %>
+
         <%= link_to "削除", group_notice_path(@group, @group_notice), 
-          method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mx-5" %>
+          method: :delete, data: { confirm: "本当に削除しますか？" }, 
+            class: "btn btn-danger group-notices-show__button" %>
       <% end %>
 
-      <%= link_to "お知らせ一覧に戻る", group_notices_path(@group), class: "btn btn-secondary" %>
+      <%= link_to "お知らせ一覧に戻る", group_notices_path(@group), 
+        class: "btn btn-secondary group-notices-show__button" %>
 
     </div>
   </div>
