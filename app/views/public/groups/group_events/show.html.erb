@@ -1,39 +1,49 @@
-<div class="container">
+<div class="container group-events-show">
   <div class="row justify-content-center">
-    <div class="col-8 space-between-mini-top">
+    <div class="col-12 col-xl-10 group-events-show__content-wrap">
 
-      <h1><%= @group_event.title %></h1>
+      <h1 class="group-events-show__page-title"><%= @group_event.title %></h1>
 
-      <p class="space-between-mini">
-        <strong>開始日時:</strong>
-        <%= l(@group_event.start_time, format: :long) %>
-      </p>
+      <div class="group-events-show__datetime-column">
+        <span class="group-events-show__datetime-label">開始日時:</span>
+        <span class="group-events-show__datetime-date">
+          <%= l(@group_event.start_time, format: :long) %>
+        </span>
+      </div>
 
-      <p class="space-between-mini">
-        <strong>終了日時:</strong>
-        <%= l(@group_event.end_time, format: :long) %>
-      </p>
+      <div class="group-events-show__datetime-column">
+        <span class="group-events-show__datetime-label">終了日時:</span>
+        <span class="group-events-show__datetime-date">
+          <%= l(@group_event.end_time, format: :long) %>
+        </span>
+      </div>
+
 
       <% if @group_event.description.present? %>
-        <p>
-          <strong>説明:</strong><br>
-          <%= simple_format(@group_event.description) %>
-        </p>
+        <div class="group-events-show__description-column">
+          <span class="group-events-show__description-label">説明:</span>
+          <span class="group-events-show__description-text">
+            <%= simple_format(@group_event.description, {}, wrapper_tag: :div) %>
+          </span>
+        </div>
       <% end %>
     </div>
 
-    <div class="col-12">
+    <div class="col-12 col-xl-10">
       <hr>
     </div>
 
-    <div class="col-8 space-between-mini">
+    <div class="col-12 col-xl-10 group-events-show__button-wrap">
       <% if group_event_editor? %>
-        <%= link_to "編集", edit_group_event_path(@group, @group_event), class: "btn btn-secondary" %>
+        <%= link_to "編集", edit_group_event_path(@group, @group_event), 
+          class: "btn btn-secondary group-events-show__button" %>
         <%= link_to "削除", group_event_path(@group, @group_event), 
-          method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger mx-5" %>
+          method: :delete, data: { confirm: "本当に削除しますか？" }, 
+            class: "btn btn-danger group-events-show__button" %>
       <% end %>
 
-      <%= link_to "イベント一覧に戻る", group_events_path(@group), class: "btn btn-secondary" %>
+      <%= link_to "イベント一覧に戻る", group_events_path(@group), 
+        class: "btn btn-secondary group-events-show__button" %>
 
     </div>
   </div>

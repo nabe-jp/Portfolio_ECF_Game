@@ -980,6 +980,7 @@
 
   &__page-title {
     font-size: var(--group-notices-show-font-title);
+    margin: 1rem 0 1.5rem;
   }
 
   &__body {
@@ -1200,6 +1201,57 @@
 
   &__list-date {
     font-size: var(--group-events-font-list-date);
+  }
+}
+
+/*   group-events-show   */
+.group-events-show {
+  --group-events-show-font-title: 1.8rem;
+  --group-events-show-font-datetime-label: 1.4rem;
+  --group-events-show-font-datetime-date: 1.2rem;
+  --group-events-show-font-description-label: 1.4rem;
+  --group-events-show-font-description-text: 1.2rem;
+  --group-events-show-font-button-text: 1.1rem;
+
+  &__content-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__page-title {
+    font-size: var(--group-events-show-font-title);
+    text-align: center;
+    margin: 1rem 0 1.5rem;
+  }
+
+  &__datetime-label {
+    font-weight: bolder;
+    font-size: var(--group-events-show-font-datetime-label);
+  }
+
+  &__datetime-date {
+    font-size: var(--group-events-show-font-datetime-date);
+  }
+
+  &__description-label {
+    font-weight: bolder;
+    font-size: var(--group-events-show-font-description-label);
+  }
+
+  &__description-text {
+    font-size: var(--group-events-show-font-description-text);
+  }
+
+  &__button-wrap {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  &__button {
+    font-size: var(--group-events-show-font-button-text);
+    padding: 0.25rem 0.75rem;
   }
 }
 
@@ -2027,6 +2079,31 @@
     }
   }
 
+  .group-events-show {
+    --group-events-show-font-title: 1.6rem;
+    --group-events-show-font-datetime-label: 1.2rem;
+    --group-events-show-font-datetime-date: 1rem;
+    --group-events-show-font-description-label: 1.2rem;
+    --group-events-show-font-description-text: 1rem;
+    --group-events-show-font-button-text: 1rem;
+  
+    &__content-wrap {
+      gap: 1rem;
+    }
+
+    &__page-title {
+      margin: 0.75rem 0 1.25rem;
+    }
+
+    &__button-wrap {
+      gap: 3rem;
+    }
+
+    &__button {
+      padding: 0.15rem 0.45rem;
+    }
+  }
+
   .group-events-editor {
     --group-events-editor-font-title: 1.6rem;
     --group-events-editor-font-label: 1.2rem;
@@ -2498,6 +2575,27 @@
     }
   }
 
+  .group-events-show {
+    --group-events-show-font-title: 1.2rem;
+    --group-events-show-font-datetime-label: 1rem;
+    --group-events-show-font-datetime-date: 0.9rem;
+    --group-events-show-font-description-label: 1rem;
+    --group-events-show-font-description-text: 0.9rem;
+    --group-events-show-font-button-text: 0.9rem;
+  
+    &__content-wrap {
+      gap: 0.75rem;
+    }
+
+    &__page-title {
+      margin: 0.75rem 0 1.25rem;
+    }
+
+    &__button-wrap {
+      gap: 2rem;
+    }
+  }
+
   .group-events-editor {
     --group-events-editor-font-title: 1.4rem;
     --group-events-editor-font-label: 1rem;
@@ -2648,6 +2746,14 @@
     --group-events-font-list-body-value: 0.8rem;
     --group-events-font-list-member: 0.75rem;
     --group-events-font-list-date: 0.7rem;
+  }
+
+  .group-events-show {
+    --group-events-show-font-title: 1rem;
+    --group-events-show-font-datetime-label: 0.85rem;
+    --group-events-show-font-datetime-date: 0.8rem;
+    --group-events-show-font-description-label: 0.85rem;
+    --group-events-show-font-description-text: 0.8rem;
   }
 }
 
@@ -2888,6 +2994,14 @@
     }
   }
   
+  .group-events-show {
+    --group-events-show-font-button-text: 0.85rem;
+  
+    &__page-title {
+      margin: 0.5rem 0 0.75rem;
+    }
+  }
+
   .group-events-editor {
     --group-events-editor-font-title: 1.2rem;
     --group-events-editor-font-label: 0.9rem;
@@ -3067,6 +3181,14 @@
     --group-events-font-list-body-label: 0.825rem;
   }
 
+  .group-events-show {
+    --group-events-show-font-title: 0.975rem;
+    --group-events-show-font-datetime-label: 0.8rem;
+    --group-events-show-font-datetime-date: 0.75rem;
+    --group-events-show-font-description-label: 0.8rem;
+    --group-events-show-font-description-text: 0.75rem;
+  }
+
   .group-form {
     --group-form-font-label: 0.8rem;
     --group-form-font-input: 0.7rem;
@@ -3187,6 +3309,14 @@
   .group-events {
     --group-events-font-title: 0.95rem;
     --group-events-font-list-title: 0.875rem;
+  }
+
+  .group-events-show {
+    --group-events-show-font-title: 0.95rem;
+    --group-events-show-font-datetime-label: 0.775rem;
+    --group-events-show-font-datetime-date: 0.725rem;
+    --group-events-show-font-description-label: 0.775rem;
+    --group-events-show-font-description-text: 0.725rem;
   }
 
   .group-post-form {
