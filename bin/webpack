@@ -9,6 +9,8 @@ ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile",
 
 require "bundler/setup"
 
+require "logger" # Rails 6.1 + Ruby 3.1環境でActiveSupport起動時のLogger未読み込みを防ぐため
+
 require "webpacker"
 require "webpacker/webpack_runner"
 

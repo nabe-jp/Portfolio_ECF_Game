@@ -70,7 +70,8 @@ end
 gem "enum_help"
 
 # カリキュラムの開発環境準備にて追加
-gem 'dotenv-rails'
+# ↓重複しているのでコメント化
+# gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
@@ -81,3 +82,6 @@ gem "net-imap"
 
 # .envに記載した情報をENV['キー名'] として使えるようにする
 gem 'dotenv-rails', groups: [:development, :test]
+
+# Rails 6.1 + Ruby 3.1環境でLoggerを明示的に読み込むため
+gem "logger"
