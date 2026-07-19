@@ -1177,7 +1177,7 @@ ActiveRecord::Base.transaction do
       deleted_due_to_parent: true
     )
 
-    image_path = Rails.root.join('app', 'assets', 'images', 'group_post', 'deleted_gropu_post_1_billiards.jpg')
+    image_path = Rails.root.join('app', 'assets', 'images', 'group_post', 'deleted_group_post_1_billiards.jpg')
     delete_group_post_1.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 
@@ -1240,7 +1240,7 @@ ActiveRecord::Base.transaction do
       deleted_reason: :self_deleted
     )
 
-    image_path = Rails.root.join('app', 'assets', 'images', 'group_post', 'deleted_gropu_post_2_dice.jpg')
+    image_path = Rails.root.join('app', 'assets', 'images', 'group_post', 'deleted_group_post_2_dice.jpg')
     delete_group_post_2.group_post_image.attach(io: File.open(image_path), 
       filename: 'no_group_post.jpg', content_type: 'image/jpeg')
 
