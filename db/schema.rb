@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2025_06_01_063131) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,7 +50,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "deleted_at"
     t.integer "deleted_by_id"
     t.boolean "is_pinned", default: false, null: false
-    t.integer "admin_id", null: false
+    t.bigint "admin_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["admin_id"], name: "index_admin_notes_on_admin_id"
@@ -66,8 +69,8 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "group_events", force: :cascade do |t|
-    t.integer "group_id", null: false
-    t.integer "member_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "member_id", null: false
     t.string "title", null: false
     t.text "description"
     t.boolean "is_deleted", default: false, null: false
@@ -88,8 +91,8 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "group_memberships", force: :cascade do |t|
-    t.integer "group_id", null: false
-    t.integer "user_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "joined_at"
     t.integer "invited_by_id"
     t.text "note"
@@ -111,8 +114,8 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "group_notices", force: :cascade do |t|
-    t.integer "group_id", null: false
-    t.integer "member_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "member_id", null: false
     t.string "title"
     t.text "body"
     t.boolean "is_deleted", default: false, null: false
@@ -131,8 +134,8 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "group_post_comments", force: :cascade do |t|
-    t.integer "group_post_id", null: false
-    t.integer "member_id", null: false
+    t.bigint "group_post_id", null: false
+    t.bigint "member_id", null: false
     t.text "body"
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
@@ -151,8 +154,8 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "group_posts", force: :cascade do |t|
-    t.integer "group_id", null: false
-    t.integer "member_id", null: false
+    t.bigint "group_id", null: false
+    t.bigint "member_id", null: false
     t.string "title", null: false
     t.text "body"
     t.boolean "is_deleted", default: false, null: false
@@ -204,7 +207,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
     t.datetime "published_at"
     t.boolean "is_pinned", default: false, null: false
     t.integer "sort_order", default: 999, null: false
-    t.integer "admin_id", null: false
+    t.bigint "admin_id", null: false
     t.string "audience", default: "all"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -212,11 +215,11 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "taggings", force: :cascade do |t|
-    t.integer "tag_id"
+    t.bigint "tag_id"
     t.string "taggable_type"
-    t.integer "taggable_id"
+    t.bigint "taggable_id"
     t.string "tagger_type"
-    t.integer "tagger_id"
+    t.bigint "tagger_id"
     t.string "context", limit: 128
     t.datetime "created_at"
     t.string "tenant", limit: 128
@@ -242,8 +245,8 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "user_post_comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "user_post_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "user_post_id", null: false
     t.text "body", null: false
     t.boolean "is_deleted", default: false, null: false
     t.datetime "deleted_at"
@@ -262,7 +265,7 @@ ActiveRecord::Schema.define(version: 2025_06_01_063131) do
   end
 
   create_table "user_posts", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "title", null: false
     t.text "body"
     t.boolean "is_deleted", default: false, null: false

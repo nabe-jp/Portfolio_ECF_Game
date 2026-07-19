@@ -5,8 +5,8 @@ ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '>= 6.1.7.10'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# PostgreSQL database
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -70,11 +70,6 @@ end
 gem "enum_help"
 
 # カリキュラムの開発環境準備にて追加
-# ↓重複しているのでコメント化
-# gem 'dotenv-rails'
-group :production do
-  gem 'mysql2'
-end
 gem "net-smtp"
 gem "net-pop"
 gem "net-imap"
