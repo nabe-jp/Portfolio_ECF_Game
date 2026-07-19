@@ -80,3 +80,6 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 # Rails 6.1 + Ruby 3.1環境でLoggerを明示的に読み込むため
 gem "logger"
+
+# Active Storageの保存先としてCloudinaryを利用するための画像ストレージサービス
+gem 'cloudinary'
