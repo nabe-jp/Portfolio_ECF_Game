@@ -41,26 +41,3 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart
-
-# カリキュラムの開発環境準備にて変更、AWSからの移行により修正
-if Gem.win_platform?
-  # Windows環境ではUnix socketが使えないためTCP接続を使用、上ですでにportが指定されているのでbindは不要
-else
-  # Linux(EC2)環境ではUnix socketを使用
-  bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
-end
-
-rails_root = Dir.pwd
-
-# 本番環境のみデーモン起動
-if Rails.env.production?
-  pidfile File.join(rails_root, 'tmp', 'pids', 'puma.pid')
-  state_path File.join(rails_root, 'tmp', 'pids', 'puma.state')
-  stdout_redirect(
-    File.join(rails_root, 'log', 'puma.log'),
-    File.join(rails_root, 'log', 'puma-error.log'),
-    true
-  )
-  # デーモン
-  daemonize
-end
