@@ -123,8 +123,8 @@
 
     padding: 0.25rem;
 
-    > ul + .sidebar__title {
-      margin-top: 0.75rem;
+    .sidebar__group {
+      margin-bottom: 0.75rem;
     }
 
     .sidebar__title {
@@ -150,8 +150,8 @@
     --sidebar-font-title: 0.6rem;
     --sidebar-font-link: 0.5rem;
 
-    > ul + .sidebar__title {
-      margin-top: 0.5rem;
+    .sidebar__group {
+      margin-bottom: 0.5rem;
     }
 
     .sidebar__title {
