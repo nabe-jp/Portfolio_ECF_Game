@@ -1,23 +1,27 @@
 <div class="sidebar__section">
-  <h2 class="sidebar__title">ナビゲーション</h2>
-  <ul class="sidebar__links">
-    <li><%= render "public/shared/link/links", home: true %></li>
-    
-    <li><%= render "public/shared/link/links", back: true %></li>
-  </ul>
+  <details open class="sidebar__group">
+    <summary class="sidebar__title">ナビゲーション</summary>
+    <ul class="sidebar__links">
+      <li><%= render "public/shared/link/links", home: true %></li>
+      
+      <li><%= render "public/shared/link/links", back: true %></li>
+    </ul>
+  </details>
 
   <% if user_signed_in? %>
-    <h2 class="sidebar__title">マイメニュー</h2>
-    <ul class="sidebar__links">
-      <li><%= render "public/shared/link/links", profile_page: true %></li>
+    <details open class="sidebar__group">
+      <summary class="sidebar__title">マイメニュー</summary>
+      <ul class="sidebar__links">
+        <li><%= render "public/shared/link/links", profile_page: true %></li>
 
-      <li><%= render "public/shared/link/links", profile_edit: true %></li>
+        <li><%= render "public/shared/link/links", profile_edit: true %></li>
 
-      <li><%= render "public/shared/link/links", mypage: true %></li>
-      
-      <li><%= render "public/shared/link/links", settings: true %></li> 
+        <li><%= render "public/shared/link/links", mypage: true %></li>
+        
+        <li><%= render "public/shared/link/links", settings: true %></li> 
 
-      <li><%= render "public/shared/link/links", my_groups: true %></li>
-    </ul>
+        <li><%= render "public/shared/link/links", my_groups: true %></li>
+      </ul>
+    </details>
   <% end %>
 </div>
