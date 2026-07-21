@@ -14,7 +14,7 @@ class Rack::Attack
   
   # 共通メソッド
   def self.ip(req)
-    req.ip
+    req.get_header('HTTP_X_FORWARDED_FOR')&.split(',')&.first || req.ip
   end
 
   def self.match?(req, method, path)
