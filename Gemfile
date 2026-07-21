@@ -83,3 +83,6 @@ gem "logger"
 
 # Active Storageの保存先としてCloudinaryを利用するための画像ストレージサービス
 gem 'cloudinary'
+
+# セキュリティ（DoS・スパム対策）
+gem "rack-attack"
