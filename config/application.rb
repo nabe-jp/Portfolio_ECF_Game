@@ -27,5 +27,8 @@ module PortfolioEcfGame
     config.time_zone = 'Tokyo'
 
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Rack::Attackを有効化
+    config.middleware.use Rack::Attack
   end
 end
